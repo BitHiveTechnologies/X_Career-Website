@@ -44,29 +44,34 @@ const dummyData = {
             id: 1,
             title: 'DSA Corner',
             description: 'Master data structures and algorithms',
-            icon: '📊',
+            icon: 'chart',
         },
         {
             id: 2,
             title: 'Job Matches',
             description: 'Personalized job recommendations',
-            icon: '🔍',
+            icon: 'search',
         },
-        { id: 3, title: 'Community', description: 'Connect with peers and mentors', icon: '👥' },
+        { id: 3, title: 'Community', description: 'Connect with peers and mentors', icon: 'users' },
         {
             id: 4,
             title: 'Resume Review',
             description: 'Get expert feedback on your CV',
-            icon: '📝',
+            icon: 'file',
         },
-        { id: 5, title: 'Job Tracker', description: 'Organize your job applications', icon: '📈' },
+        {
+            id: 5,
+            title: 'Job Tracker',
+            description: 'Organize your job applications',
+            icon: 'chart-line',
+        },
     ],
 
     features: [
-        { id: 1, title: 'Career Launch', description: 'Entry-Level Tech Jobs', icon: '🚀' },
-        { id: 2, title: 'Learning Hub', description: 'Fresher-Focused Resources', icon: '📚' },
-        { id: 3, title: 'Community', description: '35,000+ Jobs', icon: '👥' },
-        { id: 4, title: 'Tech Roadmaps', description: 'Guided Career Profile', icon: '🗺️' },
+        { id: 1, title: 'Career Launch', description: 'Entry-Level Tech Jobs', icon: 'rocket' },
+        { id: 2, title: 'Learning Hub', description: 'Fresher-Focused Resources', icon: 'book' },
+        { id: 3, title: 'Community', description: '35,000+ Jobs', icon: 'people' },
+        { id: 4, title: 'Tech Roadmaps', description: 'Guided Career Profile', icon: 'map' },
     ],
 
     benefits: [
@@ -74,19 +79,19 @@ const dummyData = {
             id: 1,
             title: 'Built for Freshers',
             description: 'Resources for 0-2 years of experience',
-            icon: '🎓',
+            icon: 'graduation',
         },
         {
             id: 2,
             title: 'Curated Opportunities',
             description: 'Handpicked roles from companies offering training',
-            icon: '✅',
+            icon: 'check',
         },
         {
             id: 3,
             title: 'Supportive Network',
             description: 'Connect with peers, mentors, and hiring managers',
-            icon: '🤝',
+            icon: 'handshake',
         },
     ],
 };
@@ -675,8 +680,114 @@ export default function Page() {
                                     className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-md border-t-4 border-[hsl(196,80%,45%)] hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 hover:border-[hsl(175,70%,41%)]"
                                     data-oid="r-epk88"
                                 >
-                                    <div className="text-4xl mb-4" data-oid="nz:xzbu">
-                                        {feature.icon}
+                                    <div
+                                        className="text-4xl mb-4 text-[hsl(196,80%,45%)]"
+                                        data-oid="nz:xzbu"
+                                    >
+                                        {feature.icon === 'rocket' && (
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="40"
+                                                height="40"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                strokeWidth="2"
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                data-oid="255yosb"
+                                            >
+                                                <path
+                                                    d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"
+                                                    data-oid=":_.4lh6"
+                                                ></path>
+                                                <path
+                                                    d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"
+                                                    data-oid="4uernwh"
+                                                ></path>
+                                                <path
+                                                    d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"
+                                                    data-oid="m240dia"
+                                                ></path>
+                                                <path
+                                                    d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"
+                                                    data-oid="5r_93mg"
+                                                ></path>
+                                            </svg>
+                                        )}
+                                        {feature.icon === 'book' && (
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="40"
+                                                height="40"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                strokeWidth="2"
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                data-oid="9w-saqb"
+                                            >
+                                                <path
+                                                    d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"
+                                                    data-oid="b_tahkp"
+                                                ></path>
+                                            </svg>
+                                        )}
+                                        {feature.icon === 'people' && (
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="40"
+                                                height="40"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                strokeWidth="2"
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                data-oid="v32yjb0"
+                                            >
+                                                <path
+                                                    d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"
+                                                    data-oid="2tcdxr-"
+                                                ></path>
+                                                <circle
+                                                    cx="9"
+                                                    cy="7"
+                                                    r="4"
+                                                    data-oid="1dq5.wy"
+                                                ></circle>
+                                                <path
+                                                    d="M22 21v-2a4 4 0 0 0-3-3.87"
+                                                    data-oid="iwj2s_0"
+                                                ></path>
+                                                <path
+                                                    d="M16 3.13a4 4 0 0 1 0 7.75"
+                                                    data-oid="bpjmzzr"
+                                                ></path>
+                                            </svg>
+                                        )}
+                                        {feature.icon === 'map' && (
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="40"
+                                                height="40"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                strokeWidth="2"
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                data-oid="s962vzn"
+                                            >
+                                                <path
+                                                    d="M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3V6z"
+                                                    data-oid="i:orh9q"
+                                                ></path>
+                                                <path d="M9 3v15" data-oid="56mw9zy"></path>
+                                                <path d="M15 6v15" data-oid="tevrjr6"></path>
+                                            </svg>
+                                        )}
                                     </div>
                                     <h3
                                         className="text-xl font-bold mb-2 text-gray-800"
@@ -782,8 +893,76 @@ export default function Page() {
                                     className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-md border border-[hsl(210,30%,95%)] hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 hover:border-[hsl(196,80%,45%)]"
                                     data-oid="79i7jkd"
                                 >
-                                    <div className="text-4xl mb-4" data-oid="6ym819x">
-                                        {benefit.icon}
+                                    <div
+                                        className="text-4xl mb-4 text-[hsl(196,80%,45%)]"
+                                        data-oid="6ym819x"
+                                    >
+                                        {benefit.icon === 'graduation' && (
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="40"
+                                                height="40"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                strokeWidth="2"
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                data-oid="xwz7yq:"
+                                            >
+                                                <path
+                                                    d="M22 10v6M2 10l10-5 10 5-10 5z"
+                                                    data-oid="mjiafaf"
+                                                ></path>
+                                                <path
+                                                    d="M6 12v5c3 3 9 3 12 0v-5"
+                                                    data-oid="4y3h9qe"
+                                                ></path>
+                                            </svg>
+                                        )}
+                                        {benefit.icon === 'check' && (
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="40"
+                                                height="40"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                strokeWidth="2"
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                data-oid=".hstzn0"
+                                            >
+                                                <path
+                                                    d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"
+                                                    data-oid="az1pnbk"
+                                                ></path>
+                                                <path d="m9 12 2 2 4-4" data-oid="ku0gcy6"></path>
+                                            </svg>
+                                        )}
+                                        {benefit.icon === 'handshake' && (
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="40"
+                                                height="40"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                strokeWidth="2"
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                data-oid="yx7x0pe"
+                                            >
+                                                <path
+                                                    d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 0C1.46 6.7 1.33 10.28 4 13l8 8 8-8c2.67-2.72 2.54-6.3.42-8.42z"
+                                                    data-oid="gjsqs8e"
+                                                ></path>
+                                                <path
+                                                    d="M12 5.36 8.87 8.5a2.13 2.13 0 0 0 0 3h0a2.13 2.13 0 0 0 3 0l2.26-2.21a2.13 2.13 0 0 1 3 0h0a2.13 2.13 0 0 1 0 3l-2.26 2.21"
+                                                    data-oid="7jc7pau"
+                                                ></path>
+                                            </svg>
+                                        )}
                                     </div>
                                     <h3
                                         className="text-xl font-bold mb-2 text-gray-800"
@@ -994,8 +1173,151 @@ export default function Page() {
                                     data-oid="xsxak:q"
                                 >
                                     <div className="p-6" data-oid="f:b2rd-">
-                                        <div className="text-4xl mb-4" data-oid="..8aiwp">
-                                            {resource.icon}
+                                        <div
+                                            className="text-4xl mb-4 text-[hsl(196,80%,45%)]"
+                                            data-oid="..8aiwp"
+                                        >
+                                            {resource.icon === 'chart' && (
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    width="40"
+                                                    height="40"
+                                                    viewBox="0 0 24 24"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    data-oid="b3sjzl7"
+                                                >
+                                                    <path d="M3 3v18h18" data-oid="s_0f7_i"></path>
+                                                    <path d="M18 17V9" data-oid="vgtc-dq"></path>
+                                                    <path d="M13 17V5" data-oid="2yhu8fk"></path>
+                                                    <path d="M8 17v-3" data-oid="u:nmi0f"></path>
+                                                </svg>
+                                            )}
+                                            {resource.icon === 'search' && (
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    width="40"
+                                                    height="40"
+                                                    viewBox="0 0 24 24"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    data-oid="uwaey22"
+                                                >
+                                                    <circle
+                                                        cx="11"
+                                                        cy="11"
+                                                        r="8"
+                                                        data-oid="sl6_1lm"
+                                                    ></circle>
+                                                    <path
+                                                        d="m21 21-4.3-4.3"
+                                                        data-oid="85oex05"
+                                                    ></path>
+                                                </svg>
+                                            )}
+                                            {resource.icon === 'users' && (
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    width="40"
+                                                    height="40"
+                                                    viewBox="0 0 24 24"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    data-oid="yb1tfsn"
+                                                >
+                                                    <path
+                                                        d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"
+                                                        data-oid="0804-bm"
+                                                    ></path>
+                                                    <circle
+                                                        cx="9"
+                                                        cy="7"
+                                                        r="4"
+                                                        data-oid="pb3ppfx"
+                                                    ></circle>
+                                                    <path
+                                                        d="M22 21v-2a4 4 0 0 0-3-3.87"
+                                                        data-oid="kybhzhx"
+                                                    ></path>
+                                                    <path
+                                                        d="M16 3.13a4 4 0 0 1 0 7.75"
+                                                        data-oid="p9owpk."
+                                                    ></path>
+                                                </svg>
+                                            )}
+                                            {resource.icon === 'file' && (
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    width="40"
+                                                    height="40"
+                                                    viewBox="0 0 24 24"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    data-oid="2xvl3an"
+                                                >
+                                                    <path
+                                                        d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"
+                                                        data-oid="7s41s_c"
+                                                    ></path>
+                                                    <polyline
+                                                        points="14 2 14 8 20 8"
+                                                        data-oid="iwfq56d"
+                                                    ></polyline>
+                                                    <line
+                                                        x1="16"
+                                                        y1="13"
+                                                        x2="8"
+                                                        y2="13"
+                                                        data-oid="g1xe_c2"
+                                                    ></line>
+                                                    <line
+                                                        x1="16"
+                                                        y1="17"
+                                                        x2="8"
+                                                        y2="17"
+                                                        data-oid="41shyqc"
+                                                    ></line>
+                                                    <line
+                                                        x1="10"
+                                                        y1="9"
+                                                        x2="8"
+                                                        y2="9"
+                                                        data-oid="93dfbme"
+                                                    ></line>
+                                                </svg>
+                                            )}
+                                            {resource.icon === 'chart-line' && (
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    width="40"
+                                                    height="40"
+                                                    viewBox="0 0 24 24"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    data-oid="d.mu378"
+                                                >
+                                                    <path d="M3 3v18h18" data-oid="ca5u_3g"></path>
+                                                    <path
+                                                        d="m3 10 5 3 4-6 5 7"
+                                                        data-oid="8lbeh_1"
+                                                    ></path>
+                                                </svg>
+                                            )}
                                         </div>
                                         <h3
                                             className="text-xl font-bold mb-2 text-gray-800"
