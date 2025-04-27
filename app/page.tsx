@@ -164,7 +164,7 @@ export default function Page() {
     const [resources, setResources] = useState([]);
     const [features, setFeatures] = useState([]);
     const [benefits, setBenefits] = useState([]);
-    const [isVisible, setIsVisible] = useState(false);
+
     const [searchQuery, setSearchQuery] = useState('');
 
     useEffect(() => {
@@ -184,9 +184,6 @@ export default function Page() {
             setResources(resourcesData);
             setFeatures(featuresData);
             setBenefits(benefitsData);
-
-            // Trigger animations after data is loaded
-            setTimeout(() => setIsVisible(true), 100);
         };
 
         loadData();
@@ -217,7 +214,7 @@ export default function Page() {
                         <div className="hidden md:flex items-center space-x-4" data-oid="evc:3ne">
                             <a
                                 href="/jobs"
-                                className="text-gray-700 hover:text-blue-800 px-3 py-2 text-sm font-medium transition-all duration-300"
+                                className="text-gray-700 hover:text-blue-800 px-3 py-2 text-sm font-medium"
                                 data-oid="-_2kj.s"
                             >
                                 Jobs
@@ -441,10 +438,7 @@ export default function Page() {
                         data-oid="f7g7tpl"
                     >
                         <div className="grid md:grid-cols-2 gap-8 items-center" data-oid="ubboxa7">
-                            <div
-                                className={`transition-all duration-700 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
-                                data-oid="j8ow0q8"
-                            >
+                            <div className="block" data-oid="j8ow0q8">
                                 <div
                                     className="inline-block bg-blue-600 px-3 py-1 rounded-full text-xs font-bold tracking-wider mb-6 uppercase"
                                     data-oid="7dae4sp"
@@ -454,7 +448,6 @@ export default function Page() {
 
                                 <h1
                                     className="text-4xl md:text-6xl font-bold mb-4"
-                                    style={{ fontFamily: 'Caveat, cursive' }}
                                     data-oid="yuqd:x3"
                                 >
                                     FROM CAMPUS TO CAREER
@@ -563,10 +556,7 @@ export default function Page() {
                                 </div>
                             </div>
 
-                            <div
-                                className={`transition-all duration-700 delay-300 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
-                                data-oid="r14d9n8"
-                            >
+                            <div className="block" data-oid="r14d9n8">
                                 <div
                                     className="bg-white/10 backdrop-blur-sm rounded-xl p-6 shadow-xl"
                                     data-oid="94v5trk"
@@ -658,8 +648,7 @@ export default function Page() {
                             {features.map((feature, index) => (
                                 <div
                                     key={feature.id}
-                                    className={`bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 border-t-4 border-blue-800 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
-                                    style={{ transitionDelay: `${index * 100}ms` }}
+                                    className="bg-white p-6 rounded-xl shadow-md border-t-4 border-blue-800"
                                     data-oid="r-epk88"
                                 >
                                     <div className="text-4xl mb-4" data-oid="nz:xzbu">
@@ -713,11 +702,7 @@ export default function Page() {
                             >
                                 Why Choose CareerX
                             </h2>
-                            <p
-                                className="text-xl text-blue-800"
-                                style={{ fontFamily: 'Caveat, cursive' }}
-                                data-oid="k2s8q9i"
-                            >
+                            <p className="text-xl text-blue-800" data-oid="k2s8q9i">
                                 Designed Exclusively For Tech Freshers
                             </p>
                             <p className="mt-4 text-gray-600 max-w-2xl mx-auto" data-oid="moq.mki">
@@ -757,8 +742,7 @@ export default function Page() {
                             {benefits.map((benefit, index) => (
                                 <div
                                     key={benefit.id}
-                                    className={`bg-white p-6 rounded-xl shadow-md border border-gray-100 transition-all duration-500 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
-                                    style={{ transitionDelay: `${index * 150}ms` }}
+                                    className="bg-white p-6 rounded-xl shadow-md border border-gray-100"
                                     data-oid="79i7jkd"
                                 >
                                     <div className="text-4xl mb-4" data-oid="6ym819x">
@@ -797,7 +781,7 @@ export default function Page() {
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-6" data-oid="m.52w:f">
                             <a
                                 href="/whatsapp"
-                                className="flex flex-col items-center p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:translate-y-[-2px]"
+                                className="flex flex-col items-center p-6 bg-white rounded-xl shadow-md"
                                 data-oid="tlh6cvn"
                             >
                                 <div
@@ -953,7 +937,7 @@ export default function Page() {
                                 {resources.map((resource, index) => (
                                     <div
                                         key={resource.id}
-                                        className="flex-none w-80 bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-blue-200"
+                                        className="flex-none w-80 bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden"
                                         data-oid="xsxak:q"
                                     >
                                         <div className="p-6" data-oid="f:b2rd-">
@@ -1070,8 +1054,7 @@ export default function Page() {
                             {testimonials.map((testimonial, index) => (
                                 <div
                                     key={testimonial.id}
-                                    className={`bg-white text-gray-800 p-6 rounded-xl shadow-lg transform transition-all duration-500 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
-                                    style={{ transitionDelay: `${index * 200}ms` }}
+                                    className="bg-white text-gray-800 p-6 rounded-xl shadow-lg"
                                     data-oid="mozk8rk"
                                 >
                                     <div className="flex items-center mb-4" data-oid=".arb65q">
@@ -1127,7 +1110,7 @@ export default function Page() {
                         >
                             <a
                                 href="/register"
-                                className="px-8 py-4 bg-white text-blue-800 rounded-md font-bold text-lg hover:bg-blue-50 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-lg animate-pulse"
+                                className="px-8 py-4 bg-white text-blue-800 rounded-md font-bold text-lg hover:bg-blue-50"
                                 data-oid="zil-22."
                             >
                                 Create Free Account →
