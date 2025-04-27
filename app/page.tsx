@@ -430,9 +430,24 @@ export default function Page() {
             <main data-oid="0etu_t5">
                 {/* Hero Section */}
                 <section
-                    className="bg-gradient-to-r from-blue-900 via-blue-800 to-blue-700 text-white"
+                    className="bg-gradient-to-r from-indigo-900 via-blue-800 to-purple-800 text-white relative overflow-hidden"
                     data-oid="s-x8nxf"
                 >
+                    {/* Animated background elements */}
+                    <div className="absolute inset-0 overflow-hidden" data-oid="8_v6pv5">
+                        <div
+                            className="absolute -top-40 -left-40 w-80 h-80 bg-purple-600 opacity-20 rounded-full blur-3xl animate-blob"
+                            data-oid="2y0yuv0"
+                        ></div>
+                        <div
+                            className="absolute top-40 right-10 w-80 h-80 bg-blue-600 opacity-20 rounded-full blur-3xl animate-blob animation-delay-2000"
+                            data-oid="_2s.v5z"
+                        ></div>
+                        <div
+                            className="absolute bottom-10 left-20 w-80 h-80 bg-indigo-600 opacity-20 rounded-full blur-3xl animate-blob animation-delay-4000"
+                            data-oid="la61w8d"
+                        ></div>
+                    </div>
                     <div
                         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24"
                         data-oid="f7g7tpl"
@@ -463,7 +478,7 @@ export default function Page() {
                                 <div className="mb-8" data-oid="hsvd_:e">
                                     <form
                                         onSubmit={handleSearch}
-                                        className="flex"
+                                        className="flex relative z-10 transform transition-all duration-500 hover:scale-[1.02]"
                                         data-oid="t.goajp"
                                     >
                                         <input
@@ -477,7 +492,7 @@ export default function Page() {
 
                                         <button
                                             type="submit"
-                                            className="bg-blue-800 hover:bg-blue-900 px-6 py-3 rounded-r-md font-medium transition-all duration-300"
+                                            className="bg-gradient-to-r from-blue-800 to-indigo-700 hover:from-indigo-700 hover:to-blue-800 px-6 py-3 rounded-r-md font-medium transition-all duration-300"
                                             data-oid="w1drx9z"
                                         >
                                             SEARCH
@@ -558,7 +573,7 @@ export default function Page() {
 
                             <div className="block" data-oid="r14d9n8">
                                 <div
-                                    className="bg-white/10 backdrop-blur-sm rounded-xl p-6 shadow-xl"
+                                    className="bg-white/10 backdrop-blur-sm rounded-xl p-6 shadow-xl animate-float"
                                     data-oid="94v5trk"
                                 >
                                     <h3
@@ -632,7 +647,10 @@ export default function Page() {
                 </section>
 
                 {/* Key Features Grid */}
-                <section className="py-16 bg-gray-50" data-oid="tg3gedw">
+                <section
+                    className="py-16 bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800"
+                    data-oid="tg3gedw"
+                >
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-oid="a9-d0ho">
                         <h2
                             className="text-3xl font-bold text-center mb-12 text-gray-800"
@@ -648,7 +666,7 @@ export default function Page() {
                             {features.map((feature, index) => (
                                 <div
                                     key={feature.id}
-                                    className="bg-white p-6 rounded-xl shadow-md border-t-4 border-blue-800"
+                                    className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md border-t-4 border-blue-800 hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 hover:border-indigo-600"
                                     data-oid="r-epk88"
                                 >
                                     <div className="text-4xl mb-4" data-oid="nz:xzbu">
@@ -693,7 +711,10 @@ export default function Page() {
                 </section>
 
                 {/* Why Choose CareerX */}
-                <section className="py-16 bg-white" data-oid="8k8qwcf">
+                <section
+                    className="py-16 bg-gradient-to-b from-white to-gray-50 dark:from-gray-800 dark:to-gray-900"
+                    data-oid="8k8qwcf"
+                >
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-oid="jplgjhp">
                         <div className="text-center mb-12" data-oid="xbv_b.e">
                             <h2
@@ -712,9 +733,14 @@ export default function Page() {
 
                         {/* Full-Width Banner */}
                         <div
-                            className="bg-gradient-to-r from-blue-800 to-blue-600 text-white p-6 rounded-xl mb-12 shadow-lg transform hover:scale-[1.01] transition-all duration-300"
+                            className="bg-gradient-to-r from-blue-800 via-indigo-700 to-purple-700 text-white p-6 rounded-xl mb-12 shadow-lg transform hover:scale-[1.01] transition-all duration-300 relative overflow-hidden group"
                             data-oid="s:526ly"
                         >
+                            {/* Animated shine effect */}
+                            <div
+                                className="absolute inset-0 opacity-0 group-hover:opacity-100 animate-shine transition-opacity duration-300"
+                                data-oid="l.pv392"
+                            ></div>
                             <div
                                 className="flex flex-col md:flex-row items-center justify-between"
                                 data-oid="::x6kfw"
@@ -742,7 +768,7 @@ export default function Page() {
                             {benefits.map((benefit, index) => (
                                 <div
                                     key={benefit.id}
-                                    className="bg-white p-6 rounded-xl shadow-md border border-gray-100"
+                                    className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md border border-gray-100 dark:border-gray-700 hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 hover:border-blue-300"
                                     data-oid="79i7jkd"
                                 >
                                     <div className="text-4xl mb-4" data-oid="6ym819x">
@@ -764,7 +790,21 @@ export default function Page() {
                 </section>
 
                 {/* Community Integration */}
-                <section className="py-16 bg-gray-50" data-oid="13ch.i3">
+                <section
+                    className="py-16 bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 relative overflow-hidden"
+                    data-oid="13ch.i3"
+                >
+                    {/* Animated background elements */}
+                    <div className="absolute inset-0 overflow-hidden opacity-30" data-oid="cih7pis">
+                        <div
+                            className="absolute top-20 left-10 w-72 h-72 bg-blue-400 dark:bg-blue-600 rounded-full blur-3xl animate-blob animation-delay-4000"
+                            data-oid="fa:ls82"
+                        ></div>
+                        <div
+                            className="absolute bottom-20 right-10 w-72 h-72 bg-green-400 dark:bg-green-600 rounded-full blur-3xl animate-blob"
+                            data-oid=".3cgzv1"
+                        ></div>
+                    </div>
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-oid="v-ukh7h">
                         <div className="text-center mb-12" data-oid="pcg6my5">
                             <h2
@@ -781,7 +821,7 @@ export default function Page() {
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-6" data-oid="m.52w:f">
                             <a
                                 href="/whatsapp"
-                                className="flex flex-col items-center p-6 bg-white rounded-xl shadow-md"
+                                className="flex flex-col items-center p-6 bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 relative z-10"
                                 data-oid="tlh6cvn"
                             >
                                 <div
@@ -915,7 +955,10 @@ export default function Page() {
                 </section>
 
                 {/* Fresher Resources */}
-                <section className="py-16 bg-white" data-oid="vakypfx">
+                <section
+                    className="py-16 bg-gradient-to-b from-white to-gray-50 dark:from-gray-800 dark:to-gray-900"
+                    data-oid="vakypfx"
+                >
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-oid="tp8_k3v">
                         <div className="text-center mb-12" data-oid="uh3nn:e">
                             <h2
@@ -937,7 +980,7 @@ export default function Page() {
                                 {resources.map((resource, index) => (
                                     <div
                                         key={resource.id}
-                                        className="flex-none w-80 bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden"
+                                        className="flex-none w-80 bg-white dark:bg-gray-800 rounded-xl shadow-md border border-gray-100 dark:border-gray-700 overflow-hidden hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2"
                                         data-oid="xsxak:q"
                                     >
                                         <div className="p-6" data-oid="f:b2rd-">
@@ -1039,7 +1082,21 @@ export default function Page() {
                 </section>
 
                 {/* Success Stories */}
-                <section className="py-16 bg-blue-700 text-white" data-oid="8dqd98c">
+                <section
+                    className="py-16 bg-gradient-to-r from-blue-800 via-indigo-700 to-blue-700 text-white relative overflow-hidden"
+                    data-oid="8dqd98c"
+                >
+                    {/* Animated background elements */}
+                    <div className="absolute inset-0 overflow-hidden" data-oid="7pd0hgh">
+                        <div
+                            className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500 opacity-20 rounded-full blur-3xl animate-blob animation-delay-2000"
+                            data-oid="13fo8g1"
+                        ></div>
+                        <div
+                            className="absolute bottom-0 right-1/4 w-96 h-96 bg-indigo-500 opacity-20 rounded-full blur-3xl animate-blob"
+                            data-oid="89243g8"
+                        ></div>
+                    </div>
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-oid="7e2z3wp">
                         <div className="text-center mb-12" data-oid="l4:akv4">
                             <h2 className="text-3xl font-bold mb-4" data-oid="jf3hcyv">
@@ -1054,7 +1111,7 @@ export default function Page() {
                             {testimonials.map((testimonial, index) => (
                                 <div
                                     key={testimonial.id}
-                                    className="bg-white text-gray-800 p-6 rounded-xl shadow-lg"
+                                    className="bg-white text-gray-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 relative z-10"
                                     data-oid="mozk8rk"
                                 >
                                     <div className="flex items-center mb-4" data-oid=".arb65q">
@@ -1088,9 +1145,20 @@ export default function Page() {
 
                 {/* Final CTA */}
                 <section
-                    className="py-16 bg-gradient-to-r from-blue-800 via-blue-600 to-teal-500 text-white"
+                    className="py-16 bg-gradient-to-r from-purple-800 via-indigo-700 to-blue-700 text-white relative overflow-hidden"
                     data-oid="7d.c30q"
                 >
+                    {/* Animated background elements */}
+                    <div className="absolute inset-0 overflow-hidden" data-oid="0o-ttl7">
+                        <div
+                            className="absolute -top-20 -right-20 w-96 h-96 bg-blue-500 opacity-20 rounded-full blur-3xl animate-blob"
+                            data-oid="dg3x9_3"
+                        ></div>
+                        <div
+                            className="absolute bottom-20 left-10 w-96 h-96 bg-purple-500 opacity-20 rounded-full blur-3xl animate-blob animation-delay-4000"
+                            data-oid="m:4wacd"
+                        ></div>
+                    </div>
                     <div
                         className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
                         data-oid="509st6h"
@@ -1110,14 +1178,14 @@ export default function Page() {
                         >
                             <a
                                 href="/register"
-                                className="px-8 py-4 bg-white text-blue-800 rounded-md font-bold text-lg hover:bg-blue-50"
+                                className="px-8 py-4 bg-white text-blue-800 rounded-md font-bold text-lg hover:bg-blue-50 transition-all duration-300 transform hover:scale-105 hover:shadow-xl animate-pulse-shadow relative z-10"
                                 data-oid="zil-22."
                             >
                                 Create Free Account →
                             </a>
                             <a
                                 href="/fresher-jobs"
-                                className="px-8 py-4 border-2 border-white text-white rounded-md font-bold text-lg hover:bg-white/10 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-lg"
+                                className="px-8 py-4 border-2 border-white text-white rounded-md font-bold text-lg hover:bg-white/10 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-lg transform hover:scale-105 relative z-10"
                                 data-oid="sr4rhd2"
                             >
                                 Browse Fresher Jobs
