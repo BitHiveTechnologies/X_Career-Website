@@ -1524,11 +1524,11 @@ export default function Page() {
                             </div>
 
                             <div
-                                className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[hsl(196,80%,45%)/90] to-transparent z-20"
+                                className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[hsl(196,80%,45%)] to-transparent z-20"
                                 data-oid="yos2.aj"
                             ></div>
                             <div
-                                className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-[hsl(196,80%,45%)/90] to-transparent z-20"
+                                className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-[hsl(196,80%,45%)] to-transparent z-20"
                                 data-oid="0o90pte"
                             ></div>
 
