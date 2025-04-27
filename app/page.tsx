@@ -41,12 +41,6 @@ const dummyData = {
 
     resources: [
         {
-            id: 1,
-            title: 'DSA Corner',
-            description: 'Master data structures and algorithms',
-            icon: 'chart',
-        },
-        {
             id: 2,
             title: 'Job Matches',
             description: 'Personalized job recommendations',
@@ -58,18 +52,6 @@ const dummyData = {
             title: 'Resume Review',
             description: 'Get expert feedback on your CV',
             icon: 'file',
-        },
-        {
-            id: 5,
-            title: 'Job Tracker',
-            description: 'Organize your job applications',
-            icon: 'chart-line',
-        },
-        {
-            id: 6,
-            title: 'Article',
-            description: 'Latest insights and career advice for freshers',
-            icon: 'article',
         },
     ],
 
@@ -371,16 +353,20 @@ export default function Page() {
                     {/* Animated background elements */}
                     <div className="absolute inset-0 overflow-hidden" data-oid="8_v6pv5">
                         <div
-                            className="absolute -top-40 -left-40 w-80 h-80 bg-[hsl(196,80%,65%)] opacity-30 rounded-full blur-3xl animate-blob"
+                            className="absolute -top-20 -left-20 w-96 h-96 bg-[hsl(196,80%,65%)] opacity-40 rounded-full blur-3xl animate-blob"
                             data-oid="2y0yuv0"
                         ></div>
                         <div
-                            className="absolute top-40 right-10 w-80 h-80 bg-[hsl(210,70%,65%)] opacity-30 rounded-full blur-3xl animate-blob animation-delay-2000"
+                            className="absolute top-40 right-20 w-96 h-96 bg-[hsl(210,70%,65%)] opacity-40 rounded-full blur-3xl animate-blob animation-delay-2000"
                             data-oid="_2s.v5z"
                         ></div>
                         <div
-                            className="absolute bottom-10 left-20 w-80 h-80 bg-[hsl(175,70%,61%)] opacity-30 rounded-full blur-3xl animate-blob animation-delay-4000"
+                            className="absolute bottom-10 left-1/3 w-96 h-96 bg-[hsl(175,70%,61%)] opacity-40 rounded-full blur-3xl animate-blob animation-delay-4000"
                             data-oid="la61w8d"
+                        ></div>
+                        <div
+                            className="absolute -bottom-20 right-1/4 w-80 h-80 bg-[hsl(220,70%,65%)] opacity-30 rounded-full blur-3xl animate-blob animation-delay-3000"
+                            data-oid="dl8z8fl"
                         ></div>
                     </div>
                     <div
@@ -410,53 +396,7 @@ export default function Page() {
                                     Discover jobs, internships, and resources tailored for freshers
                                 </p>
 
-                                <div className="mb-8" data-oid="hsvd_:e">
-                                    <form
-                                        onSubmit={handleSearch}
-                                        className="flex relative z-10 transform transition-all duration-500 hover:scale-[1.02]"
-                                        data-oid="t.goajp"
-                                    >
-                                        <input
-                                            type="text"
-                                            placeholder="Search Entry Level Jobs..."
-                                            className="w-full px-4 py-3 rounded-l-md text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                            value={searchQuery}
-                                            onChange={(e) => setSearchQuery(e.target.value)}
-                                            data-oid="zy1e.s0"
-                                        />
-
-                                        <button
-                                            type="submit"
-                                            className="bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] hover:from-[hsl(175,70%,41%)] hover:to-[hsl(196,80%,45%)] px-6 py-3 rounded-r-md font-medium transition-all duration-300"
-                                            data-oid="w1drx9z"
-                                        >
-                                            SEARCH
-                                        </button>
-                                    </form>
-                                </div>
-
-                                <div className="flex flex-wrap gap-3 mb-8" data-oid="kgfa0bb">
-                                    <div
-                                        className="bg-white/20 backdrop-blur-md px-4 py-2 rounded-full text-sm border border-white/30"
-                                        data-oid="usqs397"
-                                    >
-                                        {stats?.freshers.toLocaleString()} Freshers
-                                    </div>
-                                    <div
-                                        className="bg-white/20 backdrop-blur-md px-4 py-2 rounded-full text-sm border border-white/30"
-                                        data-oid="jh-u.hg"
-                                    >
-                                        {stats?.verifiedJobs} Verified Jobs
-                                    </div>
-                                    <div
-                                        className="bg-white/20 backdrop-blur-md px-4 py-2 rounded-full text-sm border border-white/30"
-                                        data-oid="1btc_yl"
-                                    >
-                                        Entry-Level Focused
-                                    </div>
-                                </div>
-
-                                <div className="flex flex-wrap gap-4" data-oid="un71x3o">
+                                <div className="flex flex-wrap gap-4 mt-10" data-oid="un71x3o">
                                     <a
                                         href="/fresher-jobs"
                                         className="inline-flex items-center px-6 py-3 bg-white/20 backdrop-blur-md border border-white/30 hover:bg-white/30 rounded-md font-medium transition-all duration-300 hover:translate-y-[-2px] hover:shadow-lg"
@@ -506,11 +446,66 @@ export default function Page() {
                                 </div>
                             </div>
 
-                            <div className="block" data-oid="r14d9n8">
+                            <div className="block relative" data-oid="r14d9n8">
                                 <div
-                                    className="flex justify-center items-center h-full"
-                                    data-oid="r4px9we"
-                                ></div>
+                                    className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 shadow-xl transform hover:scale-[1.01] transition-all duration-500 relative z-10"
+                                    data-oid="zr4qow2"
+                                >
+                                    <div className="mb-6" data-oid="hsvd_:e">
+                                        <form
+                                            onSubmit={handleSearch}
+                                            className="flex relative z-10 transform transition-all duration-500 hover:scale-[1.02]"
+                                            data-oid="t.goajp"
+                                        >
+                                            <input
+                                                type="text"
+                                                placeholder="Search Entry Level Jobs..."
+                                                className="w-full px-4 py-3 rounded-l-md text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-inner"
+                                                value={searchQuery}
+                                                onChange={(e) => setSearchQuery(e.target.value)}
+                                                data-oid="zy1e.s0"
+                                            />
+
+                                            <button
+                                                type="submit"
+                                                className="bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] hover:from-[hsl(175,70%,41%)] hover:to-[hsl(196,80%,45%)] px-6 py-3 rounded-r-md font-medium transition-all duration-300 shadow-lg"
+                                                data-oid="w1drx9z"
+                                            >
+                                                SEARCH
+                                            </button>
+                                        </form>
+                                    </div>
+
+                                    <div className="flex flex-wrap gap-3 mb-6" data-oid="kgfa0bb">
+                                        <div
+                                            className="bg-white/20 backdrop-blur-md px-4 py-2 rounded-full text-sm border border-white/30 shadow-sm hover:shadow-md transition-all duration-300 hover:bg-white/30"
+                                            data-oid="usqs397"
+                                        >
+                                            {stats?.freshers.toLocaleString()} Freshers
+                                        </div>
+                                        <div
+                                            className="bg-white/20 backdrop-blur-md px-4 py-2 rounded-full text-sm border border-white/30 shadow-sm hover:shadow-md transition-all duration-300 hover:bg-white/30"
+                                            data-oid="jh-u.hg"
+                                        >
+                                            {stats?.verifiedJobs} Verified Jobs
+                                        </div>
+                                        <div
+                                            className="bg-white/20 backdrop-blur-md px-4 py-2 rounded-full text-sm border border-white/30 shadow-sm hover:shadow-md transition-all duration-300 hover:bg-white/30"
+                                            data-oid="1btc_yl"
+                                        >
+                                            Entry-Level Focused
+                                        </div>
+                                    </div>
+
+                                    <div
+                                        className="absolute -bottom-3 -right-3 w-20 h-20 bg-[hsl(196,80%,65%)] opacity-60 rounded-full blur-xl"
+                                        data-oid="-tv9yeb"
+                                    ></div>
+                                    <div
+                                        className="absolute -top-3 -left-3 w-20 h-20 bg-[hsl(175,70%,61%)] opacity-60 rounded-full blur-xl"
+                                        data-oid="5.q2qq4"
+                                    ></div>
+                                </div>
                             </div>
                         </div>
                     </div>
