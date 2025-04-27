@@ -753,7 +753,7 @@ export default function Page() {
                                 data-oid="655_h6."
                             ></div>
                             <div
-                                className="flex flex-col md:flex-row items-center justify-between"
+                                className="flex flex-col md:flex-row items-center justify-between relative z-10"
                                 data-oid="::x6kfw"
                             >
                                 <div data-oid="dzz9twa">
