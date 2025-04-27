@@ -1990,7 +1990,7 @@ export default function Page() {
 
             {/* Footer */}
             <footer
-                className="bg-gradient-to-r from-[hsl(196,80%,15%)] via-[hsl(210,70%,15%)] to-[hsl(175,70%,15%)] backdrop-blur-md text-white relative overflow-hidden"
+                className="bg-gradient-to-r from-[hsl(196,80%,35%)] via-[hsl(210,70%,35%)] to-[hsl(175,70%,35%)] backdrop-blur-md text-white relative overflow-hidden"
                 data-oid="3thd4hw"
             >
                 {/* Subtle animated background elements */}
@@ -2020,14 +2020,14 @@ export default function Page() {
                                     <Logo data-oid="wur2:xh" />
                                 </div>
                             </div>
-                            <p className="text-gray-400 mb-4" data-oid="bqzosa0">
+                            <p className="text-white/80 mb-4" data-oid="bqzosa0">
                                 Helping tech freshers launch their careers with curated
                                 opportunities and resources.
                             </p>
                             <div className="flex space-x-4" data-oid="t5hrm1f">
                                 <a
                                     href="/linkedin"
-                                    className="text-gray-400 hover:text-white transition-all duration-300"
+                                    className="text-white/80 hover:text-white transition-all duration-300"
                                     data-oid="rt:13ay"
                                 >
                                     <svg
@@ -2086,7 +2086,7 @@ export default function Page() {
                                 <li data-oid="35doyf6">
                                     <a
                                         href="/about"
-                                        className="text-gray-400 hover:text-white transition-all duration-300"
+                                        className="text-white/80 hover:text-white transition-all duration-300"
                                         data-oid="dwqvhjj"
                                     >
                                         About Us
@@ -2210,7 +2210,7 @@ export default function Page() {
                     </div>
 
                     <div
-                        className="border-t border-white/10 mt-12 pt-8 text-center text-gray-400"
+                        className="border-t border-white/20 mt-12 pt-8 text-center text-white/90"
                         data-oid="rrqi6eb"
                     >
                         <p className="mb-2" data-oid="jczuknr">
