@@ -400,14 +400,14 @@ export default function Page() {
                                     className="text-4xl md:text-6xl font-bold mb-4"
                                     data-oid="yuqd:x3"
                                 >
-                                    FROM CAMPUS TO CAREER
+                                    JOIN THOUSANDS GETTING JOBS IN TOP TECH COMPANIES
                                 </h1>
 
                                 <p
                                     className="text-xl md:text-2xl mb-8 text-blue-100"
                                     data-oid="t4t2i:s"
                                 >
-                                    Your gateway to entry-level tech roles
+                                    Discover jobs, internships, and resources tailored for freshers
                                 </p>
 
                                 <div className="mb-8" data-oid="hsvd_:e">
@@ -508,73 +508,212 @@ export default function Page() {
 
                             <div className="block" data-oid="r14d9n8">
                                 <div
-                                    className="bg-white/20 backdrop-blur-md rounded-xl p-6 shadow-xl animate-float border border-white/30"
-                                    data-oid="94v5trk"
+                                    className="flex justify-center items-center h-full"
+                                    data-oid="r4px9we"
+                                ></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                {/* Platform Stats Section */}
+                <section
+                    className="py-12 bg-gradient-to-b from-[hsl(196,80%,45%)/10] to-white"
+                    data-oid="d2r3zl9"
+                >
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-oid="zp:e00i">
+                        <h2
+                            className="text-3xl font-bold text-center mb-8 text-gray-800"
+                            data-oid="jfo9qet"
+                        >
+                            Platform Metrics
+                        </h2>
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-6" data-oid=".2c4utu">
+                            <div
+                                className="bg-white rounded-xl shadow-lg p-6 border-l-4 border-blue-500 hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 hover:border-l-8"
+                                data-oid="vcfvj0g"
+                            >
+                                <div
+                                    className="flex items-center justify-between mb-2"
+                                    data-oid="1uumqao"
                                 >
-                                    <h3
-                                        className="text-xl font-semibold mb-4 text-center"
-                                        data-oid="sk81e1e"
+                                    <div
+                                        className="text-blue-500 bg-blue-100 p-3 rounded-lg"
+                                        data-oid="lsxn_we"
                                     >
-                                        Platform Stats
-                                    </h3>
-                                    <div className="grid grid-cols-2 gap-4" data-oid="sd:5qns">
-                                        <div
-                                            className="bg-white/30 backdrop-blur-md p-4 rounded-lg text-center border border-white/30 hover:bg-white/40 transition-all duration-300"
-                                            data-oid="abmmf-w"
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            className="h-8 w-8"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke="currentColor"
+                                            data-oid="fuk0q-g"
                                         >
-                                            <div className="text-3xl font-bold" data-oid="4nmhwkr">
-                                                {stats?.activeMembers.toLocaleString()}
-                                            </div>
-                                            <div
-                                                className="text-sm text-blue-100"
-                                                data-oid="ko-xso1"
-                                            >
-                                                Active Members
-                                            </div>
-                                        </div>
-                                        <div
-                                            className="bg-white/10 backdrop-blur-sm p-4 rounded-lg text-center"
-                                            data-oid="lcewumh"
-                                        >
-                                            <div className="text-3xl font-bold" data-oid="46.sg.z">
-                                                {stats?.monthlyReaders}
-                                            </div>
-                                            <div
-                                                className="text-sm text-blue-100"
-                                                data-oid="p.37ahb"
-                                            >
-                                                Monthly Readers
-                                            </div>
-                                        </div>
-                                        <div
-                                            className="bg-white/10 backdrop-blur-sm p-4 rounded-lg text-center"
-                                            data-oid="6d1kht8"
-                                        >
-                                            <div className="text-3xl font-bold" data-oid="dp7m.tj">
-                                                {stats?.linkedInFollowers}
-                                            </div>
-                                            <div
-                                                className="text-sm text-blue-100"
-                                                data-oid="1:09pi-"
-                                            >
-                                                LinkedIn
-                                            </div>
-                                        </div>
-                                        <div
-                                            className="bg-white/10 backdrop-blur-sm p-4 rounded-lg text-center"
-                                            data-oid="mhvqu73"
-                                        >
-                                            <div className="text-3xl font-bold" data-oid="qiuxi7y">
-                                                {stats?.users.toLocaleString()}
-                                            </div>
-                                            <div
-                                                className="text-sm text-blue-100"
-                                                data-oid="2ombl9a"
-                                            >
-                                                Users
-                                            </div>
-                                        </div>
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth={2}
+                                                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                                                data-oid="2e_1jw2"
+                                            />
+                                        </svg>
                                     </div>
+                                    <div
+                                        className="text-xs font-semibold text-gray-500 uppercase tracking-wider"
+                                        data-oid="q.hj5:_"
+                                    >
+                                        Active Members
+                                    </div>
+                                </div>
+                                <div
+                                    className="text-3xl font-bold text-gray-800 mb-1 animate-count-up"
+                                    data-oid="dx:50_c"
+                                >
+                                    {stats?.activeMembers.toLocaleString()}
+                                </div>
+                                <div className="text-sm text-gray-500" data-oid="9-56hmy">
+                                    Growing community
+                                </div>
+                            </div>
+
+                            <div
+                                className="bg-white rounded-xl shadow-lg p-6 border-l-4 border-green-500 hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 hover:border-l-8"
+                                data-oid="s8.9b_x"
+                            >
+                                <div
+                                    className="flex items-center justify-between mb-2"
+                                    data-oid="n2qkg3_"
+                                >
+                                    <div
+                                        className="text-green-500 bg-green-100 p-3 rounded-lg"
+                                        data-oid="7z3iire"
+                                    >
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            className="h-8 w-8"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke="currentColor"
+                                            data-oid="6yfnzs8"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth={2}
+                                                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                                                data-oid="ims3igv"
+                                            />
+                                        </svg>
+                                    </div>
+                                    <div
+                                        className="text-xs font-semibold text-gray-500 uppercase tracking-wider"
+                                        data-oid="6qz--gw"
+                                    >
+                                        Monthly Readers
+                                    </div>
+                                </div>
+                                <div
+                                    className="text-3xl font-bold text-gray-800 mb-1 animate-count-up"
+                                    data-oid="31j29gx"
+                                >
+                                    {stats?.monthlyReaders}
+                                </div>
+                                <div className="text-sm text-gray-500" data-oid="ad00xnw">
+                                    Content engagement
+                                </div>
+                            </div>
+
+                            <div
+                                className="bg-white rounded-xl shadow-lg p-6 border-l-4 border-purple-500 hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 hover:border-l-8"
+                                data-oid="m_i._fw"
+                            >
+                                <div
+                                    className="flex items-center justify-between mb-2"
+                                    data-oid="z.tef:l"
+                                >
+                                    <div
+                                        className="text-purple-500 bg-purple-100 p-3 rounded-lg"
+                                        data-oid="mrv50gt"
+                                    >
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            className="h-8 w-8"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke="currentColor"
+                                            data-oid="7rb9k8r"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth={2}
+                                                d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                                                data-oid="wj6k502"
+                                            />
+                                        </svg>
+                                    </div>
+                                    <div
+                                        className="text-xs font-semibold text-gray-500 uppercase tracking-wider"
+                                        data-oid="e03_ub-"
+                                    >
+                                        LinkedIn
+                                    </div>
+                                </div>
+                                <div
+                                    className="text-3xl font-bold text-gray-800 mb-1 animate-count-up"
+                                    data-oid="tuamr89"
+                                >
+                                    {stats?.linkedInFollowers}
+                                </div>
+                                <div className="text-sm text-gray-500" data-oid="mbrwkcl">
+                                    Professional network
+                                </div>
+                            </div>
+
+                            <div
+                                className="bg-white rounded-xl shadow-lg p-6 border-l-4 border-amber-500 hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 hover:border-l-8"
+                                data-oid="p-51wy8"
+                            >
+                                <div
+                                    className="flex items-center justify-between mb-2"
+                                    data-oid=".7wnbqq"
+                                >
+                                    <div
+                                        className="text-amber-500 bg-amber-100 p-3 rounded-lg"
+                                        data-oid="vyik:qy"
+                                    >
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            className="h-8 w-8"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke="currentColor"
+                                            data-oid="75wn_qq"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth={2}
+                                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                                                data-oid="qlqx_3o"
+                                            />
+                                        </svg>
+                                    </div>
+                                    <div
+                                        className="text-xs font-semibold text-gray-500 uppercase tracking-wider"
+                                        data-oid="ul.bk7z"
+                                    >
+                                        Users
+                                    </div>
+                                </div>
+                                <div
+                                    className="text-3xl font-bold text-gray-800 mb-1 animate-count-up"
+                                    data-oid="m3pp3iq"
+                                >
+                                    {stats?.users.toLocaleString()}
+                                </div>
+                                <div className="text-sm text-gray-500" data-oid="f35voh0">
+                                    Registered accounts
                                 </div>
                             </div>
                         </div>
