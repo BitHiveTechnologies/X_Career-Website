@@ -208,10 +208,10 @@ export default function Page() {
         style.innerHTML = `
             @keyframes scroll {
                 0% {
-                    transform: translateX(0);
+                    transform: translateX(100%);
                 }
                 100% {
-                    transform: translateX(-50%);
+                    transform: translateX(-100%);
                 }
             }
             
@@ -1421,11 +1421,7 @@ export default function Page() {
                             data-oid="89243g8"
                         ></div>
                     </div>
-                    {/* Frosted glass overlay */}
-                    <div
-                        className="absolute inset-0 bg-white/5 backdrop-blur-[1px]"
-                        data-oid="0w5:hzx"
-                    ></div>
+                    {/* No frosted glass overlay for cleaner animation */}
                     <div
                         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
                         data-oid="7e2z3wp"
@@ -1523,20 +1519,9 @@ export default function Page() {
                                 ))}
                             </div>
 
-                            <div
-                                className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[hsl(196,80%,45%)] to-transparent z-20"
-                                data-oid="yos2.aj"
-                            ></div>
-                            <div
-                                className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[hsl(175,70%,41%)] to-transparent z-20"
-                                data-oid="0o90pte"
-                            ></div>
+                            {/* No gradient overlays for clean edge-to-edge animation */}
 
-                            <div className="text-center mt-8" data-oid="gxj_sut">
-                                <p className="text-white/70 text-sm" data-oid="bwnjwbk">
-                                    Hover or click on a testimonial to pause
-                                </p>
-                            </div>
+                            <div className="text-center mt-8" data-oid="gxj_sut"></div>
                         </div>
                     </div>
                 </section>
