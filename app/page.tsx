@@ -983,111 +983,55 @@ export default function Page() {
                             </p>
                         </div>
 
-                        <div className="relative" data-oid="uo38gc7">
-                            <div
-                                className="flex overflow-x-auto pb-6 -mx-4 px-4 space-x-6 scrollbar-hide"
-                                data-oid="5n__hed"
-                            >
-                                {resources.map((resource, index) => (
-                                    <div
-                                        key={resource.id}
-                                        className="flex-none w-80 bg-white/80 backdrop-blur-sm rounded-xl shadow-md border border-[hsl(210,30%,95%)] overflow-hidden hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2"
-                                        data-oid="xsxak:q"
-                                    >
-                                        <div className="p-6" data-oid="f:b2rd-">
-                                            <div className="text-4xl mb-4" data-oid="..8aiwp">
-                                                {resource.icon}
-                                            </div>
-                                            <h3
-                                                className="text-xl font-bold mb-2 text-gray-800"
-                                                data-oid="c:4mu6h"
-                                            >
-                                                {resource.title}
-                                            </h3>
-                                            <p className="text-gray-600 mb-4" data-oid="_hhi2.-">
-                                                {resource.description}
-                                            </p>
-                                            <a
-                                                href={`/resources/${resource.title.toLowerCase().replace(/\s+/g, '-')}`}
-                                                className="text-blue-800 font-medium inline-flex items-center hover:text-blue-900 transition-all duration-300"
-                                                data-oid=":gpd5hk"
-                                            >
-                                                Learn more
-                                                <svg
-                                                    className="ml-1 h-4 w-4"
-                                                    fill="none"
-                                                    stroke="currentColor"
-                                                    viewBox="0 0 24 24"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    data-oid="suwennk"
-                                                >
-                                                    <path
-                                                        strokeLinecap="round"
-                                                        strokeLinejoin="round"
-                                                        strokeWidth="2"
-                                                        d="M14 5l7 7m0 0l-7 7m7-7H3"
-                                                        data-oid="2_mhwbq"
-                                                    ></path>
-                                                </svg>
-                                            </a>
+                        <div
+                            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+                            data-oid="uo38gc7"
+                        >
+                            {resources.map((resource, index) => (
+                                <div
+                                    key={resource.id}
+                                    className="bg-white/80 backdrop-blur-sm rounded-xl shadow-md border border-[hsl(210,30%,95%)] overflow-hidden hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2"
+                                    data-oid="xsxak:q"
+                                >
+                                    <div className="p-6" data-oid="f:b2rd-">
+                                        <div className="text-4xl mb-4" data-oid="..8aiwp">
+                                            {resource.icon}
                                         </div>
+                                        <h3
+                                            className="text-xl font-bold mb-2 text-gray-800"
+                                            data-oid="c:4mu6h"
+                                        >
+                                            {resource.title}
+                                        </h3>
+                                        <p className="text-gray-600 mb-4" data-oid="_hhi2.-">
+                                            {resource.description}
+                                        </p>
+                                        <a
+                                            href={`/resources/${resource.title.toLowerCase().replace(/\s+/g, '-')}`}
+                                            className="text-blue-800 font-medium inline-flex items-center hover:text-blue-900 transition-all duration-300"
+                                            data-oid=":gpd5hk"
+                                        >
+                                            Learn more
+                                            <svg
+                                                className="ml-1 h-4 w-4"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                viewBox="0 0 24 24"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                data-oid="suwennk"
+                                            >
+                                                <path
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    strokeWidth="2"
+                                                    d="M14 5l7 7m0 0l-7 7m7-7H3"
+                                                    data-oid="2_mhwbq"
+                                                ></path>
+                                            </svg>
+                                        </a>
                                     </div>
-                                ))}
-                            </div>
-
-                            {/* Scroll indicators */}
-                            <div
-                                className="absolute left-0 top-1/2 transform -translate-y-1/2 -ml-4 hidden md:block"
-                                data-oid="ir609c6"
-                            >
-                                <button
-                                    className="p-2 rounded-full bg-white shadow-md text-gray-800 hover:bg-gray-100 transition-all duration-300"
-                                    data-oid="g0hukj0"
-                                >
-                                    <svg
-                                        className="h-6 w-6"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        data-oid="ybtr_gl"
-                                    >
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth="2"
-                                            d="M15 19l-7-7 7-7"
-                                            data-oid="y4jpvzh"
-                                        ></path>
-                                    </svg>
-                                </button>
-                            </div>
-                            <div
-                                className="absolute right-0 top-1/2 transform -translate-y-1/2 -mr-4 hidden md:block"
-                                data-oid="rxh2uq2"
-                            >
-                                <button
-                                    className="p-2 rounded-full bg-white shadow-md text-gray-800 hover:bg-gray-100 transition-all duration-300"
-                                    data-oid="po2vk60"
-                                >
-                                    <svg
-                                        className="h-6 w-6"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        data-oid="ve-6lhx"
-                                    >
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth="2"
-                                            d="M9 5l7 7-7 7"
-                                            data-oid="91992e1"
-                                        ></path>
-                                    </svg>
-                                </button>
-                            </div>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </section>
