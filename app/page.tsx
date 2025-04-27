@@ -1440,9 +1440,9 @@ export default function Page() {
                         </div>
 
                         {/* Auto-scrolling testimonial carousel */}
-                        <div className="relative overflow-hidden" data-oid="y4tftqb">
+                        <div className="relative overflow-hidden py-4" data-oid="y4tftqb">
                             <div
-                                className="flex animate-scroll gap-6 hover:pause-animation focus:pause-animation"
+                                className="flex animate-scroll gap-6 hover:pause-animation focus:pause-animation pt-4 pb-2"
                                 onMouseEnter={(e) =>
                                     (e.currentTarget.style.animationPlayState = 'paused')
                                 }
@@ -1460,7 +1460,7 @@ export default function Page() {
                                 {testimonials.map((testimonial) => (
                                     <div
                                         key={testimonial.id}
-                                        className="bg-white/90 backdrop-blur-md text-gray-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 relative z-10 border border-white/30 min-w-[300px] flex-shrink-0"
+                                        className="bg-white/90 backdrop-blur-md text-gray-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 relative z-10 border border-white/20 min-w-[300px] flex-shrink-0"
                                         data-oid="mozk8rk"
                                     >
                                         <div className="flex items-center mb-4" data-oid=".arb65q">
@@ -1493,7 +1493,7 @@ export default function Page() {
                                 {testimonials.slice(0, 3).map((testimonial) => (
                                     <div
                                         key={`duplicate-${testimonial.id}`}
-                                        className="bg-white/90 backdrop-blur-md text-gray-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 relative z-10 border border-white/30 min-w-[300px] flex-shrink-0"
+                                        className="bg-white/90 backdrop-blur-md text-gray-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 relative z-10 border border-white/20 min-w-[300px] flex-shrink-0"
                                         data-oid="790:tqb"
                                     >
                                         <div className="flex items-center mb-4" data-oid="idfaztg">
@@ -1524,11 +1524,11 @@ export default function Page() {
                             </div>
 
                             <div
-                                className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[hsl(196,80%,45%)] to-transparent z-20"
+                                className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[hsl(196,80%,45%)/90] to-transparent z-20"
                                 data-oid="yos2.aj"
                             ></div>
                             <div
-                                className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-[hsl(196,80%,45%)] to-transparent z-20"
+                                className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-[hsl(196,80%,45%)/90] to-transparent z-20"
                                 data-oid="0o90pte"
                             ></div>
 
