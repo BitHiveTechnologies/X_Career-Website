@@ -208,10 +208,10 @@ export default function Page() {
         style.innerHTML = `
             @keyframes scroll {
                 0% {
-                    transform: translateX(100%);
+                    transform: translateX(0);
                 }
                 100% {
-                    transform: translateX(-100%);
+                    transform: translateX(-50%);
                 }
             }
             
@@ -1421,7 +1421,11 @@ export default function Page() {
                             data-oid="89243g8"
                         ></div>
                     </div>
-                    {/* No frosted glass overlay for cleaner animation */}
+                    {/* Frosted glass overlay */}
+                    <div
+                        className="absolute inset-0 bg-white/5 backdrop-blur-[1px]"
+                        data-oid="0w5:hzx"
+                    ></div>
                     <div
                         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
                         data-oid="7e2z3wp"
@@ -1438,7 +1442,7 @@ export default function Page() {
                         {/* Auto-scrolling testimonial carousel */}
                         <div className="relative overflow-hidden py-4" data-oid="y4tftqb">
                             <div
-                                className="flex animate-scroll gap-6 hover:pause-animation focus:pause-animation pt-4 pb-2"
+                                className="flex animate-scroll gap-5 hover:pause-animation focus:pause-animation pt-4 pb-2"
                                 onMouseEnter={(e) =>
                                     (e.currentTarget.style.animationPlayState = 'paused')
                                 }
@@ -1452,6 +1456,7 @@ export default function Page() {
                                 }}
                                 style={{ width: `${testimonials.length * 340}px` }}
                                 data-oid="pk:0pfz"
+                                key="olk-3x9u"
                             >
                                 {testimonials.map((testimonial) => (
                                     <div
@@ -1519,9 +1524,11 @@ export default function Page() {
                                 ))}
                             </div>
 
-                            {/* No gradient overlays for clean edge-to-edge animation */}
-
-                            <div className="text-center mt-8" data-oid="gxj_sut"></div>
+                            <div
+                                className="text-center mt-8"
+                                data-oid="gxj_sut"
+                                key="olk-xp4-"
+                            ></div>
                         </div>
                     </div>
                 </section>
