@@ -234,13 +234,6 @@ export default function Page() {
                                 Jobs
                             </a>
                             <a
-                                href="/fresher-jobs"
-                                className="text-gray-700 hover:text-blue-800 px-3 py-2 text-sm font-medium transition-all duration-300"
-                                data-oid="5ko6les"
-                            >
-                                Fresher Jobs
-                            </a>
-                            <a
                                 href="/internships"
                                 className="text-gray-700 hover:text-blue-800 px-3 py-2 text-sm font-medium transition-all duration-300"
                                 data-oid="rxopcq_"
@@ -248,73 +241,26 @@ export default function Page() {
                                 Internships
                             </a>
                             <a
-                                href="/roadmaps"
+                                href="/resume-builder"
                                 className="text-gray-700 hover:text-blue-800 px-3 py-2 text-sm font-medium transition-all duration-300"
-                                data-oid="nlm7973"
+                                data-oid="ozs1-2r"
                             >
-                                Roadmaps
+                                Resume Builder
                             </a>
                             <a
-                                href="/articles"
+                                href="/about"
                                 className="text-gray-700 hover:text-blue-800 px-3 py-2 text-sm font-medium transition-all duration-300"
-                                data-oid="-a.e7g:"
+                                data-oid="ba9a24c"
                             >
-                                Articles
+                                About Us
                             </a>
-
-                            {/* Dropdown for More */}
-                            <div className="relative group" data-oid="4:u6y49">
-                                <button
-                                    className="text-gray-700 group-hover:text-blue-800 px-3 py-2 text-sm font-medium transition-all duration-300 flex items-center"
-                                    data-oid="jta_jqc"
-                                >
-                                    More
-                                    <svg
-                                        className="ml-1 h-4 w-4"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        data-oid="kyphfxv"
-                                    >
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth="2"
-                                            d="M19 9l-7 7-7-7"
-                                            data-oid="25des13"
-                                        ></path>
-                                    </svg>
-                                </button>
-                                <div
-                                    className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top-left"
-                                    data-oid="o4jwbt5"
-                                >
-                                    <div className="py-1" data-oid="jv-7j:i">
-                                        <a
-                                            href="/about"
-                                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                            data-oid="ba9a24c"
-                                        >
-                                            About Us
-                                        </a>
-                                        <a
-                                            href="/contact"
-                                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                            data-oid="ridcf-m"
-                                        >
-                                            Contact
-                                        </a>
-                                        <a
-                                            href="/faq"
-                                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                            data-oid="nq9:nyp"
-                                        >
-                                            FAQ
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
+                            <a
+                                href="/contact"
+                                className="text-gray-700 hover:text-blue-800 px-3 py-2 text-sm font-medium transition-all duration-300"
+                                data-oid="ridcf-m"
+                            >
+                                Contact
+                            </a>
                         </div>
 
                         {/* Auth Buttons */}
@@ -374,20 +320,6 @@ export default function Page() {
                                 className="flex flex-wrap items-center space-x-4"
                                 data-oid="dqstrdp"
                             >
-                                <a
-                                    href="/jobs-tracker"
-                                    className="text-gray-600 hover:text-blue-800 py-1 transition-all duration-300"
-                                    data-oid="num-1lx"
-                                >
-                                    Jobs Tracker
-                                </a>
-                                <a
-                                    href="/resume-review"
-                                    className="text-gray-600 hover:text-blue-800 py-1 transition-all duration-300"
-                                    data-oid="0jjbtj:"
-                                >
-                                    Resume Review
-                                </a>
                                 <a
                                     href="/notify"
                                     className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs font-medium transition-all duration-300 hover:bg-blue-200"
