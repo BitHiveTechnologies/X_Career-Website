@@ -436,21 +436,21 @@ export default function Page() {
             <main data-oid="0etu_t5">
                 {/* Hero Section */}
                 <section
-                    className="bg-gradient-to-r from-indigo-900 via-blue-800 to-purple-800 text-white relative overflow-hidden"
+                    className="bg-gradient-to-r from-[hsl(196,80%,45%)] via-[hsl(210,70%,45%)] to-[hsl(175,70%,41%)] text-white relative overflow-hidden"
                     data-oid="s-x8nxf"
                 >
                     {/* Animated background elements */}
                     <div className="absolute inset-0 overflow-hidden" data-oid="8_v6pv5">
                         <div
-                            className="absolute -top-40 -left-40 w-80 h-80 bg-purple-600 opacity-20 rounded-full blur-3xl animate-blob"
+                            className="absolute -top-40 -left-40 w-80 h-80 bg-[hsl(196,80%,65%)] opacity-30 rounded-full blur-3xl animate-blob"
                             data-oid="2y0yuv0"
                         ></div>
                         <div
-                            className="absolute top-40 right-10 w-80 h-80 bg-blue-600 opacity-20 rounded-full blur-3xl animate-blob animation-delay-2000"
+                            className="absolute top-40 right-10 w-80 h-80 bg-[hsl(210,70%,65%)] opacity-30 rounded-full blur-3xl animate-blob animation-delay-2000"
                             data-oid="_2s.v5z"
                         ></div>
                         <div
-                            className="absolute bottom-10 left-20 w-80 h-80 bg-indigo-600 opacity-20 rounded-full blur-3xl animate-blob animation-delay-4000"
+                            className="absolute bottom-10 left-20 w-80 h-80 bg-[hsl(175,70%,61%)] opacity-30 rounded-full blur-3xl animate-blob animation-delay-4000"
                             data-oid="la61w8d"
                         ></div>
                     </div>
@@ -654,7 +654,7 @@ export default function Page() {
 
                 {/* Key Features Grid */}
                 <section
-                    className="py-16 bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800"
+                    className="py-16 bg-gradient-to-b from-[hsl(210,50%,98%)] to-[hsl(196,60%,95%)]"
                     data-oid="tg3gedw"
                 >
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-oid="a9-d0ho">
@@ -718,7 +718,7 @@ export default function Page() {
 
                 {/* Why Choose CareerX */}
                 <section
-                    className="py-16 bg-gradient-to-b from-white to-gray-50 dark:from-gray-800 dark:to-gray-900"
+                    className="py-16 bg-gradient-to-b from-white to-[hsl(196,60%,95%)]"
                     data-oid="8k8qwcf"
                 >
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-oid="jplgjhp">
@@ -739,13 +739,18 @@ export default function Page() {
 
                         {/* Full-Width Banner */}
                         <div
-                            className="bg-gradient-to-r from-blue-800 via-indigo-700 to-purple-700 text-white p-6 rounded-xl mb-12 shadow-lg transform hover:scale-[1.01] transition-all duration-300 relative overflow-hidden group"
+                            className="bg-gradient-to-r from-[hsl(196,80%,45%)] via-[hsl(210,70%,45%)] to-[hsl(175,70%,41%)] text-white p-6 rounded-xl mb-12 shadow-lg transform hover:scale-[1.01] transition-all duration-300 relative overflow-hidden group"
                             data-oid="s:526ly"
                         >
                             {/* Animated shine effect */}
                             <div
                                 className="absolute inset-0 opacity-0 group-hover:opacity-100 animate-shine transition-opacity duration-300"
                                 data-oid="l.pv392"
+                            ></div>
+                            {/* Frosted glass overlay */}
+                            <div
+                                className="absolute inset-0 bg-white/10 backdrop-blur-[2px]"
+                                data-oid="655_h6."
                             ></div>
                             <div
                                 className="flex flex-col md:flex-row items-center justify-between"
@@ -797,17 +802,17 @@ export default function Page() {
 
                 {/* Community Integration */}
                 <section
-                    className="py-16 bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 relative overflow-hidden"
+                    className="py-16 bg-gradient-to-b from-[hsl(210,50%,98%)] to-[hsl(196,60%,95%)] relative overflow-hidden"
                     data-oid="13ch.i3"
                 >
                     {/* Animated background elements */}
                     <div className="absolute inset-0 overflow-hidden opacity-30" data-oid="cih7pis">
                         <div
-                            className="absolute top-20 left-10 w-72 h-72 bg-blue-400 dark:bg-blue-600 rounded-full blur-3xl animate-blob animation-delay-4000"
+                            className="absolute top-20 left-10 w-72 h-72 bg-[hsl(196,80%,65%)] rounded-full blur-3xl animate-blob animation-delay-4000"
                             data-oid="fa:ls82"
                         ></div>
                         <div
-                            className="absolute bottom-20 right-10 w-72 h-72 bg-green-400 dark:bg-green-600 rounded-full blur-3xl animate-blob"
+                            className="absolute bottom-20 right-10 w-72 h-72 bg-[hsl(175,70%,61%)] rounded-full blur-3xl animate-blob"
                             data-oid=".3cgzv1"
                         ></div>
                     </div>
@@ -962,7 +967,7 @@ export default function Page() {
 
                 {/* Fresher Resources */}
                 <section
-                    className="py-16 bg-gradient-to-b from-white to-gray-50 dark:from-gray-800 dark:to-gray-900"
+                    className="py-16 bg-gradient-to-b from-white to-[hsl(196,60%,95%)]"
                     data-oid="vakypfx"
                 >
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-oid="tp8_k3v">
@@ -1089,20 +1094,25 @@ export default function Page() {
 
                 {/* Success Stories */}
                 <section
-                    className="py-16 bg-gradient-to-r from-blue-800 via-indigo-700 to-blue-700 text-white relative overflow-hidden"
+                    className="py-16 bg-gradient-to-r from-[hsl(196,80%,45%)] via-[hsl(210,70%,45%)] to-[hsl(175,70%,41%)] text-white relative overflow-hidden"
                     data-oid="8dqd98c"
                 >
                     {/* Animated background elements */}
                     <div className="absolute inset-0 overflow-hidden" data-oid="7pd0hgh">
                         <div
-                            className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500 opacity-20 rounded-full blur-3xl animate-blob animation-delay-2000"
+                            className="absolute top-0 left-1/4 w-96 h-96 bg-[hsl(196,80%,65%)] opacity-30 rounded-full blur-3xl animate-blob animation-delay-2000"
                             data-oid="13fo8g1"
                         ></div>
                         <div
-                            className="absolute bottom-0 right-1/4 w-96 h-96 bg-indigo-500 opacity-20 rounded-full blur-3xl animate-blob"
+                            className="absolute bottom-0 right-1/4 w-96 h-96 bg-[hsl(175,70%,61%)] opacity-30 rounded-full blur-3xl animate-blob"
                             data-oid="89243g8"
                         ></div>
                     </div>
+                    {/* Frosted glass overlay */}
+                    <div
+                        className="absolute inset-0 bg-white/5 backdrop-blur-[1px]"
+                        data-oid="0w5:hzx"
+                    ></div>
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-oid="7e2z3wp">
                         <div className="text-center mb-12" data-oid="l4:akv4">
                             <h2 className="text-3xl font-bold mb-4" data-oid="jf3hcyv">
@@ -1151,20 +1161,25 @@ export default function Page() {
 
                 {/* Final CTA */}
                 <section
-                    className="py-16 bg-gradient-to-r from-purple-800 via-indigo-700 to-blue-700 text-white relative overflow-hidden"
+                    className="py-16 bg-gradient-to-r from-[hsl(196,80%,45%)] via-[hsl(210,70%,45%)] to-[hsl(175,70%,41%)] text-white relative overflow-hidden"
                     data-oid="7d.c30q"
                 >
                     {/* Animated background elements */}
                     <div className="absolute inset-0 overflow-hidden" data-oid="0o-ttl7">
                         <div
-                            className="absolute -top-20 -right-20 w-96 h-96 bg-blue-500 opacity-20 rounded-full blur-3xl animate-blob"
+                            className="absolute -top-20 -right-20 w-96 h-96 bg-[hsl(196,80%,65%)] opacity-30 rounded-full blur-3xl animate-blob"
                             data-oid="dg3x9_3"
                         ></div>
                         <div
-                            className="absolute bottom-20 left-10 w-96 h-96 bg-purple-500 opacity-20 rounded-full blur-3xl animate-blob animation-delay-4000"
+                            className="absolute bottom-20 left-10 w-96 h-96 bg-[hsl(175,70%,61%)] opacity-30 rounded-full blur-3xl animate-blob animation-delay-4000"
                             data-oid="m:4wacd"
                         ></div>
                     </div>
+                    {/* Frosted glass overlay */}
+                    <div
+                        className="absolute inset-0 bg-white/5 backdrop-blur-[1px]"
+                        data-oid="rf0mk:4"
+                    ></div>
                     <div
                         className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
                         data-oid="509st6h"
