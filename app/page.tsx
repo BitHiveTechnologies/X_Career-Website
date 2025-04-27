@@ -264,7 +264,7 @@ export default function Page() {
         <div className="min-h-screen bg-white text-gray-800 font-sans" data-oid="t-025m4">
             {/* Sticky Navbar */}
             <header
-                className="sticky top-0 z-50 bg-gradient-to-r from-white/85 via-blue-50/85 to-white/85 backdrop-blur-md shadow-sm border-b border-blue-100/50"
+                className="sticky top-0 z-50 bg-gradient-to-r from-blue-50/90 via-blue-100/90 to-blue-50/90 backdrop-blur-md shadow-sm border-b border-blue-200/70"
                 data-oid="p8::s.s"
             >
                 <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-oid="z8ygt1_">
@@ -305,7 +305,7 @@ export default function Page() {
                         <div className="flex items-center space-x-3" data-oid="y0m3-bz">
                             <a
                                 href="/login"
-                                className="hidden md:inline-flex items-center px-4 py-2 border border-[hsl(196,80%,45%)] text-sm font-medium rounded-md text-[hsl(196,80%,45%)] hover:bg-gradient-to-r hover:from-[hsl(196,80%,45%)]/5 hover:to-[hsl(196,80%,45%)]/15 transition-all duration-300"
+                                className="hidden md:inline-flex items-center px-4 py-2 border border-[hsl(196,80%,45%)] text-sm font-medium rounded-md text-[hsl(196,80%,45%)] hover:bg-gradient-to-r hover:from-[hsl(196,80%,45%)]/10 hover:to-[hsl(196,80%,45%)]/25 transition-all duration-300"
                                 data-oid="rmrbh-0"
                             >
                                 Login
@@ -346,7 +346,7 @@ export default function Page() {
 
                 {/* Sub-Navbar */}
                 <div
-                    className="bg-gradient-to-r from-[hsl(196,70%,97%)]/80 via-[hsl(210,70%,95%)]/80 to-[hsl(196,70%,97%)]/80 backdrop-blur-sm border-t border-[hsl(210,30%,95%)]"
+                    className="bg-gradient-to-r from-[hsl(196,70%,92%)]/90 via-[hsl(210,70%,90%)]/90 to-[hsl(196,70%,92%)]/90 backdrop-blur-sm border-t border-[hsl(210,40%,90%)]"
                     data-oid="z2loydc"
                 >
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-oid=".e.zx1r">
@@ -360,7 +360,7 @@ export default function Page() {
                             >
                                 <a
                                     href="/notify"
-                                    className="bg-gradient-to-r from-blue-100 to-blue-50 text-blue-800 px-3 py-1 rounded-full text-xs font-medium transition-all duration-300 hover:from-blue-200 hover:to-blue-100 shadow-sm"
+                                    className="bg-gradient-to-r from-blue-200 to-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs font-medium transition-all duration-300 hover:from-blue-300 hover:to-blue-200 shadow-sm"
                                     data-oid="z2ejiq6"
                                 >
                                     NOTIFY X
