@@ -1166,6 +1166,400 @@ export default function Page() {
                     </div>
                 </section>
 
+                {/* Featured Jobs Section */}
+                <section
+                    className="py-16 bg-gradient-to-r from-[hsl(210,60%,92%)] via-[hsl(196,70%,90%)] to-[hsl(175,60%,92%)] relative overflow-hidden"
+                    data-oid="bg.vzr:"
+                >
+                    {/* Subtle animated background elements */}
+                    <div className="absolute inset-0 overflow-hidden opacity-20" data-oid="f_qd0q8">
+                        <div
+                            className="absolute top-20 left-10 w-72 h-72 bg-[hsl(196,80%,65%)] rounded-full blur-3xl animate-blob animation-delay-2000"
+                            data-oid="y3:m_2t"
+                        ></div>
+                        <div
+                            className="absolute bottom-20 right-10 w-72 h-72 bg-[hsl(175,70%,61%)] rounded-full blur-3xl animate-blob"
+                            data-oid="5sx6i6t"
+                        ></div>
+                    </div>
+
+                    <div
+                        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
+                        data-oid="zj3fonr"
+                    >
+                        <div className="text-center mb-12" data-oid="8jsld7l">
+                            <h2
+                                className="text-3xl font-bold mb-4 text-gray-800"
+                                data-oid="3pqbtvl"
+                            >
+                                Featured Jobs
+                            </h2>
+                            <p className="text-gray-600 max-w-2xl mx-auto" data-oid="l6d7872">
+                                Handpicked opportunities for freshers in top tech companies
+                            </p>
+                        </div>
+
+                        <div
+                            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+                            data-oid="9lhqc_w"
+                        >
+                            {/* Job Card 1 */}
+                            <div
+                                className="bg-white/80 backdrop-blur-sm rounded-xl shadow-md border border-[hsl(210,30%,95%)] overflow-hidden hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2"
+                                data-oid="as3g6zf"
+                            >
+                                <div className="p-6" data-oid="oalnc2j">
+                                    <div
+                                        className="flex items-center justify-between mb-4"
+                                        data-oid="f66u9a."
+                                    >
+                                        <div
+                                            className="w-12 h-12 bg-blue-100 rounded-md flex items-center justify-center text-blue-600"
+                                            data-oid="yrh:8sg"
+                                        >
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="24"
+                                                height="24"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                strokeWidth="2"
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                data-oid="ll-qffx"
+                                            >
+                                                <rect
+                                                    x="2"
+                                                    y="7"
+                                                    width="20"
+                                                    height="14"
+                                                    rx="2"
+                                                    ry="2"
+                                                    data-oid="xyy3sw8"
+                                                ></rect>
+                                                <path
+                                                    d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"
+                                                    data-oid="21pfeby"
+                                                ></path>
+                                            </svg>
+                                        </div>
+                                        <span
+                                            className="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full"
+                                            data-oid="5e9ys-h"
+                                        >
+                                            New
+                                        </span>
+                                    </div>
+                                    <h3
+                                        className="text-xl font-bold mb-2 text-gray-800"
+                                        data-oid="5s9dct2"
+                                    >
+                                        Frontend Developer
+                                    </h3>
+                                    <p
+                                        className="text-blue-700 font-medium mb-3"
+                                        data-oid="3ypn.um"
+                                    >
+                                        Microsoft
+                                    </p>
+                                    <div className="flex flex-wrap gap-2 mb-4" data-oid="rsq3coe">
+                                        <span
+                                            className="bg-blue-50 text-blue-700 text-xs font-medium px-2.5 py-0.5 rounded"
+                                            data-oid="pw1umyl"
+                                        >
+                                            React
+                                        </span>
+                                        <span
+                                            className="bg-blue-50 text-blue-700 text-xs font-medium px-2.5 py-0.5 rounded"
+                                            data-oid="yd92379"
+                                        >
+                                            TypeScript
+                                        </span>
+                                        <span
+                                            className="bg-blue-50 text-blue-700 text-xs font-medium px-2.5 py-0.5 rounded"
+                                            data-oid="k9_vvoe"
+                                        >
+                                            Remote
+                                        </span>
+                                    </div>
+                                    <div
+                                        className="flex justify-between items-center"
+                                        data-oid="1wcal_-"
+                                    >
+                                        <span className="text-gray-600" data-oid="utk68fg">
+                                            ₹5-8 LPA
+                                        </span>
+                                        <a
+                                            href="/jobs/frontend-developer"
+                                            className="text-blue-800 font-medium inline-flex items-center hover:text-blue-900 transition-all duration-300"
+                                            data-oid="1h2-kbu"
+                                        >
+                                            Apply Now
+                                            <svg
+                                                className="ml-1 h-4 w-4"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                viewBox="0 0 24 24"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                data-oid="d1_101k"
+                                            >
+                                                <path
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    strokeWidth="2"
+                                                    d="M14 5l7 7m0 0l-7 7m7-7H3"
+                                                    data-oid="vpx6h1s"
+                                                ></path>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Job Card 2 */}
+                            <div
+                                className="bg-white/80 backdrop-blur-sm rounded-xl shadow-md border border-[hsl(210,30%,95%)] overflow-hidden hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2"
+                                data-oid="14ubb7-"
+                            >
+                                <div className="p-6" data-oid="kb.4r_1">
+                                    <div
+                                        className="flex items-center justify-between mb-4"
+                                        data-oid=".d5um70"
+                                    >
+                                        <div
+                                            className="w-12 h-12 bg-orange-100 rounded-md flex items-center justify-center text-orange-600"
+                                            data-oid="c9umufr"
+                                        >
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="24"
+                                                height="24"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                strokeWidth="2"
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                data-oid="wzueho2"
+                                            >
+                                                <path
+                                                    d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
+                                                    data-oid="mafij7a"
+                                                ></path>
+                                            </svg>
+                                        </div>
+                                        <span
+                                            className="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded-full"
+                                            data-oid="wwoy4q."
+                                        >
+                                            Featured
+                                        </span>
+                                    </div>
+                                    <h3
+                                        className="text-xl font-bold mb-2 text-gray-800"
+                                        data-oid="sm95mtx"
+                                    >
+                                        Backend Engineer
+                                    </h3>
+                                    <p
+                                        className="text-blue-700 font-medium mb-3"
+                                        data-oid="m0y0qq-"
+                                    >
+                                        Amazon
+                                    </p>
+                                    <div className="flex flex-wrap gap-2 mb-4" data-oid="z03o1-8">
+                                        <span
+                                            className="bg-blue-50 text-blue-700 text-xs font-medium px-2.5 py-0.5 rounded"
+                                            data-oid="fjv4.d2"
+                                        >
+                                            Java
+                                        </span>
+                                        <span
+                                            className="bg-blue-50 text-blue-700 text-xs font-medium px-2.5 py-0.5 rounded"
+                                            data-oid="uxxgji6"
+                                        >
+                                            Spring Boot
+                                        </span>
+                                        <span
+                                            className="bg-blue-50 text-blue-700 text-xs font-medium px-2.5 py-0.5 rounded"
+                                            data-oid="kw62jzp"
+                                        >
+                                            Hybrid
+                                        </span>
+                                    </div>
+                                    <div
+                                        className="flex justify-between items-center"
+                                        data-oid="6.zr3w0"
+                                    >
+                                        <span className="text-gray-600" data-oid="b2.lro7">
+                                            ₹8-12 LPA
+                                        </span>
+                                        <a
+                                            href="/jobs/backend-engineer"
+                                            className="text-blue-800 font-medium inline-flex items-center hover:text-blue-900 transition-all duration-300"
+                                            data-oid="ic23rvz"
+                                        >
+                                            Apply Now
+                                            <svg
+                                                className="ml-1 h-4 w-4"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                viewBox="0 0 24 24"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                data-oid="dt-w.ni"
+                                            >
+                                                <path
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    strokeWidth="2"
+                                                    d="M14 5l7 7m0 0l-7 7m7-7H3"
+                                                    data-oid="3qjo:s:"
+                                                ></path>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Job Card 3 */}
+                            <div
+                                className="bg-white/80 backdrop-blur-sm rounded-xl shadow-md border border-[hsl(210,30%,95%)] overflow-hidden hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2"
+                                data-oid="g48d:jc"
+                            >
+                                <div className="p-6" data-oid="1tynp9a">
+                                    <div
+                                        className="flex items-center justify-between mb-4"
+                                        data-oid="_um.2h4"
+                                    >
+                                        <div
+                                            className="w-12 h-12 bg-green-100 rounded-md flex items-center justify-center text-green-600"
+                                            data-oid="l1.1w80"
+                                        >
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="24"
+                                                height="24"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                strokeWidth="2"
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                data-oid="1qazt0d"
+                                            >
+                                                <polyline
+                                                    points="16 18 22 12 16 6"
+                                                    data-oid="6jfztn:"
+                                                ></polyline>
+                                                <polyline
+                                                    points="8 6 2 12 8 18"
+                                                    data-oid="xezl36a"
+                                                ></polyline>
+                                            </svg>
+                                        </div>
+                                        <span
+                                            className="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full"
+                                            data-oid="mlc9mwn"
+                                        >
+                                            Hot
+                                        </span>
+                                    </div>
+                                    <h3
+                                        className="text-xl font-bold mb-2 text-gray-800"
+                                        data-oid="dxfrt-r"
+                                    >
+                                        Full Stack Developer
+                                    </h3>
+                                    <p
+                                        className="text-blue-700 font-medium mb-3"
+                                        data-oid="w_wl1r3"
+                                    >
+                                        Google
+                                    </p>
+                                    <div className="flex flex-wrap gap-2 mb-4" data-oid="1n89esu">
+                                        <span
+                                            className="bg-blue-50 text-blue-700 text-xs font-medium px-2.5 py-0.5 rounded"
+                                            data-oid="fdptuo8"
+                                        >
+                                            React
+                                        </span>
+                                        <span
+                                            className="bg-blue-50 text-blue-700 text-xs font-medium px-2.5 py-0.5 rounded"
+                                            data-oid="mc3cb6s"
+                                        >
+                                            Node.js
+                                        </span>
+                                        <span
+                                            className="bg-blue-50 text-blue-700 text-xs font-medium px-2.5 py-0.5 rounded"
+                                            data-oid="o8sipdx"
+                                        >
+                                            Onsite
+                                        </span>
+                                    </div>
+                                    <div
+                                        className="flex justify-between items-center"
+                                        data-oid="cbfbvel"
+                                    >
+                                        <span className="text-gray-600" data-oid="nf1m.7u">
+                                            ₹10-15 LPA
+                                        </span>
+                                        <a
+                                            href="/jobs/full-stack-developer"
+                                            className="text-blue-800 font-medium inline-flex items-center hover:text-blue-900 transition-all duration-300"
+                                            data-oid="050y4nm"
+                                        >
+                                            Apply Now
+                                            <svg
+                                                className="ml-1 h-4 w-4"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                viewBox="0 0 24 24"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                data-oid="zkdy9i."
+                                            >
+                                                <path
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    strokeWidth="2"
+                                                    d="M14 5l7 7m0 0l-7 7m7-7H3"
+                                                    data-oid="t392wlk"
+                                                ></path>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="text-center mt-10" data-oid="p.8qe0y">
+                            <a
+                                href="/jobs"
+                                className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white rounded-md font-medium hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300 hover:translate-y-[-2px] hover:shadow-lg"
+                                data-oid="vnby6qz"
+                            >
+                                View All Jobs
+                                <svg
+                                    className="ml-2 h-5 w-5"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    data-oid="j.yupej"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                        d="M14 5l7 7m0 0l-7 7m7-7H3"
+                                        data-oid="i0y0p.f"
+                                    ></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+
                 {/* Fresher Resources */}
                 <section
                     className="py-16 bg-gradient-to-b from-white to-[hsl(196,60%,95%)]"
