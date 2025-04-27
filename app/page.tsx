@@ -65,6 +65,12 @@ const dummyData = {
             description: 'Organize your job applications',
             icon: 'chart-line',
         },
+        {
+            id: 6,
+            title: 'Article',
+            description: 'Latest insights and career advice for freshers',
+            icon: 'article',
+        },
     ],
 
     features: [
@@ -1315,6 +1321,31 @@ export default function Page() {
                                                     <path
                                                         d="m3 10 5 3 4-6 5 7"
                                                         data-oid="8lbeh_1"
+                                                    ></path>
+                                                </svg>
+                                            )}
+                                            {resource.icon === 'article' && (
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    width="40"
+                                                    height="40"
+                                                    viewBox="0 0 24 24"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    data-oid="i1j7gk6"
+                                                >
+                                                    <path
+                                                        d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"
+                                                        data-oid="9f7lyn4"
+                                                    ></path>
+                                                    <path d="M18 14h-8" data-oid=".8nvped"></path>
+                                                    <path d="M15 18h-5" data-oid="days5ic"></path>
+                                                    <path
+                                                        d="M10 6h8v4h-8z"
+                                                        data-oid="i.pu80s"
                                                     ></path>
                                                 </svg>
                                             )}
