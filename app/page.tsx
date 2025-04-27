@@ -247,20 +247,6 @@ export default function Page() {
                             >
                                 Resume Builder
                             </a>
-                            <a
-                                href="/about"
-                                className="text-gray-700 hover:text-blue-800 px-3 py-2 text-sm font-medium transition-all duration-300"
-                                data-oid="ba9a24c"
-                            >
-                                About Us
-                            </a>
-                            <a
-                                href="/contact"
-                                className="text-gray-700 hover:text-blue-800 px-3 py-2 text-sm font-medium transition-all duration-300"
-                                data-oid="ridcf-m"
-                            >
-                                Contact
-                            </a>
                         </div>
 
                         {/* Auth Buttons */}
