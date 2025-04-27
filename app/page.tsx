@@ -8,7 +8,7 @@ const dummyData = {
         freshers: 35213,
         verifiedJobs: '10k+',
         activeMembers: 35213,
-        monthlyReaders: '784k',
+        postedJobs: '1k',
         linkedInFollowers: '40k',
         users: 42780,
         whatsappMembers: 35213,
@@ -623,17 +623,17 @@ export default function Page() {
                                     className="text-xl font-bold mb-2 text-gray-800"
                                     data-oid="6qz--gw"
                                 >
-                                    Monthly Readers
+                                    Posted Jobs
                                 </h3>
                                 <p className="text-gray-600 mb-4" data-oid="ad00xnw">
-                                    {stats?.monthlyReaders} content engagement
+                                    {stats?.postedJobs} Jobs posted till now
                                 </p>
                                 <a
-                                    href="/articles"
+                                    href="/jobs"
                                     className="text-blue-800 font-medium inline-flex items-center hover:text-blue-900 transition-all duration-300"
                                     data-oid="4fls4s-"
                                 >
-                                    Read Articles
+                                    See Jobs
                                     <svg
                                         className="ml-1 h-4 w-4"
                                         fill="none"
@@ -780,176 +780,6 @@ export default function Page() {
                                     </svg>
                                 </a>
                             </div>
-                        </div>
-                    </div>
-                </section>
-
-                {/* Key Features Grid */}
-                <section
-                    className="py-16 bg-gradient-to-b from-[hsl(210,50%,98%)] to-[hsl(196,60%,95%)]"
-                    data-oid="tg3gedw"
-                >
-                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-oid="a9-d0ho">
-                        <h2
-                            className="text-3xl font-bold text-center mb-12 text-gray-800"
-                            data-oid="412g-bp"
-                        >
-                            Key Features
-                        </h2>
-
-                        <div
-                            className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
-                            data-oid="2dphkmj"
-                        >
-                            {features.map((feature, index) => (
-                                <div
-                                    key={feature.id}
-                                    className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-md border-t-4 border-[hsl(196,80%,45%)] hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 hover:border-[hsl(175,70%,41%)]"
-                                    data-oid="r-epk88"
-                                >
-                                    <div
-                                        className="text-4xl mb-4 text-[hsl(196,80%,45%)]"
-                                        data-oid="nz:xzbu"
-                                    >
-                                        {feature.icon === 'rocket' && (
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                width="40"
-                                                height="40"
-                                                viewBox="0 0 24 24"
-                                                fill="none"
-                                                stroke="currentColor"
-                                                strokeWidth="2"
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                data-oid="255yosb"
-                                            >
-                                                <path
-                                                    d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"
-                                                    data-oid=":_.4lh6"
-                                                ></path>
-                                                <path
-                                                    d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"
-                                                    data-oid="4uernwh"
-                                                ></path>
-                                                <path
-                                                    d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"
-                                                    data-oid="m240dia"
-                                                ></path>
-                                                <path
-                                                    d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"
-                                                    data-oid="5r_93mg"
-                                                ></path>
-                                            </svg>
-                                        )}
-                                        {feature.icon === 'book' && (
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                width="40"
-                                                height="40"
-                                                viewBox="0 0 24 24"
-                                                fill="none"
-                                                stroke="currentColor"
-                                                strokeWidth="2"
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                data-oid="9w-saqb"
-                                            >
-                                                <path
-                                                    d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"
-                                                    data-oid="b_tahkp"
-                                                ></path>
-                                            </svg>
-                                        )}
-                                        {feature.icon === 'people' && (
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                width="40"
-                                                height="40"
-                                                viewBox="0 0 24 24"
-                                                fill="none"
-                                                stroke="currentColor"
-                                                strokeWidth="2"
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                data-oid="v32yjb0"
-                                            >
-                                                <path
-                                                    d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"
-                                                    data-oid="2tcdxr-"
-                                                ></path>
-                                                <circle
-                                                    cx="9"
-                                                    cy="7"
-                                                    r="4"
-                                                    data-oid="1dq5.wy"
-                                                ></circle>
-                                                <path
-                                                    d="M22 21v-2a4 4 0 0 0-3-3.87"
-                                                    data-oid="iwj2s_0"
-                                                ></path>
-                                                <path
-                                                    d="M16 3.13a4 4 0 0 1 0 7.75"
-                                                    data-oid="bpjmzzr"
-                                                ></path>
-                                            </svg>
-                                        )}
-                                        {feature.icon === 'map' && (
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                width="40"
-                                                height="40"
-                                                viewBox="0 0 24 24"
-                                                fill="none"
-                                                stroke="currentColor"
-                                                strokeWidth="2"
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                data-oid="s962vzn"
-                                            >
-                                                <path
-                                                    d="M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3V6z"
-                                                    data-oid="i:orh9q"
-                                                ></path>
-                                                <path d="M9 3v15" data-oid="56mw9zy"></path>
-                                                <path d="M15 6v15" data-oid="tevrjr6"></path>
-                                            </svg>
-                                        )}
-                                    </div>
-                                    <h3
-                                        className="text-xl font-bold mb-2 text-gray-800"
-                                        data-oid="354-rn."
-                                    >
-                                        {feature.title}
-                                    </h3>
-                                    <p className="text-gray-600 mb-4" data-oid="95__d1e">
-                                        {feature.description}
-                                    </p>
-                                    <a
-                                        href={`/${feature.title.toLowerCase().replace(/\s+/g, '-')}`}
-                                        className="text-blue-800 font-medium inline-flex items-center hover:text-blue-900 transition-all duration-300"
-                                        data-oid="f0s4kyf"
-                                    >
-                                        Explore
-                                        <svg
-                                            className="ml-1 h-4 w-4"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            viewBox="0 0 24 24"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            data-oid="s3axnhd"
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth="2"
-                                                d="M14 5l7 7m0 0l-7 7m7-7H3"
-                                                data-oid="krdgaj7"
-                                            ></path>
-                                        </svg>
-                                    </a>
-                                </div>
-                            ))}
                         </div>
                     </div>
                 </section>
