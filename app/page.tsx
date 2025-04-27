@@ -1164,36 +1164,34 @@ export default function Page() {
 
                 {/* Final CTA */}
                 <section
-                    className="py-16 bg-gradient-to-r from-[hsl(196,80%,45%)] via-[hsl(210,70%,45%)] to-[hsl(175,70%,41%)] text-white relative overflow-hidden"
+                    className="py-16 bg-white text-[hsl(196,80%,45%)] relative overflow-hidden"
                     data-oid="7d.c30q"
                 >
                     {/* Animated background elements */}
-                    <div className="absolute inset-0 overflow-hidden" data-oid="0o-ttl7">
+                    <div className="absolute inset-0 overflow-hidden opacity-30" data-oid="0o-ttl7">
                         <div
-                            className="absolute -top-20 -right-20 w-96 h-96 bg-[hsl(196,80%,65%)] opacity-30 rounded-full blur-3xl animate-blob"
+                            className="absolute top-20 left-10 w-72 h-72 bg-[hsl(196,80%,65%)] rounded-full blur-3xl animate-blob animation-delay-4000"
                             data-oid="dg3x9_3"
                         ></div>
                         <div
-                            className="absolute bottom-20 left-10 w-96 h-96 bg-[hsl(175,70%,61%)] opacity-30 rounded-full blur-3xl animate-blob animation-delay-4000"
+                            className="absolute bottom-20 right-10 w-72 h-72 bg-[hsl(175,70%,61%)] rounded-full blur-3xl animate-blob"
                             data-oid="m:4wacd"
                         ></div>
                     </div>
-                    {/* Frosted glass overlay */}
-                    <div
-                        className="absolute inset-0 bg-white/5 backdrop-blur-[1px]"
-                        data-oid="rf0mk:4"
-                    ></div>
                     <div
                         className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10"
                         data-oid="509st6h"
                     >
-                        <p className="text-blue-200 mb-2" data-oid="jf3ctzo">
+                        <p className="text-[hsl(196,80%,65%)] mb-2" data-oid="jf3ctzo">
                             Start Your Tech Journey Today
                         </p>
-                        <h2 className="text-3xl md:text-4xl font-bold mb-6" data-oid="fd:d_1b">
+                        <h2
+                            className="text-3xl md:text-4xl font-bold mb-6 text-gray-800"
+                            data-oid="fd:d_1b"
+                        >
                             Ready to Land Your First Tech Job?
                         </h2>
-                        <p className="text-xl text-blue-100 mb-8" data-oid="a2mp8:u">
+                        <p className="text-xl text-gray-600 mb-8" data-oid="a2mp8:u">
                             Join 35,000+ freshers who've launched their careers with us
                         </p>
                         <div
@@ -1202,14 +1200,14 @@ export default function Page() {
                         >
                             <a
                                 href="/register"
-                                className="px-8 py-4 bg-white text-[hsl(196,80%,45%)] rounded-md font-bold text-lg hover:bg-white/90 transition-all duration-300 transform hover:scale-105 hover:shadow-xl animate-pulse-shadow relative z-10"
+                                className="px-8 py-4 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white rounded-md font-bold text-lg hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300 transform hover:scale-105 hover:shadow-xl animate-pulse-shadow relative z-10"
                                 data-oid="zil-22."
                             >
                                 Create Free Account →
                             </a>
                             <a
                                 href="/fresher-jobs"
-                                className="px-8 py-4 border-2 border-white/80 bg-white/10 backdrop-blur-sm text-white rounded-md font-bold text-lg hover:bg-white/20 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-lg transform hover:scale-105 relative z-10"
+                                className="px-8 py-4 border-2 border-[hsl(196,80%,45%)] text-[hsl(196,80%,45%)] rounded-md font-bold text-lg hover:bg-[hsl(196,80%,45%)]/10 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-lg transform hover:scale-105 relative z-10"
                                 data-oid="sr4rhd2"
                             >
                                 Browse Fresher Jobs
