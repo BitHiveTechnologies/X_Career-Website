@@ -37,6 +37,48 @@ const dummyData = {
             quote: 'Community referrals fast-tracked my Microsoft application.',
             image: 'https://randomuser.me/api/portraits/women/3.jpg',
         },
+        {
+            id: 4,
+            name: 'Vikram Singh',
+            company: 'Adobe',
+            quote: 'The resume builder helped me create an ATS-friendly CV that got noticed.',
+            image: 'https://randomuser.me/api/portraits/men/4.jpg',
+        },
+        {
+            id: 5,
+            name: 'Neha Gupta',
+            company: 'Flipkart',
+            quote: 'From campus to Flipkart in 3 months thanks to CareerX resources!',
+            image: 'https://randomuser.me/api/portraits/women/5.jpg',
+        },
+        {
+            id: 6,
+            name: 'Arjun Reddy',
+            company: 'Infosys',
+            quote: 'The mock interviews prepared me perfectly for the real thing.',
+            image: 'https://randomuser.me/api/portraits/men/6.jpg',
+        },
+        {
+            id: 7,
+            name: 'Kavita Desai',
+            company: 'TCS',
+            quote: 'Found my first job through CareerX job board - so grateful!',
+            image: 'https://randomuser.me/api/portraits/women/7.jpg',
+        },
+        {
+            id: 8,
+            name: 'Rohan Mehta',
+            company: 'Wipro',
+            quote: 'The community support made all the difference in my job search.',
+            image: 'https://randomuser.me/api/portraits/men/8.jpg',
+        },
+        {
+            id: 9,
+            name: 'Divya Sharma',
+            company: 'IBM',
+            quote: 'CareerX helped me transition from college to a tech career seamlessly.',
+            image: 'https://randomuser.me/api/portraits/women/9.jpg',
+        },
     ],
 
     resources: [
@@ -159,6 +201,34 @@ export default function Page() {
     const [benefits, setBenefits] = useState([]);
 
     const [searchQuery, setSearchQuery] = useState('');
+
+    // Add custom CSS for animations
+    useEffect(() => {
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes scroll {
+                0% {
+                    transform: translateX(0);
+                }
+                100% {
+                    transform: translateX(-50%);
+                }
+            }
+            
+            .animate-scroll {
+                animation: scroll 40s linear infinite;
+            }
+            
+            .pause-animation {
+                animation-play-state: paused;
+            }
+        `;
+        document.head.appendChild(style);
+
+        return () => {
+            document.head.removeChild(style);
+        };
+    }, []);
 
     useEffect(() => {
         // Simulate API calls
@@ -1369,38 +1439,104 @@ export default function Page() {
                             </p>
                         </div>
 
-                        <div className="grid md:grid-cols-3 gap-8" data-oid="y4tftqb">
-                            {testimonials.map((testimonial, index) => (
-                                <div
-                                    key={testimonial.id}
-                                    className="bg-white/90 backdrop-blur-md text-gray-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 relative z-10 border border-white/30"
-                                    data-oid="mozk8rk"
-                                >
-                                    <div className="flex items-center mb-4" data-oid=".arb65q">
-                                        <img
-                                            src={testimonial.image}
-                                            alt={testimonial.name}
-                                            className="w-12 h-12 rounded-full mr-4 object-cover"
-                                            data-oid="uykc:fa"
-                                        />
+                        {/* Auto-scrolling testimonial carousel */}
+                        <div className="relative overflow-hidden" data-oid="y4tftqb">
+                            <div
+                                className="flex animate-scroll gap-6 hover:pause-animation focus:pause-animation"
+                                onMouseEnter={(e) =>
+                                    (e.currentTarget.style.animationPlayState = 'paused')
+                                }
+                                onMouseLeave={(e) =>
+                                    (e.currentTarget.style.animationPlayState = 'running')
+                                }
+                                onClick={(e) => {
+                                    const currentState = e.currentTarget.style.animationPlayState;
+                                    e.currentTarget.style.animationPlayState =
+                                        currentState === 'paused' ? 'running' : 'paused';
+                                }}
+                                style={{ width: `${testimonials.length * 340}px` }}
+                                data-oid="pk:0pfz"
+                            >
+                                {testimonials.map((testimonial) => (
+                                    <div
+                                        key={testimonial.id}
+                                        className="bg-white/90 backdrop-blur-md text-gray-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 relative z-10 border border-white/30 min-w-[300px] flex-shrink-0"
+                                        data-oid="mozk8rk"
+                                    >
+                                        <div className="flex items-center mb-4" data-oid=".arb65q">
+                                            <img
+                                                src={testimonial.image}
+                                                alt={testimonial.name}
+                                                className="w-12 h-12 rounded-full mr-4 object-cover"
+                                                data-oid="uykc:fa"
+                                            />
 
-                                        <div data-oid="l1jb58w">
-                                            <h3
-                                                className="font-bold text-gray-800"
-                                                data-oid="jafjs5f"
-                                            >
-                                                {testimonial.name}
-                                            </h3>
-                                            <p className="text-blue-700" data-oid="xxk2iqm">
-                                                {testimonial.company}
-                                            </p>
+                                            <div data-oid="l1jb58w">
+                                                <h3
+                                                    className="font-bold text-gray-800"
+                                                    data-oid="jafjs5f"
+                                                >
+                                                    {testimonial.name}
+                                                </h3>
+                                                <p className="text-blue-700" data-oid="xxk2iqm">
+                                                    {testimonial.company}
+                                                </p>
+                                            </div>
                                         </div>
+                                        <p className="text-gray-600 italic" data-oid="2k7wect">
+                                            "{testimonial.quote}"
+                                        </p>
                                     </div>
-                                    <p className="text-gray-600 italic" data-oid="2k7wect">
-                                        "{testimonial.quote}"
-                                    </p>
-                                </div>
-                            ))}
+                                ))}
+
+                                {/* Duplicate first few testimonials to create seamless loop */}
+                                {testimonials.slice(0, 3).map((testimonial) => (
+                                    <div
+                                        key={`duplicate-${testimonial.id}`}
+                                        className="bg-white/90 backdrop-blur-md text-gray-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 relative z-10 border border-white/30 min-w-[300px] flex-shrink-0"
+                                        data-oid="790:tqb"
+                                    >
+                                        <div className="flex items-center mb-4" data-oid="idfaztg">
+                                            <img
+                                                src={testimonial.image}
+                                                alt={testimonial.name}
+                                                className="w-12 h-12 rounded-full mr-4 object-cover"
+                                                data-oid=".kwe4.d"
+                                            />
+
+                                            <div data-oid="6.q9sd_">
+                                                <h3
+                                                    className="font-bold text-gray-800"
+                                                    data-oid="tn8m8_x"
+                                                >
+                                                    {testimonial.name}
+                                                </h3>
+                                                <p className="text-blue-700" data-oid="pmcz0vj">
+                                                    {testimonial.company}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <p className="text-gray-600 italic" data-oid="3pebtkn">
+                                            "{testimonial.quote}"
+                                        </p>
+                                    </div>
+                                ))}
+                            </div>
+
+                            <div
+                                className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[hsl(196,80%,45%)] to-transparent z-20"
+                                data-oid="yos2.aj"
+                            ></div>
+                            <div
+                                className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-[hsl(196,80%,45%)] to-transparent z-20"
+                                data-oid="0o90pte"
+                            ></div>
+
+                            <div className="text-center mt-8" data-oid="gxj_sut">
+                                <p className="text-white/70 text-sm" data-oid="bwnjwbk">
+                                    Hover or click on a testimonial to pause
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </section>
