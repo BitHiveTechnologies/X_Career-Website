@@ -518,203 +518,267 @@ export default function Page() {
 
                 {/* Platform Stats Section */}
                 <section
-                    className="py-12 bg-gradient-to-b from-[hsl(196,80%,45%)/10] to-white"
+                    className="py-16 bg-gradient-to-b from-[hsl(210,50%,98%)] to-[hsl(196,60%,95%)]"
                     data-oid="d2r3zl9"
                 >
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-oid="zp:e00i">
                         <h2
-                            className="text-3xl font-bold text-center mb-8 text-gray-800"
+                            className="text-3xl font-bold text-center mb-12 text-gray-800"
                             data-oid="jfo9qet"
                         >
                             Platform Metrics
                         </h2>
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-6" data-oid=".2c4utu">
+                        <div
+                            className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
+                            data-oid=".2c4utu"
+                        >
                             <div
-                                className="bg-white rounded-xl shadow-lg p-6 border-l-4 border-blue-500 hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 hover:border-l-8"
+                                className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-md border-t-4 border-[hsl(196,80%,45%)] hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 hover:border-[hsl(175,70%,41%)]"
                                 data-oid="vcfvj0g"
                             >
                                 <div
-                                    className="flex items-center justify-between mb-2"
-                                    data-oid="1uumqao"
+                                    className="text-4xl mb-4 text-[hsl(196,80%,45%)]"
+                                    data-oid="lsxn_we"
                                 >
-                                    <div
-                                        className="text-blue-500 bg-blue-100 p-3 rounded-lg"
-                                        data-oid="lsxn_we"
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="40"
+                                        height="40"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeWidth="2"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        data-oid="fuk0q-g"
                                     >
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            className="h-8 w-8"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            stroke="currentColor"
-                                            data-oid="fuk0q-g"
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth={2}
-                                                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-                                                data-oid="2e_1jw2"
-                                            />
-                                        </svg>
-                                    </div>
-                                    <div
-                                        className="text-xs font-semibold text-gray-500 uppercase tracking-wider"
-                                        data-oid="q.hj5:_"
-                                    >
-                                        Active Members
-                                    </div>
+                                        <path
+                                            d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                                            data-oid="2e_1jw2"
+                                        />
+                                    </svg>
                                 </div>
-                                <div
-                                    className="text-3xl font-bold text-gray-800 mb-1 animate-count-up"
-                                    data-oid="dx:50_c"
+                                <h3
+                                    className="text-xl font-bold mb-2 text-gray-800"
+                                    data-oid="q.hj5:_"
                                 >
-                                    {stats?.activeMembers.toLocaleString()}
-                                </div>
-                                <div className="text-sm text-gray-500" data-oid="9-56hmy">
-                                    Growing community
-                                </div>
+                                    Active Members
+                                </h3>
+                                <p className="text-gray-600 mb-4" data-oid="9-56hmy">
+                                    {stats?.activeMembers.toLocaleString()} growing community
+                                    members
+                                </p>
+                                <a
+                                    href="/community"
+                                    className="text-blue-800 font-medium inline-flex items-center hover:text-blue-900 transition-all duration-300"
+                                    data-oid="647kmej"
+                                >
+                                    Join Now
+                                    <svg
+                                        className="ml-1 h-4 w-4"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        data-oid="0jx9i3_"
+                                    >
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth="2"
+                                            d="M14 5l7 7m0 0l-7 7m7-7H3"
+                                            data-oid="soo2pmt"
+                                        ></path>
+                                    </svg>
+                                </a>
                             </div>
 
                             <div
-                                className="bg-white rounded-xl shadow-lg p-6 border-l-4 border-green-500 hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 hover:border-l-8"
+                                className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-md border-t-4 border-[hsl(196,80%,45%)] hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 hover:border-[hsl(175,70%,41%)]"
                                 data-oid="s8.9b_x"
                             >
                                 <div
-                                    className="flex items-center justify-between mb-2"
-                                    data-oid="n2qkg3_"
+                                    className="text-4xl mb-4 text-[hsl(196,80%,45%)]"
+                                    data-oid="7z3iire"
                                 >
-                                    <div
-                                        className="text-green-500 bg-green-100 p-3 rounded-lg"
-                                        data-oid="7z3iire"
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="40"
+                                        height="40"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeWidth="2"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        data-oid="6yfnzs8"
                                     >
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            className="h-8 w-8"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            stroke="currentColor"
-                                            data-oid="6yfnzs8"
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth={2}
-                                                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                                                data-oid="ims3igv"
-                                            />
-                                        </svg>
-                                    </div>
-                                    <div
-                                        className="text-xs font-semibold text-gray-500 uppercase tracking-wider"
-                                        data-oid="6qz--gw"
-                                    >
-                                        Monthly Readers
-                                    </div>
+                                        <path
+                                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                                            data-oid="ims3igv"
+                                        />
+                                    </svg>
                                 </div>
-                                <div
-                                    className="text-3xl font-bold text-gray-800 mb-1 animate-count-up"
-                                    data-oid="31j29gx"
+                                <h3
+                                    className="text-xl font-bold mb-2 text-gray-800"
+                                    data-oid="6qz--gw"
                                 >
-                                    {stats?.monthlyReaders}
-                                </div>
-                                <div className="text-sm text-gray-500" data-oid="ad00xnw">
-                                    Content engagement
-                                </div>
+                                    Monthly Readers
+                                </h3>
+                                <p className="text-gray-600 mb-4" data-oid="ad00xnw">
+                                    {stats?.monthlyReaders} content engagement
+                                </p>
+                                <a
+                                    href="/articles"
+                                    className="text-blue-800 font-medium inline-flex items-center hover:text-blue-900 transition-all duration-300"
+                                    data-oid="4fls4s-"
+                                >
+                                    Read Articles
+                                    <svg
+                                        className="ml-1 h-4 w-4"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        data-oid="o.wtqib"
+                                    >
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth="2"
+                                            d="M14 5l7 7m0 0l-7 7m7-7H3"
+                                            data-oid="6y8v7s4"
+                                        ></path>
+                                    </svg>
+                                </a>
                             </div>
 
                             <div
-                                className="bg-white rounded-xl shadow-lg p-6 border-l-4 border-purple-500 hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 hover:border-l-8"
+                                className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-md border-t-4 border-[hsl(196,80%,45%)] hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 hover:border-[hsl(175,70%,41%)]"
                                 data-oid="m_i._fw"
                             >
                                 <div
-                                    className="flex items-center justify-between mb-2"
-                                    data-oid="z.tef:l"
+                                    className="text-4xl mb-4 text-[hsl(196,80%,45%)]"
+                                    data-oid="mrv50gt"
                                 >
-                                    <div
-                                        className="text-purple-500 bg-purple-100 p-3 rounded-lg"
-                                        data-oid="mrv50gt"
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="40"
+                                        height="40"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeWidth="2"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        data-oid="7rb9k8r"
                                     >
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            className="h-8 w-8"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            stroke="currentColor"
-                                            data-oid="7rb9k8r"
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth={2}
-                                                d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
-                                                data-oid="wj6k502"
-                                            />
-                                        </svg>
-                                    </div>
-                                    <div
-                                        className="text-xs font-semibold text-gray-500 uppercase tracking-wider"
-                                        data-oid="e03_ub-"
-                                    >
-                                        LinkedIn
-                                    </div>
+                                        <path
+                                            d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
+                                            data-oid="8nw-xqo"
+                                        ></path>
+                                        <rect
+                                            x="2"
+                                            y="9"
+                                            width="4"
+                                            height="12"
+                                            data-oid="sze9zs3"
+                                        ></rect>
+                                        <circle cx="4" cy="4" r="2" data-oid="aps:2pi"></circle>
+                                    </svg>
                                 </div>
-                                <div
-                                    className="text-3xl font-bold text-gray-800 mb-1 animate-count-up"
-                                    data-oid="tuamr89"
+                                <h3
+                                    className="text-xl font-bold mb-2 text-gray-800"
+                                    data-oid="e03_ub-"
                                 >
-                                    {stats?.linkedInFollowers}
-                                </div>
-                                <div className="text-sm text-gray-500" data-oid="mbrwkcl">
-                                    Professional network
-                                </div>
+                                    LinkedIn
+                                </h3>
+                                <p className="text-gray-600 mb-4" data-oid="mbrwkcl">
+                                    {stats?.linkedInFollowers} professional followers
+                                </p>
+                                <a
+                                    href="/linkedin"
+                                    className="text-blue-800 font-medium inline-flex items-center hover:text-blue-900 transition-all duration-300"
+                                    data-oid="pdmxky6"
+                                >
+                                    Connect
+                                    <svg
+                                        className="ml-1 h-4 w-4"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        data-oid="ymd-7t6"
+                                    >
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth="2"
+                                            d="M14 5l7 7m0 0l-7 7m7-7H3"
+                                            data-oid="-4fyxsg"
+                                        ></path>
+                                    </svg>
+                                </a>
                             </div>
 
                             <div
-                                className="bg-white rounded-xl shadow-lg p-6 border-l-4 border-amber-500 hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 hover:border-l-8"
+                                className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-md border-t-4 border-[hsl(196,80%,45%)] hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 hover:border-[hsl(175,70%,41%)]"
                                 data-oid="p-51wy8"
                             >
                                 <div
-                                    className="flex items-center justify-between mb-2"
-                                    data-oid=".7wnbqq"
+                                    className="text-4xl mb-4 text-[hsl(196,80%,45%)]"
+                                    data-oid="vyik:qy"
                                 >
-                                    <div
-                                        className="text-amber-500 bg-amber-100 p-3 rounded-lg"
-                                        data-oid="vyik:qy"
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="40"
+                                        height="40"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeWidth="2"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        data-oid="75wn_qq"
                                     >
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            className="h-8 w-8"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            stroke="currentColor"
-                                            data-oid="75wn_qq"
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth={2}
-                                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                                                data-oid="qlqx_3o"
-                                            />
-                                        </svg>
-                                    </div>
-                                    <div
-                                        className="text-xs font-semibold text-gray-500 uppercase tracking-wider"
-                                        data-oid="ul.bk7z"
-                                    >
-                                        Users
-                                    </div>
+                                        <path
+                                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                                            data-oid="qlqx_3o"
+                                        />
+                                    </svg>
                                 </div>
-                                <div
-                                    className="text-3xl font-bold text-gray-800 mb-1 animate-count-up"
-                                    data-oid="m3pp3iq"
+                                <h3
+                                    className="text-xl font-bold mb-2 text-gray-800"
+                                    data-oid="ul.bk7z"
                                 >
-                                    {stats?.users.toLocaleString()}
-                                </div>
-                                <div className="text-sm text-gray-500" data-oid="f35voh0">
-                                    Registered accounts
-                                </div>
+                                    Registered Users
+                                </h3>
+                                <p className="text-gray-600 mb-4" data-oid="f35voh0">
+                                    {stats?.users.toLocaleString()} active accounts
+                                </p>
+                                <a
+                                    href="/register"
+                                    className="text-blue-800 font-medium inline-flex items-center hover:text-blue-900 transition-all duration-300"
+                                    data-oid="jcjf8f."
+                                >
+                                    Join Now
+                                    <svg
+                                        className="ml-1 h-4 w-4"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        data-oid="6y_s_:l"
+                                    >
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth="2"
+                                            d="M14 5l7 7m0 0l-7 7m7-7H3"
+                                            data-oid=".1uulkj"
+                                        ></path>
+                                    </svg>
+                                </a>
                             </div>
                         </div>
                     </div>
