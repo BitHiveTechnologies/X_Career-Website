@@ -1989,12 +1989,36 @@ export default function Page() {
             </main>
 
             {/* Footer */}
-            <footer className="bg-gray-950 text-white" data-oid="3thd4hw">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12" data-oid="z5enqj:">
+            <footer
+                className="bg-gradient-to-r from-[hsl(196,80%,15%)] via-[hsl(210,70%,15%)] to-[hsl(175,70%,15%)] backdrop-blur-md text-white relative overflow-hidden"
+                data-oid="3thd4hw"
+            >
+                {/* Subtle animated background elements */}
+                <div className="absolute inset-0 overflow-hidden opacity-10" data-oid="g23xp.0">
+                    <div
+                        className="absolute top-20 left-10 w-72 h-72 bg-[hsl(196,80%,65%)] rounded-full blur-3xl animate-blob animation-delay-2000"
+                        data-oid="2gjrqj3"
+                    ></div>
+                    <div
+                        className="absolute bottom-20 right-10 w-72 h-72 bg-[hsl(175,70%,61%)] rounded-full blur-3xl animate-blob"
+                        data-oid="u722:sj"
+                    ></div>
+                </div>
+                {/* Frosted glass overlay */}
+                <div
+                    className="absolute inset-0 bg-white/5 backdrop-blur-[1px]"
+                    data-oid="0ybcbpm"
+                ></div>
+                <div
+                    className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10"
+                    data-oid="z5enqj:"
+                >
                     <div className="grid md:grid-cols-4 gap-8" data-oid="mv5:ho_">
                         <div data-oid="084ju9w">
                             <div className="mb-6" data-oid="ef3o64e">
-                                <Logo data-oid="wur2:xh" />
+                                <div className="text-white" data-oid="m9dhq5u">
+                                    <Logo data-oid="wur2:xh" />
+                                </div>
                             </div>
                             <p className="text-gray-400 mb-4" data-oid="bqzosa0">
                                 Helping tech freshers launch their careers with curated
@@ -2055,7 +2079,7 @@ export default function Page() {
                             </div>
                         </div>
                         <div data-oid="c:0rtx4">
-                            <h3 className="text-lg font-bold mb-4" data-oid="80z5fro">
+                            <h3 className="text-lg font-bold mb-4 text-blue-100" data-oid="80z5fro">
                                 Company
                             </h3>
                             <ul className="space-y-3" data-oid="d.0nl_a">
@@ -2098,7 +2122,7 @@ export default function Page() {
                             </ul>
                         </div>
                         <div data-oid="4.c3k_4">
-                            <h3 className="text-lg font-bold mb-4" data-oid="075ucxe">
+                            <h3 className="text-lg font-bold mb-4 text-blue-100" data-oid="075ucxe">
                                 Resources
                             </h3>
                             <ul className="space-y-3" data-oid="odfuvx.">
@@ -2141,7 +2165,7 @@ export default function Page() {
                             </ul>
                         </div>
                         <div data-oid="1e2kryh">
-                            <h3 className="text-lg font-bold mb-4" data-oid="qrbikvt">
+                            <h3 className="text-lg font-bold mb-4 text-blue-100" data-oid="qrbikvt">
                                 Legal
                             </h3>
                             <ul className="space-y-3" data-oid="pqhdej_">
@@ -2186,7 +2210,7 @@ export default function Page() {
                     </div>
 
                     <div
-                        className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400"
+                        className="border-t border-white/10 mt-12 pt-8 text-center text-gray-400"
                         data-oid="rrqi6eb"
                     >
                         <p className="mb-2" data-oid="jczuknr">
