@@ -1440,7 +1440,7 @@ export default function Page() {
                         </div>
 
                         {/* Auto-scrolling testimonial carousel */}
-                        <div className="relative overflow-hidden py-4" data-oid="y4tftqb">
+                        <div className="relative overflow-hidden py-8" data-oid="y4tftqb">
                             <div
                                 className="flex animate-scroll gap-5 hover:pause-animation focus:pause-animation pt-4 pb-2"
                                 onMouseEnter={(e) =>
@@ -1454,17 +1454,17 @@ export default function Page() {
                                     e.currentTarget.style.animationPlayState =
                                         currentState === 'paused' ? 'running' : 'paused';
                                 }}
-                                style={{ width: `${testimonials.length * 340}px` }}
+                                style={{ width: `${testimonials.length * 380}px` }}
                                 data-oid="pk:0pfz"
                                 key="olk-3x9u"
                             >
                                 {testimonials.map((testimonial) => (
                                     <div
                                         key={testimonial.id}
-                                        className="bg-white/90 backdrop-blur-md text-gray-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 relative z-10 border border-white/20 min-w-[300px] flex-shrink-0"
+                                        className="bg-white/90 backdrop-blur-md text-gray-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 relative z-10 border border-white/20 w-[350px] h-[200px] flex-shrink-0 flex flex-col"
                                         data-oid="mozk8rk"
                                     >
-                                        <div className="flex items-center mb-4" data-oid=".arb65q">
+                                        <div className="flex items-center mb-3" data-oid=".arb65q">
                                             <img
                                                 src={testimonial.image}
                                                 alt={testimonial.name}
@@ -1484,7 +1484,10 @@ export default function Page() {
                                                 </p>
                                             </div>
                                         </div>
-                                        <p className="text-gray-600 italic" data-oid="2k7wect">
+                                        <p
+                                            className="text-gray-600 italic flex-grow overflow-y-auto"
+                                            data-oid="2k7wect"
+                                        >
                                             "{testimonial.quote}"
                                         </p>
                                     </div>
@@ -1494,10 +1497,10 @@ export default function Page() {
                                 {testimonials.slice(0, 3).map((testimonial) => (
                                     <div
                                         key={`duplicate-${testimonial.id}`}
-                                        className="bg-white/90 backdrop-blur-md text-gray-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 relative z-10 border border-white/20 min-w-[300px] flex-shrink-0"
+                                        className="bg-white/90 backdrop-blur-md text-gray-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 relative z-10 border border-white/20 w-[350px] h-[200px] flex-shrink-0 flex flex-col"
                                         data-oid="790:tqb"
                                     >
-                                        <div className="flex items-center mb-4" data-oid="idfaztg">
+                                        <div className="flex items-center mb-3" data-oid="idfaztg">
                                             <img
                                                 src={testimonial.image}
                                                 alt={testimonial.name}
@@ -1517,7 +1520,10 @@ export default function Page() {
                                                 </p>
                                             </div>
                                         </div>
-                                        <p className="text-gray-600 italic" data-oid="3pebtkn">
+                                        <p
+                                            className="text-gray-600 italic flex-grow overflow-y-auto"
+                                            data-oid="3pebtkn"
+                                        >
                                             "{testimonial.quote}"
                                         </p>
                                     </div>
