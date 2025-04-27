@@ -200,7 +200,10 @@ export default function Page() {
     return (
         <div className="min-h-screen bg-white text-gray-800 font-sans" data-oid="t-025m4">
             {/* Sticky Navbar */}
-            <header className="sticky top-0 z-50 bg-white shadow-sm" data-oid="p8::s.s">
+            <header
+                className="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm"
+                data-oid="p8::s.s"
+            >
                 <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-oid="z8ygt1_">
                     <div className="flex justify-between items-center h-16" data-oid="6r-cxyq">
                         {/* Logo */}
@@ -307,14 +310,14 @@ export default function Page() {
                         <div className="flex items-center space-x-3" data-oid="y0m3-bz">
                             <a
                                 href="/login"
-                                className="hidden md:inline-flex items-center px-4 py-2 border border-blue-800 text-sm font-medium rounded-md text-blue-800 hover:bg-blue-50 transition-all duration-300"
+                                className="hidden md:inline-flex items-center px-4 py-2 border border-[hsl(196,80%,45%)] text-sm font-medium rounded-md text-[hsl(196,80%,45%)] hover:bg-[hsl(196,80%,45%)]/10 transition-all duration-300"
                                 data-oid="rmrbh-0"
                             >
                                 Login
                             </a>
                             <a
                                 href="/register"
-                                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-800 hover:bg-blue-900 transition-all duration-300"
+                                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300"
                                 data-oid=".294xrt"
                             >
                                 Register
@@ -347,7 +350,10 @@ export default function Page() {
                 </nav>
 
                 {/* Sub-Navbar */}
-                <div className="bg-gray-50 border-t border-gray-100" data-oid="z2loydc">
+                <div
+                    className="bg-[hsl(196,60%,95%)]/70 backdrop-blur-sm border-t border-[hsl(210,30%,95%)]"
+                    data-oid="z2loydc"
+                >
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-oid=".e.zx1r">
                         <div
                             className="flex flex-wrap items-center justify-between py-2 text-sm"
@@ -492,7 +498,7 @@ export default function Page() {
 
                                         <button
                                             type="submit"
-                                            className="bg-gradient-to-r from-blue-800 to-indigo-700 hover:from-indigo-700 hover:to-blue-800 px-6 py-3 rounded-r-md font-medium transition-all duration-300"
+                                            className="bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] hover:from-[hsl(175,70%,41%)] hover:to-[hsl(196,80%,45%)] px-6 py-3 rounded-r-md font-medium transition-all duration-300"
                                             data-oid="w1drx9z"
                                         >
                                             SEARCH
@@ -502,19 +508,19 @@ export default function Page() {
 
                                 <div className="flex flex-wrap gap-3 mb-8" data-oid="kgfa0bb">
                                     <div
-                                        className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-sm"
+                                        className="bg-white/20 backdrop-blur-md px-4 py-2 rounded-full text-sm border border-white/30"
                                         data-oid="usqs397"
                                     >
                                         {stats?.freshers.toLocaleString()} Freshers
                                     </div>
                                     <div
-                                        className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-sm"
+                                        className="bg-white/20 backdrop-blur-md px-4 py-2 rounded-full text-sm border border-white/30"
                                         data-oid="jh-u.hg"
                                     >
                                         {stats?.verifiedJobs} Verified Jobs
                                     </div>
                                     <div
-                                        className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-sm"
+                                        className="bg-white/20 backdrop-blur-md px-4 py-2 rounded-full text-sm border border-white/30"
                                         data-oid="1btc_yl"
                                     >
                                         Entry-Level Focused
@@ -524,7 +530,7 @@ export default function Page() {
                                 <div className="flex flex-wrap gap-4" data-oid="un71x3o">
                                     <a
                                         href="/fresher-jobs"
-                                        className="inline-flex items-center px-6 py-3 bg-purple-600 hover:bg-purple-700 rounded-md font-medium transition-all duration-300 hover:translate-y-[-2px] hover:shadow-lg"
+                                        className="inline-flex items-center px-6 py-3 bg-white/20 backdrop-blur-md border border-white/30 hover:bg-white/30 rounded-md font-medium transition-all duration-300 hover:translate-y-[-2px] hover:shadow-lg"
                                         data-oid="hfmzbi1"
                                     >
                                         Browse Fresher Jobs
@@ -547,7 +553,7 @@ export default function Page() {
                                     </a>
                                     <a
                                         href="/community"
-                                        className="inline-flex items-center px-6 py-3 bg-green-600 hover:bg-green-700 rounded-md font-medium transition-all duration-300 hover:translate-y-[-2px] hover:shadow-lg"
+                                        className="inline-flex items-center px-6 py-3 bg-[hsl(175,70%,41%)] hover:bg-[hsl(175,70%,36%)] rounded-md font-medium transition-all duration-300 hover:translate-y-[-2px] hover:shadow-lg"
                                         data-oid="2_.hkj5"
                                     >
                                         Join Community
@@ -573,7 +579,7 @@ export default function Page() {
 
                             <div className="block" data-oid="r14d9n8">
                                 <div
-                                    className="bg-white/10 backdrop-blur-sm rounded-xl p-6 shadow-xl animate-float"
+                                    className="bg-white/20 backdrop-blur-md rounded-xl p-6 shadow-xl animate-float border border-white/30"
                                     data-oid="94v5trk"
                                 >
                                     <h3
@@ -584,7 +590,7 @@ export default function Page() {
                                     </h3>
                                     <div className="grid grid-cols-2 gap-4" data-oid="sd:5qns">
                                         <div
-                                            className="bg-white/10 backdrop-blur-sm p-4 rounded-lg text-center"
+                                            className="bg-white/30 backdrop-blur-md p-4 rounded-lg text-center border border-white/30 hover:bg-white/40 transition-all duration-300"
                                             data-oid="abmmf-w"
                                         >
                                             <div className="text-3xl font-bold" data-oid="4nmhwkr">
@@ -666,7 +672,7 @@ export default function Page() {
                             {features.map((feature, index) => (
                                 <div
                                     key={feature.id}
-                                    className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md border-t-4 border-blue-800 hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 hover:border-indigo-600"
+                                    className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-md border-t-4 border-[hsl(196,80%,45%)] hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 hover:border-[hsl(175,70%,41%)]"
                                     data-oid="r-epk88"
                                 >
                                     <div className="text-4xl mb-4" data-oid="nz:xzbu">
@@ -768,7 +774,7 @@ export default function Page() {
                             {benefits.map((benefit, index) => (
                                 <div
                                     key={benefit.id}
-                                    className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md border border-gray-100 dark:border-gray-700 hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 hover:border-blue-300"
+                                    className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-md border border-[hsl(210,30%,95%)] hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 hover:border-[hsl(196,80%,45%)]"
                                     data-oid="79i7jkd"
                                 >
                                     <div className="text-4xl mb-4" data-oid="6ym819x">
@@ -821,7 +827,7 @@ export default function Page() {
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-6" data-oid="m.52w:f">
                             <a
                                 href="/whatsapp"
-                                className="flex flex-col items-center p-6 bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 relative z-10"
+                                className="flex flex-col items-center p-6 bg-white/80 backdrop-blur-sm rounded-xl shadow-md hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 relative z-10 border border-[hsl(210,30%,95%)]"
                                 data-oid="tlh6cvn"
                             >
                                 <div
@@ -980,7 +986,7 @@ export default function Page() {
                                 {resources.map((resource, index) => (
                                     <div
                                         key={resource.id}
-                                        className="flex-none w-80 bg-white dark:bg-gray-800 rounded-xl shadow-md border border-gray-100 dark:border-gray-700 overflow-hidden hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2"
+                                        className="flex-none w-80 bg-white/80 backdrop-blur-sm rounded-xl shadow-md border border-[hsl(210,30%,95%)] overflow-hidden hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2"
                                         data-oid="xsxak:q"
                                     >
                                         <div className="p-6" data-oid="f:b2rd-">
@@ -1111,7 +1117,7 @@ export default function Page() {
                             {testimonials.map((testimonial, index) => (
                                 <div
                                     key={testimonial.id}
-                                    className="bg-white text-gray-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 relative z-10"
+                                    className="bg-white/90 backdrop-blur-md text-gray-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 relative z-10 border border-white/30"
                                     data-oid="mozk8rk"
                                 >
                                     <div className="flex items-center mb-4" data-oid=".arb65q">
@@ -1178,14 +1184,14 @@ export default function Page() {
                         >
                             <a
                                 href="/register"
-                                className="px-8 py-4 bg-white text-blue-800 rounded-md font-bold text-lg hover:bg-blue-50 transition-all duration-300 transform hover:scale-105 hover:shadow-xl animate-pulse-shadow relative z-10"
+                                className="px-8 py-4 bg-white text-[hsl(196,80%,45%)] rounded-md font-bold text-lg hover:bg-white/90 transition-all duration-300 transform hover:scale-105 hover:shadow-xl animate-pulse-shadow relative z-10"
                                 data-oid="zil-22."
                             >
                                 Create Free Account →
                             </a>
                             <a
                                 href="/fresher-jobs"
-                                className="px-8 py-4 border-2 border-white text-white rounded-md font-bold text-lg hover:bg-white/10 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-lg transform hover:scale-105 relative z-10"
+                                className="px-8 py-4 border-2 border-white/80 bg-white/10 backdrop-blur-sm text-white rounded-md font-bold text-lg hover:bg-white/20 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-lg transform hover:scale-105 relative z-10"
                                 data-oid="sr4rhd2"
                             >
                                 Browse Fresher Jobs
