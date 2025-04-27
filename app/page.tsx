@@ -1528,7 +1528,7 @@ export default function Page() {
                                 data-oid="yos2.aj"
                             ></div>
                             <div
-                                className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-[hsl(175,70%,41%)] to-transparent z-20"
+                                className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[hsl(175,70%,41%)/80] to-transparent z-20"
                                 data-oid="0o90pte"
                             ></div>
 
