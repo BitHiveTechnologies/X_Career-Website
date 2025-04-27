@@ -1113,7 +1113,10 @@ export default function Page() {
                         className="absolute inset-0 bg-white/5 backdrop-blur-[1px]"
                         data-oid="0w5:hzx"
                     ></div>
-                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-oid="7e2z3wp">
+                    <div
+                        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
+                        data-oid="7e2z3wp"
+                    >
                         <div className="text-center mb-12" data-oid="l4:akv4">
                             <h2 className="text-3xl font-bold mb-4" data-oid="jf3hcyv">
                                 Hear From Our Members
@@ -1181,7 +1184,7 @@ export default function Page() {
                         data-oid="rf0mk:4"
                     ></div>
                     <div
-                        className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
+                        className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10"
                         data-oid="509st6h"
                     >
                         <p className="text-blue-200 mb-2" data-oid="jf3ctzo">
