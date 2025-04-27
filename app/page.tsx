@@ -1989,45 +1989,21 @@ export default function Page() {
             </main>
 
             {/* Footer */}
-            <footer
-                className="bg-gradient-to-r from-[hsl(210,60%,85%)] via-[hsl(196,70%,85%)] to-[hsl(175,60%,85%)] text-gray-800 relative overflow-hidden"
-                data-oid="3thd4hw"
-            >
-                {/* Subtle animated background elements */}
-                <div className="absolute inset-0 overflow-hidden opacity-20" data-oid="g23xp.0">
-                    <div
-                        className="absolute top-20 left-10 w-72 h-72 bg-[hsl(196,80%,65%)] rounded-full blur-3xl animate-blob animation-delay-2000"
-                        data-oid="2gjrqj3"
-                    ></div>
-                    <div
-                        className="absolute bottom-20 right-10 w-72 h-72 bg-[hsl(175,70%,61%)] rounded-full blur-3xl animate-blob"
-                        data-oid="u722:sj"
-                    ></div>
-                </div>
-                {/* Subtle overlay */}
-                <div
-                    className="absolute inset-0 bg-[hsl(196,80%,45%)]/5 backdrop-blur-[1px]"
-                    data-oid="0ybcbpm"
-                ></div>
-                <div
-                    className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10"
-                    data-oid="z5enqj:"
-                >
+            <footer className="bg-gray-950 text-white" data-oid="3thd4hw">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12" data-oid="z5enqj:">
                     <div className="grid md:grid-cols-4 gap-8" data-oid="mv5:ho_">
                         <div data-oid="084ju9w">
                             <div className="mb-6" data-oid="ef3o64e">
-                                <div className="text-[hsl(196,80%,45%)]" data-oid="m9dhq5u">
-                                    <Logo data-oid="wur2:xh" />
-                                </div>
+                                <Logo data-oid="wur2:xh" />
                             </div>
-                            <p className="text-gray-600 mb-4" data-oid="bqzosa0">
+                            <p className="text-gray-400 mb-4" data-oid="bqzosa0">
                                 Helping tech freshers launch their careers with curated
                                 opportunities and resources.
                             </p>
                             <div className="flex space-x-4" data-oid="t5hrm1f">
                                 <a
                                     href="/linkedin"
-                                    className="text-gray-600 hover:text-[hsl(196,80%,45%)] transition-all duration-300"
+                                    className="text-gray-400 hover:text-white transition-all duration-300"
                                     data-oid="rt:13ay"
                                 >
                                     <svg
@@ -2044,7 +2020,7 @@ export default function Page() {
                                 </a>
                                 <a
                                     href="/twitter"
-                                    className="text-gray-600 hover:text-[hsl(196,80%,45%)] transition-all duration-300"
+                                    className="text-gray-400 hover:text-white transition-all duration-300"
                                     data-oid="tpvo5xq"
                                 >
                                     <svg
@@ -2061,7 +2037,7 @@ export default function Page() {
                                 </a>
                                 <a
                                     href="/instagram"
-                                    className="text-gray-600 hover:text-[hsl(196,80%,45%)] transition-all duration-300"
+                                    className="text-gray-400 hover:text-white transition-all duration-300"
                                     data-oid="nco5oi:"
                                 >
                                     <svg
@@ -2079,17 +2055,14 @@ export default function Page() {
                             </div>
                         </div>
                         <div data-oid="c:0rtx4">
-                            <h3
-                                className="text-lg font-bold mb-4 text-[hsl(196,80%,45%)]"
-                                data-oid="80z5fro"
-                            >
+                            <h3 className="text-lg font-bold mb-4" data-oid="80z5fro">
                                 Company
                             </h3>
                             <ul className="space-y-3" data-oid="d.0nl_a">
                                 <li data-oid="35doyf6">
                                     <a
                                         href="/about"
-                                        className="text-gray-600 hover:text-[hsl(196,80%,45%)] transition-all duration-300"
+                                        className="text-gray-400 hover:text-white transition-all duration-300"
                                         data-oid="dwqvhjj"
                                     >
                                         About Us
@@ -2098,7 +2071,7 @@ export default function Page() {
                                 <li data-oid="m_eavcl">
                                     <a
                                         href="/advertising"
-                                        className="text-gray-600 hover:text-[hsl(196,80%,45%)] transition-all duration-300"
+                                        className="text-gray-400 hover:text-white transition-all duration-300"
                                         data-oid="b75aik0"
                                     >
                                         Advertising
@@ -2107,7 +2080,7 @@ export default function Page() {
                                 <li data-oid="4gfye7z">
                                     <a
                                         href="/contact"
-                                        className="text-gray-600 hover:text-[hsl(196,80%,45%)] transition-all duration-300"
+                                        className="text-gray-400 hover:text-white transition-all duration-300"
                                         data-oid="dvhx3c2"
                                     >
                                         Contact
@@ -2116,7 +2089,7 @@ export default function Page() {
                                 <li data-oid="zn1l2-t">
                                     <a
                                         href="/careers"
-                                        className="text-gray-600 hover:text-[hsl(196,80%,45%)] transition-all duration-300"
+                                        className="text-gray-400 hover:text-white transition-all duration-300"
                                         data-oid="4a9xvqv"
                                     >
                                         Careers
@@ -2125,17 +2098,14 @@ export default function Page() {
                             </ul>
                         </div>
                         <div data-oid="4.c3k_4">
-                            <h3
-                                className="text-lg font-bold mb-4 text-[hsl(196,80%,45%)]"
-                                data-oid="075ucxe"
-                            >
+                            <h3 className="text-lg font-bold mb-4" data-oid="075ucxe">
                                 Resources
                             </h3>
                             <ul className="space-y-3" data-oid="odfuvx.">
                                 <li data-oid="vx2gvkq">
                                     <a
                                         href="/tax-calculator"
-                                        className="text-gray-600 hover:text-[hsl(196,80%,45%)] transition-all duration-300"
+                                        className="text-gray-400 hover:text-white transition-all duration-300"
                                         data-oid="q6y95ym"
                                     >
                                         Tax Calculator
@@ -2144,7 +2114,7 @@ export default function Page() {
                                 <li data-oid="pawp.w8">
                                     <a
                                         href="/resume-review"
-                                        className="text-gray-600 hover:text-[hsl(196,80%,45%)] transition-all duration-300"
+                                        className="text-gray-400 hover:text-white transition-all duration-300"
                                         data-oid="atvaok9"
                                     >
                                         Resume Review
@@ -2153,7 +2123,7 @@ export default function Page() {
                                 <li data-oid="p9uanln">
                                     <a
                                         href="/jobs-tracker"
-                                        className="text-gray-600 hover:text-[hsl(196,80%,45%)] transition-all duration-300"
+                                        className="text-gray-400 hover:text-white transition-all duration-300"
                                         data-oid="cle5gya"
                                     >
                                         Jobs Tracker
@@ -2162,7 +2132,7 @@ export default function Page() {
                                 <li data-oid="w58jang">
                                     <a
                                         href="/blog"
-                                        className="text-gray-600 hover:text-[hsl(196,80%,45%)] transition-all duration-300"
+                                        className="text-gray-400 hover:text-white transition-all duration-300"
                                         data-oid="5w37un."
                                     >
                                         Blog
@@ -2171,17 +2141,14 @@ export default function Page() {
                             </ul>
                         </div>
                         <div data-oid="1e2kryh">
-                            <h3
-                                className="text-lg font-bold mb-4 text-[hsl(196,80%,45%)]"
-                                data-oid="qrbikvt"
-                            >
+                            <h3 className="text-lg font-bold mb-4" data-oid="qrbikvt">
                                 Legal
                             </h3>
                             <ul className="space-y-3" data-oid="pqhdej_">
                                 <li data-oid="mqajp73">
                                     <a
                                         href="/privacy-policy"
-                                        className="text-gray-600 hover:text-[hsl(196,80%,45%)] transition-all duration-300"
+                                        className="text-gray-400 hover:text-white transition-all duration-300"
                                         data-oid="wzpjoms"
                                     >
                                         Privacy Policy
@@ -2190,7 +2157,7 @@ export default function Page() {
                                 <li data-oid="ci1ul6n">
                                     <a
                                         href="/terms"
-                                        className="text-gray-600 hover:text-[hsl(196,80%,45%)] transition-all duration-300"
+                                        className="text-gray-400 hover:text-white transition-all duration-300"
                                         data-oid="9:4hp:q"
                                     >
                                         Terms of Service
@@ -2199,7 +2166,7 @@ export default function Page() {
                                 <li data-oid="vx2ye55">
                                     <a
                                         href="/refunds"
-                                        className="text-gray-600 hover:text-[hsl(196,80%,45%)] transition-all duration-300"
+                                        className="text-gray-400 hover:text-white transition-all duration-300"
                                         data-oid="4:.:-.1"
                                     >
                                         Refund Policy
@@ -2208,7 +2175,7 @@ export default function Page() {
                                 <li data-oid="p338pwm">
                                     <a
                                         href="/shipping-policy"
-                                        className="text-gray-600 hover:text-[hsl(196,80%,45%)] transition-all duration-300"
+                                        className="text-gray-400 hover:text-white transition-all duration-300"
                                         data-oid="b.47vpy"
                                     >
                                         Shipping Policy
@@ -2219,7 +2186,7 @@ export default function Page() {
                     </div>
 
                     <div
-                        className="border-t border-gray-300/30 mt-12 pt-8 text-center text-gray-700"
+                        className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400"
                         data-oid="rrqi6eb"
                     >
                         <p className="mb-2" data-oid="jczuknr">
