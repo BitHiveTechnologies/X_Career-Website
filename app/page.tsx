@@ -264,7 +264,7 @@ export default function Page() {
         <div className="min-h-screen bg-white text-gray-800 font-sans" data-oid="t-025m4">
             {/* Sticky Navbar */}
             <header
-                className="sticky top-0 z-50 bg-gradient-to-r from-blue-50/90 via-blue-100/90 to-blue-50/90 backdrop-blur-md shadow-sm border-b border-blue-200/70"
+                className="sticky top-0 z-50 bg-gradient-to-r from-blue-200/90 via-blue-300/90 to-blue-200/90 backdrop-blur-md shadow-sm border-b border-blue-300/70"
                 data-oid="p8::s.s"
             >
                 <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-oid="z8ygt1_">
@@ -2192,7 +2192,7 @@ export default function Page() {
                         <p className="mb-2" data-oid="jczuknr">
                             © {new Date().getFullYear()} CareerX. All rights reserved.
                         </p>
-                        <p data-oid="8f0e_oa">Developed with ❤️ by Biti-live Technologies</p>
+                        <p data-oid="8f0e_oa">Built with ❤️ by BitHive Technologies</p>
                     </div>
                 </div>
             </footer>
