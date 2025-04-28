@@ -1585,7 +1585,7 @@ export default function Page() {
                             {resources.map((resource, index) => (
                                 <div
                                     key={resource.id}
-                                    className="bg-white/80 backdrop-blur-sm rounded-xl shadow-md border border-[hsl(210,30%,95%)] overflow-hidden hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2"
+                                    className="bg-white/80 backdrop-blur-sm rounded-xl shadow-md border border-[hsl(210,30%,95%)] overflow-hidden hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 hover:border-[hsl(196,80%,45%)]"
                                     data-oid="xsxak:q"
                                 >
                                     <div className="p-6" data-oid="f:b2rd-">
