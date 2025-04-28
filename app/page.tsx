@@ -215,6 +215,18 @@ export default function Page() {
                 }
             }
             
+            @keyframes ring {
+                0%, 100% {
+                    transform: rotate(0deg);
+                }
+                25% {
+                    transform: rotate(10deg);
+                }
+                75% {
+                    transform: rotate(-10deg);
+                }
+            }
+            
             .animate-scroll {
                 animation: scroll 40s linear infinite;
             }
@@ -360,9 +372,29 @@ export default function Page() {
                             >
                                 <a
                                     href="/notify"
-                                    className="bg-gradient-to-r from-blue-200 to-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs font-medium transition-all duration-300 hover:from-blue-300 hover:to-blue-200 shadow-sm"
+                                    className="bg-gradient-to-r from-blue-200 to-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs font-medium transition-all duration-300 hover:from-blue-300 hover:to-blue-200 shadow-sm flex items-center"
                                     data-oid="z2ejiq6"
                                 >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        className="h-4 w-4 mr-1 animate-[ring_1s_ease-in-out_infinite]"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeWidth="2"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        data-oid="egvs0jg"
+                                    >
+                                        <path
+                                            d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"
+                                            data-oid="budk.dj"
+                                        ></path>
+                                        <path
+                                            d="M13.73 21a2 2 0 0 1-3.46 0"
+                                            data-oid="9oil_:7"
+                                        ></path>
+                                    </svg>
                                     NOTIFY X
                                 </a>
                             </div>
