@@ -29,6 +29,15 @@
         animation-delay: 4s;
     }
 
+    /* Add animation for form fields focus effect */
+    .focus-within-scale {
+        @apply transition-all duration-300;
+    }
+
+    .focus-within-scale:focus-within {
+        @apply transform scale-[1.02];
+    }
+
     @keyframes blob {
         0% {
             transform: translate(0px, 0px) scale(1);
