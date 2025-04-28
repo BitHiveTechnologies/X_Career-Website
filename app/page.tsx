@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 
 // Dummy data for the page
 const dummyData = {
@@ -315,20 +316,20 @@ export default function Page() {
 
                         {/* Auth Buttons */}
                         <div className="flex items-center space-x-3" data-oid="y0m3-bz">
-                            <a
+                            <Link
                                 href="/login"
                                 className="hidden md:inline-flex items-center px-4 py-2 border border-[hsl(196,80%,45%)] text-sm font-medium rounded-md text-[hsl(196,80%,45%)] hover:bg-gradient-to-r hover:from-[hsl(196,80%,45%)]/10 hover:to-[hsl(196,80%,45%)]/25 transition-all duration-300"
                                 data-oid="rmrbh-0"
                             >
                                 Login
-                            </a>
-                            <a
+                            </Link>
+                            <Link
                                 href="/register"
                                 className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300"
                                 data-oid=".294xrt"
                             >
                                 Register
-                            </a>
+                            </Link>
 
                             {/* Mobile menu button */}
                             <button
@@ -853,7 +854,7 @@ export default function Page() {
                                 <p className="text-gray-600 mb-4" data-oid="f35voh0">
                                     {stats?.users.toLocaleString()} active accounts
                                 </p>
-                                <a
+                                <Link
                                     href="/register"
                                     className="text-blue-800 font-medium inline-flex items-center hover:text-blue-900 transition-all duration-300"
                                     data-oid="jcjf8f."
@@ -875,7 +876,7 @@ export default function Page() {
                                             data-oid=".1uulkj"
                                         ></path>
                                     </svg>
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -2001,20 +2002,20 @@ export default function Page() {
                             className="flex flex-col sm:flex-row justify-center gap-4"
                             data-oid="ky:ehj8"
                         >
-                            <a
+                            <Link
                                 href="/register"
                                 className="px-8 py-4 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white rounded-md font-bold text-lg hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300 transform hover:scale-105 hover:shadow-xl animate-pulse-shadow relative z-10"
                                 data-oid="zil-22."
                             >
                                 Create Free Account →
-                            </a>
-                            <a
+                            </Link>
+                            <Link
                                 href="/fresher-jobs"
                                 className="px-8 py-4 border-2 border-[hsl(196,80%,45%)] text-[hsl(196,80%,45%)] rounded-md font-bold text-lg hover:bg-[hsl(196,80%,45%)]/10 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-lg transform hover:scale-105 relative z-10"
                                 data-oid="sr4rhd2"
                             >
                                 Browse Fresher Jobs
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </section>
