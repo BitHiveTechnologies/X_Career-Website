@@ -1034,6 +1034,184 @@ export default function Page() {
                     </div>
                 </section>
 
+                {/* NotifyX Section */}
+                <section className="py-16 bg-white relative overflow-hidden" data-oid=".tuz86x">
+                    <div
+                        className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 opacity-90"
+                        data-oid="h3i3301"
+                    ></div>
+                    <div className="absolute inset-0 backdrop-blur-sm" data-oid="1h8uz7x"></div>
+                    <div
+                        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
+                        data-oid="a472hjt"
+                    >
+                        <div className="text-center mb-12" data-oid="0.puca.">
+                            <h2 className="text-3xl font-bold mb-4 text-white" data-oid=".9gy4i3">
+                                Unlock Tech Jobs Instantly with NotifyX - Get Notified by Email!
+                            </h2>
+                            <p
+                                className="text-xl text-white/90 max-w-4xl mx-auto"
+                                data-oid="9bzx9:5"
+                            >
+                                Subscribe to NotifyX at just ₹49/month and get the latest tech
+                                opportunities sent straight to your inbox. Stay ahead with real-time
+                                job alerts and connect with a community that helps you land your
+                                dream role faster. Your tech career starts for less than a cup of
+                                coffee!
+                            </p>
+                        </div>
+
+                        <div className="grid md:grid-cols-3 gap-8" data-oid="pf1lm1.">
+                            {/* Tile 1 */}
+                            <div
+                                className="bg-white/20 backdrop-blur-md p-6 rounded-xl shadow-lg border border-white/30 hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 text-center"
+                                data-oid="3ab2dd2"
+                            >
+                                <div className="text-4xl mb-4 text-white" data-oid="oajb8--">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="40"
+                                        height="40"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeWidth="2"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        data-oid="6b.mmp-"
+                                    >
+                                        <path
+                                            d="M22 12h-4l-3 9L9 3l-3 9H2"
+                                            data-oid=".4cc0cm"
+                                        ></path>
+                                    </svg>
+                                </div>
+                                <h3
+                                    className="text-xl font-bold mb-2 text-white"
+                                    data-oid="kixciv4"
+                                >
+                                    Instant Access
+                                </h3>
+                                <p className="text-white/90" data-oid="tfl3j4m">
+                                    Get immediate access to the latest tech job opportunities as
+                                    soon as they're posted.
+                                </p>
+                            </div>
+
+                            {/* Tile 2 */}
+                            <div
+                                className="bg-white/20 backdrop-blur-md p-6 rounded-xl shadow-lg border border-white/30 hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 text-center"
+                                data-oid="mlpj75a"
+                            >
+                                <div className="text-4xl mb-4 text-white" data-oid="nizuzk-">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="40"
+                                        height="40"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeWidth="2"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        data-oid="wuo3se0"
+                                    >
+                                        <path
+                                            d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"
+                                            data-oid="qc1p1pr"
+                                        ></path>
+                                        <path
+                                            d="M13.73 21a2 2 0 0 1-3.46 0"
+                                            data-oid="_ozu8n-"
+                                        ></path>
+                                    </svg>
+                                </div>
+                                <h3
+                                    className="text-xl font-bold mb-2 text-white"
+                                    data-oid="m2a5rwb"
+                                >
+                                    Real-Time Alerts
+                                </h3>
+                                <p className="text-white/90" data-oid="riu61t6">
+                                    Stay ahead with personalized notifications that match your
+                                    skills and preferences.
+                                </p>
+                            </div>
+
+                            {/* Tile 3 */}
+                            <div
+                                className="bg-white/20 backdrop-blur-md p-6 rounded-xl shadow-lg border border-white/30 hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 text-center"
+                                data-oid="atcv7:i"
+                            >
+                                <div className="text-4xl mb-4 text-white" data-oid="fjcjpfg">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="40"
+                                        height="40"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeWidth="2"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        data-oid="d5yajtr"
+                                    >
+                                        <path
+                                            d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"
+                                            data-oid="e3h._8u"
+                                        ></path>
+                                    </svg>
+                                </div>
+                                <h3
+                                    className="text-xl font-bold mb-2 text-white"
+                                    data-oid="f5sayid"
+                                >
+                                    Fast-Track Your Career
+                                </h3>
+                                <p className="text-white/90" data-oid="34suzx0">
+                                    Be among the first applicants and significantly increase your
+                                    chances of getting hired.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div className="mt-12 text-center" data-oid="ynyb6zy">
+                            <a
+                                href="/subscribe"
+                                className="inline-flex items-center px-8 py-4 bg-white text-purple-700 rounded-md font-bold text-lg hover:bg-purple-50 transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
+                                data-oid=".bpo9:u"
+                            >
+                                Subscribe Here
+                                <svg
+                                    className="ml-2 h-5 w-5"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    data-oid="gb43e2-"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                        d="M14 5l7 7m0 0l-7 7m7-7H3"
+                                        data-oid="cbkavbj"
+                                    ></path>
+                                </svg>
+                            </a>
+                            <p className="mt-4 text-white/80 text-sm" data-oid="t78ha2h">
+                                <span className="font-semibold" data-oid="5z_bwou">
+                                    Realtime Subscribers
+                                </span>{' '}
+                                |{' '}
+                                <span className="font-semibold" data-oid="-ziramu">
+                                    Notifications
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
                 {/* Community Integration */}
                 <section
                     className="py-16 bg-gradient-to-b from-[hsl(210,50%,98%)] to-[hsl(196,60%,95%)] relative overflow-hidden"
