@@ -1059,7 +1059,7 @@ export default function Page() {
                                 className="text-3xl font-bold mb-4 text-gray-800"
                                 data-oid=".9gy4i3"
                             >
-                                Unlock Tech Jobs Instantly with NotifyX - Get Notified by Email!
+                                NotifyX - Get Notified by Email !
                             </h2>
                             <p
                                 className="text-xl text-gray-600 max-w-4xl mx-auto"
@@ -1194,41 +1194,6 @@ export default function Page() {
                                     chances of getting hired.
                                 </p>
                             </div>
-                        </div>
-
-                        <div className="mt-12 text-center" data-oid="ynyb6zy">
-                            <a
-                                href="/subscribe"
-                                className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white rounded-md font-bold text-lg hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300 hover:translate-y-[-2px] hover:shadow-lg"
-                                data-oid=".bpo9:u"
-                            >
-                                Subscribe Here
-                                <svg
-                                    className="ml-2 h-5 w-5"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    data-oid="gb43e2-"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth="2"
-                                        d="M14 5l7 7m0 0l-7 7m7-7H3"
-                                        data-oid="cbkavbj"
-                                    ></path>
-                                </svg>
-                            </a>
-                            <p className="mt-4 text-gray-600 text-sm" data-oid="t78ha2h">
-                                <span className="font-semibold" data-oid="5z_bwou">
-                                    Realtime Subscribers
-                                </span>{' '}
-                                |{' '}
-                                <span className="font-semibold" data-oid="-ziramu">
-                                    Notifications
-                                </span>
-                            </p>
                         </div>
                     </div>
                 </section>
