@@ -1056,31 +1056,31 @@ export default function Page() {
                     >
                         <div className="text-center mb-12" data-oid="0.puca.">
                             <h2
-                                className="text-4xl font-bold mb-2 text-gray-800 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] inline-block text-transparent bg-clip-text"
+                                className="text-4xl font-bold mb-4 text-gray-800 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] inline-block text-transparent bg-clip-text"
                                 data-oid=".9gy4i3"
                             >
                                 NotifyX
                             </h2>
                             <p
-                                className="text-2xl font-semibold mb-4 text-gray-700"
+                                className="text-2xl font-semibold mb-2 text-gray-700"
                                 data-oid="9bzx9:5"
                             >
-                                Get real-time tech job alerts for just ₹49/month.
+                                Get Real-time Tech Job Alerts for just ₹49/month.
                             </p>
                             <p
                                 className="text-xl text-gray-600 max-w-4xl mx-auto"
                                 data-oid="9bzx9:6"
                             >
-                                Unlock curated opportunities, insider updates, and a driven
-                                community—all for less than a cup of coffee. Supercharge your
-                                career, starting today.
+                                Unlock Curated Opportunities, Insider Updates, and a driven
+                                Community — All for less than a Cup of Coffee. Supercharge your
+                                Career, starting Today.
                             </p>
                         </div>
 
                         <div className="grid md:grid-cols-3 gap-8" data-oid="pf1lm1.">
-                            {/* Section 1 */}
+                            {/* Tile 1 */}
                             <div
-                                className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-md border-t-4 border-[hsl(196,80%,45%)] hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 hover:border-t-[hsl(175,70%,41%)] text-center"
+                                className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-md border border-[hsl(210,30%,95%)] hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 hover:border-[hsl(196,80%,45%)] text-center"
                                 data-oid="3ab2dd2"
                             >
                                 <div
@@ -1109,7 +1109,7 @@ export default function Page() {
                                     className="text-xl font-bold mb-2 text-gray-800"
                                     data-oid="kixciv4"
                                 >
-                                    NotifyX
+                                    Instant Access
                                 </h3>
                                 <p className="text-gray-600" data-oid="tfl3j4m">
                                     Get immediate access to the latest tech job opportunities as
@@ -1117,13 +1117,13 @@ export default function Page() {
                                 </p>
                             </div>
 
-                            {/* Section 2 */}
+                            {/* Tile 2 */}
                             <div
-                                className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-md border-t-4 border-[hsl(175,70%,41%)] hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 hover:border-t-[hsl(196,80%,45%)] text-center"
+                                className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-md border border-[hsl(210,30%,95%)] hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 hover:border-[hsl(196,80%,45%)] text-center"
                                 data-oid="mlpj75a"
                             >
                                 <div
-                                    className="text-4xl mb-4 text-[hsl(175,70%,41%)]"
+                                    className="text-4xl mb-4 text-[hsl(196,80%,45%)]"
                                     data-oid="nizuzk-"
                                 >
                                     <svg
@@ -1152,7 +1152,7 @@ export default function Page() {
                                     className="text-xl font-bold mb-2 text-gray-800"
                                     data-oid="m2a5rwb"
                                 >
-                                    Get real-time tech job alerts for just ₹49/month.
+                                    Real-Time Alerts
                                 </h3>
                                 <p className="text-gray-600" data-oid="riu61t6">
                                     Stay ahead with personalized notifications that match your
@@ -1160,13 +1160,13 @@ export default function Page() {
                                 </p>
                             </div>
 
-                            {/* Section 3 */}
+                            {/* Tile 3 */}
                             <div
-                                className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-md border-t-4 border-[hsl(210,70%,45%)] hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 hover:border-t-[hsl(196,80%,45%)] text-center"
+                                className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-md border border-[hsl(210,30%,95%)] hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 hover:border-[hsl(196,80%,45%)] text-center"
                                 data-oid="atcv7:i"
                             >
                                 <div
-                                    className="text-4xl mb-4 text-[hsl(210,70%,45%)]"
+                                    className="text-4xl mb-4 text-[hsl(196,80%,45%)]"
                                     data-oid="fjcjpfg"
                                 >
                                     <svg
@@ -1191,11 +1191,11 @@ export default function Page() {
                                     className="text-xl font-bold mb-2 text-gray-800"
                                     data-oid="f5sayid"
                                 >
-                                    Supercharge your career
+                                    Fast-Track Your Career
                                 </h3>
                                 <p className="text-gray-600" data-oid="34suzx0">
-                                    Unlock curated opportunities, insider updates, and a driven
-                                    community—all for less than a cup of coffee.
+                                    Be among the first applicants and significantly increase your
+                                    chances of getting hired.
                                 </p>
                             </div>
                         </div>
