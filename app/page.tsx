@@ -1035,22 +1035,34 @@ export default function Page() {
                 </section>
 
                 {/* NotifyX Section */}
-                <section className="py-16 bg-white relative overflow-hidden" data-oid=".tuz86x">
-                    <div
-                        className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 opacity-90"
-                        data-oid="h3i3301"
-                    ></div>
-                    <div className="absolute inset-0 backdrop-blur-sm" data-oid="1h8uz7x"></div>
+                <section
+                    className="py-16 bg-gradient-to-r from-[hsl(210,60%,92%)] via-[hsl(196,70%,90%)] to-[hsl(175,60%,92%)] relative overflow-hidden"
+                    data-oid=".tuz86x"
+                >
+                    {/* Subtle animated background elements */}
+                    <div className="absolute inset-0 overflow-hidden opacity-20" data-oid="h3i3301">
+                        <div
+                            className="absolute top-20 left-10 w-72 h-72 bg-[hsl(196,80%,65%)] rounded-full blur-3xl animate-blob animation-delay-2000"
+                            data-oid="02646ax"
+                        ></div>
+                        <div
+                            className="absolute bottom-20 right-10 w-72 h-72 bg-[hsl(175,70%,61%)] rounded-full blur-3xl animate-blob"
+                            data-oid="qu0buk3"
+                        ></div>
+                    </div>
                     <div
                         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
                         data-oid="a472hjt"
                     >
                         <div className="text-center mb-12" data-oid="0.puca.">
-                            <h2 className="text-3xl font-bold mb-4 text-white" data-oid=".9gy4i3">
+                            <h2
+                                className="text-3xl font-bold mb-4 text-gray-800"
+                                data-oid=".9gy4i3"
+                            >
                                 Unlock Tech Jobs Instantly with NotifyX - Get Notified by Email!
                             </h2>
                             <p
-                                className="text-xl text-white/90 max-w-4xl mx-auto"
+                                className="text-xl text-gray-600 max-w-4xl mx-auto"
                                 data-oid="9bzx9:5"
                             >
                                 Subscribe to NotifyX at just ₹49/month and get the latest tech
@@ -1064,10 +1076,13 @@ export default function Page() {
                         <div className="grid md:grid-cols-3 gap-8" data-oid="pf1lm1.">
                             {/* Tile 1 */}
                             <div
-                                className="bg-white/20 backdrop-blur-md p-6 rounded-xl shadow-lg border border-white/30 hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 text-center"
+                                className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-md border border-[hsl(210,30%,95%)] hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 hover:border-[hsl(196,80%,45%)] text-center"
                                 data-oid="3ab2dd2"
                             >
-                                <div className="text-4xl mb-4 text-white" data-oid="oajb8--">
+                                <div
+                                    className="text-4xl mb-4 text-[hsl(196,80%,45%)]"
+                                    data-oid="oajb8--"
+                                >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         width="40"
@@ -1087,12 +1102,12 @@ export default function Page() {
                                     </svg>
                                 </div>
                                 <h3
-                                    className="text-xl font-bold mb-2 text-white"
+                                    className="text-xl font-bold mb-2 text-gray-800"
                                     data-oid="kixciv4"
                                 >
                                     Instant Access
                                 </h3>
-                                <p className="text-white/90" data-oid="tfl3j4m">
+                                <p className="text-gray-600" data-oid="tfl3j4m">
                                     Get immediate access to the latest tech job opportunities as
                                     soon as they're posted.
                                 </p>
@@ -1100,10 +1115,13 @@ export default function Page() {
 
                             {/* Tile 2 */}
                             <div
-                                className="bg-white/20 backdrop-blur-md p-6 rounded-xl shadow-lg border border-white/30 hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 text-center"
+                                className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-md border border-[hsl(210,30%,95%)] hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 hover:border-[hsl(196,80%,45%)] text-center"
                                 data-oid="mlpj75a"
                             >
-                                <div className="text-4xl mb-4 text-white" data-oid="nizuzk-">
+                                <div
+                                    className="text-4xl mb-4 text-[hsl(196,80%,45%)]"
+                                    data-oid="nizuzk-"
+                                >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         width="40"
@@ -1127,12 +1145,12 @@ export default function Page() {
                                     </svg>
                                 </div>
                                 <h3
-                                    className="text-xl font-bold mb-2 text-white"
+                                    className="text-xl font-bold mb-2 text-gray-800"
                                     data-oid="m2a5rwb"
                                 >
                                     Real-Time Alerts
                                 </h3>
-                                <p className="text-white/90" data-oid="riu61t6">
+                                <p className="text-gray-600" data-oid="riu61t6">
                                     Stay ahead with personalized notifications that match your
                                     skills and preferences.
                                 </p>
@@ -1140,10 +1158,13 @@ export default function Page() {
 
                             {/* Tile 3 */}
                             <div
-                                className="bg-white/20 backdrop-blur-md p-6 rounded-xl shadow-lg border border-white/30 hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 text-center"
+                                className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-md border border-[hsl(210,30%,95%)] hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 hover:border-[hsl(196,80%,45%)] text-center"
                                 data-oid="atcv7:i"
                             >
-                                <div className="text-4xl mb-4 text-white" data-oid="fjcjpfg">
+                                <div
+                                    className="text-4xl mb-4 text-[hsl(196,80%,45%)]"
+                                    data-oid="fjcjpfg"
+                                >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         width="40"
@@ -1163,12 +1184,12 @@ export default function Page() {
                                     </svg>
                                 </div>
                                 <h3
-                                    className="text-xl font-bold mb-2 text-white"
+                                    className="text-xl font-bold mb-2 text-gray-800"
                                     data-oid="f5sayid"
                                 >
                                     Fast-Track Your Career
                                 </h3>
-                                <p className="text-white/90" data-oid="34suzx0">
+                                <p className="text-gray-600" data-oid="34suzx0">
                                     Be among the first applicants and significantly increase your
                                     chances of getting hired.
                                 </p>
@@ -1178,7 +1199,7 @@ export default function Page() {
                         <div className="mt-12 text-center" data-oid="ynyb6zy">
                             <a
                                 href="/subscribe"
-                                className="inline-flex items-center px-8 py-4 bg-white text-purple-700 rounded-md font-bold text-lg hover:bg-purple-50 transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
+                                className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white rounded-md font-bold text-lg hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300 hover:translate-y-[-2px] hover:shadow-lg"
                                 data-oid=".bpo9:u"
                             >
                                 Subscribe Here
@@ -1199,7 +1220,7 @@ export default function Page() {
                                     ></path>
                                 </svg>
                             </a>
-                            <p className="mt-4 text-white/80 text-sm" data-oid="t78ha2h">
+                            <p className="mt-4 text-gray-600 text-sm" data-oid="t78ha2h">
                                 <span className="font-semibold" data-oid="5z_bwou">
                                     Realtime Subscribers
                                 </span>{' '}
