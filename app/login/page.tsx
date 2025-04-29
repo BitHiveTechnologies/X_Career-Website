@@ -1,9 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import MainNavbar from '@/components/mainNavbar';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import MainNavbar from '@/components/mainNavbar';
+import { useState } from 'react';
 
 // SVG Logo component
 const Logo = () => (
@@ -77,7 +77,7 @@ export default function LoginPage() {
         <>
             <MainNavbar data-oid="-ljxoz5" />
             <div
-                className="min-h-screen bg-gradient-to-b from-[hsl(204, 100.00%, 50.00%)] to-[hsl(162, 100.00%, 50.00%)] flex flex-col justify-center"
+                className="h-screen bg-gradient-to-b from-[hsl(204, 100.00%, 50.00%)] to-[hsl(162, 100.00%, 50.00%)] flex flex-col justify-center"
                 data-oid="j7pq0g4"
             >
                 {/* Animated background elements */}
@@ -96,13 +96,10 @@ export default function LoginPage() {
                     ></div>
                 </div>
 
-                <div className="sm:mx-auto sm:w-full sm:max-w-md px-4 py-8 z-10" data-oid="imccqkx">
+                <div className="sm:mx-auto sm:w-full sm:max-w-md px-4 z-10" data-oid="imccqkx">
                     <div className="text-center mb-6" data-oid="3b2o4b:">
                         <Link href="/" className="inline-block" data-oid="zm7xkn-"></Link>
-                        <h2
-                            className="mt-6 text-3xl font-extrabold text-gray-800"
-                            data-oid="cia:qi8"
-                        >
+                        <h2 className=" text-3xl font-extrabold text-gray-800" data-oid="cia:qi8">
                             Welcome back
                         </h2>
                         <p className="mt-2 text-sm text-gray-600" data-oid="2:yxjs2">
