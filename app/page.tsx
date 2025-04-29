@@ -5,7 +5,13 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 // Dummy data for the page
-const dummyData = {
+const dummyData: {
+    stats: Stats;
+    testimonials: Testimonial[];
+    resources: Resource[];
+    features: Feature[];
+    benefits: Benefit[];
+} = {
     stats: {
         freshers: 35213,
         verifiedJobs: '10k+',
@@ -129,27 +135,27 @@ const dummyData = {
 };
 
 // API call functions (to be implemented with actual backend)
-const fetchStats = async () => {
+const fetchStats = async (): Promise<Stats> => {
     // Replace with actual API call
     return new Promise((resolve) => setTimeout(() => resolve(dummyData.stats), 500));
 };
 
-const fetchTestimonials = async () => {
+const fetchTestimonials = async (): Promise<Testimonial[]> => {
     // Replace with actual API call
     return new Promise((resolve) => setTimeout(() => resolve(dummyData.testimonials), 500));
 };
 
-const fetchResources = async () => {
+const fetchResources = async (): Promise<Resource[]> => {
     // Replace with actual API call
     return new Promise((resolve) => setTimeout(() => resolve(dummyData.resources), 500));
 };
 
-const fetchFeatures = async () => {
+const fetchFeatures = async (): Promise<Feature[]> => {
     // Replace with actual API call
     return new Promise((resolve) => setTimeout(() => resolve(dummyData.features), 500));
 };
 
-const fetchBenefits = async () => {
+const fetchBenefits = async (): Promise<Benefit[]> => {
     // Replace with actual API call
     return new Promise((resolve) => setTimeout(() => resolve(dummyData.benefits), 500));
 };
@@ -195,14 +201,55 @@ const Logo = () => (
     </svg>
 );
 
-export default function Page() {
-    const [stats, setStats] = useState(null);
-    const [testimonials, setTestimonials] = useState([]);
-    const [resources, setResources] = useState([]);
-    const [features, setFeatures] = useState([]);
-    const [benefits, setBenefits] = useState([]);
+// Type definitions
+interface Stats {
+    freshers: number;
+    verifiedJobs: string;
+    activeMembers: number;
+    postedJobs: string;
+    linkedInFollowers: string;
+    users: number;
+    whatsappMembers: number;
+    linkedinMembers: number;
+    telegramMembers: number;
+}
 
+interface Testimonial {
+    id: number;
+    name: string;
+    company: string;
+    quote: string;
+    image: string;
+}
+
+interface Resource {
+    id: number;
+    title: string;
+    description: string;
+    icon: 'chart' | 'search' | 'users' | 'file' | 'chart-line' | 'article';
+}
+
+interface Benefit {
+    id: number;
+    title: string;
+    description: string;
+    icon: 'graduation' | 'check' | 'handshake';
+}
+
+interface Feature {
+    id: number;
+    title: string;
+    description: string;
+    icon: 'rocket' | 'book' | 'people' | 'map';
+}
+
+export default function Page() {
     const [searchQuery, setSearchQuery] = useState('');
+    const [stats, setStats] = useState<Stats | null>(null);
+    const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+    const [resources, setResources] = useState<Resource[]>([]);
+    const [features, setFeatures] = useState<Feature[]>([]);
+    const [benefits, setBenefits] = useState<Benefit[]>([]);
 
     // Add custom CSS for animations
     useEffect(() => {
@@ -266,7 +313,7 @@ export default function Page() {
         loadData();
     }, []);
 
-    const handleSearch = (e) => {
+    const handleSearch = (e: React.FormEvent) => {
         e.preventDefault();
         // Implement search functionality with backend
         console.log('Searching for:', searchQuery);
@@ -281,7 +328,7 @@ export default function Page() {
                 className="sticky top-0 z-50 bg-gradient-to-r from-blue-200/90 via-blue-300/90 to-blue-200/90 backdrop-blur-md shadow-sm border-b border-blue-300/70"
                 data-oid="p8::s.s"
             >
-                <MainNavbar/>
+                <MainNavbar data-oid="vrxt:ck" />
                 {/* Sub-Navbar */}
                 <div
                     className="bg-gradient-to-r from-[hsl(196,70%,92%)]/90 via-[hsl(210,70%,90%)]/90 to-[hsl(196,70%,92%)]/90 backdrop-blur-sm border-t border-[hsl(210,40%,90%)]"
