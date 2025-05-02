@@ -371,21 +371,12 @@ export default function Page() {
                                     NOTIFY X
                                 </a>
                             </div>
-                            <div
-                                className="flex items-center space-x-3 mt-2 sm:mt-0"
-                                data-oid="tq.vs1d"
-                            >
+                            <div className="flex items-center space-x-3 sm:mt-0" data-oid="tq.vs1d">
                                 {/* Mobile view - compact icons */}
                                 <div
                                     className="flex sm:hidden items-center space-x-2"
                                     data-oid="pv6qm:p"
                                 >
-                                    <span
-                                        className="text-xs font-medium text-gray-600"
-                                        data-oid="11sze37"
-                                    >
-                                        Join:
-                                    </span>
                                     <a
                                         href="/telegram"
                                         className="inline-flex items-center justify-center w-7 h-7 bg-teal-500 hover:bg-teal-600 text-white rounded-full transition-all duration-300"
@@ -511,7 +502,7 @@ export default function Page() {
                                     className="inline-block bg-blue-600 px-3 py-1 rounded-full text-xs font-bold tracking-wider mb-6 uppercase"
                                     data-oid="o2e:ayt"
                                 >
-                                    India's #1 Platform For Tech Freshers
+                                    India's most trusted Platform For Tech Freshers
                                 </div>
 
                                 <h1
