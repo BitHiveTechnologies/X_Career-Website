@@ -516,16 +516,16 @@ export default function Page() {
                                     className="text-xl md:text-2xl mb-8 text-white"
                                     data-oid="_ma0f86"
                                 >
-                                    Discover jobs, internships, and resources tailored for freshers
+                                    Discover Jobs, Internships, and Resources tailored for Freshers
                                 </p>
 
                                 <div className="flex flex-wrap gap-4 mt-10" data-oid="g3q6ehb">
                                     <a
-                                        href="/fresher-jobs"
+                                        href="/register"
                                         className="inline-flex items-center px-6 py-3 bg-white/20 backdrop-blur-md border border-white/30 hover:bg-white/30 rounded-md font-medium transition-all duration-300 hover:translate-y-[-2px] hover:shadow-lg"
                                         data-oid="03ztryz"
                                     >
-                                        Browse Fresher Jobs
+                                        Join Community
                                         <svg
                                             className="ml-2 h-5 w-5"
                                             fill="none"
@@ -543,29 +543,6 @@ export default function Page() {
                                             ></path>
                                         </svg>
                                     </a>
-                                    <button
-                                        onClick={() => (window.location.href = '/register')}
-                                        className="inline-flex items-center px-6 py-3 bg-[hsl(175,70%,41%)] hover:bg-[hsl(175,70%,36%)] rounded-md font-medium transition-all duration-300 hover:translate-y-[-2px] hover:shadow-lg"
-                                        data-oid="iqr:2qi"
-                                    >
-                                        Join Community
-                                        <svg
-                                            className="ml-2 h-5 w-5"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            viewBox="0 0 24 24"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            data-oid="vsxtcu4"
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth="2"
-                                                d="M14 5l7 7m0 0l-7 7m7-7H3"
-                                                data-oid="vvsu2po"
-                                            ></path>
-                                        </svg>
-                                    </button>
                                 </div>
                             </div>
 
