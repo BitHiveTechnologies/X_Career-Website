@@ -499,21 +499,21 @@ export default function Page() {
                         <div className="grid md:grid-cols-2 gap-8 items-center" data-oid="1.4tfll">
                             <div className="block" data-oid="9bbzjom">
                                 <div
-                                    className="inline-block bg-blue-600 px-3 py-1 rounded-full text-xs font-bold tracking-wider mb-6 uppercase"
+                                    className="inline-block bg-blue-600 px-3 py-1 rounded-full text-xs font-bold tracking-wider mb-6 uppercase text-white"
                                     data-oid="o2e:ayt"
                                 >
                                     India's most trusted Platform For Tech Freshers
                                 </div>
 
                                 <h1
-                                    className="text-4xl md:text-6xl font-bold mb-4"
+                                    className="text-4xl md:text-6xl font-bold mb-4 text-white drop-shadow-md"
                                     data-oid="t:8j1:l"
                                 >
                                     JOIN THOUSANDS GETTING JOBS IN TOP TECH COMPANIES
                                 </h1>
 
                                 <p
-                                    className="text-xl md:text-2xl mb-8 text-blue-100"
+                                    className="text-xl md:text-2xl mb-8 text-white"
                                     data-oid="_ma0f86"
                                 >
                                     Discover jobs, internships, and resources tailored for freshers
@@ -601,19 +601,19 @@ export default function Page() {
 
                                     <div className="flex flex-wrap gap-3 mb-6" data-oid="gu.ct48">
                                         <div
-                                            className="bg-white/20 backdrop-blur-md px-4 py-2 rounded-full text-sm border border-white/30 shadow-sm hover:shadow-md transition-all duration-300 hover:bg-white/30"
+                                            className="bg-white/20 backdrop-blur-md px-4 py-2 rounded-full text-sm border border-white/30 shadow-sm hover:shadow-md transition-all duration-300 hover:bg-white/30 text-white font-medium"
                                             data-oid="vd77568"
                                         >
                                             {stats?.freshers.toLocaleString()} Freshers
                                         </div>
                                         <div
-                                            className="bg-white/20 backdrop-blur-md px-4 py-2 rounded-full text-sm border border-white/30 shadow-sm hover:shadow-md transition-all duration-300 hover:bg-white/30"
+                                            className="bg-white/20 backdrop-blur-md px-4 py-2 rounded-full text-sm border border-white/30 shadow-sm hover:shadow-md transition-all duration-300 hover:bg-white/30 text-white font-medium"
                                             data-oid="vmg46il"
                                         >
                                             {stats?.verifiedJobs} Verified Jobs
                                         </div>
                                         <div
-                                            className="bg-white/20 backdrop-blur-md px-4 py-2 rounded-full text-sm border border-white/30 shadow-sm hover:shadow-md transition-all duration-300 hover:bg-white/30"
+                                            className="bg-white/20 backdrop-blur-md px-4 py-2 rounded-full text-sm border border-white/30 shadow-sm hover:shadow-md transition-all duration-300 hover:bg-white/30 text-white font-medium"
                                             data-oid="tq0icyh"
                                         >
                                             Entry-Level Focused
