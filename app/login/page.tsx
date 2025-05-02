@@ -77,7 +77,7 @@ export default function LoginPage() {
         <>
             <MainNavbar data-oid="344kgpd" />
             <div
-                className="h-screen bg-gradient-to-b from-[hsl(204, 100.00%, 50.00%)] to-[hsl(162, 100.00%, 50.00%)] flex flex-col justify-center"
+                className="min-h-screen bg-gradient-to-b from-[hsl(204, 100.00%, 50.00%)] to-[hsl(162, 100.00%, 50.00%)] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
                 data-oid="0q.2._-"
             >
                 {/* Animated background elements */}
@@ -96,9 +96,11 @@ export default function LoginPage() {
                     ></div>
                 </div>
 
-                <div className="sm:mx-auto sm:w-full sm:max-w-md px-4 z-10" data-oid="5g:ibj8">
+                <div className="w-full sm:mx-auto sm:max-w-md z-10" data-oid="5g:ibj8">
                     <div className="text-center mb-6" data-oid="cq7g44o">
-                        <Link href="/" className="inline-block" data-oid="ke81k8q"></Link>
+                        <Link href="/" className="inline-block mb-4" data-oid="ke81k8q">
+                            <Logo data-oid="0ky2_n0" />
+                        </Link>
                         <h2 className=" text-3xl font-extrabold text-gray-800" data-oid="649rne.">
                             Welcome back
                         </h2>
