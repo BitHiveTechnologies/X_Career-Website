@@ -543,8 +543,8 @@ export default function Page() {
                                             ></path>
                                         </svg>
                                     </a>
-                                    <a
-                                        href="/community"
+                                    <Link
+                                        href="/register"
                                         className="inline-flex items-center px-6 py-3 bg-[hsl(175,70%,41%)] hover:bg-[hsl(175,70%,36%)] rounded-md font-medium transition-all duration-300 hover:translate-y-[-2px] hover:shadow-lg"
                                         data-oid="iqr:2qi"
                                     >
@@ -565,7 +565,7 @@ export default function Page() {
                                                 data-oid="vvsu2po"
                                             ></path>
                                         </svg>
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
 
