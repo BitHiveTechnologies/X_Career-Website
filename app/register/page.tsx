@@ -56,7 +56,7 @@ export default function RegisterPage() {
                     ></div>
                 </div>
 
-                <div className="w-full sm:mx-auto sm:max-w-md z-10 -mt-10" data-oid="bv4632:">
+                <div className="w-full sm:mx-auto sm:max-w-md z-10 -mt-15" data-oid="bv4632:">
                     <div className="text-center mb-6" data-oid="f4uen3b">
                         <h2 className="text-3xl font-extrabold text-gray-800" data-oid="eo5zi3-">
                             Create an account
