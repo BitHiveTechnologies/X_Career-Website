@@ -2046,37 +2046,40 @@ export default function Page() {
                                     e.currentTarget.style.animationPlayState =
                                         currentState === 'paused' ? 'running' : 'paused';
                                 }}
-                                style={{ width: `${testimonials.length * 380}px` }}
+                                style={{ width: `${testimonials.length * 300}px` }}
                                 data-oid="-_srvo3"
                             >
                                 {testimonials.map((testimonial) => (
                                     <div
                                         key={testimonial.id}
-                                        className="bg-white/90 backdrop-blur-md text-gray-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 relative z-10 border border-white/20 w-[350px] h-[200px] flex-shrink-0 flex flex-col"
+                                        className="bg-white/90 backdrop-blur-md text-gray-800 p-4 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 relative z-10 border border-white/20 w-[280px] h-[180px] flex-shrink-0 flex flex-col"
                                         data-oid="r6v-z2g"
                                     >
-                                        <div className="flex items-center mb-3" data-oid="q44h.x8">
+                                        <div className="flex items-center mb-2" data-oid="q44h.x8">
                                             <img
                                                 src={testimonial.image}
                                                 alt={testimonial.name}
-                                                className="w-12 h-12 rounded-full mr-4 object-cover"
+                                                className="w-10 h-10 rounded-full mr-3 object-cover"
                                                 data-oid="o-yl0ew"
                                             />
 
                                             <div data-oid="dc7:zgh">
                                                 <h3
-                                                    className="font-bold text-gray-800"
+                                                    className="font-bold text-gray-800 text-sm"
                                                     data-oid="j56n77_"
                                                 >
                                                     {testimonial.name}
                                                 </h3>
-                                                <p className="text-blue-700" data-oid="51uklu7">
+                                                <p
+                                                    className="text-blue-700 text-xs"
+                                                    data-oid="51uklu7"
+                                                >
                                                     {testimonial.company}
                                                 </p>
                                             </div>
                                         </div>
                                         <p
-                                            className="text-gray-600 italic flex-grow overflow-y-auto"
+                                            className="text-gray-600 italic flex-grow overflow-y-auto text-sm"
                                             data-oid="e1t19ex"
                                         >
                                             "{testimonial.quote}"
@@ -2088,31 +2091,34 @@ export default function Page() {
                                 {testimonials.slice(0, 3).map((testimonial) => (
                                     <div
                                         key={`duplicate-${testimonial.id}`}
-                                        className="bg-white/90 backdrop-blur-md text-gray-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 relative z-10 border border-white/20 w-[350px] h-[200px] flex-shrink-0 flex flex-col"
+                                        className="bg-white/90 backdrop-blur-md text-gray-800 p-4 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 relative z-10 border border-white/20 w-[280px] h-[180px] flex-shrink-0 flex flex-col"
                                         data-oid=":hs95w4"
                                     >
-                                        <div className="flex items-center mb-3" data-oid="0b10l.t">
+                                        <div className="flex items-center mb-2" data-oid="0b10l.t">
                                             <img
                                                 src={testimonial.image}
                                                 alt={testimonial.name}
-                                                className="w-12 h-12 rounded-full mr-4 object-cover"
+                                                className="w-10 h-10 rounded-full mr-3 object-cover"
                                                 data-oid="ejrxwgx"
                                             />
 
                                             <div data-oid="l:4fo.8">
                                                 <h3
-                                                    className="font-bold text-gray-800"
+                                                    className="font-bold text-gray-800 text-sm"
                                                     data-oid="a2dnidi"
                                                 >
                                                     {testimonial.name}
                                                 </h3>
-                                                <p className="text-blue-700" data-oid="vlfr6vn">
+                                                <p
+                                                    className="text-blue-700 text-xs"
+                                                    data-oid="vlfr6vn"
+                                                >
                                                     {testimonial.company}
                                                 </p>
                                             </div>
                                         </div>
                                         <p
-                                            className="text-gray-600 italic flex-grow overflow-y-auto"
+                                            className="text-gray-600 italic flex-grow overflow-y-auto text-sm"
                                             data-oid="biv3_wo"
                                         >
                                             "{testimonial.quote}"
