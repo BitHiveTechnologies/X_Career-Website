@@ -476,7 +476,7 @@ export default function Page() {
                     {/* Animated background elements */}
                     <div className="absolute inset-0 overflow-hidden" data-oid="n687ije">
                         <div
-                            className="absolute -top-20 -left-20 w-96 h-96 bg-[hsl(196,80%,65%)] opacity-40 rounded-full blur-3xl animate-blob"
+                            className="absolute -top-20 -left-20 w-96 h-96 bg-[hsl(196,80%,65%)] opacity-30 rounded-full blur-3xl animate-blob"
                             data-oid="-:v2o4d"
                         ></div>
                         <div
@@ -488,7 +488,7 @@ export default function Page() {
                             data-oid="pz.u893"
                         ></div>
                         <div
-                            className="absolute -bottom-20 right-1/4 w-80 h-80 bg-[hsl(220,70%,65%)] opacity-30 rounded-full blur-3xl animate-blob animation-delay-3000"
+                            className="absolute -bottom-20 right-1/4 w-80 h-80 bg-[hsl(220,70%,65%)] opacity-40 rounded-full blur-3xl animate-blob animation-delay-3000"
                             data-oid="u1:hmn7"
                         ></div>
                     </div>
