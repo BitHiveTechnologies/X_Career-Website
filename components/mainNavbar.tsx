@@ -158,7 +158,14 @@ export default function MainNavbar() {
                                 >
                                     Resume Builder
                                 </a>
-                                <div className="pt-2" data-oid=":qim1cc">
+                                <div className="pt-2 space-y-2" data-oid=":qim1cc">
+                                    <Link
+                                        href="/login"
+                                        className="block w-full text-center px-4 py-2 border border-[hsl(196,80%,45%)] text-sm font-medium rounded-md text-[hsl(196,80%,45%)] hover:bg-gradient-to-r hover:from-[hsl(196,80%,45%)]/10 hover:to-[hsl(196,80%,45%)]/25 transition-all duration-300"
+                                        data-oid="mobile-login"
+                                    >
+                                        Login
+                                    </Link>
                                     <Link
                                         href="/register"
                                         className="block w-full text-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300"
