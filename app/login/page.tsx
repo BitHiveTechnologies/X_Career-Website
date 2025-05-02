@@ -96,7 +96,7 @@ export default function LoginPage() {
                     ></div>
                 </div>
 
-                <div className="w-full sm:mx-auto sm:max-w-md z-10" data-oid="5g:ibj8">
+                <div className="w-full sm:mx-auto sm:max-w-md z-10 -mt-10" data-oid="5g:ibj8">
                     <div className="text-center mb-6" data-oid="cq7g44o">
                         <h2 className=" text-3xl font-extrabold text-gray-800" data-oid="649rne.">
                             Welcome back
