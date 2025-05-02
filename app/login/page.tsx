@@ -98,9 +98,6 @@ export default function LoginPage() {
 
                 <div className="w-full sm:mx-auto sm:max-w-md z-10" data-oid="5g:ibj8">
                     <div className="text-center mb-6" data-oid="cq7g44o">
-                        <Link href="/" className="inline-block mb-4" data-oid="ke81k8q">
-                            <Logo data-oid="0ky2_n0" />
-                        </Link>
                         <h2 className=" text-3xl font-extrabold text-gray-800" data-oid="649rne.">
                             Welcome back
                         </h2>
