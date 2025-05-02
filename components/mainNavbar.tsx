@@ -1,7 +1,12 @@
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
 
 export default function MainNavbar() {
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+    const toggleMobileMenu = () => {
+        setMobileMenuOpen(!mobileMenuOpen);
+    };
     const Logo = () => (
         <svg
             className="h-8 w-auto"
@@ -93,7 +98,7 @@ export default function MainNavbar() {
                             </Link>
                             <Link
                                 href="/register"
-                                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300"
+                                className="hidden md:inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300"
                                 data-oid="9suyek4"
                             >
                                 Register
@@ -102,6 +107,7 @@ export default function MainNavbar() {
                             {/* Mobile menu button */}
                             <button
                                 type="button"
+                                onClick={toggleMobileMenu}
                                 className="md:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-blue-800 hover:bg-blue-50"
                                 data-oid="z0rsgpe"
                             >
@@ -123,6 +129,47 @@ export default function MainNavbar() {
                             </button>
                         </div>
                     </div>
+
+                    {/* Mobile menu, show/hide based on menu state */}
+                    {mobileMenuOpen && (
+                        <div className="md:hidden" data-oid="mobile-menu">
+                            <div
+                                className="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t border-blue-200"
+                                data-oid="whfosk6"
+                            >
+                                <a
+                                    href="/jobs"
+                                    className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-800 hover:bg-blue-50"
+                                    data-oid="bgar611"
+                                >
+                                    Jobs
+                                </a>
+                                <a
+                                    href="/internships"
+                                    className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-800 hover:bg-blue-50"
+                                    data-oid="qq.xi9s"
+                                >
+                                    Internships
+                                </a>
+                                <a
+                                    href="/resume-builder"
+                                    className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-800 hover:bg-blue-50"
+                                    data-oid="45wrqmm"
+                                >
+                                    Resume Builder
+                                </a>
+                                <div className="pt-2" data-oid=":qim1cc">
+                                    <Link
+                                        href="/register"
+                                        className="block w-full text-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300"
+                                        data-oid="..by9ky"
+                                    >
+                                        Register
+                                    </Link>
+                                </div>
+                            </div>
+                        </div>
+                    )}
                 </nav>
             </header>
         </div>
