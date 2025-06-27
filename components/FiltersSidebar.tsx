@@ -184,10 +184,10 @@ export default function FiltersSidebar({ filters, onFilterChange, onReset }: Fil
                     <div className="space-y-2" data-oid="8gdj77v">
                         {[
                             { value: '', label: 'Any Salary' },
-                            { value: '0-5', label: '₹0-5 LPA' },
-                            { value: '5-10', label: '₹5-10 LPA' },
-                            { value: '10-20', label: '₹10-20 LPA' },
-                            { value: '20+', label: '₹20+ LPA' },
+                            { value: '0-5', label: '0-5 LPA' },
+                            { value: '5-10', label: '5-10 LPA' },
+                            { value: '10-20', label: '10-20 LPA' },
+                            { value: '20+', label: '20+ LPA' },
                         ].map((range) => (
                             <label
                                 key={range.value}
