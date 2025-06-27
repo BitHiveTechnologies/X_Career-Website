@@ -240,51 +240,51 @@ export default function JobsPage() {
     };
 
     return (
-        <div className="min-h-screen bg-white text-gray-800 font-sans" data-oid="jobs-page">
+        <div className="min-h-screen bg-white text-gray-800 font-sans" data-oid="ihnb5bw">
             {/* Navbar */}
-            <MainNavbar data-oid="0ev0quk" />
+            <MainNavbar data-oid="9f0ngvd" />
 
             {/* Hero Section */}
             <section
                 className="bg-gradient-to-r from-[hsl(196,80%,45%)] via-[hsl(210,70%,45%)] to-[hsl(175,70%,41%)] text-white relative overflow-hidden py-16"
-                data-oid="ry4c95:"
+                data-oid="ntm4tyy"
             >
                 {/* Animated background elements */}
-                <div className="absolute inset-0 overflow-hidden" data-oid=":6wbayu">
+                <div className="absolute inset-0 overflow-hidden" data-oid="gte0-n8">
                     <div
                         className="absolute -top-20 -left-20 w-96 h-96 bg-[hsl(196,80%,65%)] opacity-30 rounded-full blur-3xl animate-blob"
-                        data-oid=":rvo.1m"
+                        data-oid="..aqckt"
                     ></div>
                     <div
                         className="absolute top-40 right-20 w-96 h-96 bg-[hsl(210,70%,65%)] opacity-40 rounded-full blur-3xl animate-blob animation-delay-2000"
-                        data-oid="2o3bt7."
+                        data-oid="5l-q4w1"
                     ></div>
                     <div
                         className="absolute bottom-10 left-1/3 w-96 h-96 bg-[hsl(175,70%,61%)] opacity-40 rounded-full blur-3xl animate-blob animation-delay-4000"
-                        data-oid="dl1w_i-"
+                        data-oid="_3y.5bg"
                     ></div>
                 </div>
 
                 {/* Frosted glass overlay */}
                 <div
                     className="absolute inset-0 bg-white/5 backdrop-blur-[1px]"
-                    data-oid="ugrl6kc"
+                    data-oid="1xc377u"
                 ></div>
 
                 <div
                     className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10"
-                    data-oid="xzh.08-"
+                    data-oid="a9u.77b"
                 >
                     <h1
                         className="text-4xl md:text-6xl font-bold mb-4 text-white drop-shadow-md"
-                        data-oid="v07oa:4"
+                        data-oid="7bi6swk"
                     >
                         JOBS
                     </h1>
-                    <p className="text-xl md:text-2xl mb-2 text-blue-100" data-oid="gmp.:3j">
+                    <p className="text-xl md:text-2xl mb-2 text-blue-100" data-oid="pb1vr95">
                         Empower Your Aspirations
                     </p>
-                    <p className="text-lg text-blue-200 max-w-2xl mx-auto" data-oid="o8hw1qz">
+                    <p className="text-lg text-blue-200 max-w-2xl mx-auto" data-oid="zcs7tls">
                         Discover thousands of opportunities tailored for tech freshers and
                         experienced professionals
                     </p>
@@ -294,38 +294,38 @@ export default function JobsPage() {
             {/* Category Menu */}
             <section
                 className="bg-gradient-to-b from-[hsl(210,50%,98%)] to-[hsl(196,60%,95%)] py-8"
-                data-oid="nr2-7ob"
+                data-oid="8b8__8l"
             >
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-oid="pbg74h2">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-oid="70bzsz3">
                     <CategoryMenu
                         categories={categories}
                         selectedCategory={selectedCategory}
                         onCategoryChange={handleCategoryChange}
-                        data-oid="rke.ehd"
+                        data-oid="if4qu2q"
                     />
 
                     {/* Jobs Count Badge */}
-                    <div className="text-center mt-6" data-oid="2lpud25">
+                    <div className="text-center mt-6" data-oid="m1.1wnm">
                         <div
                             className="inline-flex items-center px-6 py-3 bg-white/80 backdrop-blur-sm rounded-full shadow-md border border-[hsl(210,30%,95%)]"
-                            data-oid="u5y0nm-"
+                            data-oid="oj4by1-"
                         >
                             <svg
                                 className="h-5 w-5 text-[hsl(196,80%,45%)] mr-2"
                                 fill="none"
                                 stroke="currentColor"
                                 viewBox="0 0 24 24"
-                                data-oid="4zvozz5"
+                                data-oid="10_-4bg"
                             >
                                 <path
                                     strokeLinecap="round"
                                     strokeLinejoin="round"
                                     strokeWidth="2"
                                     d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H8a2 2 0 01-2-2V8a2 2 0 012-2V6"
-                                    data-oid="1yna488"
+                                    data-oid="p3ymop3"
                                 />
                             </svg>
-                            <span className="text-lg font-bold text-gray-800" data-oid="sv5.ep2">
+                            <span className="text-lg font-bold text-gray-800" data-oid="obnw0qg">
                                 {filteredJobs.length.toLocaleString()}+ JOBS FOUND
                             </span>
                         </div>
@@ -336,72 +336,72 @@ export default function JobsPage() {
             {/* Main Content */}
             <section
                 className="py-12 bg-gradient-to-b from-[hsl(196,60%,95%)] to-white"
-                data-oid="7pkga_d"
+                data-oid="ciokqtd"
             >
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-oid="7jd27fz">
-                    <div className="grid lg:grid-cols-4 gap-8" data-oid="0mqm36w">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-oid="2kdidmu">
+                    <div className="grid lg:grid-cols-4 gap-8" data-oid="i6qve-0">
                         {/* Filters Sidebar */}
-                        <div className="lg:col-span-1" data-oid="7491s0o">
+                        <div className="lg:col-span-1" data-oid="h63lvcc">
                             <FiltersSidebar
                                 filters={filters}
                                 onFilterChange={handleFilterChange}
                                 onReset={resetFilters}
-                                data-oid=".5filf1"
+                                data-oid="kjr4p_5"
                             />
                         </div>
 
                         {/* Job Listings */}
-                        <div className="lg:col-span-3" data-oid="jwr3ahy">
-                            <div className="space-y-6" role="list" data-oid="h4dw3rr">
+                        <div className="lg:col-span-3" data-oid=".tt3e5a">
+                            <div className="space-y-6" role="list" data-oid="_k84dqt">
                                 {isLoading ? (
-                                    <div className="text-center py-12" data-oid="fhtexiv">
+                                    <div className="text-center py-12" data-oid="4248-5-">
                                         <div
                                             className="animate-spin rounded-full h-12 w-12 border-b-2 border-[hsl(196,80%,45%)] mx-auto"
-                                            data-oid="hkxf9_:"
+                                            data-oid=":bh.s-4"
                                         ></div>
-                                        <p className="mt-4 text-gray-600" data-oid="4h5vncz">
+                                        <p className="mt-4 text-gray-600" data-oid="6f5k.19">
                                             Loading jobs...
                                         </p>
                                     </div>
                                 ) : filteredJobs.length > 0 ? (
                                     filteredJobs.map((job) => (
-                                        <JobCard key={job.id} job={job} data-oid="xmzdnxa" />
+                                        <JobCard key={job.id} job={job} data-oid="q1pme6d" />
                                     ))
                                 ) : (
-                                    <div className="text-center py-12" data-oid="e42ntob">
+                                    <div className="text-center py-12" data-oid="tmgojqb">
                                         <div
                                             className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4"
-                                            data-oid="c9wqqtm"
+                                            data-oid="v96h3i7"
                                         >
                                             <svg
                                                 className="h-12 w-12 text-gray-400"
                                                 fill="none"
                                                 stroke="currentColor"
                                                 viewBox="0 0 24 24"
-                                                data-oid="kuxd8mz"
+                                                data-oid="_bfmc_m"
                                             >
                                                 <path
                                                     strokeLinecap="round"
                                                     strokeLinejoin="round"
                                                     strokeWidth="2"
                                                     d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                                                    data-oid="b7e4_vy"
+                                                    data-oid="b2e240v"
                                                 />
                                             </svg>
                                         </div>
                                         <h3
                                             className="text-xl font-medium text-gray-900 mb-2"
-                                            data-oid="s-nnoth"
+                                            data-oid="iruj1or"
                                         >
                                             No jobs found
                                         </h3>
-                                        <p className="text-gray-600 mb-4" data-oid="qka_y49">
+                                        <p className="text-gray-600 mb-4" data-oid="ldxl7zt">
                                             Try adjusting your filters or search criteria
                                         </p>
                                         <button
                                             onClick={resetFilters}
                                             className="px-4 py-2 bg-[hsl(196,80%,45%)] text-white rounded-md hover:bg-[hsl(196,80%,40%)] transition-colors duration-200"
-                                            data-oid="dln8t2r"
+                                            data-oid="9f4s5a1"
                                         >
                                             Reset Filters
                                         </button>

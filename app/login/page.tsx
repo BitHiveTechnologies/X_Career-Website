@@ -12,7 +12,7 @@ const Logo = () => (
         viewBox="0 0 120 30"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        data-oid="f9d5c9i"
+        data-oid="vq4.kdm"
     >
         <path
             d="M10 5L20 15L10 25"
@@ -20,7 +20,7 @@ const Logo = () => (
             strokeWidth="3"
             strokeLinecap="round"
             strokeLinejoin="round"
-            data-oid="9m_nkkb"
+            data-oid="g3-d4rh"
         />
 
         <path
@@ -29,7 +29,7 @@ const Logo = () => (
             strokeWidth="3"
             strokeLinecap="round"
             strokeLinejoin="round"
-            data-oid="b.1m6o2"
+            data-oid="-63.z67"
         />
 
         <text
@@ -39,7 +39,7 @@ const Logo = () => (
             fontSize="18"
             fontWeight="bold"
             fill="#1E3A8A"
-            data-oid="e:hjizx"
+            data-oid="vjz7dzq"
         >
             Careers
         </text>
@@ -75,60 +75,60 @@ export default function LoginPage() {
 
     return (
         <>
-            <MainNavbar data-oid="344kgpd" />
+            <MainNavbar data-oid="k2o8h5i" />
             <div
                 className="min-h-screen bg-gradient-to-b from-[hsl(204, 100.00%, 50.00%)] to-[hsl(162, 100.00%, 50.00%)] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
-                data-oid="0q.2._-"
+                data-oid="-fo8ofy"
             >
                 {/* Animated background elements */}
-                <div className="fixed inset-0 overflow-hidden -z-10" data-oid="ktksgtl">
+                <div className="fixed inset-0 overflow-hidden -z-10" data-oid=":mxad9:">
                     <div
                         className="absolute -top-20 -left-20 w-96 h-96 bg-[hsl(196,80%,65%)] opacity-50 rounded-full blur-3xl animate-blob"
-                        data-oid=".9wor-6"
+                        data-oid="nxg:se1"
                     ></div>
                     <div
                         className="absolute top-40 right-20 w-96 h-96 bg-[hsl(210,70%,65%)] opacity-50 rounded-full blur-3xl animate-blob animation-delay-2000"
-                        data-oid="xynqorr"
+                        data-oid=":eryr2y"
                     ></div>
                     <div
                         className="absolute bottom-10 left-1/3 w-96 h-96 bg-[hsl(175,70%,61%)] opacity-40 rounded-full blur-3xl animate-blob animation-delay-4000"
-                        data-oid="q62ja16"
+                        data-oid="5to49cl"
                     ></div>
                 </div>
 
-                <div className="w-full sm:mx-auto sm:max-w-md z-10 -mt-20" data-oid="5g:ibj8">
-                    <div className="text-center mb-6" data-oid="cq7g44o">
-                        <h2 className=" text-3xl font-extrabold text-gray-800" data-oid="649rne.">
+                <div className="w-full sm:mx-auto sm:max-w-md z-10 -mt-20" data-oid="oftxght">
+                    <div className="text-center mb-6" data-oid="hv28c6-">
+                        <h2 className=" text-3xl font-extrabold text-gray-800" data-oid="cy90c3u">
                             Welcome back
                         </h2>
-                        <p className="mt-2 text-sm text-gray-600" data-oid="7xgqbd3">
+                        <p className="mt-2 text-sm text-gray-600" data-oid="algaoy-">
                             Sign in to access your account
                         </p>
                     </div>
 
                     <div
                         className="bg-white/80 backdrop-blur-md py-8 px-6 shadow-xl rounded-xl border border-[hsl(210,30%,95%)] sm:px-10 transform transition-all duration-500 hover:shadow-2xl"
-                        data-oid="gfcgu00"
+                        data-oid="1o9ce15"
                     >
                         {error && (
                             <div
                                 className="mb-4 p-3 bg-red-50 text-red-700 text-sm rounded-md border border-red-200"
-                                data-oid="t3e8i_q"
+                                data-oid="cgi-8p4"
                             >
                                 {error}
                             </div>
                         )}
 
-                        <form className="space-y-6" onSubmit={handleSubmit} data-oid="65lo_lv">
-                            <div data-oid=".7:ggh3">
+                        <form className="space-y-6" onSubmit={handleSubmit} data-oid="pud-eli">
+                            <div data-oid="xt3bm87">
                                 <label
                                     htmlFor="email"
                                     className="block text-sm font-medium text-gray-700"
-                                    data-oid="ef3_a.e"
+                                    data-oid="osz0jyu"
                                 >
                                     Email address
                                 </label>
-                                <div className="mt-1" data-oid="5.dt73p">
+                                <div className="mt-1" data-oid="g28tjdg">
                                     <input
                                         id="email"
                                         name="email"
@@ -139,20 +139,20 @@ export default function LoginPage() {
                                         onChange={(e) => setEmail(e.target.value)}
                                         className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[hsl(196,80%,45%)] focus:border-[hsl(196,80%,45%)] transition-colors duration-200"
                                         placeholder="you@example.com"
-                                        data-oid="z6kjtwc"
+                                        data-oid="2mmi:pg"
                                     />
                                 </div>
                             </div>
 
-                            <div data-oid=":q7u77y">
+                            <div data-oid="zvewz6i">
                                 <label
                                     htmlFor="password"
                                     className="block text-sm font-medium text-gray-700"
-                                    data-oid=":qty3.e"
+                                    data-oid="mt37set"
                                 >
                                     Password
                                 </label>
-                                <div className="mt-1" data-oid="_cm9npt">
+                                <div className="mt-1" data-oid="w7o:n90">
                                     <input
                                         id="password"
                                         name="password"
@@ -163,13 +163,13 @@ export default function LoginPage() {
                                         onChange={(e) => setPassword(e.target.value)}
                                         className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[hsl(196,80%,45%)] focus:border-[hsl(196,80%,45%)] transition-colors duration-200"
                                         placeholder="••••••••"
-                                        data-oid="t1yze.1"
+                                        data-oid="e.11otn"
                                     />
                                 </div>
                             </div>
 
-                            <div className="flex items-center justify-between" data-oid="b9raw6w">
-                                <div className="flex items-center" data-oid="jvu:sc8">
+                            <div className="flex items-center justify-between" data-oid="qs_eaye">
+                                <div className="flex items-center" data-oid="3bwk30i">
                                     <input
                                         id="remember-me"
                                         name="remember-me"
@@ -177,35 +177,35 @@ export default function LoginPage() {
                                         checked={rememberMe}
                                         onChange={(e) => setRememberMe(e.target.checked)}
                                         className="h-4 w-4 text-[hsl(196,80%,45%)] focus:ring-[hsl(196,80%,45%)] border-gray-300 rounded"
-                                        data-oid="nl-2j74"
+                                        data-oid="q2tyltg"
                                     />
 
                                     <label
                                         htmlFor="remember-me"
                                         className="ml-2 block text-sm text-gray-700"
-                                        data-oid="8sxhum1"
+                                        data-oid="r6kb0us"
                                     >
                                         Remember me
                                     </label>
                                 </div>
 
-                                <div className="text-sm" data-oid="1vdooe5">
+                                <div className="text-sm" data-oid="e1scc96">
                                     <Link
                                         href="/forgot-password"
                                         className="font-medium text-[hsl(196,80%,45%)] hover:text-[hsl(196,80%,35%)] transition-colors duration-200"
-                                        data-oid="ynv.iy4"
+                                        data-oid="8rki4iu"
                                     >
                                         Forgot your password?
                                     </Link>
                                 </div>
                             </div>
 
-                            <div data-oid="xqj2g.f">
+                            <div data-oid="w_fmzf_">
                                 <button
                                     type="submit"
                                     disabled={isLoading}
                                     className={`w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[hsl(196,80%,45%)] transition-all duration-300 transform hover:translate-y-[-2px] ${isLoading ? 'opacity-70 cursor-not-allowed' : ''}`}
-                                    data-oid="euwzz.q"
+                                    data-oid="p18gqvg"
                                 >
                                     {isLoading ? (
                                         <svg
@@ -213,7 +213,7 @@ export default function LoginPage() {
                                             xmlns="http://www.w3.org/2000/svg"
                                             fill="none"
                                             viewBox="0 0 24 24"
-                                            data-oid="lodel-c"
+                                            data-oid="imvhbhx"
                                         >
                                             <circle
                                                 className="opacity-25"
@@ -222,13 +222,13 @@ export default function LoginPage() {
                                                 r="10"
                                                 stroke="currentColor"
                                                 strokeWidth="4"
-                                                data-oid="z97pq09"
+                                                data-oid="2ogaq4c"
                                             ></circle>
                                             <path
                                                 className="opacity-75"
                                                 fill="currentColor"
                                                 d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                                                data-oid="yjbw:e."
+                                                data-oid="8sq-_vd"
                                             ></path>
                                         </svg>
                                     ) : null}
@@ -238,13 +238,13 @@ export default function LoginPage() {
                         </form>
                     </div>
 
-                    <div className="mt-6 text-center" data-oid="xa0vvy_">
-                        <p className="text-sm text-gray-600" data-oid="tkl42jh">
+                    <div className="mt-6 text-center" data-oid="qrsosss">
+                        <p className="text-sm text-gray-600" data-oid="8qccqfi">
                             Don't have an account?{' '}
                             <Link
                                 href="/register"
                                 className="font-medium text-[hsl(196,80%,45%)] hover:text-[hsl(196,80%,35%)] transition-colors duration-200"
-                                data-oid="n.i02gm"
+                                data-oid="m7pg2y3"
                             >
                                 Sign up
                             </Link>
