@@ -76,9 +76,8 @@ export default function JobApplicationPage() {
 
     if (!job) {
         return (
-            <div className="min-h-screen bg-white" data-oid="cgurvr.">
-                <MainNavbar data-oid="aib8lh_" />
-                <div className="max-w-4xl mx-auto px-4 py-16 text-center" data-oid="de_2zq-">
+            <div className="min-h-screen bg-white" data-oid="f:uo.me">
+                <div className="max-w-4xl mx-auto px-4 py-16 text-center" data-oid="4a2r_bv">
                     <h1 className="text-2xl font-bold text-gray-800 mb-4" data-oid="vu5xoqc">
                         Job Not Found
                     </h1>
@@ -98,10 +97,8 @@ export default function JobApplicationPage() {
     }
 
     return (
-        <div className="min-h-screen bg-gray-50" data-oid="wbyqgka">
-            <MainNavbar data-oid="exizu5g" />
-
-            <div className="max-w-4xl mx-auto px-4 py-8" data-oid="jd-z207">
+        <div className="min-h-screen bg-gray-50" data-oid="-luygqh">
+            <div className="max-w-4xl mx-auto px-4 py-8" data-oid="dykcib0">
                 {/* Header */}
                 <div className="bg-white rounded-lg shadow-md p-6 mb-8" data-oid="3rkrkfa">
                     <div className="flex items-center justify-between mb-4" data-oid="g-7d0v0">
