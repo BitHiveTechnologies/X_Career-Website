@@ -754,7 +754,7 @@ export default function JobsPage() {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-oid="nbxw6.q">
                     <div className="grid lg:grid-cols-4 gap-8" data-oid="zcyjmxv">
                         {/* Filters Sidebar */}
-                        <div className="lg:col-span-1" data-oid="v-c1n7s">
+                        <div className="lg:col-span-1 order-2 lg:order-1" data-oid="v-c1n7s">
                             <FiltersSidebar
                                 filters={filters}
                                 onFilterChange={handleFilterChange}
@@ -764,27 +764,30 @@ export default function JobsPage() {
                         </div>
 
                         {/* Job Listings */}
-                        <div className="lg:col-span-3" data-oid="bw5roa9">
+                        <div className="lg:col-span-3 order-1 lg:order-2" data-oid="bw5roa9">
                             {/* Toolbar */}
                             <div
-                                className="bg-white/80 backdrop-blur-sm rounded-xl shadow-md border border-[hsl(210,30%,95%)] p-4 mb-6"
+                                className="bg-white/80 backdrop-blur-sm rounded-xl shadow-md border border-[hsl(210,30%,95%)] p-6 mb-6"
                                 data-oid="s9qs2ii"
                             >
                                 <div
-                                    className="flex flex-col md:flex-row md:items-center justify-between gap-4"
+                                    className="flex flex-col lg:flex-row lg:items-center justify-between gap-4"
                                     data-oid="t3:-.-w"
                                 >
                                     {/* Results Counter */}
-                                    <div className="flex items-center" data-oid="2ef8icm">
+                                    <div
+                                        className="flex flex-col sm:flex-row sm:items-center gap-2"
+                                        data-oid="2ef8icm"
+                                    >
                                         <span
-                                            className="text-lg font-semibold text-gray-800"
+                                            className="text-xl font-bold text-gray-800"
                                             data-oid="rtd9e2z"
                                         >
                                             {filteredJobs.length.toLocaleString()} Jobs Found
                                         </span>
                                         {(searchQuery || searchLocation) && (
                                             <span
-                                                className="ml-2 text-sm text-gray-600"
+                                                className="text-sm text-gray-600 bg-blue-50 px-3 py-1 rounded-full"
                                                 data-oid="hw28a:s"
                                             >
                                                 for "{searchQuery}"{' '}
@@ -793,11 +796,14 @@ export default function JobsPage() {
                                         )}
                                     </div>
 
-                                    <div className="flex items-center gap-4" data-oid="umi2odv">
+                                    <div
+                                        className="flex flex-col sm:flex-row items-start sm:items-center gap-4"
+                                        data-oid="umi2odv"
+                                    >
                                         {/* Sort Options */}
                                         <div className="flex items-center gap-2" data-oid=":c:ya1l">
                                             <label
-                                                className="text-sm font-medium text-gray-700"
+                                                className="text-sm font-medium text-gray-700 whitespace-nowrap"
                                                 data-oid="3u7ry_m"
                                             >
                                                 Sort by:
@@ -805,7 +811,7 @@ export default function JobsPage() {
                                             <select
                                                 value={sortBy}
                                                 onChange={(e) => setSortBy(e.target.value)}
-                                                className="px-3 py-1 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
+                                                className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent bg-white min-w-[120px]"
                                                 data-oid=":egpruj"
                                             >
                                                 <option value="relevance" data-oid="n3kxvvw">
@@ -887,16 +893,16 @@ export default function JobsPage() {
 
                             {/* Job Alerts Section */}
                             <div
-                                className="bg-gradient-to-r from-[hsl(196,80%,45%)]/10 to-[hsl(175,70%,41%)]/10 backdrop-blur-sm rounded-xl border border-[hsl(196,80%,45%)]/20 p-6 mb-6"
+                                className="bg-gradient-to-r from-[hsl(196,80%,45%)]/10 to-[hsl(175,70%,41%)]/10 backdrop-blur-sm rounded-xl border border-[hsl(196,80%,45%)]/20 p-6 mb-8"
                                 data-oid="doppvdz"
                             >
                                 <div
-                                    className="flex items-center justify-between"
+                                    className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
                                     data-oid="vuidgrq"
                                 >
-                                    <div className="flex items-center" data-oid="zpucu2g">
+                                    <div className="flex items-start gap-4" data-oid="zpucu2g">
                                         <div
-                                            className="bg-[hsl(196,80%,45%)] p-3 rounded-full mr-4"
+                                            className="bg-[hsl(196,80%,45%)] p-3 rounded-full flex-shrink-0"
                                             data-oid="dhmshrl"
                                         >
                                             <svg
@@ -917,19 +923,19 @@ export default function JobsPage() {
                                         </div>
                                         <div data-oid="u13:x89">
                                             <h3
-                                                className="text-lg font-semibold text-gray-800"
+                                                className="text-lg font-semibold text-gray-800 mb-1"
                                                 data-oid="pkmpkam"
                                             >
                                                 Get Job Alerts
                                             </h3>
-                                            <p className="text-gray-600" data-oid="74gdga-">
+                                            <p className="text-gray-600 text-sm" data-oid="74gdga-">
                                                 Never miss a job opportunity that matches your
                                                 profile
                                             </p>
                                         </div>
                                     </div>
                                     <button
-                                        className="px-6 py-3 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white rounded-lg font-medium hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300 transform hover:scale-105"
+                                        className="px-6 py-3 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white rounded-lg font-medium hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300 transform hover:scale-105 whitespace-nowrap"
                                         data-oid="q.v-o5b"
                                     >
                                         Create Alert
@@ -937,17 +943,10 @@ export default function JobsPage() {
                                 </div>
                             </div>
 
-                            {/* Job Cards */}
-                            <div
-                                className={`${viewMode === 'grid' ? 'grid md:grid-cols-2 gap-6' : 'space-y-6'}`}
-                                role="list"
-                                data-oid="pve6zq6"
-                            >
+                            {/* Job Cards Container */}
+                            <div className="space-y-6" data-oid="job-cards-container">
                                 {isLoading ? (
-                                    <div
-                                        className="text-center py-12 col-span-full"
-                                        data-oid="d968i38"
-                                    >
+                                    <div className="text-center py-16" data-oid="d968i38">
                                         <div
                                             className="animate-spin rounded-full h-12 w-12 border-b-2 border-[hsl(196,80%,45%)] mx-auto"
                                             data-oid="an0qohs"
@@ -958,21 +957,29 @@ export default function JobsPage() {
                                     </div>
                                 ) : filteredJobs.length > 0 ? (
                                     <>
-                                        {filteredJobs.slice(0, visibleJobs).map((job) => (
-                                            <JobCard
-                                                key={job.id}
-                                                job={job}
-                                                viewMode={viewMode}
-                                                data-oid="8xcc37q"
-                                            />
-                                        ))}
+                                        {/* Job Cards Grid/List */}
+                                        <div
+                                            className={`${
+                                                viewMode === 'grid'
+                                                    ? 'grid grid-cols-1 xl:grid-cols-2 gap-6'
+                                                    : 'space-y-6'
+                                            }`}
+                                            role="list"
+                                            data-oid="pve6zq6"
+                                        >
+                                            {filteredJobs.slice(0, visibleJobs).map((job) => (
+                                                <JobCard
+                                                    key={job.id}
+                                                    job={job}
+                                                    viewMode={viewMode}
+                                                    data-oid="8xcc37q"
+                                                />
+                                            ))}
+                                        </div>
 
                                         {/* Load More Button */}
                                         {visibleJobs < filteredJobs.length && (
-                                            <div
-                                                className="text-center py-8 col-span-full"
-                                                data-oid="9vdw.o7"
-                                            >
+                                            <div className="text-center py-8" data-oid="9vdw.o7">
                                                 <button
                                                     onClick={loadMoreJobs}
                                                     className="px-8 py-3 bg-white border-2 border-[hsl(196,80%,45%)] text-[hsl(196,80%,45%)] rounded-lg font-medium hover:bg-[hsl(196,80%,45%)] hover:text-white transition-all duration-300 transform hover:scale-105"
@@ -985,12 +992,9 @@ export default function JobsPage() {
                                         )}
                                     </>
                                 ) : (
-                                    <div
-                                        className="text-center py-12 col-span-full"
-                                        data-oid="_eodaxy"
-                                    >
+                                    <div className="text-center py-16" data-oid="_eodaxy">
                                         <div
-                                            className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4"
+                                            className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6"
                                             data-oid="p3v7.9_"
                                         >
                                             <svg
@@ -1015,12 +1019,12 @@ export default function JobsPage() {
                                         >
                                             No jobs found
                                         </h3>
-                                        <p className="text-gray-600 mb-4" data-oid="yf3o.4z">
+                                        <p className="text-gray-600 mb-6" data-oid="yf3o.4z">
                                             Try adjusting your filters or search criteria
                                         </p>
                                         <button
                                             onClick={resetFilters}
-                                            className="px-4 py-2 bg-[hsl(196,80%,45%)] text-white rounded-md hover:bg-[hsl(196,80%,40%)] transition-colors duration-200"
+                                            className="px-6 py-3 bg-[hsl(196,80%,45%)] text-white rounded-lg hover:bg-[hsl(196,80%,40%)] transition-colors duration-200 font-medium"
                                             data-oid="cnr4w2:"
                                         >
                                             Reset Filters

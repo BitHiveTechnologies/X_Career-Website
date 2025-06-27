@@ -85,70 +85,61 @@ export default function JobCard({ job, viewMode = 'list' }: JobCardProps) {
                 </div>
             )}
 
-            {/* Header Row */}
-            <div
-                className={`flex ${viewMode === 'grid' ? 'flex-col' : 'justify-between items-start'} mb-4 mt-2`}
-                data-oid="uatq-j3"
-            >
-                <div className="flex-1" data-oid="dqihwx5">
-                    <div className="flex items-start justify-between mb-2" data-oid="y3nae14">
-                        <div className="flex-1" data-oid="m2mzoqi">
-                            <h3
-                                className="text-xl font-bold text-gray-800 mb-1 group-hover:text-[hsl(196,80%,45%)] transition-colors duration-300"
-                                data-oid="jb838w2"
+            {/* Header Section */}
+            <div className="mb-6" data-oid="header-section">
+                <div className="flex items-start justify-between mb-3" data-oid="title-row">
+                    <div className="flex-1 min-w-0" data-oid="title-content">
+                        <h3
+                            className="text-xl font-bold text-gray-800 mb-2 group-hover:text-[hsl(196,80%,45%)] transition-colors duration-300 line-clamp-2"
+                            data-oid="jb838w2"
+                        >
+                            {job.title}
+                        </h3>
+                        <div
+                            className="flex flex-wrap items-center gap-2 mb-2"
+                            data-oid="company-info"
+                        >
+                            <p
+                                className="text-[hsl(196,80%,45%)] font-semibold text-lg"
+                                data-oid="z1pww_x"
                             >
-                                {job.title}
-                            </h3>
-                            <div className="flex items-center gap-2 mb-1" data-oid="camgszv">
-                                <p
-                                    className="text-[hsl(196,80%,45%)] font-semibold text-lg"
-                                    data-oid="z1pww_x"
+                                {job.company}
+                            </p>
+                            {job.companySize && (
+                                <span
+                                    className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full"
+                                    data-oid="gg-hbn7"
                                 >
-                                    {job.company}
-                                </p>
-                                {job.companySize && (
-                                    <span
-                                        className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded"
-                                        data-oid="gg-hbn7"
-                                    >
-                                        {job.companySize} employees
-                                    </span>
-                                )}
-                            </div>
-                            {job.industry && (
-                                <p className="text-sm text-gray-600 mb-1" data-oid=":y3pyez">
-                                    {job.industry} • {job.companyType}
-                                </p>
+                                    {job.companySize} employees
+                                </span>
                             )}
                         </div>
-                    </div>
-
-                    {/* Salary and Applicant Count */}
-                    <div className="flex items-center justify-between mb-3" data-oid="cf2_wky">
-                        {job.salary && (
-                            <p className="text-green-600 font-medium text-sm" data-oid="9.s4r85">
-                                💰 {job.salary}
-                            </p>
-                        )}
-                        {job.applicantCount && (
-                            <p
-                                className="text-xs text-gray-500 bg-blue-50 px-2 py-1 rounded"
-                                data-oid="0qh1g7p"
-                            >
-                                👥 {job.applicantCount} applicants
+                        {job.industry && (
+                            <p className="text-sm text-gray-600" data-oid=":y3pyez">
+                                {job.industry} • {job.companyType}
                             </p>
                         )}
                     </div>
                 </div>
 
-                {viewMode === 'list' && (
-                    <button
-                        className="px-6 py-2 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white rounded-md font-medium hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300 transform hover:scale-105 ml-4"
-                        data-oid="rx6mg22"
-                    >
-                        Apply Now
-                    </button>
-                )}
+                {/* Salary and Applicant Count */}
+                <div className="flex flex-wrap items-center gap-4 mb-4" data-oid="cf2_wky">
+                    {job.salary && (
+                        <div className="flex items-center gap-1" data-oid="salary-info">
+                            <span className="text-green-600 font-medium text-sm" data-oid="9.s4r85">
+                                💰 {job.salary}
+                            </span>
+                        </div>
+                    )}
+                    {job.applicantCount && (
+                        <span
+                            className="text-xs text-gray-500 bg-blue-50 px-3 py-1 rounded-full"
+                            data-oid="0qh1g7p"
+                        >
+                            👥 {job.applicantCount} applicants
+                        </span>
+                    )}
+                </div>
             </div>
 
             {/* Details Row */}

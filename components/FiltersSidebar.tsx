@@ -300,24 +300,13 @@ export default function FiltersSidebar({ filters, onFilterChange, onReset }: Fil
                 </div>
 
                 {/* Action Buttons */}
-                <div className="space-y-3 pt-4 border-t border-gray-200" data-oid="vhhugu6">
-                    <button
-                        onClick={() => {
-                            // Apply filters - this is handled automatically by the parent component
-                            // You could add additional logic here if needed
-                        }}
-                        className="w-full px-4 py-3 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white rounded-md font-medium hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300 transform hover:translate-y-[-1px] hover:shadow-lg"
-                        data-oid="eocga9a"
-                    >
-                        Apply Filters
-                    </button>
-
+                <div className="space-y-3 pt-6 border-t border-gray-200" data-oid="vhhugu6">
                     <button
                         onClick={onReset}
-                        className="w-full px-4 py-2 text-[hsl(196,80%,45%)] border border-[hsl(196,80%,45%)] rounded-md font-medium hover:bg-[hsl(196,80%,45%)]/10 transition-all duration-300"
+                        className="w-full px-4 py-3 text-[hsl(196,80%,45%)] border border-[hsl(196,80%,45%)] rounded-lg font-medium hover:bg-[hsl(196,80%,45%)]/10 transition-all duration-300"
                         data-oid="w0wntnq"
                     >
-                        Reset Filters
+                        Reset All Filters
                     </button>
                 </div>
 
