@@ -5,9 +5,10 @@ import { Job } from '@/app/jobs/page';
 
 interface JobCardProps {
     job: Job;
+    viewMode?: 'grid' | 'list';
 }
 
-export default function JobCard({ job }: JobCardProps) {
+export default function JobCard({ job, viewMode = 'list' }: JobCardProps) {
     const [isSaved, setIsSaved] = useState(false);
 
     const formatDate = (dateString: string) => {
@@ -43,21 +44,28 @@ export default function JobCard({ job }: JobCardProps) {
 
     return (
         <div
-            className="bg-white/80 backdrop-blur-sm rounded-xl shadow-md border border-[hsl(210,30%,95%)] p-6 hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 hover:border-[hsl(196,80%,45%)] relative overflow-hidden group"
+            className={`bg-white/80 backdrop-blur-sm rounded-xl shadow-md border border-[hsl(210,30%,95%)] p-6 hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 hover:border-[hsl(196,80%,45%)] relative overflow-hidden group ${
+                viewMode === 'grid' ? 'h-full' : ''
+            }`}
             role="listitem"
             data-oid="9uyuq.e"
         >
-            {/* Featured Badge */}
-            {job.isFeatured && (
-                <div className="absolute top-4 right-4" data-oid="wex-36r">
-                    <span
-                        className="bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white text-xs font-bold px-3 py-1 rounded-full"
-                        data-oid="bl24cj7"
-                    >
-                        FEATURED
+            {/* Badges Container */}
+            <div className="absolute top-4 right-4 flex flex-col gap-2" data-oid="badges-container">
+                {/* Urgent Hiring Badge */}
+                {job.isUrgent && (
+                    <span className="bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full animate-pulse shadow-lg">
+                        🔥 URGENT HIRING
                     </span>
-                </div>
-            )}
+                )}
+
+                {/* Featured Badge */}
+                {job.isFeatured && (
+                    <span className="bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white text-xs font-bold px-3 py-1 rounded-full">
+                        ⭐ FEATURED
+                    </span>
+                )}
+            </div>
 
             {/* Remote Badge */}
             {job.isRemote && (
@@ -66,35 +74,69 @@ export default function JobCard({ job }: JobCardProps) {
                         className="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-1 rounded-full"
                         data-oid="4gpsu5t"
                     >
-                        Remote
+                        🏠 Remote
                     </span>
                 </div>
             )}
 
             {/* Header Row */}
-            <div className="flex justify-between items-start mb-4 mt-2" data-oid="uatq-j3">
+            <div
+                className={`flex ${viewMode === 'grid' ? 'flex-col' : 'justify-between items-start'} mb-4 mt-2`}
+                data-oid="uatq-j3"
+            >
                 <div className="flex-1" data-oid="dqihwx5">
-                    <h3
-                        className="text-xl font-bold text-gray-800 mb-1 group-hover:text-[hsl(196,80%,45%)] transition-colors duration-300"
-                        data-oid="jb838w2"
-                    >
-                        {job.title}
-                    </h3>
-                    <p className="text-[hsl(196,80%,45%)] font-semibold text-lg" data-oid="z1pww_x">
-                        {job.company}
-                    </p>
-                    {job.salary && (
-                        <p className="text-green-600 font-medium text-sm mt-1" data-oid="9.s4r85">
-                            {job.salary}
-                        </p>
-                    )}
+                    <div className="flex items-start justify-between mb-2">
+                        <div className="flex-1">
+                            <h3
+                                className="text-xl font-bold text-gray-800 mb-1 group-hover:text-[hsl(196,80%,45%)] transition-colors duration-300"
+                                data-oid="jb838w2"
+                            >
+                                {job.title}
+                            </h3>
+                            <div className="flex items-center gap-2 mb-1">
+                                <p
+                                    className="text-[hsl(196,80%,45%)] font-semibold text-lg"
+                                    data-oid="z1pww_x"
+                                >
+                                    {job.company}
+                                </p>
+                                {job.companySize && (
+                                    <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">
+                                        {job.companySize} employees
+                                    </span>
+                                )}
+                            </div>
+                            {job.industry && (
+                                <p className="text-sm text-gray-600 mb-1">
+                                    {job.industry} • {job.companyType}
+                                </p>
+                            )}
+                        </div>
+                    </div>
+
+                    {/* Salary and Applicant Count */}
+                    <div className="flex items-center justify-between mb-3">
+                        {job.salary && (
+                            <p className="text-green-600 font-medium text-sm" data-oid="9.s4r85">
+                                💰 {job.salary}
+                            </p>
+                        )}
+                        {job.applicantCount && (
+                            <p className="text-xs text-gray-500 bg-blue-50 px-2 py-1 rounded">
+                                👥 {job.applicantCount} applicants
+                            </p>
+                        )}
+                    </div>
                 </div>
-                <button
-                    className="px-6 py-2 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white rounded-md font-medium hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300 transform hover:scale-105 ml-4"
-                    data-oid="rx6mg22"
-                >
-                    Apply Now
-                </button>
+
+                {viewMode === 'list' && (
+                    <button
+                        className="px-6 py-2 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white rounded-md font-medium hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300 transform hover:scale-105 ml-4"
+                        data-oid="rx6mg22"
+                    >
+                        Apply Now
+                    </button>
+                )}
             </div>
 
             {/* Details Row */}
@@ -171,6 +213,43 @@ export default function JobCard({ job }: JobCardProps) {
                 </span>
             </div>
 
+            {/* Benefits Preview */}
+            {job.benefits && job.benefits.length > 0 && (
+                <div className="mb-4">
+                    <div className="flex items-center mb-2">
+                        <svg
+                            className="h-4 w-4 mr-2 text-[hsl(196,80%,45%)]"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"
+                            />
+                        </svg>
+                        <span className="text-sm font-medium text-gray-700">Benefits:</span>
+                    </div>
+                    <div className="flex flex-wrap gap-1">
+                        {job.benefits.slice(0, 3).map((benefit, index) => (
+                            <span
+                                key={index}
+                                className="bg-green-50 text-green-700 text-xs px-2 py-1 rounded"
+                            >
+                                {benefit}
+                            </span>
+                        ))}
+                        {job.benefits.length > 3 && (
+                            <span className="text-xs text-gray-500 px-2 py-1">
+                                +{job.benefits.length - 3} more
+                            </span>
+                        )}
+                    </div>
+                </div>
+            )}
+
             {/* Footer Row */}
             <div className="flex justify-between items-end" data-oid="rbeqd-:">
                 <div className="flex-1" data-oid="wegn.pg">
@@ -234,7 +313,16 @@ export default function JobCard({ job }: JobCardProps) {
                 </div>
 
                 {/* Action Buttons */}
-                <div className="flex items-center space-x-3 ml-4" data-oid="0wduk1d">
+                <div
+                    className={`flex items-center ${viewMode === 'grid' ? 'justify-between' : 'space-x-3 ml-4'}`}
+                    data-oid="0wduk1d"
+                >
+                    {viewMode === 'grid' && (
+                        <button className="flex-1 px-4 py-2 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white rounded-md font-medium hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300 transform hover:scale-105 mr-3">
+                            Apply Now
+                        </button>
+                    )}
+
                     <button
                         className="px-4 py-2 border border-[hsl(196,80%,45%)] text-[hsl(196,80%,45%)] rounded-md text-sm font-medium hover:bg-[hsl(196,80%,45%)]/10 transition-all duration-300"
                         data-oid="ut:j2g5"

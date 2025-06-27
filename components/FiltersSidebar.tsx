@@ -173,6 +173,88 @@ export default function FiltersSidebar({ filters, onFilterChange, onReset }: Fil
                     </select>
                 </div>
 
+                {/* Salary Range Filter */}
+                <div data-oid="xptkmnb">
+                    <label
+                        className="block text-sm font-medium text-gray-700 mb-3"
+                        data-oid="2bj7_ug"
+                    >
+                        Salary Range (LPA)
+                    </label>
+                    <div className="space-y-2" data-oid="4u4hcj0">
+                        {[
+                            { value: '', label: 'Any Salary' },
+                            { value: '0-5', label: '₹0-5 LPA' },
+                            { value: '5-10', label: '₹5-10 LPA' },
+                            { value: '10-20', label: '₹10-20 LPA' },
+                            { value: '20+', label: '₹20+ LPA' },
+                        ].map((range) => (
+                            <label
+                                key={range.value}
+                                className="flex items-center"
+                                data-oid="2xv3j:n"
+                            >
+                                <input
+                                    type="radio"
+                                    name="salaryRange"
+                                    value={range.value}
+                                    checked={filters.salaryRange === range.value}
+                                    onChange={(e) =>
+                                        handleInputChange('salaryRange', e.target.value)
+                                    }
+                                    className="mr-2 text-[hsl(196,80%,45%)] focus:ring-[hsl(196,80%,45%)]"
+                                    data-oid="naozext"
+                                />
+
+                                <span className="text-sm text-gray-700" data-oid="2ba7yv0">
+                                    {range.label}
+                                </span>
+                            </label>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Company Type Filter */}
+                <div data-oid="fbtc:75">
+                    <label
+                        className="block text-sm font-medium text-gray-700 mb-3"
+                        data-oid="bz1bs9g"
+                    >
+                        Company Type
+                    </label>
+                    <div className="space-y-2" data-oid="awo6goo">
+                        {[
+                            { value: '', label: 'All Companies' },
+                            { value: 'Startup', label: 'Startup' },
+                            { value: 'MNC', label: 'MNC' },
+                            { value: 'Product', label: 'Product Company' },
+                            { value: 'Service', label: 'Service Company' },
+                        ].map((type) => (
+                            <label
+                                key={type.value}
+                                className="flex items-center"
+                                data-oid="z.uu07z"
+                            >
+                                <input
+                                    type="radio"
+                                    name="companyType"
+                                    value={type.value}
+                                    checked={filters.companyType === type.value}
+                                    onChange={(e) =>
+                                        handleInputChange('companyType', e.target.value)
+                                    }
+                                    className="mr-2 text-[hsl(196,80%,45%)] focus:ring-[hsl(196,80%,45%)]"
+                                    data-oid="-o05ihf"
+                                />
+
+                                <span className="text-sm text-gray-700" data-oid="rjos9p3">
+                                    {type.label}
+                                </span>
+                            </label>
+                        ))}
+                    </div>
+                </div>
+
                 {/* Skills Filter */}
                 <div data-oid="417:cnd">
                     <label
@@ -250,7 +332,7 @@ export default function FiltersSidebar({ filters, onFilterChange, onReset }: Fil
                                 onFilterChange({
                                     ...filters,
                                     jobType: 'Full-time',
-                                    experienceLevel: '0-1 years',
+                                    experienceLevel: '0-2 years',
                                 })
                             }
                             className="w-full text-left px-3 py-2 text-sm text-gray-600 hover:text-[hsl(196,80%,45%)] hover:bg-blue-50 rounded-md transition-colors duration-200"
@@ -264,6 +346,20 @@ export default function FiltersSidebar({ filters, onFilterChange, onReset }: Fil
                             data-oid="p-olx.u"
                         >
                             🏠 Remote Jobs
+                        </button>
+                        <button
+                            onClick={() => onFilterChange({ ...filters, salaryRange: '10-20' })}
+                            className="w-full text-left px-3 py-2 text-sm text-gray-600 hover:text-[hsl(196,80%,45%)] hover:bg-blue-50 rounded-md transition-colors duration-200"
+                            data-oid="km4c25l"
+                        >
+                            💰 High Salary (10-20 LPA)
+                        </button>
+                        <button
+                            onClick={() => onFilterChange({ ...filters, companyType: 'Startup' })}
+                            className="w-full text-left px-3 py-2 text-sm text-gray-600 hover:text-[hsl(196,80%,45%)] hover:bg-blue-50 rounded-md transition-colors duration-200"
+                            data-oid="nf2gg3."
+                        >
+                            🚀 Startup Jobs
                         </button>
                         <button
                             onClick={() => onFilterChange({ ...filters, jobType: 'Internship' })}

@@ -103,6 +103,22 @@
         background-size: 200% 100%;
         animation: shine 3s infinite;
     }
+
+    @keyframes urgent-pulse {
+        0%,
+        100% {
+            transform: scale(1);
+            box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+        }
+        50% {
+            transform: scale(1.05);
+            box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
+        }
+    }
+
+    .animate-urgent-pulse {
+        animation: urgent-pulse 2s infinite;
+    }
 }
 
 @layer base {
