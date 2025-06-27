@@ -112,7 +112,7 @@ export default function JobCard({ job, viewMode = 'list' }: JobCardProps) {
                             className="text-xl font-bold text-gray-800 mb-2 group-hover:text-[hsl(196,80%,45%)] transition-colors duration-300 line-clamp-2"
                             data-oid="4nbj-ow"
                         >
-                            <br/>
+                            <br data-oid="pap-d1_" />
                             {job.title}
                         </h3>
                         <div className="flex flex-wrap items-center gap-2 mb-2" data-oid="scvav9n">
