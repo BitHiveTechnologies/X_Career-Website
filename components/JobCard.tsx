@@ -54,14 +54,20 @@ export default function JobCard({ job, viewMode = 'list' }: JobCardProps) {
             <div className="absolute top-4 right-4 flex flex-col gap-2" data-oid="badges-container">
                 {/* Urgent Hiring Badge */}
                 {job.isUrgent && (
-                    <span className="bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full animate-pulse shadow-lg">
+                    <span
+                        className="bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full animate-pulse shadow-lg"
+                        data-oid=".1-vwq9"
+                    >
                         🔥 URGENT HIRING
                     </span>
                 )}
 
                 {/* Featured Badge */}
                 {job.isFeatured && (
-                    <span className="bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white text-xs font-bold px-3 py-1 rounded-full">
+                    <span
+                        className="bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white text-xs font-bold px-3 py-1 rounded-full"
+                        data-oid="3p-9w9n"
+                    >
                         ⭐ FEATURED
                     </span>
                 )}
@@ -85,15 +91,15 @@ export default function JobCard({ job, viewMode = 'list' }: JobCardProps) {
                 data-oid="uatq-j3"
             >
                 <div className="flex-1" data-oid="dqihwx5">
-                    <div className="flex items-start justify-between mb-2">
-                        <div className="flex-1">
+                    <div className="flex items-start justify-between mb-2" data-oid="y3nae14">
+                        <div className="flex-1" data-oid="m2mzoqi">
                             <h3
                                 className="text-xl font-bold text-gray-800 mb-1 group-hover:text-[hsl(196,80%,45%)] transition-colors duration-300"
                                 data-oid="jb838w2"
                             >
                                 {job.title}
                             </h3>
-                            <div className="flex items-center gap-2 mb-1">
+                            <div className="flex items-center gap-2 mb-1" data-oid="camgszv">
                                 <p
                                     className="text-[hsl(196,80%,45%)] font-semibold text-lg"
                                     data-oid="z1pww_x"
@@ -101,13 +107,16 @@ export default function JobCard({ job, viewMode = 'list' }: JobCardProps) {
                                     {job.company}
                                 </p>
                                 {job.companySize && (
-                                    <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">
+                                    <span
+                                        className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded"
+                                        data-oid="gg-hbn7"
+                                    >
                                         {job.companySize} employees
                                     </span>
                                 )}
                             </div>
                             {job.industry && (
-                                <p className="text-sm text-gray-600 mb-1">
+                                <p className="text-sm text-gray-600 mb-1" data-oid=":y3pyez">
                                     {job.industry} • {job.companyType}
                                 </p>
                             )}
@@ -115,14 +124,17 @@ export default function JobCard({ job, viewMode = 'list' }: JobCardProps) {
                     </div>
 
                     {/* Salary and Applicant Count */}
-                    <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center justify-between mb-3" data-oid="cf2_wky">
                         {job.salary && (
                             <p className="text-green-600 font-medium text-sm" data-oid="9.s4r85">
                                 💰 {job.salary}
                             </p>
                         )}
                         {job.applicantCount && (
-                            <p className="text-xs text-gray-500 bg-blue-50 px-2 py-1 rounded">
+                            <p
+                                className="text-xs text-gray-500 bg-blue-50 px-2 py-1 rounded"
+                                data-oid="0qh1g7p"
+                            >
                                 👥 {job.applicantCount} applicants
                             </p>
                         )}
@@ -215,34 +227,39 @@ export default function JobCard({ job, viewMode = 'list' }: JobCardProps) {
 
             {/* Benefits Preview */}
             {job.benefits && job.benefits.length > 0 && (
-                <div className="mb-4">
-                    <div className="flex items-center mb-2">
+                <div className="mb-4" data-oid="g-:bdlc">
+                    <div className="flex items-center mb-2" data-oid="_bpy1l4">
                         <svg
                             className="h-4 w-4 mr-2 text-[hsl(196,80%,45%)]"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
+                            data-oid="epx_k:i"
                         >
                             <path
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
                                 strokeWidth="2"
                                 d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"
+                                data-oid="gex.qw7"
                             />
                         </svg>
-                        <span className="text-sm font-medium text-gray-700">Benefits:</span>
+                        <span className="text-sm font-medium text-gray-700" data-oid="r7vn05r">
+                            Benefits:
+                        </span>
                     </div>
-                    <div className="flex flex-wrap gap-1">
+                    <div className="flex flex-wrap gap-1" data-oid="o4y5azr">
                         {job.benefits.slice(0, 3).map((benefit, index) => (
                             <span
                                 key={index}
                                 className="bg-green-50 text-green-700 text-xs px-2 py-1 rounded"
+                                data-oid="g3oraug"
                             >
                                 {benefit}
                             </span>
                         ))}
                         {job.benefits.length > 3 && (
-                            <span className="text-xs text-gray-500 px-2 py-1">
+                            <span className="text-xs text-gray-500 px-2 py-1" data-oid="gu:cxby">
                                 +{job.benefits.length - 3} more
                             </span>
                         )}
@@ -318,7 +335,10 @@ export default function JobCard({ job, viewMode = 'list' }: JobCardProps) {
                     data-oid="0wduk1d"
                 >
                     {viewMode === 'grid' && (
-                        <button className="flex-1 px-4 py-2 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white rounded-md font-medium hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300 transform hover:scale-105 mr-3">
+                        <button
+                            className="flex-1 px-4 py-2 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white rounded-md font-medium hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300 transform hover:scale-105 mr-3"
+                            data-oid="i6_.t92"
+                        >
                             Apply Now
                         </button>
                     )}
