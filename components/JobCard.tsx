@@ -2,6 +2,9 @@
 
 import { useState } from 'react';
 import { Job } from '@/app/jobs/page';
+import JobDetailsModal from './JobDetailsModal';
+import JobApplicationModal from './JobApplicationModal';
+import ApplicationSuccessModal from './ApplicationSuccessModal';
 
 interface JobCardProps {
     job: Job;
@@ -10,6 +13,9 @@ interface JobCardProps {
 
 export default function JobCard({ job, viewMode = 'list' }: JobCardProps) {
     const [isSaved, setIsSaved] = useState(false);
+    const [showDetailsModal, setShowDetailsModal] = useState(false);
+    const [showApplicationModal, setShowApplicationModal] = useState(false);
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
 
     const formatDate = (dateString: string) => {
         const date = new Date(dateString);
@@ -40,6 +46,21 @@ export default function JobCard({ job, viewMode = 'list' }: JobCardProps) {
             navigator.clipboard.writeText(window.location.href + `/${job.id}`);
             // You could show a toast notification here
         }
+    };
+
+    const handleApplyClick = () => {
+        setShowApplicationModal(true);
+    };
+
+    const handleViewDetails = () => {
+        setShowDetailsModal(true);
+    };
+
+    const handleApplicationSubmit = (applicationData: any) => {
+        console.log('Application submitted:', applicationData);
+        // Here you would typically send the data to your backend
+        setShowApplicationModal(false);
+        setShowSuccessModal(true);
     };
 
     return (
@@ -398,6 +419,34 @@ export default function JobCard({ job, viewMode = 'list' }: JobCardProps) {
                 className="absolute inset-0 bg-gradient-to-r from-[hsl(196,80%,45%)]/5 to-[hsl(175,70%,41%)]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-xl"
                 data-oid="137gq.."
             ></div>
+
+            {/* Modals */}
+            <JobDetailsModal
+                job={job}
+                isOpen={showDetailsModal}
+                onClose={() => setShowDetailsModal(false)}
+                onApply={() => {
+                    setShowDetailsModal(false);
+                    setShowApplicationModal(true);
+                }}
+                data-oid="q5b1bw."
+            />
+
+            <JobApplicationModal
+                job={job}
+                isOpen={showApplicationModal}
+                onClose={() => setShowApplicationModal(false)}
+                onSubmit={handleApplicationSubmit}
+                data-oid="v4j1q68"
+            />
+
+            <ApplicationSuccessModal
+                isOpen={showSuccessModal}
+                onClose={() => setShowSuccessModal(false)}
+                jobTitle={job.title}
+                companyName={job.company}
+                data-oid="j8xfd71"
+            />
         </div>
     );
 }
