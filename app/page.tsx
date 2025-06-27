@@ -1490,7 +1490,7 @@ export default function Page() {
                                         </span>
                                         <div className="flex gap-2" data-oid="sxdom-v">
                                             <a
-                                                href="/jobs/frontend-developer"
+                                                href="/jobs/view-details/frontend-developer"
                                                 className="text-blue-800 font-medium inline-flex items-center hover:text-blue-900 transition-all duration-300 text-sm"
                                                 data-oid="pgwmrby"
                                             >
@@ -1520,7 +1520,7 @@ export default function Page() {
                                                 </svg>
                                             </a>
                                             <a
-                                                href="/apply/frontend-developer"
+                                                href="/jobs/apply/frontend-developer"
                                                 className="bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white px-3 py-1 rounded-md font-medium hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300 transform hover:scale-105 text-sm inline-flex items-center gap-1"
                                                 data-oid="ljef2lt"
                                             >
@@ -1626,7 +1626,7 @@ export default function Page() {
                                         </span>
                                         <div className="flex gap-2" data-oid=":egxh4h">
                                             <a
-                                                href="/jobs/backend-engineer"
+                                                href="/jobs/view-details/backend-engineer"
                                                 className="text-blue-800 font-medium inline-flex items-center hover:text-blue-900 transition-all duration-300 text-sm"
                                                 data-oid="2wios.4"
                                             >
@@ -1656,7 +1656,7 @@ export default function Page() {
                                                 </svg>
                                             </a>
                                             <a
-                                                href="/apply/backend-engineer"
+                                                href="/jobs/apply/backend-engineer"
                                                 className="bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white px-3 py-1 rounded-md font-medium hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300 transform hover:scale-105 text-sm inline-flex items-center gap-1"
                                                 data-oid="jp_13kh"
                                             >
@@ -1766,7 +1766,7 @@ export default function Page() {
                                         </span>
                                         <div className="flex gap-2" data-oid="snjvxqk">
                                             <a
-                                                href="/jobs/full-stack-developer"
+                                                href="/jobs/view-details/full-stack-developer"
                                                 className="text-blue-800 font-medium inline-flex items-center hover:text-blue-900 transition-all duration-300 text-sm"
                                                 data-oid=":o:qbk_"
                                             >
@@ -1796,7 +1796,7 @@ export default function Page() {
                                                 </svg>
                                             </a>
                                             <a
-                                                href="/apply/full-stack-developer"
+                                                href="/jobs/apply/full-stack-developer"
                                                 className="bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white px-3 py-1 rounded-md font-medium hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300 transform hover:scale-105 text-sm inline-flex items-center gap-1"
                                                 data-oid="6ltox94"
                                             >
