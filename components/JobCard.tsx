@@ -5,6 +5,7 @@ import { Job } from '@/app/jobs/page';
 import JobDetailsModal from './JobDetailsModal';
 import JobApplicationModal from './JobApplicationModal';
 import ApplicationSuccessModal from './ApplicationSuccessModal';
+import QuickApplyModal from './QuickApplyModal';
 
 interface JobCardProps {
     job: Job;
@@ -15,6 +16,7 @@ export default function JobCard({ job, viewMode = 'list' }: JobCardProps) {
     const [isSaved, setIsSaved] = useState(false);
     const [showDetailsModal, setShowDetailsModal] = useState(false);
     const [showApplicationModal, setShowApplicationModal] = useState(false);
+    const [showQuickApplyModal, setShowQuickApplyModal] = useState(false);
     const [showSuccessModal, setShowSuccessModal] = useState(false);
 
     const formatDate = (dateString: string) => {
@@ -49,6 +51,11 @@ export default function JobCard({ job, viewMode = 'list' }: JobCardProps) {
     };
 
     const handleApplyClick = () => {
+        // Show quick apply modal for faster application
+        setShowQuickApplyModal(true);
+    };
+
+    const handleFullApplicationClick = () => {
         setShowApplicationModal(true);
     };
 
@@ -60,6 +67,7 @@ export default function JobCard({ job, viewMode = 'list' }: JobCardProps) {
         console.log('Application submitted:', applicationData);
         // Here you would typically send the data to your backend
         setShowApplicationModal(false);
+        setShowQuickApplyModal(false);
         setShowSuccessModal(true);
     };
 
@@ -344,19 +352,58 @@ export default function JobCard({ job, viewMode = 'list' }: JobCardProps) {
                     className={`flex items-center ${viewMode === 'grid' ? 'justify-between' : 'space-x-3 ml-4'}`}
                     data-oid="gg6_wjn"
                 >
-                    {viewMode === 'grid' && (
-                        <button
-                            className="flex-1 px-4 py-2 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white rounded-md font-medium hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300 transform hover:scale-105 mr-3"
-                            data-oid="wnsi5dt"
+                    {/* Apply Now Button - Always visible */}
+                    <button
+                        onClick={handleApplyClick}
+                        className={`${viewMode === 'grid' ? 'flex-1 mr-3' : 'flex-1'} px-4 py-2 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white rounded-md font-medium hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center justify-center gap-2`}
+                        data-oid="apply-now-btn"
+                    >
+                        <svg
+                            className="h-4 w-4"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            data-oid="yd3k50c"
                         >
-                            Apply Now
-                        </button>
-                    )}
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                                data-oid="ds1i9xj"
+                            />
+                        </svg>
+                        Apply Now
+                    </button>
 
                     <button
-                        className="px-4 py-2 border border-[hsl(196,80%,45%)] text-[hsl(196,80%,45%)] rounded-md text-sm font-medium hover:bg-[hsl(196,80%,45%)]/10 transition-all duration-300"
+                        onClick={handleViewDetails}
+                        className="px-4 py-2 border border-[hsl(196,80%,45%)] text-[hsl(196,80%,45%)] rounded-md text-sm font-medium hover:bg-[hsl(196,80%,45%)]/10 transition-all duration-300 flex items-center gap-2"
                         data-oid="_2rkimc"
                     >
+                        <svg
+                            className="h-4 w-4"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            data-oid="vmmokgq"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                                data-oid="2:v4tgk"
+                            />
+
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                                data-oid="kqf5xwl"
+                            />
+                        </svg>
                         View Details
                     </button>
 
@@ -428,6 +475,14 @@ export default function JobCard({ job, viewMode = 'list' }: JobCardProps) {
                     setShowApplicationModal(true);
                 }}
                 data-oid="-rphv_8"
+            />
+
+            <QuickApplyModal
+                job={job}
+                isOpen={showQuickApplyModal}
+                onClose={() => setShowQuickApplyModal(false)}
+                onSubmit={handleApplicationSubmit}
+                data-oid="zcv9eo6"
             />
 
             <JobApplicationModal

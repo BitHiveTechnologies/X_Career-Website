@@ -299,6 +299,68 @@ export default function JobDetailsModal({ job, isOpen, onClose, onApply }: JobDe
                                     </div>
                                 </div>
 
+                                {/* Application Deadline & Quick Stats */}
+                                <div className="bg-blue-50 rounded-lg p-4 mb-6">
+                                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                        <div className="text-center">
+                                            <div className="text-2xl font-bold text-blue-600">
+                                                {Math.max(1, Math.floor(Math.random() * 15))} days
+                                            </div>
+                                            <div className="text-sm text-gray-600">
+                                                Application Deadline
+                                            </div>
+                                        </div>
+                                        <div className="text-center">
+                                            <div className="text-2xl font-bold text-green-600">
+                                                {job.isRemote ? 'Remote' : 'On-site'}
+                                            </div>
+                                            <div className="text-sm text-gray-600">Work Mode</div>
+                                        </div>
+                                        <div className="text-center">
+                                            <div className="text-2xl font-bold text-purple-600">
+                                                {Math.floor(Math.random() * 5) + 1}-
+                                                {Math.floor(Math.random() * 3) + 3} rounds
+                                            </div>
+                                            <div className="text-sm text-gray-600">
+                                                Interview Process
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Company Highlights */}
+                                <div className="mb-6">
+                                    <h3 className="text-lg font-semibold text-gray-800 mb-3">
+                                        Why Join {job.company}?
+                                    </h3>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                        <div className="flex items-center gap-3 p-3 bg-green-50 rounded-lg">
+                                            <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                                            <span className="text-gray-700">
+                                                Fast-growing {job.companyType} company
+                                            </span>
+                                        </div>
+                                        <div className="flex items-center gap-3 p-3 bg-blue-50 rounded-lg">
+                                            <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                                            <span className="text-gray-700">
+                                                Learning & development opportunities
+                                            </span>
+                                        </div>
+                                        <div className="flex items-center gap-3 p-3 bg-purple-50 rounded-lg">
+                                            <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                                            <span className="text-gray-700">
+                                                Collaborative work environment
+                                            </span>
+                                        </div>
+                                        <div className="flex items-center gap-3 p-3 bg-orange-50 rounded-lg">
+                                            <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+                                            <span className="text-gray-700">
+                                                Competitive compensation package
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 {/* Benefits */}
                                 {job.benefits && job.benefits.length > 0 && (
                                     <div data-oid="55pnn45">
@@ -476,6 +538,87 @@ export default function JobDetailsModal({ job, isOpen, onClose, onApply }: JobDe
                                                 performance
                                             </span>
                                         </div>
+                                    </div>
+                                </div>
+
+                                {/* Interview Process */}
+                                <div className="mt-6">
+                                    <h3 className="text-lg font-semibold text-gray-800 mb-3">
+                                        Interview Process
+                                    </h3>
+                                    <div className="space-y-4">
+                                        <div className="flex items-center gap-4 p-3 bg-blue-50 rounded-lg">
+                                            <div className="w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                                                1
+                                            </div>
+                                            <div>
+                                                <div className="font-medium text-gray-800">
+                                                    Application Review
+                                                </div>
+                                                <div className="text-sm text-gray-600">
+                                                    Resume and profile screening
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="flex items-center gap-4 p-3 bg-green-50 rounded-lg">
+                                            <div className="w-8 h-8 bg-green-500 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                                                2
+                                            </div>
+                                            <div>
+                                                <div className="font-medium text-gray-800">
+                                                    Technical Assessment
+                                                </div>
+                                                <div className="text-sm text-gray-600">
+                                                    Coding challenge or technical questions
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="flex items-center gap-4 p-3 bg-purple-50 rounded-lg">
+                                            <div className="w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                                                3
+                                            </div>
+                                            <div>
+                                                <div className="font-medium text-gray-800">
+                                                    Technical Interview
+                                                </div>
+                                                <div className="text-sm text-gray-600">
+                                                    Deep dive into technical skills and
+                                                    problem-solving
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="flex items-center gap-4 p-3 bg-orange-50 rounded-lg">
+                                            <div className="w-8 h-8 bg-orange-500 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                                                4
+                                            </div>
+                                            <div>
+                                                <div className="font-medium text-gray-800">
+                                                    HR Interview
+                                                </div>
+                                                <div className="text-sm text-gray-600">
+                                                    Cultural fit and final discussion
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Preferred Skills */}
+                                <div className="mt-6">
+                                    <h3 className="text-lg font-semibold text-gray-800 mb-3">
+                                        Nice to Have Skills
+                                    </h3>
+                                    <div className="flex flex-wrap gap-2">
+                                        {['Git', 'Docker', 'AWS', 'Agile', 'Testing', 'CI/CD'].map(
+                                            (skill, index) => (
+                                                <span
+                                                    key={index}
+                                                    className="bg-gray-100 text-gray-700 text-sm font-medium px-3 py-1 rounded-full border border-gray-300"
+                                                >
+                                                    {skill}
+                                                </span>
+                                            ),
+                                        )}
                                     </div>
                                 </div>
                             </div>
@@ -691,6 +834,104 @@ export default function JobDetailsModal({ job, isOpen, onClose, onApply }: JobDe
                                         </div>
                                     </div>
                                 </div>
+
+                                {/* Office Locations */}
+                                <div className="mt-6">
+                                    <h3 className="text-lg font-semibold text-gray-800 mb-3">
+                                        Office Locations
+                                    </h3>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div className="flex items-center gap-3 p-3 bg-blue-50 rounded-lg">
+                                            <svg
+                                                className="h-5 w-5 text-blue-600"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                viewBox="0 0 24 24"
+                                            >
+                                                <path
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    strokeWidth="2"
+                                                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                                                />
+                                                <path
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    strokeWidth="2"
+                                                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                                                />
+                                            </svg>
+                                            <div>
+                                                <div className="font-medium text-gray-800">
+                                                    Headquarters
+                                                </div>
+                                                <div className="text-sm text-gray-600">
+                                                    {job.location}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {job.isRemote && (
+                                            <div className="flex items-center gap-3 p-3 bg-green-50 rounded-lg">
+                                                <svg
+                                                    className="h-5 w-5 text-green-600"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    viewBox="0 0 24 24"
+                                                >
+                                                    <path
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        strokeWidth="2"
+                                                        d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                                                    />
+                                                </svg>
+                                                <div>
+                                                    <div className="font-medium text-gray-800">
+                                                        Remote Work
+                                                    </div>
+                                                    <div className="text-sm text-gray-600">
+                                                        Work from anywhere
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+
+                                {/* Recent News & Updates */}
+                                <div className="mt-6">
+                                    <h3 className="text-lg font-semibold text-gray-800 mb-3">
+                                        Recent Company Updates
+                                    </h3>
+                                    <div className="space-y-3">
+                                        <div className="p-3 bg-gray-50 rounded-lg border-l-4 border-blue-500">
+                                            <div className="font-medium text-gray-800">
+                                                New Product Launch
+                                            </div>
+                                            <div className="text-sm text-gray-600">
+                                                Recently launched innovative solutions in{' '}
+                                                {job.industry}
+                                            </div>
+                                        </div>
+                                        <div className="p-3 bg-gray-50 rounded-lg border-l-4 border-green-500">
+                                            <div className="font-medium text-gray-800">
+                                                Team Expansion
+                                            </div>
+                                            <div className="text-sm text-gray-600">
+                                                Growing team by 30% this year with focus on tech
+                                                talent
+                                            </div>
+                                        </div>
+                                        <div className="p-3 bg-gray-50 rounded-lg border-l-4 border-purple-500">
+                                            <div className="font-medium text-gray-800">
+                                                Awards & Recognition
+                                            </div>
+                                            <div className="text-sm text-gray-600">
+                                                Recognized as one of the best places to work in tech
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         )}
                     </div>
@@ -715,13 +956,49 @@ export default function JobDetailsModal({ job, isOpen, onClose, onApply }: JobDe
                             </button>
                             <button
                                 onClick={onApply}
-                                className="px-8 py-3 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white rounded-lg font-medium hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300 transform hover:scale-105"
+                                className="px-8 py-3 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white rounded-lg font-medium hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300 transform hover:scale-105 flex items-center gap-2 shadow-lg"
                                 data-oid="ti53tup"
                             >
+                                <svg
+                                    className="h-4 w-4"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                        d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                                    />
+                                </svg>
                                 Apply Now
                             </button>
                         </div>
                     </div>
+                </div>
+
+                {/* Floating Apply Button - appears when scrolling */}
+                <div className="fixed bottom-6 right-6 z-50">
+                    <button
+                        onClick={onApply}
+                        className="px-6 py-3 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white rounded-full font-medium hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300 transform hover:scale-110 shadow-2xl flex items-center gap-2 animate-bounce"
+                    >
+                        <svg
+                            className="h-5 w-5"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M13 10V3L4 14h7v7l9-11h-7z"
+                            />
+                        </svg>
+                        Quick Apply
+                    </button>
                 </div>
             </div>
         </div>

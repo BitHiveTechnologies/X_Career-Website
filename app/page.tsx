@@ -1488,29 +1488,54 @@ export default function Page() {
                                         <span className="text-gray-600" data-oid="q_qeclm">
                                             ₹5-8 LPA
                                         </span>
-                                        <a
-                                            href="/jobs/frontend-developer"
-                                            className="text-blue-800 font-medium inline-flex items-center hover:text-blue-900 transition-all duration-300"
-                                            data-oid="k:34siz"
-                                        >
-                                            Apply Now
-                                            <svg
-                                                className="ml-1 h-4 w-4"
-                                                fill="none"
-                                                stroke="currentColor"
-                                                viewBox="0 0 24 24"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                data-oid="r34v3:h"
+                                        <div className="flex gap-2">
+                                            <a
+                                                href="/jobs/frontend-developer"
+                                                className="text-blue-800 font-medium inline-flex items-center hover:text-blue-900 transition-all duration-300 text-sm"
+                                                data-oid="view-details-btn"
                                             >
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    strokeWidth="2"
-                                                    d="M14 5l7 7m0 0l-7 7m7-7H3"
-                                                    data-oid="tkgclx2"
-                                                ></path>
-                                            </svg>
-                                        </a>
+                                                View Details
+                                                <svg
+                                                    className="ml-1 h-3 w-3"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    viewBox="0 0 24 24"
+                                                >
+                                                    <path
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        strokeWidth="2"
+                                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                                                    />
+                                                    <path
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        strokeWidth="2"
+                                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                                                    />
+                                                </svg>
+                                            </a>
+                                            <a
+                                                href="/apply/frontend-developer"
+                                                className="bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white px-3 py-1 rounded-md font-medium hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300 transform hover:scale-105 text-sm inline-flex items-center gap-1"
+                                                data-oid="apply-now-btn"
+                                            >
+                                                <svg
+                                                    className="h-3 w-3"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    viewBox="0 0 24 24"
+                                                >
+                                                    <path
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        strokeWidth="2"
+                                                        d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                                                    />
+                                                </svg>
+                                                Apply Now
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1593,29 +1618,54 @@ export default function Page() {
                                         <span className="text-gray-600" data-oid="ou6zz1s">
                                             ₹8-12 LPA
                                         </span>
-                                        <a
-                                            href="/jobs/backend-engineer"
-                                            className="text-blue-800 font-medium inline-flex items-center hover:text-blue-900 transition-all duration-300"
-                                            data-oid="7ftfbb3"
-                                        >
-                                            Apply Now
-                                            <svg
-                                                className="ml-1 h-4 w-4"
-                                                fill="none"
-                                                stroke="currentColor"
-                                                viewBox="0 0 24 24"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                data-oid="24if-gk"
+                                        <div className="flex gap-2">
+                                            <a
+                                                href="/jobs/backend-engineer"
+                                                className="text-blue-800 font-medium inline-flex items-center hover:text-blue-900 transition-all duration-300 text-sm"
+                                                data-oid="view-details-btn"
                                             >
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    strokeWidth="2"
-                                                    d="M14 5l7 7m0 0l-7 7m7-7H3"
-                                                    data-oid="-so_kr3"
-                                                ></path>
-                                            </svg>
-                                        </a>
+                                                View Details
+                                                <svg
+                                                    className="ml-1 h-3 w-3"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    viewBox="0 0 24 24"
+                                                >
+                                                    <path
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        strokeWidth="2"
+                                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                                                    />
+                                                    <path
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        strokeWidth="2"
+                                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                                                    />
+                                                </svg>
+                                            </a>
+                                            <a
+                                                href="/apply/backend-engineer"
+                                                className="bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white px-3 py-1 rounded-md font-medium hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300 transform hover:scale-105 text-sm inline-flex items-center gap-1"
+                                                data-oid="apply-now-btn"
+                                            >
+                                                <svg
+                                                    className="h-3 w-3"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    viewBox="0 0 24 24"
+                                                >
+                                                    <path
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        strokeWidth="2"
+                                                        d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                                                    />
+                                                </svg>
+                                                Apply Now
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1702,29 +1752,54 @@ export default function Page() {
                                         <span className="text-gray-600" data-oid="bebuel7">
                                             ₹10-15 LPA
                                         </span>
-                                        <a
-                                            href="/jobs/full-stack-developer"
-                                            className="text-blue-800 font-medium inline-flex items-center hover:text-blue-900 transition-all duration-300"
-                                            data-oid="4f9ba9c"
-                                        >
-                                            Apply Now
-                                            <svg
-                                                className="ml-1 h-4 w-4"
-                                                fill="none"
-                                                stroke="currentColor"
-                                                viewBox="0 0 24 24"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                data-oid="54m1.ii"
+                                        <div className="flex gap-2">
+                                            <a
+                                                href="/jobs/full-stack-developer"
+                                                className="text-blue-800 font-medium inline-flex items-center hover:text-blue-900 transition-all duration-300 text-sm"
+                                                data-oid="view-details-btn"
                                             >
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    strokeWidth="2"
-                                                    d="M14 5l7 7m0 0l-7 7m7-7H3"
-                                                    data-oid="qi18y5t"
-                                                ></path>
-                                            </svg>
-                                        </a>
+                                                View Details
+                                                <svg
+                                                    className="ml-1 h-3 w-3"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    viewBox="0 0 24 24"
+                                                >
+                                                    <path
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        strokeWidth="2"
+                                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                                                    />
+                                                    <path
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        strokeWidth="2"
+                                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                                                    />
+                                                </svg>
+                                            </a>
+                                            <a
+                                                href="/apply/full-stack-developer"
+                                                className="bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white px-3 py-1 rounded-md font-medium hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300 transform hover:scale-105 text-sm inline-flex items-center gap-1"
+                                                data-oid="apply-now-btn"
+                                            >
+                                                <svg
+                                                    className="h-3 w-3"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    viewBox="0 0 24 24"
+                                                >
+                                                    <path
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        strokeWidth="2"
+                                                        d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                                                    />
+                                                </svg>
+                                                Apply Now
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
