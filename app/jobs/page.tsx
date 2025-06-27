@@ -48,7 +48,7 @@ export interface Category {
 }
 
 // Enhanced Mock Data with 12 diverse jobs from major Indian companies
-const mockJobs: Job[] = [
+export const mockJobs: Job[] = [
     {
         id: 1,
         title: 'Frontend Developer',

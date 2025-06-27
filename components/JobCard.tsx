@@ -48,13 +48,27 @@ export default function JobCard({ job, viewMode = 'list' }: JobCardProps) {
     };
 
     const handleApplyClick = () => {
-        const jobTitleSlug = job.title.toLowerCase().replace(/\s+/g, '-');
-        window.location.href = `/jobs/apply/${jobTitleSlug}`;
+        const companySlug = job.company
+            .toLowerCase()
+            .replace(/\s+/g, '-')
+            .replace(/[^a-z0-9-]/g, '');
+        const jobTitleSlug = job.title
+            .toLowerCase()
+            .replace(/\s+/g, '-')
+            .replace(/[^a-z0-9-]/g, '');
+        window.location.href = `/jobs/apply/${companySlug}/${jobTitleSlug}`;
     };
 
     const handleViewDetails = () => {
-        const jobTitleSlug = job.title.toLowerCase().replace(/\s+/g, '-');
-        window.location.href = `/jobs/view-details/${jobTitleSlug}`;
+        const companySlug = job.company
+            .toLowerCase()
+            .replace(/\s+/g, '-')
+            .replace(/[^a-z0-9-]/g, '');
+        const jobTitleSlug = job.title
+            .toLowerCase()
+            .replace(/\s+/g, '-')
+            .replace(/[^a-z0-9-]/g, '');
+        window.location.href = `/jobs/view-details/${companySlug}/${jobTitleSlug}`;
     };
 
     const handleApplicationSubmit = (applicationData: any) => {
