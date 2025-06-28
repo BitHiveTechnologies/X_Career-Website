@@ -13,7 +13,7 @@ export default function MainNavbar() {
             viewBox="0 0 120 30"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            data-oid="82vi58."
+            data-oid="r8meblv"
         >
             <path
                 d="M10 5L20 15L10 25"
@@ -21,7 +21,7 @@ export default function MainNavbar() {
                 strokeWidth="3"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                data-oid="-_9t-v_"
+                data-oid="bxg8g-f"
             />
 
             <path
@@ -30,7 +30,7 @@ export default function MainNavbar() {
                 strokeWidth="3"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                data-oid="vv047hj"
+                data-oid=":3olz_."
             />
 
             <text
@@ -40,7 +40,7 @@ export default function MainNavbar() {
                 fontSize="18"
                 fontWeight="bold"
                 fill="#1E3A8A"
-                data-oid="10vhpeh"
+                data-oid="qfyxtpn"
             >
                 Careers
             </text>
@@ -48,58 +48,58 @@ export default function MainNavbar() {
     );
 
     return (
-        <div data-oid="65n.ss9">
+        <div data-oid="pr9h2as">
             <header
                 className="sticky top-0 z-50 bg-gradient-to-r from-blue-200/90 via-blue-300/90 to-blue-200/90 backdrop-blur-md shadow-sm border-b border-blue-300/70"
-                data-oid="0vjb1kg"
+                data-oid="sqby:h_"
             >
-                <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-oid="arwewxa">
-                    <div className="flex justify-between items-center h-16" data-oid="fg6j06-">
+                <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-oid="1aozs9v">
+                    <div className="flex justify-between items-center h-16" data-oid="1erb-_.">
                         {/* Logo */}
-                        <div className="flex-shrink-0" data-oid="ueuvr9f">
-                            <a href="/" className="flex items-center" data-oid="zon-dw.">
-                                <Logo data-oid="33x___y" />
+                        <div className="flex-shrink-0" data-oid="exl.1g0">
+                            <a href="/" className="flex items-center" data-oid="8jighf9">
+                                <Logo data-oid="lr3g7ti" />
                             </a>
                         </div>
 
                         {/* Navigation Links - Hidden on mobile */}
-                        <div className="hidden md:flex items-center space-x-4" data-oid="4-qfmhx">
+                        <div className="hidden md:flex items-center space-x-4" data-oid="4cz47z-">
                             <a
                                 href="/jobs"
                                 className="text-gray-700 hover:text-blue-800 px-3 py-2 text-sm font-medium"
-                                data-oid="p35ii1j"
+                                data-oid="2:bbqwa"
                             >
                                 Jobs
                             </a>
                             <a
                                 href="/internships"
                                 className="text-gray-700 hover:text-blue-800 px-3 py-2 text-sm font-medium transition-all duration-300"
-                                data-oid="cyfax1f"
+                                data-oid="hfaf3xw"
                             >
                                 Internships
                             </a>
                             <a
                                 href="/resume-builder"
                                 className="text-gray-700 hover:text-blue-800 px-3 py-2 text-sm font-medium transition-all duration-300"
-                                data-oid="vgk8jz:"
+                                data-oid="m9rxoqm"
                             >
                                 Resume Builder
                             </a>
                         </div>
 
                         {/* Auth Buttons */}
-                        <div className="flex items-center space-x-3" data-oid="5s6y.8i">
+                        <div className="flex items-center space-x-3" data-oid="t43datn">
                             <Link
                                 href="/login"
                                 className="hidden md:inline-flex items-center px-4 py-2 border border-[hsl(196,80%,45%)] text-sm font-medium rounded-md text-[hsl(196,80%,45%)] hover:bg-gradient-to-r hover:from-[hsl(196,80%,45%)]/10 hover:to-[hsl(196,80%,45%)]/25 transition-all duration-300"
-                                data-oid="0ueein5"
+                                data-oid="i9kxqpt"
                             >
                                 Login
                             </Link>
                             <Link
                                 href="/register"
                                 className="hidden md:inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300"
-                                data-oid="1srw1fp"
+                                data-oid="dio5uj:"
                             >
                                 Register
                             </Link>
@@ -109,21 +109,21 @@ export default function MainNavbar() {
                                 type="button"
                                 onClick={toggleMobileMenu}
                                 className="md:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-blue-800 hover:bg-blue-50"
-                                data-oid="9kso5wh"
+                                data-oid="uut9lfx"
                             >
                                 <svg
                                     className="h-6 w-6"
                                     fill="none"
                                     viewBox="0 0 24 24"
                                     stroke="currentColor"
-                                    data-oid="yig1-qw"
+                                    data-oid="cer5dws"
                                 >
                                     <path
                                         strokeLinecap="round"
                                         strokeLinejoin="round"
                                         strokeWidth="2"
                                         d="M4 6h16M4 12h16M4 18h16"
-                                        data-oid=".p7__zj"
+                                        data-oid="gty73ae"
                                     />
                                 </svg>
                             </button>
@@ -132,44 +132,44 @@ export default function MainNavbar() {
 
                     {/* Mobile menu, show/hide based on menu state */}
                     {mobileMenuOpen && (
-                        <div className="md:hidden" data-oid="70dtysd">
+                        <div className="md:hidden" data-oid="km.2rqm">
                             <div
                                 className="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t border-blue-200"
-                                data-oid="uw0-zyu"
+                                data-oid="4w_j:a9"
                             >
                                 <a
                                     href="/jobs"
                                     className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-800 hover:bg-blue-50"
-                                    data-oid="tmilko."
+                                    data-oid="g:78fgr"
                                 >
                                     Jobs
                                 </a>
                                 <a
                                     href="/internships"
                                     className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-800 hover:bg-blue-50"
-                                    data-oid="dea7:3i"
+                                    data-oid="6y8pbbj"
                                 >
                                     Internships
                                 </a>
                                 <a
                                     href="/resume-builder"
                                     className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-800 hover:bg-blue-50"
-                                    data-oid="1ezq:0:"
+                                    data-oid="q:kea5i"
                                 >
                                     Resume Builder
                                 </a>
-                                <div className="pt-2 space-y-2" data-oid="lv7q86v">
+                                <div className="pt-2 space-y-2" data-oid="h9rjm.2">
                                     <Link
                                         href="/login"
                                         className="block w-full text-center px-4 py-2 border border-[hsl(196,80%,45%)] text-sm font-medium rounded-md text-[hsl(196,80%,45%)] hover:bg-gradient-to-r hover:from-[hsl(196,80%,45%)]/10 hover:to-[hsl(196,80%,45%)]/25 transition-all duration-300"
-                                        data-oid="t3avcv_"
+                                        data-oid="p.p4.:2"
                                     >
                                         Login
                                     </Link>
                                     <Link
                                         href="/register"
                                         className="block w-full text-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300"
-                                        data-oid="nq9g07t"
+                                        data-oid="ojt66:c"
                                     >
                                         Register
                                     </Link>

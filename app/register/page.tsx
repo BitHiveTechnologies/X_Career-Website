@@ -35,60 +35,60 @@ export default function RegisterPage() {
 
     return (
         <>
-            <MainNavbar data-oid="u3wtjet" />
+            <MainNavbar data-oid="is_lby3" />
             <div
                 className="min-h-screen bg-gradient-to-b from-[hsl(204, 100.00%, 50.00%)] to-[hsl(162, 100.00%, 50.00%)] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
-                data-oid="s:bwom4"
+                data-oid="5ov5h:z"
             >
                 {/* Animated background elements */}
-                <div className="fixed inset-0 overflow-hidden -z-10" data-oid="ts.6pfk">
+                <div className="fixed inset-0 overflow-hidden -z-10" data-oid="vhp131z">
                     <div
                         className="absolute -top-20 -left-20 w-96 h-96 bg-[hsl(196,80%,65%)] opacity-50 rounded-full blur-3xl animate-blob"
-                        data-oid="y3tnhbz"
+                        data-oid="ctto2mv"
                     ></div>
                     <div
                         className="absolute top-40 right-20 w-96 h-96 bg-[hsl(210,70%,65%)] opacity-50 rounded-full blur-3xl animate-blob animation-delay-2000"
-                        data-oid="03t9jcw"
+                        data-oid="0:nh1d8"
                     ></div>
                     <div
                         className="absolute bottom-10 left-1/3 w-96 h-96 bg-[hsl(175,70%,61%)] opacity-40 rounded-full blur-3xl animate-blob animation-delay-4000"
-                        data-oid="_0s-.l0"
+                        data-oid="048t4vp"
                     ></div>
                 </div>
 
-                <div className="w-full sm:mx-auto sm:max-w-md z-10 -mt-20" data-oid="ih.32cf">
-                    <div className="text-center mb-6" data-oid="xa9eh.:">
-                        <h2 className="text-3xl font-extrabold text-gray-800" data-oid="3ycv-b9">
+                <div className="w-full sm:mx-auto sm:max-w-md z-10 -mt-20" data-oid="ot-qlq_">
+                    <div className="text-center mb-6" data-oid="b3-4a7h">
+                        <h2 className="text-3xl font-extrabold text-gray-800" data-oid="qfnoq2r">
                             Create an account
                         </h2>
-                        <p className="mt-2 text-sm text-gray-600" data-oid="u71k61l">
+                        <p className="mt-2 text-sm text-gray-600" data-oid="ul.a52k">
                             Sign up to get started with CareerX
                         </p>
                     </div>
 
                     <div
                         className="bg-white/80 backdrop-blur-md py-8 px-6 shadow-xl rounded-xl border border-[hsl(210,30%,95%)] sm:px-10 transform transition-all duration-500 hover:shadow-2xl"
-                        data-oid="7sdmzc_"
+                        data-oid="6au1cuo"
                     >
                         {error && (
                             <div
                                 className="mb-4 p-3 bg-red-50 text-red-700 text-sm rounded-md border border-red-200"
-                                data-oid="0g4gvjt"
+                                data-oid="cbc2iu3"
                             >
                                 {error}
                             </div>
                         )}
 
-                        <form className="space-y-6" onSubmit={handleSubmit} data-oid="1jqxryw">
-                            <div data-oid="n6f_-w-">
+                        <form className="space-y-6" onSubmit={handleSubmit} data-oid=":c2nopa">
+                            <div data-oid="259jm4g">
                                 <label
                                     htmlFor="name"
                                     className="block text-sm font-medium text-gray-700"
-                                    data-oid="qbg9-ig"
+                                    data-oid="7c_xxjj"
                                 >
                                     Full Name
                                 </label>
-                                <div className="mt-1" data-oid="9snsz76">
+                                <div className="mt-1" data-oid="6:6_qxu">
                                     <input
                                         id="name"
                                         name="name"
@@ -99,20 +99,20 @@ export default function RegisterPage() {
                                         onChange={(e) => setName(e.target.value)}
                                         className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[hsl(196,80%,45%)] focus:border-[hsl(196,80%,45%)] transition-colors duration-200"
                                         placeholder="John Doe"
-                                        data-oid="6wi9wns"
+                                        data-oid="4umc-qz"
                                     />
                                 </div>
                             </div>
 
-                            <div data-oid="soildes">
+                            <div data-oid="6mk54:_">
                                 <label
                                     htmlFor="phone"
                                     className="block text-sm font-medium text-gray-700"
-                                    data-oid="adntnoe"
+                                    data-oid="fd-d3e2"
                                 >
                                     Phone Number
                                 </label>
-                                <div className="mt-1" data-oid="ej2ahnc">
+                                <div className="mt-1" data-oid="scnel78">
                                     <input
                                         id="phone"
                                         name="phone"
@@ -123,20 +123,20 @@ export default function RegisterPage() {
                                         onChange={(e) => setPhone(e.target.value)}
                                         className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[hsl(196,80%,45%)] focus:border-[hsl(196,80%,45%)] transition-colors duration-200"
                                         placeholder="+1 (123) 456-7890"
-                                        data-oid="ie8:dnf"
+                                        data-oid="28lq8_c"
                                     />
                                 </div>
                             </div>
 
-                            <div data-oid="id6uy9.">
+                            <div data-oid="cqijibw">
                                 <label
                                     htmlFor="email"
                                     className="block text-sm font-medium text-gray-700"
-                                    data-oid="dbx06rj"
+                                    data-oid="s-7-wnv"
                                 >
                                     Email address
                                 </label>
-                                <div className="mt-1" data-oid="rl:jxq6">
+                                <div className="mt-1" data-oid="17rvtvh">
                                     <input
                                         id="email"
                                         name="email"
@@ -147,20 +147,20 @@ export default function RegisterPage() {
                                         onChange={(e) => setEmail(e.target.value)}
                                         className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[hsl(196,80%,45%)] focus:border-[hsl(196,80%,45%)] transition-colors duration-200"
                                         placeholder="you@example.com"
-                                        data-oid="ywvsia3"
+                                        data-oid="iy3uf50"
                                     />
                                 </div>
                             </div>
 
-                            <div data-oid="j3:u8qn">
+                            <div data-oid="-jvtvfz">
                                 <label
                                     htmlFor="password"
                                     className="block text-sm font-medium text-gray-700"
-                                    data-oid="_t64uuj"
+                                    data-oid="7he4b_5"
                                 >
                                     Password
                                 </label>
-                                <div className="mt-1" data-oid=":x6qe5v">
+                                <div className="mt-1" data-oid="j7jn7u0">
                                     <input
                                         id="password"
                                         name="password"
@@ -171,17 +171,17 @@ export default function RegisterPage() {
                                         onChange={(e) => setPassword(e.target.value)}
                                         className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[hsl(196,80%,45%)] focus:border-[hsl(196,80%,45%)] transition-colors duration-200"
                                         placeholder="••••••••"
-                                        data-oid="we4kdju"
+                                        data-oid="r6rm47k"
                                     />
                                 </div>
                             </div>
 
-                            <div data-oid="nf1kzqs">
+                            <div data-oid="x57vasg">
                                 <button
                                     type="submit"
                                     disabled={isLoading}
                                     className={`w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[hsl(196,80%,45%)] transition-all duration-300 transform hover:translate-y-[-2px] ${isLoading ? 'opacity-70 cursor-not-allowed' : ''}`}
-                                    data-oid="jhzc:n0"
+                                    data-oid="g:5aoo8"
                                 >
                                     {isLoading ? (
                                         <svg
@@ -189,7 +189,7 @@ export default function RegisterPage() {
                                             xmlns="http://www.w3.org/2000/svg"
                                             fill="none"
                                             viewBox="0 0 24 24"
-                                            data-oid="77bn1za"
+                                            data-oid="z3mnamj"
                                         >
                                             <circle
                                                 className="opacity-25"
@@ -198,13 +198,13 @@ export default function RegisterPage() {
                                                 r="10"
                                                 stroke="currentColor"
                                                 strokeWidth="4"
-                                                data-oid="qqtjs19"
+                                                data-oid=".n52317"
                                             ></circle>
                                             <path
                                                 className="opacity-75"
                                                 fill="currentColor"
                                                 d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                                                data-oid="s2alzkh"
+                                                data-oid="muobi4l"
                                             ></path>
                                         </svg>
                                     ) : null}
@@ -214,13 +214,13 @@ export default function RegisterPage() {
                         </form>
                     </div>
 
-                    <div className="mt-6 text-center" data-oid="bb8zdn9">
-                        <p className="text-sm text-gray-600" data-oid="rfnr_wf">
+                    <div className="mt-6 text-center" data-oid="ifa._1w">
+                        <p className="text-sm text-gray-600" data-oid="li19n1w">
                             Already have an account?{' '}
                             <Link
                                 href="/login"
                                 className="font-medium text-[hsl(196,80%,45%)] hover:text-[hsl(196,80%,35%)] transition-colors duration-200"
-                                data-oid="tit:1mx"
+                                data-oid="xt.zxe8"
                             >
                                 Sign in
                             </Link>

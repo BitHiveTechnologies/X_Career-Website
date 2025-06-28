@@ -90,35 +90,35 @@ export default function JobApplicationModal({
         <div
             className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4"
             onClick={handleBackdropClick}
-            data-oid="j2nn88q"
+            data-oid="f8toxj:"
         >
             {' '}
             <div
                 className="bg-white rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden"
-                data-oid="8-ls5w7"
+                data-oid=":utxad_"
             >
                 {' '}
                 {/* Header */}{' '}
                 <div
                     className="bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white p-6"
-                    data-oid="6bx3tgr"
+                    data-oid="01rus:s"
                 >
                     {' '}
-                    <div className="flex items-center justify-between" data-oid="66h-6zj">
+                    <div className="flex items-center justify-between" data-oid="56tfw7e">
                         {' '}
-                        <div data-oid="k_b34u7">
+                        <div data-oid="5y13rez">
                             {' '}
-                            <h1 className="text-2xl font-bold" data-oid="gmm8qwo">
+                            <h1 className="text-2xl font-bold" data-oid="gibiboe">
                                 Apply for {job.title}
                             </h1>{' '}
-                            <p className="text-blue-100" data-oid="t4wp56f">
+                            <p className="text-blue-100" data-oid="-ub4sw1">
                                 {job.company} • {job.location}
                             </p>{' '}
                         </div>{' '}
                         <button
                             onClick={onClose}
                             className="p-2 hover:bg-white/20 rounded-full transition-colors"
-                            data-oid="g9f:2bu"
+                            data-oid="9dk_-5y"
                         >
                             {' '}
                             <svg
@@ -126,7 +126,7 @@ export default function JobApplicationModal({
                                 fill="none"
                                 stroke="currentColor"
                                 viewBox="0 0 24 24"
-                                data-oid="mvvn9dn"
+                                data-oid="jf0gm0c"
                             >
                                 {' '}
                                 <path
@@ -134,23 +134,23 @@ export default function JobApplicationModal({
                                     strokeLinejoin="round"
                                     strokeWidth="2"
                                     d="M6 18L18 6M6 6l12 12"
-                                    data-oid="qdj0xjb"
+                                    data-oid="hpgki8z"
                                 />{' '}
                             </svg>{' '}
                         </button>{' '}
                     </div>{' '}
                 </div>{' '}
                 {/* Progress Steps */}{' '}
-                <div className="px-6 py-4 border-b border-gray-200" data-oid="in8w..w">
+                <div className="px-6 py-4 border-b border-gray-200" data-oid=".w-see4">
                     {' '}
-                    <div className="flex items-center justify-between" data-oid="kzeb5_v">
+                    <div className="flex items-center justify-between" data-oid=".m0j45g">
                         {' '}
                         {steps.map((step, index) => (
-                            <div key={step.number} className="flex items-center" data-oid="hl.z0u:">
+                            <div key={step.number} className="flex items-center" data-oid="d92b8qf">
                                 {' '}
                                 <div
                                     className={`flex items-center justify-center w-10 h-10 rounded-full border-2 ${currentStep >= step.number ? 'bg-[hsl(196,80%,45%)] border-[hsl(196,80%,45%)] text-white' : 'border-gray-300 text-gray-500'}`}
-                                    data-oid="_zslasm"
+                                    data-oid="sxat-za"
                                 >
                                     {' '}
                                     {currentStep > step.number ? (
@@ -159,7 +159,7 @@ export default function JobApplicationModal({
                                             fill="none"
                                             stroke="currentColor"
                                             viewBox="0 0 24 24"
-                                            data-oid="_zvnzlt"
+                                            data-oid="ddce822"
                                         >
                                             {' '}
                                             <path
@@ -167,30 +167,30 @@ export default function JobApplicationModal({
                                                 strokeLinejoin="round"
                                                 strokeWidth="2"
                                                 d="M5 13l4 4L19 7"
-                                                data-oid="n80:x1q"
+                                                data-oid=":s.0qe4"
                                             />{' '}
                                         </svg>
                                     ) : (
                                         step.number
                                     )}{' '}
                                 </div>{' '}
-                                <div className="ml-3 hidden sm:block" data-oid=":d-8ed_">
+                                <div className="ml-3 hidden sm:block" data-oid="w_o8pec">
                                     {' '}
                                     <div
                                         className={`text-sm font-medium ${currentStep >= step.number ? 'text-[hsl(196,80%,45%)]' : 'text-gray-500'}`}
-                                        data-oid="4p1lda1"
+                                        data-oid="8d_13u7"
                                     >
                                         {' '}
                                         {step.title}{' '}
                                     </div>{' '}
-                                    <div className="text-xs text-gray-500" data-oid="k.zjwmt">
+                                    <div className="text-xs text-gray-500" data-oid="hzscwx.">
                                         {step.description}
                                     </div>{' '}
                                 </div>{' '}
                                 {index < steps.length - 1 && (
                                     <div
                                         className={`hidden sm:block w-16 h-0.5 ml-4 ${currentStep > step.number ? 'bg-[hsl(196,80%,45%)]' : 'bg-gray-300'}`}
-                                        data-oid="9n90xnj"
+                                        data-oid=":f18nd1"
                                     />
                                 )}{' '}
                             </div>
@@ -198,27 +198,27 @@ export default function JobApplicationModal({
                     </div>{' '}
                 </div>{' '}
                 {/* Form Content */}{' '}
-                <div className="p-6 h-[calc(90vh-300px)] overflow-y-auto" data-oid="cfsdjeh">
+                <div className="p-6 h-[calc(90vh-300px)] overflow-y-auto" data-oid="_5_8vfw">
                     {' '}
                     {currentStep === 1 && (
-                        <div className="space-y-6" data-oid="ydaorvk">
+                        <div className="space-y-6" data-oid=":q8iso1">
                             {' '}
                             <h2
                                 className="text-xl font-semibold text-gray-800 mb-4"
-                                data-oid="76axzra"
+                                data-oid="lpdegky"
                             >
                                 Personal Information
                             </h2>{' '}
                             <div
                                 className="grid grid-cols-1 md:grid-cols-2 gap-6"
-                                data-oid="pa-_vb0"
+                                data-oid="9yj7lgj"
                             >
                                 {' '}
-                                <div data-oid="we-rp56">
+                                <div data-oid="qtpu.cx">
                                     {' '}
                                     <label
                                         className="block text-sm font-medium text-gray-700 mb-2"
-                                        data-oid="2ng_2x-"
+                                        data-oid="g347hqv"
                                     >
                                         {' '}
                                         Full Name *{' '}
@@ -231,19 +231,19 @@ export default function JobApplicationModal({
                                         }
                                         className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] ${errors.fullName ? 'border-red-500' : 'border-gray-300'}`}
                                         placeholder="Enter your full name"
-                                        data-oid="dx_95pi"
+                                        data-oid="-nz06pv"
                                     />{' '}
                                     {errors.fullName && (
-                                        <p className="text-red-500 text-sm mt-1" data-oid="lo3zcss">
+                                        <p className="text-red-500 text-sm mt-1" data-oid="evosy-p">
                                             {errors.fullName}
                                         </p>
                                     )}{' '}
                                 </div>{' '}
-                                <div data-oid="xytx3:v">
+                                <div data-oid="snq87:z">
                                     {' '}
                                     <label
                                         className="block text-sm font-medium text-gray-700 mb-2"
-                                        data-oid="gk4:a09"
+                                        data-oid="871nqk2"
                                     >
                                         {' '}
                                         Email Address *{' '}
@@ -254,19 +254,19 @@ export default function JobApplicationModal({
                                         onChange={(e) => handleInputChange('email', e.target.value)}
                                         className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] ${errors.email ? 'border-red-500' : 'border-gray-300'}`}
                                         placeholder="Enter your email address"
-                                        data-oid="kiq7zal"
+                                        data-oid="0nfmnw_"
                                     />{' '}
                                     {errors.email && (
-                                        <p className="text-red-500 text-sm mt-1" data-oid="efijvv:">
+                                        <p className="text-red-500 text-sm mt-1" data-oid="a6u-uhn">
                                             {errors.email}
                                         </p>
                                     )}{' '}
                                 </div>{' '}
-                                <div data-oid="row8d.n">
+                                <div data-oid="i0mc2:g">
                                     {' '}
                                     <label
                                         className="block text-sm font-medium text-gray-700 mb-2"
-                                        data-oid="pg2mgwv"
+                                        data-oid="3z9a6a-"
                                     >
                                         {' '}
                                         Phone Number *{' '}
@@ -277,19 +277,19 @@ export default function JobApplicationModal({
                                         onChange={(e) => handleInputChange('phone', e.target.value)}
                                         className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] ${errors.phone ? 'border-red-500' : 'border-gray-300'}`}
                                         placeholder="Enter your phone number"
-                                        data-oid="_2rynng"
+                                        data-oid=".for4vo"
                                     />{' '}
                                     {errors.phone && (
-                                        <p className="text-red-500 text-sm mt-1" data-oid=".ol4xh7">
+                                        <p className="text-red-500 text-sm mt-1" data-oid="3oyannl">
                                             {errors.phone}
                                         </p>
                                     )}{' '}
                                 </div>{' '}
-                                <div data-oid="5yxcrb1">
+                                <div data-oid="65vcic8">
                                     {' '}
                                     <label
                                         className="block text-sm font-medium text-gray-700 mb-2"
-                                        data-oid="dzfiuus"
+                                        data-oid="mir1yjb"
                                     >
                                         {' '}
                                         Current Location *{' '}
@@ -302,10 +302,10 @@ export default function JobApplicationModal({
                                         }
                                         className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] ${errors.location ? 'border-red-500' : 'border-gray-300'}`}
                                         placeholder="Enter your current location"
-                                        data-oid="hf4l3gy"
+                                        data-oid="be-o0fe"
                                     />{' '}
                                     {errors.location && (
-                                        <p className="text-red-500 text-sm mt-1" data-oid="_9et1n_">
+                                        <p className="text-red-500 text-sm mt-1" data-oid="4v.39jw">
                                             {errors.location}
                                         </p>
                                     )}{' '}
@@ -314,24 +314,24 @@ export default function JobApplicationModal({
                         </div>
                     )}{' '}
                     {currentStep === 2 && (
-                        <div className="space-y-6" data-oid="x8ntx47">
+                        <div className="space-y-6" data-oid="9cu9x06">
                             {' '}
                             <h2
                                 className="text-xl font-semibold text-gray-800 mb-4"
-                                data-oid="-fiq33e"
+                                data-oid="se6wv5e"
                             >
                                 Professional Information
                             </h2>{' '}
                             <div
                                 className="grid grid-cols-1 md:grid-cols-2 gap-6"
-                                data-oid=".lw57qc"
+                                data-oid="yki-36i"
                             >
                                 {' '}
-                                <div data-oid=".-kiq84">
+                                <div data-oid="ebnd56t">
                                     {' '}
                                     <label
                                         className="block text-sm font-medium text-gray-700 mb-2"
-                                        data-oid="myq7as0"
+                                        data-oid="mncnztm"
                                     >
                                         {' '}
                                         Experience Level *{' '}
@@ -342,36 +342,36 @@ export default function JobApplicationModal({
                                             handleInputChange('experience', e.target.value)
                                         }
                                         className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] ${errors.experience ? 'border-red-500' : 'border-gray-300'}`}
-                                        data-oid="qsty596"
+                                        data-oid=".jtpgv2"
                                     >
                                         {' '}
-                                        <option value="" data-oid="ep:1:l3">
+                                        <option value="" data-oid="boxl9c4">
                                             Select experience level
                                         </option>{' '}
-                                        <option value="0-1 years" data-oid="qj:db2z">
+                                        <option value="0-1 years" data-oid="430hffr">
                                             Fresher (0-1 years)
                                         </option>{' '}
-                                        <option value="1-3 years" data-oid="2dv7z9e">
+                                        <option value="1-3 years" data-oid="yfzz.av">
                                             Junior (1-3 years)
                                         </option>{' '}
-                                        <option value="3-5 years" data-oid="v658f3o">
+                                        <option value="3-5 years" data-oid="5iaf1ve">
                                             Mid-level (3-5 years)
                                         </option>{' '}
-                                        <option value="5+ years" data-oid="90d_jkg">
+                                        <option value="5+ years" data-oid="7gdsitz">
                                             Senior (5+ years)
                                         </option>{' '}
                                     </select>{' '}
                                     {errors.experience && (
-                                        <p className="text-red-500 text-sm mt-1" data-oid="ob5p41r">
+                                        <p className="text-red-500 text-sm mt-1" data-oid="rvq-o59">
                                             {errors.experience}
                                         </p>
                                     )}{' '}
                                 </div>{' '}
-                                <div data-oid="n-hbod-">
+                                <div data-oid="vnm2vr_">
                                     {' '}
                                     <label
                                         className="block text-sm font-medium text-gray-700 mb-2"
-                                        data-oid="gc3upq."
+                                        data-oid="18r1cyk"
                                     >
                                         {' '}
                                         Expected Salary (LPA) *{' '}
@@ -382,36 +382,36 @@ export default function JobApplicationModal({
                                             handleInputChange('expectedSalary', e.target.value)
                                         }
                                         className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] ${errors.expectedSalary ? 'border-red-500' : 'border-gray-300'}`}
-                                        data-oid="5pmorz_"
+                                        data-oid="zy3fuy5"
                                     >
                                         {' '}
-                                        <option value="" data-oid=".bslwxc">
+                                        <option value="" data-oid="940de-7">
                                             Select expected salary
                                         </option>{' '}
-                                        <option value="0-5" data-oid="xmeilo0">
+                                        <option value="0-5" data-oid="dw88z6o">
                                             ₹0-5 LPA
                                         </option>{' '}
-                                        <option value="5-10" data-oid="2-dza9g">
+                                        <option value="5-10" data-oid="5.:h16a">
                                             ₹5-10 LPA
                                         </option>{' '}
-                                        <option value="10-20" data-oid="jp9nmkf">
+                                        <option value="10-20" data-oid="031hc7y">
                                             ₹10-20 LPA
                                         </option>{' '}
-                                        <option value="20+" data-oid="vgn0qyz">
+                                        <option value="20+" data-oid="0nxyhp:">
                                             ₹20+ LPA
                                         </option>{' '}
                                     </select>{' '}
                                     {errors.expectedSalary && (
-                                        <p className="text-red-500 text-sm mt-1" data-oid="br101tk">
+                                        <p className="text-red-500 text-sm mt-1" data-oid="nbgv-5.">
                                             {errors.expectedSalary}
                                         </p>
                                     )}{' '}
                                 </div>{' '}
-                                <div className="md:col-span-2" data-oid="-0cvb0m">
+                                <div className="md:col-span-2" data-oid="jvp:300">
                                     {' '}
                                     <label
                                         className="block text-sm font-medium text-gray-700 mb-2"
-                                        data-oid="3kq0rr7"
+                                        data-oid="l5_6wcx"
                                     >
                                         {' '}
                                         Notice Period *{' '}
@@ -422,30 +422,30 @@ export default function JobApplicationModal({
                                             handleInputChange('noticePeriod', e.target.value)
                                         }
                                         className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] ${errors.noticePeriod ? 'border-red-500' : 'border-gray-300'}`}
-                                        data-oid="s6pw:jf"
+                                        data-oid="02-q__t"
                                     >
                                         {' '}
-                                        <option value="" data-oid="__u-vdq">
+                                        <option value="" data-oid="ydo33i1">
                                             Select notice period
                                         </option>{' '}
-                                        <option value="Immediate" data-oid="gamgk:p">
+                                        <option value="Immediate" data-oid="-k-n04-">
                                             Immediate
                                         </option>{' '}
-                                        <option value="15 days" data-oid="immljn0">
+                                        <option value="15 days" data-oid="x8u.5co">
                                             15 days
                                         </option>{' '}
-                                        <option value="1 month" data-oid="fl2i0rm">
+                                        <option value="1 month" data-oid="eml8-ic">
                                             1 month
                                         </option>{' '}
-                                        <option value="2 months" data-oid="b9v4uc9">
+                                        <option value="2 months" data-oid="ykim:9f">
                                             2 months
                                         </option>{' '}
-                                        <option value="3 months" data-oid="19w3qa6">
+                                        <option value="3 months" data-oid="hmd-m_0">
                                             3 months
                                         </option>{' '}
                                     </select>{' '}
                                     {errors.noticePeriod && (
-                                        <p className="text-red-500 text-sm mt-1" data-oid="x5b.19m">
+                                        <p className="text-red-500 text-sm mt-1" data-oid="ck5-r0.">
                                             {errors.noticePeriod}
                                         </p>
                                     )}{' '}
@@ -454,28 +454,28 @@ export default function JobApplicationModal({
                         </div>
                     )}{' '}
                     {currentStep === 3 && (
-                        <div className="space-y-6" data-oid="cw_4jqd">
+                        <div className="space-y-6" data-oid="cvxnpvs">
                             {' '}
                             <h2
                                 className="text-xl font-semibold text-gray-800 mb-4"
-                                data-oid=":bg2bgy"
+                                data-oid="qm_a75-"
                             >
                                 Documents & Portfolio
                             </h2>{' '}
-                            <div className="space-y-6" data-oid="0x_c43-">
+                            <div className="space-y-6" data-oid="qhusa12">
                                 {' '}
-                                <div data-oid="guf9is2">
+                                <div data-oid=":430mgi">
                                     {' '}
                                     <label
                                         className="block text-sm font-medium text-gray-700 mb-2"
-                                        data-oid="98l-9or"
+                                        data-oid="2tt23:z"
                                     >
                                         {' '}
                                         Resume/CV *{' '}
                                     </label>{' '}
                                     <div
                                         className={`border-2 border-dashed rounded-lg p-6 text-center ${errors.resume ? 'border-red-500' : 'border-gray-300'}`}
-                                        data-oid="p2upfwr"
+                                        data-oid="x-u1sy7"
                                     >
                                         {' '}
                                         <input
@@ -489,22 +489,22 @@ export default function JobApplicationModal({
                                             }
                                             className="hidden"
                                             id="resume-upload"
-                                            data-oid="l:b:x77"
+                                            data-oid="xrcp:.t"
                                         />{' '}
                                         <label
                                             htmlFor="resume-upload"
                                             className="cursor-pointer"
-                                            data-oid="av.39l3"
+                                            data-oid="41wdwd-"
                                         >
                                             {' '}
-                                            <div className="text-gray-600" data-oid="xjxhs7m">
+                                            <div className="text-gray-600" data-oid=":mar-4v">
                                                 {' '}
                                                 <svg
                                                     className="mx-auto h-12 w-12 text-gray-400"
                                                     stroke="currentColor"
                                                     fill="none"
                                                     viewBox="0 0 48 48"
-                                                    data-oid="4cptkm9"
+                                                    data-oid="jrfum00"
                                                 >
                                                     {' '}
                                                     <path
@@ -512,14 +512,14 @@ export default function JobApplicationModal({
                                                         strokeWidth="2"
                                                         strokeLinecap="round"
                                                         strokeLinejoin="round"
-                                                        data-oid="r393t7k"
+                                                        data-oid="f7ts71y"
                                                     />{' '}
                                                 </svg>{' '}
-                                                <p className="mt-2 text-sm" data-oid="czdxd4k">
+                                                <p className="mt-2 text-sm" data-oid="1-_aygo">
                                                     {' '}
                                                     <span
                                                         className="font-medium text-[hsl(196,80%,45%)]"
-                                                        data-oid="ll4297b"
+                                                        data-oid="labud1n"
                                                     >
                                                         Click to upload
                                                     </span>{' '}
@@ -527,7 +527,7 @@ export default function JobApplicationModal({
                                                 </p>{' '}
                                                 <p
                                                     className="text-xs text-gray-500"
-                                                    data-oid="bpw_5:q"
+                                                    data-oid="e-6r4z-"
                                                 >
                                                     PDF, DOC, DOCX up to 10MB
                                                 </p>{' '}
@@ -536,7 +536,7 @@ export default function JobApplicationModal({
                                         {formData.resume && (
                                             <p
                                                 className="mt-2 text-sm text-green-600"
-                                                data-oid="7r52g64"
+                                                data-oid="iwen260"
                                             >
                                                 {' '}
                                                 ✓ {formData.resume.name}{' '}
@@ -544,16 +544,16 @@ export default function JobApplicationModal({
                                         )}{' '}
                                     </div>{' '}
                                     {errors.resume && (
-                                        <p className="text-red-500 text-sm mt-1" data-oid="pa_ckcl">
+                                        <p className="text-red-500 text-sm mt-1" data-oid="73gpytx">
                                             {errors.resume}
                                         </p>
                                     )}{' '}
                                 </div>{' '}
-                                <div data-oid="0473l0o">
+                                <div data-oid="oho5z2:">
                                     {' '}
                                     <label
                                         className="block text-sm font-medium text-gray-700 mb-2"
-                                        data-oid="exz2h4x"
+                                        data-oid="9jlpz:s"
                                     >
                                         {' '}
                                         Cover Letter{' '}
@@ -566,78 +566,78 @@ export default function JobApplicationModal({
                                         rows={4}
                                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)]"
                                         placeholder="Write a brief cover letter explaining why you're interested in this position..."
-                                        data-oid="an3suui"
+                                        data-oid="e4z3--1"
                                     />{' '}
                                 </div>{' '}
                             </div>{' '}
                         </div>
                     )}{' '}
                     {currentStep === 4 && (
-                        <div className="space-y-6" data-oid="w5z7v43">
+                        <div className="space-y-6" data-oid="qw0hzw-">
                             {' '}
                             <h2
                                 className="text-xl font-semibold text-gray-800 mb-4"
-                                data-oid="t9u34yv"
+                                data-oid="zhu2q0a"
                             >
                                 Review Your Application
                             </h2>{' '}
-                            <div className="bg-gray-50 rounded-lg p-6 space-y-4" data-oid="m1bfa-0">
+                            <div className="bg-gray-50 rounded-lg p-6 space-y-4" data-oid="rfuo-wh">
                                 {' '}
                                 <div
                                     className="grid grid-cols-1 md:grid-cols-2 gap-4"
-                                    data-oid="c7elwg_"
+                                    data-oid="ltsm2jp"
                                 >
                                     {' '}
-                                    <div data-oid="neht7pc">
+                                    <div data-oid="e8.u57s">
                                         {' '}
                                         <h3
                                             className="font-medium text-gray-800"
-                                            data-oid="c85:o-i"
+                                            data-oid="yn0i6b-"
                                         >
                                             Personal Information
                                         </h3>{' '}
-                                        <p className="text-sm text-gray-600" data-oid="_y2k_as">
+                                        <p className="text-sm text-gray-600" data-oid="cj6zcc5">
                                             {formData.fullName}
                                         </p>{' '}
-                                        <p className="text-sm text-gray-600" data-oid="_aleob.">
+                                        <p className="text-sm text-gray-600" data-oid="8o4k_mt">
                                             {formData.email}
                                         </p>{' '}
-                                        <p className="text-sm text-gray-600" data-oid="2sfbyak">
+                                        <p className="text-sm text-gray-600" data-oid="m-vlbuk">
                                             {formData.phone}
                                         </p>{' '}
-                                        <p className="text-sm text-gray-600" data-oid="gaxd4x-">
+                                        <p className="text-sm text-gray-600" data-oid="qk52_cj">
                                             {formData.location}
                                         </p>{' '}
                                     </div>{' '}
-                                    <div data-oid="1c8rlev">
+                                    <div data-oid=":esfuk0">
                                         {' '}
                                         <h3
                                             className="font-medium text-gray-800"
-                                            data-oid="0q1sxvs"
+                                            data-oid="m53pbr0"
                                         >
                                             Professional Information
                                         </h3>{' '}
-                                        <p className="text-sm text-gray-600" data-oid="87ghbje">
+                                        <p className="text-sm text-gray-600" data-oid="vfadxx.">
                                             Experience: {formData.experience}
                                         </p>{' '}
-                                        <p className="text-sm text-gray-600" data-oid=".lfb6jv">
+                                        <p className="text-sm text-gray-600" data-oid="1kzmje_">
                                             Expected Salary: {formData.expectedSalary}
                                         </p>{' '}
-                                        <p className="text-sm text-gray-600" data-oid="y-pyqln">
+                                        <p className="text-sm text-gray-600" data-oid="z1odynu">
                                             Notice Period: {formData.noticePeriod}
                                         </p>{' '}
                                     </div>{' '}
                                 </div>{' '}
                                 {formData.resume && (
-                                    <div data-oid="c9i99rf">
+                                    <div data-oid=".v3.ck8">
                                         {' '}
                                         <h3
                                             className="font-medium text-gray-800"
-                                            data-oid="y93fj4i"
+                                            data-oid="b5a9t9v"
                                         >
                                             Documents
                                         </h3>{' '}
-                                        <p className="text-sm text-gray-600" data-oid="tz:fluk">
+                                        <p className="text-sm text-gray-600" data-oid="lugqk:.">
                                             Resume: {formData.resume.name}
                                         </p>{' '}
                                     </div>
@@ -645,43 +645,43 @@ export default function JobApplicationModal({
                             </div>{' '}
                             <div
                                 className="bg-blue-50 border border-blue-200 rounded-lg p-4"
-                                data-oid="nw614v."
+                                data-oid="bqspmqq"
                             >
                                 {' '}
-                                <div className="flex" data-oid="lf4siwn">
+                                <div className="flex" data-oid="7z37-nh">
                                     {' '}
-                                    <div className="flex-shrink-0" data-oid="i.4loyi">
+                                    <div className="flex-shrink-0" data-oid="pkqk33m">
                                         {' '}
                                         <svg
                                             className="h-5 w-5 text-blue-400"
                                             fill="currentColor"
                                             viewBox="0 0 20 20"
-                                            data-oid="csj2b75"
+                                            data-oid="1udtpva"
                                         >
                                             {' '}
                                             <path
                                                 fillRule="evenodd"
                                                 d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
                                                 clipRule="evenodd"
-                                                data-oid="1riia5w"
+                                                data-oid="4e8mf68"
                                             />{' '}
                                         </svg>{' '}
                                     </div>{' '}
-                                    <div className="ml-3" data-oid="45hs36p">
+                                    <div className="ml-3" data-oid="m4if.dh">
                                         {' '}
                                         <h3
                                             className="text-sm font-medium text-blue-800"
-                                            data-oid="33ne6d7"
+                                            data-oid=".5_:bvz"
                                         >
                                             {' '}
                                             Application Submission{' '}
                                         </h3>{' '}
                                         <div
                                             className="mt-2 text-sm text-blue-700"
-                                            data-oid="x4nx3dq"
+                                            data-oid="f_8ip_c"
                                         >
                                             {' '}
-                                            <p data-oid="ksxn2bx">
+                                            <p data-oid=".7e8ax3">
                                                 {' '}
                                                 By submitting this application, you agree to our
                                                 terms and conditions. You will receive a
@@ -696,14 +696,14 @@ export default function JobApplicationModal({
                     )}{' '}
                 </div>{' '}
                 {/* Footer */}{' '}
-                <div className="border-t border-gray-200 p-6 bg-gray-50" data-oid="g6fmd2u">
+                <div className="border-t border-gray-200 p-6 bg-gray-50" data-oid="chl340-">
                     {' '}
-                    <div className="flex justify-between" data-oid="23xro48">
+                    <div className="flex justify-between" data-oid="q3o0xh6">
                         {' '}
                         <button
                             onClick={currentStep === 1 ? onClose : handlePrevious}
                             className="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg font-medium hover:bg-gray-100 transition-colors"
-                            data-oid="fn--0_4"
+                            data-oid="l75yu6h"
                         >
                             {' '}
                             {currentStep === 1 ? 'Cancel' : 'Previous'}{' '}
@@ -712,7 +712,7 @@ export default function JobApplicationModal({
                             <button
                                 onClick={handleNext}
                                 className="px-8 py-3 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white rounded-lg font-medium hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300"
-                                data-oid="gd76slx"
+                                data-oid="p9xn48s"
                             >
                                 {' '}
                                 Next Step{' '}
@@ -721,7 +721,7 @@ export default function JobApplicationModal({
                             <button
                                 onClick={handleSubmit}
                                 className="px-8 py-3 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg font-medium hover:from-green-600 hover:to-green-700 transition-all duration-300"
-                                data-oid="tr6r2ex"
+                                data-oid="vju:r7c"
                             >
                                 {' '}
                                 Submit Application{' '}
