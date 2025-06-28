@@ -50,7 +50,7 @@ export default function CategoryMenu({
     };
 
     return (
-        <div className="relative" data-oid="fp9w-.z">
+        <div className="relative" data-oid="z3s5mfm">
             {/* Scroll Left Button */}
             <button
                 onClick={() => scroll('left')}
@@ -60,21 +60,21 @@ export default function CategoryMenu({
                         : 'opacity-0 pointer-events-none'
                 }`}
                 aria-label="Scroll left"
-                data-oid="ryw_bu9"
+                data-oid="zrlrxw1"
             >
                 <svg
                     className="h-5 w-5 text-gray-600"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
-                    data-oid="76je7lg"
+                    data-oid="owo.9w3"
                 >
                     <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         strokeWidth="2"
                         d="M15 19l-7-7 7-7"
-                        data-oid="x_btst-"
+                        data-oid="ex.eukm"
                     />
                 </svg>
             </button>
@@ -88,21 +88,21 @@ export default function CategoryMenu({
                         : 'opacity-0 pointer-events-none'
                 }`}
                 aria-label="Scroll right"
-                data-oid="_cvlui_"
+                data-oid="babmzvx"
             >
                 <svg
                     className="h-5 w-5 text-gray-600"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
-                    data-oid=".5abgn6"
+                    data-oid="6pr:ur:"
                 >
                     <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         strokeWidth="2"
                         d="M9 5l7 7-7 7"
-                        data-oid="cm7kq87"
+                        data-oid=":tvti-2"
                     />
                 </svg>
             </button>
@@ -112,7 +112,7 @@ export default function CategoryMenu({
                 ref={scrollContainerRef}
                 className="flex space-x-4 overflow-x-auto scrollbar-hide py-4 px-8"
                 style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-                data-oid="vr84p:n"
+                data-oid="017e.a1"
             >
                 {categories.map((category) => (
                     <button
@@ -123,10 +123,10 @@ export default function CategoryMenu({
                                 ? 'bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white shadow-lg'
                                 : 'bg-white/80 backdrop-blur-sm text-gray-700 border border-gray-200 hover:border-[hsl(196,80%,45%)] hover:text-[hsl(196,80%,45%)] hover:bg-white'
                         }`}
-                        data-oid="ahyb9h-"
+                        data-oid="kah-.oo"
                     >
-                        <div className="flex flex-col items-center" data-oid="2wko0uw">
-                            <span className="font-semibold" data-oid="0-gvtt5">
+                        <div className="flex flex-col items-center" data-oid="6:co-ld">
+                            <span className="font-semibold" data-oid="n94d_9-">
                                 {category.name}
                             </span>
                             <span
@@ -135,7 +135,7 @@ export default function CategoryMenu({
                                         ? 'text-blue-100'
                                         : 'text-gray-500'
                                 }`}
-                                data-oid="r38-6og"
+                                data-oid="02.-rqx"
                             >
                                 {category.count.toLocaleString()} jobs
                             </span>
@@ -149,14 +149,14 @@ export default function CategoryMenu({
                 className={`absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-[hsl(196,60%,95%)] to-transparent pointer-events-none transition-opacity duration-300 ${
                     canScrollLeft ? 'opacity-100' : 'opacity-0'
                 }`}
-                data-oid="ckf_7ux"
+                data-oid="jb0nrfd"
             />
 
             <div
                 className={`absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-[hsl(196,60%,95%)] to-transparent pointer-events-none transition-opacity duration-300 ${
                     canScrollRight ? 'opacity-100' : 'opacity-0'
                 }`}
-                data-oid="nrk8x1s"
+                data-oid="uavfk93"
             />
         </div>
     );
