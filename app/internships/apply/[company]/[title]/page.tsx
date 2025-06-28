@@ -83,13 +83,13 @@ export default function InternshipApplicationPage() {
 
     if (!internship) {
         return (
-            <div className="min-h-screen bg-white" data-oid="h19:y1g">
-                <MainNavbar data-oid="uvfx2on" />
-                <div className="max-w-4xl mx-auto px-4 py-16 text-center" data-oid="707yemq">
-                    <h1 className="text-2xl font-bold text-gray-800 mb-4" data-oid="lu0cw0j">
+            <div className="min-h-screen bg-white" data-oid="n5-yfxq">
+                <MainNavbar data-oid="_g2him4" />
+                <div className="max-w-4xl mx-auto px-4 py-16 text-center" data-oid="97_oq3u">
+                    <h1 className="text-2xl font-bold text-gray-800 mb-4" data-oid="yl2pkax">
                         Internship Not Found
                     </h1>
-                    <p className="text-gray-600" data-oid="ojb8hwe">
+                    <p className="text-gray-600" data-oid="6aqzc9m">
                         The internship you're looking for doesn't exist.
                     </p>
                 </div>
@@ -99,53 +99,53 @@ export default function InternshipApplicationPage() {
 
     if (isSubmitted) {
         return (
-            <div className="min-h-screen bg-white" data-oid="jmzkk.s">
-                <MainNavbar data-oid="7h1viiv" />
-                <div className="max-w-4xl mx-auto px-4 py-16 text-center" data-oid="dsf_pwt">
+            <div className="min-h-screen bg-white" data-oid="x_pnyku">
+                <MainNavbar data-oid="gc905a7" />
+                <div className="max-w-4xl mx-auto px-4 py-16 text-center" data-oid="ausoxtc">
                     <div
                         className="bg-green-50 border border-green-200 rounded-xl p-8"
-                        data-oid="iicvlmx"
+                        data-oid="qo4jkjx"
                     >
                         <div
                             className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4"
-                            data-oid="nm20kyx"
+                            data-oid="w.quurr"
                         >
                             <svg
                                 className="w-8 h-8 text-white"
                                 fill="none"
                                 stroke="currentColor"
                                 viewBox="0 0 24 24"
-                                data-oid="c2njwt3"
+                                data-oid="-vcg96b"
                             >
                                 <path
                                     strokeLinecap="round"
                                     strokeLinejoin="round"
                                     strokeWidth="2"
                                     d="M5 13l4 4L19 7"
-                                    data-oid="8zjn21_"
+                                    data-oid="zees3yn"
                                 />
                             </svg>
                         </div>
-                        <h1 className="text-2xl font-bold text-gray-800 mb-4" data-oid="diw5g.n">
+                        <h1 className="text-2xl font-bold text-gray-800 mb-4" data-oid="43co-zt">
                             Application Submitted Successfully!
                         </h1>
-                        <p className="text-gray-600 mb-6" data-oid="eo8jrdu">
+                        <p className="text-gray-600 mb-6" data-oid=".:s29l5">
                             Thank you for applying for the {internship.title} position at{' '}
                             {internship.company}. We'll review your application and get back to you
                             soon.
                         </p>
-                        <div className="flex gap-4 justify-center" data-oid="g_eit6n">
+                        <div className="flex gap-4 justify-center" data-oid="lpp:-09">
                             <a
                                 href="/internships"
                                 className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-                                data-oid="40q-aim"
+                                data-oid="l6gt8s-"
                             >
                                 Browse More Internships
                             </a>
                             <a
                                 href="/"
                                 className="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
-                                data-oid="-5:d3ym"
+                                data-oid="ynuoyg6"
                             >
                                 Go Home
                             </a>
@@ -157,38 +157,38 @@ export default function InternshipApplicationPage() {
     }
 
     return (
-        <div className="min-h-screen bg-gray-50" data-oid="4-z2i35">
-            <MainNavbar data-oid="6wu0i-9" />
+        <div className="min-h-screen bg-gray-50" data-oid="smh48of">
+            <MainNavbar data-oid="qbipbe_" />
 
-            <div className="max-w-4xl mx-auto px-4 py-8" data-oid="55-5-y8">
+            <div className="max-w-4xl mx-auto px-4 py-8" data-oid="hsnemcd">
                 {/* Header */}
-                <div className="bg-white rounded-xl shadow-md p-6 mb-8" data-oid="uhz3ekz">
-                    <div className="flex items-start justify-between" data-oid="h-l:fvd">
-                        <div data-oid="_bgpznf">
+                <div className="bg-white rounded-xl shadow-md p-6 mb-8" data-oid="22w_-x5">
+                    <div className="flex items-start justify-between" data-oid="yv162d8">
+                        <div data-oid="dch5dgn">
                             <h1
                                 className="text-2xl font-bold text-gray-800 mb-2"
-                                data-oid="40-knv-"
+                                data-oid="z23:.o6"
                             >
                                 Apply for {internship.title}
                             </h1>
-                            <p className="text-lg text-blue-600 font-semibold" data-oid="gkait7i">
+                            <p className="text-lg text-blue-600 font-semibold" data-oid="yv3x.03">
                                 {internship.company}
                             </p>
                             <div
                                 className="flex items-center gap-4 mt-2 text-sm text-gray-600"
-                                data-oid="hrlwyil"
+                                data-oid="2yfbt2_"
                             >
-                                <span data-oid="ylwopsr">📍 {internship.location}</span>
-                                <span data-oid="qni6-z.">⏱️ {internship.duration}</span>
+                                <span data-oid="0.j2s6u">📍 {internship.location}</span>
+                                <span data-oid="sgovgrw">⏱️ {internship.duration}</span>
                                 {internship.stipend && (
-                                    <span data-oid="syle5o:">💰 {internship.stipend}</span>
+                                    <span data-oid="hkjscan">💰 {internship.stipend}</span>
                                 )}
                             </div>
                         </div>
                         {internship.isUrgent && (
                             <span
                                 className="bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full"
-                                data-oid="wox5:02"
+                                data-oid="6i42qh4"
                             >
                                 🔥 URGENT HIRING
                             </span>
@@ -197,18 +197,18 @@ export default function InternshipApplicationPage() {
                 </div>
 
                 {/* Application Form */}
-                <div className="bg-white rounded-xl shadow-md p-6" data-oid="7e-_v30">
-                    <h2 className="text-xl font-bold text-gray-800 mb-6" data-oid="gdd3f4u">
+                <div className="bg-white rounded-xl shadow-md p-6" data-oid="1b2mm2-">
+                    <h2 className="text-xl font-bold text-gray-800 mb-6" data-oid="1dyz9bm">
                         Application Form
                     </h2>
 
-                    <form onSubmit={handleSubmit} className="space-y-6" data-oid="ql_:tbi">
+                    <form onSubmit={handleSubmit} className="space-y-6" data-oid="hbd4c::">
                         {/* Personal Information */}
-                        <div className="grid md:grid-cols-2 gap-6" data-oid="4tlutju">
-                            <div data-oid="_o2mxdg">
+                        <div className="grid md:grid-cols-2 gap-6" data-oid=".qhq_vo">
+                            <div data-oid="-0-qd6x">
                                 <label
                                     className="block text-sm font-medium text-gray-700 mb-2"
-                                    data-oid="b_8czax"
+                                    data-oid="fbt2pws"
                                 >
                                     Full Name *
                                 </label>
@@ -219,13 +219,13 @@ export default function InternshipApplicationPage() {
                                     onChange={handleInputChange}
                                     required
                                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    data-oid="qcv1m40"
+                                    data-oid="gemk49e"
                                 />
                             </div>
-                            <div data-oid="pkf:6q2">
+                            <div data-oid="jpxv207">
                                 <label
                                     className="block text-sm font-medium text-gray-700 mb-2"
-                                    data-oid="z3e:793"
+                                    data-oid="ivpdsaf"
                                 >
                                     Email Address *
                                 </label>
@@ -236,16 +236,16 @@ export default function InternshipApplicationPage() {
                                     onChange={handleInputChange}
                                     required
                                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    data-oid=":yt75hg"
+                                    data-oid="6h19102"
                                 />
                             </div>
                         </div>
 
-                        <div className="grid md:grid-cols-2 gap-6" data-oid="0.z0ma6">
-                            <div data-oid="l96uewo">
+                        <div className="grid md:grid-cols-2 gap-6" data-oid="pakxa7m">
+                            <div data-oid="ywkbe2r">
                                 <label
                                     className="block text-sm font-medium text-gray-700 mb-2"
-                                    data-oid="ojg8fg5"
+                                    data-oid="8e4a:d5"
                                 >
                                     Phone Number *
                                 </label>
@@ -256,13 +256,13 @@ export default function InternshipApplicationPage() {
                                     onChange={handleInputChange}
                                     required
                                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    data-oid="y9i2ab1"
+                                    data-oid="dk-im7p"
                                 />
                             </div>
-                            <div data-oid="j6ww5ew">
+                            <div data-oid="-d7pkrz">
                                 <label
                                     className="block text-sm font-medium text-gray-700 mb-2"
-                                    data-oid="qw1z85k"
+                                    data-oid="-dc-lym"
                                 >
                                     University/College *
                                 </label>
@@ -273,17 +273,17 @@ export default function InternshipApplicationPage() {
                                     onChange={handleInputChange}
                                     required
                                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    data-oid="kgcphwk"
+                                    data-oid="ik1ovm5"
                                 />
                             </div>
                         </div>
 
                         {/* Academic Information */}
-                        <div className="grid md:grid-cols-3 gap-6" data-oid="0g_1c3i">
-                            <div data-oid="axdh71y">
+                        <div className="grid md:grid-cols-3 gap-6" data-oid="20aslja">
+                            <div data-oid="73p78jb">
                                 <label
                                     className="block text-sm font-medium text-gray-700 mb-2"
-                                    data-oid="m-kgmuq"
+                                    data-oid="y8ie3r9"
                                 >
                                     Course/Degree *
                                 </label>
@@ -295,13 +295,13 @@ export default function InternshipApplicationPage() {
                                     required
                                     placeholder="e.g., B.Tech CSE"
                                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    data-oid="2zuhswt"
+                                    data-oid="ogvp72c"
                                 />
                             </div>
-                            <div data-oid="lj586:9">
+                            <div data-oid="2s02c5k">
                                 <label
                                     className="block text-sm font-medium text-gray-700 mb-2"
-                                    data-oid="tje06od"
+                                    data-oid="zvihf0_"
                                 >
                                     Graduation Year *
                                 </label>
@@ -311,29 +311,29 @@ export default function InternshipApplicationPage() {
                                     onChange={handleInputChange}
                                     required
                                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    data-oid="_d9-3an"
+                                    data-oid="0vjwhg4"
                                 >
-                                    <option value="" data-oid="ihbmtxk">
+                                    <option value="" data-oid="_8_1-h1">
                                         Select Year
                                     </option>
-                                    <option value="2024" data-oid="ez6d7fh">
+                                    <option value="2024" data-oid="6qv78hf">
                                         2024
                                     </option>
-                                    <option value="2025" data-oid="ak-fcw6">
+                                    <option value="2025" data-oid=":ilwej0">
                                         2025
                                     </option>
-                                    <option value="2026" data-oid="guws.ed">
+                                    <option value="2026" data-oid="oa4:hvz">
                                         2026
                                     </option>
-                                    <option value="2027" data-oid="r.gmaoo">
+                                    <option value="2027" data-oid="fo:sh0b">
                                         2027
                                     </option>
                                 </select>
                             </div>
-                            <div data-oid="0_smtk:">
+                            <div data-oid="s3znjs:">
                                 <label
                                     className="block text-sm font-medium text-gray-700 mb-2"
-                                    data-oid="h2x4kwo"
+                                    data-oid="crgphlp"
                                 >
                                     CGPA/Percentage
                                 </label>
@@ -344,16 +344,16 @@ export default function InternshipApplicationPage() {
                                     onChange={handleInputChange}
                                     placeholder="e.g., 8.5 or 85%"
                                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    data-oid="gmyk5hu"
+                                    data-oid="07m3ele"
                                 />
                             </div>
                         </div>
 
                         {/* Skills and Experience */}
-                        <div data-oid="o0qnml:">
+                        <div data-oid="9tqy7bk">
                             <label
                                 className="block text-sm font-medium text-gray-700 mb-2"
-                                data-oid="t741h7c"
+                                data-oid="8nh4lq-"
                             >
                                 Relevant Skills *
                             </label>
@@ -365,14 +365,14 @@ export default function InternshipApplicationPage() {
                                 rows={3}
                                 placeholder="List your relevant skills (e.g., React, JavaScript, Python, etc.)"
                                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                data-oid="r6yo9-a"
+                                data-oid="5uah.ea"
                             />
                         </div>
 
-                        <div data-oid="_uqoo.u">
+                        <div data-oid="kdxjd-u">
                             <label
                                 className="block text-sm font-medium text-gray-700 mb-2"
-                                data-oid="_405zno"
+                                data-oid="11-2k_t"
                             >
                                 Previous Experience (if any)
                             </label>
@@ -383,16 +383,16 @@ export default function InternshipApplicationPage() {
                                 rows={3}
                                 placeholder="Describe any relevant projects, internships, or work experience"
                                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                data-oid="-str:xs"
+                                data-oid="g4nex:x"
                             />
                         </div>
 
                         {/* Links */}
-                        <div className="grid md:grid-cols-3 gap-6" data-oid="fp24_ef">
-                            <div data-oid="oim3tqr">
+                        <div className="grid md:grid-cols-3 gap-6" data-oid="-u.rsje">
+                            <div data-oid="tho512c">
                                 <label
                                     className="block text-sm font-medium text-gray-700 mb-2"
-                                    data-oid="jfl_.jr"
+                                    data-oid="u:h0x11"
                                 >
                                     Portfolio URL
                                 </label>
@@ -403,13 +403,13 @@ export default function InternshipApplicationPage() {
                                     onChange={handleInputChange}
                                     placeholder="https://yourportfolio.com"
                                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    data-oid="w-vgx9o"
+                                    data-oid="q820n5z"
                                 />
                             </div>
-                            <div data-oid="2jjtbup">
+                            <div data-oid="c_pmxnp">
                                 <label
                                     className="block text-sm font-medium text-gray-700 mb-2"
-                                    data-oid="yv-8sz8"
+                                    data-oid="dajezf8"
                                 >
                                     LinkedIn Profile
                                 </label>
@@ -420,13 +420,13 @@ export default function InternshipApplicationPage() {
                                     onChange={handleInputChange}
                                     placeholder="https://linkedin.com/in/yourprofile"
                                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    data-oid="mq55rem"
+                                    data-oid="gw7pr.b"
                                 />
                             </div>
-                            <div data-oid="u._kvis">
+                            <div data-oid="f8yz21e">
                                 <label
                                     className="block text-sm font-medium text-gray-700 mb-2"
-                                    data-oid="u2.ngae"
+                                    data-oid="9ql9j2c"
                                 >
                                     GitHub Profile
                                 </label>
@@ -437,17 +437,17 @@ export default function InternshipApplicationPage() {
                                     onChange={handleInputChange}
                                     placeholder="https://github.com/yourusername"
                                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    data-oid="rubr_pz"
+                                    data-oid="c2er21:"
                                 />
                             </div>
                         </div>
 
                         {/* Internship Specific */}
-                        <div className="grid md:grid-cols-2 gap-6" data-oid="2.gob1r">
-                            <div data-oid="jhod960">
+                        <div className="grid md:grid-cols-2 gap-6" data-oid="yyisau1">
+                            <div data-oid="._p7.6o">
                                 <label
                                     className="block text-sm font-medium text-gray-700 mb-2"
-                                    data-oid="8ftaouj"
+                                    data-oid="4c-:7xl"
                                 >
                                     Availability *
                                 </label>
@@ -457,29 +457,29 @@ export default function InternshipApplicationPage() {
                                     onChange={handleInputChange}
                                     required
                                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    data-oid="u4.si2-"
+                                    data-oid="sgt.m2o"
                                 >
-                                    <option value="" data-oid="j6.-1sz">
+                                    <option value="" data-oid="6vq365:">
                                         Select Availability
                                     </option>
-                                    <option value="immediately" data-oid="48xvcz0">
+                                    <option value="immediately" data-oid="i2xsppn">
                                         Immediately
                                     </option>
-                                    <option value="within-1-week" data-oid="xukkld_">
+                                    <option value="within-1-week" data-oid="pa8wkxq">
                                         Within 1 week
                                     </option>
-                                    <option value="within-2-weeks" data-oid="xi.6.x2">
+                                    <option value="within-2-weeks" data-oid="8ydr-i6">
                                         Within 2 weeks
                                     </option>
-                                    <option value="within-1-month" data-oid="mzirvka">
+                                    <option value="within-1-month" data-oid="tds-b0.">
                                         Within 1 month
                                     </option>
                                 </select>
                             </div>
-                            <div data-oid="ekl6vq4">
+                            <div data-oid="9bd2wp6">
                                 <label
                                     className="block text-sm font-medium text-gray-700 mb-2"
-                                    data-oid="orxiurn"
+                                    data-oid="u84-7yu"
                                 >
                                     Expected Stipend (per month)
                                 </label>
@@ -490,16 +490,16 @@ export default function InternshipApplicationPage() {
                                     onChange={handleInputChange}
                                     placeholder="e.g., ₹20,000 or Negotiable"
                                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    data-oid="c6wdcc8"
+                                    data-oid="08_7n66"
                                 />
                             </div>
                         </div>
 
                         {/* Why Interested */}
-                        <div data-oid="xf.mbm9">
+                        <div data-oid="g3bo.62">
                             <label
                                 className="block text-sm font-medium text-gray-700 mb-2"
-                                data-oid="xcbm-nj"
+                                data-oid="c8xrut2"
                             >
                                 Why are you interested in this internship? *
                             </label>
@@ -511,15 +511,15 @@ export default function InternshipApplicationPage() {
                                 rows={4}
                                 placeholder="Tell us why you want to intern at this company and what you hope to learn..."
                                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                data-oid="pwyjj8r"
+                                data-oid="gyxju:b"
                             />
                         </div>
 
                         {/* Cover Letter */}
-                        <div data-oid="vjkk4d-">
+                        <div data-oid="mt:xpfn">
                             <label
                                 className="block text-sm font-medium text-gray-700 mb-2"
-                                data-oid="3d1p3bv"
+                                data-oid="-g7_7jj"
                             >
                                 Cover Letter
                             </label>
@@ -530,15 +530,15 @@ export default function InternshipApplicationPage() {
                                 rows={4}
                                 placeholder="Write a brief cover letter explaining your interest and qualifications..."
                                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                data-oid="bskbbty"
+                                data-oid="73o_dvw"
                             />
                         </div>
 
                         {/* Resume Upload */}
-                        <div data-oid="_4eq4cj">
+                        <div data-oid="5ywqahn">
                             <label
                                 className="block text-sm font-medium text-gray-700 mb-2"
-                                data-oid="dw-mql-"
+                                data-oid="k9bbdn5"
                             >
                                 Resume *
                             </label>
@@ -549,30 +549,30 @@ export default function InternshipApplicationPage() {
                                 accept=".pdf,.doc,.docx"
                                 required
                                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                data-oid="i65pk5v"
+                                data-oid="bhf12u9"
                             />
 
-                            <p className="text-xs text-gray-500 mt-1" data-oid="ibwdyfi">
+                            <p className="text-xs text-gray-500 mt-1" data-oid="oj:p_h8">
                                 Accepted formats: PDF, DOC, DOCX (Max size: 5MB)
                             </p>
                         </div>
 
                         {/* Submit Button */}
-                        <div className="flex gap-4 pt-6" data-oid="b8mdk87">
+                        <div className="flex gap-4 pt-6" data-oid="edfy:kd">
                             <button
                                 type="submit"
                                 disabled={isSubmitting}
                                 className="flex-1 px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg font-medium hover:from-blue-700 hover:to-blue-800 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-                                data-oid="5fvs-o-"
+                                data-oid=":m41u-w"
                             >
                                 {isSubmitting ? (
                                     <div
                                         className="flex items-center justify-center"
-                                        data-oid="vfq8i_0"
+                                        data-oid="jf-nyjg"
                                     >
                                         <div
                                             className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"
-                                            data-oid="3_bg752"
+                                            data-oid="wbpv6_z"
                                         ></div>
                                         Submitting Application...
                                     </div>
@@ -583,7 +583,7 @@ export default function InternshipApplicationPage() {
                             <a
                                 href="/internships"
                                 className="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
-                                data-oid="t1b4f2s"
+                                data-oid="qj-6v-2"
                             >
                                 Cancel
                             </a>

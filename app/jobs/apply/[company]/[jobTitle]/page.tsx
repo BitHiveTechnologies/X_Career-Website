@@ -37,14 +37,14 @@ export default function JobApplyPage() {
     if (isLoading) {
         return (
             <>
-                <MainNavbar data-oid="zq6-:8u" />
+                <MainNavbar data-oid="h0e29h:" />
                 <div
                     className="min-h-screen bg-gradient-to-b from-[hsl(196,60%,95%)] to-white flex items-center justify-center"
-                    data-oid="_5kxes8"
+                    data-oid="hurfqg1"
                 >
                     <div
                         className="animate-spin rounded-full h-12 w-12 border-b-2 border-[hsl(196,80%,45%)]"
-                        data-oid="xc4v-iu"
+                        data-oid="wkw8iro"
                     ></div>
                 </div>
             </>
@@ -54,22 +54,22 @@ export default function JobApplyPage() {
     if (!job) {
         return (
             <>
-                <MainNavbar data-oid="cyhez3e" />
+                <MainNavbar data-oid="yk75sus" />
                 <div
                     className="min-h-screen bg-gradient-to-b from-[hsl(196,60%,95%)] to-white flex items-center justify-center"
-                    data-oid="s2-diht"
+                    data-oid="17f_:f_"
                 >
-                    <div className="text-center" data-oid="qqyktrf">
-                        <h1 className="text-2xl font-bold text-gray-800 mb-4" data-oid="gfy0_iy">
+                    <div className="text-center" data-oid="fgjy2.e">
+                        <h1 className="text-2xl font-bold text-gray-800 mb-4" data-oid="xvvi60r">
                             Job Not Found
                         </h1>
-                        <p className="text-gray-600 mb-6" data-oid="-lupu3:">
+                        <p className="text-gray-600 mb-6" data-oid="oen6bep">
                             The job you're looking for doesn't exist.
                         </p>
                         <button
                             onClick={() => router.push('/jobs')}
                             className="px-6 py-3 bg-[hsl(196,80%,45%)] text-white rounded-lg hover:bg-[hsl(196,80%,40%)] transition-colors"
-                            data-oid="vaazn95"
+                            data-oid="xyxgi2p"
                         >
                             Back to Jobs
                         </button>
@@ -81,17 +81,17 @@ export default function JobApplyPage() {
 
     return (
         <>
-            <MainNavbar data-oid="wsrcrd8" />
+            <MainNavbar data-oid="70a9989" />
             <div
                 className="min-h-screen bg-gradient-to-b from-[hsl(196,60%,95%)] to-white"
-                data-oid="2ott.b8"
+                data-oid="w0cd:sp"
             >
                 <JobApplicationModal
                     job={job}
                     isOpen={true}
                     onClose={handleClose}
                     onSubmit={handleApplicationSubmit}
-                    data-oid="rrnld71"
+                    data-oid="b7e_3q."
                 />
             </div>
         </>

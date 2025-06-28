@@ -704,80 +704,80 @@ export default function InternshipsPage() {
     });
 
     return (
-        <div className="min-h-screen bg-white text-gray-800 font-sans" data-oid="1jhf0h6">
+        <div className="min-h-screen bg-white text-gray-800 font-sans" data-oid="mscwl.t">
             {/* Navbar */}
-            <MainNavbar data-oid="suxx9j." />
+            <MainNavbar data-oid="3m8lxp5" />
 
             {/* Enhanced Hero Section with Search */}
             <section
                 className="bg-gradient-to-r from-[hsl(196,80%,45%)] via-[hsl(210,70%,45%)] to-[hsl(175,70%,41%)] text-white relative overflow-hidden py-20"
-                data-oid="81kw739"
+                data-oid="xoh:bxl"
             >
                 {/* Animated background elements */}
-                <div className="absolute inset-0 overflow-hidden" data-oid="zbqm_su">
+                <div className="absolute inset-0 overflow-hidden" data-oid="1cgqr_0">
                     <div
                         className="absolute -top-20 -left-20 w-96 h-96 bg-[hsl(196,80%,65%)] opacity-30 rounded-full blur-3xl animate-blob"
-                        data-oid="06q77zf"
+                        data-oid="mejvdt6"
                     ></div>
                     <div
                         className="absolute top-40 right-20 w-96 h-96 bg-[hsl(210,70%,65%)] opacity-40 rounded-full blur-3xl animate-blob animation-delay-2000"
-                        data-oid="4gk.-06"
+                        data-oid="x:c2l08"
                     ></div>
                     <div
                         className="absolute bottom-10 left-1/3 w-96 h-96 bg-[hsl(175,70%,61%)] opacity-40 rounded-full blur-3xl animate-blob animation-delay-4000"
-                        data-oid="-g0jn5-"
+                        data-oid="82t1vg_"
                     ></div>
                 </div>
 
                 {/* Frosted glass overlay */}
                 <div
                     className="absolute inset-0 bg-white/5 backdrop-blur-[1px]"
-                    data-oid="a8qtbuy"
+                    data-oid="j8ek_6o"
                 ></div>
 
                 <div
                     className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10"
-                    data-oid="gd6yiu:"
+                    data-oid="514rfck"
                 >
                     <h1
                         className="text-4xl md:text-6xl font-bold mb-4 text-white drop-shadow-md"
-                        data-oid="hc6cedf"
+                        data-oid="w20kc_0"
                     >
                         Find Your Dream Internship
                     </h1>
-                    <p className="text-xl md:text-2xl mb-2 text-blue-100" data-oid="1nb52fa">
+                    <p className="text-xl md:text-2xl mb-2 text-blue-100" data-oid="_v9ha-p">
                         Launch Your Career Journey
                     </p>
-                    <p className="text-lg text-blue-200 max-w-2xl mx-auto mb-8" data-oid="ngq-yhi">
+                    <p className="text-lg text-blue-200 max-w-2xl mx-auto mb-8" data-oid="810b4le">
                         Discover thousands of internship opportunities from top Indian companies
                     </p>
 
                     {/* Advanced Search Bar */}
-                    <form onSubmit={handleSearch} className="max-w-4xl mx-auto" data-oid="1sug0mp">
+                    <form onSubmit={handleSearch} className="max-w-4xl mx-auto" data-oid="injks3f">
                         <div
                             className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20"
-                            data-oid="amjs:dh"
+                            data-oid="14.e12t"
                         >
-                            <div className="grid md:grid-cols-3 gap-4" data-oid=".80z-1w">
+                            <div className="grid md:grid-cols-3 gap-4" data-oid="h592cu-">
                                 {/* Internship Title Search */}
-                                <div className="relative" data-oid="zhuzqwz">
+                                <div className="relative" data-oid="d:gulel">
                                     <div
                                         className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
-                                        data-oid="4:ar3rb"
+                                        data-oid="j2prn3c"
                                     >
                                         <svg
                                             className="h-5 w-5 text-gray-400"
                                             fill="none"
                                             stroke="currentColor"
                                             viewBox="0 0 24 24"
-                                            data-oid=".bxb51h"
+                                            data-oid="qctpbtp"
                                         >
                                             <path
                                                 strokeLinecap="round"
                                                 strokeLinejoin="round"
                                                 strokeWidth="2"
                                                 d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                                                data-oid="j5vgf2k"
+                                                data-oid="ioq8lkc"
                                             />
                                         </svg>
                                     </div>
@@ -787,29 +787,29 @@ export default function InternshipsPage() {
                                         value={searchQuery}
                                         onChange={(e) => setSearchQuery(e.target.value)}
                                         className="w-full pl-10 pr-4 py-3 bg-white/90 backdrop-blur-sm border border-white/30 rounded-xl text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all duration-300"
-                                        data-oid="__gsjmu"
+                                        data-oid="oihub.s"
                                     />
                                 </div>
 
                                 {/* Location Search */}
-                                <div className="relative" data-oid="x5bf8m0">
+                                <div className="relative" data-oid="oomnl80">
                                     <div
                                         className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
-                                        data-oid="ev-bzyv"
+                                        data-oid="6i.82s0"
                                     >
                                         <svg
                                             className="h-5 w-5 text-gray-400"
                                             fill="none"
                                             stroke="currentColor"
                                             viewBox="0 0 24 24"
-                                            data-oid="facbiin"
+                                            data-oid="ld31a:c"
                                         >
                                             <path
                                                 strokeLinecap="round"
                                                 strokeLinejoin="round"
                                                 strokeWidth="2"
                                                 d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                                                data-oid="e8w-id5"
+                                                data-oid="7:fxf5j"
                                             />
 
                                             <path
@@ -817,7 +817,7 @@ export default function InternshipsPage() {
                                                 strokeLinejoin="round"
                                                 strokeWidth="2"
                                                 d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                                                data-oid="hl_4sbw"
+                                                data-oid="nl6_.pe"
                                             />
                                         </svg>
                                     </div>
@@ -827,7 +827,7 @@ export default function InternshipsPage() {
                                         value={searchLocation}
                                         onChange={(e) => setSearchLocation(e.target.value)}
                                         className="w-full pl-10 pr-4 py-3 bg-white/90 backdrop-blur-sm border border-white/30 rounded-xl text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all duration-300"
-                                        data-oid="y2pr701"
+                                        data-oid="2yy0s0."
                                     />
                                 </div>
 
@@ -835,21 +835,21 @@ export default function InternshipsPage() {
                                 <button
                                     type="submit"
                                     className="px-8 py-3 bg-white text-[hsl(196,80%,45%)] rounded-xl font-semibold hover:bg-gray-50 transition-all duration-300 transform hover:scale-105 hover:shadow-lg flex items-center justify-center"
-                                    data-oid="u26jsd:"
+                                    data-oid="150pr6o"
                                 >
                                     <svg
                                         className="h-5 w-5 mr-2"
                                         fill="none"
                                         stroke="currentColor"
                                         viewBox="0 0 24 24"
-                                        data-oid="s4-jlb2"
+                                        data-oid="x53kff0"
                                     >
                                         <path
                                             strokeLinecap="round"
                                             strokeLinejoin="round"
                                             strokeWidth="2"
                                             d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                                            data-oid="6-66wv9"
+                                            data-oid="qru5_lv"
                                         />
                                     </svg>
                                     Search Internships
@@ -859,7 +859,7 @@ export default function InternshipsPage() {
                             {/* Quick Search Tags */}
                             <div
                                 className="flex flex-wrap gap-2 mt-4 justify-center"
-                                data-oid="ka8sdvc"
+                                data-oid="55z:g_5"
                             >
                                 {[
                                     'Frontend Intern',
@@ -872,7 +872,7 @@ export default function InternshipsPage() {
                                         key={tag}
                                         onClick={() => setSearchQuery(tag)}
                                         className="px-3 py-1 bg-white/20 backdrop-blur-sm text-white text-sm rounded-full hover:bg-white/30 transition-all duration-300"
-                                        data-oid="dkm84l1"
+                                        data-oid="evhdire"
                                     >
                                         {tag}
                                     </button>
@@ -886,38 +886,38 @@ export default function InternshipsPage() {
             {/* Category Menu */}
             <section
                 className="bg-gradient-to-b from-[hsl(210,50%,98%)] to-[hsl(196,60%,95%)] py-8"
-                data-oid="a767agp"
+                data-oid="vyb4.8p"
             >
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-oid="l:kokbb">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-oid="6zv6tre">
                     <CategoryMenu
                         categories={categories}
                         selectedCategory={selectedCategory}
                         onCategoryChange={handleCategoryChange}
-                        data-oid="vm_jvb1"
+                        data-oid="8-dm7:7"
                     />
 
                     {/* Internships Count Badge */}
-                    <div className="text-center mt-6" data-oid="x0z63bq">
+                    <div className="text-center mt-6" data-oid="rj7e0dz">
                         <div
                             className="inline-flex items-center px-6 py-3 bg-white/80 backdrop-blur-sm rounded-full shadow-md border border-[hsl(210,30%,95%)]"
-                            data-oid="9st02gh"
+                            data-oid="_k6:_i-"
                         >
                             <svg
                                 className="h-5 w-5 text-[hsl(196,80%,45%)] mr-2"
                                 fill="none"
                                 stroke="currentColor"
                                 viewBox="0 0 24 24"
-                                data-oid="uy76yci"
+                                data-oid="7:gx6.u"
                             >
                                 <path
                                     strokeLinecap="round"
                                     strokeLinejoin="round"
                                     strokeWidth="2"
                                     d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
-                                    data-oid="8v9zih1"
+                                    data-oid="bi4qsdb"
                                 />
                             </svg>
-                            <span className="text-lg font-bold text-gray-800" data-oid="dvm.hx-">
+                            <span className="text-lg font-bold text-gray-800" data-oid="cdo1d49">
                                 {filteredInternships.length.toLocaleString()}+ INTERNSHIPS FOUND
                             </span>
                         </div>
@@ -928,40 +928,40 @@ export default function InternshipsPage() {
             {/* Main Content */}
             <section
                 className="py-12 bg-gradient-to-b from-[hsl(196,60%,95%)] to-white"
-                data-oid="uoar7dq"
+                data-oid="9ue6rtu"
             >
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-oid="7cfq.m2">
-                    <div className="grid lg:grid-cols-4 gap-8" data-oid="rn2fhbk">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-oid="emzyee6">
+                    <div className="grid lg:grid-cols-4 gap-8" data-oid="396ue4p">
                         {/* Filters Sidebar */}
-                        <div className="lg:col-span-1 order-2 lg:order-1" data-oid="br-vr0l">
+                        <div className="lg:col-span-1 order-2 lg:order-1" data-oid="uh9o0e3">
                             <FiltersSidebar
                                 filters={filters}
                                 onFilterChange={handleFilterChange}
                                 onReset={resetFilters}
                                 isInternshipPage={true}
-                                data-oid="o3:_o3p"
+                                data-oid="31g7pek"
                             />
                         </div>
 
                         {/* Internship Listings */}
-                        <div className="lg:col-span-3 order-1 lg:order-2" data-oid="43wlddx">
+                        <div className="lg:col-span-3 order-1 lg:order-2" data-oid="0:.1xsj">
                             {/* Toolbar */}
                             <div
                                 className="bg-white/80 backdrop-blur-sm rounded-xl shadow-md border border-[hsl(210,30%,95%)] p-6 mb-6"
-                                data-oid=".o:847:"
+                                data-oid="fllajh3"
                             >
                                 <div
                                     className="flex flex-col lg:flex-row lg:items-center justify-between gap-4"
-                                    data-oid="bjsj.96"
+                                    data-oid="c217uys"
                                 >
                                     {/* Results Counter */}
                                     <div
                                         className="flex flex-col sm:flex-row sm:items-center gap-2"
-                                        data-oid="nichzw6"
+                                        data-oid="ormnjsc"
                                     >
                                         <span
                                             className="text-xl font-bold text-gray-800"
-                                            data-oid="1a.-:qh"
+                                            data-oid="8gyrl.9"
                                         >
                                             {filteredInternships.length.toLocaleString()}{' '}
                                             Internships Found
@@ -969,7 +969,7 @@ export default function InternshipsPage() {
                                         {(searchQuery || searchLocation) && (
                                             <span
                                                 className="text-sm text-gray-600 bg-blue-50 px-3 py-1 rounded-full"
-                                                data-oid="7:1wx29"
+                                                data-oid="77kn3my"
                                             >
                                                 for "{searchQuery}"{' '}
                                                 {searchLocation && `in ${searchLocation}`}
@@ -979,13 +979,13 @@ export default function InternshipsPage() {
 
                                     <div
                                         className="flex flex-col sm:flex-row items-start sm:items-center gap-4"
-                                        data-oid="fq.eie7"
+                                        data-oid="qtm41l4"
                                     >
                                         {/* Sort Options */}
-                                        <div className="flex items-center gap-2" data-oid="qjv-ht3">
+                                        <div className="flex items-center gap-2" data-oid="e_rej:8">
                                             <label
                                                 className="text-sm font-medium text-gray-700 whitespace-nowrap"
-                                                data-oid=".lxu41_"
+                                                data-oid="ympf:9e"
                                             >
                                                 Sort by:
                                             </label>
@@ -993,21 +993,21 @@ export default function InternshipsPage() {
                                                 value={sortBy}
                                                 onChange={(e) => setSortBy(e.target.value)}
                                                 className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent bg-white min-w-[120px]"
-                                                data-oid="w09od1f"
+                                                data-oid="5fprtyc"
                                             >
-                                                <option value="relevance" data-oid="d-0gfec">
+                                                <option value="relevance" data-oid="fz1kfbs">
                                                     Relevance
                                                 </option>
-                                                <option value="date" data-oid=".agewjx">
+                                                <option value="date" data-oid="eerh3yu">
                                                     Date Posted
                                                 </option>
-                                                <option value="stipend" data-oid="jzqgext">
+                                                <option value="stipend" data-oid="hzztap1">
                                                     Stipend
                                                 </option>
-                                                <option value="duration" data-oid="_-:5y0n">
+                                                <option value="duration" data-oid="3iqocyk">
                                                     Duration
                                                 </option>
-                                                <option value="company" data-oid="tpv7.wo">
+                                                <option value="company" data-oid="jd9uyu.">
                                                     Company
                                                 </option>
                                             </select>
@@ -1016,7 +1016,7 @@ export default function InternshipsPage() {
                                         {/* View Toggle */}
                                         <div
                                             className="flex items-center bg-gray-100 rounded-lg p-1"
-                                            data-oid="sj9vjjz"
+                                            data-oid="dapwu-n"
                                         >
                                             <button
                                                 onClick={() => setViewMode('list')}
@@ -1026,21 +1026,21 @@ export default function InternshipsPage() {
                                                         : 'text-gray-600 hover:text-gray-800'
                                                 }`}
                                                 title="List View"
-                                                data-oid="vhrfmnp"
+                                                data-oid=":51toft"
                                             >
                                                 <svg
                                                     className="h-4 w-4"
                                                     fill="none"
                                                     stroke="currentColor"
                                                     viewBox="0 0 24 24"
-                                                    data-oid="m4xw:7w"
+                                                    data-oid="4lb-8u4"
                                                 >
                                                     <path
                                                         strokeLinecap="round"
                                                         strokeLinejoin="round"
                                                         strokeWidth="2"
                                                         d="M4 6h16M4 10h16M4 14h16M4 18h16"
-                                                        data-oid="ekbb81j"
+                                                        data-oid="1f051od"
                                                     />
                                                 </svg>
                                             </button>
@@ -1052,21 +1052,21 @@ export default function InternshipsPage() {
                                                         : 'text-gray-600 hover:text-gray-800'
                                                 }`}
                                                 title="Grid View"
-                                                data-oid="rue7gq-"
+                                                data-oid="w6x:z5:"
                                             >
                                                 <svg
                                                     className="h-4 w-4"
                                                     fill="none"
                                                     stroke="currentColor"
                                                     viewBox="0 0 24 24"
-                                                    data-oid="n0p:4ur"
+                                                    data-oid="p6f5bx1"
                                                 >
                                                     <path
                                                         strokeLinecap="round"
                                                         strokeLinejoin="round"
                                                         strokeWidth="2"
                                                         d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
-                                                        data-oid="r_au:go"
+                                                        data-oid="b84.omy"
                                                     />
                                                 </svg>
                                             </button>
@@ -1078,41 +1078,41 @@ export default function InternshipsPage() {
                             {/* Internship Alerts Section */}
                             <div
                                 className="bg-gradient-to-r from-[hsl(196,80%,45%)]/10 to-[hsl(175,70%,41%)]/10 backdrop-blur-sm rounded-xl border border-[hsl(196,80%,45%)]/20 p-6 mb-8"
-                                data-oid="6.-kdl9"
+                                data-oid="3l66sxt"
                             >
                                 <div
                                     className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
-                                    data-oid="xqb2bg9"
+                                    data-oid="b.g1:n7"
                                 >
-                                    <div className="flex items-start gap-4" data-oid="1ae0ze9">
+                                    <div className="flex items-start gap-4" data-oid="2nrnx6z">
                                         <div
                                             className="bg-[hsl(196,80%,45%)] p-3 rounded-full flex-shrink-0"
-                                            data-oid="5n3hm11"
+                                            data-oid="h21h:y8"
                                         >
                                             <svg
                                                 className="h-6 w-6 text-white"
                                                 fill="none"
                                                 stroke="currentColor"
                                                 viewBox="0 0 24 24"
-                                                data-oid="2t2d942"
+                                                data-oid="ybxpbku"
                                             >
                                                 <path
                                                     strokeLinecap="round"
                                                     strokeLinejoin="round"
                                                     strokeWidth="2"
                                                     d="M15 17h5l-5 5v-5zM4 19h6v-2H4v2zM4 15h8v-2H4v2zM4 11h10V9H4v2zM4 7h12V5H4v2z"
-                                                    data-oid="c85zq9n"
+                                                    data-oid="hopga5:"
                                                 />
                                             </svg>
                                         </div>
-                                        <div data-oid="d7-cbj8">
+                                        <div data-oid="ek8emuh">
                                             <h3
                                                 className="text-lg font-semibold text-gray-800 mb-1"
-                                                data-oid="g93_8yz"
+                                                data-oid="c4v2vra"
                                             >
                                                 Get Internship Alerts
                                             </h3>
-                                            <p className="text-gray-600 text-sm" data-oid="crg4b.t">
+                                            <p className="text-gray-600 text-sm" data-oid=":3uyyqo">
                                                 Never miss an internship opportunity that matches
                                                 your profile
                                             </p>
@@ -1120,7 +1120,7 @@ export default function InternshipsPage() {
                                     </div>
                                     <button
                                         className="px-6 py-3 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white rounded-lg font-medium hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300 transform hover:scale-105 whitespace-nowrap"
-                                        data-oid="iv_lzao"
+                                        data-oid="hhi_2:2"
                                     >
                                         Create Alert
                                     </button>
@@ -1128,14 +1128,14 @@ export default function InternshipsPage() {
                             </div>
 
                             {/* Internship Cards Container */}
-                            <div className="space-y-6" data-oid="fo3v9l4">
+                            <div className="space-y-6" data-oid="8e2l9vj">
                                 {isLoading ? (
-                                    <div className="text-center py-16" data-oid="ym0giqe">
+                                    <div className="text-center py-16" data-oid="it8jr0_">
                                         <div
                                             className="animate-spin rounded-full h-12 w-12 border-b-2 border-[hsl(196,80%,45%)] mx-auto"
-                                            data-oid="bl:4bzc"
+                                            data-oid="7t-9_:g"
                                         ></div>
-                                        <p className="mt-4 text-gray-600" data-oid="x11x44h">
+                                        <p className="mt-4 text-gray-600" data-oid="2b66ar0">
                                             Loading internships...
                                         </p>
                                     </div>
@@ -1149,7 +1149,7 @@ export default function InternshipsPage() {
                                                     : 'space-y-6'
                                             }`}
                                             role="list"
-                                            data-oid="uo04dpt"
+                                            data-oid="9e8wu9y"
                                         >
                                             {filteredInternships
                                                 .slice(0, visibleInternships)
@@ -1159,18 +1159,18 @@ export default function InternshipsPage() {
                                                         job={convertInternshipToJob(internship)}
                                                         viewMode={viewMode}
                                                         isInternship={true}
-                                                        data-oid="t977sl7"
+                                                        data-oid="b95zp2a"
                                                     />
                                                 ))}
                                         </div>
 
                                         {/* Load More Button */}
                                         {visibleInternships < filteredInternships.length && (
-                                            <div className="text-center py-8" data-oid="aywzd17">
+                                            <div className="text-center py-8" data-oid="79lq57m">
                                                 <button
                                                     onClick={loadMoreInternships}
                                                     className="px-8 py-3 bg-white border-2 border-[hsl(196,80%,45%)] text-[hsl(196,80%,45%)] rounded-lg font-medium hover:bg-[hsl(196,80%,45%)] hover:text-white transition-all duration-300 transform hover:scale-105"
-                                                    data-oid="qz_szr9"
+                                                    data-oid="aibusop"
                                                 >
                                                     Load More Internships (
                                                     {filteredInternships.length -
@@ -1181,40 +1181,40 @@ export default function InternshipsPage() {
                                         )}
                                     </>
                                 ) : (
-                                    <div className="text-center py-16" data-oid="p:01r9v">
+                                    <div className="text-center py-16" data-oid="te2q3zu">
                                         <div
                                             className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6"
-                                            data-oid="fep9sse"
+                                            data-oid="k0o2knn"
                                         >
                                             <svg
                                                 className="h-12 w-12 text-gray-400"
                                                 fill="none"
                                                 stroke="currentColor"
                                                 viewBox="0 0 24 24"
-                                                data-oid="0veb69_"
+                                                data-oid="ftammik"
                                             >
                                                 <path
                                                     strokeLinecap="round"
                                                     strokeLinejoin="round"
                                                     strokeWidth="2"
                                                     d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                                                    data-oid="55pjkn3"
+                                                    data-oid="z-dx-cb"
                                                 />
                                             </svg>
                                         </div>
                                         <h3
                                             className="text-xl font-medium text-gray-900 mb-2"
-                                            data-oid="_p39rdx"
+                                            data-oid="bp44ay5"
                                         >
                                             No internships found
                                         </h3>
-                                        <p className="text-gray-600 mb-6" data-oid="78fg95w">
+                                        <p className="text-gray-600 mb-6" data-oid="5mq00se">
                                             Try adjusting your filters or search criteria
                                         </p>
                                         <button
                                             onClick={resetFilters}
                                             className="px-6 py-3 bg-[hsl(196,80%,45%)] text-white rounded-lg hover:bg-[hsl(196,80%,40%)] transition-colors duration-200 font-medium"
-                                            data-oid="eb8bt.u"
+                                            data-oid="nxc76.f"
                                         >
                                             Reset Filters
                                         </button>
