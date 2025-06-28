@@ -167,7 +167,7 @@ const Logo = () => (
         viewBox="0 0 120 30"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        data-oid="1q7kyy5"
+        data-oid="0c9_n0l"
     >
         <path
             d="M10 5L20 15L10 25"
@@ -175,7 +175,7 @@ const Logo = () => (
             strokeWidth="3"
             strokeLinecap="round"
             strokeLinejoin="round"
-            data-oid="248rxzc"
+            data-oid="5eocjat"
         />
 
         <path
@@ -184,7 +184,7 @@ const Logo = () => (
             strokeWidth="3"
             strokeLinecap="round"
             strokeLinejoin="round"
-            data-oid=".8itpan"
+            data-oid="a9o._o."
         />
 
         <text
@@ -194,7 +194,7 @@ const Logo = () => (
             fontSize="18"
             fontWeight="bold"
             fill="#1E3A8A"
-            data-oid="1r87i3a"
+            data-oid="2q0hz-e"
         >
             Careers
         </text>
@@ -322,31 +322,31 @@ export default function Page() {
     };
 
     return (
-        <div className="min-h-screen bg-white text-gray-800 font-sans" data-oid="d06w_ue">
+        <div className="min-h-screen bg-white text-gray-800 font-sans" data-oid="4gd_zue">
             {/* Sticky Navbar */}
             <header
                 className="sticky top-0 z-50 bg-gradient-to-r from-blue-200/90 via-blue-300/90 to-blue-200/90 backdrop-blur-md shadow-sm border-b border-blue-300/70"
-                data-oid=".bi2gn5"
+                data-oid="lcfyfnr"
             >
-                <MainNavbar data-oid="sud85ph" />
+                <MainNavbar data-oid="oz-i27s" />
                 {/* Sub-Navbar */}
                 <div
                     className="bg-gradient-to-r from-[hsl(196,70%,92%)]/90 via-[hsl(210,70%,90%)]/90 to-[hsl(196,70%,92%)]/90 backdrop-blur-sm border-t border-[hsl(210,40%,90%)]"
-                    data-oid="sxa6wl9"
+                    data-oid="2zoqm5h"
                 >
-                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-oid="4rjl60s">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-oid="a40up2q">
                         <div
                             className="flex flex-wrap items-center justify-between py-2 text-sm"
-                            data-oid="_5ojzus"
+                            data-oid="8s4xe-h"
                         >
                             <div
                                 className="flex flex-wrap items-center space-x-4"
-                                data-oid="ib7flls"
+                                data-oid="z-.a1.."
                             >
                                 <a
                                     href="/notify"
                                     className="bg-gradient-to-r from-blue-200 to-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs font-medium transition-all duration-300 hover:from-blue-300 hover:to-blue-200 shadow-sm flex items-center"
-                                    data-oid="vn7nvzv"
+                                    data-oid="5_w6.s-"
                                 >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -357,42 +357,42 @@ export default function Page() {
                                         strokeWidth="2"
                                         strokeLinecap="round"
                                         strokeLinejoin="round"
-                                        data-oid="ixii9sx"
+                                        data-oid="ham.-n2"
                                     >
                                         <path
                                             d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"
-                                            data-oid="muee:m."
+                                            data-oid="wp-:-u5"
                                         ></path>
                                         <path
                                             d="M13.73 21a2 2 0 0 1-3.46 0"
-                                            data-oid="qzidi-y"
+                                            data-oid="h3b_cs5"
                                         ></path>
                                     </svg>
                                     NOTIFY X
                                 </a>
                             </div>
-                            <div className="flex items-center space-x-3 sm:mt-0" data-oid="kq:u7e_">
+                            <div className="flex items-center space-x-3 sm:mt-0" data-oid="8ozn1fq">
                                 {/* Mobile view - compact icons */}
                                 <div
                                     className="flex sm:hidden items-center space-x-2"
-                                    data-oid="e933yv:"
+                                    data-oid="usgonnf"
                                 >
                                     <a
                                         href="/telegram"
                                         className="inline-flex items-center justify-center w-7 h-7 bg-teal-500 hover:bg-teal-600 text-white rounded-full transition-all duration-300"
                                         title="Join Telegram Community"
-                                        data-oid="4ab6ee5"
+                                        data-oid="tx_e9l:"
                                     >
                                         <svg
                                             className="h-4 w-4"
                                             fill="currentColor"
                                             viewBox="0 0 24 24"
                                             xmlns="http://www.w3.org/2000/svg"
-                                            data-oid="bypatg-"
+                                            data-oid="w74a8ld"
                                         >
                                             <path
                                                 d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.96 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"
-                                                data-oid="9o-sks7"
+                                                data-oid="ni1plxw"
                                             ></path>
                                         </svg>
                                     </a>
@@ -400,18 +400,18 @@ export default function Page() {
                                         href="/whatsapp"
                                         className="inline-flex items-center justify-center w-7 h-7 bg-green-500 hover:bg-green-600 text-white rounded-full transition-all duration-300"
                                         title="Join WhatsApp Community"
-                                        data-oid="qhi3hwo"
+                                        data-oid="-2.2zfz"
                                     >
                                         <svg
                                             className="h-4 w-4"
                                             fill="currentColor"
                                             viewBox="0 0 24 24"
                                             xmlns="http://www.w3.org/2000/svg"
-                                            data-oid="hq6e60w"
+                                            data-oid="540hnoo"
                                         >
                                             <path
                                                 d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
-                                                data-oid="grwhnz8"
+                                                data-oid=":b_ow8r"
                                             ></path>
                                         </svg>
                                     </a>
@@ -420,23 +420,23 @@ export default function Page() {
                                 {/* Desktop view - original buttons */}
                                 <div
                                     className="hidden sm:flex items-center space-x-3"
-                                    data-oid="ub-i2g1"
+                                    data-oid="gice90v"
                                 >
                                     <a
                                         href="/telegram"
                                         className="inline-flex items-center px-3 py-1 bg-teal-500 hover:bg-teal-600 text-white text-xs font-medium rounded-md transition-all duration-300"
-                                        data-oid="hu60f5f"
+                                        data-oid="zbcjvc6"
                                     >
                                         <svg
                                             className="h-4 w-4 mr-1"
                                             fill="currentColor"
                                             viewBox="0 0 24 24"
                                             xmlns="http://www.w3.org/2000/svg"
-                                            data-oid="5yuszxs"
+                                            data-oid="15koydy"
                                         >
                                             <path
                                                 d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.96 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"
-                                                data-oid="fx-ax2y"
+                                                data-oid="yj4_q:k"
                                             ></path>
                                         </svg>
                                         Join Telegram Community
@@ -444,18 +444,18 @@ export default function Page() {
                                     <a
                                         href="/whatsapp"
                                         className="inline-flex items-center px-3 py-1 bg-green-500 hover:bg-green-600 text-white text-xs font-medium rounded-md transition-all duration-300"
-                                        data-oid="vr3zzqq"
+                                        data-oid="c90c44."
                                     >
                                         <svg
                                             className="h-4 w-4 mr-1"
                                             fill="currentColor"
                                             viewBox="0 0 24 24"
                                             xmlns="http://www.w3.org/2000/svg"
-                                            data-oid="y8vha1j"
+                                            data-oid="11gw:hq"
                                         >
                                             <path
                                                 d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
-                                                data-oid="z86690y"
+                                                data-oid="l2n_:by"
                                             ></path>
                                         </svg>
                                         Join WhatsApp Community
@@ -467,63 +467,63 @@ export default function Page() {
                 </div>
             </header>
 
-            <main data-oid="3ouyl:o">
+            <main data-oid=".6qujf4">
                 {/* Hero Section */}
                 <section
                     className="bg-gradient-to-r from-[hsl(196,80%,45%)] via-[hsl(210,70%,45%)] to-[hsl(175,70%,41%)] text-white relative overflow-hidden"
-                    data-oid="s1vhlrd"
+                    data-oid="jqdmuqy"
                 >
                     {/* Animated background elements */}
-                    <div className="absolute inset-0 overflow-hidden" data-oid="io:t18d">
+                    <div className="absolute inset-0 overflow-hidden" data-oid="8do2ych">
                         <div
                             className="absolute -top-20 -left-20 w-96 h-96 bg-[hsl(196,80%,65%)] opacity-30 rounded-full blur-3xl animate-blob"
-                            data-oid="ikaxpxn"
+                            data-oid="0rv7_tl"
                         ></div>
                         <div
                             className="absolute top-40 right-20 w-96 h-96 bg-[hsl(210,70%,65%)] opacity-40 rounded-full blur-3xl animate-blob animation-delay-2000"
-                            data-oid="t2om.yp"
+                            data-oid="ee3t:n:"
                         ></div>
                         <div
                             className="absolute bottom-10 left-1/3 w-96 h-96 bg-[hsl(175,70%,61%)] opacity-40 rounded-full blur-3xl animate-blob animation-delay-4000"
-                            data-oid="gsk.cb6"
+                            data-oid="mrwpnqr"
                         ></div>
                         <div
                             className="absolute -bottom-20 right-1/4 w-80 h-80 bg-[hsl(220,70%,65%)] opacity-40 rounded-full blur-3xl animate-blob animation-delay-3000"
-                            data-oid="i1bwj25"
+                            data-oid="-wj__e_"
                         ></div>
                     </div>
                     <div
                         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24"
-                        data-oid="qshtdfg"
+                        data-oid="-_e8322"
                     >
-                        <div className="grid md:grid-cols-2 gap-8 items-center" data-oid="8moclnh">
-                            <div className="block" data-oid="fvh419p">
+                        <div className="grid md:grid-cols-2 gap-8 items-center" data-oid=".dmj-vx">
+                            <div className="block" data-oid="yuqk4-s">
                                 <div
                                     className="inline-block bg-blue-600 px-3 py-1 rounded-full text-xs font-bold tracking-wider mb-6 uppercase text-white"
-                                    data-oid="8efpvfl"
+                                    data-oid="j85.ryd"
                                 >
                                     India's most trusted Platform For Tech Freshers
                                 </div>
 
                                 <h1
                                     className="text-4xl md:text-6xl font-bold mb-4 text-white drop-shadow-md"
-                                    data-oid="bv.0fq6"
+                                    data-oid="f.w1y10"
                                 >
                                     JOIN THOUSANDS GETTING JOBS IN TOP TECH COMPANIES
                                 </h1>
 
                                 <p
                                     className="text-xl md:text-2xl mb-8 text-white"
-                                    data-oid="54d8tj1"
+                                    data-oid="u77u6l9"
                                 >
                                     Discover Jobs, Internships, and Resources tailored for Freshers
                                 </p>
 
-                                <div className="flex flex-wrap gap-4 mt-10" data-oid="2jnjql7">
+                                <div className="flex flex-wrap gap-4 mt-10" data-oid="0ay29ok">
                                     <a
                                         href="/register"
                                         className="inline-flex items-center px-6 py-3 bg-white/20 backdrop-blur-md border border-white/30 hover:bg-white/30 rounded-md font-medium transition-all duration-300 hover:translate-y-[-2px] hover:shadow-lg"
-                                        data-oid="rz:ws:9"
+                                        data-oid="b8ric40"
                                     >
                                         Join Community
                                         <svg
@@ -532,30 +532,30 @@ export default function Page() {
                                             stroke="currentColor"
                                             viewBox="0 0 24 24"
                                             xmlns="http://www.w3.org/2000/svg"
-                                            data-oid="g3et94."
+                                            data-oid="1.tz443"
                                         >
                                             <path
                                                 strokeLinecap="round"
                                                 strokeLinejoin="round"
                                                 strokeWidth="2"
                                                 d="M14 5l7 7m0 0l-7 7m7-7H3"
-                                                data-oid="2fof2wf"
+                                                data-oid="getjfz9"
                                             ></path>
                                         </svg>
                                     </a>
                                 </div>
                             </div>
 
-                            <div className="block relative" data-oid="cyng.bn">
+                            <div className="block relative" data-oid="-ebq79r">
                                 <div
                                     className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 shadow-xl transform hover:scale-[1.01] transition-all duration-500 relative z-10"
-                                    data-oid="k:qni7_"
+                                    data-oid="8kpxguq"
                                 >
-                                    <div className="mb-6" data-oid="wlg2eu6">
+                                    <div className="mb-6" data-oid="854_npi">
                                         <form
                                             onSubmit={handleSearch}
                                             className="flex relative z-10 transform transition-all duration-500 hover:scale-[1.02]"
-                                            data-oid="em8e248"
+                                            data-oid="p0gkb5_"
                                         >
                                             <input
                                                 type="text"
@@ -563,35 +563,35 @@ export default function Page() {
                                                 className="w-full px-4 py-3 rounded-l-md text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-inner"
                                                 value={searchQuery}
                                                 onChange={(e) => setSearchQuery(e.target.value)}
-                                                data-oid="zo61sr."
+                                                data-oid="66e-e8f"
                                             />
 
                                             <button
                                                 type="submit"
                                                 className="bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] hover:from-[hsl(175,70%,41%)] hover:to-[hsl(196,80%,45%)] px-6 py-3 rounded-r-md font-medium transition-all duration-300 shadow-lg"
-                                                data-oid="5i-sxki"
+                                                data-oid="55gx9ib"
                                             >
                                                 SEARCH
                                             </button>
                                         </form>
                                     </div>
 
-                                    <div className="flex flex-wrap gap-3 mb-6" data-oid="_wszf48">
+                                    <div className="flex flex-wrap gap-3 mb-6" data-oid="d0rn8-p">
                                         <div
                                             className="bg-white/20 backdrop-blur-md px-4 py-2 rounded-full text-sm border border-white/30 shadow-sm hover:shadow-md transition-all duration-300 hover:bg-white/30 text-white font-medium"
-                                            data-oid="9l:7r9:"
+                                            data-oid="19.90cg"
                                         >
                                             {stats?.freshers.toLocaleString()} Freshers
                                         </div>
                                         <div
                                             className="bg-white/20 backdrop-blur-md px-4 py-2 rounded-full text-sm border border-white/30 shadow-sm hover:shadow-md transition-all duration-300 hover:bg-white/30 text-white font-medium"
-                                            data-oid="fkvrf3z"
+                                            data-oid="q4on5kh"
                                         >
                                             {stats?.verifiedJobs} Verified Jobs
                                         </div>
                                         <div
                                             className="bg-white/20 backdrop-blur-md px-4 py-2 rounded-full text-sm border border-white/30 shadow-sm hover:shadow-md transition-all duration-300 hover:bg-white/30 text-white font-medium"
-                                            data-oid="x3oax.k"
+                                            data-oid="g-1qu45"
                                         >
                                             Entry-Level Focused
                                         </div>
@@ -599,11 +599,11 @@ export default function Page() {
 
                                     <div
                                         className="absolute -bottom-3 -right-3 w-20 h-20 bg-[hsl(196,80%,65%)] opacity-60 rounded-full blur-xl"
-                                        data-oid="k0qs-41"
+                                        data-oid="n5nn7do"
                                     ></div>
                                     <div
                                         className="absolute -top-3 -left-3 w-20 h-20 bg-[hsl(175,70%,61%)] opacity-60 rounded-full blur-xl"
-                                        data-oid="euv83s3"
+                                        data-oid="kt:-_.k"
                                     ></div>
                                 </div>
                             </div>
@@ -614,26 +614,26 @@ export default function Page() {
                 {/* Platform Stats Section */}
                 <section
                     className="py-16 bg-gradient-to-b from-[hsl(210,50%,98%)] to-[hsl(196,60%,95%)]"
-                    data-oid="t76juh9"
+                    data-oid="3bz02_q"
                 >
-                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-oid="kwqfinv">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-oid="mon4y05">
                         <h2
                             className="text-3xl font-bold text-center mb-12 text-gray-800"
-                            data-oid="qkaodgm"
+                            data-oid="7krlu6z"
                         >
                             Platform Metrics
                         </h2>
                         <div
                             className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
-                            data-oid="z09:h9s"
+                            data-oid="2ka:l4x"
                         >
                             <div
                                 className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-md border-t-4 border-[hsl(196,80%,45%)] hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 hover:border-[hsl(175,70%,41%)]"
-                                data-oid="ntbphfs"
+                                data-oid="asdwcm2"
                             >
                                 <div
                                     className="text-4xl mb-4 text-[hsl(196,80%,45%)]"
-                                    data-oid="a.9koyn"
+                                    data-oid="rzcrjx2"
                                 >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -645,28 +645,28 @@ export default function Page() {
                                         strokeWidth="2"
                                         strokeLinecap="round"
                                         strokeLinejoin="round"
-                                        data-oid="tv-de-x"
+                                        data-oid="67o7gjo"
                                     >
                                         <path
                                             d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-                                            data-oid="34vzz5_"
+                                            data-oid="xrpt91n"
                                         />
                                     </svg>
                                 </div>
                                 <h3
                                     className="text-xl font-bold mb-2 text-gray-800"
-                                    data-oid=":gf9o:i"
+                                    data-oid="6rh13q9"
                                 >
                                     Active Members
                                 </h3>
-                                <p className="text-gray-600 mb-4" data-oid="wzjhz23">
+                                <p className="text-gray-600 mb-4" data-oid="ov99jra">
                                     {stats?.activeMembers.toLocaleString()} growing community
                                     members
                                 </p>
                                 <a
                                     href="/community"
                                     className="text-blue-800 font-medium inline-flex items-center hover:text-blue-900 transition-all duration-300"
-                                    data-oid="etpbq31"
+                                    data-oid="s:c3hcn"
                                 >
                                     Join Now
                                     <svg
@@ -675,14 +675,14 @@ export default function Page() {
                                         stroke="currentColor"
                                         viewBox="0 0 24 24"
                                         xmlns="http://www.w3.org/2000/svg"
-                                        data-oid="nasa8:i"
+                                        data-oid="8v.vc6u"
                                     >
                                         <path
                                             strokeLinecap="round"
                                             strokeLinejoin="round"
                                             strokeWidth="2"
                                             d="M14 5l7 7m0 0l-7 7m7-7H3"
-                                            data-oid="b0onu9h"
+                                            data-oid=":u0kf_7"
                                         ></path>
                                     </svg>
                                 </a>
@@ -690,11 +690,11 @@ export default function Page() {
 
                             <div
                                 className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-md border-t-4 border-[hsl(196,80%,45%)] hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 hover:border-[hsl(175,70%,41%)]"
-                                data-oid="zrfv9g-"
+                                data-oid="j8clh07"
                             >
                                 <div
                                     className="text-4xl mb-4 text-[hsl(196,80%,45%)]"
-                                    data-oid="p9c9z_q"
+                                    data-oid="lp_3t3y"
                                 >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -706,27 +706,27 @@ export default function Page() {
                                         strokeWidth="2"
                                         strokeLinecap="round"
                                         strokeLinejoin="round"
-                                        data-oid=":25q8sh"
+                                        data-oid="z9:2j59"
                                     >
                                         <path
                                             d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                                            data-oid="8btuqhf"
+                                            data-oid="x4cuqsd"
                                         />
                                     </svg>
                                 </div>
                                 <h3
                                     className="text-xl font-bold mb-2 text-gray-800"
-                                    data-oid="8pphkkk"
+                                    data-oid="olz:2i6"
                                 >
                                     Posted Jobs
                                 </h3>
-                                <p className="text-gray-600 mb-4" data-oid="zuj552d">
+                                <p className="text-gray-600 mb-4" data-oid="z1cc:og">
                                     {stats?.postedJobs} Jobs posted till now
                                 </p>
                                 <a
                                     href="/jobs"
                                     className="text-blue-800 font-medium inline-flex items-center hover:text-blue-900 transition-all duration-300"
-                                    data-oid="kkqgw0o"
+                                    data-oid="52811i:"
                                 >
                                     See Jobs
                                     <svg
@@ -735,14 +735,14 @@ export default function Page() {
                                         stroke="currentColor"
                                         viewBox="0 0 24 24"
                                         xmlns="http://www.w3.org/2000/svg"
-                                        data-oid="e0mal0t"
+                                        data-oid="p8ywbng"
                                     >
                                         <path
                                             strokeLinecap="round"
                                             strokeLinejoin="round"
                                             strokeWidth="2"
                                             d="M14 5l7 7m0 0l-7 7m7-7H3"
-                                            data-oid="qy_je0h"
+                                            data-oid="sw51305"
                                         ></path>
                                     </svg>
                                 </a>
@@ -750,11 +750,11 @@ export default function Page() {
 
                             <div
                                 className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-md border-t-4 border-[hsl(196,80%,45%)] hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 hover:border-[hsl(175,70%,41%)]"
-                                data-oid="247txr."
+                                data-oid="g_pnyc5"
                             >
                                 <div
                                     className="text-4xl mb-4 text-[hsl(196,80%,45%)]"
-                                    data-oid="k2x_dz-"
+                                    data-oid="90h.vv."
                                 >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -766,35 +766,35 @@ export default function Page() {
                                         strokeWidth="2"
                                         strokeLinecap="round"
                                         strokeLinejoin="round"
-                                        data-oid="wfmewdy"
+                                        data-oid="o9pzxae"
                                     >
                                         <path
                                             d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
-                                            data-oid="vwthbtw"
+                                            data-oid="n5al57-"
                                         ></path>
                                         <rect
                                             x="2"
                                             y="9"
                                             width="4"
                                             height="12"
-                                            data-oid="y.rv.-z"
+                                            data-oid="-5vgjud"
                                         ></rect>
-                                        <circle cx="4" cy="4" r="2" data-oid="4goz-1l"></circle>
+                                        <circle cx="4" cy="4" r="2" data-oid="vddkhu1"></circle>
                                     </svg>
                                 </div>
                                 <h3
                                     className="text-xl font-bold mb-2 text-gray-800"
-                                    data-oid="3y84n24"
+                                    data-oid="bppt85s"
                                 >
                                     LinkedIn
                                 </h3>
-                                <p className="text-gray-600 mb-4" data-oid="avttx:0">
+                                <p className="text-gray-600 mb-4" data-oid="mo92a4p">
                                     {stats?.linkedInFollowers} professional followers
                                 </p>
                                 <a
                                     href="/linkedin"
                                     className="text-blue-800 font-medium inline-flex items-center hover:text-blue-900 transition-all duration-300"
-                                    data-oid="p_lns_z"
+                                    data-oid="sadh_ft"
                                 >
                                     Connect
                                     <svg
@@ -803,14 +803,14 @@ export default function Page() {
                                         stroke="currentColor"
                                         viewBox="0 0 24 24"
                                         xmlns="http://www.w3.org/2000/svg"
-                                        data-oid="0xcsr0e"
+                                        data-oid="5yl29hb"
                                     >
                                         <path
                                             strokeLinecap="round"
                                             strokeLinejoin="round"
                                             strokeWidth="2"
                                             d="M14 5l7 7m0 0l-7 7m7-7H3"
-                                            data-oid="1y:9hrg"
+                                            data-oid="mx84krd"
                                         ></path>
                                     </svg>
                                 </a>
@@ -818,11 +818,11 @@ export default function Page() {
 
                             <div
                                 className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-md border-t-4 border-[hsl(196,80%,45%)] hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 hover:border-[hsl(175,70%,41%)]"
-                                data-oid="avfmcix"
+                                data-oid="81ps3ex"
                             >
                                 <div
                                     className="text-4xl mb-4 text-[hsl(196,80%,45%)]"
-                                    data-oid="crdjnzu"
+                                    data-oid="f4fq6zb"
                                 >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -834,27 +834,27 @@ export default function Page() {
                                         strokeWidth="2"
                                         strokeLinecap="round"
                                         strokeLinejoin="round"
-                                        data-oid="06-8.ea"
+                                        data-oid="2hip883"
                                     >
                                         <path
                                             d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                                            data-oid="bpngd-2"
+                                            data-oid="k2z.1u3"
                                         />
                                     </svg>
                                 </div>
                                 <h3
                                     className="text-xl font-bold mb-2 text-gray-800"
-                                    data-oid="5d90egg"
+                                    data-oid="rv5vphl"
                                 >
                                     Registered Users
                                 </h3>
-                                <p className="text-gray-600 mb-4" data-oid="pflpu9f">
+                                <p className="text-gray-600 mb-4" data-oid="w616v8y">
                                     {stats?.users.toLocaleString()} active accounts
                                 </p>
                                 <Link
                                     href="/register"
                                     className="text-blue-800 font-medium inline-flex items-center hover:text-blue-900 transition-all duration-300"
-                                    data-oid="b_shsz7"
+                                    data-oid="ree8t9m"
                                 >
                                     Join Now
                                     <svg
@@ -863,14 +863,14 @@ export default function Page() {
                                         stroke="currentColor"
                                         viewBox="0 0 24 24"
                                         xmlns="http://www.w3.org/2000/svg"
-                                        data-oid="v3ygyzp"
+                                        data-oid="ossr.vi"
                                     >
                                         <path
                                             strokeLinecap="round"
                                             strokeLinejoin="round"
                                             strokeWidth="2"
                                             d="M14 5l7 7m0 0l-7 7m7-7H3"
-                                            data-oid="-1-1wua"
+                                            data-oid="yr7ikzx"
                                         ></path>
                                     </svg>
                                 </Link>
@@ -882,20 +882,20 @@ export default function Page() {
                 {/* Why Choose CareerX */}
                 <section
                     className="py-16 bg-gradient-to-b from-white to-[hsl(196,60%,95%)]"
-                    data-oid="q-rvgd1"
+                    data-oid="5h6ihhc"
                 >
-                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-oid="kb7we24">
-                        <div className="text-center mb-12" data-oid="nephzsa">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-oid="bo9gl30">
+                        <div className="text-center mb-12" data-oid="2rldk3m">
                             <h2
                                 className="text-3xl font-bold mb-4 text-gray-800"
-                                data-oid="k0fpckf"
+                                data-oid="f.ldbzp"
                             >
                                 Why Choose CareerX
                             </h2>
-                            <p className="text-xl text-blue-800" data-oid=".2sm0ho">
+                            <p className="text-xl text-blue-800" data-oid="--vuk_8">
                                 Designed Exclusively For Tech Freshers
                             </p>
-                            <p className="mt-4 text-gray-600 max-w-2xl mx-auto" data-oid=":w9-zr:">
+                            <p className="mt-4 text-gray-600 max-w-2xl mx-auto" data-oid="7nmalke">
                                 Our platform focuses on the unique needs of entry-level tech talent.
                             </p>
                         </div>
@@ -903,34 +903,34 @@ export default function Page() {
                         {/* Full-Width Banner */}
                         <div
                             className="bg-gradient-to-r from-[hsl(196,80%,45%)] via-[hsl(210,70%,45%)] to-[hsl(175,70%,41%)] text-white p-6 rounded-xl mb-12 shadow-lg transform hover:scale-[1.01] transition-all duration-300 relative overflow-hidden group"
-                            data-oid="p4yj6j-"
+                            data-oid="_0ucnzz"
                         >
                             {/* Animated shine effect */}
                             <div
                                 className="absolute inset-0 opacity-0 group-hover:opacity-100 animate-shine transition-opacity duration-300"
-                                data-oid="mt-uyeh"
+                                data-oid="y-ovc78"
                             ></div>
                             {/* Frosted glass overlay */}
                             <div
                                 className="absolute inset-0 bg-white/10 backdrop-blur-[2px]"
-                                data-oid="sm50huk"
+                                data-oid="3p:i6r:"
                             ></div>
                             <div
                                 className="flex flex-col md:flex-row items-center justify-between relative z-10"
-                                data-oid="too454c"
+                                data-oid="v93lmbm"
                             >
-                                <div data-oid="pi4:slh">
-                                    <h3 className="text-2xl font-bold mb-2" data-oid="t6ljlxp">
+                                <div data-oid="fw4xg90">
+                                    <h3 className="text-2xl font-bold mb-2" data-oid="9l:sqgv">
                                         NOTIFY X
                                     </h3>
-                                    <p className="text-blue-100" data-oid="a55shd9">
+                                    <p className="text-blue-100" data-oid="mparq9o">
                                         Get real-time alerts for freshers jobs matching your profile
                                     </p>
                                 </div>
                                 <a
                                     href="/notify"
                                     className="mt-4 md:mt-0 px-6 py-2 bg-white text-blue-800 rounded-md font-medium hover:bg-blue-50 transition-all duration-300"
-                                    data-oid=":b5xap4"
+                                    data-oid="g20219w"
                                 >
                                     Learn More
                                 </a>
@@ -938,16 +938,16 @@ export default function Page() {
                         </div>
 
                         {/* Benefits Cards */}
-                        <div className="grid md:grid-cols-3 gap-8" data-oid="bp4516:">
+                        <div className="grid md:grid-cols-3 gap-8" data-oid="on52i5o">
                             {benefits.map((benefit, index) => (
                                 <div
                                     key={benefit.id}
                                     className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-md border border-[hsl(210,30%,95%)] hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 hover:border-[hsl(196,80%,45%)]"
-                                    data-oid="1c8cp7m"
+                                    data-oid="d22utm5"
                                 >
                                     <div
                                         className="text-4xl mb-4 text-[hsl(196,80%,45%)]"
-                                        data-oid="l4e9a:-"
+                                        data-oid="9dt3jy."
                                     >
                                         {benefit.icon === 'graduation' && (
                                             <svg
@@ -960,15 +960,15 @@ export default function Page() {
                                                 strokeWidth="2"
                                                 strokeLinecap="round"
                                                 strokeLinejoin="round"
-                                                data-oid="1j6qncv"
+                                                data-oid="2_whl5g"
                                             >
                                                 <path
                                                     d="M22 10v6M2 10l10-5 10 5-10 5z"
-                                                    data-oid="aqugnvs"
+                                                    data-oid="vzjogbz"
                                                 ></path>
                                                 <path
                                                     d="M6 12v5c3 3 9 3 12 0v-5"
-                                                    data-oid=".q18u1z"
+                                                    data-oid="y7j1k94"
                                                 ></path>
                                             </svg>
                                         )}
@@ -983,13 +983,13 @@ export default function Page() {
                                                 strokeWidth="2"
                                                 strokeLinecap="round"
                                                 strokeLinejoin="round"
-                                                data-oid="iiktkax"
+                                                data-oid=":xu-:8:"
                                             >
                                                 <path
                                                     d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"
-                                                    data-oid="_6hvpn1"
+                                                    data-oid=".qyxr5f"
                                                 ></path>
-                                                <path d="m9 12 2 2 4-4" data-oid="tneqc3w"></path>
+                                                <path d="m9 12 2 2 4-4" data-oid="3i4t8_-"></path>
                                             </svg>
                                         )}
                                         {benefit.icon === 'handshake' && (
@@ -1003,26 +1003,26 @@ export default function Page() {
                                                 strokeWidth="2"
                                                 strokeLinecap="round"
                                                 strokeLinejoin="round"
-                                                data-oid="3e_z79-"
+                                                data-oid="ed.7ywz"
                                             >
                                                 <path
                                                     d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 0C1.46 6.7 1.33 10.28 4 13l8 8 8-8c2.67-2.72 2.54-6.3.42-8.42z"
-                                                    data-oid="2xcxfg1"
+                                                    data-oid="17kwy.2"
                                                 ></path>
                                                 <path
                                                     d="M12 5.36 8.87 8.5a2.13 2.13 0 0 0 0 3h0a2.13 2.13 0 0 0 3 0l2.26-2.21a2.13 2.13 0 0 1 3 0h0a2.13 2.13 0 0 1 0 3l-2.26 2.21"
-                                                    data-oid="d2b_2_g"
+                                                    data-oid="zwvayy0"
                                                 ></path>
                                             </svg>
                                         )}
                                     </div>
                                     <h3
                                         className="text-xl font-bold mb-2 text-gray-800"
-                                        data-oid="3qbledc"
+                                        data-oid="a_061j9"
                                     >
                                         {benefit.title}
                                     </h3>
-                                    <p className="text-gray-600" data-oid="fb08f-u">
+                                    <p className="text-gray-600" data-oid="i43:v8y">
                                         {benefit.description}
                                     </p>
                                 </div>
@@ -1034,39 +1034,39 @@ export default function Page() {
                 {/* NotifyX Section */}
                 <section
                     className="py-16 bg-gradient-to-r from-[hsl(210,60%,92%)] via-[hsl(196,70%,90%)] to-[hsl(175,60%,92%)] relative overflow-hidden"
-                    data-oid="h3h7pyt"
+                    data-oid="yt15n6:"
                 >
                     {/* Subtle animated background elements */}
-                    <div className="absolute inset-0 overflow-hidden opacity-20" data-oid="lzx5ls6">
+                    <div className="absolute inset-0 overflow-hidden opacity-20" data-oid="bhdg1u0">
                         <div
                             className="absolute top-20 left-10 w-72 h-72 bg-[hsl(196,80%,65%)] rounded-full blur-3xl animate-blob animation-delay-2000"
-                            data-oid="d1u2la8"
+                            data-oid="lkkho.z"
                         ></div>
                         <div
                             className="absolute bottom-20 right-10 w-72 h-72 bg-[hsl(175,70%,61%)] rounded-full blur-3xl animate-blob"
-                            data-oid="zt4ge03"
+                            data-oid="by260pa"
                         ></div>
                     </div>
                     <div
                         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
-                        data-oid="frs46gb"
+                        data-oid="ub:98q."
                     >
-                        <div className="text-center mb-12" data-oid="5kpl:v3">
+                        <div className="text-center mb-12" data-oid="u:kd23p">
                             <h2
                                 className="text-4xl font-bold mb-4 text-gray-800 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] inline-block text-transparent bg-clip-text"
-                                data-oid="yg65bcx"
+                                data-oid="inffo-:"
                             >
                                 NotifyX
                             </h2>
                             <p
                                 className="text-2xl font-semibold mb-2 text-gray-700"
-                                data-oid="wlekhnn"
+                                data-oid=".qs:kqj"
                             >
                                 Get Real-time Tech Job Alerts for just ₹49/month.
                             </p>
                             <p
                                 className="text-xl text-gray-600 max-w-4xl mx-auto"
-                                data-oid="vkev2vb"
+                                data-oid="5afzz5:"
                             >
                                 Unlock Curated Opportunities, Insider Updates, and a driven
                                 Community — All for less than a Cup of Coffee. Supercharge your
@@ -1074,15 +1074,15 @@ export default function Page() {
                             </p>
                         </div>
 
-                        <div className="grid md:grid-cols-3 gap-8" data-oid="bb8-5hl">
+                        <div className="grid md:grid-cols-3 gap-8" data-oid=":_nkf86">
                             {/* Tile 1 */}
                             <div
                                 className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-md border border-[hsl(210,30%,95%)] hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 hover:border-[hsl(196,80%,45%)] text-center"
-                                data-oid="_6uk.g3"
+                                data-oid="jv_guuf"
                             >
                                 <div
                                     className="text-4xl mb-4 text-[hsl(196,80%,45%)]"
-                                    data-oid="6jpumw7"
+                                    data-oid="e9t0xu1"
                                 >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -1094,21 +1094,21 @@ export default function Page() {
                                         strokeWidth="2"
                                         strokeLinecap="round"
                                         strokeLinejoin="round"
-                                        data-oid="js3wvs8"
+                                        data-oid="v6hvf9-"
                                     >
                                         <path
                                             d="M22 12h-4l-3 9L9 3l-3 9H2"
-                                            data-oid=":92zqle"
+                                            data-oid="-s.zla2"
                                         ></path>
                                     </svg>
                                 </div>
                                 <h3
                                     className="text-xl font-bold mb-2 text-gray-800"
-                                    data-oid=".swftr9"
+                                    data-oid="f3j8.:0"
                                 >
                                     Instant Access
                                 </h3>
-                                <p className="text-gray-600" data-oid="y3i-e-h">
+                                <p className="text-gray-600" data-oid="oq1djjc">
                                     Get immediate access to the latest tech job opportunities as
                                     soon as they're posted.
                                 </p>
@@ -1117,11 +1117,11 @@ export default function Page() {
                             {/* Tile 2 */}
                             <div
                                 className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-md border border-[hsl(210,30%,95%)] hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 hover:border-[hsl(196,80%,45%)] text-center"
-                                data-oid="cm7et5m"
+                                data-oid="ha7zatn"
                             >
                                 <div
                                     className="text-4xl mb-4 text-[hsl(196,80%,45%)]"
-                                    data-oid="gyrgtva"
+                                    data-oid="jl1u:52"
                                 >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -1133,25 +1133,25 @@ export default function Page() {
                                         strokeWidth="2"
                                         strokeLinecap="round"
                                         strokeLinejoin="round"
-                                        data-oid="7_r6z7m"
+                                        data-oid="i4-qou8"
                                     >
                                         <path
                                             d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"
-                                            data-oid="3:80.01"
+                                            data-oid="237l83a"
                                         ></path>
                                         <path
                                             d="M13.73 21a2 2 0 0 1-3.46 0"
-                                            data-oid="k55m_pd"
+                                            data-oid="-0mr:u1"
                                         ></path>
                                     </svg>
                                 </div>
                                 <h3
                                     className="text-xl font-bold mb-2 text-gray-800"
-                                    data-oid="3ij6vj1"
+                                    data-oid="iln8ruh"
                                 >
                                     Real-Time Alerts
                                 </h3>
-                                <p className="text-gray-600" data-oid="f1m3bss">
+                                <p className="text-gray-600" data-oid="73gn.sc">
                                     Stay ahead with personalized notifications that match your
                                     skills and preferences.
                                 </p>
@@ -1160,11 +1160,11 @@ export default function Page() {
                             {/* Tile 3 */}
                             <div
                                 className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-md border border-[hsl(210,30%,95%)] hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 hover:border-[hsl(196,80%,45%)] text-center"
-                                data-oid=":f-ei3t"
+                                data-oid="k885zp5"
                             >
                                 <div
                                     className="text-4xl mb-4 text-[hsl(196,80%,45%)]"
-                                    data-oid="8:kpy_e"
+                                    data-oid="99ygvtq"
                                 >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -1176,21 +1176,21 @@ export default function Page() {
                                         strokeWidth="2"
                                         strokeLinecap="round"
                                         strokeLinejoin="round"
-                                        data-oid="p.toq4b"
+                                        data-oid="vngajte"
                                     >
                                         <path
                                             d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"
-                                            data-oid="itkykow"
+                                            data-oid="d-6nuyl"
                                         ></path>
                                     </svg>
                                 </div>
                                 <h3
                                     className="text-xl font-bold mb-2 text-gray-800"
-                                    data-oid="gcokssq"
+                                    data-oid="4xju44x"
                                 >
                                     Fast-Track Your Career
                                 </h3>
-                                <p className="text-gray-600" data-oid="vtzhi24">
+                                <p className="text-gray-600" data-oid="32-opa9">
                                     Be among the first applicants and significantly increase your
                                     chances of getting hired.
                                 </p>
@@ -1202,62 +1202,62 @@ export default function Page() {
                 {/* Community Integration */}
                 <section
                     className="py-16 bg-gradient-to-b from-[hsl(210,50%,98%)] to-[hsl(196,60%,95%)] relative overflow-hidden"
-                    data-oid="t_ioluh"
+                    data-oid="r9ebu7d"
                 >
                     {/* Animated background elements */}
-                    <div className="absolute inset-0 overflow-hidden opacity-30" data-oid="f4nx8-.">
+                    <div className="absolute inset-0 overflow-hidden opacity-30" data-oid="vs-v1lr">
                         <div
                             className="absolute top-20 left-10 w-72 h-72 bg-[hsl(196,80%,65%)] rounded-full blur-3xl animate-blob animation-delay-4000"
-                            data-oid="0y0sblp"
+                            data-oid="tgnukd:"
                         ></div>
                         <div
                             className="absolute bottom-20 right-10 w-72 h-72 bg-[hsl(175,70%,61%)] rounded-full blur-3xl animate-blob"
-                            data-oid="g136.tr"
+                            data-oid="ee99mrj"
                         ></div>
                     </div>
-                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-oid="xhve9c4">
-                        <div className="text-center mb-12" data-oid="-cf96fe">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-oid="v17iq:-">
+                        <div className="text-center mb-12" data-oid="jc7ji4x">
                             <h2
                                 className="text-3xl font-bold mb-4 text-gray-800"
-                                data-oid="webtkg9"
+                                data-oid="6kmpn4d"
                             >
                                 Join 35,000+ Tech Freshers
                             </h2>
-                            <p className="text-gray-600 max-w-2xl mx-auto" data-oid="f-kggje">
+                            <p className="text-gray-600 max-w-2xl mx-auto" data-oid="shqte.p">
                                 Networking is crucial. Connect with peers and mentors.
                             </p>
                         </div>
 
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-6" data-oid=".bzpf97">
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-6" data-oid="__s-e0b">
                             <a
                                 href="/whatsapp"
                                 className="flex flex-col items-center p-6 bg-white/80 backdrop-blur-sm rounded-xl shadow-md hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 relative z-10 border border-[hsl(210,30%,95%)] border-t-4 border-t-green-500"
-                                data-oid="-lbk5m6"
+                                data-oid="8y_nc8s"
                             >
                                 <div
                                     className="w-16 h-16 flex items-center justify-center bg-green-500 text-white rounded-full mb-4"
-                                    data-oid="am9q7v4"
+                                    data-oid="fu0iytg"
                                 >
                                     <svg
                                         className="h-8 w-8"
                                         fill="currentColor"
                                         viewBox="0 0 24 24"
                                         xmlns="http://www.w3.org/2000/svg"
-                                        data-oid="srgnsu2"
+                                        data-oid=":x786x_"
                                     >
                                         <path
                                             d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
-                                            data-oid="tn:ldff"
+                                            data-oid="9ybgslm"
                                         ></path>
                                     </svg>
                                 </div>
                                 <h3
                                     className="text-xl font-bold mb-1 text-gray-800"
-                                    data-oid="n22h:cb"
+                                    data-oid="ihdwhcd"
                                 >
                                     WhatsApp
                                 </h3>
-                                <p className="text-gray-600" data-oid="bcqtelj">
+                                <p className="text-gray-600" data-oid="t1pxr4p">
                                     {stats?.whatsappMembers.toLocaleString()} members
                                 </p>
                             </a>
@@ -1265,32 +1265,32 @@ export default function Page() {
                             <a
                                 href="/linkedin"
                                 className="flex flex-col items-center p-6 bg-white/80 backdrop-blur-sm rounded-xl shadow-md hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 relative z-10 border border-[hsl(210,30%,95%)] border-t-4 border-t-blue-600"
-                                data-oid="s.hk20x"
+                                data-oid="o1:bkcp"
                             >
                                 <div
                                     className="w-16 h-16 flex items-center justify-center bg-blue-600 text-white rounded-full mb-4"
-                                    data-oid="i81p3ce"
+                                    data-oid="u6k6lcj"
                                 >
                                     <svg
                                         className="h-8 w-8"
                                         fill="currentColor"
                                         viewBox="0 0 24 24"
                                         xmlns="http://www.w3.org/2000/svg"
-                                        data-oid="bnxfmno"
+                                        data-oid="f0q_q1q"
                                     >
                                         <path
                                             d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
-                                            data-oid="rq9h91c"
+                                            data-oid="n6s85o7"
                                         ></path>
                                     </svg>
                                 </div>
                                 <h3
                                     className="text-xl font-bold mb-1 text-gray-800"
-                                    data-oid=":rk_:eu"
+                                    data-oid="9f:30z_"
                                 >
                                     LinkedIn
                                 </h3>
-                                <p className="text-gray-600" data-oid="c2843z2">
+                                <p className="text-gray-600" data-oid="zez:w9q">
                                     {stats?.linkedinMembers.toLocaleString()} followers
                                 </p>
                             </a>
@@ -1298,32 +1298,32 @@ export default function Page() {
                             <a
                                 href="/telegram"
                                 className="flex flex-col items-center p-6 bg-white/80 backdrop-blur-sm rounded-xl shadow-md hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 relative z-10 border border-[hsl(210,30%,95%)] border-t-4 border-t-blue-500"
-                                data-oid="lk78xm7"
+                                data-oid="yebj0-b"
                             >
                                 <div
                                     className="w-16 h-16 flex items-center justify-center bg-blue-500 text-white rounded-full mb-4"
-                                    data-oid=".38tc7n"
+                                    data-oid="b3gevpl"
                                 >
                                     <svg
                                         className="h-8 w-8"
                                         fill="currentColor"
                                         viewBox="0 0 24 24"
                                         xmlns="http://www.w3.org/2000/svg"
-                                        data-oid="l4cw8uj"
+                                        data-oid="4p5y35c"
                                     >
                                         <path
                                             d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.96 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"
-                                            data-oid="mviusn."
+                                            data-oid="36g71et"
                                         ></path>
                                     </svg>
                                 </div>
                                 <h3
                                     className="text-xl font-bold mb-1 text-gray-800"
-                                    data-oid="i1px7ut"
+                                    data-oid="j2s2z3i"
                                 >
                                     Telegram
                                 </h3>
-                                <p className="text-gray-600" data-oid=".n:ifza">
+                                <p className="text-gray-600" data-oid="1pkbqyv">
                                     {stats?.telegramMembers.toLocaleString()} members
                                 </p>
                             </a>
@@ -1331,32 +1331,32 @@ export default function Page() {
                             <a
                                 href="/instagram"
                                 className="flex flex-col items-center p-6 bg-white/80 backdrop-blur-sm rounded-xl shadow-md hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 relative z-10 border border-[hsl(210,30%,95%)] border-t-4 border-t-purple-600"
-                                data-oid="7zkgxac"
+                                data-oid="qu0mpzr"
                             >
                                 <div
                                     className="w-16 h-16 flex items-center justify-center bg-gradient-to-tr from-purple-600 to-pink-500 text-white rounded-full mb-4"
-                                    data-oid="efs:cby"
+                                    data-oid="_w_4u93"
                                 >
                                     <svg
                                         className="h-8 w-8"
                                         fill="currentColor"
                                         viewBox="0 0 24 24"
                                         xmlns="http://www.w3.org/2000/svg"
-                                        data-oid="cexv-.:"
+                                        data-oid="7adxsu0"
                                     >
                                         <path
                                             d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"
-                                            data-oid="j9waf5w"
+                                            data-oid="9agy8o2"
                                         ></path>
                                     </svg>
                                 </div>
                                 <h3
                                     className="text-xl font-bold mb-1 text-gray-800"
-                                    data-oid="r9y35gg"
+                                    data-oid="1z1vez2"
                                 >
                                     Instagram
                                 </h3>
-                                <p className="text-gray-600" data-oid="8e7nu.f">
+                                <p className="text-gray-600" data-oid="4mz108b">
                                     Follow us
                                 </p>
                             </a>
@@ -1367,53 +1367,53 @@ export default function Page() {
                 {/* Featured Jobs Section */}
                 <section
                     className="py-16 bg-gradient-to-r from-[hsl(210,60%,92%)] via-[hsl(196,70%,90%)] to-[hsl(175,60%,92%)] relative overflow-hidden"
-                    data-oid="g.cql88"
+                    data-oid="g7:5bbl"
                 >
                     {/* Subtle animated background elements */}
-                    <div className="absolute inset-0 overflow-hidden opacity-20" data-oid="mc5gw21">
+                    <div className="absolute inset-0 overflow-hidden opacity-20" data-oid="2rds-.v">
                         <div
                             className="absolute top-20 left-10 w-72 h-72 bg-[hsl(196,80%,65%)] rounded-full blur-3xl animate-blob animation-delay-2000"
-                            data-oid="6ul34p8"
+                            data-oid="z.5yqvi"
                         ></div>
                         <div
                             className="absolute bottom-20 right-10 w-72 h-72 bg-[hsl(175,70%,61%)] rounded-full blur-3xl animate-blob"
-                            data-oid="hgrpeqr"
+                            data-oid="kb50sg3"
                         ></div>
                     </div>
 
                     <div
                         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
-                        data-oid="7_1kw68"
+                        data-oid="va6b:tj"
                     >
-                        <div className="text-center mb-12" data-oid="s:d8d33">
+                        <div className="text-center mb-12" data-oid="q0irjsg">
                             <h2
                                 className="text-3xl font-bold mb-4 text-gray-800"
-                                data-oid="s.:3rf_"
+                                data-oid="inaw5dy"
                             >
                                 Featured Jobs
                             </h2>
-                            <p className="text-gray-600 max-w-2xl mx-auto" data-oid="4bcc5fx">
+                            <p className="text-gray-600 max-w-2xl mx-auto" data-oid="vlwvt:w">
                                 Handpicked opportunities for freshers in top tech companies
                             </p>
                         </div>
 
                         <div
                             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-                            data-oid="g1x11h8"
+                            data-oid="v:h6aa1"
                         >
                             {/* Job Card 1 */}
                             <div
                                 className="bg-white/80 backdrop-blur-sm rounded-xl shadow-md border border-[hsl(210,30%,95%)] overflow-hidden hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2"
-                                data-oid="-4s7vw1"
+                                data-oid="fgb49zl"
                             >
-                                <div className="p-6" data-oid="xhs:ra5">
+                                <div className="p-6" data-oid="t3l7yjn">
                                     <div
                                         className="flex items-center justify-between mb-4"
-                                        data-oid="vvftw4n"
+                                        data-oid="2:t4v-s"
                                     >
                                         <div
                                             className="w-12 h-12 bg-blue-100 rounded-md flex items-center justify-center text-blue-600"
-                                            data-oid="c404-o6"
+                                            data-oid="llla:q-"
                                         >
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
@@ -1425,7 +1425,7 @@ export default function Page() {
                                                 strokeWidth="2"
                                                 strokeLinecap="round"
                                                 strokeLinejoin="round"
-                                                data-oid="tcdjnh8"
+                                                data-oid="0l2skm4"
                                             >
                                                 <rect
                                                     x="2"
@@ -1434,65 +1434,65 @@ export default function Page() {
                                                     height="14"
                                                     rx="2"
                                                     ry="2"
-                                                    data-oid="-o6p0p9"
+                                                    data-oid="zcecpx0"
                                                 ></rect>
                                                 <path
                                                     d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"
-                                                    data-oid="6rg_m8:"
+                                                    data-oid=".ens8vm"
                                                 ></path>
                                             </svg>
                                         </div>
                                         <span
                                             className="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full"
-                                            data-oid="-q8c574"
+                                            data-oid="r91w_-w"
                                         >
                                             New
                                         </span>
                                     </div>
                                     <h3
                                         className="text-xl font-bold mb-2 text-gray-800"
-                                        data-oid="ilzzw4c"
+                                        data-oid="9l5ramq"
                                     >
                                         Frontend Developer
                                     </h3>
                                     <p
                                         className="text-blue-700 font-medium mb-3"
-                                        data-oid="kjd5v-e"
+                                        data-oid="c8:3d74"
                                     >
                                         Microsoft
                                     </p>
-                                    <div className="flex flex-wrap gap-2 mb-4" data-oid="c_8cmwy">
+                                    <div className="flex flex-wrap gap-2 mb-4" data-oid="r5okcrp">
                                         <span
                                             className="bg-blue-50 text-blue-700 text-xs font-medium px-2.5 py-0.5 rounded"
-                                            data-oid="q5hse5w"
+                                            data-oid="tp:fqf."
                                         >
                                             React
                                         </span>
                                         <span
                                             className="bg-blue-50 text-blue-700 text-xs font-medium px-2.5 py-0.5 rounded"
-                                            data-oid=":5txzy0"
+                                            data-oid="m4ut88r"
                                         >
                                             TypeScript
                                         </span>
                                         <span
                                             className="bg-blue-50 text-blue-700 text-xs font-medium px-2.5 py-0.5 rounded"
-                                            data-oid="7zr2qot"
+                                            data-oid="s5_h4_:"
                                         >
                                             Remote
                                         </span>
                                     </div>
                                     <div
                                         className="flex justify-between items-center"
-                                        data-oid="z5cc6ue"
+                                        data-oid="wi9mdnl"
                                     >
-                                        <span className="text-gray-600" data-oid=":2k1z3i">
+                                        <span className="text-gray-600" data-oid=":.5gm4t">
                                             ₹5-8 LPA
                                         </span>
-                                        <div className="flex gap-2" data-oid="axiemm6">
+                                        <div className="flex gap-2" data-oid="2qcyxmc">
                                             <a
                                                 href="/jobs/view-details/microsoft/frontend-developer"
                                                 className="text-blue-800 font-medium inline-flex items-center hover:text-blue-900 transition-all duration-300 text-sm"
-                                                data-oid="78:nyyk"
+                                                data-oid="adwg1c1"
                                             >
                                                 View Details
                                                 <svg
@@ -1500,14 +1500,14 @@ export default function Page() {
                                                     fill="none"
                                                     stroke="currentColor"
                                                     viewBox="0 0 24 24"
-                                                    data-oid="ham2ggl"
+                                                    data-oid="k-yrq7x"
                                                 >
                                                     <path
                                                         strokeLinecap="round"
                                                         strokeLinejoin="round"
                                                         strokeWidth="2"
                                                         d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                                                        data-oid="e3l9zgv"
+                                                        data-oid="mpdxmv4"
                                                     />
 
                                                     <path
@@ -1515,28 +1515,28 @@ export default function Page() {
                                                         strokeLinejoin="round"
                                                         strokeWidth="2"
                                                         d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                                                        data-oid="khc11vh"
+                                                        data-oid=":w0t5-_"
                                                     />
                                                 </svg>
                                             </a>
                                             <a
                                                 href="/jobs/apply/microsoft/frontend-developer"
                                                 className="bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white px-3 py-1 rounded-md font-medium hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300 transform hover:scale-105 text-sm inline-flex items-center gap-1"
-                                                data-oid="ikq5s6x"
+                                                data-oid="q2v083_"
                                             >
                                                 <svg
                                                     className="h-3 w-3"
                                                     fill="none"
                                                     stroke="currentColor"
                                                     viewBox="0 0 24 24"
-                                                    data-oid="5.dxr0y"
+                                                    data-oid="uco93wu"
                                                 >
                                                     <path
                                                         strokeLinecap="round"
                                                         strokeLinejoin="round"
                                                         strokeWidth="2"
                                                         d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                                                        data-oid="gddlnu1"
+                                                        data-oid="aob.swj"
                                                     />
                                                 </svg>
                                                 Apply Now
@@ -1549,16 +1549,16 @@ export default function Page() {
                             {/* Job Card 2 */}
                             <div
                                 className="bg-white/80 backdrop-blur-sm rounded-xl shadow-md border border-[hsl(210,30%,95%)] overflow-hidden hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2"
-                                data-oid="w90x4fe"
+                                data-oid="g4t6dor"
                             >
-                                <div className="p-6" data-oid="k9i2nxh">
+                                <div className="p-6" data-oid="p0mqrd5">
                                     <div
                                         className="flex items-center justify-between mb-4"
-                                        data-oid="l7dtd:1"
+                                        data-oid="dgg13hk"
                                     >
                                         <div
                                             className="w-12 h-12 bg-orange-100 rounded-md flex items-center justify-center text-orange-600"
-                                            data-oid="w3ad7ue"
+                                            data-oid="78kec8a"
                                         >
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
@@ -1570,65 +1570,65 @@ export default function Page() {
                                                 strokeWidth="2"
                                                 strokeLinecap="round"
                                                 strokeLinejoin="round"
-                                                data-oid="-q6111t"
+                                                data-oid="j:at.ij"
                                             >
                                                 <path
                                                     d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
-                                                    data-oid="8iuv.xr"
+                                                    data-oid="z0cwla3"
                                                 ></path>
                                             </svg>
                                         </div>
                                         <span
                                             className="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded-full"
-                                            data-oid="b95hjhr"
+                                            data-oid="mgjxa3g"
                                         >
                                             Featured
                                         </span>
                                     </div>
                                     <h3
                                         className="text-xl font-bold mb-2 text-gray-800"
-                                        data-oid="4mwn.a."
+                                        data-oid="i11i:cd"
                                     >
                                         Backend Engineer
                                     </h3>
                                     <p
                                         className="text-blue-700 font-medium mb-3"
-                                        data-oid=":5z73t9"
+                                        data-oid="n_81mon"
                                     >
                                         Amazon
                                     </p>
-                                    <div className="flex flex-wrap gap-2 mb-4" data-oid="ft-71.w">
+                                    <div className="flex flex-wrap gap-2 mb-4" data-oid="1igsm_g">
                                         <span
                                             className="bg-blue-50 text-blue-700 text-xs font-medium px-2.5 py-0.5 rounded"
-                                            data-oid="uogalez"
+                                            data-oid="s6x4ycj"
                                         >
                                             Java
                                         </span>
                                         <span
                                             className="bg-blue-50 text-blue-700 text-xs font-medium px-2.5 py-0.5 rounded"
-                                            data-oid="22qbkov"
+                                            data-oid="6ec_9kq"
                                         >
                                             Spring Boot
                                         </span>
                                         <span
                                             className="bg-blue-50 text-blue-700 text-xs font-medium px-2.5 py-0.5 rounded"
-                                            data-oid="5919b93"
+                                            data-oid="q.5s4mc"
                                         >
                                             Hybrid
                                         </span>
                                     </div>
                                     <div
                                         className="flex justify-between items-center"
-                                        data-oid="9fi6r_k"
+                                        data-oid="48974:8"
                                     >
-                                        <span className="text-gray-600" data-oid="siezzar">
+                                        <span className="text-gray-600" data-oid="swxflg4">
                                             ₹8-12 LPA
                                         </span>
-                                        <div className="flex gap-2" data-oid="s2_-524">
+                                        <div className="flex gap-2" data-oid="8o_rfal">
                                             <a
                                                 href="/jobs/view-details/amazon/backend-engineer"
                                                 className="text-blue-800 font-medium inline-flex items-center hover:text-blue-900 transition-all duration-300 text-sm"
-                                                data-oid="iz.f-07"
+                                                data-oid="8iteah:"
                                             >
                                                 View Details
                                                 <svg
@@ -1636,14 +1636,14 @@ export default function Page() {
                                                     fill="none"
                                                     stroke="currentColor"
                                                     viewBox="0 0 24 24"
-                                                    data-oid="q.q6.hi"
+                                                    data-oid="j58u.c1"
                                                 >
                                                     <path
                                                         strokeLinecap="round"
                                                         strokeLinejoin="round"
                                                         strokeWidth="2"
                                                         d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                                                        data-oid="zn6t8c1"
+                                                        data-oid="xo.lnje"
                                                     />
 
                                                     <path
@@ -1651,28 +1651,28 @@ export default function Page() {
                                                         strokeLinejoin="round"
                                                         strokeWidth="2"
                                                         d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                                                        data-oid="e027vh3"
+                                                        data-oid="aag_3pn"
                                                     />
                                                 </svg>
                                             </a>
                                             <a
                                                 href="/jobs/apply/amazon/backend-engineer"
                                                 className="bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white px-3 py-1 rounded-md font-medium hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300 transform hover:scale-105 text-sm inline-flex items-center gap-1"
-                                                data-oid="rft3tl7"
+                                                data-oid="mq.1iar"
                                             >
                                                 <svg
                                                     className="h-3 w-3"
                                                     fill="none"
                                                     stroke="currentColor"
                                                     viewBox="0 0 24 24"
-                                                    data-oid="_6cvnku"
+                                                    data-oid="1v88gst"
                                                 >
                                                     <path
                                                         strokeLinecap="round"
                                                         strokeLinejoin="round"
                                                         strokeWidth="2"
                                                         d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                                                        data-oid="gq62a.i"
+                                                        data-oid="u8sm:r7"
                                                     />
                                                 </svg>
                                                 Apply Now
@@ -1685,16 +1685,16 @@ export default function Page() {
                             {/* Job Card 3 */}
                             <div
                                 className="bg-white/80 backdrop-blur-sm rounded-xl shadow-md border border-[hsl(210,30%,95%)] overflow-hidden hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2"
-                                data-oid="hwfgoa6"
+                                data-oid=".bpgfaw"
                             >
-                                <div className="p-6" data-oid="37buoms">
+                                <div className="p-6" data-oid="fjp0nkn">
                                     <div
                                         className="flex items-center justify-between mb-4"
-                                        data-oid="flvx:9w"
+                                        data-oid="6sypvff"
                                     >
                                         <div
                                             className="w-12 h-12 bg-green-100 rounded-md flex items-center justify-center text-green-600"
-                                            data-oid="wjr5hug"
+                                            data-oid="9vzpu-3"
                                         >
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
@@ -1706,69 +1706,69 @@ export default function Page() {
                                                 strokeWidth="2"
                                                 strokeLinecap="round"
                                                 strokeLinejoin="round"
-                                                data-oid="p.kcwkr"
+                                                data-oid="5i5ce.y"
                                             >
                                                 <polyline
                                                     points="16 18 22 12 16 6"
-                                                    data-oid="57eq.bx"
+                                                    data-oid="p5pb56c"
                                                 ></polyline>
                                                 <polyline
                                                     points="8 6 2 12 8 18"
-                                                    data-oid="8e21_nr"
+                                                    data-oid="b5rqzg3"
                                                 ></polyline>
                                             </svg>
                                         </div>
                                         <span
                                             className="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full"
-                                            data-oid="_7s52ve"
+                                            data-oid="-.ouc3y"
                                         >
                                             Hot
                                         </span>
                                     </div>
                                     <h3
                                         className="text-xl font-bold mb-2 text-gray-800"
-                                        data-oid="kqdelfc"
+                                        data-oid="olcti73"
                                     >
                                         Full Stack Developer
                                     </h3>
                                     <p
                                         className="text-blue-700 font-medium mb-3"
-                                        data-oid="6ov1:bk"
+                                        data-oid="j3ri01y"
                                     >
                                         Google
                                     </p>
-                                    <div className="flex flex-wrap gap-2 mb-4" data-oid="g8p7669">
+                                    <div className="flex flex-wrap gap-2 mb-4" data-oid="rzmapvv">
                                         <span
                                             className="bg-blue-50 text-blue-700 text-xs font-medium px-2.5 py-0.5 rounded"
-                                            data-oid="zt2prbv"
+                                            data-oid="08lc_xt"
                                         >
                                             React
                                         </span>
                                         <span
                                             className="bg-blue-50 text-blue-700 text-xs font-medium px-2.5 py-0.5 rounded"
-                                            data-oid="top0xl."
+                                            data-oid="a.yx4b."
                                         >
                                             Node.js
                                         </span>
                                         <span
                                             className="bg-blue-50 text-blue-700 text-xs font-medium px-2.5 py-0.5 rounded"
-                                            data-oid=".stel2y"
+                                            data-oid="9e-23xu"
                                         >
                                             Onsite
                                         </span>
                                     </div>
                                     <div
                                         className="flex justify-between items-center"
-                                        data-oid="j92.eks"
+                                        data-oid="3p3ygum"
                                     >
-                                        <span className="text-gray-600" data-oid="22o8_yx">
+                                        <span className="text-gray-600" data-oid="qxibazt">
                                             ₹10-15 LPA
                                         </span>
-                                        <div className="flex gap-2" data-oid="hesi:4g">
+                                        <div className="flex gap-2" data-oid="0jje-ch">
                                             <a
                                                 href="/jobs/view-details/google/full-stack-developer"
                                                 className="text-blue-800 font-medium inline-flex items-center hover:text-blue-900 transition-all duration-300 text-sm"
-                                                data-oid="sxwmocj"
+                                                data-oid="6nc-yu3"
                                             >
                                                 View Details
                                                 <svg
@@ -1776,14 +1776,14 @@ export default function Page() {
                                                     fill="none"
                                                     stroke="currentColor"
                                                     viewBox="0 0 24 24"
-                                                    data-oid="py7td7n"
+                                                    data-oid="pk1a52h"
                                                 >
                                                     <path
                                                         strokeLinecap="round"
                                                         strokeLinejoin="round"
                                                         strokeWidth="2"
                                                         d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                                                        data-oid="wdajv4q"
+                                                        data-oid="asa6-gy"
                                                     />
 
                                                     <path
@@ -1791,28 +1791,28 @@ export default function Page() {
                                                         strokeLinejoin="round"
                                                         strokeWidth="2"
                                                         d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                                                        data-oid="0j7gm7c"
+                                                        data-oid="sxt16yr"
                                                     />
                                                 </svg>
                                             </a>
                                             <a
                                                 href="/jobs/apply/google/full-stack-developer"
                                                 className="bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white px-3 py-1 rounded-md font-medium hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300 transform hover:scale-105 text-sm inline-flex items-center gap-1"
-                                                data-oid="4q2d_lp"
+                                                data-oid="jt6x:dj"
                                             >
                                                 <svg
                                                     className="h-3 w-3"
                                                     fill="none"
                                                     stroke="currentColor"
                                                     viewBox="0 0 24 24"
-                                                    data-oid="v73dpyc"
+                                                    data-oid="lf_46mt"
                                                 >
                                                     <path
                                                         strokeLinecap="round"
                                                         strokeLinejoin="round"
                                                         strokeWidth="2"
                                                         d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                                                        data-oid="sfxrowa"
+                                                        data-oid="fyem-pa"
                                                     />
                                                 </svg>
                                                 Apply Now
@@ -1823,11 +1823,11 @@ export default function Page() {
                             </div>
                         </div>
 
-                        <div className="text-center mt-10" data-oid="7cnl6e6">
+                        <div className="text-center mt-10" data-oid="0d5_u6u">
                             <a
                                 href="/jobs"
                                 className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white rounded-md font-medium hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300 hover:translate-y-[-2px] hover:shadow-lg"
-                                data-oid="o-hmwgx"
+                                data-oid="31_i0yt"
                             >
                                 View All Jobs
                                 <svg
@@ -1836,14 +1836,14 @@ export default function Page() {
                                     stroke="currentColor"
                                     viewBox="0 0 24 24"
                                     xmlns="http://www.w3.org/2000/svg"
-                                    data-oid="yt_nk3."
+                                    data-oid="7zm7i4l"
                                 >
                                     <path
                                         strokeLinecap="round"
                                         strokeLinejoin="round"
                                         strokeWidth="2"
                                         d="M14 5l7 7m0 0l-7 7m7-7H3"
-                                        data-oid="jkk4:0d"
+                                        data-oid="aj.9g0i"
                                     ></path>
                                 </svg>
                             </a>
@@ -1854,35 +1854,35 @@ export default function Page() {
                 {/* Fresher Resources */}
                 <section
                     className="py-16 bg-gradient-to-b from-white to-[hsl(196,60%,95%)]"
-                    data-oid="3fmxa0i"
+                    data-oid="-4yb50p"
                 >
-                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-oid="a16dmbn">
-                        <div className="text-center mb-12" data-oid="vduff4g">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-oid="fpuzvz0">
+                        <div className="text-center mb-12" data-oid="hmxevi0">
                             <h2
                                 className="text-3xl font-bold mb-4 text-gray-800"
-                                data-oid="g87vr.d"
+                                data-oid="efw3url"
                             >
                                 Fresher Resources
                             </h2>
-                            <p className="text-gray-600 max-w-2xl mx-auto" data-oid=".6l4noa">
+                            <p className="text-gray-600 max-w-2xl mx-auto" data-oid="9ao3cdp">
                                 Everything You Need to Succeed
                             </p>
                         </div>
 
                         <div
                             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
-                            data-oid="91lnp3g"
+                            data-oid="zad_285"
                         >
                             {resources.map((resource, index) => (
                                 <div
                                     key={resource.id}
                                     className="bg-white/80 backdrop-blur-sm rounded-xl shadow-md border border-[hsl(210,30%,95%)] overflow-hidden hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 hover:border-[hsl(196,80%,45%)]"
-                                    data-oid="5.lrn91"
+                                    data-oid="q6jy.mo"
                                 >
-                                    <div className="p-6" data-oid="m-zw2i2">
+                                    <div className="p-6" data-oid="a9h4kvq">
                                         <div
                                             className="text-4xl mb-4 text-[hsl(196,80%,45%)]"
-                                            data-oid="utp1v-0"
+                                            data-oid="-ibi0bt"
                                         >
                                             {resource.icon === 'chart' && (
                                                 <svg
@@ -1895,12 +1895,12 @@ export default function Page() {
                                                     strokeWidth="2"
                                                     strokeLinecap="round"
                                                     strokeLinejoin="round"
-                                                    data-oid="3qniq6c"
+                                                    data-oid=".f54ir5"
                                                 >
-                                                    <path d="M3 3v18h18" data-oid="vl4mmxb"></path>
-                                                    <path d="M18 17V9" data-oid="-8zs2i9"></path>
-                                                    <path d="M13 17V5" data-oid="887u8hd"></path>
-                                                    <path d="M8 17v-3" data-oid="774mn-0"></path>
+                                                    <path d="M3 3v18h18" data-oid="8cm.x9n"></path>
+                                                    <path d="M18 17V9" data-oid="nbe-auk"></path>
+                                                    <path d="M13 17V5" data-oid="x03d_rs"></path>
+                                                    <path d="M8 17v-3" data-oid="ibiz:88"></path>
                                                 </svg>
                                             )}
                                             {resource.icon === 'search' && (
@@ -1914,17 +1914,17 @@ export default function Page() {
                                                     strokeWidth="2"
                                                     strokeLinecap="round"
                                                     strokeLinejoin="round"
-                                                    data-oid="r843o3-"
+                                                    data-oid="fomvon:"
                                                 >
                                                     <circle
                                                         cx="11"
                                                         cy="11"
                                                         r="8"
-                                                        data-oid="m:x1dg-"
+                                                        data-oid="d4x5-7e"
                                                     ></circle>
                                                     <path
                                                         d="m21 21-4.3-4.3"
-                                                        data-oid="rbrhxm6"
+                                                        data-oid="3tyn3-g"
                                                     ></path>
                                                 </svg>
                                             )}
@@ -1939,25 +1939,25 @@ export default function Page() {
                                                     strokeWidth="2"
                                                     strokeLinecap="round"
                                                     strokeLinejoin="round"
-                                                    data-oid="z3n-hjr"
+                                                    data-oid="81ll0xe"
                                                 >
                                                     <path
                                                         d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"
-                                                        data-oid="jzr5h6q"
+                                                        data-oid="1p2jtdc"
                                                     ></path>
                                                     <circle
                                                         cx="9"
                                                         cy="7"
                                                         r="4"
-                                                        data-oid="m-:u4o2"
+                                                        data-oid="u468pid"
                                                     ></circle>
                                                     <path
                                                         d="M22 21v-2a4 4 0 0 0-3-3.87"
-                                                        data-oid="7_n9h8i"
+                                                        data-oid="_lcjsh4"
                                                     ></path>
                                                     <path
                                                         d="M16 3.13a4 4 0 0 1 0 7.75"
-                                                        data-oid="mscbwcy"
+                                                        data-oid="92t0k8b"
                                                     ></path>
                                                 </svg>
                                             )}
@@ -1972,36 +1972,36 @@ export default function Page() {
                                                     strokeWidth="2"
                                                     strokeLinecap="round"
                                                     strokeLinejoin="round"
-                                                    data-oid="e77lsr0"
+                                                    data-oid="4378:o8"
                                                 >
                                                     <path
                                                         d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"
-                                                        data-oid="dqxwqqw"
+                                                        data-oid="rih4lln"
                                                     ></path>
                                                     <polyline
                                                         points="14 2 14 8 20 8"
-                                                        data-oid=":.r1xph"
+                                                        data-oid="td5ccsc"
                                                     ></polyline>
                                                     <line
                                                         x1="16"
                                                         y1="13"
                                                         x2="8"
                                                         y2="13"
-                                                        data-oid="y-0oapj"
+                                                        data-oid="fvd-:ux"
                                                     ></line>
                                                     <line
                                                         x1="16"
                                                         y1="17"
                                                         x2="8"
                                                         y2="17"
-                                                        data-oid="mqk02fd"
+                                                        data-oid="wel6z8a"
                                                     ></line>
                                                     <line
                                                         x1="10"
                                                         y1="9"
                                                         x2="8"
                                                         y2="9"
-                                                        data-oid="o2ab:rj"
+                                                        data-oid="48vvbh6"
                                                     ></line>
                                                 </svg>
                                             )}
@@ -2016,12 +2016,12 @@ export default function Page() {
                                                     strokeWidth="2"
                                                     strokeLinecap="round"
                                                     strokeLinejoin="round"
-                                                    data-oid="sjy_z3l"
+                                                    data-oid="eozczi2"
                                                 >
-                                                    <path d="M3 3v18h18" data-oid="a4l.0qu"></path>
+                                                    <path d="M3 3v18h18" data-oid="9rm:z--"></path>
                                                     <path
                                                         d="m3 10 5 3 4-6 5 7"
-                                                        data-oid="j1jzcjm"
+                                                        data-oid=":-nuw6b"
                                                     ></path>
                                                 </svg>
                                             )}
@@ -2036,34 +2036,34 @@ export default function Page() {
                                                     strokeWidth="2"
                                                     strokeLinecap="round"
                                                     strokeLinejoin="round"
-                                                    data-oid="hxbmh5l"
+                                                    data-oid="tajdmsn"
                                                 >
                                                     <path
                                                         d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"
-                                                        data-oid="lgh.bgu"
+                                                        data-oid="q0igoi."
                                                     ></path>
-                                                    <path d="M18 14h-8" data-oid="mlur3vq"></path>
-                                                    <path d="M15 18h-5" data-oid=".h0oy-n"></path>
+                                                    <path d="M18 14h-8" data-oid="5.dy1vg"></path>
+                                                    <path d="M15 18h-5" data-oid="9l58n2h"></path>
                                                     <path
                                                         d="M10 6h8v4h-8z"
-                                                        data-oid="57mn3cb"
+                                                        data-oid="bs-yjh-"
                                                     ></path>
                                                 </svg>
                                             )}
                                         </div>
                                         <h3
                                             className="text-xl font-bold mb-2 text-gray-800"
-                                            data-oid=":.pe-hm"
+                                            data-oid="aa_c1r-"
                                         >
                                             {resource.title}
                                         </h3>
-                                        <p className="text-gray-600 mb-4" data-oid="azeb4uf">
+                                        <p className="text-gray-600 mb-4" data-oid="dbm4z2t">
                                             {resource.description}
                                         </p>
                                         <a
                                             href={`/resources/${resource.title.toLowerCase().replace(/\s+/g, '-')}`}
                                             className="text-blue-800 font-medium inline-flex items-center hover:text-blue-900 transition-all duration-300"
-                                            data-oid="dfxkq0l"
+                                            data-oid="o_sfbl."
                                         >
                                             Learn more
                                             <svg
@@ -2072,14 +2072,14 @@ export default function Page() {
                                                 stroke="currentColor"
                                                 viewBox="0 0 24 24"
                                                 xmlns="http://www.w3.org/2000/svg"
-                                                data-oid="z5ly_p9"
+                                                data-oid="jxfis5r"
                                             >
                                                 <path
                                                     strokeLinecap="round"
                                                     strokeLinejoin="round"
                                                     strokeWidth="2"
                                                     d="M14 5l7 7m0 0l-7 7m7-7H3"
-                                                    data-oid="muv3klr"
+                                                    data-oid="ru_a5gw"
                                                 ></path>
                                             </svg>
                                         </a>
@@ -2093,39 +2093,39 @@ export default function Page() {
                 {/* Success Stories */}
                 <section
                     className="py-16 bg-gradient-to-r from-[hsl(196,80%,45%)] via-[hsl(210,70%,45%)] to-[hsl(175,70%,41%)] text-white relative overflow-hidden"
-                    data-oid="o3610-p"
+                    data-oid="ol2fpnm"
                 >
                     {/* Animated background elements */}
-                    <div className="absolute inset-0 overflow-hidden" data-oid="pto7760">
+                    <div className="absolute inset-0 overflow-hidden" data-oid="t.58v58">
                         <div
                             className="absolute top-0 left-1/4 w-96 h-96 bg-[hsl(196,80%,65%)] opacity-30 rounded-full blur-3xl animate-blob animation-delay-2000"
-                            data-oid="unjvzu8"
+                            data-oid="nzt3_2-"
                         ></div>
                         <div
                             className="absolute bottom-0 right-1/4 w-96 h-96 bg-[hsl(175,70%,61%)] opacity-30 rounded-full blur-3xl animate-blob"
-                            data-oid="b81vy04"
+                            data-oid="h7ovkdm"
                         ></div>
                     </div>
                     {/* Frosted glass overlay */}
                     <div
                         className="absolute inset-0 bg-white/5 backdrop-blur-[1px]"
-                        data-oid="dymq98v"
+                        data-oid="3c0:.tc"
                     ></div>
                     <div
                         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
-                        data-oid="pvd1wwr"
+                        data-oid="76f0:pn"
                     >
-                        <div className="text-center mb-12" data-oid="-3ao:dl">
-                            <h2 className="text-3xl font-bold mb-4" data-oid="zs3lsdx">
+                        <div className="text-center mb-12" data-oid="7hl-my6">
+                            <h2 className="text-3xl font-bold mb-4" data-oid="tbmy349">
                                 Hear From Our Members
                             </h2>
-                            <p className="text-blue-100 max-w-2xl mx-auto" data-oid="cpatrv:">
+                            <p className="text-blue-100 max-w-2xl mx-auto" data-oid="p36xz1a">
                                 Success stories from freshers who found their dream tech jobs
                             </p>
                         </div>
 
                         {/* Auto-scrolling testimonial carousel */}
-                        <div className="relative overflow-hidden py-8" data-oid="ts0pvvc">
+                        <div className="relative overflow-hidden py-8" data-oid="fuqen:c">
                             <div
                                 className="flex animate-scroll gap-5 hover:pause-animation focus:pause-animation pt-4 pb-2"
                                 onMouseEnter={(e) =>
@@ -2140,32 +2140,32 @@ export default function Page() {
                                         currentState === 'paused' ? 'running' : 'paused';
                                 }}
                                 style={{ width: `${testimonials.length * 300}px` }}
-                                data-oid="pdt76m4"
+                                data-oid="d.6cx03"
                             >
                                 {testimonials.map((testimonial) => (
                                     <div
                                         key={testimonial.id}
                                         className="bg-white/90 backdrop-blur-md text-gray-800 p-4 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 relative z-10 border border-white/20 w-[280px] h-[180px] flex-shrink-0 flex flex-col"
-                                        data-oid="b5nyjyz"
+                                        data-oid="3te12f2"
                                     >
-                                        <div className="flex items-center mb-2" data-oid="-zg15e7">
+                                        <div className="flex items-center mb-2" data-oid="4-a321z">
                                             <img
                                                 src={testimonial.image}
                                                 alt={testimonial.name}
                                                 className="w-10 h-10 rounded-full mr-3 object-cover"
-                                                data-oid="898zy51"
+                                                data-oid="npfdew5"
                                             />
 
-                                            <div data-oid="r.tbbb-">
+                                            <div data-oid="m2sbtd9">
                                                 <h3
                                                     className="font-bold text-gray-800 text-sm"
-                                                    data-oid="-txnqsw"
+                                                    data-oid="8r8vbga"
                                                 >
                                                     {testimonial.name}
                                                 </h3>
                                                 <p
                                                     className="text-blue-700 text-xs"
-                                                    data-oid="pexrcq."
+                                                    data-oid="q7979ce"
                                                 >
                                                     {testimonial.company}
                                                 </p>
@@ -2173,7 +2173,7 @@ export default function Page() {
                                         </div>
                                         <p
                                             className="text-gray-600 italic flex-grow overflow-y-auto text-sm"
-                                            data-oid="no:9lid"
+                                            data-oid=":fllrc4"
                                         >
                                             "{testimonial.quote}"
                                         </p>
@@ -2185,26 +2185,26 @@ export default function Page() {
                                     <div
                                         key={`duplicate-${testimonial.id}`}
                                         className="bg-white/90 backdrop-blur-md text-gray-800 p-4 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 relative z-10 border border-white/20 w-[280px] h-[180px] flex-shrink-0 flex flex-col"
-                                        data-oid="4tkpjy0"
+                                        data-oid="_3wizlk"
                                     >
-                                        <div className="flex items-center mb-2" data-oid="azs:f6.">
+                                        <div className="flex items-center mb-2" data-oid="h45:-_6">
                                             <img
                                                 src={testimonial.image}
                                                 alt={testimonial.name}
                                                 className="w-10 h-10 rounded-full mr-3 object-cover"
-                                                data-oid="n13scdd"
+                                                data-oid="rb6l41h"
                                             />
 
-                                            <div data-oid="clrm17t">
+                                            <div data-oid="8gca-3d">
                                                 <h3
                                                     className="font-bold text-gray-800 text-sm"
-                                                    data-oid="6wa.36u"
+                                                    data-oid="m2o:bc."
                                                 >
                                                     {testimonial.name}
                                                 </h3>
                                                 <p
                                                     className="text-blue-700 text-xs"
-                                                    data-oid="-v71_ab"
+                                                    data-oid="tom__pg"
                                                 >
                                                     {testimonial.company}
                                                 </p>
@@ -2212,7 +2212,7 @@ export default function Page() {
                                         </div>
                                         <p
                                             className="text-gray-600 italic flex-grow overflow-y-auto text-sm"
-                                            data-oid="dfbodw7"
+                                            data-oid="n81ivj4"
                                         >
                                             "{testimonial.quote}"
                                         </p>
@@ -2220,7 +2220,7 @@ export default function Page() {
                                 ))}
                             </div>
 
-                            <div className="text-center mt-8" data-oid="mw9:21w"></div>
+                            <div className="text-center mt-8" data-oid="s9cif2b"></div>
                         </div>
                     </div>
                 </section>
@@ -2228,50 +2228,50 @@ export default function Page() {
                 {/* Final CTA */}
                 <section
                     className="py-16 bg-white text-[hsl(196,80%,45%)] relative overflow-hidden"
-                    data-oid="f4klm21"
+                    data-oid="224uwcu"
                 >
                     {/* Animated background elements */}
-                    <div className="absolute inset-0 overflow-hidden opacity-30" data-oid="7apvulu">
+                    <div className="absolute inset-0 overflow-hidden opacity-30" data-oid="kgecl54">
                         <div
                             className="absolute top-20 left-10 w-72 h-72 bg-[hsl(196,80%,65%)] rounded-full blur-3xl animate-blob animation-delay-4000"
-                            data-oid="m1u.g82"
+                            data-oid="vy6aco1"
                         ></div>
                         <div
                             className="absolute bottom-20 right-10 w-72 h-72 bg-[hsl(175,70%,61%)] rounded-full blur-3xl animate-blob"
-                            data-oid="ovt_dgx"
+                            data-oid="s2t:dcd"
                         ></div>
                     </div>
                     <div
                         className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10"
-                        data-oid="b2rsslp"
+                        data-oid="7h3a_1q"
                     >
-                        <p className="text-[hsl(196,80%,65%)] mb-2" data-oid="3xko84g">
+                        <p className="text-[hsl(196,80%,65%)] mb-2" data-oid="5mh_zmv">
                             Start Your Tech Journey Today
                         </p>
                         <h2
                             className="text-3xl md:text-4xl font-bold mb-6 text-gray-800"
-                            data-oid=".6zaqgh"
+                            data-oid="7g:v545"
                         >
                             Ready to Land Your First Tech Job?
                         </h2>
-                        <p className="text-xl text-gray-600 mb-8" data-oid="a.c1e.j">
+                        <p className="text-xl text-gray-600 mb-8" data-oid="iy3nvcn">
                             Join 35,000+ freshers who've launched their careers with us
                         </p>
                         <div
                             className="flex flex-col sm:flex-row justify-center gap-4"
-                            data-oid="oeepssl"
+                            data-oid="iow0xth"
                         >
                             <Link
                                 href="/register"
                                 className="px-8 py-4 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white rounded-md font-bold text-lg hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300 transform hover:scale-105 hover:shadow-xl animate-pulse-shadow relative z-10"
-                                data-oid="s_qjkq0"
+                                data-oid="3cn59yy"
                             >
                                 Create Free Account →
                             </Link>
                             <Link
                                 href="/fresher-jobs"
                                 className="px-8 py-4 border-2 border-[hsl(196,80%,45%)] text-[hsl(196,80%,45%)] rounded-md font-bold text-lg hover:bg-[hsl(196,80%,45%)]/10 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-lg transform hover:scale-105 relative z-10"
-                                data-oid="gh-92vw"
+                                data-oid="mn8nxvw"
                             >
                                 Browse Fresher Jobs
                             </Link>
@@ -2281,194 +2281,194 @@ export default function Page() {
             </main>
 
             {/* Footer */}
-            <footer className="bg-gray-950 text-white" data-oid="4ppn6q0">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12" data-oid="hkx:_72">
-                    <div className="grid md:grid-cols-4 gap-8" data-oid="bu.h3-2">
-                        <div data-oid="7uuxiga">
-                            <div className="mb-6" data-oid="rv2nqv1">
-                                <Logo data-oid="m14:bdq" />
+            <footer className="bg-gray-950 text-white" data-oid="8tw5.:p">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12" data-oid="i4.5ejr">
+                    <div className="grid md:grid-cols-4 gap-8" data-oid="ewndbcv">
+                        <div data-oid="t:sp_rd">
+                            <div className="mb-6" data-oid="cvppdfe">
+                                <Logo data-oid="odz_7e:" />
                             </div>
-                            <p className="text-gray-400 mb-4" data-oid="62mc7rg">
+                            <p className="text-gray-400 mb-4" data-oid="e_l8cl6">
                                 Helping tech freshers launch their careers with curated
                                 opportunities and resources.
                             </p>
-                            <div className="flex space-x-4" data-oid="68:m3zp">
+                            <div className="flex space-x-4" data-oid="fr-ou-_">
                                 <a
                                     href="/linkedin"
                                     className="text-gray-400 hover:text-white transition-all duration-300"
-                                    data-oid="oek-sek"
+                                    data-oid="1rzdjw8"
                                 >
                                     <svg
                                         className="h-6 w-6"
                                         fill="currentColor"
                                         viewBox="0 0 24 24"
-                                        data-oid="1jv0zac"
+                                        data-oid="znw3_uq"
                                     >
                                         <path
                                             d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
-                                            data-oid="4io6jfk"
+                                            data-oid="zysh7sp"
                                         />
                                     </svg>
                                 </a>
                                 <a
                                     href="/twitter"
                                     className="text-gray-400 hover:text-white transition-all duration-300"
-                                    data-oid="utbiq-_"
+                                    data-oid="sz-tnd-"
                                 >
                                     <svg
                                         className="h-6 w-6"
                                         fill="currentColor"
                                         viewBox="0 0 24 24"
-                                        data-oid="pn.6rta"
+                                        data-oid="_wr6pm."
                                     >
                                         <path
                                             d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"
-                                            data-oid="quuhq5x"
+                                            data-oid="9dr8w__"
                                         />
                                     </svg>
                                 </a>
                                 <a
                                     href="/instagram"
                                     className="text-gray-400 hover:text-white transition-all duration-300"
-                                    data-oid="lu.it0d"
+                                    data-oid="y6xo8_o"
                                 >
                                     <svg
                                         className="h-6 w-6"
                                         fill="currentColor"
                                         viewBox="0 0 24 24"
-                                        data-oid="7yo:por"
+                                        data-oid="ze77b90"
                                     >
                                         <path
                                             d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"
-                                            data-oid="g67lrki"
+                                            data-oid="gnph3hr"
                                         />
                                     </svg>
                                 </a>
                             </div>
                         </div>
-                        <div data-oid="9up4.m5">
-                            <h3 className="text-lg font-bold mb-4" data-oid="juy4gl1">
+                        <div data-oid="cjaamcm">
+                            <h3 className="text-lg font-bold mb-4" data-oid="e76rekm">
                                 Company
                             </h3>
-                            <ul className="space-y-3" data-oid="89u9fqh">
-                                <li data-oid="n4o7bd:">
+                            <ul className="space-y-3" data-oid="lhnrsh5">
+                                <li data-oid="ga27c6_">
                                     <a
                                         href="/about"
                                         className="text-gray-400 hover:text-white transition-all duration-300"
-                                        data-oid="8fqawp8"
+                                        data-oid="279rbxb"
                                     >
                                         About Us
                                     </a>
                                 </li>
-                                <li data-oid="itsj_i:">
+                                <li data-oid="8e38-.1">
                                     <a
                                         href="/advertising"
                                         className="text-gray-400 hover:text-white transition-all duration-300"
-                                        data-oid="m5un2u3"
+                                        data-oid="lmebcfr"
                                     >
                                         Advertising
                                     </a>
                                 </li>
-                                <li data-oid="b-c9v:e">
+                                <li data-oid="xn:3_bk">
                                     <a
                                         href="/contact"
                                         className="text-gray-400 hover:text-white transition-all duration-300"
-                                        data-oid=":fweb.7"
+                                        data-oid="fwxleoq"
                                     >
                                         Contact
                                     </a>
                                 </li>
-                                <li data-oid="avv::oz">
+                                <li data-oid="tf18wux">
                                     <a
                                         href="/careers"
                                         className="text-gray-400 hover:text-white transition-all duration-300"
-                                        data-oid="ueoxyy6"
+                                        data-oid="874dn_3"
                                     >
                                         Careers
                                     </a>
                                 </li>
                             </ul>
                         </div>
-                        <div data-oid="1o5r954">
-                            <h3 className="text-lg font-bold mb-4" data-oid="9wdms26">
+                        <div data-oid="v9c.tdz">
+                            <h3 className="text-lg font-bold mb-4" data-oid="76ea3rx">
                                 Resources
                             </h3>
-                            <ul className="space-y-3" data-oid="y.4f.7a">
-                                <li data-oid="l11ia:.">
+                            <ul className="space-y-3" data-oid="5zpkae4">
+                                <li data-oid="2g_0lcj">
                                     <a
                                         href="/tax-calculator"
                                         className="text-gray-400 hover:text-white transition-all duration-300"
-                                        data-oid="4tkraqn"
+                                        data-oid="ezg-f03"
                                     >
                                         Tax Calculator
                                     </a>
                                 </li>
-                                <li data-oid="h.joaxw">
+                                <li data-oid="y8tfe._">
                                     <a
                                         href="/resume-review"
                                         className="text-gray-400 hover:text-white transition-all duration-300"
-                                        data-oid="7kwip04"
+                                        data-oid="4ny5ow-"
                                     >
                                         Resume Review
                                     </a>
                                 </li>
-                                <li data-oid="r8pik0_">
+                                <li data-oid="ipecbbk">
                                     <a
                                         href="/jobs-tracker"
                                         className="text-gray-400 hover:text-white transition-all duration-300"
-                                        data-oid="9ld39b."
+                                        data-oid="b5n.lvh"
                                     >
                                         Jobs Tracker
                                     </a>
                                 </li>
-                                <li data-oid="jnz_203">
+                                <li data-oid=":9u-:.4">
                                     <a
                                         href="/blog"
                                         className="text-gray-400 hover:text-white transition-all duration-300"
-                                        data-oid="kahchwo"
+                                        data-oid="_t47xmi"
                                     >
                                         Blog
                                     </a>
                                 </li>
                             </ul>
                         </div>
-                        <div data-oid=".yyiop_">
-                            <h3 className="text-lg font-bold mb-4" data-oid="4.busq_">
+                        <div data-oid="w81euqx">
+                            <h3 className="text-lg font-bold mb-4" data-oid="oje3cat">
                                 Legal
                             </h3>
-                            <ul className="space-y-3" data-oid="eer3wnv">
-                                <li data-oid="zjnz:bo">
+                            <ul className="space-y-3" data-oid="k:f6_54">
+                                <li data-oid="9_l167s">
                                     <a
                                         href="/privacy-policy"
                                         className="text-gray-400 hover:text-white transition-all duration-300"
-                                        data-oid="7lwpwiu"
+                                        data-oid="2qx3-8l"
                                     >
                                         Privacy Policy
                                     </a>
                                 </li>
-                                <li data-oid="ue.xcs_">
+                                <li data-oid="0r595f3">
                                     <a
                                         href="/terms"
                                         className="text-gray-400 hover:text-white transition-all duration-300"
-                                        data-oid="-kp1j7c"
+                                        data-oid=".umaex8"
                                     >
                                         Terms of Service
                                     </a>
                                 </li>
-                                <li data-oid="sblury6">
+                                <li data-oid="l_h4ebx">
                                     <a
                                         href="/refunds"
                                         className="text-gray-400 hover:text-white transition-all duration-300"
-                                        data-oid="bvq-jvv"
+                                        data-oid="xne:ias"
                                     >
                                         Refund Policy
                                     </a>
                                 </li>
-                                <li data-oid="v2kg7gh">
+                                <li data-oid="5ohm2kg">
                                     <a
                                         href="/shipping-policy"
                                         className="text-gray-400 hover:text-white transition-all duration-300"
-                                        data-oid="1m_qhgt"
+                                        data-oid="v1bpsmu"
                                     >
                                         Shipping Policy
                                     </a>
@@ -2479,12 +2479,12 @@ export default function Page() {
 
                     <div
                         className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400"
-                        data-oid="o:hzrw6"
+                        data-oid="8822rb1"
                     >
-                        <p className="mb-2" data-oid="hh3d6qr">
+                        <p className="mb-2" data-oid="8vub.yc">
                             © {new Date().getFullYear()} CareerX. All rights reserved.
                         </p>
-                        <p data-oid=":uxkm4p">Built with ❤️ by BitHive Technologies</p>
+                        <p data-oid="9vl:tq:">Built with ❤️ by BitHive Technologies</p>
                     </div>
                 </div>
             </footer>
