@@ -37,15 +37,15 @@ export default function ApplicationSuccessModal({
         <div
             className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4"
             onClick={handleBackdropClick}
-            data-oid="3eqn_r6"
+            data-oid="emu-2dr"
         >
             <div
                 className="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden relative"
-                data-oid="lx_fbvt"
+                data-oid="jci8h_c"
             >
                 {/* Confetti Animation */}
                 {showConfetti && (
-                    <div className="absolute inset-0 pointer-events-none" data-oid="ab63obq">
+                    <div className="absolute inset-0 pointer-events-none" data-oid="cy:qetb">
                         {[...Array(20)].map((_, i) => (
                             <div
                                 key={i}
@@ -56,7 +56,7 @@ export default function ApplicationSuccessModal({
                                     animationDelay: `${Math.random() * 2}s`,
                                     animationDuration: `${1 + Math.random()}s`,
                                 }}
-                                data-oid="n1own1o"
+                                data-oid="34f_8s."
                             >
                                 🎉
                             </div>
@@ -65,72 +65,72 @@ export default function ApplicationSuccessModal({
                 )}
 
                 {/* Success Icon */}
-                <div className="text-center p-8" data-oid="f8bmzxp">
+                <div className="text-center p-8" data-oid="0er4uua">
                     <div
                         className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100 mb-6"
-                        data-oid="m.73vih"
+                        data-oid="awqqny7"
                     >
                         <svg
                             className="h-8 w-8 text-green-600"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
-                            data-oid="2x4j24q"
+                            data-oid="sjehnrt"
                         >
                             <path
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
                                 strokeWidth="2"
                                 d="M5 13l4 4L19 7"
-                                data-oid="w9x30m-"
+                                data-oid="es2d18g"
                             />
                         </svg>
                     </div>
 
-                    <h2 className="text-2xl font-bold text-gray-900 mb-2" data-oid="i8icf2o">
+                    <h2 className="text-2xl font-bold text-gray-900 mb-2" data-oid="a11j3lu">
                         Application Submitted!
                     </h2>
 
-                    <p className="text-gray-600 mb-6" data-oid="aqxi6v-">
+                    <p className="text-gray-600 mb-6" data-oid="48o34uf">
                         Your application for{' '}
-                        <span className="font-semibold text-[hsl(196,80%,45%)]" data-oid="o4z666u">
+                        <span className="font-semibold text-[hsl(196,80%,45%)]" data-oid="opklh3f">
                             {jobTitle}
                         </span>{' '}
                         at{' '}
-                        <span className="font-semibold text-[hsl(196,80%,45%)]" data-oid="eb8u7as">
+                        <span className="font-semibold text-[hsl(196,80%,45%)]" data-oid="tnmepsi">
                             {companyName}
                         </span>{' '}
                         has been successfully submitted.
                     </p>
 
                     {/* Next Steps */}
-                    <div className="bg-blue-50 rounded-lg p-4 mb-6 text-left" data-oid="qapf4f.">
-                        <h3 className="font-semibold text-gray-800 mb-3" data-oid="vswlcdt">
+                    <div className="bg-blue-50 rounded-lg p-4 mb-6 text-left" data-oid="aagtulc">
+                        <h3 className="font-semibold text-gray-800 mb-3" data-oid="ft0s20v">
                             What happens next?
                         </h3>
-                        <div className="space-y-2 text-sm text-gray-600" data-oid="boof9ef">
-                            <div className="flex items-center gap-2" data-oid="jxo5xwh">
+                        <div className="space-y-2 text-sm text-gray-600" data-oid="_ce-dbe">
+                            <div className="flex items-center gap-2" data-oid="04pb_ks">
                                 <div
                                     className="w-2 h-2 bg-blue-500 rounded-full"
-                                    data-oid=".wya4yf"
+                                    data-oid="3xo5w0m"
                                 ></div>
-                                <span data-oid="q_hdirx">
+                                <span data-oid="cfd3ji_">
                                     You'll receive a confirmation email shortly
                                 </span>
                             </div>
-                            <div className="flex items-center gap-2" data-oid="ledyv65">
+                            <div className="flex items-center gap-2" data-oid="t55cymf">
                                 <div
                                     className="w-2 h-2 bg-blue-500 rounded-full"
-                                    data-oid="fazm5n1"
+                                    data-oid="5gi2k-f"
                                 ></div>
-                                <span data-oid="8bfe.dj">HR team will review your application</span>
+                                <span data-oid="gi.q23:">HR team will review your application</span>
                             </div>
-                            <div className="flex items-center gap-2" data-oid="j6embu4">
+                            <div className="flex items-center gap-2" data-oid="w5v7ncj">
                                 <div
                                     className="w-2 h-2 bg-blue-500 rounded-full"
-                                    data-oid="mdnn:pf"
+                                    data-oid="w5zvpm3"
                                 ></div>
-                                <span data-oid="tc-c9k0">
+                                <span data-oid="9f71hy1">
                                     You'll be contacted within 3-5 business days
                                 </span>
                             </div>
@@ -138,11 +138,11 @@ export default function ApplicationSuccessModal({
                     </div>
 
                     {/* Action Buttons */}
-                    <div className="flex flex-col sm:flex-row gap-3" data-oid="u78q4tn">
+                    <div className="flex flex-col sm:flex-row gap-3" data-oid="u7_5ym5">
                         <button
                             onClick={onClose}
                             className="flex-1 px-6 py-3 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white rounded-lg font-medium hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300"
-                            data-oid="2bjbaoa"
+                            data-oid="_rw-fy2"
                         >
                             Continue Browsing
                         </button>
@@ -152,7 +152,7 @@ export default function ApplicationSuccessModal({
                                 onClose();
                             }}
                             className="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-lg font-medium hover:bg-gray-50 transition-colors"
-                            data-oid="izjpdh-"
+                            data-oid=":3-iyoj"
                         >
                             View Applications
                         </button>

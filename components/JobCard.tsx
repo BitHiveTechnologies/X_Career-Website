@@ -87,14 +87,14 @@ export default function JobCard({ job, viewMode = 'list', isInternship = false }
                 viewMode === 'grid' ? 'h-full' : ''
             }`}
             role="listitem"
-            data-oid="2ib4.-d"
+            data-oid="n8jdduc"
         >
             {/* Badges Container */}
-            <div className="absolute top-4 right-4 flex flex-col gap-2" data-oid="t:184k-">
+            <div className="absolute top-4 right-4 flex flex-col gap-2" data-oid="owk_2pl">
                 {job.isUrgent && (
                     <span
                         className="bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full animate-pulse shadow-lg"
-                        data-oid="d6mxzz2"
+                        data-oid="qjl5o6q"
                     >
                         🔥 URGENT HIRING
                     </span>
@@ -102,7 +102,7 @@ export default function JobCard({ job, viewMode = 'list', isInternship = false }
                 {job.isFeatured && (
                     <span
                         className="bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white text-xs font-bold px-3 py-1 rounded-full"
-                        data-oid="_cglk-x"
+                        data-oid="_omjq-1"
                     >
                         ⭐ FEATURED
                     </span>
@@ -111,10 +111,10 @@ export default function JobCard({ job, viewMode = 'list', isInternship = false }
 
             {/* Remote Badge */}
             {job.isRemote && (
-                <div className="absolute top-4 left-4" data-oid="t2_6fwk">
+                <div className="absolute top-4 left-4" data-oid=".fz_96a">
                     <span
                         className="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-1 rounded-full"
-                        data-oid="j6hzuqg"
+                        data-oid="5o7.7_:"
                     >
                         🏠 Remote
                     </span>
@@ -122,34 +122,34 @@ export default function JobCard({ job, viewMode = 'list', isInternship = false }
             )}
 
             {/* Header Section */}
-            <div className="mb-6" data-oid="b:zd2ut">
-                <div className="flex items-start justify-between mb-3" data-oid="yy6.ft0">
-                    <div className="flex-1 min-w-0" data-oid="zm6y19a">
+            <div className="mb-6" data-oid="walbahd">
+                <div className="flex items-start justify-between mb-3" data-oid="eysymi.">
+                    <div className="flex-1 min-w-0" data-oid="3ag.opc">
                         <h3
                             className="text-xl font-bold text-gray-800 mb-2 group-hover:text-[hsl(196,80%,45%)] transition-colors duration-300 line-clamp-2"
-                            data-oid="okqct3h"
+                            data-oid="m_xut3c"
                         >
-                            <br data-oid="1713cgq" />
+                            <br data-oid="a78zwqj" />
                             {job.title}
                         </h3>
-                        <div className="flex flex-wrap items-center gap-2 mb-2" data-oid="os:uhub">
+                        <div className="flex flex-wrap items-center gap-2 mb-2" data-oid="b-h-0jh">
                             <p
                                 className="text-[hsl(196,80%,45%)] font-semibold text-lg"
-                                data-oid="htj03l:"
+                                data-oid="3a6ivd3"
                             >
                                 {job.company}
                             </p>
                             {job.companySize && (
                                 <span
                                     className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full"
-                                    data-oid="_yomv2n"
+                                    data-oid="1m_o-58"
                                 >
                                     {job.companySize} employees
                                 </span>
                             )}
                         </div>
                         {job.industry && (
-                            <p className="text-sm text-gray-600" data-oid="s8zdkbn">
+                            <p className="text-sm text-gray-600" data-oid=".enqsi_">
                                 {job.industry} • {job.companyType}
                             </p>
                         )}
@@ -157,10 +157,10 @@ export default function JobCard({ job, viewMode = 'list', isInternship = false }
                 </div>
 
                 {/* Salary/Stipend and Applicant Count */}
-                <div className="flex flex-wrap items-center gap-4 mb-4" data-oid="__xg21_">
+                <div className="flex flex-wrap items-center gap-4 mb-4" data-oid="iprqx9y">
                     {job.salary && (
-                        <div className="flex items-center gap-1" data-oid="adnkd8s">
-                            <span className="text-green-600 font-medium text-sm" data-oid="0j8epjv">
+                        <div className="flex items-center gap-1" data-oid="wkoixxm">
+                            <span className="text-green-600 font-medium text-sm" data-oid=".3t60xe">
                                 💰 {job.salary}
                             </span>
                         </div>
@@ -168,7 +168,7 @@ export default function JobCard({ job, viewMode = 'list', isInternship = false }
                     {job.applicantCount && (
                         <span
                             className="text-xs text-gray-500 bg-blue-50 px-3 py-1 rounded-full"
-                            data-oid="dmrlcq2"
+                            data-oid="-0r8wa0"
                         >
                             👥 {job.applicantCount} applicants
                         </span>
@@ -176,7 +176,7 @@ export default function JobCard({ job, viewMode = 'list', isInternship = false }
                     {isInternship && (job as any).duration && (
                         <span
                             className="text-xs text-purple-600 bg-purple-50 px-3 py-1 rounded-full"
-                            data-oid="rkn802h"
+                            data-oid="874ozo2"
                         >
                             ⏱️ {(job as any).duration}
                         </span>
@@ -185,21 +185,21 @@ export default function JobCard({ job, viewMode = 'list', isInternship = false }
             </div>
 
             {/* Details Row */}
-            <div className="grid md:grid-cols-2 gap-4 mb-4" data-oid="mciv15g">
-                <div className="flex items-center text-gray-600" data-oid="ccah.05">
+            <div className="grid md:grid-cols-2 gap-4 mb-4" data-oid="::sabkr">
+                <div className="flex items-center text-gray-600" data-oid="fgs:iu4">
                     <svg
                         className="h-4 w-4 mr-2 text-[hsl(196,80%,45%)]"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
-                        data-oid="wje-31d"
+                        data-oid="j2._._u"
                     >
                         <path
                             strokeLinecap="round"
                             strokeLinejoin="round"
                             strokeWidth="2"
                             d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                            data-oid="fvonl:m"
+                            data-oid="hgyhl:y"
                         />
 
                         <path
@@ -207,34 +207,34 @@ export default function JobCard({ job, viewMode = 'list', isInternship = false }
                             strokeLinejoin="round"
                             strokeWidth="2"
                             d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                            data-oid="x-m7852"
+                            data-oid="2-1339g"
                         />
                     </svg>
-                    <span className="text-sm" data-oid="y_id2jc">
-                        <span className="font-medium" data-oid="22z5fq-">
+                    <span className="text-sm" data-oid="9sa8ip.">
+                        <span className="font-medium" data-oid="42p-7yw">
                             Location:
                         </span>{' '}
                         {job.location}
                     </span>
                 </div>
-                <div className="flex items-center text-gray-600" data-oid="w1k-572">
+                <div className="flex items-center text-gray-600" data-oid="0mgognz">
                     <svg
                         className="h-4 w-4 mr-2 text-[hsl(196,80%,45%)]"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
-                        data-oid="u3x6wiq"
+                        data-oid="dgw33qi"
                     >
                         <path
                             strokeLinecap="round"
                             strokeLinejoin="round"
                             strokeWidth="2"
                             d="M13 10V3L4 14h7v7l9-11h-7z"
-                            data-oid="1s:sbuh"
+                            data-oid=":qd.w1o"
                         />
                     </svg>
-                    <span className="text-sm" data-oid="us4e7a0">
-                        <span className="font-medium" data-oid="pgqp510">
+                    <span className="text-sm" data-oid="aw697.t">
+                        <span className="font-medium" data-oid="89ok-3j">
                             Experience:
                         </span>{' '}
                         {job.experienceRequired}
@@ -243,16 +243,16 @@ export default function JobCard({ job, viewMode = 'list', isInternship = false }
             </div>
 
             {/* Employment Type & Job Type */}
-            <div className="flex flex-wrap gap-2 mb-4" data-oid="o6aag4q">
+            <div className="flex flex-wrap gap-2 mb-4" data-oid="j4k-2el">
                 <span
                     className="bg-blue-50 text-blue-700 text-xs font-medium px-2.5 py-1 rounded"
-                    data-oid="mategps"
+                    data-oid="zcpbz8y"
                 >
                     {job.jobType}
                 </span>
                 <span
                     className="bg-purple-50 text-purple-700 text-xs font-medium px-2.5 py-1 rounded"
-                    data-oid="2:_wyur"
+                    data-oid="v5ny_s."
                 >
                     {job.employmentType}
                 </span>
@@ -260,39 +260,39 @@ export default function JobCard({ job, viewMode = 'list', isInternship = false }
 
             {/* Benefits Preview */}
             {job.benefits && job.benefits.length > 0 && (
-                <div className="mb-4" data-oid="q3ybxgi">
-                    <div className="flex items-center mb-2" data-oid="firgxnr">
+                <div className="mb-4" data-oid="28niy7o">
+                    <div className="flex items-center mb-2" data-oid="o9b7sx2">
                         <svg
                             className="h-4 w-4 mr-2 text-[hsl(196,80%,45%)]"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
-                            data-oid="7_nwkc6"
+                            data-oid="f1q9y8k"
                         >
                             <path
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
                                 strokeWidth="2"
                                 d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"
-                                data-oid="7mz2k_e"
+                                data-oid="llgv.lb"
                             />
                         </svg>
-                        <span className="text-sm font-medium text-gray-700" data-oid="zijgtv-">
+                        <span className="text-sm font-medium text-gray-700" data-oid="ctaksuy">
                             Benefits:
                         </span>
                     </div>
-                    <div className="flex flex-wrap gap-1" data-oid="d_2u-ho">
+                    <div className="flex flex-wrap gap-1" data-oid="e:cgkso">
                         {job.benefits.slice(0, 3).map((benefit, index) => (
                             <span
                                 key={index}
                                 className="bg-green-50 text-green-700 text-xs px-2 py-1 rounded"
-                                data-oid="m19iz0t"
+                                data-oid="bv5v98a"
                             >
                                 {benefit}
                             </span>
                         ))}
                         {job.benefits.length > 3 && (
-                            <span className="text-xs text-gray-500 px-2 py-1" data-oid="mwa6t85">
+                            <span className="text-xs text-gray-500 px-2 py-1" data-oid="zm6manu">
                                 +{job.benefits.length - 3} more
                             </span>
                         )}
@@ -301,58 +301,58 @@ export default function JobCard({ job, viewMode = 'list', isInternship = false }
             )}
 
             {/* Footer Row */}
-            <div className="flex justify-between items-end" data-oid="cq3ixd1">
-                <div className="flex-1" data-oid="kf.c_3a">
-                    <div className="flex items-center text-gray-600 mb-2" data-oid="8llqxm2">
+            <div className="flex justify-between items-end" data-oid="yxuvvu6">
+                <div className="flex-1" data-oid="ss.8.m7">
+                    <div className="flex items-center text-gray-600 mb-2" data-oid="ye5nwq8">
                         <svg
                             className="h-4 w-4 mr-2 text-[hsl(196,80%,45%)]"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
-                            data-oid=".wps-zo"
+                            data-oid="r-43ram"
                         >
                             <path
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
                                 strokeWidth="2"
                                 d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                                data-oid="5jw0th-"
+                                data-oid="tlb91dy"
                             />
                         </svg>
-                        <span className="text-sm" data-oid="gogrdd.">
-                            <span className="font-medium" data-oid="boy98vy">
+                        <span className="text-sm" data-oid="ub2wsox">
+                            <span className="font-medium" data-oid="d0u2su6">
                                 Posted:
                             </span>{' '}
                             {formatDate(job.postedDate)}
                         </span>
                     </div>
 
-                    <div className="flex items-start" data-oid="rhjx_xs">
+                    <div className="flex items-start" data-oid="lka1l9q">
                         <svg
                             className="h-4 w-4 mr-2 mt-0.5 text-[hsl(196,80%,45%)] flex-shrink-0"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
-                            data-oid="9r2ay-b"
+                            data-oid=".v44nry"
                         >
                             <path
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
                                 strokeWidth="2"
                                 d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
-                                data-oid="su5m7k8"
+                                data-oid="rxyzk47"
                             />
                         </svg>
-                        <div className="flex-1" data-oid="nf1lt_9">
-                            <span className="text-sm font-medium text-gray-700" data-oid="32:v-k6">
+                        <div className="flex-1" data-oid=":uy5apg">
+                            <span className="text-sm font-medium text-gray-700" data-oid="l7qk9.o">
                                 Skills Required:
                             </span>
-                            <div className="flex flex-wrap gap-1 mt-1" data-oid="6bux-1c">
+                            <div className="flex flex-wrap gap-1 mt-1" data-oid="nd4vdna">
                                 {job.skills.map((skill, index) => (
                                     <span
                                         key={index}
                                         className="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded"
-                                        data-oid="3zxez1z"
+                                        data-oid="rjl-rai"
                                     >
                                         {skill}
                                     </span>
@@ -365,26 +365,26 @@ export default function JobCard({ job, viewMode = 'list', isInternship = false }
                 {/* Action Buttons */}
                 <div
                     className={`flex items-center ${viewMode === 'grid' ? 'justify-between' : 'space-x-3 ml-4'}`}
-                    data-oid="1xgq1lz"
+                    data-oid="q7-g.hi"
                 >
                     <button
                         onClick={handleApplyClick}
                         className={`${viewMode === 'grid' ? 'flex-1 mr-3' : 'flex-1'} px-4 py-2 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white rounded-md font-medium hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center justify-center gap-2`}
-                        data-oid="kn6te68"
+                        data-oid="t1s7yr9"
                     >
                         <svg
                             className="h-4 w-4"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
-                            data-oid="xmtuhmv"
+                            data-oid="o75yxab"
                         >
                             <path
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
                                 strokeWidth="2"
                                 d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                                data-oid="ujubt:x"
+                                data-oid="bj4pm3-"
                             />
                         </svg>
                         {isInternship ? 'Apply for Internship' : 'Apply Now'}
@@ -393,21 +393,21 @@ export default function JobCard({ job, viewMode = 'list', isInternship = false }
                     <button
                         onClick={handleViewDetails}
                         className="px-4 py-2 border border-[hsl(196,80%,45%)] text-[hsl(196,80%,45%)] rounded-md text-sm font-medium hover:bg-[hsl(196,80%,45%)]/10 transition-all duration-300 flex items-center gap-2"
-                        data-oid="gh1qmqq"
+                        data-oid="9wdb_t1"
                     >
                         <svg
                             className="h-4 w-4"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
-                            data-oid="r-0bid0"
+                            data-oid="hx_2kqa"
                         >
                             <path
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
                                 strokeWidth="2"
                                 d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                                data-oid="k99ex:b"
+                                data-oid="gl947wf"
                             />
 
                             <path
@@ -415,7 +415,7 @@ export default function JobCard({ job, viewMode = 'list', isInternship = false }
                                 strokeLinejoin="round"
                                 strokeWidth="2"
                                 d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                                data-oid="7xwl_ca"
+                                data-oid="5wf9j0i"
                             />
                         </svg>
                         View Details
@@ -429,21 +429,21 @@ export default function JobCard({ job, viewMode = 'list', isInternship = false }
                                 : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                         }`}
                         title={isSaved ? 'Remove from saved' : 'Save job'}
-                        data-oid="hr2s-b:"
+                        data-oid="h8ujnj_"
                     >
                         <svg
                             className="h-5 w-5"
                             fill={isSaved ? 'currentColor' : 'none'}
                             stroke="currentColor"
                             viewBox="0 0 24 24"
-                            data-oid="jp2gdn6"
+                            data-oid="x61j26g"
                         >
                             <path
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
                                 strokeWidth="2"
                                 d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                                data-oid="h0g66-7"
+                                data-oid="2qw:9:r"
                             />
                         </svg>
                     </button>
@@ -452,21 +452,21 @@ export default function JobCard({ job, viewMode = 'list', isInternship = false }
                         onClick={handleShare}
                         className="p-2 bg-gray-100 text-gray-600 rounded-md hover:bg-gray-200 transition-all duration-300"
                         title="Share job"
-                        data-oid="vywd8bg"
+                        data-oid="od5bh.3"
                     >
                         <svg
                             className="h-5 w-5"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
-                            data-oid="mdrf8gj"
+                            data-oid="4fnjevy"
                         >
                             <path
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
                                 strokeWidth="2"
                                 d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"
-                                data-oid="wjo8xe0"
+                                data-oid="fkn.iho"
                             />
                         </svg>
                     </button>
@@ -476,7 +476,7 @@ export default function JobCard({ job, viewMode = 'list', isInternship = false }
             {/* Hover effect overlay */}
             <div
                 className="absolute inset-0 bg-gradient-to-r from-[hsl(196,80%,45%)]/5 to-[hsl(175,70%,41%)]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-xl"
-                data-oid="z3ef:pu"
+                data-oid="89ha:a0"
             ></div>
 
             {/* Modals */}
@@ -488,7 +488,7 @@ export default function JobCard({ job, viewMode = 'list', isInternship = false }
                     setShowDetailsModal(false);
                     setShowApplicationModal(true);
                 }}
-                data-oid="ri9qn3g"
+                data-oid="1747qec"
             />
 
             <QuickApplyModal
@@ -496,7 +496,7 @@ export default function JobCard({ job, viewMode = 'list', isInternship = false }
                 isOpen={showQuickApplyModal}
                 onClose={() => setShowQuickApplyModal(false)}
                 onSubmit={handleApplicationSubmit}
-                data-oid="of-parm"
+                data-oid="se6_87m"
             />
 
             <JobApplicationModal
@@ -504,7 +504,7 @@ export default function JobCard({ job, viewMode = 'list', isInternship = false }
                 isOpen={showApplicationModal}
                 onClose={() => setShowApplicationModal(false)}
                 onSubmit={handleApplicationSubmit}
-                data-oid="qr.cxjn"
+                data-oid="fbw3-f_"
             />
 
             <ApplicationSuccessModal
@@ -512,7 +512,7 @@ export default function JobCard({ job, viewMode = 'list', isInternship = false }
                 onClose={() => setShowSuccessModal(false)}
                 jobTitle={job.title}
                 companyName={job.company}
-                data-oid="q_pwpbz"
+                data-oid="068ua1:"
             />
         </div>
     );
