@@ -34,27 +34,27 @@ export default function JobDetailsModal({ job, isOpen, onClose, onApply }: JobDe
         <div
             className="fixed inset-0 z-50 bg-black/50 backdrop-blur-custom flex items-center justify-center p-4"
             onClick={handleBackdropClick}
-            data-oid="on5jsy5"
+            data-oid="8doaxpw"
         >
             <div
                 className="bg-white rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden modal-enter"
-                data-oid=".o.78uc"
+                data-oid="s9gh718"
             >
                 {/* Header */}
                 <div
                     className="bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white p-6"
-                    data-oid="ixd3oqq"
+                    data-oid="6y.38q-"
                 >
-                    <div className="flex items-start justify-between" data-oid="a27rkkr">
-                        <div className="flex-1" data-oid="vum7ctm">
-                            <div className="flex items-center gap-3 mb-2" data-oid="q7jlk48">
-                                <h1 className="text-2xl font-bold" data-oid="zxqiiop">
+                    <div className="flex items-start justify-between" data-oid="5kp_-.k">
+                        <div className="flex-1" data-oid="kl6.p.7">
+                            <div className="flex items-center gap-3 mb-2" data-oid="mla-g-_">
+                                <h1 className="text-2xl font-bold" data-oid="iic73t9">
                                     {job.title}
                                 </h1>
                                 {job.isUrgent && (
                                     <span
                                         className="bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full animate-pulse"
-                                        data-oid="51uaay1"
+                                        data-oid="wo5cipr"
                                     >
                                         🔥 URGENT
                                     </span>
@@ -62,7 +62,7 @@ export default function JobDetailsModal({ job, isOpen, onClose, onApply }: JobDe
                                 {job.isFeatured && (
                                     <span
                                         className="bg-yellow-500 text-white text-xs font-bold px-3 py-1 rounded-full"
-                                        data-oid="c94pt9k"
+                                        data-oid="0ez6b3h"
                                     >
                                         ⭐ FEATURED
                                     </span>
@@ -70,28 +70,28 @@ export default function JobDetailsModal({ job, isOpen, onClose, onApply }: JobDe
                             </div>
                             <p
                                 className="text-xl font-semibold text-blue-100 mb-2"
-                                data-oid="j7y-8lw"
+                                data-oid="ly0o.m5"
                             >
                                 {job.company}
                             </p>
                             <div
                                 className="flex flex-wrap items-center gap-4 text-sm text-blue-100"
-                                data-oid="pr9lve4"
+                                data-oid=":hpbbdr"
                             >
-                                <span className="flex items-center gap-1" data-oid="8d:1q-e">
+                                <span className="flex items-center gap-1" data-oid="r31omnu">
                                     <svg
                                         className="h-4 w-4"
                                         fill="none"
                                         stroke="currentColor"
                                         viewBox="0 0 24 24"
-                                        data-oid="oujd2wf"
+                                        data-oid="6fe64l8"
                                     >
                                         <path
                                             strokeLinecap="round"
                                             strokeLinejoin="round"
                                             strokeWidth="2"
                                             d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                                            data-oid="ho-fv2z"
+                                            data-oid="gd3om6n"
                                         />
 
                                         <path
@@ -99,43 +99,43 @@ export default function JobDetailsModal({ job, isOpen, onClose, onApply }: JobDe
                                             strokeLinejoin="round"
                                             strokeWidth="2"
                                             d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                                            data-oid="actljnw"
+                                            data-oid="2b2i1hb"
                                         />
                                     </svg>
                                     {job.location}
                                 </span>
-                                <span className="flex items-center gap-1" data-oid="pp4vc0j">
+                                <span className="flex items-center gap-1" data-oid="4e8z2ff">
                                     <svg
                                         className="h-4 w-4"
                                         fill="none"
                                         stroke="currentColor"
                                         viewBox="0 0 24 24"
-                                        data-oid="_w2ql6q"
+                                        data-oid=".zi07h3"
                                     >
                                         <path
                                             strokeLinecap="round"
                                             strokeLinejoin="round"
                                             strokeWidth="2"
                                             d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"
-                                            data-oid="ukkbng."
+                                            data-oid="k-trrq1"
                                         />
                                     </svg>
                                     {job.salary}
                                 </span>
-                                <span className="flex items-center gap-1" data-oid="j8kdend">
+                                <span className="flex items-center gap-1" data-oid="f7-:rcp">
                                     <svg
                                         className="h-4 w-4"
                                         fill="none"
                                         stroke="currentColor"
                                         viewBox="0 0 24 24"
-                                        data-oid="7.du2q3"
+                                        data-oid="w02m-mt"
                                     >
                                         <path
                                             strokeLinecap="round"
                                             strokeLinejoin="round"
                                             strokeWidth="2"
                                             d="M13 10V3L4 14h7v7l9-11h-7z"
-                                            data-oid="_v5-wxr"
+                                            data-oid="ol99h5m"
                                         />
                                     </svg>
                                     {job.experienceRequired}
@@ -145,21 +145,21 @@ export default function JobDetailsModal({ job, isOpen, onClose, onApply }: JobDe
                         <button
                             onClick={onClose}
                             className="p-2 hover:bg-white/20 rounded-full transition-colors"
-                            data-oid="-edv8g6"
+                            data-oid="pz-jzr9"
                         >
                             <svg
                                 className="h-6 w-6"
                                 fill="none"
                                 stroke="currentColor"
                                 viewBox="0 0 24 24"
-                                data-oid="zxw8dnt"
+                                data-oid="5os_ur4"
                             >
                                 <path
                                     strokeLinecap="round"
                                     strokeLinejoin="round"
                                     strokeWidth="2"
                                     d="M6 18L18 6M6 6l12 12"
-                                    data-oid="o0j95f7"
+                                    data-oid="qnp0g4g"
                                 />
                             </svg>
                         </button>
@@ -167,10 +167,10 @@ export default function JobDetailsModal({ job, isOpen, onClose, onApply }: JobDe
                 </div>
 
                 {/* Content */}
-                <div className="flex flex-col h-[calc(90vh-200px)]" data-oid="dlcpo:n">
+                <div className="flex flex-col h-[calc(90vh-200px)]" data-oid="zj7kayw">
                     {/* Tabs */}
-                    <div className="border-b border-gray-200 px-6" data-oid="awa-5fl">
-                        <nav className="flex space-x-8" data-oid="pm9ls4y">
+                    <div className="border-b border-gray-200 px-6" data-oid="bhv8nol">
+                        <nav className="flex space-x-8" data-oid="9p1.48:">
                             {[
                                 { id: 'overview', label: 'Job Overview' },
                                 { id: 'requirements', label: 'Requirements' },
@@ -184,7 +184,7 @@ export default function JobDetailsModal({ job, isOpen, onClose, onApply }: JobDe
                                             ? 'border-[hsl(196,80%,45%)] text-[hsl(196,80%,45%)]'
                                             : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                                     }`}
-                                    data-oid="y1nuom-"
+                                    data-oid="g0ldf7y"
                                 >
                                     {tab.label}
                                 </button>
@@ -193,84 +193,84 @@ export default function JobDetailsModal({ job, isOpen, onClose, onApply }: JobDe
                     </div>
 
                     {/* Tab Content */}
-                    <div className="flex-1 overflow-y-auto p-6 modal-scroll" data-oid="7vk9d-h">
+                    <div className="flex-1 overflow-y-auto p-6 modal-scroll" data-oid="cfm3-jz">
                         {activeTab === 'overview' && (
-                            <div className="space-y-6" data-oid="efatva8">
+                            <div className="space-y-6" data-oid="subgm:a">
                                 {/* Job Stats */}
                                 <div
                                     className="grid grid-cols-2 md:grid-cols-4 gap-4"
-                                    data-oid="v:6y111"
+                                    data-oid="_iizous"
                                 >
                                     <div
                                         className="bg-blue-50 p-4 rounded-lg text-center"
-                                        data-oid="jdyjsy8"
+                                        data-oid="ow_h347"
                                     >
                                         <div
                                             className="text-2xl font-bold text-[hsl(196,80%,45%)]"
-                                            data-oid="uyh9-hf"
+                                            data-oid="iib_i8q"
                                         >
                                             {job.applicantCount}
                                         </div>
-                                        <div className="text-sm text-gray-600" data-oid=":.wlw9o">
+                                        <div className="text-sm text-gray-600" data-oid="zk3mir5">
                                             Applicants
                                         </div>
                                     </div>
                                     <div
                                         className="bg-green-50 p-4 rounded-lg text-center"
-                                        data-oid="myc4va4"
+                                        data-oid="x0zk.dg"
                                     >
                                         <div
                                             className="text-2xl font-bold text-green-600"
-                                            data-oid="kju6uoh"
+                                            data-oid="wugatz."
                                         >
                                             {job.jobType}
                                         </div>
-                                        <div className="text-sm text-gray-600" data-oid="ncrzyf_">
+                                        <div className="text-sm text-gray-600" data-oid="5r-ikih">
                                             Job Type
                                         </div>
                                     </div>
                                     <div
                                         className="bg-purple-50 p-4 rounded-lg text-center"
-                                        data-oid="ectujfj"
+                                        data-oid="7kdqsss"
                                     >
                                         <div
                                             className="text-2xl font-bold text-purple-600"
-                                            data-oid="j:2_l8c"
+                                            data-oid="cw-99sd"
                                         >
                                             {job.employmentType}
                                         </div>
-                                        <div className="text-sm text-gray-600" data-oid="bft5900">
+                                        <div className="text-sm text-gray-600" data-oid="8zt_:0:">
                                             Employment
                                         </div>
                                     </div>
                                     <div
                                         className="bg-orange-50 p-4 rounded-lg text-center"
-                                        data-oid="vpd_g8t"
+                                        data-oid="jkonerv"
                                     >
                                         <div
                                             className="text-2xl font-bold text-orange-600"
-                                            data-oid="p1h5zq_"
+                                            data-oid="uw:575-"
                                         >
                                             {formatDate(job.postedDate).split(' ')[0]}
                                         </div>
-                                        <div className="text-sm text-gray-600" data-oid="e_-rncc">
+                                        <div className="text-sm text-gray-600" data-oid="iei9_sb">
                                             Posted
                                         </div>
                                     </div>
                                 </div>
 
                                 {/* Job Description */}
-                                <div data-oid="zmywu_3">
+                                <div data-oid="tag8s80">
                                     <h3
                                         className="text-lg font-semibold text-gray-800 mb-3"
-                                        data-oid="46ucz--"
+                                        data-oid="ex_c2m2"
                                     >
                                         Job Description
                                     </h3>
-                                    <div className="prose prose-blue max-w-none" data-oid="0:6mws1">
+                                    <div className="prose prose-blue max-w-none" data-oid="v92e-jb">
                                         <p
                                             className="text-gray-600 leading-relaxed mb-4"
-                                            data-oid="6am_.f2"
+                                            data-oid="ndyfi.:"
                                         >
                                             We are looking for a talented {job.title} to join our
                                             dynamic team at {job.company}. This is an excellent
@@ -280,7 +280,7 @@ export default function JobDetailsModal({ job, isOpen, onClose, onApply }: JobDe
                                         </p>
                                         <p
                                             className="text-gray-600 leading-relaxed mb-4"
-                                            data-oid="yurfbbm"
+                                            data-oid="xvl6m9f"
                                         >
                                             As a {job.title}, you will be responsible for developing
                                             and maintaining high-quality software solutions,
@@ -289,7 +289,7 @@ export default function JobDetailsModal({ job, isOpen, onClose, onApply }: JobDe
                                         </p>
                                         <p
                                             className="text-gray-600 leading-relaxed"
-                                            data-oid=":b0ah:2"
+                                            data-oid="sjd1w_k"
                                         >
                                             Join us in building innovative solutions that impact
                                             millions of users across India and beyond. We offer a
@@ -300,50 +300,50 @@ export default function JobDetailsModal({ job, isOpen, onClose, onApply }: JobDe
                                 </div>
 
                                 {/* Application Deadline & Quick Stats */}
-                                <div className="bg-blue-50 rounded-lg p-4 mb-6" data-oid="-hy.tnf">
+                                <div className="bg-blue-50 rounded-lg p-4 mb-6" data-oid=":u4sp79">
                                     <div
                                         className="grid grid-cols-1 md:grid-cols-3 gap-4"
-                                        data-oid="x5q.::k"
+                                        data-oid="hq:68de"
                                     >
-                                        <div className="text-center" data-oid="hoybvik">
+                                        <div className="text-center" data-oid="_bcz88g">
                                             <div
                                                 className="text-2xl font-bold text-blue-600"
-                                                data-oid=":q-_9:s"
+                                                data-oid="b3glj3o"
                                             >
                                                 {Math.max(1, Math.floor(Math.random() * 15))} days
                                             </div>
                                             <div
                                                 className="text-sm text-gray-600"
-                                                data-oid="yt6mu6k"
+                                                data-oid="-cokyw7"
                                             >
                                                 Application Deadline
                                             </div>
                                         </div>
-                                        <div className="text-center" data-oid="ngm9cm4">
+                                        <div className="text-center" data-oid="20rkn9h">
                                             <div
                                                 className="text-2xl font-bold text-green-600"
-                                                data-oid="rsb3ml."
+                                                data-oid="bvxk:bp"
                                             >
                                                 {job.isRemote ? 'Remote' : 'On-site'}
                                             </div>
                                             <div
                                                 className="text-sm text-gray-600"
-                                                data-oid="a:vqv2k"
+                                                data-oid=":2_5j3s"
                                             >
                                                 Work Mode
                                             </div>
                                         </div>
-                                        <div className="text-center" data-oid="6_rxv3h">
+                                        <div className="text-center" data-oid="dlv0b5r">
                                             <div
                                                 className="text-2xl font-bold text-purple-600"
-                                                data-oid="0sr7vz."
+                                                data-oid="pol3_j8"
                                             >
                                                 {Math.floor(Math.random() * 5) + 1}-
                                                 {Math.floor(Math.random() * 3) + 3} rounds
                                             </div>
                                             <div
                                                 className="text-sm text-gray-600"
-                                                data-oid="az4ix41"
+                                                data-oid="2hmo:t9"
                                             >
                                                 Interview Process
                                             </div>
@@ -352,62 +352,62 @@ export default function JobDetailsModal({ job, isOpen, onClose, onApply }: JobDe
                                 </div>
 
                                 {/* Company Highlights */}
-                                <div className="mb-6" data-oid="dl-x6.1">
+                                <div className="mb-6" data-oid="5oyh19c">
                                     <h3
                                         className="text-lg font-semibold text-gray-800 mb-3"
-                                        data-oid="iv-zn9f"
+                                        data-oid="vprns.n"
                                     >
                                         Why Join {job.company}?
                                     </h3>
                                     <div
                                         className="grid grid-cols-1 md:grid-cols-2 gap-3"
-                                        data-oid="s14y_kl"
+                                        data-oid="usxf1g8"
                                     >
                                         <div
                                             className="flex items-center gap-3 p-3 bg-green-50 rounded-lg"
-                                            data-oid="2kxpo8c"
+                                            data-oid="biig:y-"
                                         >
                                             <div
                                                 className="w-2 h-2 bg-green-500 rounded-full"
-                                                data-oid="fgh0dwf"
+                                                data-oid="rq9tp:l"
                                             ></div>
-                                            <span className="text-gray-700" data-oid="3r0e2rk">
+                                            <span className="text-gray-700" data-oid="cn08ir:">
                                                 Fast-growing {job.companyType} company
                                             </span>
                                         </div>
                                         <div
                                             className="flex items-center gap-3 p-3 bg-blue-50 rounded-lg"
-                                            data-oid="m0nm8.v"
+                                            data-oid="2dm53du"
                                         >
                                             <div
                                                 className="w-2 h-2 bg-blue-500 rounded-full"
-                                                data-oid="v03l03:"
+                                                data-oid="ut-wmx7"
                                             ></div>
-                                            <span className="text-gray-700" data-oid="golhnvo">
+                                            <span className="text-gray-700" data-oid="u874dii">
                                                 Learning & development opportunities
                                             </span>
                                         </div>
                                         <div
                                             className="flex items-center gap-3 p-3 bg-purple-50 rounded-lg"
-                                            data-oid="lac02hj"
+                                            data-oid="v:ywkt9"
                                         >
                                             <div
                                                 className="w-2 h-2 bg-purple-500 rounded-full"
-                                                data-oid="_e3q.04"
+                                                data-oid="t5xid32"
                                             ></div>
-                                            <span className="text-gray-700" data-oid="avhwxbx">
+                                            <span className="text-gray-700" data-oid="o79j7wi">
                                                 Collaborative work environment
                                             </span>
                                         </div>
                                         <div
                                             className="flex items-center gap-3 p-3 bg-orange-50 rounded-lg"
-                                            data-oid="_j2b2np"
+                                            data-oid="fmxnk1l"
                                         >
                                             <div
                                                 className="w-2 h-2 bg-orange-500 rounded-full"
-                                                data-oid="0jlalpk"
+                                                data-oid="ngc_swn"
                                             ></div>
-                                            <span className="text-gray-700" data-oid="6.2k:ak">
+                                            <span className="text-gray-700" data-oid="vhplb.p">
                                                 Competitive compensation package
                                             </span>
                                         </div>
@@ -416,30 +416,30 @@ export default function JobDetailsModal({ job, isOpen, onClose, onApply }: JobDe
 
                                 {/* Benefits */}
                                 {job.benefits && job.benefits.length > 0 && (
-                                    <div data-oid="wjm01g2">
+                                    <div data-oid="44zy2ml">
                                         <h3
                                             className="text-lg font-semibold text-gray-800 mb-3"
-                                            data-oid=":7qj74m"
+                                            data-oid="gd_o25-"
                                         >
                                             Benefits & Perks
                                         </h3>
                                         <div
                                             className="grid grid-cols-1 md:grid-cols-2 gap-3"
-                                            data-oid="0wwi1lf"
+                                            data-oid="7iqs_mb"
                                         >
                                             {job.benefits.map((benefit, index) => (
                                                 <div
                                                     key={index}
                                                     className="flex items-center gap-3 p-3 bg-green-50 rounded-lg"
-                                                    data-oid="f5jhir9"
+                                                    data-oid="tuoy.08"
                                                 >
                                                     <div
                                                         className="w-2 h-2 bg-green-500 rounded-full"
-                                                        data-oid=":_cl_5f"
+                                                        data-oid="hxeohyk"
                                                     ></div>
                                                     <span
                                                         className="text-gray-700"
-                                                        data-oid="36cbeqb"
+                                                        data-oid="wz:gjoo"
                                                     >
                                                         {benefit}
                                                     </span>
@@ -452,21 +452,21 @@ export default function JobDetailsModal({ job, isOpen, onClose, onApply }: JobDe
                         )}
 
                         {activeTab === 'requirements' && (
-                            <div className="space-y-6" data-oid="9wr.4br">
+                            <div className="space-y-6" data-oid="faotctj">
                                 {/* Skills Required */}
-                                <div data-oid="2p92hs1">
+                                <div data-oid="4z-1fzj">
                                     <h3
                                         className="text-lg font-semibold text-gray-800 mb-3"
-                                        data-oid="l-51gpg"
+                                        data-oid="e7k8pzu"
                                     >
                                         Required Skills
                                     </h3>
-                                    <div className="flex flex-wrap gap-2" data-oid="z.p_9wj">
+                                    <div className="flex flex-wrap gap-2" data-oid="kndpzkw">
                                         {job.skills.map((skill, index) => (
                                             <span
                                                 key={index}
                                                 className="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-2 rounded-full"
-                                                data-oid="fpx3yai"
+                                                data-oid="rceu79j"
                                             >
                                                 {skill}
                                             </span>
@@ -475,57 +475,57 @@ export default function JobDetailsModal({ job, isOpen, onClose, onApply }: JobDe
                                 </div>
 
                                 {/* Experience & Qualifications */}
-                                <div data-oid="jr6gmij">
+                                <div data-oid="nyodtfb">
                                     <h3
                                         className="text-lg font-semibold text-gray-800 mb-3"
-                                        data-oid="4do1get"
+                                        data-oid="c4185ls"
                                     >
                                         Experience & Qualifications
                                     </h3>
-                                    <div className="space-y-3" data-oid="yodt_n1">
-                                        <div className="flex items-start gap-3" data-oid="6qa68.t">
+                                    <div className="space-y-3" data-oid=".:ef-q5">
+                                        <div className="flex items-start gap-3" data-oid="54_swii">
                                             <div
                                                 className="w-2 h-2 bg-[hsl(196,80%,45%)] rounded-full mt-2"
-                                                data-oid="u4wtc5-"
+                                                data-oid="8uptp98"
                                             ></div>
-                                            <span className="text-gray-700" data-oid="qejdi57">
+                                            <span className="text-gray-700" data-oid="e:q1g_k">
                                                 Experience: {job.experienceRequired}
                                             </span>
                                         </div>
-                                        <div className="flex items-start gap-3" data-oid="m27ubsg">
+                                        <div className="flex items-start gap-3" data-oid="ufjgsr_">
                                             <div
                                                 className="w-2 h-2 bg-[hsl(196,80%,45%)] rounded-full mt-2"
-                                                data-oid="bii2aoy"
+                                                data-oid="l9:99wh"
                                             ></div>
-                                            <span className="text-gray-700" data-oid="cpr0kzg">
+                                            <span className="text-gray-700" data-oid="y7xrmso">
                                                 Bachelor's degree in Computer Science, Engineering,
                                                 or related field
                                             </span>
                                         </div>
-                                        <div className="flex items-start gap-3" data-oid="c7r_f31">
+                                        <div className="flex items-start gap-3" data-oid="-mjmt-.">
                                             <div
                                                 className="w-2 h-2 bg-[hsl(196,80%,45%)] rounded-full mt-2"
-                                                data-oid="ukyhcev"
+                                                data-oid="whlmxj7"
                                             ></div>
-                                            <span className="text-gray-700" data-oid="991yelo">
+                                            <span className="text-gray-700" data-oid="ztqix2v">
                                                 Strong problem-solving and analytical skills
                                             </span>
                                         </div>
-                                        <div className="flex items-start gap-3" data-oid="e.im:04">
+                                        <div className="flex items-start gap-3" data-oid="xf47ub1">
                                             <div
                                                 className="w-2 h-2 bg-[hsl(196,80%,45%)] rounded-full mt-2"
-                                                data-oid="9sp019f"
+                                                data-oid="0w7lzp0"
                                             ></div>
-                                            <span className="text-gray-700" data-oid="akp-lma">
+                                            <span className="text-gray-700" data-oid="-j..-.m">
                                                 Excellent communication and teamwork abilities
                                             </span>
                                         </div>
-                                        <div className="flex items-start gap-3" data-oid="m1sz6rk">
+                                        <div className="flex items-start gap-3" data-oid="_l5nthm">
                                             <div
                                                 className="w-2 h-2 bg-[hsl(196,80%,45%)] rounded-full mt-2"
-                                                data-oid="324tw1q"
+                                                data-oid="ml8kvqe"
                                             ></div>
-                                            <span className="text-gray-700" data-oid="vpi.sms">
+                                            <span className="text-gray-700" data-oid="mt5om-e">
                                                 Passion for learning new technologies and best
                                                 practices
                                             </span>
@@ -534,59 +534,59 @@ export default function JobDetailsModal({ job, isOpen, onClose, onApply }: JobDe
                                 </div>
 
                                 {/* Responsibilities */}
-                                <div data-oid="4xz5ih:">
+                                <div data-oid="8m-g8qu">
                                     <h3
                                         className="text-lg font-semibold text-gray-800 mb-3"
-                                        data-oid="ga1jz_6"
+                                        data-oid="b5.k567"
                                     >
                                         Key Responsibilities
                                     </h3>
-                                    <div className="space-y-3" data-oid="l_o900f">
-                                        <div className="flex items-start gap-3" data-oid="jzoqxpn">
+                                    <div className="space-y-3" data-oid="mqll4hl">
+                                        <div className="flex items-start gap-3" data-oid="qpr97uf">
                                             <div
                                                 className="w-2 h-2 bg-green-500 rounded-full mt-2"
-                                                data-oid="maexi:p"
+                                                data-oid=".47ndt_"
                                             ></div>
-                                            <span className="text-gray-700" data-oid="xrpv7au">
+                                            <span className="text-gray-700" data-oid="kbybh78">
                                                 Develop and maintain high-quality software
                                                 applications
                                             </span>
                                         </div>
-                                        <div className="flex items-start gap-3" data-oid="dh7fgja">
+                                        <div className="flex items-start gap-3" data-oid="47t-sn2">
                                             <div
                                                 className="w-2 h-2 bg-green-500 rounded-full mt-2"
-                                                data-oid="oenx3o0"
+                                                data-oid="xfu3.ku"
                                             ></div>
-                                            <span className="text-gray-700" data-oid="bzxl19z">
+                                            <span className="text-gray-700" data-oid="uorunzb">
                                                 Collaborate with cross-functional teams to define
                                                 and implement features
                                             </span>
                                         </div>
-                                        <div className="flex items-start gap-3" data-oid="26_k8pr">
+                                        <div className="flex items-start gap-3" data-oid="vso13e5">
                                             <div
                                                 className="w-2 h-2 bg-green-500 rounded-full mt-2"
-                                                data-oid="qj.x0kc"
+                                                data-oid="dnyw0uj"
                                             ></div>
-                                            <span className="text-gray-700" data-oid="m.ed6zd">
+                                            <span className="text-gray-700" data-oid="nthaw6b">
                                                 Write clean, maintainable, and efficient code
                                             </span>
                                         </div>
-                                        <div className="flex items-start gap-3" data-oid="0dp-0rb">
+                                        <div className="flex items-start gap-3" data-oid="j-tazop">
                                             <div
                                                 className="w-2 h-2 bg-green-500 rounded-full mt-2"
-                                                data-oid="a:4rfho"
+                                                data-oid="3zdwxbg"
                                             ></div>
-                                            <span className="text-gray-700" data-oid="asc3pvg">
+                                            <span className="text-gray-700" data-oid="85:971l">
                                                 Participate in code reviews and maintain coding
                                                 standards
                                             </span>
                                         </div>
-                                        <div className="flex items-start gap-3" data-oid="6tcba9d">
+                                        <div className="flex items-start gap-3" data-oid="_.-6xdw">
                                             <div
                                                 className="w-2 h-2 bg-green-500 rounded-full mt-2"
-                                                data-oid="3pgp.hr"
+                                                data-oid="adrb_vc"
                                             ></div>
-                                            <span className="text-gray-700" data-oid="s02n7ug">
+                                            <span className="text-gray-700" data-oid="3q.fqih">
                                                 Troubleshoot and debug applications to optimize
                                                 performance
                                             </span>
@@ -595,34 +595,34 @@ export default function JobDetailsModal({ job, isOpen, onClose, onApply }: JobDe
                                 </div>
 
                                 {/* Interview Process */}
-                                <div className="mt-6" data-oid="r2u6vxr">
+                                <div className="mt-6" data-oid="r4.7t6-">
                                     <h3
                                         className="text-lg font-semibold text-gray-800 mb-3"
-                                        data-oid="58mjdw-"
+                                        data-oid="zy6ri2g"
                                     >
                                         Interview Process
                                     </h3>
-                                    <div className="space-y-4" data-oid="k_av75n">
+                                    <div className="space-y-4" data-oid="-h2y5ph">
                                         <div
                                             className="flex items-center gap-4 p-3 bg-blue-50 rounded-lg"
-                                            data-oid="3ojn3u4"
+                                            data-oid="wrvv89d"
                                         >
                                             <div
                                                 className="w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center text-sm font-bold"
-                                                data-oid="o2.s:7-"
+                                                data-oid="iw1xhu0"
                                             >
                                                 1
                                             </div>
-                                            <div data-oid="qqszmys">
+                                            <div data-oid="s3:5-qs">
                                                 <div
                                                     className="font-medium text-gray-800"
-                                                    data-oid="8c6l09k"
+                                                    data-oid="a.9f_ih"
                                                 >
                                                     Application Review
                                                 </div>
                                                 <div
                                                     className="text-sm text-gray-600"
-                                                    data-oid="yj:g8c."
+                                                    data-oid=".:cax-3"
                                                 >
                                                     Resume and profile screening
                                                 </div>
@@ -630,24 +630,24 @@ export default function JobDetailsModal({ job, isOpen, onClose, onApply }: JobDe
                                         </div>
                                         <div
                                             className="flex items-center gap-4 p-3 bg-green-50 rounded-lg"
-                                            data-oid="r8q22k2"
+                                            data-oid="8:uhm_0"
                                         >
                                             <div
                                                 className="w-8 h-8 bg-green-500 text-white rounded-full flex items-center justify-center text-sm font-bold"
-                                                data-oid="9al67a."
+                                                data-oid="j9v6w96"
                                             >
                                                 2
                                             </div>
-                                            <div data-oid="prxo12k">
+                                            <div data-oid="on28577">
                                                 <div
                                                     className="font-medium text-gray-800"
-                                                    data-oid="ykm_.35"
+                                                    data-oid="ooyg-9t"
                                                 >
                                                     Technical Assessment
                                                 </div>
                                                 <div
                                                     className="text-sm text-gray-600"
-                                                    data-oid="uhpykhe"
+                                                    data-oid="ynqowqi"
                                                 >
                                                     Coding challenge or technical questions
                                                 </div>
@@ -655,24 +655,24 @@ export default function JobDetailsModal({ job, isOpen, onClose, onApply }: JobDe
                                         </div>
                                         <div
                                             className="flex items-center gap-4 p-3 bg-purple-50 rounded-lg"
-                                            data-oid="-uihjbw"
+                                            data-oid=".t6pviv"
                                         >
                                             <div
                                                 className="w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center text-sm font-bold"
-                                                data-oid="bmqp_bs"
+                                                data-oid="gv-g04z"
                                             >
                                                 3
                                             </div>
-                                            <div data-oid="ws6wd:z">
+                                            <div data-oid="fvglqnr">
                                                 <div
                                                     className="font-medium text-gray-800"
-                                                    data-oid="8z05oua"
+                                                    data-oid="3-h30og"
                                                 >
                                                     Technical Interview
                                                 </div>
                                                 <div
                                                     className="text-sm text-gray-600"
-                                                    data-oid="a_jd_r8"
+                                                    data-oid="ns7_v9t"
                                                 >
                                                     Deep dive into technical skills and
                                                     problem-solving
@@ -681,24 +681,24 @@ export default function JobDetailsModal({ job, isOpen, onClose, onApply }: JobDe
                                         </div>
                                         <div
                                             className="flex items-center gap-4 p-3 bg-orange-50 rounded-lg"
-                                            data-oid="hdqp70b"
+                                            data-oid="g6fu-fh"
                                         >
                                             <div
                                                 className="w-8 h-8 bg-orange-500 text-white rounded-full flex items-center justify-center text-sm font-bold"
-                                                data-oid="h17ww-c"
+                                                data-oid="pu7qvn4"
                                             >
                                                 4
                                             </div>
-                                            <div data-oid="_26i7wn">
+                                            <div data-oid="sejs:ev">
                                                 <div
                                                     className="font-medium text-gray-800"
-                                                    data-oid="r88weu5"
+                                                    data-oid="8irgm2r"
                                                 >
                                                     HR Interview
                                                 </div>
                                                 <div
                                                     className="text-sm text-gray-600"
-                                                    data-oid="c2i2zfp"
+                                                    data-oid="ro1mr9s"
                                                 >
                                                     Cultural fit and final discussion
                                                 </div>
@@ -708,20 +708,20 @@ export default function JobDetailsModal({ job, isOpen, onClose, onApply }: JobDe
                                 </div>
 
                                 {/* Preferred Skills */}
-                                <div className="mt-6" data-oid="b:hpop.">
+                                <div className="mt-6" data-oid="jd-z6ic">
                                     <h3
                                         className="text-lg font-semibold text-gray-800 mb-3"
-                                        data-oid="06.64m_"
+                                        data-oid="q-bb5s5"
                                     >
                                         Nice to Have Skills
                                     </h3>
-                                    <div className="flex flex-wrap gap-2" data-oid="x3op_v8">
+                                    <div className="flex flex-wrap gap-2" data-oid="1vxq353">
                                         {['Git', 'Docker', 'AWS', 'Agile', 'Testing', 'CI/CD'].map(
                                             (skill, index) => (
                                                 <span
                                                     key={index}
                                                     className="bg-gray-100 text-gray-700 text-sm font-medium px-3 py-1 rounded-full border border-gray-300"
-                                                    data-oid="0n4llw5"
+                                                    data-oid=":ywtmyw"
                                                 >
                                                     {skill}
                                                 </span>
@@ -733,25 +733,25 @@ export default function JobDetailsModal({ job, isOpen, onClose, onApply }: JobDe
                         )}
 
                         {activeTab === 'company' && (
-                            <div className="space-y-6" data-oid="ii0q:g6">
+                            <div className="space-y-6" data-oid="1n..blu">
                                 {/* Company Overview */}
-                                <div data-oid="m-mdb44">
+                                <div data-oid="5t6ud.i">
                                     <h3
                                         className="text-lg font-semibold text-gray-800 mb-3"
-                                        data-oid="nz.o.vm"
+                                        data-oid="kxt-nq3"
                                     >
                                         About {job.company}
                                     </h3>
                                     <p
                                         className="text-gray-600 leading-relaxed mb-4"
-                                        data-oid="bj.8iwz"
+                                        data-oid="ezr-c4u"
                                     >
                                         {job.company} is a leading {job.industry} company that has
                                         been revolutionizing the industry with innovative solutions
                                         and cutting-edge technology. We are committed to creating
                                         products that make a real difference in people's lives.
                                     </p>
-                                    <p className="text-gray-600 leading-relaxed" data-oid="k0ry911">
+                                    <p className="text-gray-600 leading-relaxed" data-oid="0cret45">
                                         Our team consists of passionate professionals who are
                                         dedicated to excellence and continuous learning. We foster a
                                         culture of innovation, collaboration, and growth where every
@@ -762,89 +762,89 @@ export default function JobDetailsModal({ job, isOpen, onClose, onApply }: JobDe
                                 {/* Company Stats */}
                                 <div
                                     className="grid grid-cols-1 md:grid-cols-3 gap-4"
-                                    data-oid="7m-njfo"
+                                    data-oid="yhfug3y"
                                 >
                                     <div
                                         className="bg-blue-50 p-4 rounded-lg text-center"
-                                        data-oid=":myna-d"
+                                        data-oid="-a3:nwo"
                                     >
                                         <div
                                             className="text-2xl font-bold text-[hsl(196,80%,45%)]"
-                                            data-oid="yb6i-.3"
+                                            data-oid="sbxkp:d"
                                         >
                                             {job.companySize}
                                         </div>
-                                        <div className="text-sm text-gray-600" data-oid=".4ynawv">
+                                        <div className="text-sm text-gray-600" data-oid="cjaly2y">
                                             Employees
                                         </div>
                                     </div>
                                     <div
                                         className="bg-green-50 p-4 rounded-lg text-center"
-                                        data-oid="rdlnmht"
+                                        data-oid="d2ir0dz"
                                     >
                                         <div
                                             className="text-2xl font-bold text-green-600"
-                                            data-oid="_pmx75x"
+                                            data-oid="dpftazc"
                                         >
                                             {job.industry}
                                         </div>
-                                        <div className="text-sm text-gray-600" data-oid="p3:n606">
+                                        <div className="text-sm text-gray-600" data-oid=".v13_d8">
                                             Industry
                                         </div>
                                     </div>
                                     <div
                                         className="bg-purple-50 p-4 rounded-lg text-center"
-                                        data-oid="y0w7wvw"
+                                        data-oid="cz5hagj"
                                     >
                                         <div
                                             className="text-2xl font-bold text-purple-600"
-                                            data-oid=".eg1lm5"
+                                            data-oid="6_msds9"
                                         >
                                             {job.companyType}
                                         </div>
-                                        <div className="text-sm text-gray-600" data-oid="inq285x">
+                                        <div className="text-sm text-gray-600" data-oid="14b90px">
                                             Company Type
                                         </div>
                                     </div>
                                 </div>
 
                                 {/* Company Culture */}
-                                <div data-oid="nn:4e8p">
+                                <div data-oid="7phze1b">
                                     <h3
                                         className="text-lg font-semibold text-gray-800 mb-3"
-                                        data-oid="4gtdf::"
+                                        data-oid="hs54a8o"
                                     >
                                         Company Culture
                                     </h3>
                                     <div
                                         className="grid grid-cols-1 md:grid-cols-2 gap-4"
-                                        data-oid="w5zzk-s"
+                                        data-oid="4p4qlal"
                                     >
                                         <div
                                             className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg"
-                                            data-oid="7.debfe"
+                                            data-oid="i5p3zh2"
                                         >
                                             <div
                                                 className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center"
-                                                data-oid=":j1t1j0"
+                                                data-oid="fs2p8g5"
                                             >
                                                 <span
                                                     className="text-blue-600 text-sm"
-                                                    data-oid="fsxieyd"
+                                                    data-oid="k_hl592"
                                                 >
                                                     🚀
                                                 </span>
                                             </div>
-                                            <div data-oid="m.nqltx">
+                                            <div data-oid="wp7.b1z">
                                                 <div
                                                     className="font-medium text-gray-800"
-                                                    data-oid=":wqa.m3"
+                                                    data-oid="9d149w7"
                                                 >
                                                     Innovation
                                                 </div>
                                                 <div
                                                     className="text-sm text-gray-600"
-                                                    data-oid="4ezr-q_"
+                                                    data-oid="quxq3d1"
                                                 >
                                                     Cutting-edge technology
                                                 </div>
@@ -852,29 +852,29 @@ export default function JobDetailsModal({ job, isOpen, onClose, onApply }: JobDe
                                         </div>
                                         <div
                                             className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg"
-                                            data-oid="wrb-nsr"
+                                            data-oid="s9vzzz6"
                                         >
                                             <div
                                                 className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center"
-                                                data-oid="xzptlzc"
+                                                data-oid="ub_8ls4"
                                             >
                                                 <span
                                                     className="text-green-600 text-sm"
-                                                    data-oid=":o7q27x"
+                                                    data-oid="dcieb:b"
                                                 >
                                                     🤝
                                                 </span>
                                             </div>
-                                            <div data-oid="-r95dhf">
+                                            <div data-oid="v2_x:6_">
                                                 <div
                                                     className="font-medium text-gray-800"
-                                                    data-oid="q7p.y0x"
+                                                    data-oid="v6i93:."
                                                 >
                                                     Collaboration
                                                 </div>
                                                 <div
                                                     className="text-sm text-gray-600"
-                                                    data-oid="ln51oz1"
+                                                    data-oid="j5p6tn5"
                                                 >
                                                     Team-first approach
                                                 </div>
@@ -882,29 +882,29 @@ export default function JobDetailsModal({ job, isOpen, onClose, onApply }: JobDe
                                         </div>
                                         <div
                                             className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg"
-                                            data-oid="42lxtdb"
+                                            data-oid="roa7q_r"
                                         >
                                             <div
                                                 className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center"
-                                                data-oid="yzpz0b4"
+                                                data-oid="99.7:24"
                                             >
                                                 <span
                                                     className="text-purple-600 text-sm"
-                                                    data-oid="81l6mvu"
+                                                    data-oid="b4e-kzz"
                                                 >
                                                     📈
                                                 </span>
                                             </div>
-                                            <div data-oid="9owyvma">
+                                            <div data-oid="21t3vly">
                                                 <div
                                                     className="font-medium text-gray-800"
-                                                    data-oid="00ej:x:"
+                                                    data-oid="2anlje7"
                                                 >
                                                     Growth
                                                 </div>
                                                 <div
                                                     className="text-sm text-gray-600"
-                                                    data-oid="rafidd3"
+                                                    data-oid="pwkwl7e"
                                                 >
                                                     Career development
                                                 </div>
@@ -912,29 +912,29 @@ export default function JobDetailsModal({ job, isOpen, onClose, onApply }: JobDe
                                         </div>
                                         <div
                                             className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg"
-                                            data-oid="cljp5zx"
+                                            data-oid=".i0jcav"
                                         >
                                             <div
                                                 className="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center"
-                                                data-oid="evcvfc3"
+                                                data-oid=":rmqygg"
                                             >
                                                 <span
                                                     className="text-orange-600 text-sm"
-                                                    data-oid="30.bfeo"
+                                                    data-oid="cstc.x5"
                                                 >
                                                     ⚖️
                                                 </span>
                                             </div>
-                                            <div data-oid="n8l6:87">
+                                            <div data-oid="ev.asmv">
                                                 <div
                                                     className="font-medium text-gray-800"
-                                                    data-oid="i4pkn16"
+                                                    data-oid="xmzf0:6"
                                                 >
                                                     Work-Life Balance
                                                 </div>
                                                 <div
                                                     className="text-sm text-gray-600"
-                                                    data-oid="nvswrmk"
+                                                    data-oid="j6a1o0e"
                                                 >
                                                     Flexible working
                                                 </div>
@@ -944,34 +944,34 @@ export default function JobDetailsModal({ job, isOpen, onClose, onApply }: JobDe
                                 </div>
 
                                 {/* Office Locations */}
-                                <div className="mt-6" data-oid="32.dmax">
+                                <div className="mt-6" data-oid="dk9nv6g">
                                     <h3
                                         className="text-lg font-semibold text-gray-800 mb-3"
-                                        data-oid="_h38gp9"
+                                        data-oid="t-dnhnf"
                                     >
                                         Office Locations
                                     </h3>
                                     <div
                                         className="grid grid-cols-1 md:grid-cols-2 gap-4"
-                                        data-oid="x0oz07r"
+                                        data-oid="e43wvss"
                                     >
                                         <div
                                             className="flex items-center gap-3 p-3 bg-blue-50 rounded-lg"
-                                            data-oid="wqac6k5"
+                                            data-oid="-b.zca9"
                                         >
                                             <svg
                                                 className="h-5 w-5 text-blue-600"
                                                 fill="none"
                                                 stroke="currentColor"
                                                 viewBox="0 0 24 24"
-                                                data-oid="vac0:iv"
+                                                data-oid="b69gnp7"
                                             >
                                                 <path
                                                     strokeLinecap="round"
                                                     strokeLinejoin="round"
                                                     strokeWidth="2"
                                                     d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                                                    data-oid="p3993vq"
+                                                    data-oid="eacstt4"
                                                 />
 
                                                 <path
@@ -979,19 +979,19 @@ export default function JobDetailsModal({ job, isOpen, onClose, onApply }: JobDe
                                                     strokeLinejoin="round"
                                                     strokeWidth="2"
                                                     d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                                                    data-oid="w4v68sv"
+                                                    data-oid="dw:--fm"
                                                 />
                                             </svg>
-                                            <div data-oid="7h:apcf">
+                                            <div data-oid="bn33abp">
                                                 <div
                                                     className="font-medium text-gray-800"
-                                                    data-oid="0:vcuj7"
+                                                    data-oid="m94iqet"
                                                 >
                                                     Headquarters
                                                 </div>
                                                 <div
                                                     className="text-sm text-gray-600"
-                                                    data-oid="aush_.."
+                                                    data-oid="sy4j3i7"
                                                 >
                                                     {job.location}
                                                 </div>
@@ -1000,33 +1000,33 @@ export default function JobDetailsModal({ job, isOpen, onClose, onApply }: JobDe
                                         {job.isRemote && (
                                             <div
                                                 className="flex items-center gap-3 p-3 bg-green-50 rounded-lg"
-                                                data-oid="a_14zk7"
+                                                data-oid="dg.aq5o"
                                             >
                                                 <svg
                                                     className="h-5 w-5 text-green-600"
                                                     fill="none"
                                                     stroke="currentColor"
                                                     viewBox="0 0 24 24"
-                                                    data-oid="p5.hf1-"
+                                                    data-oid="wxaxcpy"
                                                 >
                                                     <path
                                                         strokeLinecap="round"
                                                         strokeLinejoin="round"
                                                         strokeWidth="2"
                                                         d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                                                        data-oid="dnr.zwi"
+                                                        data-oid="k96kwjn"
                                                     />
                                                 </svg>
-                                                <div data-oid="7i2iacl">
+                                                <div data-oid="_k_y3qs">
                                                     <div
                                                         className="font-medium text-gray-800"
-                                                        data-oid="y458ivs"
+                                                        data-oid="xo:dw6m"
                                                     >
                                                         Remote Work
                                                     </div>
                                                     <div
                                                         className="text-sm text-gray-600"
-                                                        data-oid="jm53axq"
+                                                        data-oid="n:h3:me"
                                                     >
                                                         Work from anywhere
                                                     </div>
@@ -1037,27 +1037,27 @@ export default function JobDetailsModal({ job, isOpen, onClose, onApply }: JobDe
                                 </div>
 
                                 {/* Recent News & Updates */}
-                                <div className="mt-6" data-oid="x139o1p">
+                                <div className="mt-6" data-oid="rgxkvqd">
                                     <h3
                                         className="text-lg font-semibold text-gray-800 mb-3"
-                                        data-oid="-yz7ggm"
+                                        data-oid="c_l2kxl"
                                     >
                                         Recent Company Updates
                                     </h3>
-                                    <div className="space-y-3" data-oid="pn7dfyp">
+                                    <div className="space-y-3" data-oid="m:aau-0">
                                         <div
                                             className="p-3 bg-gray-50 rounded-lg border-l-4 border-blue-500"
-                                            data-oid="uro54-y"
+                                            data-oid="txf5yk:"
                                         >
                                             <div
                                                 className="font-medium text-gray-800"
-                                                data-oid="awyf9vy"
+                                                data-oid="0lwhk-n"
                                             >
                                                 New Product Launch
                                             </div>
                                             <div
                                                 className="text-sm text-gray-600"
-                                                data-oid="rrx:ps5"
+                                                data-oid="jtgvd.1"
                                             >
                                                 Recently launched innovative solutions in{' '}
                                                 {job.industry}
@@ -1065,17 +1065,17 @@ export default function JobDetailsModal({ job, isOpen, onClose, onApply }: JobDe
                                         </div>
                                         <div
                                             className="p-3 bg-gray-50 rounded-lg border-l-4 border-green-500"
-                                            data-oid="gmye12:"
+                                            data-oid=":tw2ytf"
                                         >
                                             <div
                                                 className="font-medium text-gray-800"
-                                                data-oid="fi6q9sl"
+                                                data-oid=":2i:efe"
                                             >
                                                 Team Expansion
                                             </div>
                                             <div
                                                 className="text-sm text-gray-600"
-                                                data-oid="9rbpafl"
+                                                data-oid="-jcixl0"
                                             >
                                                 Growing team by 30% this year with focus on tech
                                                 talent
@@ -1083,17 +1083,17 @@ export default function JobDetailsModal({ job, isOpen, onClose, onApply }: JobDe
                                         </div>
                                         <div
                                             className="p-3 bg-gray-50 rounded-lg border-l-4 border-purple-500"
-                                            data-oid="x:57rtz"
+                                            data-oid="pfbmjqy"
                                         >
                                             <div
                                                 className="font-medium text-gray-800"
-                                                data-oid="fs8e4f2"
+                                                data-oid="_8a0igr"
                                             >
                                                 Awards & Recognition
                                             </div>
                                             <div
                                                 className="text-sm text-gray-600"
-                                                data-oid="r6fsjzq"
+                                                data-oid="79a0uqd"
                                             >
                                                 Recognized as one of the best places to work in tech
                                             </div>
@@ -1106,40 +1106,40 @@ export default function JobDetailsModal({ job, isOpen, onClose, onApply }: JobDe
                 </div>
 
                 {/* Footer */}
-                <div className="border-t border-gray-200 p-6 bg-gray-50" data-oid="x4rdxd1">
+                <div className="border-t border-gray-200 p-6 bg-gray-50" data-oid="52nw--x">
                     <div
                         className="flex flex-col sm:flex-row items-center justify-between gap-4"
-                        data-oid="v7k-m9h"
+                        data-oid="2a66yms"
                     >
-                        <div className="text-sm text-gray-600" data-oid="vib-f0z">
+                        <div className="text-sm text-gray-600" data-oid="_baknuh">
                             Posted on {formatDate(job.postedDate)} • {job.applicantCount} applicants
                         </div>
-                        <div className="flex gap-3" data-oid="wavcdjh">
+                        <div className="flex gap-3" data-oid="17-s:tp">
                             <button
                                 onClick={onClose}
                                 className="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg font-medium hover:bg-gray-100 transition-colors"
-                                data-oid="r:-9mnu"
+                                data-oid="x9.g.oh"
                             >
                                 Close
                             </button>
                             <button
                                 onClick={onApply}
                                 className="px-8 py-3 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white rounded-lg font-medium hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300 transform hover:scale-105 flex items-center gap-2 shadow-lg"
-                                data-oid="yr:c0ig"
+                                data-oid="u7x0.rq"
                             >
                                 <svg
                                     className="h-4 w-4"
                                     fill="none"
                                     stroke="currentColor"
                                     viewBox="0 0 24 24"
-                                    data-oid="rt7l4.a"
+                                    data-oid="lsc_iw-"
                                 >
                                     <path
                                         strokeLinecap="round"
                                         strokeLinejoin="round"
                                         strokeWidth="2"
                                         d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                                        data-oid="eub.pxq"
+                                        data-oid="7iyk04w"
                                     />
                                 </svg>
                                 Apply Now
@@ -1149,25 +1149,25 @@ export default function JobDetailsModal({ job, isOpen, onClose, onApply }: JobDe
                 </div>
 
                 {/* Floating Apply Button - appears when scrolling */}
-                <div className="fixed bottom-6 right-6 z-50" data-oid="hd67dbq">
+                <div className="fixed bottom-6 right-6 z-50" data-oid="ymm_3_n">
                     <button
                         onClick={onApply}
                         className="px-6 py-3 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white rounded-full font-medium hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300 transform hover:scale-110 shadow-2xl flex items-center gap-2 animate-bounce"
-                        data-oid="l1ryd0z"
+                        data-oid="zssgmdp"
                     >
                         <svg
                             className="h-5 w-5"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
-                            data-oid="_-:gilo"
+                            data-oid="lbex-w6"
                         >
                             <path
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
                                 strokeWidth="2"
                                 d="M13 10V3L4 14h7v7l9-11h-7z"
-                                data-oid="t8e6lr7"
+                                data-oid="_votxsh"
                             />
                         </svg>
                         Quick Apply

@@ -5,37 +5,9 @@ import { useState, useEffect } from 'react';
 import JobCard from '@/components/JobCard';
 import FiltersSidebar from '@/components/FiltersSidebar';
 import CategoryMenu from '@/components/CategoryMenu';
+import { mockInternships, type Internship } from '@/lib/mockData';
 
 // TypeScript Interfaces for Internships
-export interface Internship {
-    id: number;
-    title: string;
-    company: string;
-    location: string;
-    duration: string;
-    stipend?: string;
-    jobType: string;
-    employmentType: string;
-    skills: string[];
-    postedDate: string;
-    description: string;
-    isRemote: boolean;
-    isFeatured: boolean;
-    isUrgent?: boolean;
-    applicantCount?: number;
-    companyLogo?: string;
-    companySize?: string;
-    industry?: string;
-    benefits?: string[];
-    companyType?: 'Startup' | 'MNC' | 'Product' | 'Service';
-    startDate?: string;
-    applicationDeadline?: string;
-    isPartTime?: boolean;
-    isPaid?: boolean;
-    certificateProvided?: boolean;
-    mentorshipIncluded?: boolean;
-}
-
 export interface InternshipFilterOptions {
     jobType: string;
     employmentType: string;
@@ -54,10 +26,8 @@ export interface Category {
     slug: string;
 }
 
-// Mock Internship Data - 15 diverse internships from major Indian companies
-export const mockInternships: Internship[] = [
-    {
-        
+// Categories for Internships
+const mockCategories: Category[] = [
     { id: 1, name: 'All Internships', count: 8247, slug: 'all' },
     { id: 2, name: 'Software Development', count: 2821, slug: 'software-development' },
     { id: 3, name: 'Data Science & AI', count: 1456, slug: 'data-science' },
