@@ -47,27 +47,27 @@ export default function FiltersSidebar({ filters, onFilterChange, onReset }: Fil
     return (
         <div
             className="bg-white/80 backdrop-blur-sm rounded-xl shadow-md border border-[hsl(210,30%,95%)] p-6 sticky top-24"
-            data-oid="f-m0x:a"
+            data-oid="-zhwh-j"
         >
             {/* Header */}
-            <div className="flex items-center justify-between mb-6" data-oid="78z:0_z">
+            <div className="flex items-center justify-between mb-6" data-oid="nqkfimi">
                 <h2
                     className="text-xl font-bold text-gray-800 flex items-center"
-                    data-oid="n0y_tsf"
+                    data-oid="rng1n8f"
                 >
                     <svg
                         className="h-5 w-5 mr-2 text-[hsl(196,80%,45%)]"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
-                        data-oid="l2q8r4a"
+                        data-oid="pm-b-vg"
                     >
                         <path
                             strokeLinecap="round"
                             strokeLinejoin="round"
                             strokeWidth="2"
                             d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"
-                            data-oid="mxi_uu0"
+                            data-oid="em56heg"
                         />
                     </svg>
                     Filter Jobs
@@ -75,21 +75,21 @@ export default function FiltersSidebar({ filters, onFilterChange, onReset }: Fil
                 <button
                     onClick={() => setIsExpanded(!isExpanded)}
                     className="lg:hidden p-1 text-gray-500 hover:text-gray-700"
-                    data-oid="g_.2i2g"
+                    data-oid="l3cc7oj"
                 >
                     <svg
                         className={`h-5 w-5 transform transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`}
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
-                        data-oid="uua2bs."
+                        data-oid=":4f._h:"
                     >
                         <path
                             strokeLinecap="round"
                             strokeLinejoin="round"
                             strokeWidth="2"
                             d="M19 9l-7 7-7-7"
-                            data-oid=":pkw0c5"
+                            data-oid="gpp.o7m"
                         />
                     </svg>
                 </button>
@@ -99,14 +99,14 @@ export default function FiltersSidebar({ filters, onFilterChange, onReset }: Fil
             <div
                 className={`space-y-6 ${isExpanded ? 'block' : 'hidden lg:block'}`}
                 role="form"
-                data-oid="ny7o7eh"
+                data-oid="vd:kr1."
             >
                 {/* Job Type Filter */}
-                <div data-oid="ub.qwek">
+                <div data-oid="nflh.1b">
                     <label
                         htmlFor="jobType"
                         className="block text-sm font-medium text-gray-700 mb-2"
-                        data-oid="crzvia:"
+                        data-oid="2qgi-su"
                     >
                         Job Type
                     </label>
@@ -115,10 +115,10 @@ export default function FiltersSidebar({ filters, onFilterChange, onReset }: Fil
                         value={filters.jobType}
                         onChange={(e) => handleInputChange('jobType', e.target.value)}
                         className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[hsl(196,80%,45%)] focus:border-[hsl(196,80%,45%)] transition-colors duration-200 bg-white"
-                        data-oid="oj.4d5q"
+                        data-oid="xrgzm3u"
                     >
                         {jobTypes.map((type) => (
-                            <option key={type.value} value={type.value} data-oid="tunpwlx">
+                            <option key={type.value} value={type.value} data-oid="-j.fofj">
                                 {type.label}
                             </option>
                         ))}
@@ -126,11 +126,11 @@ export default function FiltersSidebar({ filters, onFilterChange, onReset }: Fil
                 </div>
 
                 {/* Employment Type Filter */}
-                <div data-oid="pq_g.h:">
+                <div data-oid="2u3g7c9">
                     <label
                         htmlFor="employmentType"
                         className="block text-sm font-medium text-gray-700 mb-2"
-                        data-oid="9_lthi."
+                        data-oid="hp57lt."
                     >
                         Employment Type
                     </label>
@@ -139,10 +139,10 @@ export default function FiltersSidebar({ filters, onFilterChange, onReset }: Fil
                         value={filters.employmentType}
                         onChange={(e) => handleInputChange('employmentType', e.target.value)}
                         className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[hsl(196,80%,45%)] focus:border-[hsl(196,80%,45%)] transition-colors duration-200 bg-white"
-                        data-oid="28.q2aq"
+                        data-oid="wh3e2wc"
                     >
                         {employmentTypes.map((type) => (
-                            <option key={type.value} value={type.value} data-oid="d69fwo6">
+                            <option key={type.value} value={type.value} data-oid="bd5:1hg">
                                 {type.label}
                             </option>
                         ))}
@@ -150,11 +150,11 @@ export default function FiltersSidebar({ filters, onFilterChange, onReset }: Fil
                 </div>
 
                 {/* Experience Level Filter */}
-                <div data-oid="3_sui01">
+                <div data-oid="oqt7pwu">
                     <label
                         htmlFor="experienceLevel"
                         className="block text-sm font-medium text-gray-700 mb-2"
-                        data-oid=":lccfgb"
+                        data-oid="cf7u:va"
                     >
                         Experience Level
                     </label>
@@ -163,10 +163,10 @@ export default function FiltersSidebar({ filters, onFilterChange, onReset }: Fil
                         value={filters.experienceLevel}
                         onChange={(e) => handleInputChange('experienceLevel', e.target.value)}
                         className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[hsl(196,80%,45%)] focus:border-[hsl(196,80%,45%)] transition-colors duration-200 bg-white"
-                        data-oid="li:2y5n"
+                        data-oid="6j2ol4o"
                     >
                         {experienceLevels.map((level) => (
-                            <option key={level.value} value={level.value} data-oid="8s.a2ov">
+                            <option key={level.value} value={level.value} data-oid=":brw456">
                                 {level.label}
                             </option>
                         ))}
@@ -174,14 +174,14 @@ export default function FiltersSidebar({ filters, onFilterChange, onReset }: Fil
                 </div>
 
                 {/* Salary Range Filter */}
-                <div data-oid="iv.j20g">
+                <div data-oid="8e8k5o6">
                     <label
                         className="block text-sm font-medium text-gray-700 mb-3"
-                        data-oid="imk5w13"
+                        data-oid="z_zeji2"
                     >
                         Salary Range (LPA)
                     </label>
-                    <div className="space-y-2" data-oid="uvsrwyh">
+                    <div className="space-y-2" data-oid="ro59-.h">
                         {[
                             { value: '', label: 'Any Salary' },
                             { value: '0-5', label: '0-5 LPA' },
@@ -192,7 +192,7 @@ export default function FiltersSidebar({ filters, onFilterChange, onReset }: Fil
                             <label
                                 key={range.value}
                                 className="flex items-center"
-                                data-oid="m30blkc"
+                                data-oid="ecgz007"
                             >
                                 <input
                                     type="radio"
@@ -203,10 +203,10 @@ export default function FiltersSidebar({ filters, onFilterChange, onReset }: Fil
                                         handleInputChange('salaryRange', e.target.value)
                                     }
                                     className="mr-2 text-[hsl(196,80%,45%)] focus:ring-[hsl(196,80%,45%)]"
-                                    data-oid="367vf4-"
+                                    data-oid="a1zm251"
                                 />
 
-                                <span className="text-sm text-gray-700" data-oid="s02.tqy">
+                                <span className="text-sm text-gray-700" data-oid="jnrsrnj">
                                     {range.label}
                                 </span>
                             </label>
@@ -215,14 +215,14 @@ export default function FiltersSidebar({ filters, onFilterChange, onReset }: Fil
                 </div>
 
                 {/* Company Type Filter */}
-                <div data-oid="0ecdpz.">
+                <div data-oid="lbwsiu8">
                     <label
                         className="block text-sm font-medium text-gray-700 mb-3"
-                        data-oid="hz43inl"
+                        data-oid="6034_3v"
                     >
                         Company Type
                     </label>
-                    <div className="space-y-2" data-oid="ksy432a">
+                    <div className="space-y-2" data-oid="ut13t8.">
                         {[
                             { value: '', label: 'All Companies' },
                             { value: 'Startup', label: 'Startup' },
@@ -233,7 +233,7 @@ export default function FiltersSidebar({ filters, onFilterChange, onReset }: Fil
                             <label
                                 key={type.value}
                                 className="flex items-center"
-                                data-oid="4vhd02w"
+                                data-oid="r3ye66e"
                             >
                                 <input
                                     type="radio"
@@ -244,10 +244,10 @@ export default function FiltersSidebar({ filters, onFilterChange, onReset }: Fil
                                         handleInputChange('companyType', e.target.value)
                                     }
                                     className="mr-2 text-[hsl(196,80%,45%)] focus:ring-[hsl(196,80%,45%)]"
-                                    data-oid="n_3xioe"
+                                    data-oid="nt:s-x0"
                                 />
 
-                                <span className="text-sm text-gray-700" data-oid="-_y8i2v">
+                                <span className="text-sm text-gray-700" data-oid="mmbff8w">
                                     {type.label}
                                 </span>
                             </label>
@@ -256,11 +256,11 @@ export default function FiltersSidebar({ filters, onFilterChange, onReset }: Fil
                 </div>
 
                 {/* Skills Filter */}
-                <div data-oid="anljdn1">
+                <div data-oid="fy_5kwz">
                     <label
                         htmlFor="skills"
                         className="block text-sm font-medium text-gray-700 mb-2"
-                        data-oid="d7pf5me"
+                        data-oid="52iegkb"
                     >
                         Skills
                     </label>
@@ -271,20 +271,20 @@ export default function FiltersSidebar({ filters, onFilterChange, onReset }: Fil
                         onChange={(e) => handleInputChange('skills', e.target.value)}
                         placeholder="e.g. Python, React, JavaScript"
                         className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[hsl(196,80%,45%)] focus:border-[hsl(196,80%,45%)] transition-colors duration-200"
-                        data-oid="44tujks"
+                        data-oid="4f6vcyz"
                     />
 
-                    <p className="mt-1 text-xs text-gray-500" data-oid="qzpy8ya">
+                    <p className="mt-1 text-xs text-gray-500" data-oid="gj1gtg3">
                         Separate multiple skills with commas
                     </p>
                 </div>
 
                 {/* Location Filter */}
-                <div data-oid="1m1gcbt">
+                <div data-oid="lpme0ez">
                     <label
                         htmlFor="location"
                         className="block text-sm font-medium text-gray-700 mb-2"
-                        data-oid="fhf.4ie"
+                        data-oid="-q5zogi"
                     >
                         Location
                     </label>
@@ -295,27 +295,27 @@ export default function FiltersSidebar({ filters, onFilterChange, onReset }: Fil
                         onChange={(e) => handleInputChange('location', e.target.value)}
                         placeholder="e.g. Bangalore, Mumbai, Remote"
                         className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[hsl(196,80%,45%)] focus:border-[hsl(196,80%,45%)] transition-colors duration-200"
-                        data-oid="c037c7m"
+                        data-oid="ek:pxpr"
                     />
                 </div>
 
                 {/* Action Buttons */}
-                <div className="space-y-3 pt-6 border-t border-gray-200" data-oid="6f6:59n">
+                <div className="space-y-3 pt-6 border-t border-gray-200" data-oid="3.cn-s2">
                     <button
                         onClick={onReset}
                         className="w-full px-4 py-3 text-[hsl(196,80%,45%)] border border-[hsl(196,80%,45%)] rounded-lg font-medium hover:bg-[hsl(196,80%,45%)]/10 transition-all duration-300"
-                        data-oid=".vt0n0g"
+                        data-oid="nadv2wx"
                     >
                         Reset All Filters
                     </button>
                 </div>
 
                 {/* Quick Filters */}
-                <div className="pt-4 border-t border-gray-200" data-oid="s6ac0qr">
-                    <h3 className="text-sm font-medium text-gray-700 mb-3" data-oid="lwe0fqy">
+                <div className="pt-4 border-t border-gray-200" data-oid="b4qmp0g">
+                    <h3 className="text-sm font-medium text-gray-700 mb-3" data-oid="jvd9naj">
                         Quick Filters
                     </h3>
-                    <div className="space-y-2" data-oid="k9pgj-6">
+                    <div className="space-y-2" data-oid="4_zh6sq">
                         <button
                             onClick={() =>
                                 onFilterChange({
@@ -325,35 +325,35 @@ export default function FiltersSidebar({ filters, onFilterChange, onReset }: Fil
                                 })
                             }
                             className="w-full text-left px-3 py-2 text-sm text-gray-600 hover:text-[hsl(196,80%,45%)] hover:bg-blue-50 rounded-md transition-colors duration-200"
-                            data-oid="wm7mtdf"
+                            data-oid="wxjk7y1"
                         >
                             🎯 Fresher Full-time Jobs
                         </button>
                         <button
                             onClick={() => onFilterChange({ ...filters, location: 'Remote' })}
                             className="w-full text-left px-3 py-2 text-sm text-gray-600 hover:text-[hsl(196,80%,45%)] hover:bg-blue-50 rounded-md transition-colors duration-200"
-                            data-oid="08o23td"
+                            data-oid="rcxafqj"
                         >
                             🏠 Remote Jobs
                         </button>
                         <button
                             onClick={() => onFilterChange({ ...filters, salaryRange: '10-20' })}
                             className="w-full text-left px-3 py-2 text-sm text-gray-600 hover:text-[hsl(196,80%,45%)] hover:bg-blue-50 rounded-md transition-colors duration-200"
-                            data-oid="e13ptv9"
+                            data-oid="9iyse25"
                         >
                             💰 High Salary (10-20 LPA)
                         </button>
                         <button
                             onClick={() => onFilterChange({ ...filters, companyType: 'Startup' })}
                             className="w-full text-left px-3 py-2 text-sm text-gray-600 hover:text-[hsl(196,80%,45%)] hover:bg-blue-50 rounded-md transition-colors duration-200"
-                            data-oid="krd:eof"
+                            data-oid="mmmbnm4"
                         >
                             🚀 Startup Jobs
                         </button>
                         <button
                             onClick={() => onFilterChange({ ...filters, jobType: 'Internship' })}
                             className="w-full text-left px-3 py-2 text-sm text-gray-600 hover:text-[hsl(196,80%,45%)] hover:bg-blue-50 rounded-md transition-colors duration-200"
-                            data-oid="pbiiq5g"
+                            data-oid="veh4vev"
                         >
                             📚 Internships
                         </button>

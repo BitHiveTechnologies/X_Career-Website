@@ -84,14 +84,14 @@ export default function JobCard({ job, viewMode = 'list' }: JobCardProps) {
                 viewMode === 'grid' ? 'h-full' : ''
             }`}
             role="listitem"
-            data-oid=":1zq258"
+            data-oid="lw.grnm"
         >
             {/* Badges Container */}
-            <div className="absolute top-4 right-4 flex flex-col gap-2" data-oid="n0-xd:g">
+            <div className="absolute top-4 right-4 flex flex-col gap-2" data-oid="1854keb">
                 {job.isUrgent && (
                     <span
                         className="bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full animate-pulse shadow-lg"
-                        data-oid="kdfkrap"
+                        data-oid="v:m3cbw"
                     >
                         🔥 URGENT HIRING
                     </span>
@@ -99,7 +99,7 @@ export default function JobCard({ job, viewMode = 'list' }: JobCardProps) {
                 {job.isFeatured && (
                     <span
                         className="bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white text-xs font-bold px-3 py-1 rounded-full"
-                        data-oid="x4q66sc"
+                        data-oid="5bc.8v2"
                     >
                         ⭐ FEATURED
                     </span>
@@ -108,10 +108,10 @@ export default function JobCard({ job, viewMode = 'list' }: JobCardProps) {
 
             {/* Remote Badge */}
             {job.isRemote && (
-                <div className="absolute top-4 left-4" data-oid="u2w_3o-">
+                <div className="absolute top-4 left-4" data-oid="-0268ig">
                     <span
                         className="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-1 rounded-full"
-                        data-oid="lnkw-_w"
+                        data-oid="do9wiz9"
                     >
                         🏠 Remote
                     </span>
@@ -119,34 +119,34 @@ export default function JobCard({ job, viewMode = 'list' }: JobCardProps) {
             )}
 
             {/* Header Section */}
-            <div className="mb-6" data-oid="40qa7ht">
-                <div className="flex items-start justify-between mb-3" data-oid="i9bc-lu">
-                    <div className="flex-1 min-w-0" data-oid="v.g88rk">
+            <div className="mb-6" data-oid="up9vhta">
+                <div className="flex items-start justify-between mb-3" data-oid="0dft-6t">
+                    <div className="flex-1 min-w-0" data-oid="dn8mm1s">
                         <h3
                             className="text-xl font-bold text-gray-800 mb-2 group-hover:text-[hsl(196,80%,45%)] transition-colors duration-300 line-clamp-2"
-                            data-oid="4nbj-ow"
+                            data-oid="loky531"
                         >
-                            <br data-oid="pap-d1_" />
+                            <br data-oid="rlg1rai" />
                             {job.title}
                         </h3>
-                        <div className="flex flex-wrap items-center gap-2 mb-2" data-oid="scvav9n">
+                        <div className="flex flex-wrap items-center gap-2 mb-2" data-oid="9hcldb9">
                             <p
                                 className="text-[hsl(196,80%,45%)] font-semibold text-lg"
-                                data-oid="z84ab-v"
+                                data-oid="amjz6ba"
                             >
                                 {job.company}
                             </p>
                             {job.companySize && (
                                 <span
                                     className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full"
-                                    data-oid="z59:zoe"
+                                    data-oid="zm2zoq2"
                                 >
                                     {job.companySize} employees
                                 </span>
                             )}
                         </div>
                         {job.industry && (
-                            <p className="text-sm text-gray-600" data-oid="j79qx1i">
+                            <p className="text-sm text-gray-600" data-oid="pua-_iv">
                                 {job.industry} • {job.companyType}
                             </p>
                         )}
@@ -154,10 +154,10 @@ export default function JobCard({ job, viewMode = 'list' }: JobCardProps) {
                 </div>
 
                 {/* Salary and Applicant Count */}
-                <div className="flex flex-wrap items-center gap-4 mb-4" data-oid="_zpk2t:">
+                <div className="flex flex-wrap items-center gap-4 mb-4" data-oid="b:541eb">
                     {job.salary && (
-                        <div className="flex items-center gap-1" data-oid="5.0mq6z">
-                            <span className="text-green-600 font-medium text-sm" data-oid="iw2vx-m">
+                        <div className="flex items-center gap-1" data-oid="etcarla">
+                            <span className="text-green-600 font-medium text-sm" data-oid="e9scu20">
                                 💰 {job.salary}
                             </span>
                         </div>
@@ -165,7 +165,7 @@ export default function JobCard({ job, viewMode = 'list' }: JobCardProps) {
                     {job.applicantCount && (
                         <span
                             className="text-xs text-gray-500 bg-blue-50 px-3 py-1 rounded-full"
-                            data-oid="l8k13xg"
+                            data-oid="zfmr.41"
                         >
                             👥 {job.applicantCount} applicants
                         </span>
@@ -174,21 +174,21 @@ export default function JobCard({ job, viewMode = 'list' }: JobCardProps) {
             </div>
 
             {/* Details Row */}
-            <div className="grid md:grid-cols-2 gap-4 mb-4" data-oid=":in-d_s">
-                <div className="flex items-center text-gray-600" data-oid="zmf37_p">
+            <div className="grid md:grid-cols-2 gap-4 mb-4" data-oid="9aj6tj8">
+                <div className="flex items-center text-gray-600" data-oid="yq5me0u">
                     <svg
                         className="h-4 w-4 mr-2 text-[hsl(196,80%,45%)]"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
-                        data-oid="ssj7u:9"
+                        data-oid="9zjeiw-"
                     >
                         <path
                             strokeLinecap="round"
                             strokeLinejoin="round"
                             strokeWidth="2"
                             d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                            data-oid="jei0de:"
+                            data-oid=":8tjg56"
                         />
 
                         <path
@@ -196,34 +196,34 @@ export default function JobCard({ job, viewMode = 'list' }: JobCardProps) {
                             strokeLinejoin="round"
                             strokeWidth="2"
                             d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                            data-oid="e:s2iw."
+                            data-oid="_efr82u"
                         />
                     </svg>
-                    <span className="text-sm" data-oid="g_-jp8.">
-                        <span className="font-medium" data-oid="1th6ix2">
+                    <span className="text-sm" data-oid="xd.-89s">
+                        <span className="font-medium" data-oid="f-amoxu">
                             Location:
                         </span>{' '}
                         {job.location}
                     </span>
                 </div>
-                <div className="flex items-center text-gray-600" data-oid=":fr-rys">
+                <div className="flex items-center text-gray-600" data-oid="47k3w6p">
                     <svg
                         className="h-4 w-4 mr-2 text-[hsl(196,80%,45%)]"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
-                        data-oid="4iq4xjc"
+                        data-oid=".ql_vm-"
                     >
                         <path
                             strokeLinecap="round"
                             strokeLinejoin="round"
                             strokeWidth="2"
                             d="M13 10V3L4 14h7v7l9-11h-7z"
-                            data-oid="_k2.7bw"
+                            data-oid="4gu07dw"
                         />
                     </svg>
-                    <span className="text-sm" data-oid="_1or0hf">
-                        <span className="font-medium" data-oid="hq0dpw:">
+                    <span className="text-sm" data-oid="bj2lhnc">
+                        <span className="font-medium" data-oid="44pf6cw">
                             Experience:
                         </span>{' '}
                         {job.experienceRequired}
@@ -232,16 +232,16 @@ export default function JobCard({ job, viewMode = 'list' }: JobCardProps) {
             </div>
 
             {/* Employment Type & Job Type */}
-            <div className="flex flex-wrap gap-2 mb-4" data-oid="gpy8sym">
+            <div className="flex flex-wrap gap-2 mb-4" data-oid="e:y4c_.">
                 <span
                     className="bg-blue-50 text-blue-700 text-xs font-medium px-2.5 py-1 rounded"
-                    data-oid="_pz:iuu"
+                    data-oid="oee_b65"
                 >
                     {job.jobType}
                 </span>
                 <span
                     className="bg-purple-50 text-purple-700 text-xs font-medium px-2.5 py-1 rounded"
-                    data-oid="ax_ky:x"
+                    data-oid="g:g92c7"
                 >
                     {job.employmentType}
                 </span>
@@ -249,39 +249,39 @@ export default function JobCard({ job, viewMode = 'list' }: JobCardProps) {
 
             {/* Benefits Preview */}
             {job.benefits && job.benefits.length > 0 && (
-                <div className="mb-4" data-oid="q2889yu">
-                    <div className="flex items-center mb-2" data-oid="i_hexq:">
+                <div className="mb-4" data-oid="y:zcuk9">
+                    <div className="flex items-center mb-2" data-oid="8:v4rrt">
                         <svg
                             className="h-4 w-4 mr-2 text-[hsl(196,80%,45%)]"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
-                            data-oid="yyagcai"
+                            data-oid="adx5-kq"
                         >
                             <path
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
                                 strokeWidth="2"
                                 d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"
-                                data-oid="boc5at0"
+                                data-oid="n.ohbaz"
                             />
                         </svg>
-                        <span className="text-sm font-medium text-gray-700" data-oid="qu6iaua">
+                        <span className="text-sm font-medium text-gray-700" data-oid="3xr_8-o">
                             Benefits:
                         </span>
                     </div>
-                    <div className="flex flex-wrap gap-1" data-oid="an:l2c6">
+                    <div className="flex flex-wrap gap-1" data-oid="measvj2">
                         {job.benefits.slice(0, 3).map((benefit, index) => (
                             <span
                                 key={index}
                                 className="bg-green-50 text-green-700 text-xs px-2 py-1 rounded"
-                                data-oid="7x.d0fg"
+                                data-oid="a:hssvf"
                             >
                                 {benefit}
                             </span>
                         ))}
                         {job.benefits.length > 3 && (
-                            <span className="text-xs text-gray-500 px-2 py-1" data-oid="z8l:hp-">
+                            <span className="text-xs text-gray-500 px-2 py-1" data-oid="9:zuki8">
                                 +{job.benefits.length - 3} more
                             </span>
                         )}
@@ -290,58 +290,58 @@ export default function JobCard({ job, viewMode = 'list' }: JobCardProps) {
             )}
 
             {/* Footer Row */}
-            <div className="flex justify-between items-end" data-oid="z3m.n6q">
-                <div className="flex-1" data-oid="rupkwrg">
-                    <div className="flex items-center text-gray-600 mb-2" data-oid="o131t0t">
+            <div className="flex justify-between items-end" data-oid="6jp2bk0">
+                <div className="flex-1" data-oid="n:0zsyl">
+                    <div className="flex items-center text-gray-600 mb-2" data-oid="s8aft5d">
                         <svg
                             className="h-4 w-4 mr-2 text-[hsl(196,80%,45%)]"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
-                            data-oid="iedly2e"
+                            data-oid="-eqrgq3"
                         >
                             <path
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
                                 strokeWidth="2"
                                 d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                                data-oid="1pmqdg3"
+                                data-oid="8eyjksi"
                             />
                         </svg>
-                        <span className="text-sm" data-oid="_1c8qt9">
-                            <span className="font-medium" data-oid="7_a9o86">
+                        <span className="text-sm" data-oid="oakmwhc">
+                            <span className="font-medium" data-oid="gv2wdqk">
                                 Posted:
                             </span>{' '}
                             {formatDate(job.postedDate)}
                         </span>
                     </div>
 
-                    <div className="flex items-start" data-oid=".kxg74j">
+                    <div className="flex items-start" data-oid="3gx5obu">
                         <svg
                             className="h-4 w-4 mr-2 mt-0.5 text-[hsl(196,80%,45%)] flex-shrink-0"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
-                            data-oid="d01yylv"
+                            data-oid="wgrdw3e"
                         >
                             <path
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
                                 strokeWidth="2"
                                 d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
-                                data-oid="g1zu0h5"
+                                data-oid="ml09jxh"
                             />
                         </svg>
-                        <div className="flex-1" data-oid="t-2c7f9">
-                            <span className="text-sm font-medium text-gray-700" data-oid=".a_uuyi">
+                        <div className="flex-1" data-oid="jq6m8sg">
+                            <span className="text-sm font-medium text-gray-700" data-oid="9tht8xz">
                                 Skills Required:
                             </span>
-                            <div className="flex flex-wrap gap-1 mt-1" data-oid="od9oj4r">
+                            <div className="flex flex-wrap gap-1 mt-1" data-oid="p35obx9">
                                 {job.skills.map((skill, index) => (
                                     <span
                                         key={index}
                                         className="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded"
-                                        data-oid="jc3s7px"
+                                        data-oid=".evjtsq"
                                     >
                                         {skill}
                                     </span>
@@ -354,26 +354,26 @@ export default function JobCard({ job, viewMode = 'list' }: JobCardProps) {
                 {/* Action Buttons */}
                 <div
                     className={`flex items-center ${viewMode === 'grid' ? 'justify-between' : 'space-x-3 ml-4'}`}
-                    data-oid="ir9uygl"
+                    data-oid=".akdk_9"
                 >
                     <button
                         onClick={handleApplyClick}
                         className={`${viewMode === 'grid' ? 'flex-1 mr-3' : 'flex-1'} px-4 py-2 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white rounded-md font-medium hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center justify-center gap-2`}
-                        data-oid="e-cazr2"
+                        data-oid="o1im8po"
                     >
                         <svg
                             className="h-4 w-4"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
-                            data-oid="d2y861a"
+                            data-oid="vyy-ciq"
                         >
                             <path
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
                                 strokeWidth="2"
                                 d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                                data-oid="-iouk5h"
+                                data-oid="c2ukjrk"
                             />
                         </svg>
                         Apply Now
@@ -382,21 +382,21 @@ export default function JobCard({ job, viewMode = 'list' }: JobCardProps) {
                     <button
                         onClick={handleViewDetails}
                         className="px-4 py-2 border border-[hsl(196,80%,45%)] text-[hsl(196,80%,45%)] rounded-md text-sm font-medium hover:bg-[hsl(196,80%,45%)]/10 transition-all duration-300 flex items-center gap-2"
-                        data-oid="67ukjbt"
+                        data-oid="ty8zru4"
                     >
                         <svg
                             className="h-4 w-4"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
-                            data-oid="wx5zhwt"
+                            data-oid="ls1b1fo"
                         >
                             <path
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
                                 strokeWidth="2"
                                 d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                                data-oid="1k_ynvt"
+                                data-oid="lf9a6z1"
                             />
 
                             <path
@@ -404,7 +404,7 @@ export default function JobCard({ job, viewMode = 'list' }: JobCardProps) {
                                 strokeLinejoin="round"
                                 strokeWidth="2"
                                 d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                                data-oid="fc6kzpg"
+                                data-oid="qx.j3go"
                             />
                         </svg>
                         View Details
@@ -418,21 +418,21 @@ export default function JobCard({ job, viewMode = 'list' }: JobCardProps) {
                                 : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                         }`}
                         title={isSaved ? 'Remove from saved' : 'Save job'}
-                        data-oid=":f656hw"
+                        data-oid="npljuq9"
                     >
                         <svg
                             className="h-5 w-5"
                             fill={isSaved ? 'currentColor' : 'none'}
                             stroke="currentColor"
                             viewBox="0 0 24 24"
-                            data-oid="kg_.2ao"
+                            data-oid="rug7b4d"
                         >
                             <path
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
                                 strokeWidth="2"
                                 d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                                data-oid="rss67_z"
+                                data-oid="seik3_-"
                             />
                         </svg>
                     </button>
@@ -441,21 +441,21 @@ export default function JobCard({ job, viewMode = 'list' }: JobCardProps) {
                         onClick={handleShare}
                         className="p-2 bg-gray-100 text-gray-600 rounded-md hover:bg-gray-200 transition-all duration-300"
                         title="Share job"
-                        data-oid="ky_r4k6"
+                        data-oid="xkk.-pn"
                     >
                         <svg
                             className="h-5 w-5"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
-                            data-oid="6i8xmgr"
+                            data-oid="s2773ts"
                         >
                             <path
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
                                 strokeWidth="2"
                                 d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"
-                                data-oid="qc9wks8"
+                                data-oid="ev3rn0e"
                             />
                         </svg>
                     </button>
@@ -465,7 +465,7 @@ export default function JobCard({ job, viewMode = 'list' }: JobCardProps) {
             {/* Hover effect overlay */}
             <div
                 className="absolute inset-0 bg-gradient-to-r from-[hsl(196,80%,45%)]/5 to-[hsl(175,70%,41%)]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-xl"
-                data-oid="6dc9cys"
+                data-oid="p.jhtaw"
             ></div>
 
             {/* Modals */}
@@ -477,7 +477,7 @@ export default function JobCard({ job, viewMode = 'list' }: JobCardProps) {
                     setShowDetailsModal(false);
                     setShowApplicationModal(true);
                 }}
-                data-oid="u1nwrca"
+                data-oid="r6n3z9s"
             />
 
             <QuickApplyModal
@@ -485,7 +485,7 @@ export default function JobCard({ job, viewMode = 'list' }: JobCardProps) {
                 isOpen={showQuickApplyModal}
                 onClose={() => setShowQuickApplyModal(false)}
                 onSubmit={handleApplicationSubmit}
-                data-oid="vv7k19y"
+                data-oid="opxm2qz"
             />
 
             <JobApplicationModal
@@ -493,7 +493,7 @@ export default function JobCard({ job, viewMode = 'list' }: JobCardProps) {
                 isOpen={showApplicationModal}
                 onClose={() => setShowApplicationModal(false)}
                 onSubmit={handleApplicationSubmit}
-                data-oid="km2wiok"
+                data-oid="68a9wc."
             />
 
             <ApplicationSuccessModal
@@ -501,7 +501,7 @@ export default function JobCard({ job, viewMode = 'list' }: JobCardProps) {
                 onClose={() => setShowSuccessModal(false)}
                 jobTitle={job.title}
                 companyName={job.company}
-                data-oid="_pvnjye"
+                data-oid="twvx9oy"
             />
         </div>
     );
