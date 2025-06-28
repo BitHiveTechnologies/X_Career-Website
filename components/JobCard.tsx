@@ -10,9 +10,10 @@ import QuickApplyModal from './QuickApplyModal';
 interface JobCardProps {
     job: Job;
     viewMode?: 'grid' | 'list';
+    isInternship?: boolean;
 }
 
-export default function JobCard({ job, viewMode = 'list' }: JobCardProps) {
+export default function JobCard({ job, viewMode = 'list', isInternship = false }: JobCardProps) {
     const [isSaved, setIsSaved] = useState(false);
     const [showDetailsModal, setShowDetailsModal] = useState(false);
     const [showApplicationModal, setShowApplicationModal] = useState(false);
@@ -56,7 +57,8 @@ export default function JobCard({ job, viewMode = 'list' }: JobCardProps) {
             .toLowerCase()
             .replace(/\s+/g, '-')
             .replace(/[^a-z0-9-]/g, '');
-        window.location.href = `/jobs/apply/${companySlug}/${jobTitleSlug}`;
+        const basePath = isInternship ? '/internships' : '/jobs';
+        window.location.href = `${basePath}/apply/${companySlug}/${jobTitleSlug}`;
     };
 
     const handleViewDetails = () => {
@@ -68,7 +70,8 @@ export default function JobCard({ job, viewMode = 'list' }: JobCardProps) {
             .toLowerCase()
             .replace(/\s+/g, '-')
             .replace(/[^a-z0-9-]/g, '');
-        window.location.href = `/jobs/view-details/${companySlug}/${jobTitleSlug}`;
+        const basePath = isInternship ? '/internships' : '/jobs';
+        window.location.href = `${basePath}/view-details/${companySlug}/${jobTitleSlug}`;
     };
 
     const handleApplicationSubmit = (applicationData: any) => {
@@ -153,7 +156,7 @@ export default function JobCard({ job, viewMode = 'list' }: JobCardProps) {
                     </div>
                 </div>
 
-                {/* Salary and Applicant Count */}
+                {/* Salary/Stipend and Applicant Count */}
                 <div className="flex flex-wrap items-center gap-4 mb-4" data-oid="b:541eb">
                     {job.salary && (
                         <div className="flex items-center gap-1" data-oid="etcarla">
@@ -168,6 +171,14 @@ export default function JobCard({ job, viewMode = 'list' }: JobCardProps) {
                             data-oid="zfmr.41"
                         >
                             👥 {job.applicantCount} applicants
+                        </span>
+                    )}
+                    {isInternship && (job as any).duration && (
+                        <span
+                            className="text-xs text-purple-600 bg-purple-50 px-3 py-1 rounded-full"
+                            data-oid="_tsqqiq"
+                        >
+                            ⏱️ {(job as any).duration}
                         </span>
                     )}
                 </div>
@@ -376,7 +387,7 @@ export default function JobCard({ job, viewMode = 'list' }: JobCardProps) {
                                 data-oid="c2ukjrk"
                             />
                         </svg>
-                        Apply Now
+                        {isInternship ? 'Apply for Internship' : 'Apply Now'}
                     </button>
 
                     <button

@@ -4,15 +4,21 @@ import { useState } from 'react';
 import { FilterOptions } from '@/app/jobs/page';
 
 interface FiltersSidebarProps {
-    filters: FilterOptions;
-    onFilterChange: (filters: FilterOptions) => void;
+    filters: FilterOptions | any;
+    onFilterChange: (filters: FilterOptions | any) => void;
     onReset: () => void;
+    isInternshipPage?: boolean;
 }
 
-export default function FiltersSidebar({ filters, onFilterChange, onReset }: FiltersSidebarProps) {
+export default function FiltersSidebar({
+    filters,
+    onFilterChange,
+    onReset,
+    isInternshipPage = false,
+}: FiltersSidebarProps) {
     const [isExpanded, setIsExpanded] = useState(true);
 
-    const handleInputChange = (field: keyof FilterOptions, value: string) => {
+    const handleInputChange = (field: string, value: string) => {
         onFilterChange({
             ...filters,
             [field]: value,
@@ -70,7 +76,7 @@ export default function FiltersSidebar({ filters, onFilterChange, onReset }: Fil
                             data-oid="em56heg"
                         />
                     </svg>
-                    Filter Jobs
+                    {isInternshipPage ? 'Filter Internships' : 'Filter Jobs'}
                 </h2>
                 <button
                     onClick={() => setIsExpanded(!isExpanded)}
@@ -149,70 +155,170 @@ export default function FiltersSidebar({ filters, onFilterChange, onReset }: Fil
                     </select>
                 </div>
 
-                {/* Experience Level Filter */}
-                <div data-oid="oqt7pwu">
-                    <label
-                        htmlFor="experienceLevel"
-                        className="block text-sm font-medium text-gray-700 mb-2"
-                        data-oid="cf7u:va"
-                    >
-                        Experience Level
-                    </label>
-                    <select
-                        id="experienceLevel"
-                        value={filters.experienceLevel}
-                        onChange={(e) => handleInputChange('experienceLevel', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[hsl(196,80%,45%)] focus:border-[hsl(196,80%,45%)] transition-colors duration-200 bg-white"
-                        data-oid="6j2ol4o"
-                    >
-                        {experienceLevels.map((level) => (
-                            <option key={level.value} value={level.value} data-oid=":brw456">
-                                {level.label}
-                            </option>
-                        ))}
-                    </select>
-                </div>
+                {/* Experience Level Filter (only for jobs) */}
+                {!isInternshipPage && (
+                    <div data-oid="oqt7pwu">
+                        <label
+                            htmlFor="experienceLevel"
+                            className="block text-sm font-medium text-gray-700 mb-2"
+                            data-oid="cf7u:va"
+                        >
+                            Experience Level
+                        </label>
+                        <select
+                            id="experienceLevel"
+                            value={filters.experienceLevel}
+                            onChange={(e) => handleInputChange('experienceLevel', e.target.value)}
+                            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[hsl(196,80%,45%)] focus:border-[hsl(196,80%,45%)] transition-colors duration-200 bg-white"
+                            data-oid="6j2ol4o"
+                        >
+                            {experienceLevels.map((level) => (
+                                <option key={level.value} value={level.value} data-oid=":brw456">
+                                    {level.label}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                )}
 
-                {/* Salary Range Filter */}
+                {/* Duration Filter (only for internships) */}
+                {isInternshipPage && (
+                    <div data-oid="duration-filter">
+                        <label
+                            htmlFor="duration"
+                            className="block text-sm font-medium text-gray-700 mb-2"
+                            data-oid="maazwde"
+                        >
+                            Duration
+                        </label>
+                        <select
+                            id="duration"
+                            value={filters.duration || ''}
+                            onChange={(e) => handleInputChange('duration', e.target.value)}
+                            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[hsl(196,80%,45%)] focus:border-[hsl(196,80%,45%)] transition-colors duration-200 bg-white"
+                            data-oid="-.oc84p"
+                        >
+                            <option value="" data-oid="emcuqb.">
+                                All Durations
+                            </option>
+                            <option value="1 month" data-oid="n._axax">
+                                1 month
+                            </option>
+                            <option value="2 months" data-oid="syvevt1">
+                                2 months
+                            </option>
+                            <option value="3 months" data-oid="ci57jbx">
+                                3 months
+                            </option>
+                            <option value="4 months" data-oid="xsr1bd9">
+                                4 months
+                            </option>
+                            <option value="5 months" data-oid="c-8m9ps">
+                                5 months
+                            </option>
+                            <option value="6 months" data-oid="49j9zyb">
+                                6 months
+                            </option>
+                        </select>
+                    </div>
+                )}
+
+                {/* Salary/Stipend Range Filter */}
                 <div data-oid="8e8k5o6">
                     <label
                         className="block text-sm font-medium text-gray-700 mb-3"
                         data-oid="z_zeji2"
                     >
-                        Salary Range (LPA)
+                        {isInternshipPage ? 'Stipend Range (per month)' : 'Salary Range (LPA)'}
                     </label>
                     <div className="space-y-2" data-oid="ro59-.h">
-                        {[
-                            { value: '', label: 'Any Salary' },
-                            { value: '0-5', label: '0-5 LPA' },
-                            { value: '5-10', label: '5-10 LPA' },
-                            { value: '10-20', label: '10-20 LPA' },
-                            { value: '20+', label: '20+ LPA' },
-                        ].map((range) => (
-                            <label
-                                key={range.value}
-                                className="flex items-center"
-                                data-oid="ecgz007"
-                            >
-                                <input
-                                    type="radio"
-                                    name="salaryRange"
-                                    value={range.value}
-                                    checked={filters.salaryRange === range.value}
-                                    onChange={(e) =>
-                                        handleInputChange('salaryRange', e.target.value)
-                                    }
-                                    className="mr-2 text-[hsl(196,80%,45%)] focus:ring-[hsl(196,80%,45%)]"
-                                    data-oid="a1zm251"
-                                />
+                        {isInternshipPage
+                            ? [
+                                  { value: '', label: 'Any Stipend' },
+                                  { value: '0-15', label: '₹0-15k' },
+                                  { value: '15-25', label: '₹15-25k' },
+                                  { value: '25-35', label: '₹25-35k' },
+                                  { value: '35+', label: '₹35k+' },
+                              ]
+                            : [
+                                  { value: '', label: 'Any Salary' },
+                                  { value: '0-5', label: '0-5 LPA' },
+                                  { value: '5-10', label: '5-10 LPA' },
+                                  { value: '10-20', label: '10-20 LPA' },
+                                  { value: '20+', label: '20+ LPA' },
+                              ].map((range) => (
+                                  <label
+                                      key={range.value}
+                                      className="flex items-center"
+                                      data-oid="ecgz007"
+                                  >
+                                      <input
+                                          type="radio"
+                                          name={isInternshipPage ? 'stipendRange' : 'salaryRange'}
+                                          value={range.value}
+                                          checked={
+                                              (isInternshipPage
+                                                  ? filters.stipendRange
+                                                  : filters.salaryRange) === range.value
+                                          }
+                                          onChange={(e) =>
+                                              handleInputChange(
+                                                  isInternshipPage ? 'stipendRange' : 'salaryRange',
+                                                  e.target.value,
+                                              )
+                                          }
+                                          className="mr-2 text-[hsl(196,80%,45%)] focus:ring-[hsl(196,80%,45%)]"
+                                          data-oid="a1zm251"
+                                      />
 
-                                <span className="text-sm text-gray-700" data-oid="jnrsrnj">
-                                    {range.label}
-                                </span>
-                            </label>
-                        ))}
+                                      <span className="text-sm text-gray-700" data-oid="jnrsrnj">
+                                          {range.label}
+                                      </span>
+                                  </label>
+                              ))}
                     </div>
                 </div>
+
+                {/* Paid/Unpaid Filter (only for internships) */}
+                {isInternshipPage && (
+                    <div data-oid="paid-filter">
+                        <label
+                            className="block text-sm font-medium text-gray-700 mb-3"
+                            data-oid="shyx232"
+                        >
+                            Internship Type
+                        </label>
+                        <div className="space-y-2" data-oid="aehkfwj">
+                            {[
+                                { value: '', label: 'All Internships' },
+                                { value: 'paid', label: 'Paid Internships' },
+                                { value: 'unpaid', label: 'Unpaid Internships' },
+                            ].map((type) => (
+                                <label
+                                    key={type.value}
+                                    className="flex items-center"
+                                    data-oid="fa8y2.m"
+                                >
+                                    <input
+                                        type="radio"
+                                        name="isPaid"
+                                        value={type.value}
+                                        checked={filters.isPaid === type.value}
+                                        onChange={(e) =>
+                                            handleInputChange('isPaid', e.target.value)
+                                        }
+                                        className="mr-2 text-[hsl(196,80%,45%)] focus:ring-[hsl(196,80%,45%)]"
+                                        data-oid="5zjg6at"
+                                    />
+
+                                    <span className="text-sm text-gray-700" data-oid="f2p.l7x">
+                                        {type.label}
+                                    </span>
+                                </label>
+                            ))}
+                        </div>
+                    </div>
+                )}
 
                 {/* Company Type Filter */}
                 <div data-oid="lbwsiu8">
@@ -316,47 +422,111 @@ export default function FiltersSidebar({ filters, onFilterChange, onReset }: Fil
                         Quick Filters
                     </h3>
                     <div className="space-y-2" data-oid="4_zh6sq">
-                        <button
-                            onClick={() =>
-                                onFilterChange({
-                                    ...filters,
-                                    jobType: 'Full-time',
-                                    experienceLevel: '0-2 years',
-                                })
-                            }
-                            className="w-full text-left px-3 py-2 text-sm text-gray-600 hover:text-[hsl(196,80%,45%)] hover:bg-blue-50 rounded-md transition-colors duration-200"
-                            data-oid="wxjk7y1"
-                        >
-                            🎯 Fresher Full-time Jobs
-                        </button>
-                        <button
-                            onClick={() => onFilterChange({ ...filters, location: 'Remote' })}
-                            className="w-full text-left px-3 py-2 text-sm text-gray-600 hover:text-[hsl(196,80%,45%)] hover:bg-blue-50 rounded-md transition-colors duration-200"
-                            data-oid="rcxafqj"
-                        >
-                            🏠 Remote Jobs
-                        </button>
-                        <button
-                            onClick={() => onFilterChange({ ...filters, salaryRange: '10-20' })}
-                            className="w-full text-left px-3 py-2 text-sm text-gray-600 hover:text-[hsl(196,80%,45%)] hover:bg-blue-50 rounded-md transition-colors duration-200"
-                            data-oid="9iyse25"
-                        >
-                            💰 High Salary (10-20 LPA)
-                        </button>
-                        <button
-                            onClick={() => onFilterChange({ ...filters, companyType: 'Startup' })}
-                            className="w-full text-left px-3 py-2 text-sm text-gray-600 hover:text-[hsl(196,80%,45%)] hover:bg-blue-50 rounded-md transition-colors duration-200"
-                            data-oid="mmmbnm4"
-                        >
-                            🚀 Startup Jobs
-                        </button>
-                        <button
-                            onClick={() => onFilterChange({ ...filters, jobType: 'Internship' })}
-                            className="w-full text-left px-3 py-2 text-sm text-gray-600 hover:text-[hsl(196,80%,45%)] hover:bg-blue-50 rounded-md transition-colors duration-200"
-                            data-oid="veh4vev"
-                        >
-                            📚 Internships
-                        </button>
+                        {isInternshipPage ? (
+                            <>
+                                <button
+                                    onClick={() =>
+                                        onFilterChange({
+                                            ...filters,
+                                            isPaid: 'paid',
+                                            duration: '3 months',
+                                        })
+                                    }
+                                    className="w-full text-left px-3 py-2 text-sm text-gray-600 hover:text-[hsl(196,80%,45%)] hover:bg-blue-50 rounded-md transition-colors duration-200"
+                                    data-oid="hg2u-p7"
+                                >
+                                    💰 Paid 3-month Internships
+                                </button>
+                                <button
+                                    onClick={() =>
+                                        onFilterChange({ ...filters, location: 'Remote' })
+                                    }
+                                    className="w-full text-left px-3 py-2 text-sm text-gray-600 hover:text-[hsl(196,80%,45%)] hover:bg-blue-50 rounded-md transition-colors duration-200"
+                                    data-oid=".mz4:z9"
+                                >
+                                    🏠 Remote Internships
+                                </button>
+                                <button
+                                    onClick={() =>
+                                        onFilterChange({ ...filters, stipendRange: '25-35' })
+                                    }
+                                    className="w-full text-left px-3 py-2 text-sm text-gray-600 hover:text-[hsl(196,80%,45%)] hover:bg-blue-50 rounded-md transition-colors duration-200"
+                                    data-oid="svq.553"
+                                >
+                                    💸 High Stipend (₹25-35k)
+                                </button>
+                                <button
+                                    onClick={() =>
+                                        onFilterChange({ ...filters, companyType: 'Startup' })
+                                    }
+                                    className="w-full text-left px-3 py-2 text-sm text-gray-600 hover:text-[hsl(196,80%,45%)] hover:bg-blue-50 rounded-md transition-colors duration-200"
+                                    data-oid="3ptlq2m"
+                                >
+                                    🚀 Startup Internships
+                                </button>
+                                <button
+                                    onClick={() =>
+                                        onFilterChange({ ...filters, duration: '6 months' })
+                                    }
+                                    className="w-full text-left px-3 py-2 text-sm text-gray-600 hover:text-[hsl(196,80%,45%)] hover:bg-blue-50 rounded-md transition-colors duration-200"
+                                    data-oid="glb29wd"
+                                >
+                                    📅 Long-term (6 months)
+                                </button>
+                            </>
+                        ) : (
+                            <>
+                                <button
+                                    onClick={() =>
+                                        onFilterChange({
+                                            ...filters,
+                                            jobType: 'Full-time',
+                                            experienceLevel: '0-2 years',
+                                        })
+                                    }
+                                    className="w-full text-left px-3 py-2 text-sm text-gray-600 hover:text-[hsl(196,80%,45%)] hover:bg-blue-50 rounded-md transition-colors duration-200"
+                                    data-oid="wxjk7y1"
+                                >
+                                    🎯 Fresher Full-time Jobs
+                                </button>
+                                <button
+                                    onClick={() =>
+                                        onFilterChange({ ...filters, location: 'Remote' })
+                                    }
+                                    className="w-full text-left px-3 py-2 text-sm text-gray-600 hover:text-[hsl(196,80%,45%)] hover:bg-blue-50 rounded-md transition-colors duration-200"
+                                    data-oid="rcxafqj"
+                                >
+                                    🏠 Remote Jobs
+                                </button>
+                                <button
+                                    onClick={() =>
+                                        onFilterChange({ ...filters, salaryRange: '10-20' })
+                                    }
+                                    className="w-full text-left px-3 py-2 text-sm text-gray-600 hover:text-[hsl(196,80%,45%)] hover:bg-blue-50 rounded-md transition-colors duration-200"
+                                    data-oid="9iyse25"
+                                >
+                                    💰 High Salary (10-20 LPA)
+                                </button>
+                                <button
+                                    onClick={() =>
+                                        onFilterChange({ ...filters, companyType: 'Startup' })
+                                    }
+                                    className="w-full text-left px-3 py-2 text-sm text-gray-600 hover:text-[hsl(196,80%,45%)] hover:bg-blue-50 rounded-md transition-colors duration-200"
+                                    data-oid="mmmbnm4"
+                                >
+                                    🚀 Startup Jobs
+                                </button>
+                                <button
+                                    onClick={() =>
+                                        onFilterChange({ ...filters, jobType: 'Internship' })
+                                    }
+                                    className="w-full text-left px-3 py-2 text-sm text-gray-600 hover:text-[hsl(196,80%,45%)] hover:bg-blue-50 rounded-md transition-colors duration-200"
+                                    data-oid="veh4vev"
+                                >
+                                    📚 Internships
+                                </button>
+                            </>
+                        )}
                     </div>
                 </div>
             </div>

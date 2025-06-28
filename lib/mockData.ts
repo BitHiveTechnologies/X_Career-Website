@@ -1,5 +1,35 @@
 import { Job } from '@/app/jobs/page';
 
+// Import internship type from internships page
+export interface Internship {
+    id: number;
+    title: string;
+    company: string;
+    location: string;
+    duration: string;
+    stipend?: string;
+    jobType: string;
+    employmentType: string;
+    skills: string[];
+    postedDate: string;
+    description: string;
+    isRemote: boolean;
+    isFeatured: boolean;
+    isUrgent?: boolean;
+    applicantCount?: number;
+    companyLogo?: string;
+    companySize?: string;
+    industry?: string;
+    benefits?: string[];
+    companyType?: 'Startup' | 'MNC' | 'Product' | 'Service';
+    startDate?: string;
+    applicationDeadline?: string;
+    isPartTime?: boolean;
+    isPaid?: boolean;
+    certificateProvided?: boolean;
+    mentorshipIncluded?: boolean;
+}
+
 export const mockJobs: Job[] = [
     {
         id: 1,
@@ -268,6 +298,39 @@ export const mockJobs: Job[] = [
     },
 ];
 
+// Mock Internship Data
+export const mockInternships: Internship[] = [
+    {
+        id: 1,
+        title: 'Frontend Development Intern',
+        company: 'Swiggy',
+        location: 'Bangalore, India',
+        duration: '3 months',
+        stipend: '₹25,000/month',
+        jobType: 'Internship',
+        employmentType: 'Temporary',
+        skills: ['React', 'JavaScript', 'HTML', 'CSS', 'Git'],
+        postedDate: '2024-01-15',
+        description: 'Work on user-facing features for our food delivery platform...',
+        isRemote: false,
+        isFeatured: true,
+        isUrgent: true,
+        applicantCount: 156,
+        companyLogo: '/logos/swiggy.png',
+        companySize: '5000-10000',
+        industry: 'Food Tech',
+        benefits: ['Mentorship', 'Free Meals', 'Certificate', 'Pre-placement Offer'],
+        companyType: 'Startup',
+        startDate: '2024-02-01',
+        applicationDeadline: '2024-01-25',
+        isPartTime: false,
+        isPaid: true,
+        certificateProvided: true,
+        mentorshipIncluded: true,
+    },
+    // Add more internships as needed...
+];
+
 export const findJobBySlug = (companySlug: string, jobTitleSlug: string): Job | null => {
     return (
         mockJobs.find((job) => {
@@ -280,6 +343,28 @@ export const findJobBySlug = (companySlug: string, jobTitleSlug: string): Job | 
                 .replace(/\s+/g, '-')
                 .replace(/[^a-z0-9-]/g, '');
             return jobCompanySlug === companySlug && jobTitleSlugMatch === jobTitleSlug;
+        }) || null
+    );
+};
+
+export const findInternshipBySlug = (
+    companySlug: string,
+    internshipTitleSlug: string,
+): Internship | null => {
+    return (
+        mockInternships.find((internship) => {
+            const internshipCompanySlug = internship.company
+                .toLowerCase()
+                .replace(/\s+/g, '-')
+                .replace(/[^a-z0-9-]/g, '');
+            const internshipTitleSlugMatch = internship.title
+                .toLowerCase()
+                .replace(/\s+/g, '-')
+                .replace(/[^a-z0-9-]/g, '');
+            return (
+                internshipCompanySlug === companySlug &&
+                internshipTitleSlugMatch === internshipTitleSlug
+            );
         }) || null
     );
 };
