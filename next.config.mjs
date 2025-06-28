@@ -7,6 +7,7 @@ const nextConfig = {
     },
     experimental: {
         optimizePackageImports: ['lucide-react'],
+        optimizeCss: true,
     },
     eslint: {
         ignoreDuringBuilds: false,
@@ -18,10 +19,6 @@ const nextConfig = {
     compress: true,
     // Optimize for production
     swcMinify: true,
-    // Remove unused CSS
-    experimental: {
-        optimizeCss: true,
-    },
 };
 
 export default nextConfig;
