@@ -232,7 +232,7 @@ export default function FiltersSidebar({
                         {isInternshipPage ? 'Stipend Range (per month)' : 'Salary Range (LPA)'}
                     </label>
                     <div className="space-y-2" data-oid="7m4_pau">
-                        {isInternshipPage
+                        {(isInternshipPage
                             ? [
                                   { value: '', label: 'Any Stipend' },
                                   { value: '0-15', label: '₹0-15k' },
@@ -246,36 +246,37 @@ export default function FiltersSidebar({
                                   { value: '5-10', label: '5-10 LPA' },
                                   { value: '10-20', label: '10-20 LPA' },
                                   { value: '20+', label: '20+ LPA' },
-                              ].map((range) => (
-                                  <label
-                                      key={range.value}
-                                      className="flex items-center"
-                                      data-oid="am1hg70"
-                                  >
-                                      <input
-                                          type="radio"
-                                          name={isInternshipPage ? 'stipendRange' : 'salaryRange'}
-                                          value={range.value}
-                                          checked={
-                                              (isInternshipPage
-                                                  ? filters.stipendRange
-                                                  : filters.salaryRange) === range.value
-                                          }
-                                          onChange={(e) =>
-                                              handleInputChange(
-                                                  isInternshipPage ? 'stipendRange' : 'salaryRange',
-                                                  e.target.value,
-                                              )
-                                          }
-                                          className="mr-2 text-[hsl(196,80%,45%)] focus:ring-[hsl(196,80%,45%)]"
-                                          data-oid="wiujwqj"
-                                      />
+                              ]
+                        ).map((range) => (
+                            <label
+                                key={range.value}
+                                className="flex items-center"
+                                data-oid="am1hg70"
+                            >
+                                <input
+                                    type="radio"
+                                    name={isInternshipPage ? 'stipendRange' : 'salaryRange'}
+                                    value={range.value}
+                                    checked={
+                                        (isInternshipPage
+                                            ? filters.stipendRange
+                                            : filters.salaryRange) === range.value
+                                    }
+                                    onChange={(e) =>
+                                        handleInputChange(
+                                            isInternshipPage ? 'stipendRange' : 'salaryRange',
+                                            e.target.value,
+                                        )
+                                    }
+                                    className="mr-2 text-[hsl(196,80%,45%)] focus:ring-[hsl(196,80%,45%)]"
+                                    data-oid="wiujwqj"
+                                />
 
-                                      <span className="text-sm text-gray-700" data-oid="15gvzy2">
-                                          {range.label}
-                                      </span>
-                                  </label>
-                              ))}
+                                <span className="text-sm text-gray-700" data-oid="15gvzy2">
+                                    {range.label}
+                                </span>
+                            </label>
+                        ))}
                     </div>
                 </div>
 
