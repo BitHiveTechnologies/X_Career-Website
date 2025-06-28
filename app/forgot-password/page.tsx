@@ -10,7 +10,7 @@ const Logo = () => (
         viewBox="0 0 120 30"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        data-oid="i38.1dn"
+        data-oid="fsd::.1"
     >
         <path
             d="M10 5L20 15L10 25"
@@ -18,7 +18,7 @@ const Logo = () => (
             strokeWidth="3"
             strokeLinecap="round"
             strokeLinejoin="round"
-            data-oid="i5ghwa-"
+            data-oid="mh9l9ws"
         />
 
         <path
@@ -27,7 +27,7 @@ const Logo = () => (
             strokeWidth="3"
             strokeLinecap="round"
             strokeLinejoin="round"
-            data-oid="jr7z:kd"
+            data-oid="g54e-5a"
         />
 
         <text
@@ -37,7 +37,7 @@ const Logo = () => (
             fontSize="18"
             fontWeight="bold"
             fill="#1E3A8A"
-            data-oid="ox38jml"
+            data-oid="2.iv3gb"
         >
             Careers
         </text>
@@ -70,103 +70,103 @@ export default function ForgotPasswordPage() {
     return (
         <div
             className="min-h-screen bg-gradient-to-b from-[hsl(210,50%,98%)] to-[hsl(196,60%,95%)] flex flex-col justify-center"
-            data-oid="0jw_dlk"
+            data-oid="7rbvc1z"
         >
             {/* Animated background elements */}
-            <div className="fixed inset-0 overflow-hidden -z-10" data-oid="fwm1y-0">
+            <div className="fixed inset-0 overflow-hidden -z-10" data-oid="5rm.tl5">
                 <div
                     className="absolute -top-20 -left-20 w-96 h-96 bg-[hsl(196,80%,65%)] opacity-20 rounded-full blur-3xl animate-blob"
-                    data-oid="7fj3:32"
+                    data-oid="77v21jp"
                 ></div>
                 <div
                     className="absolute top-40 right-20 w-96 h-96 bg-[hsl(210,70%,65%)] opacity-20 rounded-full blur-3xl animate-blob animation-delay-2000"
-                    data-oid="h4iq4sp"
+                    data-oid="ft6wccr"
                 ></div>
                 <div
                     className="absolute bottom-10 left-1/3 w-96 h-96 bg-[hsl(175,70%,61%)] opacity-20 rounded-full blur-3xl animate-blob animation-delay-4000"
-                    data-oid="h.ev35c"
+                    data-oid="b.4a:a5"
                 ></div>
             </div>
 
-            <div className="sm:mx-auto sm:w-full sm:max-w-md px-4 py-8 z-10" data-oid="wdrggd8">
-                <div className="text-center mb-6" data-oid="zdvmyyl">
-                    <Link href="/" className="inline-block" data-oid="gg419wz">
-                        <Logo data-oid="of_kuh-" />
+            <div className="sm:mx-auto sm:w-full sm:max-w-md px-4 py-8 z-10" data-oid=".o-90:9">
+                <div className="text-center mb-6" data-oid=".4lnnfg">
+                    <Link href="/" className="inline-block" data-oid="p1ie7kl">
+                        <Logo data-oid="sz65qpt" />
                     </Link>
-                    <h2 className="mt-6 text-3xl font-extrabold text-gray-800" data-oid="w43p8yk">
+                    <h2 className="mt-6 text-3xl font-extrabold text-gray-800" data-oid="9cw32u_">
                         Reset your password
                     </h2>
-                    <p className="mt-2 text-sm text-gray-600" data-oid="eob17uz">
+                    <p className="mt-2 text-sm text-gray-600" data-oid="c2po9cp">
                         We'll send you a link to reset your password
                     </p>
                 </div>
 
                 <div
                     className="bg-white/80 backdrop-blur-md py-8 px-6 shadow-xl rounded-xl border border-[hsl(210,30%,95%)] sm:px-10 transform transition-all duration-500 hover:shadow-2xl"
-                    data-oid="ngkubl0"
+                    data-oid="o1t3.lt"
                 >
                     {error && (
                         <div
                             className="mb-4 p-3 bg-red-50 text-red-700 text-sm rounded-md border border-red-200"
-                            data-oid="wz:arj0"
+                            data-oid="fe3px58"
                         >
                             {error}
                         </div>
                     )}
 
                     {isSubmitted ? (
-                        <div className="text-center" data-oid="6uuny4f">
-                            <div className="mb-4 flex justify-center" data-oid="llqsbk0">
+                        <div className="text-center" data-oid="sz253rd">
+                            <div className="mb-4 flex justify-center" data-oid="55rrx0o">
                                 <div
                                     className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center"
-                                    data-oid="b24q.x_"
+                                    data-oid="-7:3k73"
                                 >
                                     <svg
                                         className="h-8 w-8 text-green-600"
                                         fill="none"
                                         viewBox="0 0 24 24"
                                         stroke="currentColor"
-                                        data-oid="d-7-szn"
+                                        data-oid="gzqcna3"
                                     >
                                         <path
                                             strokeLinecap="round"
                                             strokeLinejoin="round"
                                             strokeWidth={2}
                                             d="M5 13l4 4L19 7"
-                                            data-oid=".ti_g4h"
+                                            data-oid="5i.ikzr"
                                         />
                                     </svg>
                                 </div>
                             </div>
-                            <h3 className="text-lg font-medium text-gray-900" data-oid="-bp.v93">
+                            <h3 className="text-lg font-medium text-gray-900" data-oid="xk5gfa_">
                                 Check your email
                             </h3>
-                            <p className="mt-2 text-sm text-gray-600" data-oid="dc59it3">
+                            <p className="mt-2 text-sm text-gray-600" data-oid="04luwmx">
                                 We've sent a password reset link to{' '}
-                                <strong data-oid="g7vtl93">{email}</strong>
+                                <strong data-oid="6l21qbm">{email}</strong>
                             </p>
-                            <p className="mt-4 text-sm text-gray-600" data-oid="ee1755q">
+                            <p className="mt-4 text-sm text-gray-600" data-oid="5g:sw31">
                                 Didn't receive the email? Check your spam folder or{' '}
                                 <button
                                     onClick={() => setIsSubmitted(false)}
                                     className="font-medium text-[hsl(196,80%,45%)] hover:text-[hsl(196,80%,35%)] transition-colors duration-200"
-                                    data-oid="ibefhal"
+                                    data-oid="cfxs54-"
                                 >
                                     try again
                                 </button>
                             </p>
                         </div>
                     ) : (
-                        <form className="space-y-6" onSubmit={handleSubmit} data-oid="gxeb:c4">
-                            <div data-oid=".hy.lql">
+                        <form className="space-y-6" onSubmit={handleSubmit} data-oid="evo7vfb">
+                            <div data-oid="ga7gji5">
                                 <label
                                     htmlFor="email"
                                     className="block text-sm font-medium text-gray-700"
-                                    data-oid="2_yrstd"
+                                    data-oid="dr6oy_0"
                                 >
                                     Email address
                                 </label>
-                                <div className="mt-1 focus-within-scale" data-oid="ki.h8jk">
+                                <div className="mt-1 focus-within-scale" data-oid="1dsxk3x">
                                     <input
                                         id="email"
                                         name="email"
@@ -177,17 +177,17 @@ export default function ForgotPasswordPage() {
                                         onChange={(e) => setEmail(e.target.value)}
                                         className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[hsl(196,80%,45%)] focus:border-[hsl(196,80%,45%)] transition-colors duration-200"
                                         placeholder="you@example.com"
-                                        data-oid="m-m0_c9"
+                                        data-oid="n4sh072"
                                     />
                                 </div>
                             </div>
 
-                            <div data-oid="wm0ll-7">
+                            <div data-oid=":2xyg6v">
                                 <button
                                     type="submit"
                                     disabled={isLoading}
                                     className={`w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[hsl(196,80%,45%)] transition-all duration-300 transform hover:translate-y-[-2px] ${isLoading ? 'opacity-70 cursor-not-allowed' : ''}`}
-                                    data-oid="--fh7sr"
+                                    data-oid="2_2kr1."
                                 >
                                     {isLoading ? (
                                         <svg
@@ -195,7 +195,7 @@ export default function ForgotPasswordPage() {
                                             xmlns="http://www.w3.org/2000/svg"
                                             fill="none"
                                             viewBox="0 0 24 24"
-                                            data-oid="6bhwa53"
+                                            data-oid="lg3u9u0"
                                         >
                                             <circle
                                                 className="opacity-25"
@@ -204,13 +204,13 @@ export default function ForgotPasswordPage() {
                                                 r="10"
                                                 stroke="currentColor"
                                                 strokeWidth="4"
-                                                data-oid="vfck.um"
+                                                data-oid="b5o-mmu"
                                             ></circle>
                                             <path
                                                 className="opacity-75"
                                                 fill="currentColor"
                                                 d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                                                data-oid="r1l6h4x"
+                                                data-oid="bqhvf8e"
                                             ></path>
                                         </svg>
                                     ) : null}
@@ -221,13 +221,13 @@ export default function ForgotPasswordPage() {
                     )}
                 </div>
 
-                <div className="mt-6 text-center" data-oid="oijv72k">
-                    <p className="text-sm text-gray-600" data-oid="sbfelae">
+                <div className="mt-6 text-center" data-oid="nsk6z4l">
+                    <p className="text-sm text-gray-600" data-oid="tgfo:q8">
                         Remember your password?{' '}
                         <Link
                             href="/login"
                             className="font-medium text-[hsl(196,80%,45%)] hover:text-[hsl(196,80%,35%)] transition-colors duration-200"
-                            data-oid="nmu08xn"
+                            data-oid="5z_ooms"
                         >
                             Sign in
                         </Link>

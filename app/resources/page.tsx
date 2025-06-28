@@ -132,44 +132,44 @@ export default function ResourcesPage() {
     return (
         <div
             className="min-h-screen bg-gradient-to-b from-[hsl(210,50%,98%)] to-[hsl(196,60%,95%)]"
-            data-oid="si9hpr."
+            data-oid="o6gtxp6"
         >
             {/* Animated background elements */}
-            <div className="fixed inset-0 overflow-hidden -z-10" data-oid="foy8__o">
+            <div className="fixed inset-0 overflow-hidden -z-10" data-oid="xtbaq_.">
                 <div
                     className="absolute -top-20 -left-20 w-96 h-96 bg-[hsl(196,80%,65%)] opacity-20 rounded-full blur-3xl animate-blob"
-                    data-oid="u5glwvn"
+                    data-oid="0czxc12"
                 ></div>
                 <div
                     className="absolute top-40 right-20 w-96 h-96 bg-[hsl(210,70%,65%)] opacity-20 rounded-full blur-3xl animate-blob animation-delay-2000"
-                    data-oid="-9-2ttj"
+                    data-oid="0lld3oh"
                 ></div>
                 <div
                     className="absolute bottom-10 left-1/3 w-96 h-96 bg-[hsl(175,70%,61%)] opacity-20 rounded-full blur-3xl animate-blob animation-delay-4000"
-                    data-oid="a3h9..w"
+                    data-oid="jnxf6fj"
                 ></div>
             </div>
 
-            <div className="relative z-10" data-oid="5j5eb:-">
+            <div className="relative z-10" data-oid="y9_c31n">
                 {/* Hero Section */}
-                <section className="pt-24 pb-16 px-4" data-oid="epmdi10">
-                    <div className="max-w-7xl mx-auto text-center" data-oid="8_m_0.h">
+                <section className="pt-24 pb-16 px-4" data-oid="7-8rxhq">
+                    <div className="max-w-7xl mx-auto text-center" data-oid="ql62cb_">
                         <div
                             className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium text-[hsl(196,80%,45%)] border border-[hsl(210,30%,95%)] mb-6"
-                            data-oid="7ra1z8k"
+                            data-oid="3q60uv0"
                         >
-                            <BookOpen className="h-4 w-4" data-oid=".:jkdus" />
+                            <BookOpen className="h-4 w-4" data-oid="pbj8rhb" />
                             Free Resources for Tech Careers
                         </div>
 
                         <h1
                             className="text-4xl md:text-6xl font-bold text-gray-800 mb-6"
-                            data-oid="hj.w6t_"
+                            data-oid="c:js2q6"
                         >
                             Your Career
                             <span
                                 className="bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] bg-clip-text text-transparent"
-                                data-oid="uk9l:ll"
+                                data-oid="y-h68i5"
                             >
                                 {' '}
                                 Resource Hub
@@ -178,29 +178,29 @@ export default function ResourcesPage() {
 
                         <p
                             className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto"
-                            data-oid="hi2pmd2"
+                            data-oid="xmnx4zc"
                         >
                             Everything you need to land your dream tech job - from interview prep to
                             skill development, all in one place.
                         </p>
 
                         {/* Search Bar */}
-                        <div className="max-w-2xl mx-auto mb-12" data-oid="na4j5if">
-                            <div className="relative" data-oid="ps7e6v7">
+                        <div className="max-w-2xl mx-auto mb-12" data-oid="z1nwsd2">
+                            <div className="relative" data-oid="yiyo-ba">
                                 <input
                                     type="text"
                                     placeholder="Search resources, guides, templates..."
                                     value={searchQuery}
                                     onChange={(e) => setSearchQuery(e.target.value)}
                                     className="w-full px-6 py-4 text-lg rounded-2xl border border-gray-200 bg-white/80 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent shadow-lg"
-                                    data-oid="gdfsua:"
+                                    data-oid="s_nwhkk"
                                 />
 
                                 <button
                                     className="absolute right-3 top-1/2 transform -translate-y-1/2 p-2 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white rounded-xl hover:shadow-lg transition-all"
-                                    data-oid="c3x-ckd"
+                                    data-oid="az6dnhj"
                                 >
-                                    <ArrowRight className="h-5 w-5" data-oid="bn:u_wb" />
+                                    <ArrowRight className="h-5 w-5" data-oid="0-i.x.9" />
                                 </button>
                             </div>
                         </div>
@@ -208,61 +208,61 @@ export default function ResourcesPage() {
                         {/* Stats */}
                         <div
                             className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto"
-                            data-oid="u8c6zjj"
+                            data-oid="yz1iibw"
                         >
                             <div
                                 className="bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-[hsl(210,30%,95%)]"
-                                data-oid="8qijsz9"
+                                data-oid="omrrtnz"
                             >
                                 <div
                                     className="text-3xl font-bold text-[hsl(196,80%,45%)]"
-                                    data-oid="f.6mr4v"
+                                    data-oid="v5mnftk"
                                 >
                                     500+
                                 </div>
-                                <div className="text-gray-600" data-oid="25pz9-j">
+                                <div className="text-gray-600" data-oid="l_-p3u.">
                                     Free Resources
                                 </div>
                             </div>
                             <div
                                 className="bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-[hsl(210,30%,95%)]"
-                                data-oid="s3p3jqw"
+                                data-oid="0scpjy2"
                             >
                                 <div
                                     className="text-3xl font-bold text-[hsl(196,80%,45%)]"
-                                    data-oid="hiyusig"
+                                    data-oid="sf_gas8"
                                 >
                                     1M+
                                 </div>
-                                <div className="text-gray-600" data-oid="b76n_up">
+                                <div className="text-gray-600" data-oid="ffz9g_:">
                                     Downloads
                                 </div>
                             </div>
                             <div
                                 className="bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-[hsl(210,30%,95%)]"
-                                data-oid="pou2c28"
+                                data-oid="t7chpby"
                             >
                                 <div
                                     className="text-3xl font-bold text-[hsl(196,80%,45%)]"
-                                    data-oid="eyyh7e_"
+                                    data-oid="kgqzh.n"
                                 >
                                     50K+
                                 </div>
-                                <div className="text-gray-600" data-oid="7a5tz0v">
+                                <div className="text-gray-600" data-oid="yu9jalj">
                                     Success Stories
                                 </div>
                             </div>
                             <div
                                 className="bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-[hsl(210,30%,95%)]"
-                                data-oid="f6n8tqm"
+                                data-oid="rsyzsib"
                             >
                                 <div
                                     className="text-3xl font-bold text-[hsl(196,80%,45%)]"
-                                    data-oid="wo6n4kj"
+                                    data-oid="7:zwupu"
                                 >
                                     4.9★
                                 </div>
-                                <div className="text-gray-600" data-oid=".23udn0">
+                                <div className="text-gray-600" data-oid="761qa4w">
                                     Average Rating
                                 </div>
                             </div>
@@ -271,84 +271,84 @@ export default function ResourcesPage() {
                 </section>
 
                 {/* Featured Resources */}
-                <section className="py-16 px-4" data-oid="2z.frbw">
-                    <div className="max-w-7xl mx-auto" data-oid="gdqa8eq">
-                        <div className="text-center mb-12" data-oid="ifgn9gg">
+                <section className="py-16 px-4" data-oid="wgzldlo">
+                    <div className="max-w-7xl mx-auto" data-oid="iaf5a2e">
+                        <div className="text-center mb-12" data-oid="8ykjcl_">
                             <h2
                                 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4"
-                                data-oid="hkexosd"
+                                data-oid="y9qh0rw"
                             >
                                 Featured Resources
                             </h2>
-                            <p className="text-xl text-gray-600" data-oid="9y7ak6s">
+                            <p className="text-xl text-gray-600" data-oid="j2q:s_6">
                                 Most popular and highly-rated resources this month
                             </p>
                         </div>
 
-                        <div className="grid md:grid-cols-3 gap-8" data-oid="nvircm1">
+                        <div className="grid md:grid-cols-3 gap-8" data-oid="uxrb3.j">
                             {featuredResources.map((resource, index) => (
                                 <div
                                     key={index}
                                     className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-[hsl(210,30%,95%)] hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
-                                    data-oid="zeiebiw"
+                                    data-oid="88sacx."
                                 >
-                                    <div className="text-4xl mb-4" data-oid="ivjzci5">
+                                    <div className="text-4xl mb-4" data-oid="u--zn03">
                                         {resource.image}
                                     </div>
                                     <h3
                                         className="text-xl font-bold text-gray-800 mb-2"
-                                        data-oid="ndz_jr5"
+                                        data-oid="zsdfzx3"
                                     >
                                         {resource.title}
                                     </h3>
-                                    <p className="text-gray-600 mb-4" data-oid="n8yinbf">
+                                    <p className="text-gray-600 mb-4" data-oid="7kbgc0h">
                                         {resource.description}
                                     </p>
 
                                     <div
                                         className="flex items-center gap-4 mb-4"
-                                        data-oid="8pjud.l"
+                                        data-oid="pklt-_h"
                                     >
-                                        <div className="flex items-center gap-1" data-oid="vuqy8:6">
+                                        <div className="flex items-center gap-1" data-oid="eo04dgi">
                                             <Download
                                                 className="h-4 w-4 text-gray-500"
-                                                data-oid="_5538xg"
+                                                data-oid="zz4ktyo"
                                             />
 
                                             <span
                                                 className="text-sm text-gray-600"
-                                                data-oid="::v81-5"
+                                                data-oid="vuf6mvv"
                                             >
                                                 {resource.downloads}
                                             </span>
                                         </div>
-                                        <div className="flex items-center gap-1" data-oid="chx0xs_">
+                                        <div className="flex items-center gap-1" data-oid="z0astoy">
                                             <Star
                                                 className="h-4 w-4 text-yellow-500 fill-current"
-                                                data-oid="37:y4.g"
+                                                data-oid="oqb..5w"
                                             />
 
                                             <span
                                                 className="text-sm text-gray-600"
-                                                data-oid="m-kcm3j"
+                                                data-oid="wmkrc7w"
                                             >
                                                 {resource.rating}
                                             </span>
                                         </div>
                                         <div
                                             className="text-sm font-medium text-green-600"
-                                            data-oid="du.juei"
+                                            data-oid="m8x3.a4"
                                         >
                                             {resource.price}
                                         </div>
                                     </div>
 
-                                    <div className="flex flex-wrap gap-2 mb-4" data-oid="n-chn6r">
+                                    <div className="flex flex-wrap gap-2 mb-4" data-oid="jv.:ej.">
                                         {resource.tags.map((tag, tagIndex) => (
                                             <span
                                                 key={tagIndex}
                                                 className="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded-full"
-                                                data-oid="5wo6z2."
+                                                data-oid="_qqxofo"
                                             >
                                                 {tag}
                                             </span>
@@ -357,7 +357,7 @@ export default function ResourcesPage() {
 
                                     <button
                                         className="w-full px-4 py-3 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white rounded-xl font-medium hover:shadow-lg transition-all transform hover:scale-105"
-                                        data-oid="7nz6kn-"
+                                        data-oid="jd6p:wj"
                                     >
                                         Download Now
                                     </button>
@@ -368,16 +368,16 @@ export default function ResourcesPage() {
                 </section>
 
                 {/* Resource Categories */}
-                <section className="py-16 px-4" data-oid="-:y7sv2">
-                    <div className="max-w-7xl mx-auto" data-oid="njtf4l8">
-                        <div className="text-center mb-12" data-oid="3wj54__">
+                <section className="py-16 px-4" data-oid="klpqik3">
+                    <div className="max-w-7xl mx-auto" data-oid="13d68n.">
+                        <div className="text-center mb-12" data-oid="_a3zj24">
                             <h2
                                 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4"
-                                data-oid="sdm.-3r"
+                                data-oid="lzbxic8"
                             >
                                 Browse by Category
                             </h2>
-                            <p className="text-xl text-gray-600" data-oid="e29v:yj">
+                            <p className="text-xl text-gray-600" data-oid="y53s08f">
                                 Find exactly what you need for your career journey
                             </p>
                         </div>
@@ -385,7 +385,7 @@ export default function ResourcesPage() {
                         {/* Category Tabs */}
                         <div
                             className="flex flex-wrap justify-center gap-4 mb-12"
-                            data-oid="nh1h_i7"
+                            data-oid="iphj..p"
                         >
                             {resourceCategories.map((category) => (
                                 <button
@@ -396,9 +396,9 @@ export default function ResourcesPage() {
                                             ? 'bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white shadow-lg'
                                             : 'bg-white/80 backdrop-blur-sm text-gray-700 border border-[hsl(210,30%,95%)] hover:border-[hsl(196,80%,45%)]'
                                     }`}
-                                    data-oid="uh-i1pq"
+                                    data-oid="x8bnaww"
                                 >
-                                    <span className="mr-2" data-oid=".89nmre">
+                                    <span className="mr-2" data-oid="47biuck">
                                         {category.icon}
                                     </span>
                                     {category.title}
@@ -413,46 +413,46 @@ export default function ResourcesPage() {
                                     <div
                                         key={category.id}
                                         className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-[hsl(210,30%,95%)]"
-                                        data-oid="3_ugh_s"
+                                        data-oid="c_jeo-5"
                                     >
-                                        <div className="text-center mb-8" data-oid="uxwml0v">
-                                            <div className="text-6xl mb-4" data-oid="ui0y3nr">
+                                        <div className="text-center mb-8" data-oid="t8w2c5.">
+                                            <div className="text-6xl mb-4" data-oid="q.v6k7w">
                                                 {category.icon}
                                             </div>
                                             <h3
                                                 className="text-2xl font-bold text-gray-800 mb-2"
-                                                data-oid="3.nbo31"
+                                                data-oid="c2je1cs"
                                             >
                                                 {category.title}
                                             </h3>
-                                            <p className="text-gray-600" data-oid="zgqjy-d">
+                                            <p className="text-gray-600" data-oid="2qinfp.">
                                                 {category.description}
                                             </p>
                                         </div>
 
                                         <div
                                             className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
-                                            data-oid="rgpiq8q"
+                                            data-oid="mee:b9x"
                                         >
                                             {category.resources.map((resource, index) => (
                                                 <div
                                                     key={index}
                                                     className="bg-white rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-all"
-                                                    data-oid="rw3f-cy"
+                                                    data-oid="qag5.ml"
                                                 >
                                                     <div
                                                         className="flex items-start justify-between mb-3"
-                                                        data-oid="bnw71kn"
+                                                        data-oid="ueh74on"
                                                     >
                                                         <h4
                                                             className="font-semibold text-gray-800 text-sm"
-                                                            data-oid="81h9y8y"
+                                                            data-oid="8hbr0o4"
                                                         >
                                                             {resource.title}
                                                         </h4>
                                                         <span
                                                             className="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-full"
-                                                            data-oid="njb:ts:"
+                                                            data-oid="ryy1:4_"
                                                         >
                                                             {resource.type}
                                                         </span>
@@ -460,16 +460,16 @@ export default function ResourcesPage() {
 
                                                     <div
                                                         className="flex items-center gap-4 text-sm text-gray-600 mb-4"
-                                                        data-oid="auiim8:"
+                                                        data-oid=":e3m9hm"
                                                     >
                                                         {resource.downloads && (
                                                             <div
                                                                 className="flex items-center gap-1"
-                                                                data-oid="brsdskl"
+                                                                data-oid="l.-ng52"
                                                             >
                                                                 <Download
                                                                     className="h-3 w-3"
-                                                                    data-oid="84pk50n"
+                                                                    data-oid="xojgy1w"
                                                                 />
 
                                                                 {resource.downloads}
@@ -478,11 +478,11 @@ export default function ResourcesPage() {
                                                         {resource.duration && (
                                                             <div
                                                                 className="flex items-center gap-1"
-                                                                data-oid="d5fo4f:"
+                                                                data-oid="63u5c2y"
                                                             >
                                                                 <Clock
                                                                     className="h-3 w-3"
-                                                                    data-oid="hxh00ln"
+                                                                    data-oid="papibov"
                                                                 />
 
                                                                 {resource.duration}
@@ -491,11 +491,11 @@ export default function ResourcesPage() {
                                                         {resource.readTime && (
                                                             <div
                                                                 className="flex items-center gap-1"
-                                                                data-oid="oofxecd"
+                                                                data-oid="w.uupge"
                                                             >
                                                                 <Clock
                                                                     className="h-3 w-3"
-                                                                    data-oid="hk..wh1"
+                                                                    data-oid="i4uh93b"
                                                                 />
 
                                                                 {resource.readTime}
@@ -504,11 +504,11 @@ export default function ResourcesPage() {
                                                         {resource.users && (
                                                             <div
                                                                 className="flex items-center gap-1"
-                                                                data-oid="dw:c9o_"
+                                                                data-oid="7-281vp"
                                                             >
                                                                 <Users
                                                                     className="h-3 w-3"
-                                                                    data-oid="6snucdl"
+                                                                    data-oid="7hdr2qw"
                                                                 />
 
                                                                 {resource.users}
@@ -518,31 +518,31 @@ export default function ResourcesPage() {
 
                                                     <div
                                                         className="flex items-center justify-between"
-                                                        data-oid="lb.0awj"
+                                                        data-oid="-doke2w"
                                                     >
                                                         <div
                                                             className="flex items-center gap-1"
-                                                            data-oid="0hzcrsr"
+                                                            data-oid="v:v347m"
                                                         >
                                                             <Star
                                                                 className="h-4 w-4 text-yellow-500 fill-current"
-                                                                data-oid="pdmm.a7"
+                                                                data-oid="-tsnwqh"
                                                             />
 
                                                             <span
                                                                 className="text-sm font-medium"
-                                                                data-oid=".kxzz8r"
+                                                                data-oid="_nyulpz"
                                                             >
                                                                 {resource.rating}
                                                             </span>
                                                         </div>
                                                         <button
                                                             className="text-[hsl(196,80%,45%)] hover:text-[hsl(196,80%,35%)] transition-colors"
-                                                            data-oid="17imp.r"
+                                                            data-oid="urxlebv"
                                                         >
                                                             <ExternalLink
                                                                 className="h-4 w-4"
-                                                                data-oid="c.k.wic"
+                                                                data-oid="dzjfzai"
                                                             />
                                                         </button>
                                                     </div>
@@ -556,38 +556,38 @@ export default function ResourcesPage() {
                 </section>
 
                 {/* Community CTA */}
-                <section className="py-16 px-4" data-oid="gj4j3pt">
-                    <div className="max-w-4xl mx-auto text-center" data-oid="ogq:9xd">
+                <section className="py-16 px-4" data-oid="z-es4hf">
+                    <div className="max-w-4xl mx-auto text-center" data-oid="uqvqrwh">
                         <div
                             className="bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] rounded-2xl p-8 text-white"
-                            data-oid="81:0oxd"
+                            data-oid="gtvgknx"
                         >
-                            <h2 className="text-3xl font-bold mb-4" data-oid="17_p8qp">
+                            <h2 className="text-3xl font-bold mb-4" data-oid="e:_u30o">
                                 Join Our Learning Community
                             </h2>
-                            <p className="text-xl mb-6 text-blue-100" data-oid="ajduaod">
+                            <p className="text-xl mb-6 text-blue-100" data-oid="dfe.vpd">
                                 Connect with fellow developers, share resources, and grow together
                             </p>
                             <div
                                 className="flex flex-col sm:flex-row gap-4 justify-center"
-                                data-oid="dx:5h8q"
+                                data-oid="79b4fh."
                             >
                                 <Link
                                     href="/resources/community"
                                     className="px-6 py-3 bg-white text-[hsl(196,80%,45%)] rounded-xl font-medium hover:shadow-lg transition-all transform hover:scale-105"
-                                    data-oid="-yl4qj-"
+                                    data-oid="4tt4ksa"
                                 >
-                                    <Users className="inline h-5 w-5 mr-2" data-oid="1dur0d3" />
+                                    <Users className="inline h-5 w-5 mr-2" data-oid="dl.ls-s" />
                                     Join Community
                                 </Link>
                                 <Link
                                     href="/notify"
                                     className="px-6 py-3 border border-white text-white rounded-xl font-medium hover:bg-white hover:text-[hsl(196,80%,45%)] transition-all"
-                                    data-oid="dt706n_"
+                                    data-oid=":oyqsco"
                                 >
                                     <TrendingUp
                                         className="inline h-5 w-5 mr-2"
-                                        data-oid="1tsxm4d"
+                                        data-oid="1scn2jc"
                                     />
                                     Get Notified
                                 </Link>

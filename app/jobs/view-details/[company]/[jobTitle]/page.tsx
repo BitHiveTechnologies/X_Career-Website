@@ -70,14 +70,14 @@ export default function JobDetailsPage() {
     if (isLoading) {
         return (
             <>
-                <MainNavbar data-oid="3j_njtb" />
+                <MainNavbar data-oid="rp_2sfp" />
                 <div
                     className="min-h-screen bg-gradient-to-b from-[hsl(196,60%,95%)] to-white flex items-center justify-center"
-                    data-oid="tzr-4-v"
+                    data-oid="qi24o9w"
                 >
                     <div
                         className="animate-spin rounded-full h-12 w-12 border-b-2 border-[hsl(196,80%,45%)]"
-                        data-oid="xooq1_u"
+                        data-oid="8m8:3u_"
                     ></div>
                 </div>
             </>
@@ -87,22 +87,22 @@ export default function JobDetailsPage() {
     if (!job) {
         return (
             <>
-                <MainNavbar data-oid="ijgk5mk" />
+                <MainNavbar data-oid="ysyt.77" />
                 <div
                     className="min-h-screen bg-gradient-to-b from-[hsl(196,60%,95%)] to-white flex items-center justify-center"
-                    data-oid="k06.0v9"
+                    data-oid=".z1lghi"
                 >
-                    <div className="text-center" data-oid="t4t-6sy">
-                        <h1 className="text-2xl font-bold text-gray-800 mb-4" data-oid="rso5fgt">
+                    <div className="text-center" data-oid="9imcd1v">
+                        <h1 className="text-2xl font-bold text-gray-800 mb-4" data-oid="qs09lm4">
                             Job Not Found
                         </h1>
-                        <p className="text-gray-600 mb-6" data-oid="z_sw6uz">
+                        <p className="text-gray-600 mb-6" data-oid="z17r6fe">
                             The job you're looking for doesn't exist.
                         </p>
                         <button
                             onClick={() => router.push('/jobs')}
                             className="px-6 py-3 bg-[hsl(196,80%,45%)] text-white rounded-lg hover:bg-[hsl(196,80%,40%)] transition-colors"
-                            data-oid="o9-j9b5"
+                            data-oid="_lxl.kg"
                         >
                             Back to Jobs
                         </button>
@@ -114,38 +114,38 @@ export default function JobDetailsPage() {
 
     return (
         <>
-            <MainNavbar data-oid="xhovi-u" />
+            <MainNavbar data-oid="ha.m:zd" />
             <div
                 className="min-h-screen bg-gradient-to-b from-[hsl(196,60%,95%)] to-white"
-                data-oid="310365g"
+                data-oid="lxhmktu"
             >
                 {/* Breadcrumb */}
                 <div
                     className="bg-white/80 backdrop-blur-sm border-b border-gray-200"
-                    data-oid="99a:pgp"
+                    data-oid="rmby2t5"
                 >
-                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4" data-oid="-fr8ql3">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4" data-oid="20ey5fn">
                         <nav
                             className="flex items-center space-x-2 text-sm text-gray-600"
-                            data-oid="5nyl18v"
+                            data-oid="5ty0lyo"
                         >
                             <Link
                                 href="/jobs"
                                 className="hover:text-[hsl(196,80%,45%)] transition-colors"
-                                data-oid="-:e:6xv"
+                                data-oid="lcbullr"
                             >
                                 Jobs
                             </Link>
-                            <span data-oid="u6l5-45">›</span>
+                            <span data-oid="ggroes4">›</span>
                             <Link
                                 href={`/jobs?company=${job.company}`}
                                 className="hover:text-[hsl(196,80%,45%)] transition-colors"
-                                data-oid="f34e6e5"
+                                data-oid="eg6et_6"
                             >
                                 {job.company}
                             </Link>
-                            <span data-oid="_ctzxft">›</span>
-                            <span className="text-gray-800 font-medium" data-oid="kn:n.e8">
+                            <span data-oid="n._-zhz">›</span>
+                            <span className="text-gray-800 font-medium" data-oid="5wv5z7x">
                                 {job.title}
                             </span>
                         </nav>
@@ -155,37 +155,37 @@ export default function JobDetailsPage() {
                 {/* Header Section */}
                 <div
                     className="bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white"
-                    data-oid="q.bs312"
+                    data-oid="6pg3pta"
                 >
                     <div
                         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12"
-                        data-oid="9dvff4n"
+                        data-oid="v9ynikr"
                     >
                         <div
                             className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8"
-                            data-oid="_v1fsc1"
+                            data-oid="_dan5wf"
                         >
-                            <div className="flex-1" data-oid=".sket-8">
-                                <div className="flex items-center gap-4 mb-4" data-oid="l6h9krt">
+                            <div className="flex-1" data-oid="oqi3ldw">
+                                <div className="flex items-center gap-4 mb-4" data-oid="jcls3-4">
                                     <div
                                         className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center"
-                                        data-oid="aoee0v4"
+                                        data-oid="txeu0o8"
                                     >
                                         <span
                                             className="text-2xl font-bold text-white"
-                                            data-oid="fvy698m"
+                                            data-oid="6dt1h1t"
                                         >
                                             {job.company.charAt(0)}
                                         </span>
                                     </div>
-                                    <div data-oid="3:ip8yq">
+                                    <div data-oid="c3i._b_">
                                         <h1
                                             className="text-3xl lg:text-4xl font-bold mb-2"
-                                            data-oid="1zo3adk"
+                                            data-oid="i6:jj67"
                                         >
                                             {job.title}
                                         </h1>
-                                        <p className="text-xl text-blue-100" data-oid="217fkrw">
+                                        <p className="text-xl text-blue-100" data-oid="xl.hl4u">
                                             {job.company}
                                         </p>
                                     </div>
@@ -193,22 +193,22 @@ export default function JobDetailsPage() {
 
                                 <div
                                     className="flex flex-wrap items-center gap-6 text-blue-100 mb-6"
-                                    data-oid="ikte.h_"
+                                    data-oid="t8t5tr_"
                                 >
-                                    <div className="flex items-center gap-2" data-oid="-gm.yj3">
+                                    <div className="flex items-center gap-2" data-oid="llwqhg7">
                                         <svg
                                             className="h-5 w-5"
                                             fill="none"
                                             stroke="currentColor"
                                             viewBox="0 0 24 24"
-                                            data-oid="jal_iiz"
+                                            data-oid="u-4odf-"
                                         >
                                             <path
                                                 strokeLinecap="round"
                                                 strokeLinejoin="round"
                                                 strokeWidth="2"
                                                 d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                                                data-oid="28_92ae"
+                                                data-oid="9ldm3qe"
                                             />
 
                                             <path
@@ -216,74 +216,74 @@ export default function JobDetailsPage() {
                                                 strokeLinejoin="round"
                                                 strokeWidth="2"
                                                 d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                                                data-oid="nljzata"
+                                                data-oid="8jqqlvs"
                                             />
                                         </svg>
-                                        <span data-oid="m.a467p">{job.location}</span>
+                                        <span data-oid="0jy8yh2">{job.location}</span>
                                     </div>
-                                    <div className="flex items-center gap-2" data-oid="o_p8y4b">
+                                    <div className="flex items-center gap-2" data-oid="ij75hf:">
                                         <svg
                                             className="h-5 w-5"
                                             fill="none"
                                             stroke="currentColor"
                                             viewBox="0 0 24 24"
-                                            data-oid="wxmwp87"
+                                            data-oid="-4iu.t3"
                                         >
                                             <path
                                                 strokeLinecap="round"
                                                 strokeLinejoin="round"
                                                 strokeWidth="2"
                                                 d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"
-                                                data-oid="0sjeyce"
+                                                data-oid="zuwb3hl"
                                             />
                                         </svg>
-                                        <span data-oid="e0-6e9p">{job.salary}</span>
+                                        <span data-oid="6iju6nt">{job.salary}</span>
                                     </div>
-                                    <div className="flex items-center gap-2" data-oid="usqzbbj">
+                                    <div className="flex items-center gap-2" data-oid="po4-sdb">
                                         <svg
                                             className="h-5 w-5"
                                             fill="none"
                                             stroke="currentColor"
                                             viewBox="0 0 24 24"
-                                            data-oid="xepgwk."
+                                            data-oid="1hvfy3q"
                                         >
                                             <path
                                                 strokeLinecap="round"
                                                 strokeLinejoin="round"
                                                 strokeWidth="2"
                                                 d="M13 10V3L4 14h7v7l9-11h-7z"
-                                                data-oid="r8wp44a"
+                                                data-oid="o0enb60"
                                             />
                                         </svg>
-                                        <span data-oid="c3p6gbt">{job.experienceRequired}</span>
+                                        <span data-oid="aywijsn">{job.experienceRequired}</span>
                                     </div>
-                                    <div className="flex items-center gap-2" data-oid="4w.p7r9">
+                                    <div className="flex items-center gap-2" data-oid="e.avwn3">
                                         <svg
                                             className="h-5 w-5"
                                             fill="none"
                                             stroke="currentColor"
                                             viewBox="0 0 24 24"
-                                            data-oid="l2x2uxy"
+                                            data-oid="-57jt3d"
                                         >
                                             <path
                                                 strokeLinecap="round"
                                                 strokeLinejoin="round"
                                                 strokeWidth="2"
                                                 d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                                                data-oid="mamucyl"
+                                                data-oid="kkqw4:m"
                                             />
                                         </svg>
-                                        <span data-oid="nmsqqmb">
+                                        <span data-oid="71fjcg4">
                                             Posted {formatDate(job.postedDate)}
                                         </span>
                                     </div>
                                 </div>
 
-                                <div className="flex flex-wrap gap-3" data-oid="juz7g-:">
+                                <div className="flex flex-wrap gap-3" data-oid="9716bte">
                                     {job.isUrgent && (
                                         <span
                                             className="bg-red-500 text-white text-sm font-bold px-3 py-1 rounded-full animate-pulse"
-                                            data-oid=".i82y.r"
+                                            data-oid="c9colzh"
                                         >
                                             🔥 URGENT HIRING
                                         </span>
@@ -291,7 +291,7 @@ export default function JobDetailsPage() {
                                     {job.isFeatured && (
                                         <span
                                             className="bg-yellow-500 text-white text-sm font-bold px-3 py-1 rounded-full"
-                                            data-oid="nbnqk0h"
+                                            data-oid="ugt.qp."
                                         >
                                             ⭐ FEATURED
                                         </span>
@@ -299,20 +299,20 @@ export default function JobDetailsPage() {
                                     {job.isRemote && (
                                         <span
                                             className="bg-green-500 text-white text-sm font-medium px-3 py-1 rounded-full"
-                                            data-oid="n-m_39d"
+                                            data-oid="tvabdkh"
                                         >
                                             🏠 Remote
                                         </span>
                                     )}
                                     <span
                                         className="bg-blue-500 text-white text-sm font-medium px-3 py-1 rounded-full"
-                                        data-oid="tan:3rd"
+                                        data-oid="w7tbzf1"
                                     >
                                         {job.jobType}
                                     </span>
                                     <span
                                         className="bg-purple-500 text-white text-sm font-medium px-3 py-1 rounded-full"
-                                        data-oid="01j-_55"
+                                        data-oid="48hspwl"
                                     >
                                         {job.employmentType}
                                     </span>
@@ -321,31 +321,31 @@ export default function JobDetailsPage() {
 
                             <div
                                 className="flex flex-col sm:flex-row lg:flex-col gap-4"
-                                data-oid="fy0:g6k"
+                                data-oid="oee1w-l"
                             >
                                 <button
                                     onClick={handleApply}
                                     className="px-8 py-4 bg-white text-[hsl(196,80%,45%)] rounded-xl font-bold hover:bg-gray-50 transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center gap-2"
-                                    data-oid="lmr0nle"
+                                    data-oid="550:03t"
                                 >
                                     <svg
                                         className="h-5 w-5"
                                         fill="none"
                                         stroke="currentColor"
                                         viewBox="0 0 24 24"
-                                        data-oid="52p8:3v"
+                                        data-oid="if:yn8o"
                                     >
                                         <path
                                             strokeLinecap="round"
                                             strokeLinejoin="round"
                                             strokeWidth="2"
                                             d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                                            data-oid="hs2v2oz"
+                                            data-oid="abxx:a6"
                                         />
                                     </svg>
                                     Apply Now
                                 </button>
-                                <div className="flex gap-3" data-oid="n3h-h59">
+                                <div className="flex gap-3" data-oid="usw9042">
                                     <button
                                         onClick={handleSave}
                                         className={`p-3 rounded-xl transition-all duration-300 ${
@@ -354,21 +354,21 @@ export default function JobDetailsPage() {
                                                 : 'bg-white/20 backdrop-blur-sm text-white hover:bg-white/30'
                                         }`}
                                         title={isSaved ? 'Remove from saved' : 'Save job'}
-                                        data-oid="06536n:"
+                                        data-oid="a.4fxi5"
                                     >
                                         <svg
                                             className="h-6 w-6"
                                             fill={isSaved ? 'currentColor' : 'none'}
                                             stroke="currentColor"
                                             viewBox="0 0 24 24"
-                                            data-oid="2p.e-9w"
+                                            data-oid="q3v5ki2"
                                         >
                                             <path
                                                 strokeLinecap="round"
                                                 strokeLinejoin="round"
                                                 strokeWidth="2"
                                                 d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                                                data-oid="tsiqrl."
+                                                data-oid="-ujbpeo"
                                             />
                                         </svg>
                                     </button>
@@ -376,21 +376,21 @@ export default function JobDetailsPage() {
                                         onClick={handleShare}
                                         className="p-3 bg-white/20 backdrop-blur-sm text-white rounded-xl hover:bg-white/30 transition-all duration-300"
                                         title="Share job"
-                                        data-oid="ebic5w3"
+                                        data-oid=":8b4p8p"
                                     >
                                         <svg
                                             className="h-6 w-6"
                                             fill="none"
                                             stroke="currentColor"
                                             viewBox="0 0 24 24"
-                                            data-oid="2fs4_73"
+                                            data-oid="s8cjkdi"
                                         >
                                             <path
                                                 strokeLinecap="round"
                                                 strokeLinejoin="round"
                                                 strokeWidth="2"
                                                 d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"
-                                                data-oid="rw-xt3r"
+                                                data-oid="rfwxtso"
                                             />
                                         </svg>
                                     </button>
@@ -403,51 +403,51 @@ export default function JobDetailsPage() {
                 {/* Quick Stats */}
                 <div
                     className="bg-white/80 backdrop-blur-sm border-b border-gray-200"
-                    data-oid="4iv6ezo"
+                    data-oid="z2uy_ln"
                 >
-                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6" data-oid="kda8f3w">
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-6" data-oid="rx49_na">
-                            <div className="text-center" data-oid="wdvmibj">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6" data-oid="k.eb.qi">
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-6" data-oid="2yo2yf7">
+                            <div className="text-center" data-oid=".tdq35l">
                                 <div
                                     className="text-2xl font-bold text-[hsl(196,80%,45%)]"
-                                    data-oid="i-1oiig"
+                                    data-oid="lg2w4pt"
                                 >
                                     {job.applicantCount}
                                 </div>
-                                <div className="text-sm text-gray-600" data-oid="pcpn3.z">
+                                <div className="text-sm text-gray-600" data-oid="0l1beuw">
                                     Applicants
                                 </div>
                             </div>
-                            <div className="text-center" data-oid="id59732">
+                            <div className="text-center" data-oid="jmgm7u7">
                                 <div
                                     className="text-2xl font-bold text-green-600"
-                                    data-oid="8:lazxo"
+                                    data-oid="qv6aru-"
                                 >
                                     {job.companySize}
                                 </div>
-                                <div className="text-sm text-gray-600" data-oid="v8m4bvk">
+                                <div className="text-sm text-gray-600" data-oid="6mkoyey">
                                     Company Size
                                 </div>
                             </div>
-                            <div className="text-center" data-oid="8:b49u7">
+                            <div className="text-center" data-oid="_ky54v:">
                                 <div
                                     className="text-2xl font-bold text-purple-600"
-                                    data-oid="_35gl3f"
+                                    data-oid="9g7hhgl"
                                 >
                                     {job.industry}
                                 </div>
-                                <div className="text-sm text-gray-600" data-oid="mphswjj">
+                                <div className="text-sm text-gray-600" data-oid="ymm7z8h">
                                     Industry
                                 </div>
                             </div>
-                            <div className="text-center" data-oid="8u1yfqs">
+                            <div className="text-center" data-oid=":9racsw">
                                 <div
                                     className="text-2xl font-bold text-orange-600"
-                                    data-oid="4:rvknj"
+                                    data-oid="ik0b4gj"
                                 >
                                     {Math.max(1, Math.floor(Math.random() * 15))} days
                                 </div>
-                                <div className="text-sm text-gray-600" data-oid="2xsahjz">
+                                <div className="text-sm text-gray-600" data-oid="b6ms0cs">
                                     Application Deadline
                                 </div>
                             </div>
@@ -456,17 +456,17 @@ export default function JobDetailsPage() {
                 </div>
 
                 {/* Main Content */}
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8" data-oid="h4fl4fh">
-                    <div className="grid lg:grid-cols-3 gap-8" data-oid="8g8.vlt">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8" data-oid="6b22pmd">
+                    <div className="grid lg:grid-cols-3 gap-8" data-oid="w:-..hz">
                         {/* Main Content */}
-                        <div className="lg:col-span-2" data-oid=":tcircd">
+                        <div className="lg:col-span-2" data-oid="oa1q6cf">
                             {/* Tabs */}
                             <div
                                 className="bg-white/80 backdrop-blur-sm rounded-xl shadow-md border border-gray-200 mb-8"
-                                data-oid="3lj2:_b"
+                                data-oid="ofcaacz"
                             >
-                                <div className="border-b border-gray-200" data-oid="fwi-8:4">
-                                    <nav className="flex space-x-8 px-6" data-oid=":eow.yd">
+                                <div className="border-b border-gray-200" data-oid=".33qii4">
+                                    <nav className="flex space-x-8 px-6" data-oid="03sg0sq">
                                         {[
                                             { id: 'overview', label: 'Job Overview' },
                                             { id: 'requirements', label: 'Requirements' },
@@ -481,7 +481,7 @@ export default function JobDetailsPage() {
                                                         ? 'border-[hsl(196,80%,45%)] text-[hsl(196,80%,45%)]'
                                                         : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                                                 }`}
-                                                data-oid="9-w_zc2"
+                                                data-oid="ruojml:"
                                             >
                                                 {tab.label}
                                             </button>
@@ -489,23 +489,23 @@ export default function JobDetailsPage() {
                                     </nav>
                                 </div>
 
-                                <div className="p-6" data-oid="jc:t5x7">
+                                <div className="p-6" data-oid="t0:b-ge">
                                     {activeTab === 'overview' && (
-                                        <div className="space-y-6" data-oid="rknb6b2">
-                                            <div data-oid="ko8e_vm">
+                                        <div className="space-y-6" data-oid="0nyo4pw">
+                                            <div data-oid="33o5ki9">
                                                 <h3
                                                     className="text-lg font-semibold text-gray-800 mb-3"
-                                                    data-oid="zz3gvfe"
+                                                    data-oid="o81xvwa"
                                                 >
                                                     Job Description
                                                 </h3>
                                                 <div
                                                     className="prose prose-blue max-w-none"
-                                                    data-oid="mfxk.-3"
+                                                    data-oid="f_n4jj_"
                                                 >
                                                     <p
                                                         className="text-gray-600 leading-relaxed mb-4"
-                                                        data-oid="qy9lp.l"
+                                                        data-oid="ss-e_hu"
                                                     >
                                                         We are looking for a talented {job.title} to
                                                         join our dynamic team at {job.company}. This
@@ -516,7 +516,7 @@ export default function JobDetailsPage() {
                                                     </p>
                                                     <p
                                                         className="text-gray-600 leading-relaxed mb-4"
-                                                        data-oid="brvlbt9"
+                                                        data-oid="xonyc35"
                                                     >
                                                         As a {job.title}, you will be responsible
                                                         for developing and maintaining high-quality
@@ -526,7 +526,7 @@ export default function JobDetailsPage() {
                                                     </p>
                                                     <p
                                                         className="text-gray-600 leading-relaxed"
-                                                        data-oid="yavss3d"
+                                                        data-oid="w9r67bt"
                                                     >
                                                         Join us in building innovative solutions
                                                         that impact millions of users across India
@@ -537,25 +537,25 @@ export default function JobDetailsPage() {
                                                 </div>
                                             </div>
 
-                                            <div data-oid="5-7vy1t">
+                                            <div data-oid="svdek.s">
                                                 <h3
                                                     className="text-lg font-semibold text-gray-800 mb-3"
-                                                    data-oid="7k_osr4"
+                                                    data-oid="8clrx7f"
                                                 >
                                                     Key Responsibilities
                                                 </h3>
-                                                <ul className="space-y-2" data-oid="bfzp6d8">
+                                                <ul className="space-y-2" data-oid="roj.i2z">
                                                     <li
                                                         className="flex items-start gap-3"
-                                                        data-oid="c-t.rm_"
+                                                        data-oid=":54x._h"
                                                     >
                                                         <div
                                                             className="w-2 h-2 bg-[hsl(196,80%,45%)] rounded-full mt-2"
-                                                            data-oid="qs.:g_y"
+                                                            data-oid="skoburp"
                                                         ></div>
                                                         <span
                                                             className="text-gray-700"
-                                                            data-oid="te64ysk"
+                                                            data-oid="lf5fts1"
                                                         >
                                                             Develop and maintain high-quality
                                                             software applications
@@ -563,15 +563,15 @@ export default function JobDetailsPage() {
                                                     </li>
                                                     <li
                                                         className="flex items-start gap-3"
-                                                        data-oid="nru61pc"
+                                                        data-oid="nfksqfx"
                                                     >
                                                         <div
                                                             className="w-2 h-2 bg-[hsl(196,80%,45%)] rounded-full mt-2"
-                                                            data-oid="og1:6n:"
+                                                            data-oid="z3etqd3"
                                                         ></div>
                                                         <span
                                                             className="text-gray-700"
-                                                            data-oid="t4pb7ky"
+                                                            data-oid="b89xqts"
                                                         >
                                                             Collaborate with cross-functional teams
                                                             to define and implement features
@@ -579,15 +579,15 @@ export default function JobDetailsPage() {
                                                     </li>
                                                     <li
                                                         className="flex items-start gap-3"
-                                                        data-oid="n541006"
+                                                        data-oid="ffhxry8"
                                                     >
                                                         <div
                                                             className="w-2 h-2 bg-[hsl(196,80%,45%)] rounded-full mt-2"
-                                                            data-oid="yog.cs:"
+                                                            data-oid="9zr1tc7"
                                                         ></div>
                                                         <span
                                                             className="text-gray-700"
-                                                            data-oid="ky7q6to"
+                                                            data-oid="gj3ke-3"
                                                         >
                                                             Write clean, maintainable, and efficient
                                                             code
@@ -595,15 +595,15 @@ export default function JobDetailsPage() {
                                                     </li>
                                                     <li
                                                         className="flex items-start gap-3"
-                                                        data-oid="yovdf1s"
+                                                        data-oid="6uzi38:"
                                                     >
                                                         <div
                                                             className="w-2 h-2 bg-[hsl(196,80%,45%)] rounded-full mt-2"
-                                                            data-oid="_01tu1k"
+                                                            data-oid="65r06o8"
                                                         ></div>
                                                         <span
                                                             className="text-gray-700"
-                                                            data-oid="bv18r-0"
+                                                            data-oid="h239pc."
                                                         >
                                                             Participate in code reviews and maintain
                                                             coding standards
@@ -611,15 +611,15 @@ export default function JobDetailsPage() {
                                                     </li>
                                                     <li
                                                         className="flex items-start gap-3"
-                                                        data-oid="v-rvlam"
+                                                        data-oid="jqb13vc"
                                                     >
                                                         <div
                                                             className="w-2 h-2 bg-[hsl(196,80%,45%)] rounded-full mt-2"
-                                                            data-oid="-joucwb"
+                                                            data-oid="f8z7tzy"
                                                         ></div>
                                                         <span
                                                             className="text-gray-700"
-                                                            data-oid="n57fp3e"
+                                                            data-oid="9f7hn60"
                                                         >
                                                             Troubleshoot and debug applications to
                                                             optimize performance
@@ -629,30 +629,30 @@ export default function JobDetailsPage() {
                                             </div>
 
                                             {job.benefits && job.benefits.length > 0 && (
-                                                <div data-oid="hkoguo4">
+                                                <div data-oid="tcu9zxt">
                                                     <h3
                                                         className="text-lg font-semibold text-gray-800 mb-3"
-                                                        data-oid="1rlz3ij"
+                                                        data-oid=":6yin7m"
                                                     >
                                                         Benefits & Perks
                                                     </h3>
                                                     <div
                                                         className="grid grid-cols-1 md:grid-cols-2 gap-3"
-                                                        data-oid="2hf:mds"
+                                                        data-oid="hc5867m"
                                                     >
                                                         {job.benefits.map((benefit, index) => (
                                                             <div
                                                                 key={index}
                                                                 className="flex items-center gap-3 p-3 bg-green-50 rounded-lg"
-                                                                data-oid="n0eh-im"
+                                                                data-oid="94b.p3:"
                                                             >
                                                                 <div
                                                                     className="w-2 h-2 bg-green-500 rounded-full"
-                                                                    data-oid="0lqn5wj"
+                                                                    data-oid="f80o4-8"
                                                                 ></div>
                                                                 <span
                                                                     className="text-gray-700"
-                                                                    data-oid="g382lhd"
+                                                                    data-oid="3udv2sm"
                                                                 >
                                                                     {benefit}
                                                                 </span>
@@ -665,23 +665,23 @@ export default function JobDetailsPage() {
                                     )}
 
                                     {activeTab === 'requirements' && (
-                                        <div className="space-y-6" data-oid="3_g6aa_">
-                                            <div data-oid="yz71-qm">
+                                        <div className="space-y-6" data-oid="-ysen.f">
+                                            <div data-oid="xagosp3">
                                                 <h3
                                                     className="text-lg font-semibold text-gray-800 mb-3"
-                                                    data-oid="klrxp0p"
+                                                    data-oid="igi.ndi"
                                                 >
                                                     Required Skills
                                                 </h3>
                                                 <div
                                                     className="flex flex-wrap gap-2"
-                                                    data-oid="rs2yhz9"
+                                                    data-oid=":9arbeu"
                                                 >
                                                     {job.skills.map((skill, index) => (
                                                         <span
                                                             key={index}
                                                             className="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-2 rounded-full"
-                                                            data-oid="j0_fvcs"
+                                                            data-oid="3mug2ld"
                                                         >
                                                             {skill}
                                                         </span>
@@ -689,40 +689,40 @@ export default function JobDetailsPage() {
                                                 </div>
                                             </div>
 
-                                            <div data-oid="axkkbru">
+                                            <div data-oid="axrtugc">
                                                 <h3
                                                     className="text-lg font-semibold text-gray-800 mb-3"
-                                                    data-oid="85cbd7v"
+                                                    data-oid="1wi0kvv"
                                                 >
                                                     Experience & Qualifications
                                                 </h3>
-                                                <ul className="space-y-3" data-oid="-dm-.5d">
+                                                <ul className="space-y-3" data-oid="obfn_gr">
                                                     <li
                                                         className="flex items-start gap-3"
-                                                        data-oid="56jl5ld"
+                                                        data-oid="ck__:vm"
                                                     >
                                                         <div
                                                             className="w-2 h-2 bg-[hsl(196,80%,45%)] rounded-full mt-2"
-                                                            data-oid="mfbyg-d"
+                                                            data-oid="hl88cas"
                                                         ></div>
                                                         <span
                                                             className="text-gray-700"
-                                                            data-oid="jkx:z6z"
+                                                            data-oid="1vdb7ej"
                                                         >
                                                             Experience: {job.experienceRequired}
                                                         </span>
                                                     </li>
                                                     <li
                                                         className="flex items-start gap-3"
-                                                        data-oid="6_gu228"
+                                                        data-oid="po6ffae"
                                                     >
                                                         <div
                                                             className="w-2 h-2 bg-[hsl(196,80%,45%)] rounded-full mt-2"
-                                                            data-oid="kq8hye3"
+                                                            data-oid="jgv1254"
                                                         ></div>
                                                         <span
                                                             className="text-gray-700"
-                                                            data-oid="q0csh-d"
+                                                            data-oid="oh_vw_p"
                                                         >
                                                             Bachelor's degree in Computer Science,
                                                             Engineering, or related field
@@ -730,15 +730,15 @@ export default function JobDetailsPage() {
                                                     </li>
                                                     <li
                                                         className="flex items-start gap-3"
-                                                        data-oid="6pugmy-"
+                                                        data-oid="-9d0gvd"
                                                     >
                                                         <div
                                                             className="w-2 h-2 bg-[hsl(196,80%,45%)] rounded-full mt-2"
-                                                            data-oid="j0fmtqm"
+                                                            data-oid="m1khcpb"
                                                         ></div>
                                                         <span
                                                             className="text-gray-700"
-                                                            data-oid="k85u7e:"
+                                                            data-oid="j0834wm"
                                                         >
                                                             Strong problem-solving and analytical
                                                             skills
@@ -746,15 +746,15 @@ export default function JobDetailsPage() {
                                                     </li>
                                                     <li
                                                         className="flex items-start gap-3"
-                                                        data-oid="r05p5cx"
+                                                        data-oid="ph5siz4"
                                                     >
                                                         <div
                                                             className="w-2 h-2 bg-[hsl(196,80%,45%)] rounded-full mt-2"
-                                                            data-oid="kaw4n16"
+                                                            data-oid="ub_gjc-"
                                                         ></div>
                                                         <span
                                                             className="text-gray-700"
-                                                            data-oid="04i4jjh"
+                                                            data-oid="4z6mjlu"
                                                         >
                                                             Excellent communication and teamwork
                                                             abilities
@@ -762,15 +762,15 @@ export default function JobDetailsPage() {
                                                     </li>
                                                     <li
                                                         className="flex items-start gap-3"
-                                                        data-oid="_dngu63"
+                                                        data-oid="o0u9rti"
                                                     >
                                                         <div
                                                             className="w-2 h-2 bg-[hsl(196,80%,45%)] rounded-full mt-2"
-                                                            data-oid="_t4a4u3"
+                                                            data-oid="sw2fkto"
                                                         ></div>
                                                         <span
                                                             className="text-gray-700"
-                                                            data-oid="yhda4b0"
+                                                            data-oid="h5j_6bv"
                                                         >
                                                             Passion for learning new technologies
                                                             and best practices
@@ -779,16 +779,16 @@ export default function JobDetailsPage() {
                                                 </ul>
                                             </div>
 
-                                            <div data-oid="2tncibt">
+                                            <div data-oid=".laf5uj">
                                                 <h3
                                                     className="text-lg font-semibold text-gray-800 mb-3"
-                                                    data-oid="3hpunth"
+                                                    data-oid="545d__t"
                                                 >
                                                     Nice to Have Skills
                                                 </h3>
                                                 <div
                                                     className="flex flex-wrap gap-2"
-                                                    data-oid="h0bsae6"
+                                                    data-oid="bad.qvw"
                                                 >
                                                     {[
                                                         'Git',
@@ -801,7 +801,7 @@ export default function JobDetailsPage() {
                                                         <span
                                                             key={index}
                                                             className="bg-gray-100 text-gray-700 text-sm font-medium px-3 py-1 rounded-full border border-gray-300"
-                                                            data-oid="pijj2fw"
+                                                            data-oid="-55:2jy"
                                                         >
                                                             {skill}
                                                         </span>
@@ -812,17 +812,17 @@ export default function JobDetailsPage() {
                                     )}
 
                                     {activeTab === 'company' && (
-                                        <div className="space-y-6" data-oid="_:c1jwl">
-                                            <div data-oid="dx2je9q">
+                                        <div className="space-y-6" data-oid="kntf7ld">
+                                            <div data-oid="04do13:">
                                                 <h3
                                                     className="text-lg font-semibold text-gray-800 mb-3"
-                                                    data-oid="k2jpq-."
+                                                    data-oid="bnb1mu5"
                                                 >
                                                     About {job.company}
                                                 </h3>
                                                 <p
                                                     className="text-gray-600 leading-relaxed mb-4"
-                                                    data-oid="9zsgoh5"
+                                                    data-oid="vl4df06"
                                                 >
                                                     {job.company} is a leading {job.industry}{' '}
                                                     company that has been revolutionizing the
@@ -833,7 +833,7 @@ export default function JobDetailsPage() {
                                                 </p>
                                                 <p
                                                     className="text-gray-600 leading-relaxed"
-                                                    data-oid="r9l3hc8"
+                                                    data-oid="2fqgzkv"
                                                 >
                                                     Our team consists of passionate professionals
                                                     who are dedicated to excellence and continuous
@@ -845,97 +845,97 @@ export default function JobDetailsPage() {
 
                                             <div
                                                 className="grid grid-cols-1 md:grid-cols-3 gap-4"
-                                                data-oid="vq-l6ap"
+                                                data-oid="fv1gt2x"
                                             >
                                                 <div
                                                     className="bg-blue-50 p-4 rounded-lg text-center"
-                                                    data-oid="7mry6qg"
+                                                    data-oid=":4_.n25"
                                                 >
                                                     <div
                                                         className="text-2xl font-bold text-[hsl(196,80%,45%)]"
-                                                        data-oid="df.23at"
+                                                        data-oid="8hgfgx5"
                                                     >
                                                         {job.companySize}
                                                     </div>
                                                     <div
                                                         className="text-sm text-gray-600"
-                                                        data-oid="uyr-bws"
+                                                        data-oid="9jsj8go"
                                                     >
                                                         Employees
                                                     </div>
                                                 </div>
                                                 <div
                                                     className="bg-green-50 p-4 rounded-lg text-center"
-                                                    data-oid="z6_nscu"
+                                                    data-oid="9gsrxfe"
                                                 >
                                                     <div
                                                         className="text-2xl font-bold text-green-600"
-                                                        data-oid="oguyp2z"
+                                                        data-oid="mpetfne"
                                                     >
                                                         {job.industry}
                                                     </div>
                                                     <div
                                                         className="text-sm text-gray-600"
-                                                        data-oid="iutahzz"
+                                                        data-oid="xb6_mki"
                                                     >
                                                         Industry
                                                     </div>
                                                 </div>
                                                 <div
                                                     className="bg-purple-50 p-4 rounded-lg text-center"
-                                                    data-oid="ah8u2.b"
+                                                    data-oid="6r02z61"
                                                 >
                                                     <div
                                                         className="text-2xl font-bold text-purple-600"
-                                                        data-oid="14efexc"
+                                                        data-oid="n4:ab8y"
                                                     >
                                                         {job.companyType}
                                                     </div>
                                                     <div
                                                         className="text-sm text-gray-600"
-                                                        data-oid="r2w.rrq"
+                                                        data-oid="-4wvo_a"
                                                     >
                                                         Company Type
                                                     </div>
                                                 </div>
                                             </div>
 
-                                            <div data-oid="2_.uge:">
+                                            <div data-oid=".oy1zf-">
                                                 <h3
                                                     className="text-lg font-semibold text-gray-800 mb-3"
-                                                    data-oid="ounyt.h"
+                                                    data-oid="s5:0vr5"
                                                 >
                                                     Company Culture
                                                 </h3>
                                                 <div
                                                     className="grid grid-cols-1 md:grid-cols-2 gap-4"
-                                                    data-oid="_u6zfld"
+                                                    data-oid="4qzz_c6"
                                                 >
                                                     <div
                                                         className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg"
-                                                        data-oid="jc95qwj"
+                                                        data-oid="a8654uf"
                                                     >
                                                         <div
                                                             className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center"
-                                                            data-oid="r.25a2d"
+                                                            data-oid="n5:otp-"
                                                         >
                                                             <span
                                                                 className="text-blue-600 text-sm"
-                                                                data-oid="3kg5mow"
+                                                                data-oid="f4nwz.1"
                                                             >
                                                                 🚀
                                                             </span>
                                                         </div>
-                                                        <div data-oid="lblvk8r">
+                                                        <div data-oid="ms2amye">
                                                             <div
                                                                 className="font-medium text-gray-800"
-                                                                data-oid="9t6ebs6"
+                                                                data-oid="rzq8aap"
                                                             >
                                                                 Innovation
                                                             </div>
                                                             <div
                                                                 className="text-sm text-gray-600"
-                                                                data-oid="bpl88qz"
+                                                                data-oid="z:foy5x"
                                                             >
                                                                 Cutting-edge technology
                                                             </div>
@@ -943,29 +943,29 @@ export default function JobDetailsPage() {
                                                     </div>
                                                     <div
                                                         className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg"
-                                                        data-oid="v_yj6t9"
+                                                        data-oid="jcai-51"
                                                     >
                                                         <div
                                                             className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center"
-                                                            data-oid="hsgcemh"
+                                                            data-oid="zoffk72"
                                                         >
                                                             <span
                                                                 className="text-green-600 text-sm"
-                                                                data-oid=":k5a-cc"
+                                                                data-oid="29h28m6"
                                                             >
                                                                 🤝
                                                             </span>
                                                         </div>
-                                                        <div data-oid="uhu.wl6">
+                                                        <div data-oid="9gy9z2a">
                                                             <div
                                                                 className="font-medium text-gray-800"
-                                                                data-oid="67rjgol"
+                                                                data-oid="k.70gbh"
                                                             >
                                                                 Collaboration
                                                             </div>
                                                             <div
                                                                 className="text-sm text-gray-600"
-                                                                data-oid="bcmaysq"
+                                                                data-oid="4oe:n19"
                                                             >
                                                                 Team-first approach
                                                             </div>
@@ -973,29 +973,29 @@ export default function JobDetailsPage() {
                                                     </div>
                                                     <div
                                                         className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg"
-                                                        data-oid="jgb_xl5"
+                                                        data-oid="ukyd9i7"
                                                     >
                                                         <div
                                                             className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center"
-                                                            data-oid="qk9pryi"
+                                                            data-oid="5mqhsir"
                                                         >
                                                             <span
                                                                 className="text-purple-600 text-sm"
-                                                                data-oid="9mrx3mk"
+                                                                data-oid="-h6whk6"
                                                             >
                                                                 📈
                                                             </span>
                                                         </div>
-                                                        <div data-oid="mn8s44v">
+                                                        <div data-oid="hl_gow8">
                                                             <div
                                                                 className="font-medium text-gray-800"
-                                                                data-oid="i99fk47"
+                                                                data-oid="kweuhi8"
                                                             >
                                                                 Growth
                                                             </div>
                                                             <div
                                                                 className="text-sm text-gray-600"
-                                                                data-oid="q1boan1"
+                                                                data-oid="pmar2d5"
                                                             >
                                                                 Career development
                                                             </div>
@@ -1003,29 +1003,29 @@ export default function JobDetailsPage() {
                                                     </div>
                                                     <div
                                                         className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg"
-                                                        data-oid="slxvx9t"
+                                                        data-oid="q62bkoz"
                                                     >
                                                         <div
                                                             className="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center"
-                                                            data-oid="7xg_wj8"
+                                                            data-oid="vx_rnxj"
                                                         >
                                                             <span
                                                                 className="text-orange-600 text-sm"
-                                                                data-oid=":vb-o-4"
+                                                                data-oid="vh5cnkm"
                                                             >
                                                                 ⚖️
                                                             </span>
                                                         </div>
-                                                        <div data-oid="f8_811m">
+                                                        <div data-oid="sgl7xiv">
                                                             <div
                                                                 className="font-medium text-gray-800"
-                                                                data-oid="6uz4dlj"
+                                                                data-oid="a-3srm2"
                                                             >
                                                                 Work-Life Balance
                                                             </div>
                                                             <div
                                                                 className="text-sm text-gray-600"
-                                                                data-oid="09_qxmo"
+                                                                data-oid="x_:ih3:"
                                                             >
                                                                 Flexible working
                                                             </div>
@@ -1037,26 +1037,26 @@ export default function JobDetailsPage() {
                                     )}
 
                                     {activeTab === 'reviews' && (
-                                        <div className="space-y-6" data-oid="3wb4030">
-                                            <div className="text-center py-8" data-oid="ds2vds5">
-                                                <div className="text-6xl mb-4" data-oid="-in39cx">
+                                        <div className="space-y-6" data-oid="sgom47.">
+                                            <div className="text-center py-8" data-oid="kha09ji">
+                                                <div className="text-6xl mb-4" data-oid="hgwei02">
                                                     ⭐
                                                 </div>
                                                 <h3
                                                     className="text-2xl font-bold text-gray-800 mb-2"
-                                                    data-oid="oh.ar4d"
+                                                    data-oid="3ud:sgp"
                                                 >
                                                     4.2 out of 5
                                                 </h3>
                                                 <p
                                                     className="text-gray-600 mb-4"
-                                                    data-oid="d_3gpr7"
+                                                    data-oid="qjjxos:"
                                                 >
                                                     Based on 127 employee reviews
                                                 </p>
                                                 <div
                                                     className="flex justify-center space-x-1 mb-6"
-                                                    data-oid="tiqsvgi"
+                                                    data-oid="28zwm.j"
                                                 >
                                                     {[1, 2, 3, 4, 5].map((star) => (
                                                         <svg
@@ -1064,18 +1064,18 @@ export default function JobDetailsPage() {
                                                             className={`h-6 w-6 ${star <= 4 ? 'text-yellow-400' : 'text-gray-300'}`}
                                                             fill="currentColor"
                                                             viewBox="0 0 20 20"
-                                                            data-oid="95xtl3c"
+                                                            data-oid="gs76vl1"
                                                         >
                                                             <path
                                                                 d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                                                                data-oid="eimn_p5"
+                                                                data-oid="qjmf-0c"
                                                             />
                                                         </svg>
                                                     ))}
                                                 </div>
                                             </div>
 
-                                            <div className="space-y-4" data-oid="lla49cr">
+                                            <div className="space-y-4" data-oid="avv4hfo">
                                                 {[
                                                     {
                                                         rating: 5,
@@ -1102,15 +1102,15 @@ export default function JobDetailsPage() {
                                                     <div
                                                         key={index}
                                                         className="bg-gray-50 rounded-lg p-4"
-                                                        data-oid="lckix:e"
+                                                        data-oid="lybv_1f"
                                                     >
                                                         <div
                                                             className="flex items-center justify-between mb-2"
-                                                            data-oid="ahwfymp"
+                                                            data-oid="9grgc9q"
                                                         >
                                                             <div
                                                                 className="flex items-center space-x-1"
-                                                                data-oid="rw_09r5"
+                                                                data-oid="j4f7vwt"
                                                             >
                                                                 {[1, 2, 3, 4, 5].map((star) => (
                                                                     <svg
@@ -1118,37 +1118,37 @@ export default function JobDetailsPage() {
                                                                         className={`h-4 w-4 ${star <= review.rating ? 'text-yellow-400' : 'text-gray-300'}`}
                                                                         fill="currentColor"
                                                                         viewBox="0 0 20 20"
-                                                                        data-oid="9h_q0nd"
+                                                                        data-oid="nb9uwhp"
                                                                     >
                                                                         <path
                                                                             d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                                                                            data-oid="p.ybk-k"
+                                                                            data-oid="6259hu."
                                                                         />
                                                                     </svg>
                                                                 ))}
                                                             </div>
                                                             <span
                                                                 className="text-sm text-gray-500"
-                                                                data-oid="folw835"
+                                                                data-oid="0wi3qqp"
                                                             >
                                                                 {review.date}
                                                             </span>
                                                         </div>
                                                         <h4
                                                             className="font-semibold text-gray-800 mb-1"
-                                                            data-oid="2g_jm.n"
+                                                            data-oid="ilmanqz"
                                                         >
                                                             {review.title}
                                                         </h4>
                                                         <p
                                                             className="text-gray-600 text-sm mb-2"
-                                                            data-oid="6750rrq"
+                                                            data-oid="euxvyfz"
                                                         >
                                                             {review.review}
                                                         </p>
                                                         <p
                                                             className="text-xs text-gray-500"
-                                                            data-oid="xkq71dd"
+                                                            data-oid="gndgu21"
                                                         >
                                                             {review.author}
                                                         </p>
@@ -1162,85 +1162,85 @@ export default function JobDetailsPage() {
                         </div>
 
                         {/* Sidebar */}
-                        <div className="lg:col-span-1" data-oid="q.g7vq7">
-                            <div className="sticky top-24 space-y-6" data-oid="g3q.o-1">
+                        <div className="lg:col-span-1" data-oid="a-8..d8">
+                            <div className="sticky top-24 space-y-6" data-oid="5fzkdmx">
                                 {/* Apply Card */}
                                 <div
                                     className="bg-white/80 backdrop-blur-sm rounded-xl shadow-md border border-gray-200 p-6"
-                                    data-oid="ujc25ke"
+                                    data-oid="79_m:_q"
                                 >
                                     <h3
                                         className="text-lg font-semibold text-gray-800 mb-4"
-                                        data-oid="i:.5hgd"
+                                        data-oid="pztb698"
                                     >
                                         Ready to Apply?
                                     </h3>
                                     <button
                                         onClick={handleApply}
                                         className="w-full px-6 py-3 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white rounded-lg font-medium hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300 transform hover:scale-105 mb-4"
-                                        data-oid="a2ow6qv"
+                                        data-oid="xc4zy:7"
                                     >
                                         Apply Now
                                     </button>
                                     <div
                                         className="text-sm text-gray-600 space-y-2"
-                                        data-oid="gw-l8ua"
+                                        data-oid="a0qep.y"
                                     >
-                                        <div className="flex items-center gap-2" data-oid="1t92qri">
+                                        <div className="flex items-center gap-2" data-oid="rjh37mf">
                                             <svg
                                                 className="h-4 w-4 text-green-500"
                                                 fill="none"
                                                 stroke="currentColor"
                                                 viewBox="0 0 24 24"
-                                                data-oid="j:c3b.c"
+                                                data-oid="diq7zob"
                                             >
                                                 <path
                                                     strokeLinecap="round"
                                                     strokeLinejoin="round"
                                                     strokeWidth="2"
                                                     d="M5 13l4 4L19 7"
-                                                    data-oid="8j0nite"
+                                                    data-oid="ag5.cqs"
                                                 />
                                             </svg>
-                                            <span data-oid="8wurdq8">
+                                            <span data-oid="3m-9:h8">
                                                 Quick application process
                                             </span>
                                         </div>
-                                        <div className="flex items-center gap-2" data-oid="zo6oke1">
+                                        <div className="flex items-center gap-2" data-oid="ug8qsrh">
                                             <svg
                                                 className="h-4 w-4 text-green-500"
                                                 fill="none"
                                                 stroke="currentColor"
                                                 viewBox="0 0 24 24"
-                                                data-oid="e--a4q8"
+                                                data-oid="y1el20r"
                                             >
                                                 <path
                                                     strokeLinecap="round"
                                                     strokeLinejoin="round"
                                                     strokeWidth="2"
                                                     d="M5 13l4 4L19 7"
-                                                    data-oid="c5yil0a"
+                                                    data-oid="-y7l.gn"
                                                 />
                                             </svg>
-                                            <span data-oid="lvfrzuy">Response within 3-5 days</span>
+                                            <span data-oid="xxizz:9">Response within 3-5 days</span>
                                         </div>
-                                        <div className="flex items-center gap-2" data-oid="3_6a_x_">
+                                        <div className="flex items-center gap-2" data-oid="g.jjf7m">
                                             <svg
                                                 className="h-4 w-4 text-green-500"
                                                 fill="none"
                                                 stroke="currentColor"
                                                 viewBox="0 0 24 24"
-                                                data-oid="m7.ptcn"
+                                                data-oid="x0-4:yd"
                                             >
                                                 <path
                                                     strokeLinecap="round"
                                                     strokeLinejoin="round"
                                                     strokeWidth="2"
                                                     d="M5 13l4 4L19 7"
-                                                    data-oid="_if7nk9"
+                                                    data-oid="jdgwo44"
                                                 />
                                             </svg>
-                                            <span data-oid="ysyy0wa">Direct contact with HR</span>
+                                            <span data-oid="awclaf8">Direct contact with HR</span>
                                         </div>
                                     </div>
                                 </div>
@@ -1248,60 +1248,60 @@ export default function JobDetailsPage() {
                                 {/* Job Summary */}
                                 <div
                                     className="bg-white/80 backdrop-blur-sm rounded-xl shadow-md border border-gray-200 p-6"
-                                    data-oid="8c4iucu"
+                                    data-oid="0akh1o0"
                                 >
                                     <h3
                                         className="text-lg font-semibold text-gray-800 mb-4"
-                                        data-oid="f__p965"
+                                        data-oid="i9qc6yd"
                                     >
                                         Job Summary
                                     </h3>
-                                    <div className="space-y-3 text-sm" data-oid="5wo9-_b">
-                                        <div className="flex justify-between" data-oid="e9uf4j.">
-                                            <span className="text-gray-600" data-oid="k3nduzz">
+                                    <div className="space-y-3 text-sm" data-oid="0ijk7u9">
+                                        <div className="flex justify-between" data-oid=":86y:x1">
+                                            <span className="text-gray-600" data-oid="tf:k07_">
                                                 Job Type:
                                             </span>
-                                            <span className="font-medium" data-oid="6g00.1z">
+                                            <span className="font-medium" data-oid="b3wwlr-">
                                                 {job.jobType}
                                             </span>
                                         </div>
-                                        <div className="flex justify-between" data-oid="fmf-ab:">
-                                            <span className="text-gray-600" data-oid="zmdrgq2">
+                                        <div className="flex justify-between" data-oid="h4h055z">
+                                            <span className="text-gray-600" data-oid="snkuo1v">
                                                 Employment:
                                             </span>
-                                            <span className="font-medium" data-oid="xna0f2l">
+                                            <span className="font-medium" data-oid="jiny85e">
                                                 {job.employmentType}
                                             </span>
                                         </div>
-                                        <div className="flex justify-between" data-oid="e27-80.">
-                                            <span className="text-gray-600" data-oid="13l5f1q">
+                                        <div className="flex justify-between" data-oid="nk5.it9">
+                                            <span className="text-gray-600" data-oid="gg7k25:">
                                                 Experience:
                                             </span>
-                                            <span className="font-medium" data-oid="550q8wg">
+                                            <span className="font-medium" data-oid="y1pb:di">
                                                 {job.experienceRequired}
                                             </span>
                                         </div>
-                                        <div className="flex justify-between" data-oid="o9uy5w6">
-                                            <span className="text-gray-600" data-oid="avquxw5">
+                                        <div className="flex justify-between" data-oid="ao:1acj">
+                                            <span className="text-gray-600" data-oid="zpqn9xu">
                                                 Salary:
                                             </span>
-                                            <span className="font-medium" data-oid="23yln84">
+                                            <span className="font-medium" data-oid="58__pf0">
                                                 {job.salary}
                                             </span>
                                         </div>
-                                        <div className="flex justify-between" data-oid="1_6_77m">
-                                            <span className="text-gray-600" data-oid="xzcl4rk">
+                                        <div className="flex justify-between" data-oid="b16dy3e">
+                                            <span className="text-gray-600" data-oid=":n--hoe">
                                                 Location:
                                             </span>
-                                            <span className="font-medium" data-oid="-0ttgtc">
+                                            <span className="font-medium" data-oid="_njxsuz">
                                                 {job.location}
                                             </span>
                                         </div>
-                                        <div className="flex justify-between" data-oid="7pg.60d">
-                                            <span className="text-gray-600" data-oid="jt8:fm6">
+                                        <div className="flex justify-between" data-oid="lqlkwkl">
+                                            <span className="text-gray-600" data-oid="qv6sadk">
                                                 Remote:
                                             </span>
-                                            <span className="font-medium" data-oid="ee2-38t">
+                                            <span className="font-medium" data-oid="46jy:9p">
                                                 {job.isRemote ? 'Yes' : 'No'}
                                             </span>
                                         </div>
@@ -1311,15 +1311,15 @@ export default function JobDetailsPage() {
                                 {/* Similar Jobs */}
                                 <div
                                     className="bg-white/80 backdrop-blur-sm rounded-xl shadow-md border border-gray-200 p-6"
-                                    data-oid="28:lrm1"
+                                    data-oid="kiun.6y"
                                 >
                                     <h3
                                         className="text-lg font-semibold text-gray-800 mb-4"
-                                        data-oid="e8en4np"
+                                        data-oid="0h_n72m"
                                     >
                                         Similar Jobs
                                     </h3>
-                                    <div className="space-y-3" data-oid="7p6rfol">
+                                    <div className="space-y-3" data-oid="abdd4a:">
                                         {[
                                             {
                                                 title: 'React Developer',
@@ -1340,23 +1340,23 @@ export default function JobDetailsPage() {
                                             <div
                                                 key={index}
                                                 className="p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer"
-                                                data-oid="aeod72l"
+                                                data-oid="zbfp0vh"
                                             >
                                                 <h4
                                                     className="font-medium text-gray-800 text-sm"
-                                                    data-oid="ghpb30l"
+                                                    data-oid="736vqw0"
                                                 >
                                                     {similarJob.title}
                                                 </h4>
                                                 <p
                                                     className="text-xs text-gray-600"
-                                                    data-oid="iar-85c"
+                                                    data-oid="3i0hiue"
                                                 >
                                                     {similarJob.company}
                                                 </p>
                                                 <p
                                                     className="text-xs text-[hsl(196,80%,45%)] font-medium"
-                                                    data-oid="ox0nwxm"
+                                                    data-oid="x.ke5pl"
                                                 >
                                                     {similarJob.salary}
                                                 </p>
@@ -1370,25 +1370,25 @@ export default function JobDetailsPage() {
                 </div>
 
                 {/* Floating Apply Button */}
-                <div className="fixed bottom-6 right-6 z-50 lg:hidden" data-oid="hw6u-cf">
+                <div className="fixed bottom-6 right-6 z-50 lg:hidden" data-oid="mgec5z1">
                     <button
                         onClick={handleApply}
                         className="px-6 py-3 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white rounded-full font-medium hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300 transform hover:scale-110 shadow-2xl flex items-center gap-2 animate-bounce"
-                        data-oid="3n840qt"
+                        data-oid="2f5ncxo"
                     >
                         <svg
                             className="h-5 w-5"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
-                            data-oid="89eisx1"
+                            data-oid="i06y8gs"
                         >
                             <path
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
                                 strokeWidth="2"
                                 d="M13 10V3L4 14h7v7l9-11h-7z"
-                                data-oid="skdqgy9"
+                                data-oid="z4ka5o0"
                             />
                         </svg>
                         Quick Apply

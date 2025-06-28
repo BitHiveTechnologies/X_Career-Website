@@ -525,80 +525,80 @@ export default function JobsPage() {
     };
 
     return (
-        <div className="min-h-screen bg-white text-gray-800 font-sans" data-oid="1daaqkr">
+        <div className="min-h-screen bg-white text-gray-800 font-sans" data-oid="deh:2h-">
             {/* Navbar */}
-            <MainNavbar data-oid="qxu:c9g" />
+            <MainNavbar data-oid="qxp1t72" />
 
             {/* Enhanced Hero Section with Search */}
             <section
                 className="bg-gradient-to-r from-[hsl(196,80%,45%)] via-[hsl(210,70%,45%)] to-[hsl(175,70%,41%)] text-white relative overflow-hidden py-20"
-                data-oid="3zh8x8_"
+                data-oid="q.bkblv"
             >
                 {/* Animated background elements */}
-                <div className="absolute inset-0 overflow-hidden" data-oid="ifumtmh">
+                <div className="absolute inset-0 overflow-hidden" data-oid="5vxcj4a">
                     <div
                         className="absolute -top-20 -left-20 w-96 h-96 bg-[hsl(196,80%,65%)] opacity-30 rounded-full blur-3xl animate-blob"
-                        data-oid="pj6zj:2"
+                        data-oid="cabdonk"
                     ></div>
                     <div
                         className="absolute top-40 right-20 w-96 h-96 bg-[hsl(210,70%,65%)] opacity-40 rounded-full blur-3xl animate-blob animation-delay-2000"
-                        data-oid="i4bq3gt"
+                        data-oid="fhi1:nl"
                     ></div>
                     <div
                         className="absolute bottom-10 left-1/3 w-96 h-96 bg-[hsl(175,70%,61%)] opacity-40 rounded-full blur-3xl animate-blob animation-delay-4000"
-                        data-oid="36ymp7q"
+                        data-oid="7wgb_02"
                     ></div>
                 </div>
 
                 {/* Frosted glass overlay */}
                 <div
                     className="absolute inset-0 bg-white/5 backdrop-blur-[1px]"
-                    data-oid="a1f6x-0"
+                    data-oid="p8js6ck"
                 ></div>
 
                 <div
                     className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10"
-                    data-oid="k_cpbir"
+                    data-oid="rdx7l8j"
                 >
                     <h1
                         className="text-4xl md:text-6xl font-bold mb-4 text-white drop-shadow-md"
-                        data-oid="s2ddgnu"
+                        data-oid="wug:gzk"
                     >
                         Find Your Dream Job
                     </h1>
-                    <p className="text-xl md:text-2xl mb-2 text-blue-100" data-oid="3ed66w4">
+                    <p className="text-xl md:text-2xl mb-2 text-blue-100" data-oid="a:qahja">
                         Empower Your Career Journey
                     </p>
-                    <p className="text-lg text-blue-200 max-w-2xl mx-auto mb-8" data-oid="d242bqt">
+                    <p className="text-lg text-blue-200 max-w-2xl mx-auto mb-8" data-oid="chohyb1">
                         Discover thousands of opportunities from top Indian companies
                     </p>
 
                     {/* Advanced Search Bar */}
-                    <form onSubmit={handleSearch} className="max-w-4xl mx-auto" data-oid="i-f2:4b">
+                    <form onSubmit={handleSearch} className="max-w-4xl mx-auto" data-oid="j7g9qb7">
                         <div
                             className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20"
-                            data-oid="7m2kl3i"
+                            data-oid="f-5v.zd"
                         >
-                            <div className="grid md:grid-cols-3 gap-4" data-oid="rifzugu">
+                            <div className="grid md:grid-cols-3 gap-4" data-oid="mjus_5r">
                                 {/* Job Title Search */}
-                                <div className="relative" data-oid="z.p4ow.">
+                                <div className="relative" data-oid="h:j6yxt">
                                     <div
                                         className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
-                                        data-oid=".icqeh-"
+                                        data-oid="5jqbc-."
                                     >
                                         <svg
                                             className="h-5 w-5 text-gray-400"
                                             fill="none"
                                             stroke="currentColor"
                                             viewBox="0 0 24 24"
-                                            data-oid="cob:_2g"
+                                            data-oid="z4u9vzn"
                                         >
                                             <path
                                                 strokeLinecap="round"
                                                 strokeLinejoin="round"
                                                 strokeWidth="2"
                                                 d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                                                data-oid="e2i4oyq"
+                                                data-oid="_3:krx9"
                                             />
                                         </svg>
                                     </div>
@@ -608,29 +608,29 @@ export default function JobsPage() {
                                         value={searchQuery}
                                         onChange={(e) => setSearchQuery(e.target.value)}
                                         className="w-full pl-10 pr-4 py-3 bg-white/90 backdrop-blur-sm border border-white/30 rounded-xl text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all duration-300"
-                                        data-oid="o6pgivu"
+                                        data-oid="194im:_"
                                     />
                                 </div>
 
                                 {/* Location Search */}
-                                <div className="relative" data-oid="wz7osvc">
+                                <div className="relative" data-oid="174_68r">
                                     <div
                                         className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
-                                        data-oid="1zg2zr2"
+                                        data-oid="g5u:.1d"
                                     >
                                         <svg
                                             className="h-5 w-5 text-gray-400"
                                             fill="none"
                                             stroke="currentColor"
                                             viewBox="0 0 24 24"
-                                            data-oid="v2-dcil"
+                                            data-oid="1e1ulo8"
                                         >
                                             <path
                                                 strokeLinecap="round"
                                                 strokeLinejoin="round"
                                                 strokeWidth="2"
                                                 d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                                                data-oid="2uz7198"
+                                                data-oid="padpr4i"
                                             />
 
                                             <path
@@ -638,7 +638,7 @@ export default function JobsPage() {
                                                 strokeLinejoin="round"
                                                 strokeWidth="2"
                                                 d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                                                data-oid="dxpq:5c"
+                                                data-oid="grtybx."
                                             />
                                         </svg>
                                     </div>
@@ -648,7 +648,7 @@ export default function JobsPage() {
                                         value={searchLocation}
                                         onChange={(e) => setSearchLocation(e.target.value)}
                                         className="w-full pl-10 pr-4 py-3 bg-white/90 backdrop-blur-sm border border-white/30 rounded-xl text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all duration-300"
-                                        data-oid="xymaw9o"
+                                        data-oid="5ow8s75"
                                     />
                                 </div>
 
@@ -656,21 +656,21 @@ export default function JobsPage() {
                                 <button
                                     type="submit"
                                     className="px-8 py-3 bg-white text-[hsl(196,80%,45%)] rounded-xl font-semibold hover:bg-gray-50 transition-all duration-300 transform hover:scale-105 hover:shadow-lg flex items-center justify-center"
-                                    data-oid="o3el9xa"
+                                    data-oid="ztq_n8a"
                                 >
                                     <svg
                                         className="h-5 w-5 mr-2"
                                         fill="none"
                                         stroke="currentColor"
                                         viewBox="0 0 24 24"
-                                        data-oid="aswzn2t"
+                                        data-oid="gstitn1"
                                     >
                                         <path
                                             strokeLinecap="round"
                                             strokeLinejoin="round"
                                             strokeWidth="2"
                                             d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                                            data-oid="8.x-c_f"
+                                            data-oid="x-53vc8"
                                         />
                                     </svg>
                                     Search Jobs
@@ -680,7 +680,7 @@ export default function JobsPage() {
                             {/* Quick Search Tags */}
                             <div
                                 className="flex flex-wrap gap-2 mt-4 justify-center"
-                                data-oid="elapyy2"
+                                data-oid="dajyk4j"
                             >
                                 {[
                                     'React Developer',
@@ -693,7 +693,7 @@ export default function JobsPage() {
                                         key={tag}
                                         onClick={() => setSearchQuery(tag)}
                                         className="px-3 py-1 bg-white/20 backdrop-blur-sm text-white text-sm rounded-full hover:bg-white/30 transition-all duration-300"
-                                        data-oid="_y69ix4"
+                                        data-oid="bcul69q"
                                     >
                                         {tag}
                                     </button>
@@ -707,38 +707,38 @@ export default function JobsPage() {
             {/* Category Menu */}
             <section
                 className="bg-gradient-to-b from-[hsl(210,50%,98%)] to-[hsl(196,60%,95%)] py-8"
-                data-oid="09qqzt3"
+                data-oid="r:y49qx"
             >
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-oid="f105rx9">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-oid="t7yjqdj">
                     <CategoryMenu
                         categories={categories}
                         selectedCategory={selectedCategory}
                         onCategoryChange={handleCategoryChange}
-                        data-oid="7u57r9e"
+                        data-oid="r-a3y5c"
                     />
 
                     {/* Jobs Count Badge */}
-                    <div className="text-center mt-6" data-oid=":cbly-t">
+                    <div className="text-center mt-6" data-oid="b5m2tgh">
                         <div
                             className="inline-flex items-center px-6 py-3 bg-white/80 backdrop-blur-sm rounded-full shadow-md border border-[hsl(210,30%,95%)]"
-                            data-oid="jms7bfo"
+                            data-oid="3s36ca6"
                         >
                             <svg
                                 className="h-5 w-5 text-[hsl(196,80%,45%)] mr-2"
                                 fill="none"
                                 stroke="currentColor"
                                 viewBox="0 0 24 24"
-                                data-oid="x0lwl8-"
+                                data-oid="0v0fcea"
                             >
                                 <path
                                     strokeLinecap="round"
                                     strokeLinejoin="round"
                                     strokeWidth="2"
                                     d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H8a2 2 0 01-2-2V8a2 2 0 012-2V6"
-                                    data-oid="s6hn7_t"
+                                    data-oid="ksx0i19"
                                 />
                             </svg>
-                            <span className="text-lg font-bold text-gray-800" data-oid="tfpbw-i">
+                            <span className="text-lg font-bold text-gray-800" data-oid="3y188xt">
                                 {filteredJobs.length.toLocaleString()}+ JOBS FOUND
                             </span>
                         </div>
@@ -749,46 +749,46 @@ export default function JobsPage() {
             {/* Main Content */}
             <section
                 className="py-12 bg-gradient-to-b from-[hsl(196,60%,95%)] to-white"
-                data-oid="989ybk."
+                data-oid="bi:pg1a"
             >
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-oid="3_.fnu:">
-                    <div className="grid lg:grid-cols-4 gap-8" data-oid="_i-14-_">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-oid="hrpjqvc">
+                    <div className="grid lg:grid-cols-4 gap-8" data-oid="2o-.cng">
                         {/* Filters Sidebar */}
-                        <div className="lg:col-span-1 order-2 lg:order-1" data-oid=".:-.ueh">
+                        <div className="lg:col-span-1 order-2 lg:order-1" data-oid="xo53gfn">
                             <FiltersSidebar
                                 filters={filters}
                                 onFilterChange={handleFilterChange}
                                 onReset={resetFilters}
-                                data-oid="h3u77k7"
+                                data-oid="sku-kja"
                             />
                         </div>
 
                         {/* Job Listings */}
-                        <div className="lg:col-span-3 order-1 lg:order-2" data-oid="z3r0849">
+                        <div className="lg:col-span-3 order-1 lg:order-2" data-oid="-7wii5_">
                             {/* Toolbar */}
                             <div
                                 className="bg-white/80 backdrop-blur-sm rounded-xl shadow-md border border-[hsl(210,30%,95%)] p-6 mb-6"
-                                data-oid="7lmhput"
+                                data-oid="zdu_vpa"
                             >
                                 <div
                                     className="flex flex-col lg:flex-row lg:items-center justify-between gap-4"
-                                    data-oid="c90zxri"
+                                    data-oid="26178he"
                                 >
                                     {/* Results Counter */}
                                     <div
                                         className="flex flex-col sm:flex-row sm:items-center gap-2"
-                                        data-oid="bn7xc9f"
+                                        data-oid="gq.d1qt"
                                     >
                                         <span
                                             className="text-xl font-bold text-gray-800"
-                                            data-oid="52_3koy"
+                                            data-oid="zzq-tmx"
                                         >
                                             {filteredJobs.length.toLocaleString()} Jobs Found
                                         </span>
                                         {(searchQuery || searchLocation) && (
                                             <span
                                                 className="text-sm text-gray-600 bg-blue-50 px-3 py-1 rounded-full"
-                                                data-oid="9pfz_eu"
+                                                data-oid="z8tyk26"
                                             >
                                                 for "{searchQuery}"{' '}
                                                 {searchLocation && `in ${searchLocation}`}
@@ -798,13 +798,13 @@ export default function JobsPage() {
 
                                     <div
                                         className="flex flex-col sm:flex-row items-start sm:items-center gap-4"
-                                        data-oid="cfdg9v9"
+                                        data-oid="og6uhf3"
                                     >
                                         {/* Sort Options */}
-                                        <div className="flex items-center gap-2" data-oid="lose:k:">
+                                        <div className="flex items-center gap-2" data-oid="e1_4ge2">
                                             <label
                                                 className="text-sm font-medium text-gray-700 whitespace-nowrap"
-                                                data-oid="khj63ck"
+                                                data-oid="ynpdi67"
                                             >
                                                 Sort by:
                                             </label>
@@ -812,18 +812,18 @@ export default function JobsPage() {
                                                 value={sortBy}
                                                 onChange={(e) => setSortBy(e.target.value)}
                                                 className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent bg-white min-w-[120px]"
-                                                data-oid="t8_.rnx"
+                                                data-oid="vx.0kp:"
                                             >
-                                                <option value="relevance" data-oid="tewrkxi">
+                                                <option value="relevance" data-oid="wk2qj1s">
                                                     Relevance
                                                 </option>
-                                                <option value="date" data-oid="n_-wlcp">
+                                                <option value="date" data-oid="k4:dkvz">
                                                     Date Posted
                                                 </option>
-                                                <option value="salary" data-oid="tc.aw-b">
+                                                <option value="salary" data-oid="pxvqvph">
                                                     Salary
                                                 </option>
-                                                <option value="company" data-oid="5gfser.">
+                                                <option value="company" data-oid="0s.ule1">
                                                     Company
                                                 </option>
                                             </select>
@@ -832,7 +832,7 @@ export default function JobsPage() {
                                         {/* View Toggle */}
                                         <div
                                             className="flex items-center bg-gray-100 rounded-lg p-1"
-                                            data-oid="dlyua3y"
+                                            data-oid="eouf0z3"
                                         >
                                             <button
                                                 onClick={() => setViewMode('list')}
@@ -842,21 +842,21 @@ export default function JobsPage() {
                                                         : 'text-gray-600 hover:text-gray-800'
                                                 }`}
                                                 title="List View"
-                                                data-oid="1vq.vk1"
+                                                data-oid="ssrz4by"
                                             >
                                                 <svg
                                                     className="h-4 w-4"
                                                     fill="none"
                                                     stroke="currentColor"
                                                     viewBox="0 0 24 24"
-                                                    data-oid="jx4nsy7"
+                                                    data-oid="n5qn-5g"
                                                 >
                                                     <path
                                                         strokeLinecap="round"
                                                         strokeLinejoin="round"
                                                         strokeWidth="2"
                                                         d="M4 6h16M4 10h16M4 14h16M4 18h16"
-                                                        data-oid="yrrbtv7"
+                                                        data-oid="t2vo_47"
                                                     />
                                                 </svg>
                                             </button>
@@ -868,21 +868,21 @@ export default function JobsPage() {
                                                         : 'text-gray-600 hover:text-gray-800'
                                                 }`}
                                                 title="Grid View"
-                                                data-oid="fayqu5l"
+                                                data-oid="rmz806s"
                                             >
                                                 <svg
                                                     className="h-4 w-4"
                                                     fill="none"
                                                     stroke="currentColor"
                                                     viewBox="0 0 24 24"
-                                                    data-oid="l3ag1.g"
+                                                    data-oid=":i3dyfw"
                                                 >
                                                     <path
                                                         strokeLinecap="round"
                                                         strokeLinejoin="round"
                                                         strokeWidth="2"
                                                         d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
-                                                        data-oid="zm_2ni6"
+                                                        data-oid="97m8w43"
                                                     />
                                                 </svg>
                                             </button>
@@ -894,41 +894,41 @@ export default function JobsPage() {
                             {/* Job Alerts Section */}
                             <div
                                 className="bg-gradient-to-r from-[hsl(196,80%,45%)]/10 to-[hsl(175,70%,41%)]/10 backdrop-blur-sm rounded-xl border border-[hsl(196,80%,45%)]/20 p-6 mb-8"
-                                data-oid="1khrraq"
+                                data-oid="u1v5jpp"
                             >
                                 <div
                                     className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
-                                    data-oid="4wbb9jh"
+                                    data-oid="0arnrwh"
                                 >
-                                    <div className="flex items-start gap-4" data-oid="ofe39o6">
+                                    <div className="flex items-start gap-4" data-oid="3g.xjdi">
                                         <div
                                             className="bg-[hsl(196,80%,45%)] p-3 rounded-full flex-shrink-0"
-                                            data-oid="w0-z.es"
+                                            data-oid="t-log5f"
                                         >
                                             <svg
                                                 className="h-6 w-6 text-white"
                                                 fill="none"
                                                 stroke="currentColor"
                                                 viewBox="0 0 24 24"
-                                                data-oid="edb7qw:"
+                                                data-oid="2xg2q3f"
                                             >
                                                 <path
                                                     strokeLinecap="round"
                                                     strokeLinejoin="round"
                                                     strokeWidth="2"
                                                     d="M15 17h5l-5 5v-5zM4 19h6v-2H4v2zM4 15h8v-2H4v2zM4 11h10V9H4v2zM4 7h12V5H4v2z"
-                                                    data-oid="g4k9vxu"
+                                                    data-oid="_nxrvyc"
                                                 />
                                             </svg>
                                         </div>
-                                        <div data-oid="wmqv5:e">
+                                        <div data-oid=":2_68bt">
                                             <h3
                                                 className="text-lg font-semibold text-gray-800 mb-1"
-                                                data-oid="z0xgkfy"
+                                                data-oid="2dxn--a"
                                             >
                                                 Get Job Alerts
                                             </h3>
-                                            <p className="text-gray-600 text-sm" data-oid="g.zuyhw">
+                                            <p className="text-gray-600 text-sm" data-oid="upz:ubc">
                                                 Never miss a job opportunity that matches your
                                                 profile
                                             </p>
@@ -936,7 +936,7 @@ export default function JobsPage() {
                                     </div>
                                     <button
                                         className="px-6 py-3 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white rounded-lg font-medium hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300 transform hover:scale-105 whitespace-nowrap"
-                                        data-oid="y:.jsc8"
+                                        data-oid="a3k:jz8"
                                     >
                                         Create Alert
                                     </button>
@@ -944,14 +944,14 @@ export default function JobsPage() {
                             </div>
 
                             {/* Job Cards Container */}
-                            <div className="space-y-6" data-oid="88lrsdl">
+                            <div className="space-y-6" data-oid="0wrioj.">
                                 {isLoading ? (
-                                    <div className="text-center py-16" data-oid="fr3wbg5">
+                                    <div className="text-center py-16" data-oid="j3kq1zk">
                                         <div
                                             className="animate-spin rounded-full h-12 w-12 border-b-2 border-[hsl(196,80%,45%)] mx-auto"
-                                            data-oid="hcuebot"
+                                            data-oid="ip.so23"
                                         ></div>
-                                        <p className="mt-4 text-gray-600" data-oid="tyhg6:1">
+                                        <p className="mt-4 text-gray-600" data-oid="1r.xdq3">
                                             Loading jobs...
                                         </p>
                                     </div>
@@ -965,25 +965,25 @@ export default function JobsPage() {
                                                     : 'space-y-6'
                                             }`}
                                             role="list"
-                                            data-oid="5x52dgt"
+                                            data-oid="_1fwvbn"
                                         >
                                             {filteredJobs.slice(0, visibleJobs).map((job) => (
                                                 <JobCard
                                                     key={job.id}
                                                     job={job}
                                                     viewMode={viewMode}
-                                                    data-oid="iaokyvb"
+                                                    data-oid="rwrwf1."
                                                 />
                                             ))}
                                         </div>
 
                                         {/* Load More Button */}
                                         {visibleJobs < filteredJobs.length && (
-                                            <div className="text-center py-8" data-oid="f9u4va_">
+                                            <div className="text-center py-8" data-oid="9jbxrpn">
                                                 <button
                                                     onClick={loadMoreJobs}
                                                     className="px-8 py-3 bg-white border-2 border-[hsl(196,80%,45%)] text-[hsl(196,80%,45%)] rounded-lg font-medium hover:bg-[hsl(196,80%,45%)] hover:text-white transition-all duration-300 transform hover:scale-105"
-                                                    data-oid="4pg-6-:"
+                                                    data-oid="e3x-g02"
                                                 >
                                                     Load More Jobs (
                                                     {filteredJobs.length - visibleJobs} remaining)
@@ -992,40 +992,40 @@ export default function JobsPage() {
                                         )}
                                     </>
                                 ) : (
-                                    <div className="text-center py-16" data-oid="v28r-2p">
+                                    <div className="text-center py-16" data-oid="3p2b-c0">
                                         <div
                                             className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6"
-                                            data-oid=":xopcg4"
+                                            data-oid="1..-bvd"
                                         >
                                             <svg
                                                 className="h-12 w-12 text-gray-400"
                                                 fill="none"
                                                 stroke="currentColor"
                                                 viewBox="0 0 24 24"
-                                                data-oid="9cw_:vf"
+                                                data-oid=":4ie7cq"
                                             >
                                                 <path
                                                     strokeLinecap="round"
                                                     strokeLinejoin="round"
                                                     strokeWidth="2"
                                                     d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                                                    data-oid="si.vc7q"
+                                                    data-oid="ff7xh4k"
                                                 />
                                             </svg>
                                         </div>
                                         <h3
                                             className="text-xl font-medium text-gray-900 mb-2"
-                                            data-oid="huey_g:"
+                                            data-oid="avh45g6"
                                         >
                                             No jobs found
                                         </h3>
-                                        <p className="text-gray-600 mb-6" data-oid="1162o4-">
+                                        <p className="text-gray-600 mb-6" data-oid="xmfongl">
                                             Try adjusting your filters or search criteria
                                         </p>
                                         <button
                                             onClick={resetFilters}
                                             className="px-6 py-3 bg-[hsl(196,80%,45%)] text-white rounded-lg hover:bg-[hsl(196,80%,40%)] transition-colors duration-200 font-medium"
-                                            data-oid="022m1iz"
+                                            data-oid="01bqtph"
                                         >
                                             Reset Filters
                                         </button>

@@ -163,44 +163,44 @@ export default function NotifyPage() {
     return (
         <div
             className="min-h-screen bg-gradient-to-b from-[hsl(210,50%,98%)] to-[hsl(196,60%,95%)]"
-            data-oid="yn.gvmj"
+            data-oid="ndxc4x."
         >
             {/* Animated background elements */}
-            <div className="fixed inset-0 overflow-hidden -z-10" data-oid="ta4y-.t">
+            <div className="fixed inset-0 overflow-hidden -z-10" data-oid="d3.6wei">
                 <div
                     className="absolute -top-20 -left-20 w-96 h-96 bg-[hsl(196,80%,65%)] opacity-20 rounded-full blur-3xl animate-blob"
-                    data-oid="coja61o"
+                    data-oid="7a2vrhn"
                 ></div>
                 <div
                     className="absolute top-40 right-20 w-96 h-96 bg-[hsl(210,70%,65%)] opacity-20 rounded-full blur-3xl animate-blob animation-delay-2000"
-                    data-oid="k2xko-p"
+                    data-oid="e2anmbn"
                 ></div>
                 <div
                     className="absolute bottom-10 left-1/3 w-96 h-96 bg-[hsl(175,70%,61%)] opacity-20 rounded-full blur-3xl animate-blob animation-delay-4000"
-                    data-oid="j049-fk"
+                    data-oid="w7yozh-"
                 ></div>
             </div>
 
-            <div className="relative z-10" data-oid="0erzr.n">
+            <div className="relative z-10" data-oid="_2h609v">
                 {/* Hero Section */}
-                <section className="pt-24 pb-16 px-4" data-oid="ede8f-p">
-                    <div className="max-w-6xl mx-auto text-center" data-oid="9wbul5i">
+                <section className="pt-24 pb-16 px-4" data-oid="uupzp_l">
+                    <div className="max-w-6xl mx-auto text-center" data-oid="fz1cdeq">
                         <div
                             className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium text-[hsl(196,80%,45%)] border border-[hsl(210,30%,95%)] mb-6"
-                            data-oid="v5dx96u"
+                            data-oid=".3uaehq"
                         >
-                            <Bell className="h-4 w-4" data-oid="klgvdv9" />
+                            <Bell className="h-4 w-4" data-oid="taqc:q3" />
                             Never Miss an Opportunity
                         </div>
 
                         <h1
                             className="text-4xl md:text-6xl font-bold text-gray-800 mb-6"
-                            data-oid="kh5b339"
+                            data-oid="5va9e9i"
                         >
                             Stay Ahead with
                             <span
                                 className="bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] bg-clip-text text-transparent"
-                                data-oid="pqn1ub2"
+                                data-oid="2ud625s"
                             >
                                 {' '}
                                 NotifyX
@@ -209,44 +209,44 @@ export default function NotifyPage() {
 
                         <p
                             className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto"
-                            data-oid="4wx12oi"
+                            data-oid="t-yfc.e"
                         >
                             Get instant notifications about job opportunities, interview tips, and
                             career resources. Be the first to know, be the first to apply.
                         </p>
 
                         {/* Quick Subscribe Form */}
-                        <div className="max-w-2xl mx-auto mb-12" data-oid="ue7_g:_">
+                        <div className="max-w-2xl mx-auto mb-12" data-oid=".4_1cm3">
                             <div
                                 className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-[hsl(210,30%,95%)]"
-                                data-oid="h_rru4p"
+                                data-oid="dvxg5:t"
                             >
                                 <h3
                                     className="text-xl font-bold text-gray-800 mb-4"
-                                    data-oid=":-.vh1p"
+                                    data-oid="29rk5:2"
                                 >
                                     Start Getting Notifications
                                 </h3>
-                                <div className="flex flex-col sm:flex-row gap-4" data-oid="pdsftf.">
+                                <div className="flex flex-col sm:flex-row gap-4" data-oid="e70fg5e">
                                     <input
                                         type="email"
                                         placeholder="Enter your email"
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
                                         className="flex-1 px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)]"
-                                        data-oid="ixvfc:t"
+                                        data-oid="1x_o6ay"
                                     />
 
                                     <button
                                         onClick={() => handleSubscribe('free')}
                                         className="px-6 py-3 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white rounded-xl font-medium hover:shadow-lg transition-all transform hover:scale-105"
-                                        data-oid="5f8wa22"
+                                        data-oid="d765w7z"
                                     >
-                                        <Bell className="inline h-5 w-5 mr-2" data-oid="af93s61" />
+                                        <Bell className="inline h-5 w-5 mr-2" data-oid="0x-21k:" />
                                         Notify Me
                                     </button>
                                 </div>
-                                <p className="text-sm text-gray-500 mt-2" data-oid=".e.60vu">
+                                <p className="text-sm text-gray-500 mt-2" data-oid="ylxzbnq">
                                     Free forever. No spam. Unsubscribe anytime.
                                 </p>
                             </div>
@@ -255,61 +255,61 @@ export default function NotifyPage() {
                         {/* Stats */}
                         <div
                             className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto"
-                            data-oid="9ig35ed"
+                            data-oid="qeiqvf9"
                         >
                             <div
                                 className="bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-[hsl(210,30%,95%)]"
-                                data-oid="lnfye-e"
+                                data-oid="g8g-tof"
                             >
                                 <div
                                     className="text-3xl font-bold text-[hsl(196,80%,45%)]"
-                                    data-oid="x:b:t9t"
+                                    data-oid="ncg-tls"
                                 >
                                     50K+
                                 </div>
-                                <div className="text-gray-600" data-oid="ec:_ae_">
+                                <div className="text-gray-600" data-oid="6gy4m71">
                                     Active Subscribers
                                 </div>
                             </div>
                             <div
                                 className="bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-[hsl(210,30%,95%)]"
-                                data-oid="csh2z46"
+                                data-oid="7p2k4l6"
                             >
                                 <div
                                     className="text-3xl font-bold text-[hsl(196,80%,45%)]"
-                                    data-oid=":_z3y78"
+                                    data-oid="o-8rhrw"
                                 >
                                     1000+
                                 </div>
-                                <div className="text-gray-600" data-oid="lo7zna2">
+                                <div className="text-gray-600" data-oid="-6igi5-">
                                     Jobs Notified Daily
                                 </div>
                             </div>
                             <div
                                 className="bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-[hsl(210,30%,95%)]"
-                                data-oid="4bdfl0n"
+                                data-oid="neg48s8"
                             >
                                 <div
                                     className="text-3xl font-bold text-[hsl(196,80%,45%)]"
-                                    data-oid="zywoweh"
+                                    data-oid="2bqwwv1"
                                 >
                                     95%
                                 </div>
-                                <div className="text-gray-600" data-oid="9-r-fp3">
+                                <div className="text-gray-600" data-oid="lrux7uo">
                                     Success Rate
                                 </div>
                             </div>
                             <div
                                 className="bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-[hsl(210,30%,95%)]"
-                                data-oid="xw2ydo9"
+                                data-oid="kana.g6"
                             >
                                 <div
                                     className="text-3xl font-bold text-[hsl(196,80%,45%)]"
-                                    data-oid="apoyco8"
+                                    data-oid="bw72x_g"
                                 >
                                     24/7
                                 </div>
-                                <div className="text-gray-600" data-oid="dw8y.hk">
+                                <div className="text-gray-600" data-oid=":-cs4r3">
                                     Monitoring
                                 </div>
                             </div>
@@ -318,52 +318,52 @@ export default function NotifyPage() {
                 </section>
 
                 {/* Notification Types */}
-                <section className="py-16 px-4" data-oid="17cn:p0">
-                    <div className="max-w-6xl mx-auto" data-oid="_hy7rzq">
-                        <div className="text-center mb-12" data-oid=".yyb4p9">
+                <section className="py-16 px-4" data-oid="512j5cl">
+                    <div className="max-w-6xl mx-auto" data-oid="n_o6q_5">
+                        <div className="text-center mb-12" data-oid="evy-e5i">
                             <h2
                                 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4"
-                                data-oid="e191oks"
+                                data-oid="5tx5.ks"
                             >
                                 What You'll Get Notified About
                             </h2>
-                            <p className="text-xl text-gray-600" data-oid="6woybc1">
+                            <p className="text-xl text-gray-600" data-oid="qmas.jg">
                                 Choose what matters most to your career
                             </p>
                         </div>
 
                         <div
                             className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
-                            data-oid="wrdzp0b"
+                            data-oid="_4epj.0"
                         >
                             {notificationTypes.map((type, index) => (
                                 <div
                                     key={index}
                                     className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-[hsl(210,30%,95%)] hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
-                                    data-oid="hp-5ome"
+                                    data-oid="jf:xoj6"
                                 >
                                     <div
                                         className={`w-16 h-16 bg-gradient-to-r ${type.color} rounded-xl flex items-center justify-center text-2xl mb-4 mx-auto`}
-                                        data-oid="jkkp.gx"
+                                        data-oid="gf:bb_0"
                                     >
                                         {type.icon}
                                     </div>
                                     <h3
                                         className="text-xl font-bold text-gray-800 mb-2 text-center"
-                                        data-oid="k7hr2yv"
+                                        data-oid="6t8eq.:"
                                     >
                                         {type.title}
                                     </h3>
                                     <p
                                         className="text-gray-600 text-center mb-4"
-                                        data-oid="7mw9.12"
+                                        data-oid="t5a_gk8"
                                     >
                                         {type.description}
                                     </p>
-                                    <div className="text-center" data-oid="be_dor-">
+                                    <div className="text-center" data-oid=".333mqp">
                                         <span
                                             className="inline-block px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium"
-                                            data-oid="bi3gi9g"
+                                            data-oid="cyrwv71"
                                         >
                                             {type.frequency}
                                         </span>
@@ -375,21 +375,21 @@ export default function NotifyPage() {
                 </section>
 
                 {/* Pricing Plans */}
-                <section className="py-16 px-4" data-oid="2p.x8o5">
-                    <div className="max-w-6xl mx-auto" data-oid="lj:e-5f">
-                        <div className="text-center mb-12" data-oid="9wneylb">
+                <section className="py-16 px-4" data-oid="8jo2e-x">
+                    <div className="max-w-6xl mx-auto" data-oid="_ynm-oe">
+                        <div className="text-center mb-12" data-oid=":s7ppjx">
                             <h2
                                 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4"
-                                data-oid="d5zf0hs"
+                                data-oid="sa:865v"
                             >
                                 Choose Your Plan
                             </h2>
-                            <p className="text-xl text-gray-600" data-oid="r:jjipp">
+                            <p className="text-xl text-gray-600" data-oid="ousn2oo">
                                 Upgrade to premium for advanced features and priority access
                             </p>
                         </div>
 
-                        <div className="grid md:grid-cols-3 gap-8" data-oid="1x_:95l">
+                        <div className="grid md:grid-cols-3 gap-8" data-oid="360t7rr">
                             {pricingPlans.map((plan, index) => (
                                 <div
                                     key={index}
@@ -398,53 +398,53 @@ export default function NotifyPage() {
                                             ? 'border-[hsl(196,80%,45%)] shadow-xl scale-105'
                                             : 'border-[hsl(210,30%,95%)] hover:shadow-xl'
                                     }`}
-                                    data-oid="bz7:1v:"
+                                    data-oid="2q_krbz"
                                 >
                                     {plan.popular && (
-                                        <div className="text-center mb-4" data-oid="2fgiana">
+                                        <div className="text-center mb-4" data-oid="ae0_vhi">
                                             <span
                                                 className="inline-block px-3 py-1 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white rounded-full text-sm font-medium"
-                                                data-oid="wla7i3u"
+                                                data-oid="6advefv"
                                             >
                                                 Most Popular
                                             </span>
                                         </div>
                                     )}
 
-                                    <div className="text-center mb-6" data-oid="5jb9n4v">
+                                    <div className="text-center mb-6" data-oid="ruit7le">
                                         <h3
                                             className="text-2xl font-bold text-gray-800 mb-2"
-                                            data-oid="b20:o0l"
+                                            data-oid="ez9n48f"
                                         >
                                             {plan.name}
                                         </h3>
                                         <div
                                             className="text-4xl font-bold text-[hsl(196,80%,45%)] mb-1"
-                                            data-oid="wlfn5_q"
+                                            data-oid="weoq702"
                                         >
                                             {plan.price}
                                             <span
                                                 className="text-lg text-gray-600"
-                                                data-oid="o:v4o5."
+                                                data-oid="q27psfr"
                                             >
                                                 /{plan.period}
                                             </span>
                                         </div>
                                     </div>
 
-                                    <div className="space-y-3 mb-8" data-oid="28j83_w">
+                                    <div className="space-y-3 mb-8" data-oid="a:h.tpr">
                                         {plan.features.map((feature, featureIndex) => (
                                             <div
                                                 key={featureIndex}
                                                 className="flex items-center gap-3"
-                                                data-oid="5j6a3do"
+                                                data-oid="-qrftvv"
                                             >
                                                 <CheckCircle
                                                     className="h-5 w-5 text-green-500 flex-shrink-0"
-                                                    data-oid="x70h2nl"
+                                                    data-oid=":4uukeo"
                                                 />
 
-                                                <span className="text-gray-700" data-oid="b3itvm0">
+                                                <span className="text-gray-700" data-oid="mjcenv3">
                                                     {feature}
                                                 </span>
                                             </div>
@@ -458,7 +458,7 @@ export default function NotifyPage() {
                                                 ? 'bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white hover:shadow-lg'
                                                 : 'border border-[hsl(196,80%,45%)] text-[hsl(196,80%,45%)] hover:bg-[hsl(196,80%,45%)]/10'
                                         }`}
-                                        data-oid="lxm5b9h"
+                                        data-oid=".wj98do"
                                     >
                                         {plan.buttonText}
                                     </button>
@@ -469,44 +469,44 @@ export default function NotifyPage() {
                 </section>
 
                 {/* Premium Features */}
-                <section className="py-16 px-4" data-oid="0gbjw.o">
-                    <div className="max-w-6xl mx-auto" data-oid="_5.2n7v">
-                        <div className="text-center mb-12" data-oid="rfpv_qr">
+                <section className="py-16 px-4" data-oid="q:m37w4">
+                    <div className="max-w-6xl mx-auto" data-oid="npvkhw_">
+                        <div className="text-center mb-12" data-oid="i1h_gmy">
                             <h2
                                 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4"
-                                data-oid="axd4l.9"
+                                data-oid="1sim4yv"
                             >
                                 Premium Features
                             </h2>
-                            <p className="text-xl text-gray-600" data-oid="tn93nvh">
+                            <p className="text-xl text-gray-600" data-oid="45fy6l6">
                                 Get the competitive edge with NotifyX Premium
                             </p>
                         </div>
 
                         <div
                             className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
-                            data-oid="sq-fp_j"
+                            data-oid="wrkfjaf"
                         >
                             {premiumFeatures.map((feature, index) => (
                                 <div
                                     key={index}
                                     className="bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-[hsl(210,30%,95%)] hover:shadow-lg transition-all"
-                                    data-oid="leks3dp"
+                                    data-oid="i1_.4ic"
                                 >
                                     <feature.icon
                                         className="h-12 w-12 text-[hsl(196,80%,45%)] mb-4 mx-auto"
-                                        data-oid="o7g-2hn"
+                                        data-oid="7-59:t8"
                                     />
 
                                     <h3
                                         className="text-lg font-bold text-gray-800 mb-2 text-center"
-                                        data-oid="eu2q1d4"
+                                        data-oid="2j-fuzg"
                                     >
                                         {feature.title}
                                     </h3>
                                     <p
                                         className="text-gray-600 text-center text-sm"
-                                        data-oid="8t_rsm7"
+                                        data-oid="abn3_f:"
                                     >
                                         {feature.description}
                                     </p>
@@ -517,46 +517,46 @@ export default function NotifyPage() {
                 </section>
 
                 {/* Notification Preferences */}
-                <section className="py-16 px-4" data-oid="t3rjzt.">
-                    <div className="max-w-4xl mx-auto" data-oid="wi5y2lw">
+                <section className="py-16 px-4" data-oid="nop:mvn">
+                    <div className="max-w-4xl mx-auto" data-oid="2rj9ebb">
                         <div
                             className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-[hsl(210,30%,95%)]"
-                            data-oid="cgbdqa:"
+                            data-oid="4azr3g9"
                         >
-                            <div className="text-center mb-8" data-oid="-5f1f7.">
+                            <div className="text-center mb-8" data-oid=":ht_u.q">
                                 <h2
                                     className="text-2xl font-bold text-gray-800 mb-4"
-                                    data-oid="vxwi80k"
+                                    data-oid="iw:x_uz"
                                 >
                                     Customize Your Notifications
                                 </h2>
-                                <p className="text-gray-600" data-oid="pr88vo2">
+                                <p className="text-gray-600" data-oid="4z:3-:9">
                                     Choose what you want to be notified about
                                 </p>
                             </div>
 
-                            <div className="grid md:grid-cols-2 gap-6" data-oid="ijsljk6">
-                                <div className="space-y-4" data-oid="eyf9yrz">
-                                    <h3 className="font-semibold text-gray-800" data-oid="xxjc8dj">
+                            <div className="grid md:grid-cols-2 gap-6" data-oid="ax8zg3y">
+                                <div className="space-y-4" data-oid="gd.o6o8">
+                                    <h3 className="font-semibold text-gray-800" data-oid="mdzsz.e">
                                         Notification Types
                                     </h3>
                                     {Object.entries(preferences).map(([key, value]) => (
                                         <label
                                             key={key}
                                             className="flex items-center gap-3 cursor-pointer"
-                                            data-oid="2s7:nxu"
+                                            data-oid=":twwmy1"
                                         >
                                             <input
                                                 type="checkbox"
                                                 checked={value}
                                                 onChange={() => handlePreferenceChange(key)}
                                                 className="w-5 h-5 text-[hsl(196,80%,45%)] rounded focus:ring-[hsl(196,80%,45%)]"
-                                                data-oid="48_je1k"
+                                                data-oid=":g8nen4"
                                             />
 
                                             <span
                                                 className="text-gray-700 capitalize"
-                                                data-oid="m0bxh:g"
+                                                data-oid="33rh5ce"
                                             >
                                                 {key.replace(/([A-Z])/g, ' $1').trim()}
                                             </span>
@@ -564,47 +564,47 @@ export default function NotifyPage() {
                                     ))}
                                 </div>
 
-                                <div className="space-y-4" data-oid="j2o6oed">
-                                    <h3 className="font-semibold text-gray-800" data-oid="adtbgz5">
+                                <div className="space-y-4" data-oid="jr3xmec">
+                                    <h3 className="font-semibold text-gray-800" data-oid="lcrx3-w">
                                         Delivery Methods
                                     </h3>
-                                    <div className="space-y-3" data-oid="1gbj:vv">
+                                    <div className="space-y-3" data-oid="e6n2l3e">
                                         <div
                                             className="flex items-center gap-3 p-3 bg-blue-50 rounded-lg"
-                                            data-oid="a6t1tlb"
+                                            data-oid=".f0f6at"
                                         >
                                             <Mail
                                                 className="h-5 w-5 text-blue-600"
-                                                data-oid="dvia94a"
+                                                data-oid="zop:oen"
                                             />
 
-                                            <span className="text-gray-700" data-oid="nq1_7dj">
+                                            <span className="text-gray-700" data-oid="w3iv-xr">
                                                 Email Notifications
                                             </span>
                                         </div>
                                         <div
                                             className="flex items-center gap-3 p-3 bg-green-50 rounded-lg"
-                                            data-oid="4n:klc0"
+                                            data-oid="itdcs2j"
                                         >
                                             <MessageCircle
                                                 className="h-5 w-5 text-green-600"
-                                                data-oid="txy1jn:"
+                                                data-oid="3t:qyea"
                                             />
 
-                                            <span className="text-gray-700" data-oid="w1---pu">
+                                            <span className="text-gray-700" data-oid="-x5c_mw">
                                                 WhatsApp Alerts (Premium)
                                             </span>
                                         </div>
                                         <div
                                             className="flex items-center gap-3 p-3 bg-purple-50 rounded-lg"
-                                            data-oid="r26g.et"
+                                            data-oid="dv-o1kc"
                                         >
                                             <Smartphone
                                                 className="h-5 w-5 text-purple-600"
-                                                data-oid="0rd5hcg"
+                                                data-oid="o0u7mgx"
                                             />
 
-                                            <span className="text-gray-700" data-oid="x5asa0t">
+                                            <span className="text-gray-700" data-oid="j.zqf74">
                                                 SMS Notifications (Premium)
                                             </span>
                                         </div>
@@ -616,55 +616,55 @@ export default function NotifyPage() {
                 </section>
 
                 {/* Testimonials */}
-                <section className="py-16 px-4" data-oid=".6ymf62">
-                    <div className="max-w-6xl mx-auto" data-oid="dy_25s8">
-                        <div className="text-center mb-12" data-oid="jzi5twe">
+                <section className="py-16 px-4" data-oid="wj1c6g6">
+                    <div className="max-w-6xl mx-auto" data-oid="7kdz5s1">
+                        <div className="text-center mb-12" data-oid="kxxtrip">
                             <h2
                                 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4"
-                                data-oid="0c2h4ei"
+                                data-oid="ssje19i"
                             >
                                 Success Stories
                             </h2>
-                            <p className="text-xl text-gray-600" data-oid="i9c5mpi">
+                            <p className="text-xl text-gray-600" data-oid="-rhkr10">
                                 See how NotifyX helped others land their dream jobs
                             </p>
                         </div>
 
-                        <div className="grid md:grid-cols-3 gap-8" data-oid="k_ez8n2">
+                        <div className="grid md:grid-cols-3 gap-8" data-oid="eqclp08">
                             {testimonials.map((testimonial, index) => (
                                 <div
                                     key={index}
                                     className="bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-[hsl(210,30%,95%)]"
-                                    data-oid="ws-0gn:"
+                                    data-oid="3j2b1uh"
                                 >
                                     <div
                                         className="flex items-center gap-4 mb-4"
-                                        data-oid="1a4eo6."
+                                        data-oid="p-3k1h2"
                                     >
-                                        <div className="text-3xl" data-oid="m-3_wsy">
+                                        <div className="text-3xl" data-oid="dscd8-y">
                                             {testimonial.image}
                                         </div>
-                                        <div data-oid="0e0uw_:">
+                                        <div data-oid="tqbx48.">
                                             <h4
                                                 className="font-bold text-gray-800"
-                                                data-oid="i335od6"
+                                                data-oid="ta0i0er"
                                             >
                                                 {testimonial.name}
                                             </h4>
-                                            <p className="text-sm text-gray-600" data-oid="hojxkwb">
+                                            <p className="text-sm text-gray-600" data-oid="50qm8i4">
                                                 {testimonial.role}
                                             </p>
                                         </div>
                                     </div>
-                                    <p className="text-gray-700 italic mb-4" data-oid=":.2dny_">
+                                    <p className="text-gray-700 italic mb-4" data-oid="8kpvarc">
                                         "{testimonial.text}"
                                     </p>
-                                    <div className="flex items-center gap-1" data-oid="h7l:fnd">
+                                    <div className="flex items-center gap-1" data-oid="6pl1sfq">
                                         {[...Array(testimonial.rating)].map((_, i) => (
                                             <Star
                                                 key={i}
                                                 className="h-4 w-4 text-yellow-500 fill-current"
-                                                data-oid="j4gavju"
+                                                data-oid="fcxah_q"
                                             />
                                         ))}
                                     </div>
@@ -675,38 +675,38 @@ export default function NotifyPage() {
                 </section>
 
                 {/* CTA Section */}
-                <section className="py-16 px-4" data-oid="zp8y1:-">
-                    <div className="max-w-4xl mx-auto text-center" data-oid="156944q">
+                <section className="py-16 px-4" data-oid="x:7gi2m">
+                    <div className="max-w-4xl mx-auto text-center" data-oid="2:zdxdx">
                         <div
                             className="bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] rounded-2xl p-8 text-white"
-                            data-oid="aivddn_"
+                            data-oid="1:g37da"
                         >
-                            <h2 className="text-3xl font-bold mb-4" data-oid="i3z:utk">
+                            <h2 className="text-3xl font-bold mb-4" data-oid="f0ifydg">
                                 Ready to Get Notified?
                             </h2>
-                            <p className="text-xl mb-6 text-blue-100" data-oid="xait4:v">
+                            <p className="text-xl mb-6 text-blue-100" data-oid="i1jjonz">
                                 Join thousands of professionals who never miss an opportunity
                             </p>
                             <div
                                 className="flex flex-col sm:flex-row gap-4 justify-center"
-                                data-oid="gd:g-fz"
+                                data-oid="tp9.k_v"
                             >
                                 <button
                                     onClick={() => handleSubscribe('premium')}
                                     className="px-6 py-3 bg-white text-[hsl(196,80%,45%)] rounded-xl font-medium hover:shadow-lg transition-all transform hover:scale-105"
-                                    data-oid="6lu6g1w"
+                                    data-oid="v1:87d7"
                                 >
-                                    <Zap className="inline h-5 w-5 mr-2" data-oid="zeizk.2" />
+                                    <Zap className="inline h-5 w-5 mr-2" data-oid="4ecg:ty" />
                                     Start Premium Trial
                                 </button>
                                 <Link
                                     href="/resources/community"
                                     className="px-6 py-3 border border-white text-white rounded-xl font-medium hover:bg-white hover:text-[hsl(196,80%,45%)] transition-all"
-                                    data-oid="-_9kzbn"
+                                    data-oid="0ncqh_m"
                                 >
                                     <TrendingUp
                                         className="inline h-5 w-5 mr-2"
-                                        data-oid="mbfbgne"
+                                        data-oid="knusvn:"
                                     />
                                     Join Community
                                 </Link>
