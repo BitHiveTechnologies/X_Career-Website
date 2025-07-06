@@ -122,44 +122,44 @@ export default function LinkedInPage() {
     return (
         <div
             className="min-h-screen bg-gradient-to-b from-[hsl(210,50%,98%)] to-[hsl(196,60%,95%)]"
-            data-oid="wmf7i_q"
+            data-oid="agbvcdk"
         >
             {/* Animated background elements */}
-            <div className="fixed inset-0 overflow-hidden -z-10" data-oid="einpbbl">
+            <div className="fixed inset-0 overflow-hidden -z-10" data-oid="w7sgo3z">
                 <div
                     className="absolute -top-20 -left-20 w-96 h-96 bg-[hsl(196,80%,65%)] opacity-20 rounded-full blur-3xl animate-blob"
-                    data-oid="f3vqgiv"
+                    data-oid="17f_8ub"
                 ></div>
                 <div
                     className="absolute top-40 right-20 w-96 h-96 bg-[hsl(210,70%,65%)] opacity-20 rounded-full blur-3xl animate-blob animation-delay-2000"
-                    data-oid="8gb82.2"
+                    data-oid="pj2gfiw"
                 ></div>
                 <div
                     className="absolute bottom-10 left-1/3 w-96 h-96 bg-[hsl(175,70%,61%)] opacity-20 rounded-full blur-3xl animate-blob animation-delay-4000"
-                    data-oid="49z944g"
+                    data-oid="2rb-g6t"
                 ></div>
             </div>
 
-            <div className="relative z-10" data-oid="u74kx:p">
+            <div className="relative z-10" data-oid="ngkbdwu">
                 {/* Hero Section */}
-                <section className="pt-24 pb-16 px-4" data-oid="_0pn4mx">
-                    <div className="max-w-6xl mx-auto text-center" data-oid="-1x7.q:">
+                <section className="pt-24 pb-16 px-4" data-oid="njikitd">
+                    <div className="max-w-6xl mx-auto text-center" data-oid="2bd7:fp">
                         <div
                             className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium text-[hsl(196,80%,45%)] border border-[hsl(210,30%,95%)] mb-6"
-                            data-oid="yca9qt0"
+                            data-oid="n23yfvo"
                         >
-                            <Linkedin className="h-4 w-4" data-oid="-j:m-95" />
+                            <Linkedin className="h-4 w-4" data-oid="syheuk." />
                             Professional Networking Made Easy
                         </div>
 
                         <h1
                             className="text-4xl md:text-6xl font-bold text-gray-800 mb-6"
-                            data-oid="wmapska"
+                            data-oid="s10061d"
                         >
                             Master Your
                             <span
                                 className="bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] bg-clip-text text-transparent"
-                                data-oid="tjulp.b"
+                                data-oid="6a10ejs"
                             >
                                 {' '}
                                 LinkedIn Presence
@@ -168,7 +168,7 @@ export default function LinkedInPage() {
 
                         <p
                             className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto"
-                            data-oid="_fuy4pn"
+                            data-oid="nx0c078"
                         >
                             Build a powerful LinkedIn profile, expand your professional network, and
                             unlock career opportunities with our expert guidance and community
@@ -177,23 +177,23 @@ export default function LinkedInPage() {
 
                         <div
                             className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
-                            data-oid="321ik3o"
+                            data-oid="4k5w58d"
                         >
                             <button
                                 onClick={handleLinkedInRedirect}
                                 className="px-8 py-4 bg-[#0077B5] text-white rounded-xl font-medium hover:bg-[#005885] transition-all transform hover:scale-105 flex items-center justify-center gap-2"
-                                data-oid="72-9.ig"
+                                data-oid="f-td1ax"
                             >
-                                <Linkedin className="h-5 w-5" data-oid="bri0f1n" />
+                                <Linkedin className="h-5 w-5" data-oid="wgbi3s6" />
                                 Follow Us on LinkedIn
-                                <ExternalLink className="h-4 w-4" data-oid=".wjq1-1" />
+                                <ExternalLink className="h-4 w-4" data-oid="zgly5p2" />
                             </button>
                             <Link
                                 href="/resources"
                                 className="px-8 py-4 border border-[hsl(196,80%,45%)] text-[hsl(196,80%,45%)] rounded-xl font-medium hover:bg-[hsl(196,80%,45%)]/10 transition-all"
-                                data-oid="omeii1y"
+                                data-oid="8:k2sxm"
                             >
-                                <BookOpen className="inline h-5 w-5 mr-2" data-oid="xnfj_4i" />
+                                <BookOpen className="inline h-5 w-5 mr-2" data-oid="7m7f.ko" />
                                 LinkedIn Resources
                             </Link>
                         </div>
@@ -201,26 +201,26 @@ export default function LinkedInPage() {
                         {/* LinkedIn Stats */}
                         <div
                             className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto"
-                            data-oid="p8-ee70"
+                            data-oid=":j7p_ap"
                         >
                             {linkedinStats.map((stat, index) => (
                                 <div
                                     key={index}
                                     className="bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-[hsl(210,30%,95%)]"
-                                    data-oid="xb47i9y"
+                                    data-oid="k0rq_lj"
                                 >
                                     <stat.icon
                                         className="h-8 w-8 text-[#0077B5] mx-auto mb-2"
-                                        data-oid="rawd3rs"
+                                        data-oid="zf8olms"
                                     />
 
                                     <div
                                         className="text-2xl font-bold text-gray-800"
-                                        data-oid="zsydstf"
+                                        data-oid="yzdl_74"
                                     >
                                         {stat.value}
                                     </div>
-                                    <div className="text-sm text-gray-600" data-oid="rf234jh">
+                                    <div className="text-sm text-gray-600" data-oid="qn8t.af">
                                         {stat.label}
                                     </div>
                                 </div>
@@ -230,51 +230,51 @@ export default function LinkedInPage() {
                 </section>
 
                 {/* LinkedIn Features */}
-                <section className="py-16 px-4" data-oid="3bg-5qg">
-                    <div className="max-w-6xl mx-auto" data-oid="ahg2vz5">
-                        <div className="text-center mb-12" data-oid="envep2d">
+                <section className="py-16 px-4" data-oid="if3xmav">
+                    <div className="max-w-6xl mx-auto" data-oid="-0fqpf9">
+                        <div className="text-center mb-12" data-oid="mt:67-:">
                             <h2
                                 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4"
-                                data-oid="orpdcej"
+                                data-oid="igszqba"
                             >
                                 LinkedIn Success Services
                             </h2>
-                            <p className="text-xl text-gray-600" data-oid="jnd8go5">
+                            <p className="text-xl text-gray-600" data-oid="i41egno">
                                 Everything you need to build a powerful LinkedIn presence
                             </p>
                         </div>
 
                         <div
                             className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
-                            data-oid="i7ihtat"
+                            data-oid="e_z67:a"
                         >
                             {linkedinFeatures.map((feature, index) => (
                                 <div
                                     key={index}
                                     className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-[hsl(210,30%,95%)] hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
-                                    data-oid="7rq3.dg"
+                                    data-oid="ak5x8md"
                                 >
                                     <div
                                         className={`w-16 h-16 bg-gradient-to-r ${feature.color} rounded-xl flex items-center justify-center text-2xl mb-4 mx-auto`}
-                                        data-oid="vbgvbdz"
+                                        data-oid="n9lk241"
                                     >
                                         {feature.icon}
                                     </div>
                                     <h3
                                         className="text-xl font-bold text-gray-800 mb-2 text-center"
-                                        data-oid="5c-c_w."
+                                        data-oid="ga.jk6w"
                                     >
                                         {feature.title}
                                     </h3>
                                     <p
                                         className="text-gray-600 text-center mb-4"
-                                        data-oid="5krzamm"
+                                        data-oid="t14jc0_"
                                     >
                                         {feature.description}
                                     </p>
                                     <button
                                         className="w-full px-4 py-3 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white rounded-xl font-medium hover:shadow-lg transition-all transform hover:scale-105"
-                                        data-oid="4.wd3nq"
+                                        data-oid="kq21azy"
                                     >
                                         {feature.action}
                                     </button>
@@ -285,48 +285,48 @@ export default function LinkedInPage() {
                 </section>
 
                 {/* LinkedIn Tips */}
-                <section className="py-16 px-4" data-oid="f28he9z">
-                    <div className="max-w-6xl mx-auto" data-oid="c2hvx7m">
-                        <div className="text-center mb-12" data-oid="o6:by4:">
+                <section className="py-16 px-4" data-oid="2_lxnmn">
+                    <div className="max-w-6xl mx-auto" data-oid="hc6nhw-">
+                        <div className="text-center mb-12" data-oid="_v:0cvp">
                             <h2
                                 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4"
-                                data-oid="bnhl2pd"
+                                data-oid="z1ep-7p"
                             >
                                 LinkedIn Success Tips
                             </h2>
-                            <p className="text-xl text-gray-600" data-oid="xm:7uzi">
+                            <p className="text-xl text-gray-600" data-oid="_s9h76a">
                                 Expert advice to maximize your LinkedIn impact
                             </p>
                         </div>
 
-                        <div className="grid md:grid-cols-3 gap-8" data-oid="vuf:o7y">
+                        <div className="grid md:grid-cols-3 gap-8" data-oid="pj91qa5">
                             {linkedinTips.map((section, index) => (
                                 <div
                                     key={index}
                                     className="bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-[hsl(210,30%,95%)]"
-                                    data-oid=":-:kb2x"
+                                    data-oid="fu6va7g"
                                 >
                                     <h3
                                         className="text-xl font-bold text-gray-800 mb-4 text-center"
-                                        data-oid="1zjvec7"
+                                        data-oid="mny2jfa"
                                     >
                                         {section.category}
                                     </h3>
-                                    <div className="space-y-3" data-oid="fu0aea:">
+                                    <div className="space-y-3" data-oid="8l:9ere">
                                         {section.tips.map((tip, tipIndex) => (
                                             <div
                                                 key={tipIndex}
                                                 className="flex items-start gap-3"
-                                                data-oid="y97:rrf"
+                                                data-oid="t665ocy"
                                             >
                                                 <CheckCircle
                                                     className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0"
-                                                    data-oid="o03e3ug"
+                                                    data-oid="97uskg4"
                                                 />
 
                                                 <span
                                                     className="text-gray-700 text-sm"
-                                                    data-oid="wlg4u4t"
+                                                    data-oid="ms_b6c_"
                                                 >
                                                     {tip}
                                                 </span>
@@ -340,48 +340,48 @@ export default function LinkedInPage() {
                 </section>
 
                 {/* Success Stories */}
-                <section className="py-16 px-4" data-oid="e:qghjb">
-                    <div className="max-w-6xl mx-auto" data-oid="2fsbv-r">
-                        <div className="text-center mb-12" data-oid="tj3xx9o">
+                <section className="py-16 px-4" data-oid="vchuww5">
+                    <div className="max-w-6xl mx-auto" data-oid="wkdz7qd">
+                        <div className="text-center mb-12" data-oid="b0584yc">
                             <h2
                                 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4"
-                                data-oid="mb6cxj1"
+                                data-oid="i23y.mz"
                             >
                                 LinkedIn Success Stories
                             </h2>
-                            <p className="text-xl text-gray-600" data-oid="dt829yv">
+                            <p className="text-xl text-gray-600" data-oid="c2cg0wx">
                                 Real results from our community members
                             </p>
                         </div>
 
-                        <div className="grid md:grid-cols-3 gap-8" data-oid="9k9w1-q">
+                        <div className="grid md:grid-cols-3 gap-8" data-oid="o63qt1_">
                             {successStories.map((story, index) => (
                                 <div
                                     key={index}
                                     className="bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-[hsl(210,30%,95%)]"
-                                    data-oid="cabgk9u"
+                                    data-oid="q-_751r"
                                 >
-                                    <div className="text-center mb-4" data-oid="_:t3bfr">
-                                        <div className="text-4xl mb-2" data-oid="in3fepb">
+                                    <div className="text-center mb-4" data-oid="4j-a5ip">
+                                        <div className="text-4xl mb-2" data-oid="hl-49xp">
                                             {story.image}
                                         </div>
-                                        <h3 className="font-bold text-gray-800" data-oid="g25o28o">
+                                        <h3 className="font-bold text-gray-800" data-oid="c8ximp:">
                                             {story.name}
                                         </h3>
-                                        <p className="text-sm text-[#0077B5]" data-oid="wrupz9d">
+                                        <p className="text-sm text-[#0077B5]" data-oid="s19fy.a">
                                             {story.role}
                                         </p>
                                     </div>
                                     <p
                                         className="text-gray-700 italic text-center mb-4"
-                                        data-oid="jz2p--v"
+                                        data-oid="_:h8p_1"
                                     >
                                         "{story.story}"
                                     </p>
-                                    <div className="text-center" data-oid="-su16af">
+                                    <div className="text-center" data-oid="gmi_0te">
                                         <span
                                             className="inline-block px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium"
-                                            data-oid="jwcfrll"
+                                            data-oid="wes11-2"
                                         >
                                             {story.growth}
                                         </span>
@@ -393,46 +393,46 @@ export default function LinkedInPage() {
                 </section>
 
                 {/* LinkedIn Content Calendar */}
-                <section className="py-16 px-4" data-oid="pv6q18k">
-                    <div className="max-w-4xl mx-auto" data-oid="bcb6mrn">
+                <section className="py-16 px-4" data-oid="5wu0q.y">
+                    <div className="max-w-4xl mx-auto" data-oid="-mmvzgo">
                         <div
                             className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-[hsl(210,30%,95%)]"
-                            data-oid="qjs36:s"
+                            data-oid="zl9syrq"
                         >
-                            <div className="text-center mb-8" data-oid="7ph1u7s">
+                            <div className="text-center mb-8" data-oid="ako.jrj">
                                 <h2
                                     className="text-2xl font-bold text-gray-800 mb-4"
-                                    data-oid="41c6oeo"
+                                    data-oid="xlyu2pd"
                                 >
                                     Weekly LinkedIn Content Calendar
                                 </h2>
-                                <p className="text-gray-600" data-oid="_cdy91a">
+                                <p className="text-gray-600" data-oid="t1m:hii">
                                     Stay consistent with our proven content strategy
                                 </p>
                             </div>
 
-                            <div className="grid md:grid-cols-2 gap-6" data-oid="a97:op:">
-                                <div className="space-y-4" data-oid="26fcnro">
+                            <div className="grid md:grid-cols-2 gap-6" data-oid="jnlmt_x">
+                                <div className="space-y-4" data-oid="ru:2npd">
                                     <div
                                         className="flex items-center gap-3 p-3 bg-blue-50 rounded-lg"
-                                        data-oid="3_7jv60"
+                                        data-oid="t9zii:t"
                                     >
                                         <div
                                             className="w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center text-sm font-bold"
-                                            data-oid="1iu08ry"
+                                            data-oid="npff70l"
                                         >
                                             M
                                         </div>
-                                        <div data-oid="vtoticn">
+                                        <div data-oid=".4::c0-">
                                             <div
                                                 className="font-medium text-gray-800"
-                                                data-oid="8fpd_gs"
+                                                data-oid="y2wo1r9"
                                             >
                                                 Monday Motivation
                                             </div>
                                             <div
                                                 className="text-sm text-gray-600"
-                                                data-oid="508f:oa"
+                                                data-oid="9_aqvw."
                                             >
                                                 Share career insights or achievements
                                             </div>
@@ -440,24 +440,24 @@ export default function LinkedInPage() {
                                     </div>
                                     <div
                                         className="flex items-center gap-3 p-3 bg-green-50 rounded-lg"
-                                        data-oid="jlbu786"
+                                        data-oid=".oeaap3"
                                     >
                                         <div
                                             className="w-8 h-8 bg-green-500 text-white rounded-full flex items-center justify-center text-sm font-bold"
-                                            data-oid="2ahwa3y"
+                                            data-oid="bji3ufn"
                                         >
                                             T
                                         </div>
-                                        <div data-oid="7e6p5xs">
+                                        <div data-oid="eeg4l5e">
                                             <div
                                                 className="font-medium text-gray-800"
-                                                data-oid="_0z6r_y"
+                                                data-oid="orgbmoq"
                                             >
                                                 Tech Tuesday
                                             </div>
                                             <div
                                                 className="text-sm text-gray-600"
-                                                data-oid="oxcnujv"
+                                                data-oid="zdje3:v"
                                             >
                                                 Share technical knowledge or tutorials
                                             </div>
@@ -465,51 +465,51 @@ export default function LinkedInPage() {
                                     </div>
                                     <div
                                         className="flex items-center gap-3 p-3 bg-purple-50 rounded-lg"
-                                        data-oid="f601i1m"
+                                        data-oid="0:0hhgl"
                                     >
                                         <div
                                             className="w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center text-sm font-bold"
-                                            data-oid="ubzvegk"
+                                            data-oid="obxw-_y"
                                         >
                                             W
                                         </div>
-                                        <div data-oid="4_gnqpy">
+                                        <div data-oid="yo74cwo">
                                             <div
                                                 className="font-medium text-gray-800"
-                                                data-oid="sm6lqks"
+                                                data-oid="rz:wjm8"
                                             >
                                                 Wisdom Wednesday
                                             </div>
                                             <div
                                                 className="text-sm text-gray-600"
-                                                data-oid="lljwhw_"
+                                                data-oid="w6f.7:."
                                             >
                                                 Share lessons learned or advice
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div className="space-y-4" data-oid="90p-ysi">
+                                <div className="space-y-4" data-oid="ew-cei0">
                                     <div
                                         className="flex items-center gap-3 p-3 bg-orange-50 rounded-lg"
-                                        data-oid="jfu633-"
+                                        data-oid="mgiy4fj"
                                     >
                                         <div
                                             className="w-8 h-8 bg-orange-500 text-white rounded-full flex items-center justify-center text-sm font-bold"
-                                            data-oid="yz-svko"
+                                            data-oid="0.2wpiq"
                                         >
                                             T
                                         </div>
-                                        <div data-oid="lac1.kd">
+                                        <div data-oid="26ciov:">
                                             <div
                                                 className="font-medium text-gray-800"
-                                                data-oid="_j1hu9p"
+                                                data-oid="mn3_gz0"
                                             >
                                                 Throwback Thursday
                                             </div>
                                             <div
                                                 className="text-sm text-gray-600"
-                                                data-oid="8o_iahm"
+                                                data-oid="hn0nq81"
                                             >
                                                 Share your journey or milestones
                                             </div>
@@ -517,24 +517,24 @@ export default function LinkedInPage() {
                                     </div>
                                     <div
                                         className="flex items-center gap-3 p-3 bg-pink-50 rounded-lg"
-                                        data-oid="hoc835i"
+                                        data-oid="gfnvlxn"
                                     >
                                         <div
                                             className="w-8 h-8 bg-pink-500 text-white rounded-full flex items-center justify-center text-sm font-bold"
-                                            data-oid="yczbms4"
+                                            data-oid="hqm5:a8"
                                         >
                                             F
                                         </div>
-                                        <div data-oid="kvrs0tt">
+                                        <div data-oid="__yek-y">
                                             <div
                                                 className="font-medium text-gray-800"
-                                                data-oid="_1z.z87"
+                                                data-oid="qm4dj0t"
                                             >
                                                 Feature Friday
                                             </div>
                                             <div
                                                 className="text-sm text-gray-600"
-                                                data-oid="s0r_maa"
+                                                data-oid="zc7v2j6"
                                             >
                                                 Highlight tools, resources, or people
                                             </div>
@@ -542,24 +542,24 @@ export default function LinkedInPage() {
                                     </div>
                                     <div
                                         className="flex items-center gap-3 p-3 bg-indigo-50 rounded-lg"
-                                        data-oid="2ta_:vm"
+                                        data-oid="liu4fy1"
                                     >
                                         <div
                                             className="w-8 h-8 bg-indigo-500 text-white rounded-full flex items-center justify-center text-sm font-bold"
-                                            data-oid="q9vxxcm"
+                                            data-oid="_2bpxx8"
                                         >
                                             S
                                         </div>
-                                        <div data-oid="ernh4_i">
+                                        <div data-oid="uzvfacb">
                                             <div
                                                 className="font-medium text-gray-800"
-                                                data-oid="-lhr52o"
+                                                data-oid="i:qr._g"
                                             >
                                                 Saturday Spotlight
                                             </div>
                                             <div
                                                 className="text-sm text-gray-600"
-                                                data-oid="lq-8a56"
+                                                data-oid="joxp3_i"
                                             >
                                                 Engage with community content
                                             </div>
@@ -572,37 +572,37 @@ export default function LinkedInPage() {
                 </section>
 
                 {/* CTA Section */}
-                <section className="py-16 px-4" data-oid="brni9kb">
-                    <div className="max-w-4xl mx-auto text-center" data-oid="mozpi.8">
+                <section className="py-16 px-4" data-oid="u6-dakb">
+                    <div className="max-w-4xl mx-auto text-center" data-oid=":la6w.2">
                         <div
                             className="bg-gradient-to-r from-[#0077B5] to-[#005885] rounded-2xl p-8 text-white"
-                            data-oid="1wkov29"
+                            data-oid="azhpb3y"
                         >
-                            <h2 className="text-3xl font-bold mb-4" data-oid="m:y.k3o">
+                            <h2 className="text-3xl font-bold mb-4" data-oid="2bgmawm">
                                 Ready to Transform Your LinkedIn?
                             </h2>
-                            <p className="text-xl mb-6 text-blue-100" data-oid="43.9tm5">
+                            <p className="text-xl mb-6 text-blue-100" data-oid="uov7.k6">
                                 Join thousands of professionals who've accelerated their careers
                                 through LinkedIn
                             </p>
                             <div
                                 className="flex flex-col sm:flex-row gap-4 justify-center"
-                                data-oid="y9ts9cu"
+                                data-oid="g9ksfrl"
                             >
                                 <button
                                     onClick={handleLinkedInRedirect}
                                     className="px-6 py-3 bg-white text-[#0077B5] rounded-xl font-medium hover:shadow-lg transition-all transform hover:scale-105"
-                                    data-oid="x6o_6fg"
+                                    data-oid="ig1o9b3"
                                 >
-                                    <Linkedin className="inline h-5 w-5 mr-2" data-oid="m_fxa18" />
+                                    <Linkedin className="inline h-5 w-5 mr-2" data-oid="rklorac" />
                                     Follow Our LinkedIn
                                 </button>
                                 <Link
                                     href="/resources/community"
                                     className="px-6 py-3 border border-white text-white rounded-xl font-medium hover:bg-white hover:text-[#0077B5] transition-all"
-                                    data-oid="gtzj7_u"
+                                    data-oid="u_jochr"
                                 >
-                                    <Users className="inline h-5 w-5 mr-2" data-oid="jmra_3y" />
+                                    <Users className="inline h-5 w-5 mr-2" data-oid="6sfk0zs" />
                                     Join Community
                                 </Link>
                             </div>

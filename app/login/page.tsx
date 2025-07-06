@@ -1,134 +1,94 @@
 'use client';
 
-import MainNavbar from '@/components/mainNavbar';
+import { useState, useEffect, Suspense } from 'react';
+import { useAuth } from '@/lib/auth/AuthContext';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import MainNavbar from '@/components/mainNavbar';
 
-// SVG Logo component
-const Logo = () => (
-    <svg
-        className="h-8 w-auto"
-        viewBox="0 0 120 30"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        data-oid="3ficlh6"
-    >
-        <path
-            d="M10 5L20 15L10 25"
-            stroke="#1E3A8A"
-            strokeWidth="3"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            data-oid="l:f7a84"
-        />
-
-        <path
-            d="M30 5H40L50 25H40"
-            stroke="#1E3A8A"
-            strokeWidth="3"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            data-oid="ofek_9y"
-        />
-
-        <text
-            x="60"
-            y="22"
-            fontFamily="Arial"
-            fontSize="18"
-            fontWeight="bold"
-            fill="#1E3A8A"
-            data-oid="n-qtqoy"
-        >
-            Careers
-        </text>
-    </svg>
-);
-
-export default function LoginPage() {
-    const router = useRouter();
+function LoginForm() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [rememberMe, setRememberMe] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+    const { login, isAuthenticated } = useAuth();
+    const router = useRouter();
+    const searchParams = useSearchParams();
+
+    // Redirect if already authenticated
+    useEffect(() => {
+        if (isAuthenticated) {
+            const redirectTo = searchParams.get('redirect') || '/dashboard';
+            router.push(redirectTo);
+        }
+    }, [isAuthenticated, router, searchParams]);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setIsLoading(true);
         setError('');
+        setIsLoading(true);
 
-        // Simulate API call
-        try {
-            // Replace with actual authentication logic
-            await new Promise((resolve) => setTimeout(resolve, 1000));
+        const result = await login(email, password);
 
-            // For demo purposes, just redirect to home
-            router.push('/');
-        } catch (err) {
-            setError('Invalid email or password. Please try again.');
-        } finally {
-            setIsLoading(false);
+        if (!result.success) {
+            setError(result.error || 'Login failed');
         }
+
+        setIsLoading(false);
     };
 
     return (
         <>
-            <MainNavbar data-oid="fxns-f9" />
             <div
-                className="min-h-screen bg-gradient-to-b from-[hsl(204, 100.00%, 50.00%)] to-[hsl(162, 100.00%, 50.00%)] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
-                data-oid="-lntnaz"
+                className="min-h-screen bg-gradient-to-br from-[hsl(196,80%,45%)] via-[hsl(210,70%,45%)] to-[hsl(175,70%,41%)] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
+                data-oid="nlvqou:"
             >
-                {/* Animated background elements */}
-                <div className="fixed inset-0 overflow-hidden -z-10" data-oid="1e7gyxh">
+                <div className="max-w-md w-full space-y-8" data-oid="eph87iy">
                     <div
-                        className="absolute -top-20 -left-20 w-96 h-96 bg-[hsl(196,80%,65%)] opacity-50 rounded-full blur-3xl animate-blob"
-                        data-oid="v71p-d5"
-                    ></div>
-                    <div
-                        className="absolute top-40 right-20 w-96 h-96 bg-[hsl(210,70%,65%)] opacity-50 rounded-full blur-3xl animate-blob animation-delay-2000"
-                        data-oid="bt1hsd3"
-                    ></div>
-                    <div
-                        className="absolute bottom-10 left-1/3 w-96 h-96 bg-[hsl(175,70%,61%)] opacity-40 rounded-full blur-3xl animate-blob animation-delay-4000"
-                        data-oid="cp6703k"
-                    ></div>
-                </div>
-
-                <div className="w-full sm:mx-auto sm:max-w-md z-10 -mt-20" data-oid="zmw.qyt">
-                    <div className="text-center mb-6" data-oid="bhtyv9k">
-                        <h2 className=" text-3xl font-extrabold text-gray-800" data-oid="nk9.qtr">
-                            Welcome back
-                        </h2>
-                        <p className="mt-2 text-sm text-gray-600" data-oid="st4bmrq">
-                            Sign in to access your account
-                        </p>
-                    </div>
-
-                    <div
-                        className="bg-white/80 backdrop-blur-md py-8 px-6 shadow-xl rounded-xl border border-[hsl(210,30%,95%)] sm:px-10 transform transition-all duration-500 hover:shadow-2xl"
-                        data-oid="vrsezvi"
+                        className="bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl p-8 border border-white/20"
+                        data-oid="1c:whjq"
                     >
-                        {error && (
-                            <div
-                                className="mb-4 p-3 bg-red-50 text-red-700 text-sm rounded-md border border-red-200"
-                                data-oid="dfxuhxp"
+                        <div data-oid="fn9oq4q">
+                            <h2
+                                className="mt-6 text-center text-3xl font-extrabold text-gray-900"
+                                data-oid="r7lzat-"
                             >
-                                {error}
-                            </div>
-                        )}
-
-                        <form className="space-y-6" onSubmit={handleSubmit} data-oid="jbr_.kl">
-                            <div data-oid="b6.ivs2">
-                                <label
-                                    htmlFor="email"
-                                    className="block text-sm font-medium text-gray-700"
-                                    data-oid="gl30f-d"
+                                Sign in to your account
+                            </h2>
+                            <p
+                                className="mt-2 text-center text-sm text-gray-600"
+                                data-oid="coutkf4"
+                            >
+                                Or{' '}
+                                <Link
+                                    href="/register"
+                                    className="font-medium text-[hsl(196,80%,45%)] hover:text-[hsl(196,80%,40%)] transition-colors"
+                                    data-oid="5esl7f6"
                                 >
-                                    Email address
-                                </label>
-                                <div className="mt-1" data-oid="iiarkb6">
+                                    create a new account
+                                </Link>
+                            </p>
+                        </div>
+
+                        <form className="mt-8 space-y-6" onSubmit={handleSubmit} data-oid="e8hs7hr">
+                            {error && (
+                                <div
+                                    className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg"
+                                    data-oid="eejy.5x"
+                                >
+                                    {error}
+                                </div>
+                            )}
+
+                            <div className="space-y-4" data-oid="-59:8k2">
+                                <div data-oid="32w1jh:">
+                                    <label
+                                        htmlFor="email"
+                                        className="block text-sm font-medium text-gray-700"
+                                        data-oid="ik2vogq"
+                                    >
+                                        Email address
+                                    </label>
                                     <input
                                         id="email"
                                         name="email"
@@ -137,22 +97,20 @@ export default function LoginPage() {
                                         required
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
-                                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[hsl(196,80%,45%)] focus:border-[hsl(196,80%,45%)] transition-colors duration-200"
-                                        placeholder="you@example.com"
-                                        data-oid="ca55mb3"
+                                        className="mt-1 appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-[hsl(196,80%,45%)] focus:z-10 sm:text-sm transition-all duration-200"
+                                        placeholder="Enter your email"
+                                        data-oid="g7u.o_n"
                                     />
                                 </div>
-                            </div>
 
-                            <div data-oid="661ya9_">
-                                <label
-                                    htmlFor="password"
-                                    className="block text-sm font-medium text-gray-700"
-                                    data-oid="1y4btaq"
-                                >
-                                    Password
-                                </label>
-                                <div className="mt-1" data-oid="cph78u1">
+                                <div data-oid="4zi2:fm">
+                                    <label
+                                        htmlFor="password"
+                                        className="block text-sm font-medium text-gray-700"
+                                        data-oid="95sgd5."
+                                    >
+                                        Password
+                                    </label>
                                     <input
                                         id="password"
                                         name="password"
@@ -161,97 +119,128 @@ export default function LoginPage() {
                                         required
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
-                                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[hsl(196,80%,45%)] focus:border-[hsl(196,80%,45%)] transition-colors duration-200"
-                                        placeholder="••••••••"
-                                        data-oid="fzzmr-o"
+                                        className="mt-1 appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-[hsl(196,80%,45%)] focus:z-10 sm:text-sm transition-all duration-200"
+                                        placeholder="Enter your password"
+                                        data-oid="7y0m:aj"
                                     />
                                 </div>
                             </div>
 
-                            <div className="flex items-center justify-between" data-oid="fj518k5">
-                                <div className="flex items-center" data-oid="5406udh">
+                            <div className="flex items-center justify-between" data-oid="ni.:ugl">
+                                <div className="flex items-center" data-oid="6g16_gr">
                                     <input
                                         id="remember-me"
                                         name="remember-me"
                                         type="checkbox"
-                                        checked={rememberMe}
-                                        onChange={(e) => setRememberMe(e.target.checked)}
                                         className="h-4 w-4 text-[hsl(196,80%,45%)] focus:ring-[hsl(196,80%,45%)] border-gray-300 rounded"
-                                        data-oid="u:.q1:u"
+                                        data-oid="mz7jnuj"
                                     />
 
                                     <label
                                         htmlFor="remember-me"
-                                        className="ml-2 block text-sm text-gray-700"
-                                        data-oid="7rby564"
+                                        className="ml-2 block text-sm text-gray-900"
+                                        data-oid="pmqb13i"
                                     >
                                         Remember me
                                     </label>
                                 </div>
 
-                                <div className="text-sm" data-oid="255rxoi">
+                                <div className="text-sm" data-oid="21y7ftr">
                                     <Link
                                         href="/forgot-password"
-                                        className="font-medium text-[hsl(196,80%,45%)] hover:text-[hsl(196,80%,35%)] transition-colors duration-200"
-                                        data-oid="hjo2ypr"
+                                        className="font-medium text-[hsl(196,80%,45%)] hover:text-[hsl(196,80%,40%)] transition-colors"
+                                        data-oid="-zcji:o"
                                     >
                                         Forgot your password?
                                     </Link>
                                 </div>
                             </div>
 
-                            <div data-oid="6t56c9i">
+                            <div data-oid="7_8xra3">
                                 <button
                                     type="submit"
                                     disabled={isLoading}
-                                    className={`w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[hsl(196,80%,45%)] transition-all duration-300 transform hover:translate-y-[-2px] ${isLoading ? 'opacity-70 cursor-not-allowed' : ''}`}
-                                    data-oid="y6twf84"
+                                    className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[hsl(196,80%,45%)] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 transform hover:scale-105"
+                                    data-oid="sq26m_j"
                                 >
                                     {isLoading ? (
-                                        <svg
-                                            className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            data-oid="gnfkd06"
-                                        >
-                                            <circle
-                                                className="opacity-25"
-                                                cx="12"
-                                                cy="12"
-                                                r="10"
-                                                stroke="currentColor"
-                                                strokeWidth="4"
-                                                data-oid="g-v1:j_"
-                                            ></circle>
-                                            <path
-                                                className="opacity-75"
-                                                fill="currentColor"
-                                                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                                                data-oid="-e41v:k"
-                                            ></path>
-                                        </svg>
-                                    ) : null}
-                                    {isLoading ? 'Signing in...' : 'Sign in'}
+                                        <div className="flex items-center" data-oid="aqt4w7a">
+                                            <div
+                                                className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"
+                                                data-oid="c58dno-"
+                                            ></div>
+                                            Signing in...
+                                        </div>
+                                    ) : (
+                                        'Sign in'
+                                    )}
                                 </button>
                             </div>
-                        </form>
-                    </div>
 
-                    <div className="mt-6 text-center" data-oid="zy8e-t4">
-                        <p className="text-sm text-gray-600" data-oid="sqrfdlc">
-                            Don't have an account?{' '}
-                            <Link
-                                href="/register"
-                                className="font-medium text-[hsl(196,80%,45%)] hover:text-[hsl(196,80%,35%)] transition-colors duration-200"
-                                data-oid="gsmd75v"
-                            >
-                                Sign up
-                            </Link>
-                        </p>
+                            <div className="mt-6" data-oid="330m_nb">
+                                <div className="relative" data-oid="49o.ezp">
+                                    <div
+                                        className="absolute inset-0 flex items-center"
+                                        data-oid="6vthylw"
+                                    >
+                                        <div
+                                            className="w-full border-t border-gray-300"
+                                            data-oid="cz13.32"
+                                        />
+                                    </div>
+                                    <div
+                                        className="relative flex justify-center text-sm"
+                                        data-oid="z9ls.gw"
+                                    >
+                                        <span
+                                            className="px-2 bg-white text-gray-500"
+                                            data-oid="8a9y7jv"
+                                        >
+                                            Demo Credentials
+                                        </span>
+                                    </div>
+                                </div>
+                                <div
+                                    className="mt-3 text-center text-xs text-gray-600 bg-gray-50 p-3 rounded-lg"
+                                    data-oid="5:n_tun"
+                                >
+                                    <p data-oid="8n9m:9-">
+                                        <strong data-oid="q.:cecq">Email:</strong> demo@careerx.com
+                                    </p>
+                                    <p data-oid="havau7-">
+                                        <strong data-oid="0.8qdle">Password:</strong> Any password
+                                        (6+ characters)
+                                    </p>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </>
+    );
+}
+
+export default function LoginPage() {
+    return (
+        <div className="min-h-screen bg-white text-gray-800 font-sans" data-oid="snqh.s7">
+            <MainNavbar data-oid="cvd9f_w" />
+            <Suspense
+                fallback={
+                    <div
+                        className="min-h-screen bg-gradient-to-br from-[hsl(196,80%,45%)] via-[hsl(210,70%,45%)] to-[hsl(175,70%,41%)] flex items-center justify-center"
+                        data-oid="qs8fy3v"
+                    >
+                        <div
+                            className="animate-spin rounded-full h-32 w-32 border-b-2 border-white"
+                            data-oid="kmc-mhb"
+                        ></div>
+                    </div>
+                }
+                data-oid="fj00bp4"
+            >
+                <LoginForm data-oid="mwd:nhw" />
+            </Suspense>
+        </div>
     );
 }

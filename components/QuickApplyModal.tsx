@@ -71,44 +71,44 @@ export default function QuickApplyModal({ job, isOpen, onClose, onSubmit }: Quic
         <div
             className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4"
             onClick={handleBackdropClick}
-            data-oid="m185_hw"
+            data-oid="wp1tk5q"
         >
             <div
                 className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-hidden"
-                data-oid="1syn8g0"
+                data-oid="l8_kpy2"
             >
                 {/* Header */}
                 <div
                     className="bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white p-6"
-                    data-oid="ee3iacp"
+                    data-oid="-h5:jki"
                 >
-                    <div className="flex items-center justify-between" data-oid="lqi_0v8">
-                        <div data-oid="ybjfpnm">
-                            <h1 className="text-2xl font-bold" data-oid="b1w42j4">
+                    <div className="flex items-center justify-between" data-oid="13vk-df">
+                        <div data-oid="j07-nwa">
+                            <h1 className="text-2xl font-bold" data-oid="hcr5m63">
                                 Quick Apply
                             </h1>
-                            <p className="text-blue-100" data-oid="wpp.b87">
+                            <p className="text-blue-100" data-oid="o2dt:uv">
                                 {job.title} at {job.company}
                             </p>
                         </div>
                         <button
                             onClick={onClose}
                             className="p-2 hover:bg-white/20 rounded-full transition-colors"
-                            data-oid="zk8s3cm"
+                            data-oid="1pcj:8p"
                         >
                             <svg
                                 className="h-6 w-6"
                                 fill="none"
                                 stroke="currentColor"
                                 viewBox="0 0 24 24"
-                                data-oid="qeudkf0"
+                                data-oid="lkgkh1f"
                             >
                                 <path
                                     strokeLinecap="round"
                                     strokeLinejoin="round"
                                     strokeWidth="2"
                                     d="M6 18L18 6M6 6l12 12"
-                                    data-oid="y-f4ewy"
+                                    data-oid="jj9.0y5"
                                 />
                             </svg>
                         </button>
@@ -116,12 +116,12 @@ export default function QuickApplyModal({ job, isOpen, onClose, onSubmit }: Quic
                 </div>
 
                 {/* Form */}
-                <form onSubmit={handleSubmit} className="p-6 space-y-6" data-oid="xusorby">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6" data-oid="4gh3l_n">
-                        <div data-oid=".n6rh30">
+                <form onSubmit={handleSubmit} className="p-6 space-y-6" data-oid="1r3g3c_">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6" data-oid="0i-m8v9">
+                        <div data-oid="f:04eg-">
                             <label
                                 className="block text-sm font-medium text-gray-700 mb-2"
-                                data-oid="_-1_l9f"
+                                data-oid="p:ped_5"
                             >
                                 Full Name *
                             </label>
@@ -133,20 +133,20 @@ export default function QuickApplyModal({ job, isOpen, onClose, onSubmit }: Quic
                                     errors.fullName ? 'border-red-500' : 'border-gray-300'
                                 }`}
                                 placeholder="Enter your full name"
-                                data-oid="-mz_ws-"
+                                data-oid="6xb:pxo"
                             />
 
                             {errors.fullName && (
-                                <p className="text-red-500 text-sm mt-1" data-oid="le0tfk:">
+                                <p className="text-red-500 text-sm mt-1" data-oid="19kzl96">
                                     {errors.fullName}
                                 </p>
                             )}
                         </div>
 
-                        <div data-oid="p:.e-xc">
+                        <div data-oid="05h2afn">
                             <label
                                 className="block text-sm font-medium text-gray-700 mb-2"
-                                data-oid="k0qbo8t"
+                                data-oid="j9mx_bw"
                             >
                                 Email Address *
                             </label>
@@ -158,21 +158,21 @@ export default function QuickApplyModal({ job, isOpen, onClose, onSubmit }: Quic
                                     errors.email ? 'border-red-500' : 'border-gray-300'
                                 }`}
                                 placeholder="Enter your email address"
-                                data-oid="z_x-mf4"
+                                data-oid="1dxol53"
                             />
 
                             {errors.email && (
-                                <p className="text-red-500 text-sm mt-1" data-oid="3:zr4_z">
+                                <p className="text-red-500 text-sm mt-1" data-oid="bomp51l">
                                     {errors.email}
                                 </p>
                             )}
                         </div>
                     </div>
 
-                    <div data-oid="8od20bk">
+                    <div data-oid="n3svu.y">
                         <label
                             className="block text-sm font-medium text-gray-700 mb-2"
-                            data-oid="rrop6dr"
+                            data-oid="kw0-t:k"
                         >
                             Phone Number *
                         </label>
@@ -184,20 +184,20 @@ export default function QuickApplyModal({ job, isOpen, onClose, onSubmit }: Quic
                                 errors.phone ? 'border-red-500' : 'border-gray-300'
                             }`}
                             placeholder="Enter your phone number"
-                            data-oid="dt8qdvu"
+                            data-oid="rp.18zw"
                         />
 
                         {errors.phone && (
-                            <p className="text-red-500 text-sm mt-1" data-oid="yqne270">
+                            <p className="text-red-500 text-sm mt-1" data-oid="2ep-zz2">
                                 {errors.phone}
                             </p>
                         )}
                     </div>
 
-                    <div data-oid="h04:3zz">
+                    <div data-oid="p5imwcx">
                         <label
                             className="block text-sm font-medium text-gray-700 mb-2"
-                            data-oid="c._pa3j"
+                            data-oid="2duqwxc"
                         >
                             Resume/CV *
                         </label>
@@ -205,7 +205,7 @@ export default function QuickApplyModal({ job, isOpen, onClose, onSubmit }: Quic
                             className={`border-2 border-dashed rounded-lg p-6 text-center ${
                                 errors.resume ? 'border-red-500' : 'border-gray-300'
                             }`}
-                            data-oid="i71zxtd"
+                            data-oid="al141f9"
                         >
                             <input
                                 type="file"
@@ -215,61 +215,61 @@ export default function QuickApplyModal({ job, isOpen, onClose, onSubmit }: Quic
                                 }
                                 className="hidden"
                                 id="quick-resume-upload"
-                                data-oid="n2h4_gq"
+                                data-oid="0qj05j5"
                             />
 
                             <label
                                 htmlFor="quick-resume-upload"
                                 className="cursor-pointer"
-                                data-oid="hfzrkt2"
+                                data-oid="ecgcls9"
                             >
-                                <div className="text-gray-600" data-oid="53jgb1j">
+                                <div className="text-gray-600" data-oid="_3l0v47">
                                     <svg
                                         className="mx-auto h-8 w-8 text-gray-400"
                                         stroke="currentColor"
                                         fill="none"
                                         viewBox="0 0 48 48"
-                                        data-oid="aurqcxs"
+                                        data-oid="k_1hmm9"
                                     >
                                         <path
                                             d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
                                             strokeWidth="2"
                                             strokeLinecap="round"
                                             strokeLinejoin="round"
-                                            data-oid="fjj4qd_"
+                                            data-oid="apkbx69"
                                         />
                                     </svg>
-                                    <p className="mt-2 text-sm" data-oid="9-np2pn">
+                                    <p className="mt-2 text-sm" data-oid="u034tf-">
                                         <span
                                             className="font-medium text-[hsl(196,80%,45%)]"
-                                            data-oid="ncv_1kd"
+                                            data-oid="27eqz93"
                                         >
                                             Click to upload
                                         </span>{' '}
                                         or drag and drop
                                     </p>
-                                    <p className="text-xs text-gray-500" data-oid="j128zoc">
+                                    <p className="text-xs text-gray-500" data-oid="-opk7-h">
                                         PDF, DOC, DOCX up to 10MB
                                     </p>
                                 </div>
                             </label>
                             {formData.resume && (
-                                <p className="mt-2 text-sm text-green-600" data-oid="cm2y_n5">
+                                <p className="mt-2 text-sm text-green-600" data-oid="zr_rubm">
                                     ✓ {formData.resume.name}
                                 </p>
                             )}
                         </div>
                         {errors.resume && (
-                            <p className="text-red-500 text-sm mt-1" data-oid="rpw.4_1">
+                            <p className="text-red-500 text-sm mt-1" data-oid="k_-152u">
                                 {errors.resume}
                             </p>
                         )}
                     </div>
 
-                    <div data-oid="a.57q7:">
+                    <div data-oid="g85fw03">
                         <label
                             className="block text-sm font-medium text-gray-700 mb-2"
-                            data-oid=":fwbz00"
+                            data-oid="w9tti54"
                         >
                             Why are you interested in this role?
                         </label>
@@ -279,20 +279,20 @@ export default function QuickApplyModal({ job, isOpen, onClose, onSubmit }: Quic
                             rows={4}
                             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)]"
                             placeholder="Tell us why you're excited about this opportunity..."
-                            data-oid="pyz815b"
+                            data-oid="hbsjy8v"
                         />
                     </div>
 
                     {/* Footer */}
                     <div
                         className="flex justify-between pt-4 border-t border-gray-200"
-                        data-oid="01k3hq3"
+                        data-oid="01lahzb"
                     >
                         <button
                             type="button"
                             onClick={onClose}
                             className="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg font-medium hover:bg-gray-100 transition-colors"
-                            data-oid="aingqoe"
+                            data-oid="46jldrb"
                         >
                             Cancel
                         </button>
@@ -300,7 +300,7 @@ export default function QuickApplyModal({ job, isOpen, onClose, onSubmit }: Quic
                             type="submit"
                             disabled={isSubmitting}
                             className="px-8 py-3 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white rounded-lg font-medium hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
-                            data-oid="87gadp3"
+                            data-oid="wm:2gje"
                         >
                             {isSubmitting ? (
                                 <>
@@ -308,7 +308,7 @@ export default function QuickApplyModal({ job, isOpen, onClose, onSubmit }: Quic
                                         className="animate-spin h-4 w-4"
                                         fill="none"
                                         viewBox="0 0 24 24"
-                                        data-oid="c7_hp_u"
+                                        data-oid="qkz00a1"
                                     >
                                         <circle
                                             className="opacity-25"
@@ -317,14 +317,14 @@ export default function QuickApplyModal({ job, isOpen, onClose, onSubmit }: Quic
                                             r="10"
                                             stroke="currentColor"
                                             strokeWidth="4"
-                                            data-oid="1gy9yuv"
+                                            data-oid="lqnguk3"
                                         />
 
                                         <path
                                             className="opacity-75"
                                             fill="currentColor"
                                             d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                                            data-oid="zn38n_m"
+                                            data-oid="i:3w:zs"
                                         />
                                     </svg>
                                     Submitting...
