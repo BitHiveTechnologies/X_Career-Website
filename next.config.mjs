@@ -21,6 +21,16 @@ const nextConfig = {
     compress: true,
     // Optimize for production
     swcMinify: true,
+    // Redirects configuration
+    async redirects() {
+        return [
+            {
+                source: '/resources/resume-builder',
+                destination: '/resume-builder',
+                permanent: true,
+            },
+        ];
+    },
     // Webpack configuration to handle potential module resolution issues
     webpack: (config, { isServer }) => {
         // Ensure proper module resolution

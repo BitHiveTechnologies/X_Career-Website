@@ -12,7 +12,7 @@ export const useAuthAction = () => {
             action();
         } else {
             // Store the intended action path for redirect after login
-            if (redirectPath) {
+            if (redirectPath && typeof window !== 'undefined') {
                 localStorage.setItem('careerx_redirect_after_auth', redirectPath);
             }
             router.push('/login');
@@ -21,10 +21,24 @@ export const useAuthAction = () => {
 
     const navigateWithAuth = (path: string) => {
         if (isAuthenticated) {
-            router.push(path);
+            // If user is authenticated and trying to access community, go to community
+            if (path === '/community') {
+                router.push('/community');
+            } else {
+                router.push(path);
+            }
         } else {
-            localStorage.setItem('careerx_redirect_after_auth', path);
-            router.push('/login');
+            // If user is not authenticated
+            if (path === '/community') {
+                // For community access, redirect to register page
+                router.push('/register');
+            } else {
+                // For other protected routes, store redirect and go to login
+                if (typeof window !== 'undefined') {
+                    localStorage.setItem('careerx_redirect_after_auth', path);
+                }
+                router.push('/login');
+            }
         }
     };
 
