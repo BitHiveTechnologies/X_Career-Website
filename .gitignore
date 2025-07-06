@@ -5,6 +5,7 @@
 /.pnp
 .pnp.js
 .yarn/install-state.gz
+node_modules/
 
 # testing
 /coverage
@@ -12,6 +13,7 @@
 # next.js
 /.next/
 /out/
+.next/
 
 # production
 /build
@@ -51,3 +53,8 @@ bun.lock
 
 # Cache
 .cache/
+
+# Additional Next.js ignores
+.next
+node_modules
+*.tsbuildinfo
