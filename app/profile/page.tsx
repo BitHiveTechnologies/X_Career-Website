@@ -44,6 +44,7 @@ export default function ProfilePage() {
       "Git",
       "Figma",
     ],
+
     experience: "Fresher",
     education: "B.Tech in Computer Science Engineering",
     portfolio: "https://johndoe.dev",
@@ -96,49 +97,49 @@ export default function ProfilePage() {
   return (
     <div
       className="min-h-screen bg-gradient-to-br from-[hsl(210,50%,98%)] to-[hsl(196,60%,95%)]"
-      data-oid="g1c3tuu"
+      data-oid="c-xulzm"
     >
-      <MainNavbar data-oid="wv2e_67" />
+      <MainNavbar data-oid="18rgthj" />
 
       <div
         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8"
-        data-oid=":l95:35"
+        data-oid="u7t2yea"
       >
         {/* Header Section */}
         <div
           className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 p-8 mb-8"
-          data-oid="m-uz8yv"
+          data-oid=":-7jyvh"
         >
           <div
             className="flex flex-col lg:flex-row items-start lg:items-center gap-8"
-            data-oid="hjr0v0:"
+            data-oid="ywg-:4s"
           >
             {/* Profile Image */}
-            <div className="relative" data-oid="wo..18k">
+            <div className="relative" data-oid="cpe-tcr">
               <img
                 src={profile.profileImage}
                 alt={profile.name}
                 className="w-32 h-32 rounded-full object-cover border-4 border-[hsl(196,80%,45%)] shadow-lg"
-                data-oid="6uwwytn"
+                data-oid="bysu7wv"
               />
 
               <div
                 className="absolute -bottom-2 -right-2 bg-[hsl(196,80%,45%)] text-white rounded-full p-2 shadow-lg"
-                data-oid="s-u93tp"
+                data-oid="5806l:p"
               >
                 <svg
                   className="h-5 w-5"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
-                  data-oid="wuoggbk"
+                  data-oid="hg-7c14"
                 >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth="2"
                     d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
-                    data-oid="ree7j6v"
+                    data-oid="0o.wwlh"
                   />
 
                   <path
@@ -146,48 +147,48 @@ export default function ProfilePage() {
                     strokeLinejoin="round"
                     strokeWidth="2"
                     d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"
-                    data-oid="7v3-ubh"
+                    data-oid="f-332kd"
                   />
                 </svg>
               </div>
             </div>
 
             {/* Profile Info */}
-            <div className="flex-1" data-oid="-e-q5e7">
+            <div className="flex-1" data-oid="t6q-jcr">
               <div
                 className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4"
-                data-oid="y7rvm0m"
+                data-oid="mugxhi6"
               >
-                <div data-oid="pwbff-c">
+                <div data-oid="h4omhzy">
                   <h1
                     className="text-3xl font-bold text-gray-800 mb-2"
-                    data-oid="p7pzio5"
+                    data-oid="_q_cjjw"
                   >
                     {profile.name}
                   </h1>
                   <p
                     className="text-lg text-[hsl(196,80%,45%)] font-medium"
-                    data-oid="g5yjn:z"
+                    data-oid="u30pqdz"
                   >
                     {profile.experience}
                   </p>
                   <p
                     className="text-gray-600 flex items-center gap-2 mt-1"
-                    data-oid="k8lmj:1"
+                    data-oid="gueuj4."
                   >
                     <svg
                       className="h-4 w-4"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
-                      data-oid=":zy968k"
+                      data-oid="y2akww_"
                     >
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         strokeWidth="2"
                         d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                        data-oid="4gw3_qy"
+                        data-oid="q0175il"
                       />
 
                       <path
@@ -195,7 +196,7 @@ export default function ProfilePage() {
                         strokeLinejoin="round"
                         strokeWidth="2"
                         d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                        data-oid="w62-rfj"
+                        data-oid=".p2qoxs"
                       />
                     </svg>
                     {profile.location}
@@ -204,7 +205,7 @@ export default function ProfilePage() {
                 <button
                   onClick={() => setIsEditing(!isEditing)}
                   className="mt-4 sm:mt-0 px-6 py-2 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white rounded-lg font-medium hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300 transform hover:scale-105 shadow-lg"
-                  data-oid="prh._5u"
+                  data-oid="igou51a"
                 >
                   {isEditing ? "Save Profile" : "Edit Profile"}
                 </button>
@@ -213,39 +214,39 @@ export default function ProfilePage() {
               {/* Profile Completion */}
               <div
                 className="bg-gray-50 rounded-lg p-4 mb-4"
-                data-oid="x4khxyq"
+                data-oid="-1nog:1"
               >
                 <div
                   className="flex items-center justify-between mb-2"
-                  data-oid="min:2dt"
+                  data-oid="omngfwt"
                 >
                   <span
                     className="text-sm font-medium text-gray-700"
-                    data-oid="c77e_-6"
+                    data-oid="99.8:vv"
                   >
                     Profile Completion
                   </span>
                   <span
                     className={`text-sm font-bold ${getCompletionColor(profile.completionPercentage)}`}
-                    data-oid="jpblowv"
+                    data-oid="17e9dc3"
                   >
                     {profile.completionPercentage}%
                   </span>
                 </div>
                 <div
                   className="w-full bg-gray-200 rounded-full h-2"
-                  data-oid="3m0g0x0"
+                  data-oid="49wcr83"
                 >
                   <div
                     className="bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] h-2 rounded-full transition-all duration-500"
                     style={{ width: `${profile.completionPercentage}%` }}
-                    data-oid="b.u41p8"
+                    data-oid="2627y8n"
                   ></div>
                 </div>
               </div>
 
               {/* Bio */}
-              <p className="text-gray-600 leading-relaxed" data-oid="ztahl8j">
+              <p className="text-gray-600 leading-relaxed" data-oid="ol0g2fw">
                 {profile.bio}
               </p>
             </div>
@@ -255,11 +256,11 @@ export default function ProfilePage() {
         {/* Navigation Tabs */}
         <div
           className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 mb-8"
-          data-oid="z92ccy0"
+          data-oid="vib0w0q"
         >
           <div
             className="flex flex-wrap border-b border-gray-200"
-            data-oid="8ett6fu"
+            data-oid="yfx-813"
           >
             {[
               { id: "overview", label: "Overview", icon: "👤" },
@@ -276,9 +277,9 @@ export default function ProfilePage() {
                     ? "text-[hsl(196,80%,45%)] border-b-2 border-[hsl(196,80%,45%)] bg-blue-50"
                     : "text-gray-600 hover:text-[hsl(196,80%,45%)] hover:bg-gray-50"
                 }`}
-                data-oid="c5etebr"
+                data-oid="y3qr2n_"
               >
-                <span data-oid="3ka_e7t">{tab.icon}</span>
+                <span data-oid="7sglyge">{tab.icon}</span>
                 {tab.label}
               </button>
             ))}
@@ -288,23 +289,23 @@ export default function ProfilePage() {
         {/* Tab Content */}
         <div
           className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 p-8"
-          data-oid="ymt.qbz"
+          data-oid="uojtk9z"
         >
           {activeTab === "overview" && (
-            <div className="space-y-6" data-oid="q6kcpdw">
+            <div className="space-y-6" data-oid="mqa6lrs">
               <h2
                 className="text-2xl font-bold text-gray-800 mb-6"
-                data-oid="kdhej2i"
+                data-oid="xtd5u_0"
               >
                 Profile Overview
               </h2>
 
-              <div className="grid md:grid-cols-2 gap-6" data-oid="qydj7zr">
-                <div className="space-y-4" data-oid="7ikg210">
-                  <div data-oid="j8d78ij">
+              <div className="grid md:grid-cols-2 gap-6" data-oid="2t2txsp">
+                <div className="space-y-4" data-oid="b4dqxpx">
+                  <div data-oid="5c4fbfq">
                     <label
                       className="block text-sm font-medium text-gray-700 mb-2"
-                      data-oid="v01ukba"
+                      data-oid="2v0-1r7"
                     >
                       Full Name
                     </label>
@@ -319,34 +320,34 @@ export default function ProfilePage() {
                           }))
                         }
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
-                        data-oid="0mwplq-"
+                        data-oid="uhotxo:"
                       />
                     ) : (
                       <p
                         className="text-gray-800 font-medium"
-                        data-oid="7pdq_bi"
+                        data-oid="w:k1h8c"
                       >
                         {profile.name}
                       </p>
                     )}
                   </div>
 
-                  <div data-oid="8x6zv41">
+                  <div data-oid="2942721">
                     <label
                       className="block text-sm font-medium text-gray-700 mb-2"
-                      data-oid="3w07zbg"
+                      data-oid="llkru7f"
                     >
                       Email
                     </label>
-                    <p className="text-gray-800" data-oid="n0y1e_s">
+                    <p className="text-gray-800" data-oid="jbqu4nw">
                       {profile.email}
                     </p>
                   </div>
 
-                  <div data-oid="r847p1m">
+                  <div data-oid="l1dyfc3">
                     <label
                       className="block text-sm font-medium text-gray-700 mb-2"
-                      data-oid="_nadgnq"
+                      data-oid="5bxlj20"
                     >
                       Phone
                     </label>
@@ -361,21 +362,21 @@ export default function ProfilePage() {
                           }))
                         }
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
-                        data-oid=":5vyy29"
+                        data-oid="7rn3d-n"
                       />
                     ) : (
-                      <p className="text-gray-800" data-oid="-84mpcn">
+                      <p className="text-gray-800" data-oid="krg:gmu">
                         {profile.phone}
                       </p>
                     )}
                   </div>
                 </div>
 
-                <div className="space-y-4" data-oid="uo6x2eo">
-                  <div data-oid="rapyg15">
+                <div className="space-y-4" data-oid="3i92aym">
+                  <div data-oid="-rp3rxm">
                     <label
                       className="block text-sm font-medium text-gray-700 mb-2"
-                      data-oid="45eew-8"
+                      data-oid="4tg8jql"
                     >
                       Location
                     </label>
@@ -390,19 +391,19 @@ export default function ProfilePage() {
                           }))
                         }
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
-                        data-oid="fmdfu0f"
+                        data-oid="b.qsxd0"
                       />
                     ) : (
-                      <p className="text-gray-800" data-oid="y80yom7">
+                      <p className="text-gray-800" data-oid="dkm9-0e">
                         {profile.location}
                       </p>
                     )}
                   </div>
 
-                  <div data-oid="zsl5b6v">
+                  <div data-oid="vpco37i">
                     <label
                       className="block text-sm font-medium text-gray-700 mb-2"
-                      data-oid="1txdu-q"
+                      data-oid="87s:qku"
                     >
                       Experience Level
                     </label>
@@ -416,39 +417,39 @@ export default function ProfilePage() {
                           }))
                         }
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
-                        data-oid="ki.b25."
+                        data-oid="r.5phxd"
                       >
-                        <option value="Fresher" data-oid="7kznixk">
+                        <option value="Fresher" data-oid="qlcqmpi">
                           Fresher
                         </option>
-                        <option value="0-1 years" data-oid="59cd0en">
+                        <option value="0-1 years" data-oid="2ctb9pp">
                           0-1 years
                         </option>
-                        <option value="1-3 years" data-oid="k_pzy-q">
+                        <option value="1-3 years" data-oid="wgiifb4">
                           1-3 years
                         </option>
-                        <option value="3-5 years" data-oid="za9l51w">
+                        <option value="3-5 years" data-oid="i1rlrg3">
                           3-5 years
                         </option>
-                        <option value="5+ years" data-oid="bhq82hy">
+                        <option value="5+ years" data-oid="eolo74s">
                           5+ years
                         </option>
                       </select>
                     ) : (
-                      <p className="text-gray-800" data-oid="st8euw5">
+                      <p className="text-gray-800" data-oid="c42cwd.">
                         {profile.experience}
                       </p>
                     )}
                   </div>
 
-                  <div data-oid="vbpv5gt">
+                  <div data-oid="ydn-hgc">
                     <label
                       className="block text-sm font-medium text-gray-700 mb-2"
-                      data-oid="sbcx7d5"
+                      data-oid="q_e1k7."
                     >
                       Member Since
                     </label>
-                    <p className="text-gray-800" data-oid="s1xog6t">
+                    <p className="text-gray-800" data-oid="bfvn4:n">
                       {new Date(profile.joinedDate).toLocaleDateString(
                         "en-US",
                         { year: "numeric", month: "long", day: "numeric" },
@@ -458,10 +459,10 @@ export default function ProfilePage() {
                 </div>
               </div>
 
-              <div data-oid="1g282fm">
+              <div data-oid="dlqwzdp">
                 <label
                   className="block text-sm font-medium text-gray-700 mb-2"
-                  data-oid="ojmdrv-"
+                  data-oid="sq8rjuj"
                 >
                   Bio
                 </label>
@@ -474,12 +475,12 @@ export default function ProfilePage() {
                     rows={4}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
                     placeholder="Tell us about yourself..."
-                    data-oid="t5q9ze7"
+                    data-oid="l26g2y:"
                   />
                 ) : (
                   <p
                     className="text-gray-800 leading-relaxed"
-                    data-oid="9pv7e0j"
+                    data-oid="9-u8yfq"
                   >
                     {profile.bio}
                   </p>
@@ -489,19 +490,19 @@ export default function ProfilePage() {
           )}
 
           {activeTab === "skills" && (
-            <div className="space-y-6" data-oid="8:._nba">
+            <div className="space-y-6" data-oid="qb:rpl.">
               <div
                 className="flex items-center justify-between"
-                data-oid="ygk37x1"
+                data-oid="whigbuy"
               >
                 <h2
                   className="text-2xl font-bold text-gray-800"
-                  data-oid="ph6fnsu"
+                  data-oid="olkeyw6"
                 >
                   Skills & Technologies
                 </h2>
                 {isEditing && (
-                  <div className="flex gap-2" data-oid="_htj1:.">
+                  <div className="flex gap-2" data-oid="8ydx91w">
                     <input
                       type="text"
                       placeholder="Add a skill..."
@@ -512,12 +513,12 @@ export default function ProfilePage() {
                           e.currentTarget.value = "";
                         }
                       }}
-                      data-oid="fkn3e.w"
+                      data-oid="6i12-8e"
                     />
 
                     <button
                       className="px-4 py-2 bg-[hsl(196,80%,45%)] text-white rounded-lg hover:bg-[hsl(196,80%,40%)] transition-colors"
-                      data-oid="muz8qky"
+                      data-oid="sd41_3h"
                     >
                       Add
                     </button>
@@ -525,19 +526,19 @@ export default function ProfilePage() {
                 )}
               </div>
 
-              <div className="flex flex-wrap gap-3" data-oid="nln9kfe">
+              <div className="flex flex-wrap gap-3" data-oid="0jbpaz.">
                 {profile.skills.map((skill, index) => (
                   <div
                     key={index}
                     className="relative group bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white px-4 py-2 rounded-full font-medium shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-                    data-oid="o4zz_oc"
+                    data-oid=":i.1q4b"
                   >
                     {skill}
                     {isEditing && (
                       <button
                         onClick={() => handleSkillRemove(skill)}
                         className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs hover:bg-red-600 transition-colors"
-                        data-oid="hku4o5t"
+                        data-oid="9sxvrx8"
                       >
                         ×
                       </button>
@@ -549,24 +550,24 @@ export default function ProfilePage() {
               {profile.skills.length === 0 && (
                 <div
                   className="text-center py-12 text-gray-500"
-                  data-oid=":1emtgk"
+                  data-oid="ychx4q3"
                 >
                   <svg
                     className="h-16 w-16 mx-auto mb-4 text-gray-300"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
-                    data-oid=":4yto:u"
+                    data-oid="f-h525z"
                   >
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       strokeWidth="2"
                       d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
-                      data-oid="_h3ind0"
+                      data-oid="729vp0b"
                     />
                   </svg>
-                  <p data-oid="1lyjpv0">
+                  <p data-oid="173zqp9">
                     No skills added yet. Add your first skill to get started!
                   </p>
                 </div>
@@ -575,38 +576,38 @@ export default function ProfilePage() {
           )}
 
           {activeTab === "experience" && (
-            <div className="space-y-6" data-oid="zoqs4q5">
+            <div className="space-y-6" data-oid="o5xqqsp">
               <h2
                 className="text-2xl font-bold text-gray-800"
-                data-oid="cwwd8_r"
+                data-oid="hz6xls5"
               >
                 Work Experience
               </h2>
 
-              <div className="bg-gray-50 rounded-lg p-6" data-oid="c7ixuq7">
+              <div className="bg-gray-50 rounded-lg p-6" data-oid="-dhg0dx">
                 <div
                   className="flex items-center gap-4 mb-4"
-                  data-oid="xofnrqu"
+                  data-oid="rfmld.h"
                 >
                   <div
                     className="w-12 h-12 bg-[hsl(196,80%,45%)] rounded-lg flex items-center justify-center text-white font-bold"
-                    data-oid="7l76xb:"
+                    data-oid="z_4ka53"
                   >
                     F
                   </div>
-                  <div data-oid="6p219rh">
+                  <div data-oid="fu2zb99">
                     <h3
                       className="text-lg font-semibold text-gray-800"
-                      data-oid="5bbsgv."
+                      data-oid="2sjw7ri"
                     >
                       Fresher
                     </h3>
-                    <p className="text-gray-600" data-oid=":c4:awq">
+                    <p className="text-gray-600" data-oid="vf1f_xp">
                       Ready to start my career journey
                     </p>
                   </div>
                 </div>
-                <p className="text-gray-700" data-oid="2y0o.kg">
+                <p className="text-gray-700" data-oid="8niek:w">
                   As a recent graduate, I'm excited to apply my academic
                   knowledge and passion for technology to real-world projects.
                   I've completed several personal projects and internships that
@@ -615,25 +616,25 @@ export default function ProfilePage() {
                 </p>
               </div>
 
-              <div className="text-center py-8" data-oid="m4d1l3_">
+              <div className="text-center py-8" data-oid="xp52_-s">
                 <Link
                   href="/jobs"
                   className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white rounded-lg font-medium hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300 transform hover:scale-105 shadow-lg"
-                  data-oid="by7lnxu"
+                  data-oid="y.9fm-r"
                 >
                   <svg
                     className="h-5 w-5"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
-                    data-oid="nbw876u"
+                    data-oid="_m4::gy"
                   >
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       strokeWidth="2"
                       d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H8a2 2 0 01-2-2V8a2 2 0 012-2V6"
-                      data-oid="3y_a2j2"
+                      data-oid="xryaq9f"
                     />
                   </svg>
                   Find Your First Job
@@ -643,23 +644,23 @@ export default function ProfilePage() {
           )}
 
           {activeTab === "education" && (
-            <div className="space-y-6" data-oid="tpneyw2">
+            <div className="space-y-6" data-oid="-ukiu12">
               <h2
                 className="text-2xl font-bold text-gray-800"
-                data-oid="9kso4i3"
+                data-oid="pz:cix."
               >
                 Education
               </h2>
 
-              <div className="bg-gray-50 rounded-lg p-6" data-oid="os2doxg">
-                <div className="flex items-start gap-4" data-oid=":k7rjh9">
+              <div className="bg-gray-50 rounded-lg p-6" data-oid="6ucbdyx">
+                <div className="flex items-start gap-4" data-oid="hcc35p4">
                   <div
                     className="w-12 h-12 bg-[hsl(196,80%,45%)] rounded-lg flex items-center justify-center text-white"
-                    data-oid="g1.vnb:"
+                    data-oid="jjbwm8_"
                   >
                     🎓
                   </div>
-                  <div className="flex-1" data-oid="ofj6ax2">
+                  <div className="flex-1" data-oid="mkehys_">
                     {isEditing ? (
                       <input
                         type="text"
@@ -672,20 +673,20 @@ export default function ProfilePage() {
                         }
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent mb-2"
                         placeholder="Your education details..."
-                        data-oid="ykjmp0o"
+                        data-oid="ml0c1zc"
                       />
                     ) : (
                       <h3
                         className="text-lg font-semibold text-gray-800 mb-2"
-                        data-oid="aa4voxz"
+                        data-oid="zk:k40f"
                       >
                         {profile.education}
                       </h3>
                     )}
-                    <p className="text-gray-600" data-oid="3rvn124">
+                    <p className="text-gray-600" data-oid="xmnafor">
                       2020 - 2024
                     </p>
-                    <p className="text-gray-700 mt-2" data-oid="09ogu_o">
+                    <p className="text-gray-700 mt-2" data-oid="eave6ae">
                       Focused on computer science fundamentals, software
                       engineering principles, and modern web technologies.
                       Completed projects in various programming languages and
@@ -698,19 +699,19 @@ export default function ProfilePage() {
           )}
 
           {activeTab === "social" && (
-            <div className="space-y-6" data-oid="r9lpt-z">
+            <div className="space-y-6" data-oid="yt5daj:">
               <h2
                 className="text-2xl font-bold text-gray-800"
-                data-oid="udaa2wq"
+                data-oid="a_pv_5m"
               >
                 Social Links
               </h2>
 
-              <div className="grid md:grid-cols-2 gap-6" data-oid="v7g0u2g">
-                <div data-oid="pe1ub6c">
+              <div className="grid md:grid-cols-2 gap-6" data-oid="hm_dhm:">
+                <div data-oid=".:p-kqm">
                   <label
                     className="block text-sm font-medium text-gray-700 mb-2"
-                    data-oid="faomr.2"
+                    data-oid=":x7a0.l"
                   >
                     Portfolio Website
                   </label>
@@ -726,7 +727,7 @@ export default function ProfilePage() {
                       }
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
                       placeholder="https://yourportfolio.com"
-                      data-oid="kq5_4rp"
+                      data-oid=".en:327"
                     />
                   ) : (
                     <a
@@ -734,7 +735,7 @@ export default function ProfilePage() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-[hsl(196,80%,45%)] hover:underline flex items-center gap-2"
-                      data-oid="1o_oks8"
+                      data-oid="wb-n1bl"
                     >
                       {profile.portfolio}
                       <svg
@@ -742,24 +743,24 @@ export default function ProfilePage() {
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
-                        data-oid="rimo3j0"
+                        data-oid="9inar:h"
                       >
                         <path
                           strokeLinecap="round"
                           strokeLinejoin="round"
                           strokeWidth="2"
                           d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                          data-oid="kog:kmw"
+                          data-oid="z:x_d7m"
                         />
                       </svg>
                     </a>
                   )}
                 </div>
 
-                <div data-oid="rqg3dss">
+                <div data-oid="l0yt_wh">
                   <label
                     className="block text-sm font-medium text-gray-700 mb-2"
-                    data-oid="cc_t.8o"
+                    data-oid="o59zsu1"
                   >
                     LinkedIn Profile
                   </label>
@@ -775,7 +776,7 @@ export default function ProfilePage() {
                       }
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
                       placeholder="https://linkedin.com/in/yourprofile"
-                      data-oid="2lgr.gr"
+                      data-oid="ju2u8jr"
                     />
                   ) : (
                     <a
@@ -783,7 +784,7 @@ export default function ProfilePage() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-[hsl(196,80%,45%)] hover:underline flex items-center gap-2"
-                      data-oid="30rk8l-"
+                      data-oid="r6dn7i3"
                     >
                       {profile.linkedin}
                       <svg
@@ -791,24 +792,24 @@ export default function ProfilePage() {
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
-                        data-oid=".n7c:wq"
+                        data-oid="mwqfnct"
                       >
                         <path
                           strokeLinecap="round"
                           strokeLinejoin="round"
                           strokeWidth="2"
                           d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                          data-oid="1btg--j"
+                          data-oid="fq748ql"
                         />
                       </svg>
                     </a>
                   )}
                 </div>
 
-                <div data-oid="sgcpoy1">
+                <div data-oid="ks2:3xj">
                   <label
                     className="block text-sm font-medium text-gray-700 mb-2"
-                    data-oid="fquk347"
+                    data-oid="p-2k8gc"
                   >
                     GitHub Profile
                   </label>
@@ -824,7 +825,7 @@ export default function ProfilePage() {
                       }
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
                       placeholder="https://github.com/yourusername"
-                      data-oid="b8p0qor"
+                      data-oid="ucc3bhb"
                     />
                   ) : (
                     <a
@@ -832,7 +833,7 @@ export default function ProfilePage() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-[hsl(196,80%,45%)] hover:underline flex items-center gap-2"
-                      data-oid="ihiefxx"
+                      data-oid="5u9fx1x"
                     >
                       {profile.github}
                       <svg
@@ -840,14 +841,14 @@ export default function ProfilePage() {
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
-                        data-oid="z5q.0d4"
+                        data-oid="gb0ez_g"
                       >
                         <path
                           strokeLinecap="round"
                           strokeLinejoin="round"
                           strokeWidth="2"
                           d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                          data-oid="2iffjo2"
+                          data-oid="4qfc522"
                         />
                       </svg>
                     </a>
@@ -860,19 +861,19 @@ export default function ProfilePage() {
           {isEditing && (
             <div
               className="flex justify-end gap-4 pt-6 border-t border-gray-200"
-              data-oid="xmp_gz8"
+              data-oid="mr5cqk."
             >
               <button
                 onClick={() => setIsEditing(false)}
                 className="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
-                data-oid="fu60:-y"
+                data-oid="p2je4ja"
               >
                 Cancel
               </button>
               <button
                 onClick={handleSave}
                 className="px-6 py-2 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white rounded-lg font-medium hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300 transform hover:scale-105 shadow-lg"
-                data-oid="vxm80z2"
+                data-oid="s3mog0h"
               >
                 Save Changes
               </button>

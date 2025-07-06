@@ -165,44 +165,44 @@ export default function CommunityPage() {
   return (
     <div
       className="min-h-screen bg-gradient-to-b from-[hsl(210,50%,98%)] to-[hsl(196,60%,95%)]"
-      data-oid="jklf4el"
+      data-oid="pvyzh8s"
     >
       {/* Animated background elements */}
-      <div className="fixed inset-0 overflow-hidden -z-10" data-oid="1080y6o">
+      <div className="fixed inset-0 overflow-hidden -z-10" data-oid="6bak-8g">
         <div
           className="absolute -top-20 -left-20 w-96 h-96 bg-[hsl(196,80%,65%)] opacity-20 rounded-full blur-3xl animate-blob"
-          data-oid="pxjiuck"
+          data-oid="fekiqyu"
         ></div>
         <div
           className="absolute top-40 right-20 w-96 h-96 bg-[hsl(210,70%,65%)] opacity-20 rounded-full blur-3xl animate-blob animation-delay-2000"
-          data-oid="i9f3g-1"
+          data-oid=":k.swzd"
         ></div>
         <div
           className="absolute bottom-10 left-1/3 w-96 h-96 bg-[hsl(175,70%,61%)] opacity-20 rounded-full blur-3xl animate-blob animation-delay-4000"
-          data-oid="2a0cfy8"
+          data-oid="7--u7sf"
         ></div>
       </div>
 
-      <div className="relative z-10" data-oid="an5821d">
+      <div className="relative z-10" data-oid="mcv67:4">
         {/* Hero Section */}
-        <section className="pt-24 pb-16 px-4" data-oid="hc.3x_5">
-          <div className="max-w-6xl mx-auto text-center" data-oid="b_o:9km">
+        <section className="pt-24 pb-16 px-4" data-oid="skmbwyb">
+          <div className="max-w-6xl mx-auto text-center" data-oid="o5_ajou">
             <div
               className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium text-[hsl(196,80%,45%)] border border-[hsl(210,30%,95%)] mb-6"
-              data-oid="kiil27v"
+              data-oid="epk:hp7"
             >
-              <Heart className="h-4 w-4" data-oid="ya:2d_0" />
+              <Heart className="h-4 w-4" data-oid="1pv2q_s" />
               Built by developers, for developers
             </div>
 
             <h1
               className="text-4xl md:text-6xl font-bold text-gray-800 mb-6"
-              data-oid="_wexe_o"
+              data-oid="iyza4br"
             >
               Welcome to Our
               <span
                 className="bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] bg-clip-text text-transparent"
-                data-oid="cz4uw8l"
+                data-oid="96yhm1q"
               >
                 {" "}
                 Tech Community
@@ -211,7 +211,7 @@ export default function CommunityPage() {
 
             <p
               className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto"
-              data-oid="1r7v38_"
+              data-oid="_q:cg_o"
             >
               Join thousands of developers, share knowledge, find opportunities,
               and grow your career in the most supportive tech community in
@@ -220,22 +220,22 @@ export default function CommunityPage() {
 
             <div
               className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
-              data-oid="0-2urdu"
+              data-oid="o8e9-u0"
             >
               <Link
                 href="/resources/community"
                 className="px-8 py-4 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white rounded-xl font-medium hover:shadow-lg transition-all transform hover:scale-105"
-                data-oid="8:-v2qb"
+                data-oid="-9u5xad"
               >
-                <Users className="inline h-5 w-5 mr-2" data-oid=".rk-8xg" />
+                <Users className="inline h-5 w-5 mr-2" data-oid="5y4dd95" />
                 Join Community
               </Link>
               <Link
                 href="/resources"
                 className="px-8 py-4 border border-[hsl(196,80%,45%)] text-[hsl(196,80%,45%)] rounded-xl font-medium hover:bg-[hsl(196,80%,45%)]/10 transition-all"
-                data-oid="0new.gs"
+                data-oid="ckq_-1p"
               >
-                <BookOpen className="inline h-5 w-5 mr-2" data-oid="8ro9dsh" />
+                <BookOpen className="inline h-5 w-5 mr-2" data-oid="tu-q:f_" />
                 Browse Resources
               </Link>
             </div>
@@ -243,26 +243,26 @@ export default function CommunityPage() {
             {/* Community Stats */}
             <div
               className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto"
-              data-oid="2z-5.ra"
+              data-oid="adztc9s"
             >
               {communityStats.map((stat, index) => (
                 <div
                   key={index}
                   className="bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-[hsl(210,30%,95%)]"
-                  data-oid="_xwk6dv"
+                  data-oid="i6x2397"
                 >
                   <stat.icon
                     className={`h-8 w-8 ${stat.color} mx-auto mb-2`}
-                    data-oid="ldyefs4"
+                    data-oid="qtxe3yy"
                   />
 
                   <div
                     className="text-2xl font-bold text-gray-800"
-                    data-oid="pcc8uj7"
+                    data-oid=".p6qffm"
                   >
                     {stat.value}
                   </div>
-                  <div className="text-sm text-gray-600" data-oid="xo-.ca-">
+                  <div className="text-sm text-gray-600" data-oid="c271k5i">
                     {stat.label}
                   </div>
                 </div>
@@ -272,54 +272,54 @@ export default function CommunityPage() {
         </section>
 
         {/* Community Highlights */}
-        <section className="py-16 px-4" data-oid="m2.b9ob">
-          <div className="max-w-6xl mx-auto" data-oid="xxp3:3.">
-            <div className="text-center mb-12" data-oid="_u.2aec">
+        <section className="py-16 px-4" data-oid="_14deg7">
+          <div className="max-w-6xl mx-auto" data-oid="j7r3_s6">
+            <div className="text-center mb-12" data-oid="yks7_bg">
               <h2
                 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4"
-                data-oid="64qeehx"
+                data-oid="mlzj3w5"
               >
                 Community Highlights
               </h2>
-              <p className="text-xl text-gray-600" data-oid="5xxv_64">
+              <p className="text-xl text-gray-600" data-oid="q6qbxmu">
                 Discover what makes our community special
               </p>
             </div>
 
             <div
               className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
-              data-oid="3mh:byu"
+              data-oid="ge0n3r2"
             >
               {communityHighlights.map((highlight, index) => (
                 <div
                   key={index}
                   className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-[hsl(210,30%,95%)] hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
-                  data-oid="6u41cr_"
+                  data-oid="8ln61a0"
                 >
                   <div
                     className={`w-16 h-16 bg-gradient-to-r ${highlight.color} rounded-xl flex items-center justify-center text-2xl mb-4 mx-auto`}
-                    data-oid="99.mlz8"
+                    data-oid="cdk77:9"
                   >
                     {highlight.icon}
                   </div>
                   <h3
                     className="text-xl font-bold text-gray-800 mb-2 text-center"
-                    data-oid="nxwc52k"
+                    data-oid="9u.n:uw"
                   >
                     {highlight.title}
                   </h3>
                   <p
                     className="text-gray-600 text-center mb-4"
-                    data-oid="z_xdla."
+                    data-oid="8uo.5t5"
                   >
                     {highlight.description}
                   </p>
-                  <div className="text-center" data-oid="aq9webv">
+                  <div className="text-center" data-oid="tkwmuho">
                     <span
                       className="inline-flex items-center gap-1 bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm font-medium"
-                      data-oid="m::8wu6"
+                      data-oid="2o5a6i-"
                     >
-                      <Users className="h-3 w-3" data-oid="jtlvs_g" />
+                      <Users className="h-3 w-3" data-oid="67uu8p:" />
                       {highlight.participants}
                     </span>
                   </div>
@@ -330,73 +330,73 @@ export default function CommunityPage() {
         </section>
 
         {/* Upcoming Events */}
-        <section className="py-16 px-4" data-oid="_ma.b1k">
-          <div className="max-w-6xl mx-auto" data-oid=".n3pkbt">
-            <div className="text-center mb-12" data-oid="y8v072c">
+        <section className="py-16 px-4" data-oid="j_meu12">
+          <div className="max-w-6xl mx-auto" data-oid="bw2e9if">
+            <div className="text-center mb-12" data-oid="0e8aap0">
               <h2
                 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4"
-                data-oid="c6xr2q0"
+                data-oid="vd7x33-"
               >
                 Upcoming Events
               </h2>
-              <p className="text-xl text-gray-600" data-oid="psbm2zn">
+              <p className="text-xl text-gray-600" data-oid="n6:le_k">
                 Don't miss these amazing learning opportunities
               </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8" data-oid="qohskt0">
+            <div className="grid md:grid-cols-3 gap-8" data-oid="j6m0lb7">
               {upcomingEvents.map((event, index) => (
                 <div
                   key={index}
                   className="bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-[hsl(210,30%,95%)] hover:shadow-lg transition-all"
-                  data-oid="5_-p7ot"
+                  data-oid="3kf-cd:"
                 >
                   <div
                     className="flex items-center justify-between mb-4"
-                    data-oid="0e9sp5n"
+                    data-oid="n43fawn"
                   >
                     <span
                       className="px-3 py-1 bg-[hsl(196,80%,45%)]/10 text-[hsl(196,80%,45%)] rounded-full text-sm font-medium"
-                      data-oid="vt7u0pd"
+                      data-oid="xm.1-v5"
                     >
                       {event.type}
                     </span>
                     <div
                       className="flex items-center gap-1 text-sm text-gray-600"
-                      data-oid="b6hwijs"
+                      data-oid="8x3aamu"
                     >
-                      <Users className="h-4 w-4" data-oid="7x-104k" />
+                      <Users className="h-4 w-4" data-oid=".:2ay8j" />
                       {event.attendees}
                     </div>
                   </div>
 
                   <h3
                     className="text-xl font-bold text-gray-800 mb-2"
-                    data-oid="gooyrmg"
+                    data-oid="dya9xvq"
                   >
                     {event.title}
                   </h3>
-                  <p className="text-gray-600 mb-4" data-oid="2vp0l9:">
+                  <p className="text-gray-600 mb-4" data-oid="q3kl76-">
                     by {event.speaker}
                   </p>
 
                   <div
                     className="flex items-center gap-4 text-sm text-gray-600 mb-4"
-                    data-oid="7_8ux9z"
+                    data-oid="qq:jgot"
                   >
-                    <div className="flex items-center gap-1" data-oid="k:r_6xr">
-                      <Calendar className="h-4 w-4" data-oid="upb8usx" />
+                    <div className="flex items-center gap-1" data-oid="tz5b06w">
+                      <Calendar className="h-4 w-4" data-oid="z_gaiai" />
                       {event.date}
                     </div>
-                    <div className="flex items-center gap-1" data-oid="phzsmhi">
-                      <Globe className="h-4 w-4" data-oid="vs.7nch" />
+                    <div className="flex items-center gap-1" data-oid="9msva1p">
+                      <Globe className="h-4 w-4" data-oid="qzmbpl5" />
                       {event.time}
                     </div>
                   </div>
 
                   <button
                     className="w-full px-4 py-3 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white rounded-xl font-medium hover:shadow-lg transition-all transform hover:scale-105"
-                    data-oid="c:848x."
+                    data-oid="9zbk5ok"
                   >
                     Register Now
                   </button>
@@ -407,56 +407,56 @@ export default function CommunityPage() {
         </section>
 
         {/* Community Channels */}
-        <section className="py-16 px-4" data-oid="wtu-2y0">
-          <div className="max-w-6xl mx-auto" data-oid="l5cql1k">
-            <div className="text-center mb-12" data-oid="a7kukfc">
+        <section className="py-16 px-4" data-oid="ebpucoa">
+          <div className="max-w-6xl mx-auto" data-oid="7r0ut0v">
+            <div className="text-center mb-12" data-oid="fa:iazl">
               <h2
                 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4"
-                data-oid="cs:eojg"
+                data-oid="9.-0z35"
               >
                 Community Channels
               </h2>
-              <p className="text-xl text-gray-600" data-oid="2y-4-5:">
+              <p className="text-xl text-gray-600" data-oid="vdxutxy">
                 Find the right channel for your interests
               </p>
             </div>
 
             <div
               className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
-              data-oid="pu4bqu4"
+              data-oid="754fywh"
             >
               {communityChannels.map((channel, index) => (
                 <div
                   key={index}
                   className="bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-[hsl(210,30%,95%)] hover:shadow-lg transition-all"
-                  data-oid="03va.qx"
+                  data-oid="m.j5755"
                 >
                   <div
                     className="flex items-center gap-3 mb-3"
-                    data-oid="8f240sn"
+                    data-oid="7_jye.3"
                   >
                     <channel.icon
                       className="h-6 w-6 text-[hsl(196,80%,45%)]"
-                      data-oid="_k6h21f"
+                      data-oid="nh0at.j"
                     />
 
-                    <h3 className="font-bold text-gray-800" data-oid="6sxxg9d">
+                    <h3 className="font-bold text-gray-800" data-oid="4u_21qw">
                       {channel.name}
                     </h3>
                   </div>
-                  <p className="text-gray-600 text-sm mb-3" data-oid="s8j3qi4">
+                  <p className="text-gray-600 text-sm mb-3" data-oid="gpi1p0l">
                     {channel.description}
                   </p>
                   <div
                     className="flex items-center justify-between"
-                    data-oid="3rw5:bv"
+                    data-oid="kboo0t9"
                   >
-                    <span className="text-sm text-gray-500" data-oid="8jikjfh">
+                    <span className="text-sm text-gray-500" data-oid="cn6ogwb">
                       {channel.members} members
                     </span>
                     <button
                       className="text-[hsl(196,80%,45%)] hover:text-[hsl(196,80%,35%)] text-sm font-medium"
-                      data-oid="dv78num"
+                      data-oid="qfym.6k"
                     >
                       Join →
                     </button>
@@ -468,48 +468,48 @@ export default function CommunityPage() {
         </section>
 
         {/* Featured Members */}
-        <section className="py-16 px-4" data-oid="ytv9d2l">
-          <div className="max-w-6xl mx-auto" data-oid="mqx2t.0">
-            <div className="text-center mb-12" data-oid="g6q0kf6">
+        <section className="py-16 px-4" data-oid="d_p3vx7">
+          <div className="max-w-6xl mx-auto" data-oid="_zi9kn6">
+            <div className="text-center mb-12" data-oid="x043.xf">
               <h2
                 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4"
-                data-oid="m-7jva7"
+                data-oid="e_x9kwh"
               >
                 Featured Community Members
               </h2>
-              <p className="text-xl text-gray-600" data-oid="lhz3tiy">
+              <p className="text-xl text-gray-600" data-oid="s8.r6.i">
                 Meet the amazing people who make our community thrive
               </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8" data-oid="gzgsyyu">
+            <div className="grid md:grid-cols-3 gap-8" data-oid="t8d_70o">
               {featuredMembers.map((member, index) => (
                 <div
                   key={index}
                   className="bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-[hsl(210,30%,95%)] text-center"
-                  data-oid="yheu1dr"
+                  data-oid="dkse7xr"
                 >
-                  <div className="text-4xl mb-4" data-oid="ph90hw1">
+                  <div className="text-4xl mb-4" data-oid=":ufi72n">
                     {member.image}
                   </div>
                   <h3
                     className="text-xl font-bold text-gray-800 mb-1"
-                    data-oid="8yxxopz"
+                    data-oid="7.ju3_z"
                   >
                     {member.name}
                   </h3>
                   <p
                     className="text-[hsl(196,80%,45%)] font-medium mb-3"
-                    data-oid="vf0t_2w"
+                    data-oid="22_fuz2"
                   >
                     {member.role}
                   </p>
-                  <p className="text-gray-600 text-sm mb-4" data-oid="qk1eabo">
+                  <p className="text-gray-600 text-sm mb-4" data-oid="jpxhfll">
                     {member.contribution}
                   </p>
                   <span
                     className="inline-block px-3 py-1 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white rounded-full text-xs font-medium"
-                    data-oid="6514hww"
+                    data-oid="lj89:rj"
                   >
                     {member.badge}
                   </span>
@@ -520,37 +520,37 @@ export default function CommunityPage() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-16 px-4" data-oid="7:l-z7u">
-          <div className="max-w-4xl mx-auto text-center" data-oid="wk9qv.0">
+        <section className="py-16 px-4" data-oid="qg_ig-5">
+          <div className="max-w-4xl mx-auto text-center" data-oid=".3742t2">
             <div
               className="bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] rounded-2xl p-8 text-white"
-              data-oid="bal8e8b"
+              data-oid=":z7_o36"
             >
-              <h2 className="text-3xl font-bold mb-4" data-oid="__hgheo">
+              <h2 className="text-3xl font-bold mb-4" data-oid=".:j:mvj">
                 Ready to Join Our Community?
               </h2>
-              <p className="text-xl mb-6 text-blue-100" data-oid=".4puspq">
+              <p className="text-xl mb-6 text-blue-100" data-oid="_0d14gg">
                 Connect with like-minded developers and accelerate your career
                 growth
               </p>
               <div
                 className="flex flex-col sm:flex-row gap-4 justify-center"
-                data-oid="i8xj4jh"
+                data-oid="o61blb5"
               >
                 <Link
                   href="/resources/community"
                   className="px-6 py-3 bg-white text-[hsl(196,80%,45%)] rounded-xl font-medium hover:shadow-lg transition-all transform hover:scale-105"
-                  data-oid="81rugv_"
+                  data-oid="m5ebl47"
                 >
-                  <Users className="inline h-5 w-5 mr-2" data-oid="tnyq.wr" />
+                  <Users className="inline h-5 w-5 mr-2" data-oid="svcx__q" />
                   Join Now
                 </Link>
                 <Link
                   href="/notify"
                   className="px-6 py-3 border border-white text-white rounded-xl font-medium hover:bg-white hover:text-[hsl(196,80%,45%)] transition-all"
-                  data-oid="mastq8."
+                  data-oid="ty-lbdq"
                 >
-                  <Zap className="inline h-5 w-5 mr-2" data-oid="-d9sks8" />
+                  <Zap className="inline h-5 w-5 mr-2" data-oid="hak7r46" />
                   Get Updates
                 </Link>
               </div>

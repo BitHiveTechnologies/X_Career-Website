@@ -41,21 +41,21 @@ export function SafeImage({
       <div
         className={`bg-gray-200 flex items-center justify-center ${className}`}
         style={{ width, height }}
-        data-oid="3j4z0m2"
+        data-oid="g8c:rbu"
       >
         <svg
           className="w-8 h-8 text-gray-400"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
-          data-oid="xvtw7tl"
+          data-oid="eurufq0"
         >
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth="2"
             d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-            data-oid="qi-pyw8"
+            data-oid=".j2jdse"
           />
         </svg>
       </div>
@@ -71,7 +71,7 @@ export function SafeImage({
       height={height}
       onError={handleError}
       loading="lazy"
-      data-oid="m5tnd7e"
+      data-oid="_pdjn2g"
     />
   );
 }
@@ -120,7 +120,7 @@ export function SafeAvatar({
       <div
         className={`${getAvatarColor(name)} flex items-center justify-center text-white font-medium rounded-full ${className}`}
         style={{ width: size, height: size, fontSize: size * 0.4 }}
-        data-oid="pz_:g:t"
+        data-oid="lfvqjas"
       >
         {getInitials(name)}
       </div>
@@ -135,7 +135,7 @@ export function SafeAvatar({
       style={{ width: size, height: size }}
       onError={() => setImgError(true)}
       loading="lazy"
-      data-oid="q2pym80"
+      data-oid="..4wqqh"
     />
   );
 }

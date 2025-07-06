@@ -151,19 +151,19 @@ export default function ResumeForm({
   };
 
   const renderPersonalInfo = () => (
-    <div className="p-6 space-y-6" data-oid="-..0rpg">
+    <div className="p-6 space-y-6" data-oid="kk_by0j">
       <h3
         className="text-xl font-semibold text-gray-800 mb-4"
-        data-oid="rbfho6l"
+        data-oid="5vq-gdw"
       >
         Personal Information
       </h3>
 
-      <div className="grid md:grid-cols-2 gap-4" data-oid="4wa0qke">
-        <div data-oid="qg4k::_">
+      <div className="grid md:grid-cols-2 gap-4" data-oid="unj6y:b">
+        <div data-oid="63hthnz">
           <label
             className="block text-sm font-medium text-gray-700 mb-2"
-            data-oid="nd-0d5s"
+            data-oid="y9:sbsc"
           >
             Full Name *
           </label>
@@ -175,14 +175,14 @@ export default function ResumeForm({
             }
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
             placeholder="John Doe"
-            data-oid="o6h5:2b"
+            data-oid="1.yeq6o"
           />
         </div>
 
-        <div data-oid="23.7492">
+        <div data-oid="sxbm31v">
           <label
             className="block text-sm font-medium text-gray-700 mb-2"
-            data-oid="w.49mn3"
+            data-oid="6jx9ei7"
           >
             Email *
           </label>
@@ -192,14 +192,14 @@ export default function ResumeForm({
             onChange={(e) => handlePersonalInfoChange("email", e.target.value)}
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
             placeholder="john@example.com"
-            data-oid="n9_-j5h"
+            data-oid="gl3-ft8"
           />
         </div>
 
-        <div data-oid="vlltrlj">
+        <div data-oid="tz7j2yc">
           <label
             className="block text-sm font-medium text-gray-700 mb-2"
-            data-oid="_n220x4"
+            data-oid="3uup-ux"
           >
             Phone *
           </label>
@@ -209,14 +209,14 @@ export default function ResumeForm({
             onChange={(e) => handlePersonalInfoChange("phone", e.target.value)}
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
             placeholder="+1 (555) 123-4567"
-            data-oid="wmp.t6c"
+            data-oid="j_5zta9"
           />
         </div>
 
-        <div data-oid="pc67__0">
+        <div data-oid="rbd.98u">
           <label
             className="block text-sm font-medium text-gray-700 mb-2"
-            data-oid="98u.mk-"
+            data-oid="5wzla2d"
           >
             Location
           </label>
@@ -228,14 +228,14 @@ export default function ResumeForm({
             }
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
             placeholder="City, State"
-            data-oid="xx:fd3_"
+            data-oid="n:_w4jb"
           />
         </div>
 
-        <div data-oid="7:5._ih">
+        <div data-oid="b6mmy1:">
           <label
             className="block text-sm font-medium text-gray-700 mb-2"
-            data-oid="3daetmi"
+            data-oid="bhoh-et"
           >
             LinkedIn
           </label>
@@ -247,14 +247,14 @@ export default function ResumeForm({
             }
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
             placeholder="https://linkedin.com/in/johndoe"
-            data-oid="5z6l-w1"
+            data-oid="-njcghi"
           />
         </div>
 
-        <div data-oid="abtgn0:">
+        <div data-oid="tx8zofg">
           <label
             className="block text-sm font-medium text-gray-700 mb-2"
-            data-oid="4wrpgh4"
+            data-oid="d4vbj.z"
           >
             GitHub
           </label>
@@ -264,15 +264,15 @@ export default function ResumeForm({
             onChange={(e) => handlePersonalInfoChange("github", e.target.value)}
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
             placeholder="https://github.com/johndoe"
-            data-oid="kdhd0yp"
+            data-oid="gtmyg9j"
           />
         </div>
       </div>
 
-      <div data-oid="9w6uldg">
+      <div data-oid="ytqb54r">
         <label
           className="block text-sm font-medium text-gray-700 mb-2"
-          data-oid="c-z.ozg"
+          data-oid="uadc4r5"
         >
           Portfolio Website
         </label>
@@ -284,14 +284,14 @@ export default function ResumeForm({
           }
           className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
           placeholder="https://johndoe.com"
-          data-oid="izw3gdd"
+          data-oid="t3-zufx"
         />
       </div>
 
-      <div data-oid="uors82v">
+      <div data-oid="ofln_gu">
         <label
           className="block text-sm font-medium text-gray-700 mb-2"
-          data-oid="tbq5-yu"
+          data-oid="y1lrve9"
         >
           Professional Summary
         </label>
@@ -301,22 +301,22 @@ export default function ResumeForm({
           rows={4}
           className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
           placeholder="Write a brief summary of your professional background and career objectives..."
-          data-oid="gwi5tcg"
+          data-oid="74x3lr3"
         />
       </div>
     </div>
   );
 
   const renderExperience = () => (
-    <div className="p-6 space-y-6" data-oid="c1v:7-v">
-      <div className="flex items-center justify-between" data-oid="f2o7big">
-        <h3 className="text-xl font-semibold text-gray-800" data-oid="8i-iq51">
+    <div className="p-6 space-y-6" data-oid="r5z2ae2">
+      <div className="flex items-center justify-between" data-oid="twpfy:r">
+        <h3 className="text-xl font-semibold text-gray-800" data-oid="s__lxon">
           Work Experience
         </h3>
         <button
           onClick={addExperience}
           className="px-4 py-2 bg-[hsl(196,80%,45%)] text-white rounded-md hover:bg-[hsl(196,80%,40%)] transition-colors duration-200"
-          data-oid="_65--s:"
+          data-oid="u1ckb--"
         >
           Add Experience
         </button>
@@ -326,26 +326,26 @@ export default function ResumeForm({
         <div
           key={exp.id}
           className="border border-gray-200 rounded-lg p-4 space-y-4"
-          data-oid="i7jab-y"
+          data-oid="c_ukpup"
         >
-          <div className="flex items-center justify-between" data-oid="zx8jiaq">
-            <h4 className="font-medium text-gray-800" data-oid="kjq_g8n">
+          <div className="flex items-center justify-between" data-oid="9hf123k">
+            <h4 className="font-medium text-gray-800" data-oid="2y0w4km">
               Experience {index + 1}
             </h4>
             <button
               onClick={() => removeExperience(exp.id)}
               className="text-red-500 hover:text-red-700"
-              data-oid="6akarly"
+              data-oid="316mj0h"
             >
               Remove
             </button>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-4" data-oid="wcnqcd.">
-            <div data-oid="8f9bo94">
+          <div className="grid md:grid-cols-2 gap-4" data-oid="rm21d--">
+            <div data-oid="9iye450">
               <label
                 className="block text-sm font-medium text-gray-700 mb-1"
-                data-oid="riyndar"
+                data-oid="-r2u9fb"
               >
                 Company *
               </label>
@@ -357,14 +357,14 @@ export default function ResumeForm({
                 }
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
                 placeholder="Company Name"
-                data-oid="1hmv5nd"
+                data-oid="2qouozy"
               />
             </div>
 
-            <div data-oid="ezcmu-5">
+            <div data-oid="2jdfamv">
               <label
                 className="block text-sm font-medium text-gray-700 mb-1"
-                data-oid="1.o2m7_"
+                data-oid="4vswd3_"
               >
                 Position *
               </label>
@@ -376,14 +376,14 @@ export default function ResumeForm({
                 }
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
                 placeholder="Job Title"
-                data-oid="4rrh.vl"
+                data-oid="l6l3d69"
               />
             </div>
 
-            <div data-oid="vd_gc87">
+            <div data-oid="k.ht7v8">
               <label
                 className="block text-sm font-medium text-gray-700 mb-1"
-                data-oid="hwroyxc"
+                data-oid="__s8:wp"
               >
                 Location
               </label>
@@ -395,11 +395,11 @@ export default function ResumeForm({
                 }
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
                 placeholder="City, State"
-                data-oid="t4s.zdp"
+                data-oid="yn62upv"
               />
             </div>
 
-            <div className="flex items-center space-x-2" data-oid="hb426rn">
+            <div className="flex items-center space-x-2" data-oid="r2dtiox">
               <input
                 type="checkbox"
                 checked={exp.current}
@@ -407,18 +407,18 @@ export default function ResumeForm({
                   updateExperience(exp.id, "current", e.target.checked)
                 }
                 className="rounded text-[hsl(196,80%,45%)] focus:ring-[hsl(196,80%,45%)]"
-                data-oid="hai-8:h"
+                data-oid="16n89br"
               />
 
-              <label className="text-sm text-gray-700" data-oid="ip801h:">
+              <label className="text-sm text-gray-700" data-oid="_tkcbo-">
                 Currently working here
               </label>
             </div>
 
-            <div data-oid="ekk3rs.">
+            <div data-oid="dch.cao">
               <label
                 className="block text-sm font-medium text-gray-700 mb-1"
-                data-oid="-_c5qry"
+                data-oid="bthyrqx"
               >
                 Start Date
               </label>
@@ -429,15 +429,15 @@ export default function ResumeForm({
                   updateExperience(exp.id, "startDate", e.target.value)
                 }
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
-                data-oid="d11_:r0"
+                data-oid="_l6ja2c"
               />
             </div>
 
             {!exp.current && (
-              <div data-oid="r_s5ted">
+              <div data-oid="s.kwp04">
                 <label
                   className="block text-sm font-medium text-gray-700 mb-1"
-                  data-oid="50cf:8_"
+                  data-oid="w1a8sou"
                 >
                   End Date
                 </label>
@@ -448,16 +448,16 @@ export default function ResumeForm({
                     updateExperience(exp.id, "endDate", e.target.value)
                   }
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
-                  data-oid="he79bfv"
+                  data-oid="39y-0vc"
                 />
               </div>
             )}
           </div>
 
-          <div data-oid="0:ke3mq">
+          <div data-oid="5i8sd_g">
             <label
               className="block text-sm font-medium text-gray-700 mb-1"
-              data-oid="_fwyuk."
+              data-oid="b6ov80z"
             >
               Job Description
             </label>
@@ -473,16 +473,16 @@ export default function ResumeForm({
               rows={4}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
               placeholder="• Describe your responsibilities and achievements&#10;• Use bullet points for better readability&#10;• Include quantifiable results when possible"
-              data-oid="b13m66_"
+              data-oid="3j_e6gq"
             />
           </div>
         </div>
       ))}
 
       {resumeData.experience.length === 0 && (
-        <div className="text-center py-8 text-gray-500" data-oid="8cj925:">
-          <p data-oid="2h24tch">No work experience added yet.</p>
-          <p className="text-sm" data-oid=":snv5df">
+        <div className="text-center py-8 text-gray-500" data-oid="7l-.kcn">
+          <p data-oid="pnw64s4">No work experience added yet.</p>
+          <p className="text-sm" data-oid="a_x9qyo">
             Click "Add Experience" to get started.
           </p>
         </div>
@@ -491,15 +491,15 @@ export default function ResumeForm({
   );
 
   const renderEducation = () => (
-    <div className="p-6 space-y-6" data-oid="bc4_vg9">
-      <div className="flex items-center justify-between" data-oid="8u44v:q">
-        <h3 className="text-xl font-semibold text-gray-800" data-oid="7:re9rg">
+    <div className="p-6 space-y-6" data-oid="gbg0l:n">
+      <div className="flex items-center justify-between" data-oid="9bhf8.d">
+        <h3 className="text-xl font-semibold text-gray-800" data-oid=".ktx.21">
           Education
         </h3>
         <button
           onClick={addEducation}
           className="px-4 py-2 bg-[hsl(196,80%,45%)] text-white rounded-md hover:bg-[hsl(196,80%,40%)] transition-colors duration-200"
-          data-oid="y9jshgd"
+          data-oid="3aswv:w"
         >
           Add Education
         </button>
@@ -509,26 +509,26 @@ export default function ResumeForm({
         <div
           key={edu.id}
           className="border border-gray-200 rounded-lg p-4 space-y-4"
-          data-oid="7ike4y0"
+          data-oid="31_cunf"
         >
-          <div className="flex items-center justify-between" data-oid="3co7-oe">
-            <h4 className="font-medium text-gray-800" data-oid=":skakyy">
+          <div className="flex items-center justify-between" data-oid="9nk2q2q">
+            <h4 className="font-medium text-gray-800" data-oid="q85_yrd">
               Education {index + 1}
             </h4>
             <button
               onClick={() => removeEducation(edu.id)}
               className="text-red-500 hover:text-red-700"
-              data-oid="h7g-xcc"
+              data-oid="rr50nb6"
             >
               Remove
             </button>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-4" data-oid="m1ep59-">
-            <div data-oid="ega.muq">
+          <div className="grid md:grid-cols-2 gap-4" data-oid="b7-b3hz">
+            <div data-oid="94866::">
               <label
                 className="block text-sm font-medium text-gray-700 mb-1"
-                data-oid="ib.eljc"
+                data-oid="o0vlq5m"
               >
                 Institution *
               </label>
@@ -540,14 +540,14 @@ export default function ResumeForm({
                 }
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
                 placeholder="University Name"
-                data-oid="dab0p8_"
+                data-oid="2y2cnyw"
               />
             </div>
 
-            <div data-oid="0i:8l0l">
+            <div data-oid="7w90x86">
               <label
                 className="block text-sm font-medium text-gray-700 mb-1"
-                data-oid="dl0f14y"
+                data-oid="11-1xdt"
               >
                 Degree *
               </label>
@@ -559,14 +559,14 @@ export default function ResumeForm({
                 }
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
                 placeholder="Bachelor's, Master's, etc."
-                data-oid="lmq1z0k"
+                data-oid="kww4qgn"
               />
             </div>
 
-            <div data-oid=":5nfj0u">
+            <div data-oid="8-.04lh">
               <label
                 className="block text-sm font-medium text-gray-700 mb-1"
-                data-oid="unixt2u"
+                data-oid="p-ir-r:"
               >
                 Field of Study
               </label>
@@ -578,14 +578,14 @@ export default function ResumeForm({
                 }
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
                 placeholder="Computer Science, Engineering, etc."
-                data-oid="qiwr57k"
+                data-oid=":7ziqq:"
               />
             </div>
 
-            <div data-oid="x88a4f.">
+            <div data-oid="kge_zcd">
               <label
                 className="block text-sm font-medium text-gray-700 mb-1"
-                data-oid="ef8sekq"
+                data-oid="uk63r30"
               >
                 GPA (Optional)
               </label>
@@ -595,14 +595,14 @@ export default function ResumeForm({
                 onChange={(e) => updateEducation(edu.id, "gpa", e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
                 placeholder="3.8/4.0"
-                data-oid="ndxrfk4"
+                data-oid="dkipm9e"
               />
             </div>
 
-            <div data-oid="awg435x">
+            <div data-oid="dtnoe5h">
               <label
                 className="block text-sm font-medium text-gray-700 mb-1"
-                data-oid="klkruq7"
+                data-oid="opsq.b2"
               >
                 Start Date
               </label>
@@ -613,14 +613,14 @@ export default function ResumeForm({
                   updateEducation(edu.id, "startDate", e.target.value)
                 }
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
-                data-oid="anfxu3j"
+                data-oid="0nz0gbl"
               />
             </div>
 
-            <div data-oid="q1p3bd.">
+            <div data-oid="bflhov:">
               <label
                 className="block text-sm font-medium text-gray-700 mb-1"
-                data-oid="w.6hpp7"
+                data-oid="uclow5i"
               >
                 End Date
               </label>
@@ -631,15 +631,15 @@ export default function ResumeForm({
                   updateEducation(edu.id, "endDate", e.target.value)
                 }
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
-                data-oid="dygcz-r"
+                data-oid="gcyzr:0"
               />
             </div>
           </div>
 
-          <div data-oid="yhq19f9">
+          <div data-oid="l_jw9aj">
             <label
               className="block text-sm font-medium text-gray-700 mb-1"
-              data-oid="hqxb93e"
+              data-oid="ae7m2hh"
             >
               Achievements & Activities
             </label>
@@ -655,16 +655,16 @@ export default function ResumeForm({
               rows={3}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
               placeholder="• Dean's List&#10;• Relevant coursework&#10;• Academic achievements"
-              data-oid="6oa3ery"
+              data-oid="mim:sxd"
             />
           </div>
         </div>
       ))}
 
       {resumeData.education.length === 0 && (
-        <div className="text-center py-8 text-gray-500" data-oid="u819:.f">
-          <p data-oid="x5gvqr6">No education added yet.</p>
-          <p className="text-sm" data-oid="ll6rv8k">
+        <div className="text-center py-8 text-gray-500" data-oid="iyyiadn">
+          <p data-oid="rfdnc04">No education added yet.</p>
+          <p className="text-sm" data-oid="v61x3o4">
             Click "Add Education" to get started.
           </p>
         </div>
@@ -673,15 +673,15 @@ export default function ResumeForm({
   );
 
   const renderProjects = () => (
-    <div className="p-6 space-y-6" data-oid=":d-iyqd">
-      <div className="flex items-center justify-between" data-oid="3esxtnd">
-        <h3 className="text-xl font-semibold text-gray-800" data-oid="_agqk2.">
+    <div className="p-6 space-y-6" data-oid="p5_o81a">
+      <div className="flex items-center justify-between" data-oid="q.w1rum">
+        <h3 className="text-xl font-semibold text-gray-800" data-oid="lf0.loj">
           Projects
         </h3>
         <button
           onClick={addProject}
           className="px-4 py-2 bg-[hsl(196,80%,45%)] text-white rounded-md hover:bg-[hsl(196,80%,40%)] transition-colors duration-200"
-          data-oid="go:loiv"
+          data-oid="iyjtpgw"
         >
           Add Project
         </button>
@@ -691,26 +691,26 @@ export default function ResumeForm({
         <div
           key={project.id}
           className="border border-gray-200 rounded-lg p-4 space-y-4"
-          data-oid="wuyqxxe"
+          data-oid="3ifriog"
         >
-          <div className="flex items-center justify-between" data-oid="wy8l2mj">
-            <h4 className="font-medium text-gray-800" data-oid="3.mbebs">
+          <div className="flex items-center justify-between" data-oid="i.t0.ul">
+            <h4 className="font-medium text-gray-800" data-oid="uowf8lx">
               Project {index + 1}
             </h4>
             <button
               onClick={() => removeProject(project.id)}
               className="text-red-500 hover:text-red-700"
-              data-oid=".q37nvl"
+              data-oid="z-uu_54"
             >
               Remove
             </button>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-4" data-oid="aw8se1p">
-            <div data-oid="n3ts_wz">
+          <div className="grid md:grid-cols-2 gap-4" data-oid="oul5dr_">
+            <div data-oid="r3:j.1f">
               <label
                 className="block text-sm font-medium text-gray-700 mb-1"
-                data-oid="be:mtyt"
+                data-oid="av8ksti"
               >
                 Project Name *
               </label>
@@ -722,14 +722,14 @@ export default function ResumeForm({
                 }
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
                 placeholder="Project Name"
-                data-oid="by9qqdd"
+                data-oid="3u:25.n"
               />
             </div>
 
-            <div data-oid="38qxhmb">
+            <div data-oid="wadsxxh">
               <label
                 className="block text-sm font-medium text-gray-700 mb-1"
-                data-oid="k3no8ts"
+                data-oid="equybtf"
               >
                 Technologies Used
               </label>
@@ -745,14 +745,14 @@ export default function ResumeForm({
                 }
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
                 placeholder="React, Node.js, MongoDB"
-                data-oid="8skl:u3"
+                data-oid="sq:v86r"
               />
             </div>
 
-            <div data-oid="1_33kp7">
+            <div data-oid="ra8v6ha">
               <label
                 className="block text-sm font-medium text-gray-700 mb-1"
-                data-oid="1o20bu5"
+                data-oid="_9rewmn"
               >
                 Live Demo Link
               </label>
@@ -764,14 +764,14 @@ export default function ResumeForm({
                 }
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
                 placeholder="https://project-demo.com"
-                data-oid="yxck6hz"
+                data-oid="u-zu9kz"
               />
             </div>
 
-            <div data-oid="fp4cxxz">
+            <div data-oid="e3x5xr0">
               <label
                 className="block text-sm font-medium text-gray-700 mb-1"
-                data-oid="sryeuma"
+                data-oid="3-ir4ni"
               >
                 GitHub Repository
               </label>
@@ -783,15 +783,15 @@ export default function ResumeForm({
                 }
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
                 placeholder="https://github.com/username/project"
-                data-oid="g4.5el7"
+                data-oid="qslo9x7"
               />
             </div>
           </div>
 
-          <div data-oid="yln_q2-">
+          <div data-oid="7nd3iip">
             <label
               className="block text-sm font-medium text-gray-700 mb-1"
-              data-oid="o3-1cr_"
+              data-oid="-95gzh5"
             >
               Project Description
             </label>
@@ -803,14 +803,14 @@ export default function ResumeForm({
               rows={3}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
               placeholder="Brief description of the project and its purpose..."
-              data-oid="agnd:az"
+              data-oid="q::ntgh"
             />
           </div>
 
-          <div data-oid="_wsk1_u">
+          <div data-oid="8ce51b.">
             <label
               className="block text-sm font-medium text-gray-700 mb-1"
-              data-oid="fm6dpe8"
+              data-oid="hggia_3"
             >
               Key Highlights
             </label>
@@ -826,16 +826,16 @@ export default function ResumeForm({
               rows={3}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
               placeholder="• Key features implemented&#10;• Technical challenges solved&#10;• Impact or results achieved"
-              data-oid="x3ok79j"
+              data-oid="923da-g"
             />
           </div>
         </div>
       ))}
 
       {resumeData.projects.length === 0 && (
-        <div className="text-center py-8 text-gray-500" data-oid="dgn3je1">
-          <p data-oid="n2:jr1-">No projects added yet.</p>
-          <p className="text-sm" data-oid="yl3du9m">
+        <div className="text-center py-8 text-gray-500" data-oid="gz:z-2x">
+          <p data-oid="vfcfhml">No projects added yet.</p>
+          <p className="text-sm" data-oid="ad7z0s.">
             Click "Add Project" to get started.
           </p>
         </div>
@@ -844,25 +844,25 @@ export default function ResumeForm({
   );
 
   const renderSkills = () => (
-    <div className="p-6 space-y-6" data-oid="yo00ycf">
-      <div className="flex items-center justify-between" data-oid="veojlr5">
-        <h3 className="text-xl font-semibold text-gray-800" data-oid="dmkwdo3">
+    <div className="p-6 space-y-6" data-oid="gh990g-">
+      <div className="flex items-center justify-between" data-oid="mlfmp-1">
+        <h3 className="text-xl font-semibold text-gray-800" data-oid="i7b5ipg">
           Skills
         </h3>
-        <div className="flex items-center space-x-2" data-oid="0yyenlj">
+        <div className="flex items-center space-x-2" data-oid="unczja_">
           <input
             type="text"
             value={newSkillCategory}
             onChange={(e) => setNewSkillCategory(e.target.value)}
             placeholder="Category name"
             className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
-            data-oid="-ypz4mt"
+            data-oid="kpvfd53"
           />
 
           <button
             onClick={addSkillCategory}
             className="px-4 py-2 bg-[hsl(196,80%,45%)] text-white rounded-md hover:bg-[hsl(196,80%,40%)] transition-colors duration-200"
-            data-oid="6a-0rtz"
+            data-oid="o24dose"
           >
             Add Category
           </button>
@@ -873,9 +873,9 @@ export default function ResumeForm({
         <div
           key={index}
           className="border border-gray-200 rounded-lg p-4 space-y-4"
-          data-oid="7ktl56b"
+          data-oid="vmf.ttf"
         >
-          <div className="flex items-center justify-between" data-oid="fb6x3-r">
+          <div className="flex items-center justify-between" data-oid="0raiom5">
             <input
               type="text"
               value={skill.category}
@@ -884,22 +884,22 @@ export default function ResumeForm({
               }
               className="font-medium text-gray-800 bg-transparent border-none focus:outline-none focus:ring-0 text-lg"
               placeholder="Skill Category"
-              data-oid="7d.x0f."
+              data-oid="emdg9mc"
             />
 
             <button
               onClick={() => removeSkillCategory(index)}
               className="text-red-500 hover:text-red-700"
-              data-oid="udmvsqa"
+              data-oid="42k9z-r"
             >
               Remove
             </button>
           </div>
 
-          <div data-oid="xw2y.eo">
+          <div data-oid="cbd77bj">
             <label
               className="block text-sm font-medium text-gray-700 mb-1"
-              data-oid="nw0_zc4"
+              data-oid="ts-ysh4"
             >
               Skills (comma-separated)
             </label>
@@ -915,16 +915,16 @@ export default function ResumeForm({
               }
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
               placeholder="JavaScript, React, Node.js"
-              data-oid="4vutea9"
+              data-oid="p2qxa95"
             />
           </div>
         </div>
       ))}
 
       {resumeData.skills.length === 0 && (
-        <div className="text-center py-8 text-gray-500" data-oid="w_qk4m-">
-          <p data-oid="8:._30d">No skill categories added yet.</p>
-          <p className="text-sm" data-oid="ynz21dq">
+        <div className="text-center py-8 text-gray-500" data-oid="r2:t0_r">
+          <p data-oid="m4-vxli">No skill categories added yet.</p>
+          <p className="text-sm" data-oid="e.lngd9">
             Add a category to get started.
           </p>
         </div>
@@ -933,18 +933,18 @@ export default function ResumeForm({
   );
 
   const renderAdditional = () => (
-    <div className="p-6 space-y-6" data-oid="ow.r:kp">
+    <div className="p-6 space-y-6" data-oid="it.n-ha">
       <h3
         className="text-xl font-semibold text-gray-800 mb-4"
-        data-oid="6dn.ntb"
+        data-oid="ngel0k:"
       >
         Additional Information
       </h3>
 
-      <div data-oid="ug52n8u">
+      <div data-oid="kk3rxek">
         <label
           className="block text-sm font-medium text-gray-700 mb-2"
-          data-oid="5yqzsb5"
+          data-oid="b2zqo.s"
         >
           Certifications
         </label>
@@ -959,18 +959,18 @@ export default function ResumeForm({
           rows={4}
           className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
           placeholder="AWS Certified Solutions Architect&#10;Google Cloud Professional&#10;Microsoft Azure Fundamentals"
-          data-oid="2mf7mrw"
+          data-oid="k6mpl6z"
         />
 
-        <p className="text-xs text-gray-500 mt-1" data-oid="i02ak.a">
+        <p className="text-xs text-gray-500 mt-1" data-oid="o9iu86h">
           Enter each certification on a new line
         </p>
       </div>
 
-      <div data-oid="qz2yiz-">
+      <div data-oid="aw.oyzc">
         <label
           className="block text-sm font-medium text-gray-700 mb-2"
-          data-oid="bk:k9:8"
+          data-oid="aywi8gw"
         >
           Languages
         </label>
@@ -985,10 +985,10 @@ export default function ResumeForm({
           rows={3}
           className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
           placeholder="English (Native)&#10;Spanish (Conversational)&#10;French (Basic)"
-          data-oid="-ig0ti1"
+          data-oid="ek4b_.c"
         />
 
-        <p className="text-xs text-gray-500 mt-1" data-oid="5y1i4fl">
+        <p className="text-xs text-gray-500 mt-1" data-oid="iwotyiu">
           Enter each language on a new line
         </p>
       </div>
@@ -1005,7 +1005,7 @@ export default function ResumeForm({
   };
 
   return (
-    <div className="bg-white" data-oid="bhvxaqk">
+    <div className="bg-white" data-oid="4ozhv:g">
       {sections[activeSection as keyof typeof sections]?.() ||
         renderPersonalInfo()}
     </div>

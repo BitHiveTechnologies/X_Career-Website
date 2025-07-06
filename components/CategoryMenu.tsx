@@ -51,7 +51,7 @@ export default function CategoryMenu({
   };
 
   return (
-    <div className="relative" data-oid="5ecl_fa">
+    <div className="relative" data-oid="7suys5b">
       {/* Scroll Left Button */}
       <button
         onClick={() => scroll("left")}
@@ -61,21 +61,21 @@ export default function CategoryMenu({
             : "opacity-0 pointer-events-none"
         }`}
         aria-label="Scroll left"
-        data-oid="d834637"
+        data-oid="zlekxn5"
       >
         <svg
           className="h-5 w-5 text-gray-600"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
-          data-oid="e300nou"
+          data-oid=":z9gik4"
         >
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth="2"
             d="M15 19l-7-7 7-7"
-            data-oid="6y_ccdv"
+            data-oid=".in2niy"
           />
         </svg>
       </button>
@@ -89,21 +89,21 @@ export default function CategoryMenu({
             : "opacity-0 pointer-events-none"
         }`}
         aria-label="Scroll right"
-        data-oid="294j1p8"
+        data-oid="0vj9sb0"
       >
         <svg
           className="h-5 w-5 text-gray-600"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
-          data-oid="_cq:60-"
+          data-oid=".93sfjo"
         >
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth="2"
             d="M9 5l7 7-7 7"
-            data-oid="oagez-q"
+            data-oid="awhej8c"
           />
         </svg>
       </button>
@@ -113,7 +113,7 @@ export default function CategoryMenu({
         ref={scrollContainerRef}
         className="flex space-x-4 overflow-x-auto scrollbar-hide py-4 px-8"
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-        data-oid="nx3ve3z"
+        data-oid="5pg6sm6"
       >
         {categories.map((category) => (
           <button
@@ -124,10 +124,10 @@ export default function CategoryMenu({
                 ? "bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white shadow-lg"
                 : "bg-white/80 backdrop-blur-sm text-gray-700 border border-gray-200 hover:border-[hsl(196,80%,45%)] hover:text-[hsl(196,80%,45%)] hover:bg-white"
             }`}
-            data-oid="o7tj64w"
+            data-oid="m-xckor"
           >
-            <div className="flex flex-col items-center" data-oid="n2:823o">
-              <span className="font-semibold" data-oid="8j5ui1y">
+            <div className="flex flex-col items-center" data-oid=":th-7lm">
+              <span className="font-semibold" data-oid="yeus8lp">
                 {category.name}
               </span>
               <span
@@ -136,7 +136,7 @@ export default function CategoryMenu({
                     ? "text-blue-100"
                     : "text-gray-500"
                 }`}
-                data-oid="k4hw1ge"
+                data-oid="0y:hc_l"
               >
                 {category.count.toLocaleString()} jobs
               </span>
@@ -150,14 +150,14 @@ export default function CategoryMenu({
         className={`absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-[hsl(196,60%,95%)] to-transparent pointer-events-none transition-opacity duration-300 ${
           canScrollLeft ? "opacity-100" : "opacity-0"
         }`}
-        data-oid="n708f4y"
+        data-oid="cm1tafx"
       />
 
       <div
         className={`absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-[hsl(196,60%,95%)] to-transparent pointer-events-none transition-opacity duration-300 ${
           canScrollRight ? "opacity-100" : "opacity-0"
         }`}
-        data-oid="96urm1p"
+        data-oid="atk28j4"
       />
     </div>
   );

@@ -41,27 +41,27 @@ export default function JobDetailsModal({
     <div
       className="fixed inset-0 z-50 bg-black/50 backdrop-blur-custom flex items-center justify-center p-4"
       onClick={handleBackdropClick}
-      data-oid="l:5-4so"
+      data-oid="j..df16"
     >
       <div
         className="bg-white rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden modal-enter"
-        data-oid="vzxmbb8"
+        data-oid="6kaak3o"
       >
         {/* Header */}
         <div
           className="bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white p-6"
-          data-oid="a.yfb8l"
+          data-oid="9.5rw:z"
         >
-          <div className="flex items-start justify-between" data-oid="muohqh1">
-            <div className="flex-1" data-oid="63d523f">
-              <div className="flex items-center gap-3 mb-2" data-oid="ca4nqn7">
-                <h1 className="text-2xl font-bold" data-oid="h6urqi:">
+          <div className="flex items-start justify-between" data-oid="xrh::s:">
+            <div className="flex-1" data-oid="yvk2lly">
+              <div className="flex items-center gap-3 mb-2" data-oid="u2:pka3">
+                <h1 className="text-2xl font-bold" data-oid="_1qde20">
                   {job.title}
                 </h1>
                 {job.isUrgent && (
                   <span
                     className="bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full animate-pulse"
-                    data-oid="2u21dv5"
+                    data-oid="eg4yn4r"
                   >
                     🔥 URGENT
                   </span>
@@ -69,7 +69,7 @@ export default function JobDetailsModal({
                 {job.isFeatured && (
                   <span
                     className="bg-yellow-500 text-white text-xs font-bold px-3 py-1 rounded-full"
-                    data-oid="m4we9:w"
+                    data-oid="7-qem.r"
                   >
                     ⭐ FEATURED
                   </span>
@@ -77,28 +77,28 @@ export default function JobDetailsModal({
               </div>
               <p
                 className="text-xl font-semibold text-blue-100 mb-2"
-                data-oid="ozhwcrw"
+                data-oid="ci2eeo0"
               >
                 {job.company}
               </p>
               <div
                 className="flex flex-wrap items-center gap-4 text-sm text-blue-100"
-                data-oid="8k-qtye"
+                data-oid="_k61_fu"
               >
-                <span className="flex items-center gap-1" data-oid="jmw9tym">
+                <span className="flex items-center gap-1" data-oid="d_rt8on">
                   <svg
                     className="h-4 w-4"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
-                    data-oid="_tlh2ae"
+                    data-oid="d4vkrxw"
                   >
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       strokeWidth="2"
                       d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                      data-oid="z7sw.d6"
+                      data-oid="r.414f3"
                     />
 
                     <path
@@ -106,43 +106,43 @@ export default function JobDetailsModal({
                       strokeLinejoin="round"
                       strokeWidth="2"
                       d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                      data-oid="2dolkg0"
+                      data-oid="6u2w-cm"
                     />
                   </svg>
                   {job.location}
                 </span>
-                <span className="flex items-center gap-1" data-oid="l3i45-w">
+                <span className="flex items-center gap-1" data-oid="mh_2bxv">
                   <svg
                     className="h-4 w-4"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
-                    data-oid="_:hqsal"
+                    data-oid="ls.6664"
                   >
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       strokeWidth="2"
                       d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"
-                      data-oid="h-._hq9"
+                      data-oid="o_ecjy2"
                     />
                   </svg>
                   {job.salary}
                 </span>
-                <span className="flex items-center gap-1" data-oid="m-eckqk">
+                <span className="flex items-center gap-1" data-oid="l9g9sg9">
                   <svg
                     className="h-4 w-4"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
-                    data-oid="rus8rpy"
+                    data-oid="cb3_2db"
                   >
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       strokeWidth="2"
                       d="M13 10V3L4 14h7v7l9-11h-7z"
-                      data-oid="n2k5u5m"
+                      data-oid="z9r5m8l"
                     />
                   </svg>
                   {job.experienceRequired}
@@ -152,21 +152,21 @@ export default function JobDetailsModal({
             <button
               onClick={onClose}
               className="p-2 hover:bg-white/20 rounded-full transition-colors"
-              data-oid="muyo4qw"
+              data-oid="c9o.hya"
             >
               <svg
                 className="h-6 w-6"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
-                data-oid="3q3tyxh"
+                data-oid="h1-esxh"
               >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth="2"
                   d="M6 18L18 6M6 6l12 12"
-                  data-oid=".6yidxf"
+                  data-oid="vcln3lq"
                 />
               </svg>
             </button>
@@ -174,10 +174,10 @@ export default function JobDetailsModal({
         </div>
 
         {/* Content */}
-        <div className="flex flex-col h-[calc(90vh-200px)]" data-oid="awjcl8s">
+        <div className="flex flex-col h-[calc(90vh-200px)]" data-oid="f.2z7mo">
           {/* Tabs */}
-          <div className="border-b border-gray-200 px-6" data-oid="-3y8p_7">
-            <nav className="flex space-x-8" data-oid="q3-o96l">
+          <div className="border-b border-gray-200 px-6" data-oid="8k.qo.8">
+            <nav className="flex space-x-8" data-oid="4.y:y_n">
               {[
                 { id: "overview", label: "Job Overview" },
                 { id: "requirements", label: "Requirements" },
@@ -191,7 +191,7 @@ export default function JobDetailsModal({
                       ? "border-[hsl(196,80%,45%)] text-[hsl(196,80%,45%)]"
                       : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
                   }`}
-                  data-oid="owaqu_z"
+                  data-oid="l.y0upi"
                 >
                   {tab.label}
                 </button>
@@ -202,88 +202,88 @@ export default function JobDetailsModal({
           {/* Tab Content */}
           <div
             className="flex-1 overflow-y-auto p-6 modal-scroll"
-            data-oid=".x1t2d5"
+            data-oid="a:lx5_6"
           >
             {activeTab === "overview" && (
-              <div className="space-y-6" data-oid="fgk9lrw">
+              <div className="space-y-6" data-oid="wcn4.8u">
                 {/* Job Stats */}
                 <div
                   className="grid grid-cols-2 md:grid-cols-4 gap-4"
-                  data-oid="nr:j_39"
+                  data-oid="6ycdf1-"
                 >
                   <div
                     className="bg-blue-50 p-4 rounded-lg text-center"
-                    data-oid="5.:7lmu"
+                    data-oid="efq::a0"
                   >
                     <div
                       className="text-2xl font-bold text-[hsl(196,80%,45%)]"
-                      data-oid="03babwo"
+                      data-oid="dbtfd3_"
                     >
                       {job.applicantCount}
                     </div>
-                    <div className="text-sm text-gray-600" data-oid="lnqfan_">
+                    <div className="text-sm text-gray-600" data-oid="o-i57dp">
                       Applicants
                     </div>
                   </div>
                   <div
                     className="bg-green-50 p-4 rounded-lg text-center"
-                    data-oid=".jf0gf."
+                    data-oid="n40ngz5"
                   >
                     <div
                       className="text-2xl font-bold text-green-600"
-                      data-oid="q-yc650"
+                      data-oid="1o50ov4"
                     >
                       {job.jobType}
                     </div>
-                    <div className="text-sm text-gray-600" data-oid="1x83su_">
+                    <div className="text-sm text-gray-600" data-oid="mvezk:m">
                       Job Type
                     </div>
                   </div>
                   <div
                     className="bg-purple-50 p-4 rounded-lg text-center"
-                    data-oid="-9n19aq"
+                    data-oid="fcupwh:"
                   >
                     <div
                       className="text-2xl font-bold text-purple-600"
-                      data-oid="akjo0y."
+                      data-oid="7qt0_ob"
                     >
                       {job.employmentType}
                     </div>
-                    <div className="text-sm text-gray-600" data-oid="6dsnwwo">
+                    <div className="text-sm text-gray-600" data-oid=":o5mm_m">
                       Employment
                     </div>
                   </div>
                   <div
                     className="bg-orange-50 p-4 rounded-lg text-center"
-                    data-oid="bxp1k:d"
+                    data-oid="hgmk:jp"
                   >
                     <div
                       className="text-2xl font-bold text-orange-600"
-                      data-oid="w6rv_k7"
+                      data-oid="x5ugxa4"
                     >
                       {formatDate(job.postedDate).split(" ")[0]}
                     </div>
-                    <div className="text-sm text-gray-600" data-oid="mti6nnm">
+                    <div className="text-sm text-gray-600" data-oid="vfurdu9">
                       Posted
                     </div>
                   </div>
                 </div>
 
                 {/* Job Description */}
-                <div data-oid="wd2zia8">
+                <div data-oid="fmxiguv">
                   <h3
                     className="text-lg font-semibold text-gray-800 mb-3"
-                    data-oid="30hbxx6"
+                    data-oid="bnwc1dh"
                   >
                     Job Description
                   </h3>
                   <div
                     className="prose prose-blue max-w-none"
-                    data-oid="6loueh8"
+                    data-oid="2lqz_nk"
                   >
                     <p
                       className="text-gray-600 leading-relaxed mb-4"
-                      data-oid="d5.zrl6"
+                      data-oid=":zcqpwy"
                     >
                       We are looking for a talented {job.title} to join our
                       dynamic team at {job.company}. This is an excellent
@@ -293,7 +293,7 @@ export default function JobDetailsModal({
                     </p>
                     <p
                       className="text-gray-600 leading-relaxed mb-4"
-                      data-oid="b--zuj-"
+                      data-oid="b34jb15"
                     >
                       As a {job.title}, you will be responsible for developing
                       and maintaining high-quality software solutions,
@@ -302,7 +302,7 @@ export default function JobDetailsModal({
                     </p>
                     <p
                       className="text-gray-600 leading-relaxed"
-                      data-oid="hm8.31l"
+                      data-oid="c73:v2t"
                     >
                       Join us in building innovative solutions that impact
                       millions of users across India and beyond. We offer a
@@ -315,43 +315,43 @@ export default function JobDetailsModal({
                 {/* Application Deadline & Quick Stats */}
                 <div
                   className="bg-blue-50 rounded-lg p-4 mb-6"
-                  data-oid="iatbuin"
+                  data-oid="_vknjkw"
                 >
                   <div
                     className="grid grid-cols-1 md:grid-cols-3 gap-4"
-                    data-oid="429c6o9"
+                    data-oid="0bryhr."
                   >
-                    <div className="text-center" data-oid="-8ntcjt">
+                    <div className="text-center" data-oid="y2qxrjj">
                       <div
                         className="text-2xl font-bold text-blue-600"
-                        data-oid="qt1k_3b"
+                        data-oid="9rl5ojf"
                       >
                         {Math.max(1, Math.floor(Math.random() * 15))} days
                       </div>
-                      <div className="text-sm text-gray-600" data-oid="8gfpz-z">
+                      <div className="text-sm text-gray-600" data-oid="wy.yjiz">
                         Application Deadline
                       </div>
                     </div>
-                    <div className="text-center" data-oid="3afy3sh">
+                    <div className="text-center" data-oid="g:7p19-">
                       <div
                         className="text-2xl font-bold text-green-600"
-                        data-oid="4ska43x"
+                        data-oid="7c6:ckz"
                       >
                         {job.isRemote ? "Remote" : "On-site"}
                       </div>
-                      <div className="text-sm text-gray-600" data-oid="3w:1hsx">
+                      <div className="text-sm text-gray-600" data-oid=":eysp2p">
                         Work Mode
                       </div>
                     </div>
-                    <div className="text-center" data-oid="qa27dpy">
+                    <div className="text-center" data-oid="2ly98pi">
                       <div
                         className="text-2xl font-bold text-purple-600"
-                        data-oid="d_sniyr"
+                        data-oid=":gw7np-"
                       >
                         {Math.floor(Math.random() * 5) + 1}-
                         {Math.floor(Math.random() * 3) + 3} rounds
                       </div>
-                      <div className="text-sm text-gray-600" data-oid="o4_1jnp">
+                      <div className="text-sm text-gray-600" data-oid="5h7z:pr">
                         Interview Process
                       </div>
                     </div>
@@ -359,62 +359,62 @@ export default function JobDetailsModal({
                 </div>
 
                 {/* Company Highlights */}
-                <div className="mb-6" data-oid="qi:vc7i">
+                <div className="mb-6" data-oid="h7-6z-f">
                   <h3
                     className="text-lg font-semibold text-gray-800 mb-3"
-                    data-oid="45t.qi5"
+                    data-oid="p.2mi2l"
                   >
                     Why Join {job.company}?
                   </h3>
                   <div
                     className="grid grid-cols-1 md:grid-cols-2 gap-3"
-                    data-oid="0m5190i"
+                    data-oid="ozgg8tr"
                   >
                     <div
                       className="flex items-center gap-3 p-3 bg-green-50 rounded-lg"
-                      data-oid="a98zevk"
+                      data-oid="4hi1rym"
                     >
                       <div
                         className="w-2 h-2 bg-green-500 rounded-full"
-                        data-oid="k.fd6zg"
+                        data-oid="meh-g-4"
                       ></div>
-                      <span className="text-gray-700" data-oid="gjitcf5">
+                      <span className="text-gray-700" data-oid="roa.cgz">
                         Fast-growing {job.companyType} company
                       </span>
                     </div>
                     <div
                       className="flex items-center gap-3 p-3 bg-blue-50 rounded-lg"
-                      data-oid="as1:a.g"
+                      data-oid="cimqtdf"
                     >
                       <div
                         className="w-2 h-2 bg-blue-500 rounded-full"
-                        data-oid="37iyl.r"
+                        data-oid="i_e77s3"
                       ></div>
-                      <span className="text-gray-700" data-oid="u:ny4uk">
+                      <span className="text-gray-700" data-oid="1xrn7-g">
                         Learning & development opportunities
                       </span>
                     </div>
                     <div
                       className="flex items-center gap-3 p-3 bg-purple-50 rounded-lg"
-                      data-oid="x-.sgym"
+                      data-oid="q98bg.c"
                     >
                       <div
                         className="w-2 h-2 bg-purple-500 rounded-full"
-                        data-oid="21rvebw"
+                        data-oid="bbq1dkl"
                       ></div>
-                      <span className="text-gray-700" data-oid="tgy2k9k">
+                      <span className="text-gray-700" data-oid="tq9efy8">
                         Collaborative work environment
                       </span>
                     </div>
                     <div
                       className="flex items-center gap-3 p-3 bg-orange-50 rounded-lg"
-                      data-oid="j-gcz5-"
+                      data-oid="a.wm-23"
                     >
                       <div
                         className="w-2 h-2 bg-orange-500 rounded-full"
-                        data-oid=":ehd0_9"
+                        data-oid="bpwf.-0"
                       ></div>
-                      <span className="text-gray-700" data-oid="v5zfd47">
+                      <span className="text-gray-700" data-oid="k9bpn8e">
                         Competitive compensation package
                       </span>
                     </div>
@@ -423,28 +423,28 @@ export default function JobDetailsModal({
 
                 {/* Benefits */}
                 {job.benefits && job.benefits.length > 0 && (
-                  <div data-oid="ofdw5_p">
+                  <div data-oid="i3:1.ya">
                     <h3
                       className="text-lg font-semibold text-gray-800 mb-3"
-                      data-oid="0x7eebj"
+                      data-oid=".dlzugd"
                     >
                       Benefits & Perks
                     </h3>
                     <div
                       className="grid grid-cols-1 md:grid-cols-2 gap-3"
-                      data-oid="jp0mdyi"
+                      data-oid="rzjd:_2"
                     >
                       {job.benefits.map((benefit, index) => (
                         <div
                           key={index}
                           className="flex items-center gap-3 p-3 bg-green-50 rounded-lg"
-                          data-oid="nro3mol"
+                          data-oid="o1v_kxl"
                         >
                           <div
                             className="w-2 h-2 bg-green-500 rounded-full"
-                            data-oid="j-wml9d"
+                            data-oid="xrxmlvp"
                           ></div>
-                          <span className="text-gray-700" data-oid="apv5dwf">
+                          <span className="text-gray-700" data-oid="ik6-wyk">
                             {benefit}
                           </span>
                         </div>
@@ -456,21 +456,21 @@ export default function JobDetailsModal({
             )}
 
             {activeTab === "requirements" && (
-              <div className="space-y-6" data-oid="w-jyz9k">
+              <div className="space-y-6" data-oid="3t-ffpl">
                 {/* Skills Required */}
-                <div data-oid="qdbpue6">
+                <div data-oid="9qtp9z6">
                   <h3
                     className="text-lg font-semibold text-gray-800 mb-3"
-                    data-oid="i6lwvlu"
+                    data-oid="2oniiyj"
                   >
                     Required Skills
                   </h3>
-                  <div className="flex flex-wrap gap-2" data-oid="bt.lnxr">
+                  <div className="flex flex-wrap gap-2" data-oid="bf2hzdq">
                     {job.skills.map((skill, index) => (
                       <span
                         key={index}
                         className="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-2 rounded-full"
-                        data-oid="r8ed_q3"
+                        data-oid="j97p5ck"
                       >
                         {skill}
                       </span>
@@ -479,57 +479,57 @@ export default function JobDetailsModal({
                 </div>
 
                 {/* Experience & Qualifications */}
-                <div data-oid="jbb.54x">
+                <div data-oid="1b3q65j">
                   <h3
                     className="text-lg font-semibold text-gray-800 mb-3"
-                    data-oid=".t6p_-_"
+                    data-oid="qb7a8vy"
                   >
                     Experience & Qualifications
                   </h3>
-                  <div className="space-y-3" data-oid="kjmxujl">
-                    <div className="flex items-start gap-3" data-oid="f4pelcc">
+                  <div className="space-y-3" data-oid="qs.x4_c">
+                    <div className="flex items-start gap-3" data-oid="bw5938a">
                       <div
                         className="w-2 h-2 bg-[hsl(196,80%,45%)] rounded-full mt-2"
-                        data-oid="xhul-2q"
+                        data-oid="4chi7l_"
                       ></div>
-                      <span className="text-gray-700" data-oid="wgfj05t">
+                      <span className="text-gray-700" data-oid="67byb_7">
                         Experience: {job.experienceRequired}
                       </span>
                     </div>
-                    <div className="flex items-start gap-3" data-oid="kqjkos3">
+                    <div className="flex items-start gap-3" data-oid="uuz9112">
                       <div
                         className="w-2 h-2 bg-[hsl(196,80%,45%)] rounded-full mt-2"
-                        data-oid="te9nv:t"
+                        data-oid="0rxz7os"
                       ></div>
-                      <span className="text-gray-700" data-oid="ye:b6hl">
+                      <span className="text-gray-700" data-oid="7uaf-wv">
                         Bachelor's degree in Computer Science, Engineering, or
                         related field
                       </span>
                     </div>
-                    <div className="flex items-start gap-3" data-oid="3q4d:dg">
+                    <div className="flex items-start gap-3" data-oid="dkb8q5q">
                       <div
                         className="w-2 h-2 bg-[hsl(196,80%,45%)] rounded-full mt-2"
-                        data-oid="v8bfr0i"
+                        data-oid="sim7xir"
                       ></div>
-                      <span className="text-gray-700" data-oid="45t_7a8">
+                      <span className="text-gray-700" data-oid="vr_d:5w">
                         Strong problem-solving and analytical skills
                       </span>
                     </div>
-                    <div className="flex items-start gap-3" data-oid="vt4tj4f">
+                    <div className="flex items-start gap-3" data-oid="aet4bog">
                       <div
                         className="w-2 h-2 bg-[hsl(196,80%,45%)] rounded-full mt-2"
-                        data-oid="l7072by"
+                        data-oid="vunjz0e"
                       ></div>
-                      <span className="text-gray-700" data-oid="_dwv9aj">
+                      <span className="text-gray-700" data-oid="zaw6-9n">
                         Excellent communication and teamwork abilities
                       </span>
                     </div>
-                    <div className="flex items-start gap-3" data-oid="fiv98rf">
+                    <div className="flex items-start gap-3" data-oid="qnqilf1">
                       <div
                         className="w-2 h-2 bg-[hsl(196,80%,45%)] rounded-full mt-2"
-                        data-oid="vqurg::"
+                        data-oid="vhw.bfr"
                       ></div>
-                      <span className="text-gray-700" data-oid="yh0e6v0">
+                      <span className="text-gray-700" data-oid="61fph7h">
                         Passion for learning new technologies and best practices
                       </span>
                     </div>
@@ -537,58 +537,58 @@ export default function JobDetailsModal({
                 </div>
 
                 {/* Responsibilities */}
-                <div data-oid="fojwjaa">
+                <div data-oid="30lct7-">
                   <h3
                     className="text-lg font-semibold text-gray-800 mb-3"
-                    data-oid="rnd6w97"
+                    data-oid="0_eltpp"
                   >
                     Key Responsibilities
                   </h3>
-                  <div className="space-y-3" data-oid="i-u9yfj">
-                    <div className="flex items-start gap-3" data-oid="dbgq19-">
+                  <div className="space-y-3" data-oid=".laj:zr">
+                    <div className="flex items-start gap-3" data-oid="q8z9bpf">
                       <div
                         className="w-2 h-2 bg-green-500 rounded-full mt-2"
-                        data-oid="gcpkzo."
+                        data-oid="2f-d:z-"
                       ></div>
-                      <span className="text-gray-700" data-oid="q2e05m5">
+                      <span className="text-gray-700" data-oid="n-95xu:">
                         Develop and maintain high-quality software applications
                       </span>
                     </div>
-                    <div className="flex items-start gap-3" data-oid="n58xnsm">
+                    <div className="flex items-start gap-3" data-oid="9z7iz1f">
                       <div
                         className="w-2 h-2 bg-green-500 rounded-full mt-2"
-                        data-oid="hmouw5z"
+                        data-oid="b9-.02d"
                       ></div>
-                      <span className="text-gray-700" data-oid="y:_:v4n">
+                      <span className="text-gray-700" data-oid="8h9vu8h">
                         Collaborate with cross-functional teams to define and
                         implement features
                       </span>
                     </div>
-                    <div className="flex items-start gap-3" data-oid="1qwamvx">
+                    <div className="flex items-start gap-3" data-oid="4c.kb-c">
                       <div
                         className="w-2 h-2 bg-green-500 rounded-full mt-2"
-                        data-oid=":bbuw6l"
+                        data-oid="7u1f8hq"
                       ></div>
-                      <span className="text-gray-700" data-oid="6h7ep1x">
+                      <span className="text-gray-700" data-oid="q28:0ua">
                         Write clean, maintainable, and efficient code
                       </span>
                     </div>
-                    <div className="flex items-start gap-3" data-oid="_u9n429">
+                    <div className="flex items-start gap-3" data-oid="04q8u.n">
                       <div
                         className="w-2 h-2 bg-green-500 rounded-full mt-2"
-                        data-oid="7tjp_x-"
+                        data-oid="yuo8tbw"
                       ></div>
-                      <span className="text-gray-700" data-oid="75-mech">
+                      <span className="text-gray-700" data-oid="b:ds7__">
                         Participate in code reviews and maintain coding
                         standards
                       </span>
                     </div>
-                    <div className="flex items-start gap-3" data-oid="q-7vb43">
+                    <div className="flex items-start gap-3" data-oid="xlxr0g3">
                       <div
                         className="w-2 h-2 bg-green-500 rounded-full mt-2"
-                        data-oid="rvx_ea-"
+                        data-oid="e_:h6e5"
                       ></div>
-                      <span className="text-gray-700" data-oid="je8geq3">
+                      <span className="text-gray-700" data-oid="t.wxfo.">
                         Troubleshoot and debug applications to optimize
                         performance
                       </span>
@@ -597,34 +597,34 @@ export default function JobDetailsModal({
                 </div>
 
                 {/* Interview Process */}
-                <div className="mt-6" data-oid="rv8d2zt">
+                <div className="mt-6" data-oid="0mgtzd4">
                   <h3
                     className="text-lg font-semibold text-gray-800 mb-3"
-                    data-oid="_pep5ta"
+                    data-oid="zzzakbz"
                   >
                     Interview Process
                   </h3>
-                  <div className="space-y-4" data-oid="6igb5uo">
+                  <div className="space-y-4" data-oid="nz6f.j6">
                     <div
                       className="flex items-center gap-4 p-3 bg-blue-50 rounded-lg"
-                      data-oid="grxs840"
+                      data-oid="yef10k0"
                     >
                       <div
                         className="w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center text-sm font-bold"
-                        data-oid="rf_q5:4"
+                        data-oid=":89dhuu"
                       >
                         1
                       </div>
-                      <div data-oid="_i9.1be">
+                      <div data-oid="_s_nqsc">
                         <div
                           className="font-medium text-gray-800"
-                          data-oid="_gbaeqq"
+                          data-oid="_crqcgg"
                         >
                           Application Review
                         </div>
                         <div
                           className="text-sm text-gray-600"
-                          data-oid="1uw8mj2"
+                          data-oid="ru82vu4"
                         >
                           Resume and profile screening
                         </div>
@@ -632,24 +632,24 @@ export default function JobDetailsModal({
                     </div>
                     <div
                       className="flex items-center gap-4 p-3 bg-green-50 rounded-lg"
-                      data-oid="tumthl1"
+                      data-oid=":jugqhv"
                     >
                       <div
                         className="w-8 h-8 bg-green-500 text-white rounded-full flex items-center justify-center text-sm font-bold"
-                        data-oid="_l2fcap"
+                        data-oid="dejedi:"
                       >
                         2
                       </div>
-                      <div data-oid=":-3lhz8">
+                      <div data-oid="dhdmdq9">
                         <div
                           className="font-medium text-gray-800"
-                          data-oid="bt-8no8"
+                          data-oid="2mpe74h"
                         >
                           Technical Assessment
                         </div>
                         <div
                           className="text-sm text-gray-600"
-                          data-oid="-snpy9v"
+                          data-oid="mlalav9"
                         >
                           Coding challenge or technical questions
                         </div>
@@ -657,24 +657,24 @@ export default function JobDetailsModal({
                     </div>
                     <div
                       className="flex items-center gap-4 p-3 bg-purple-50 rounded-lg"
-                      data-oid="y5gc_qb"
+                      data-oid="k-hvwvc"
                     >
                       <div
                         className="w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center text-sm font-bold"
-                        data-oid=".ur2p1w"
+                        data-oid="2r2fx.6"
                       >
                         3
                       </div>
-                      <div data-oid="z3dkrbx">
+                      <div data-oid="6oe2k9t">
                         <div
                           className="font-medium text-gray-800"
-                          data-oid="xp_6m_0"
+                          data-oid="tbt2gf1"
                         >
                           Technical Interview
                         </div>
                         <div
                           className="text-sm text-gray-600"
-                          data-oid="oo736dp"
+                          data-oid="smf6dvv"
                         >
                           Deep dive into technical skills and problem-solving
                         </div>
@@ -682,24 +682,24 @@ export default function JobDetailsModal({
                     </div>
                     <div
                       className="flex items-center gap-4 p-3 bg-orange-50 rounded-lg"
-                      data-oid="o3fyirc"
+                      data-oid="us3.e:3"
                     >
                       <div
                         className="w-8 h-8 bg-orange-500 text-white rounded-full flex items-center justify-center text-sm font-bold"
-                        data-oid="dmeclo0"
+                        data-oid="lvqu7dz"
                       >
                         4
                       </div>
-                      <div data-oid="4t.xuni">
+                      <div data-oid="cqis2m:">
                         <div
                           className="font-medium text-gray-800"
-                          data-oid="j0c8-jj"
+                          data-oid="423r8xe"
                         >
                           HR Interview
                         </div>
                         <div
                           className="text-sm text-gray-600"
-                          data-oid="x6_ro89"
+                          data-oid="yluli8a"
                         >
                           Cultural fit and final discussion
                         </div>
@@ -709,20 +709,20 @@ export default function JobDetailsModal({
                 </div>
 
                 {/* Preferred Skills */}
-                <div className="mt-6" data-oid="yxpm332">
+                <div className="mt-6" data-oid="51bqh6c">
                   <h3
                     className="text-lg font-semibold text-gray-800 mb-3"
-                    data-oid="vf_1vjo"
+                    data-oid="pv26kga"
                   >
                     Nice to Have Skills
                   </h3>
-                  <div className="flex flex-wrap gap-2" data-oid="5nq09qq">
+                  <div className="flex flex-wrap gap-2" data-oid="16.68ds">
                     {["Git", "Docker", "AWS", "Agile", "Testing", "CI/CD"].map(
                       (skill, index) => (
                         <span
                           key={index}
                           className="bg-gray-100 text-gray-700 text-sm font-medium px-3 py-1 rounded-full border border-gray-300"
-                          data-oid="h1yfqks"
+                          data-oid="1159tbo"
                         >
                           {skill}
                         </span>
@@ -734,18 +734,18 @@ export default function JobDetailsModal({
             )}
 
             {activeTab === "company" && (
-              <div className="space-y-6" data-oid="r1bzfrq">
+              <div className="space-y-6" data-oid="j.azlfx">
                 {/* Company Overview */}
-                <div data-oid="nbk1t32">
+                <div data-oid="i1yuba5">
                   <h3
                     className="text-lg font-semibold text-gray-800 mb-3"
-                    data-oid="54hp3qw"
+                    data-oid="j.qbpbj"
                   >
                     About {job.company}
                   </h3>
                   <p
                     className="text-gray-600 leading-relaxed mb-4"
-                    data-oid="-ojjsfe"
+                    data-oid="71:3zte"
                   >
                     {job.company} is a leading {job.industry} company that has
                     been revolutionizing the industry with innovative solutions
@@ -754,7 +754,7 @@ export default function JobDetailsModal({
                   </p>
                   <p
                     className="text-gray-600 leading-relaxed"
-                    data-oid="dva.04c"
+                    data-oid="55es9l5"
                   >
                     Our team consists of passionate professionals who are
                     dedicated to excellence and continuous learning. We foster a
@@ -766,89 +766,89 @@ export default function JobDetailsModal({
                 {/* Company Stats */}
                 <div
                   className="grid grid-cols-1 md:grid-cols-3 gap-4"
-                  data-oid="xe-j7-c"
+                  data-oid=".__4tx."
                 >
                   <div
                     className="bg-blue-50 p-4 rounded-lg text-center"
-                    data-oid=":rtxgmo"
+                    data-oid="4:xml95"
                   >
                     <div
                       className="text-2xl font-bold text-[hsl(196,80%,45%)]"
-                      data-oid=".tp.bwc"
+                      data-oid="8eh7.34"
                     >
                       {job.companySize}
                     </div>
-                    <div className="text-sm text-gray-600" data-oid="lirxa1x">
+                    <div className="text-sm text-gray-600" data-oid="y50d:41">
                       Employees
                     </div>
                   </div>
                   <div
                     className="bg-green-50 p-4 rounded-lg text-center"
-                    data-oid="8ncf:t."
+                    data-oid="5wm-fy:"
                   >
                     <div
                       className="text-2xl font-bold text-green-600"
-                      data-oid="0:j:9tj"
+                      data-oid="sg54.6x"
                     >
                       {job.industry}
                     </div>
-                    <div className="text-sm text-gray-600" data-oid="_-gszkt">
+                    <div className="text-sm text-gray-600" data-oid="aggyxf-">
                       Industry
                     </div>
                   </div>
                   <div
                     className="bg-purple-50 p-4 rounded-lg text-center"
-                    data-oid=".inj2yb"
+                    data-oid="pr--x6-"
                   >
                     <div
                       className="text-2xl font-bold text-purple-600"
-                      data-oid="97w:r7a"
+                      data-oid="1y_xpi3"
                     >
                       {job.companyType}
                     </div>
-                    <div className="text-sm text-gray-600" data-oid="ze0hefz">
+                    <div className="text-sm text-gray-600" data-oid="67v1xdi">
                       Company Type
                     </div>
                   </div>
                 </div>
 
                 {/* Company Culture */}
-                <div data-oid="hw2iy5o">
+                <div data-oid="f:aesg4">
                   <h3
                     className="text-lg font-semibold text-gray-800 mb-3"
-                    data-oid="ccslste"
+                    data-oid="6dcrkd3"
                   >
                     Company Culture
                   </h3>
                   <div
                     className="grid grid-cols-1 md:grid-cols-2 gap-4"
-                    data-oid="cyat9ai"
+                    data-oid="1_ev_hm"
                   >
                     <div
                       className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg"
-                      data-oid="2kl781a"
+                      data-oid="nwi:72b"
                     >
                       <div
                         className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center"
-                        data-oid="i5m7-7k"
+                        data-oid="gy7xjp3"
                       >
                         <span
                           className="text-blue-600 text-sm"
-                          data-oid="vzg_.ac"
+                          data-oid="llplm2s"
                         >
                           🚀
                         </span>
                       </div>
-                      <div data-oid="zdgg1qa">
+                      <div data-oid="a8x1vu4">
                         <div
                           className="font-medium text-gray-800"
-                          data-oid="_go0m:8"
+                          data-oid="ys9im-_"
                         >
                           Innovation
                         </div>
                         <div
                           className="text-sm text-gray-600"
-                          data-oid="jwji:v3"
+                          data-oid="-3f4:xm"
                         >
                           Cutting-edge technology
                         </div>
@@ -856,29 +856,29 @@ export default function JobDetailsModal({
                     </div>
                     <div
                       className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg"
-                      data-oid="mz.o9m8"
+                      data-oid="uw2n104"
                     >
                       <div
                         className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center"
-                        data-oid="c:5n62i"
+                        data-oid="wye_wox"
                       >
                         <span
                           className="text-green-600 text-sm"
-                          data-oid="klwkq_w"
+                          data-oid="desl33t"
                         >
                           🤝
                         </span>
                       </div>
-                      <div data-oid="gtau6da">
+                      <div data-oid="7_u2wdo">
                         <div
                           className="font-medium text-gray-800"
-                          data-oid="ip4rmi0"
+                          data-oid="1.ff:8j"
                         >
                           Collaboration
                         </div>
                         <div
                           className="text-sm text-gray-600"
-                          data-oid="r.32enc"
+                          data-oid="na0qxfa"
                         >
                           Team-first approach
                         </div>
@@ -886,29 +886,29 @@ export default function JobDetailsModal({
                     </div>
                     <div
                       className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg"
-                      data-oid="s6be-w1"
+                      data-oid="4a-97rj"
                     >
                       <div
                         className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center"
-                        data-oid="n80mj6s"
+                        data-oid="e23a5ml"
                       >
                         <span
                           className="text-purple-600 text-sm"
-                          data-oid="awoqu.m"
+                          data-oid="fax66a0"
                         >
                           📈
                         </span>
                       </div>
-                      <div data-oid="f4up54_">
+                      <div data-oid="dnqhy7m">
                         <div
                           className="font-medium text-gray-800"
-                          data-oid="-jpisih"
+                          data-oid="4vt5_o6"
                         >
                           Growth
                         </div>
                         <div
                           className="text-sm text-gray-600"
-                          data-oid="tpep7oj"
+                          data-oid="aj0uj9."
                         >
                           Career development
                         </div>
@@ -916,29 +916,29 @@ export default function JobDetailsModal({
                     </div>
                     <div
                       className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg"
-                      data-oid="p82t5i5"
+                      data-oid="x44396u"
                     >
                       <div
                         className="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center"
-                        data-oid="g7op0s2"
+                        data-oid="cvr1yft"
                       >
                         <span
                           className="text-orange-600 text-sm"
-                          data-oid="udcpw35"
+                          data-oid="9dgjc:-"
                         >
                           ⚖️
                         </span>
                       </div>
-                      <div data-oid="19vpxvh">
+                      <div data-oid="ua_uuy5">
                         <div
                           className="font-medium text-gray-800"
-                          data-oid="59yrxxv"
+                          data-oid="-2wl:ry"
                         >
                           Work-Life Balance
                         </div>
                         <div
                           className="text-sm text-gray-600"
-                          data-oid="1.82k3:"
+                          data-oid="epfpwp3"
                         >
                           Flexible working
                         </div>
@@ -948,34 +948,34 @@ export default function JobDetailsModal({
                 </div>
 
                 {/* Office Locations */}
-                <div className="mt-6" data-oid="hf1b-a9">
+                <div className="mt-6" data-oid="q--5o:m">
                   <h3
                     className="text-lg font-semibold text-gray-800 mb-3"
-                    data-oid="e.f9-a-"
+                    data-oid="vd:-fvm"
                   >
                     Office Locations
                   </h3>
                   <div
                     className="grid grid-cols-1 md:grid-cols-2 gap-4"
-                    data-oid="rpzpiif"
+                    data-oid="v:jl2nq"
                   >
                     <div
                       className="flex items-center gap-3 p-3 bg-blue-50 rounded-lg"
-                      data-oid="i2_3dz0"
+                      data-oid="sbjvkch"
                     >
                       <svg
                         className="h-5 w-5 text-blue-600"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
-                        data-oid="-lz3jdf"
+                        data-oid="4vrje:3"
                       >
                         <path
                           strokeLinecap="round"
                           strokeLinejoin="round"
                           strokeWidth="2"
                           d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                          data-oid="8739gu2"
+                          data-oid="jx39gc6"
                         />
 
                         <path
@@ -983,19 +983,19 @@ export default function JobDetailsModal({
                           strokeLinejoin="round"
                           strokeWidth="2"
                           d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                          data-oid="c8ygf:p"
+                          data-oid="b8k6l4x"
                         />
                       </svg>
-                      <div data-oid="fn8:1k:">
+                      <div data-oid="f:japyi">
                         <div
                           className="font-medium text-gray-800"
-                          data-oid="wlf.9s-"
+                          data-oid="cpr_aqo"
                         >
                           Headquarters
                         </div>
                         <div
                           className="text-sm text-gray-600"
-                          data-oid="e2179zm"
+                          data-oid="gb_c-yi"
                         >
                           {job.location}
                         </div>
@@ -1004,33 +1004,33 @@ export default function JobDetailsModal({
                     {job.isRemote && (
                       <div
                         className="flex items-center gap-3 p-3 bg-green-50 rounded-lg"
-                        data-oid="wc6ago3"
+                        data-oid="bz9zn0x"
                       >
                         <svg
                           className="h-5 w-5 text-green-600"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
-                          data-oid="ae225s4"
+                          data-oid="rm:o2k5"
                         >
                           <path
                             strokeLinecap="round"
                             strokeLinejoin="round"
                             strokeWidth="2"
                             d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                            data-oid="y_rtyh9"
+                            data-oid="unzn8x4"
                           />
                         </svg>
-                        <div data-oid="8rlu_4_">
+                        <div data-oid="h7-l6sk">
                           <div
                             className="font-medium text-gray-800"
-                            data-oid="zz:jc4s"
+                            data-oid="og9j9e7"
                           >
                             Remote Work
                           </div>
                           <div
                             className="text-sm text-gray-600"
-                            data-oid="pm_:3wn"
+                            data-oid="45-hkx5"
                           >
                             Work from anywhere
                           </div>
@@ -1041,53 +1041,53 @@ export default function JobDetailsModal({
                 </div>
 
                 {/* Recent News & Updates */}
-                <div className="mt-6" data-oid="1nkaw2k">
+                <div className="mt-6" data-oid="m.wul3v">
                   <h3
                     className="text-lg font-semibold text-gray-800 mb-3"
-                    data-oid="jdvltj6"
+                    data-oid="3rz2yd2"
                   >
                     Recent Company Updates
                   </h3>
-                  <div className="space-y-3" data-oid="9t2m4e_">
+                  <div className="space-y-3" data-oid="_gmn1qz">
                     <div
                       className="p-3 bg-gray-50 rounded-lg border-l-4 border-blue-500"
-                      data-oid="lz:73lq"
+                      data-oid="34ok558"
                     >
                       <div
                         className="font-medium text-gray-800"
-                        data-oid="26ap.4c"
+                        data-oid="6it:zw4"
                       >
                         New Product Launch
                       </div>
-                      <div className="text-sm text-gray-600" data-oid="6t.um49">
+                      <div className="text-sm text-gray-600" data-oid="5owsa_s">
                         Recently launched innovative solutions in {job.industry}
                       </div>
                     </div>
                     <div
                       className="p-3 bg-gray-50 rounded-lg border-l-4 border-green-500"
-                      data-oid="sdyztht"
+                      data-oid="o.hz8jp"
                     >
                       <div
                         className="font-medium text-gray-800"
-                        data-oid="rpiewlh"
+                        data-oid="awo8xtv"
                       >
                         Team Expansion
                       </div>
-                      <div className="text-sm text-gray-600" data-oid="3z8zd2:">
+                      <div className="text-sm text-gray-600" data-oid="wxub:sa">
                         Growing team by 30% this year with focus on tech talent
                       </div>
                     </div>
                     <div
                       className="p-3 bg-gray-50 rounded-lg border-l-4 border-purple-500"
-                      data-oid="-n9bnc-"
+                      data-oid="m23bbuw"
                     >
                       <div
                         className="font-medium text-gray-800"
-                        data-oid="q74f6aw"
+                        data-oid="ge5odfr"
                       >
                         Awards & Recognition
                       </div>
-                      <div className="text-sm text-gray-600" data-oid="md774s-">
+                      <div className="text-sm text-gray-600" data-oid="fdlv80.">
                         Recognized as one of the best places to work in tech
                       </div>
                     </div>
@@ -1101,42 +1101,42 @@ export default function JobDetailsModal({
         {/* Footer */}
         <div
           className="border-t border-gray-200 p-6 bg-gray-50"
-          data-oid="m5mah:3"
+          data-oid="64u6:vt"
         >
           <div
             className="flex flex-col sm:flex-row items-center justify-between gap-4"
-            data-oid="::u1_8v"
+            data-oid="pn53awf"
           >
-            <div className="text-sm text-gray-600" data-oid=".5ha9dp">
+            <div className="text-sm text-gray-600" data-oid="nva.nad">
               Posted on {formatDate(job.postedDate)} • {job.applicantCount}{" "}
               applicants
             </div>
-            <div className="flex gap-3" data-oid="z7wvrz5">
+            <div className="flex gap-3" data-oid="_0eomzq">
               <button
                 onClick={onClose}
                 className="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg font-medium hover:bg-gray-100 transition-colors"
-                data-oid="k3ot4.c"
+                data-oid="rbvysky"
               >
                 Close
               </button>
               <button
                 onClick={onApply}
                 className="px-8 py-3 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white rounded-lg font-medium hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300 transform hover:scale-105 flex items-center gap-2 shadow-lg"
-                data-oid="0s:daxl"
+                data-oid=".t2ajmp"
               >
                 <svg
                   className="h-4 w-4"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
-                  data-oid="cda9__y"
+                  data-oid="xk_qgfi"
                 >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth="2"
                     d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                    data-oid="00516jl"
+                    data-oid="b.kbgv."
                   />
                 </svg>
                 Apply Now
@@ -1146,25 +1146,25 @@ export default function JobDetailsModal({
         </div>
 
         {/* Floating Apply Button - appears when scrolling */}
-        <div className="fixed bottom-6 right-6 z-50" data-oid="f2l:lu:">
+        <div className="fixed bottom-6 right-6 z-50" data-oid="39n47ni">
           <button
             onClick={onApply}
             className="px-6 py-3 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white rounded-full font-medium hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300 transform hover:scale-110 shadow-2xl flex items-center gap-2 animate-bounce"
-            data-oid="lbc5jsm"
+            data-oid="r6-8-97"
           >
             <svg
               className="h-5 w-5"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
-              data-oid="10v90ex"
+              data-oid="c:7uho:"
             >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth="2"
                 d="M13 10V3L4 14h7v7l9-11h-7z"
-                data-oid="btlol1o"
+                data-oid="2c70e_r"
               />
             </svg>
             Quick Apply

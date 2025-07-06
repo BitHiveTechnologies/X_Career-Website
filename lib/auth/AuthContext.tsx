@@ -232,7 +232,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={value} data-oid="xpar59t">
+    <AuthContext.Provider value={value} data-oid="yvvh:w8">
       {children}
     </AuthContext.Provider>
   );

@@ -154,6 +154,7 @@ export default function ApplicationsPage() {
         return (
           new Date(b.lastUpdated).getTime() - new Date(a.lastUpdated).getTime()
         );
+
       case "status":
         return a.status.localeCompare(b.status);
       case "company":
@@ -203,41 +204,41 @@ export default function ApplicationsPage() {
   return (
     <div
       className="min-h-screen bg-gradient-to-br from-[hsl(210,50%,98%)] to-[hsl(196,60%,95%)]"
-      data-oid="-tfxd48"
+      data-oid="rj5_91u"
     >
-      <MainNavbar data-oid="7tcfegg" />
+      <MainNavbar data-oid="6zr7vkx" />
 
       <div
         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8"
-        data-oid="x18prkb"
+        data-oid="c0123hj"
       >
         {/* Header */}
         <div
           className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 p-8 mb-8"
-          data-oid=":-e7:yf"
+          data-oid=".if162g"
         >
           <div
             className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6"
-            data-oid="w9f0n.-"
+            data-oid="olko_4g"
           >
-            <div data-oid="m7ersd1">
+            <div data-oid="p5v2co.">
               <h1
                 className="text-3xl font-bold text-gray-800 mb-2"
-                data-oid="use-g4x"
+                data-oid="r4q2abw"
               >
                 My Applications
               </h1>
-              <p className="text-gray-600" data-oid="fwlr5mw">
+              <p className="text-gray-600" data-oid="jq2-8wb">
                 Track your job and internship applications •{" "}
                 {applications.length} total applications
               </p>
             </div>
 
-            <div className="flex items-center gap-4" data-oid="xc6n6-x">
+            <div className="flex items-center gap-4" data-oid="fbiv1qh">
               <Link
                 href="/jobs"
                 className="px-6 py-2 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white rounded-lg font-medium hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300 transform hover:scale-105 shadow-lg"
-                data-oid="4:xqq1p"
+                data-oid="l487t6m"
               >
                 Apply to More Jobs
               </Link>
@@ -248,19 +249,19 @@ export default function ApplicationsPage() {
         {/* Stats Cards */}
         <div
           className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8"
-          data-oid=".2xjg0y"
+          data-oid="n0nvnt-"
         >
           <div
             className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 p-4 text-center"
-            data-oid="8a:7act"
+            data-oid="qu5obyj"
           >
             <div
               className="text-2xl font-bold text-gray-800"
-              data-oid="pdlfbby"
+              data-oid="z:ofe7a"
             >
               {applications.length}
             </div>
-            <div className="text-sm text-gray-600" data-oid="ly44idu">
+            <div className="text-sm text-gray-600" data-oid="lljz8t9">
               Total Applied
             </div>
           </div>
@@ -268,54 +269,54 @@ export default function ApplicationsPage() {
             <div
               key={status}
               className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 p-4 text-center"
-              data-oid="t65_vbz"
+              data-oid=":z7uall"
             >
-              <div className="text-xl mb-1" data-oid="pjsl9g.">
+              <div className="text-xl mb-1" data-oid="nyky:9o">
                 {config.icon}
               </div>
               <div
                 className="text-2xl font-bold text-gray-800"
-                data-oid="8kdr:1b"
+                data-oid="72qct21"
               >
                 {statusCounts[status as ApplicationStatus] || 0}
               </div>
-              <div className="text-sm text-gray-600" data-oid="v:vybkp">
+              <div className="text-sm text-gray-600" data-oid="byv061m">
                 {config.label}
               </div>
             </div>
           ))}
         </div>
 
-        <div className="grid lg:grid-cols-4 gap-8" data-oid="c9i76b3">
+        <div className="grid lg:grid-cols-4 gap-8" data-oid="c03xuvj">
           {/* Filters Sidebar */}
-          <div className="lg:col-span-1" data-oid="sgi5hfb">
+          <div className="lg:col-span-1" data-oid="dwy97wr">
             <div
               className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 p-6 sticky top-8"
-              data-oid="65cgwfm"
+              data-oid="y---dth"
             >
               <h3
                 className="text-lg font-semibold text-gray-800 mb-4"
-                data-oid="i84v640"
+                data-oid="m_aur6q"
               >
                 Filters
               </h3>
 
               {/* Search */}
-              <div className="mb-6" data-oid="yr.lx0i">
+              <div className="mb-6" data-oid="yd.omae">
                 <label
                   className="block text-sm font-medium text-gray-700 mb-2"
-                  data-oid="lepek:6"
+                  data-oid="06wcexw"
                 >
                   Search
                 </label>
-                <div className="relative" data-oid="172ok6s">
+                <div className="relative" data-oid="o:l73qf">
                   <input
                     type="text"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="Search applications..."
                     className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
-                    data-oid="ack-ov0"
+                    data-oid="6tndq2n"
                   />
 
                   <svg
@@ -323,28 +324,28 @@ export default function ApplicationsPage() {
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
-                    data-oid="pn4w75w"
+                    data-oid="yb.1wgk"
                   >
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       strokeWidth="2"
                       d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                      data-oid="s5nktv."
+                      data-oid="e929op4"
                     />
                   </svg>
                 </div>
               </div>
 
               {/* Status Filter */}
-              <div className="mb-6" data-oid="362mucj">
+              <div className="mb-6" data-oid="psm:ah2">
                 <label
                   className="block text-sm font-medium text-gray-700 mb-2"
-                  data-oid="8j:a6.e"
+                  data-oid="2mfzp0q"
                 >
                   Status
                 </label>
-                <div className="space-y-2" data-oid="it9ge6o">
+                <div className="space-y-2" data-oid="5i2i2c1">
                   <button
                     onClick={() => setActiveTab("all")}
                     className={`w-full text-left px-3 py-2 rounded-lg transition-all ${
@@ -352,18 +353,18 @@ export default function ApplicationsPage() {
                         ? "bg-[hsl(196,80%,45%)] text-white"
                         : "text-gray-700 hover:bg-gray-100"
                     }`}
-                    data-oid="0h3edtr"
+                    data-oid="lobvpns"
                   >
                     <span
                       className="flex justify-between items-center"
-                      data-oid="x2zcxlt"
+                      data-oid="mw0kjka"
                     >
                       All Applications
                       <span
                         className={`text-xs px-2 py-1 rounded-full ${
                           activeTab === "all" ? "bg-white/20" : "bg-gray-200"
                         }`}
-                        data-oid="1s09jo_"
+                        data-oid="tr-wnra"
                       >
                         {applications.length}
                       </span>
@@ -378,15 +379,15 @@ export default function ApplicationsPage() {
                           ? "bg-[hsl(196,80%,45%)] text-white"
                           : "text-gray-700 hover:bg-gray-100"
                       }`}
-                      data-oid="4593f53"
+                      data-oid="lp:3ad5"
                     >
                       <span
                         className="flex justify-between items-center"
-                        data-oid="5ks_ti0"
+                        data-oid="vpz-3z4"
                       >
                         <span
                           className="flex items-center gap-2"
-                          data-oid=".0gio58"
+                          data-oid="txa2.0i"
                         >
                           {config.icon} {config.label}
                         </span>
@@ -394,7 +395,7 @@ export default function ApplicationsPage() {
                           className={`text-xs px-2 py-1 rounded-full ${
                             activeTab === status ? "bg-white/20" : "bg-gray-200"
                           }`}
-                          data-oid="_c8nvx2"
+                          data-oid="9rmlycf"
                         >
                           {statusCounts[status as ApplicationStatus] || 0}
                         </span>
@@ -405,10 +406,10 @@ export default function ApplicationsPage() {
               </div>
 
               {/* Sort By */}
-              <div data-oid=".x4b544">
+              <div data-oid="y3rt5fp">
                 <label
                   className="block text-sm font-medium text-gray-700 mb-2"
-                  data-oid="coz3c6b"
+                  data-oid="3i:yxn:"
                 >
                   Sort By
                 </label>
@@ -416,15 +417,15 @@ export default function ApplicationsPage() {
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value as any)}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
-                  data-oid="ksg-vy:"
+                  data-oid="2_xt0-t"
                 >
-                  <option value="recent" data-oid="zv.x:29">
+                  <option value="recent" data-oid="8izsjn0">
                     Recently Updated
                   </option>
-                  <option value="status" data-oid="4wyqg:.">
+                  <option value="status" data-oid="w_uyfo.">
                     Status
                   </option>
-                  <option value="company" data-oid="kglezxs">
+                  <option value="company" data-oid="2gprc1.">
                     Company Name
                   </option>
                 </select>
@@ -433,56 +434,56 @@ export default function ApplicationsPage() {
           </div>
 
           {/* Main Content */}
-          <div className="lg:col-span-3" data-oid=".wrl2u:">
+          <div className="lg:col-span-3" data-oid="sqyi0qh">
             {sortedApplications.length === 0 ? (
               <div
                 className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 p-12 text-center"
-                data-oid="bawl62f"
+                data-oid="_.2ky9-"
               >
-                <div className="max-w-md mx-auto" data-oid="cuwzv8m">
+                <div className="max-w-md mx-auto" data-oid="fglo0uc">
                   <svg
                     className="h-24 w-24 mx-auto mb-6 text-gray-300"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
-                    data-oid="xfhpj9d"
+                    data-oid="bnaofpa"
                   >
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       strokeWidth="2"
                       d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                      data-oid="bpdvm_a"
+                      data-oid="q.pyx3w"
                     />
                   </svg>
                   <h3
                     className="text-xl font-semibold text-gray-800 mb-2"
-                    data-oid="twj6ojk"
+                    data-oid="wipvftz"
                   >
                     {applications.length === 0
                       ? "No applications yet"
                       : "No applications match your filters"}
                   </h3>
-                  <p className="text-gray-600 mb-6" data-oid="es.t8w.">
+                  <p className="text-gray-600 mb-6" data-oid="0pacwn1">
                     {applications.length === 0
                       ? "Start applying to jobs and internships to track your progress here."
                       : "Try adjusting your filters to see more results."}
                   </p>
                   <div
                     className="flex flex-col sm:flex-row gap-4 justify-center"
-                    data-oid="4b7iqkl"
+                    data-oid="x7ot71:"
                   >
                     <Link
                       href="/jobs"
                       className="px-6 py-3 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white rounded-lg font-medium hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300 transform hover:scale-105 shadow-lg"
-                      data-oid=".t69y5a"
+                      data-oid="j8vjr_x"
                     >
                       Browse Jobs
                     </Link>
                     <Link
                       href="/internships"
                       className="px-6 py-3 border border-[hsl(196,80%,45%)] text-[hsl(196,80%,45%)] rounded-lg font-medium hover:bg-[hsl(196,80%,45%)]/10 transition-all duration-300"
-                      data-oid="ijjtm10"
+                      data-oid="2kw2htn"
                     >
                       Browse Internships
                     </Link>
@@ -490,66 +491,66 @@ export default function ApplicationsPage() {
                 </div>
               </div>
             ) : (
-              <div className="space-y-6" data-oid="i2x8uni">
+              <div className="space-y-6" data-oid="h7-ow-c">
                 {sortedApplications.map((application) => {
                   const statusInfo = statusConfig[application.status];
                   return (
                     <div
                       key={application.id}
                       className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 overflow-hidden hover:shadow-xl transition-all duration-300"
-                      data-oid="edqefiq"
+                      data-oid="-udl6n2"
                     >
-                      <div className="p-6" data-oid="u4eelu:">
+                      <div className="p-6" data-oid="rfc8783">
                         {/* Header */}
                         <div
                           className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 mb-4"
-                          data-oid="0ahg6u9"
+                          data-oid="lx_-4a1"
                         >
-                          <div className="flex-1" data-oid="bor65ev">
+                          <div className="flex-1" data-oid="elbgqwp">
                             <div
                               className="flex items-start gap-4"
-                              data-oid="6pmv8i5"
+                              data-oid="m9.qv6:"
                             >
                               <div
                                 className="w-12 h-12 bg-[hsl(196,80%,45%)] rounded-lg flex items-center justify-center text-white font-bold text-lg"
-                                data-oid="_dle:v_"
+                                data-oid="vk311bd"
                               >
                                 {application.job.company.charAt(0)}
                               </div>
-                              <div className="flex-1" data-oid="fshwtgu">
+                              <div className="flex-1" data-oid="cr.tmwo">
                                 <h3
                                   className="text-xl font-bold text-gray-800 mb-1"
-                                  data-oid="cpzu3ml"
+                                  data-oid="vux9.8p"
                                 >
                                   {application.job.title}
                                 </h3>
                                 <p
                                   className="text-[hsl(196,80%,45%)] font-semibold text-lg mb-2"
-                                  data-oid="iwd29ot"
+                                  data-oid="0xecc7_"
                                 >
                                   {application.job.company}
                                 </p>
                                 <div
                                   className="flex flex-wrap items-center gap-4 text-sm text-gray-600"
-                                  data-oid="kejsd:r"
+                                  data-oid="dmrphr_"
                                 >
                                   <span
                                     className="flex items-center gap-1"
-                                    data-oid="z5ylq32"
+                                    data-oid="h9as2hi"
                                   >
                                     <svg
                                       className="h-4 w-4"
                                       fill="none"
                                       stroke="currentColor"
                                       viewBox="0 0 24 24"
-                                      data-oid="n6f-5:u"
+                                      data-oid="ge__:h9"
                                     >
                                       <path
                                         strokeLinecap="round"
                                         strokeLinejoin="round"
                                         strokeWidth="2"
                                         d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                                        data-oid="puy:ox:"
+                                        data-oid="jehuvtg"
                                       />
 
                                       <path
@@ -557,28 +558,28 @@ export default function ApplicationsPage() {
                                         strokeLinejoin="round"
                                         strokeWidth="2"
                                         d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                                        data-oid="jf014-s"
+                                        data-oid="sag:hgr"
                                       />
                                     </svg>
                                     {application.job.location}
                                   </span>
                                   <span
                                     className="flex items-center gap-1"
-                                    data-oid="bt-kjo."
+                                    data-oid="3hbkkum"
                                   >
                                     <svg
                                       className="h-4 w-4"
                                       fill="none"
                                       stroke="currentColor"
                                       viewBox="0 0 24 24"
-                                      data-oid="7aq-p2e"
+                                      data-oid="vmp5j5r"
                                     >
                                       <path
                                         strokeLinecap="round"
                                         strokeLinejoin="round"
                                         strokeWidth="2"
                                         d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                                        data-oid="a70e.i."
+                                        data-oid="i17zzkv"
                                       />
                                     </svg>
                                     Applied{" "}
@@ -586,21 +587,21 @@ export default function ApplicationsPage() {
                                   </span>
                                   <span
                                     className="flex items-center gap-1"
-                                    data-oid="42164xg"
+                                    data-oid="4az1o0g"
                                   >
                                     <svg
                                       className="h-4 w-4"
                                       fill="none"
                                       stroke="currentColor"
                                       viewBox="0 0 24 24"
-                                      data-oid="i6lfe5t"
+                                      data-oid="4oea2q3"
                                     >
                                       <path
                                         strokeLinecap="round"
                                         strokeLinejoin="round"
                                         strokeWidth="2"
                                         d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-                                        data-oid=".ozo82m"
+                                        data-oid=":2f-syy"
                                       />
                                     </svg>
                                     Updated{" "}
@@ -613,18 +614,18 @@ export default function ApplicationsPage() {
 
                           <div
                             className="flex items-center gap-3"
-                            data-oid="sjm-689"
+                            data-oid="tnyi4v8"
                           >
                             <span
                               className={`px-4 py-2 rounded-full text-sm font-medium ${statusInfo.color}`}
-                              data-oid="57zx-cq"
+                              data-oid="bja6632"
                             >
                               {statusInfo.icon} {statusInfo.label}
                             </span>
                             {application.isInternship && (
                               <span
                                 className="px-3 py-1 bg-purple-100 text-purple-800 text-xs font-medium rounded-full"
-                                data-oid="x6-aq15"
+                                data-oid="4a9nf0m"
                               >
                                 Internship
                               </span>
@@ -633,8 +634,8 @@ export default function ApplicationsPage() {
                         </div>
 
                         {/* Status Description */}
-                        <div className="mb-4" data-oid="1c.vnr6">
-                          <p className="text-gray-600" data-oid="5lsy:_w">
+                        <div className="mb-4" data-oid="bu:y5r7">
+                          <p className="text-gray-600" data-oid="l41ndlx">
                             {statusInfo.description}
                           </p>
                         </div>
@@ -642,18 +643,18 @@ export default function ApplicationsPage() {
                         {/* Application Details */}
                         <div
                           className="grid md:grid-cols-2 gap-6 mb-6"
-                          data-oid="9d:1uqy"
+                          data-oid="igsmvyk"
                         >
-                          <div data-oid="b6h:rzo">
+                          <div data-oid="_3zs:hz">
                             <h4
                               className="text-sm font-medium text-gray-700 mb-2"
-                              data-oid="whksmun"
+                              data-oid="aw6z62q"
                             >
                               Application Method
                             </h4>
                             <div
                               className="flex items-center gap-2"
-                              data-oid="p.kf3u6"
+                              data-oid="-1-ku2x"
                             >
                               <span
                                 className={`px-3 py-1 rounded-full text-xs font-medium ${
@@ -665,7 +666,7 @@ export default function ApplicationsPage() {
                                       ? "bg-blue-100 text-blue-800"
                                       : "bg-gray-100 text-gray-800"
                                 }`}
-                                data-oid="gmc64do"
+                                data-oid="c3x1vg2"
                               >
                                 {application.applicationMethod === "quick-apply"
                                   ? "⚡ Quick Apply"
@@ -680,16 +681,16 @@ export default function ApplicationsPage() {
                           {!application.isInternship &&
                             "salary" in application.job &&
                             application.job.salary && (
-                              <div data-oid="o2-j3ns">
+                              <div data-oid="l49on8b">
                                 <h4
                                   className="text-sm font-medium text-gray-700 mb-2"
-                                  data-oid="x73pun:"
+                                  data-oid="309loht"
                                 >
                                   Salary Range
                                 </h4>
                                 <p
                                   className="text-green-600 font-medium"
-                                  data-oid="4a2os.6"
+                                  data-oid="p6_cl-9"
                                 >
                                   {application.job.salary}
                                 </p>
@@ -699,16 +700,16 @@ export default function ApplicationsPage() {
                           {application.isInternship &&
                             "stipend" in application.job &&
                             application.job.stipend && (
-                              <div data-oid="nekhpj2">
+                              <div data-oid="yc3806l">
                                 <h4
                                   className="text-sm font-medium text-gray-700 mb-2"
-                                  data-oid="tfs9x49"
+                                  data-oid="g9n13t8"
                                 >
                                   Stipend
                                 </h4>
                                 <p
                                   className="text-green-600 font-medium"
-                                  data-oid="l1pmxgs"
+                                  data-oid="vhosqx1"
                                 >
                                   {application.job.stipend}
                                 </p>
@@ -720,37 +721,37 @@ export default function ApplicationsPage() {
                         {application.interviewDate && (
                           <div
                             className="bg-purple-50 border border-purple-200 rounded-lg p-4 mb-4"
-                            data-oid="oz7e70j"
+                            data-oid="pevmkyv"
                           >
                             <div
                               className="flex items-start gap-3"
-                              data-oid="ftcvx5f"
+                              data-oid="_:a1jy8"
                             >
                               <svg
                                 className="h-5 w-5 text-purple-600 mt-0.5"
                                 fill="none"
                                 stroke="currentColor"
                                 viewBox="0 0 24 24"
-                                data-oid="5d8wy7s"
+                                data-oid="v8__7sf"
                               >
                                 <path
                                   strokeLinecap="round"
                                   strokeLinejoin="round"
                                   strokeWidth="2"
                                   d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                                  data-oid="mjul11g"
+                                  data-oid="88:1-se"
                                 />
                               </svg>
-                              <div data-oid="4f-212f">
+                              <div data-oid="41s:7_y">
                                 <p
                                   className="text-sm font-medium text-purple-800"
-                                  data-oid="wgz-5j_"
+                                  data-oid="lhsr7pj"
                                 >
                                   Interview Scheduled
                                 </p>
                                 <p
                                   className="text-sm text-purple-700"
-                                  data-oid="-89f5l7"
+                                  data-oid="gxml_:a"
                                 >
                                   {formatDate(application.interviewDate)}
                                 </p>
@@ -766,11 +767,11 @@ export default function ApplicationsPage() {
                                 ? "bg-green-50 border-green-200"
                                 : "bg-red-50 border-red-200"
                             }`}
-                            data-oid="38c5mc7"
+                            data-oid="_es9jt5"
                           >
                             <div
                               className="flex items-start gap-3"
-                              data-oid="j19lzbk"
+                              data-oid="qncmrr7"
                             >
                               <svg
                                 className={`h-5 w-5 mt-0.5 ${
@@ -781,24 +782,24 @@ export default function ApplicationsPage() {
                                 fill="none"
                                 stroke="currentColor"
                                 viewBox="0 0 24 24"
-                                data-oid="ygcxyjo"
+                                data-oid="r-7i:.m"
                               >
                                 <path
                                   strokeLinecap="round"
                                   strokeLinejoin="round"
                                   strokeWidth="2"
                                   d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
-                                  data-oid="uvinhb."
+                                  data-oid="fq116yq"
                                 />
                               </svg>
-                              <div data-oid="w5pcxhp">
+                              <div data-oid="sxm25dk">
                                 <p
                                   className={`text-sm font-medium ${
                                     application.status === "accepted"
                                       ? "text-green-800"
                                       : "text-red-800"
                                   }`}
-                                  data-oid="i89qd2i"
+                                  data-oid="b7mi1.c"
                                 >
                                   Feedback from Company
                                 </p>
@@ -808,7 +809,7 @@ export default function ApplicationsPage() {
                                       ? "text-green-700"
                                       : "text-red-700"
                                   }`}
-                                  data-oid="icbaz86"
+                                  data-oid="0xm05xt"
                                 >
                                   {application.feedback}
                                 </p>
@@ -820,37 +821,37 @@ export default function ApplicationsPage() {
                         {application.nextSteps && (
                           <div
                             className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4"
-                            data-oid="964sb54"
+                            data-oid="593a:g-"
                           >
                             <div
                               className="flex items-start gap-3"
-                              data-oid="jzvq5:_"
+                              data-oid="tbtuoh7"
                             >
                               <svg
                                 className="h-5 w-5 text-blue-600 mt-0.5"
                                 fill="none"
                                 stroke="currentColor"
                                 viewBox="0 0 24 24"
-                                data-oid="6495vgn"
+                                data-oid="fqdbb9r"
                               >
                                 <path
                                   strokeLinecap="round"
                                   strokeLinejoin="round"
                                   strokeWidth="2"
                                   d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                                  data-oid=".129em6"
+                                  data-oid="lbdtveb"
                                 />
                               </svg>
-                              <div data-oid="o6xgexg">
+                              <div data-oid="iafeiqe">
                                 <p
                                   className="text-sm font-medium text-blue-800"
-                                  data-oid="q7s.r4e"
+                                  data-oid="clg-47h"
                                 >
                                   Next Steps
                                 </p>
                                 <p
                                   className="text-sm text-blue-700"
-                                  data-oid="2.ijzhu"
+                                  data-oid="mczwd6i"
                                 >
                                   {application.nextSteps}
                                 </p>
@@ -863,37 +864,37 @@ export default function ApplicationsPage() {
                         {application.notes && (
                           <div
                             className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-4"
-                            data-oid="kl4fa8:"
+                            data-oid="udel5yr"
                           >
                             <div
                               className="flex items-start gap-3"
-                              data-oid="6:e.imm"
+                              data-oid="ev9adtz"
                             >
                               <svg
                                 className="h-5 w-5 text-yellow-600 mt-0.5"
                                 fill="none"
                                 stroke="currentColor"
                                 viewBox="0 0 24 24"
-                                data-oid="glyn0zu"
+                                data-oid="6xgcv2r"
                               >
                                 <path
                                   strokeLinecap="round"
                                   strokeLinejoin="round"
                                   strokeWidth="2"
                                   d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
-                                  data-oid="hak:u-."
+                                  data-oid="u_senar"
                                 />
                               </svg>
-                              <div data-oid="r7scd-x">
+                              <div data-oid="hfzth2d">
                                 <p
                                   className="text-sm font-medium text-yellow-800"
-                                  data-oid="7eblrbf"
+                                  data-oid="04v_kiw"
                                 >
                                   Your Notes
                                 </p>
                                 <p
                                   className="text-sm text-yellow-700"
-                                  data-oid="x5pewh4"
+                                  data-oid="chkhiq3"
                                 >
                                   {application.notes}
                                 </p>
@@ -905,17 +906,17 @@ export default function ApplicationsPage() {
                         {/* Skills Match */}
                         <div
                           className="border-t border-gray-200 pt-4"
-                          data-oid="1tbmpf5"
+                          data-oid="i7tcs_c"
                         >
                           <h4
                             className="text-sm font-medium text-gray-700 mb-2"
-                            data-oid="__9wphm"
+                            data-oid="5gjby.."
                           >
                             Required Skills
                           </h4>
                           <div
                             className="flex flex-wrap gap-2"
-                            data-oid="8b05:4h"
+                            data-oid="nuhhg66"
                           >
                             {application.job.skills
                               .slice(0, 5)
@@ -923,7 +924,7 @@ export default function ApplicationsPage() {
                                 <span
                                   key={index}
                                   className="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full"
-                                  data-oid="82jo:73"
+                                  data-oid="2yle4ii"
                                 >
                                   {skill}
                                 </span>
@@ -931,7 +932,7 @@ export default function ApplicationsPage() {
                             {application.job.skills.length > 5 && (
                               <span
                                 className="px-3 py-1 text-gray-500 text-xs"
-                                data-oid="tyxp.ef"
+                                data-oid="yxaa41d"
                               >
                                 +{application.job.skills.length - 5} more
                               </span>

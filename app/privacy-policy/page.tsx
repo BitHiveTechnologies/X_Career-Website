@@ -6,37 +6,37 @@ export default function PrivacyPolicyPage() {
   return (
     <div
       className="min-h-screen bg-gradient-to-br from-[hsl(210,50%,98%)] to-[hsl(196,60%,95%)]"
-      data-oid="9qi1o5i"
+      data-oid="g20cu6v"
     >
-      <MainNavbar data-oid="1rx33sn" />
+      <MainNavbar data-oid="3tkt41." />
 
       <div
         className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12"
-        data-oid="rp-fwh8"
+        data-oid="qf756:j"
       >
         <div
           className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 p-8"
-          data-oid="o:2uvqz"
+          data-oid="arn88b7"
         >
           <h1
             className="text-3xl font-bold text-gray-800 mb-8"
-            data-oid="kpqxx_v"
+            data-oid="xgovnlg"
           >
             Privacy Policy
           </h1>
 
           <div
             className="prose prose-lg max-w-none text-gray-700 space-y-6"
-            data-oid="ki4tyjj"
+            data-oid="a:p7fac"
           >
-            <section data-oid="3sie:4g">
+            <section data-oid="d07_ecc">
               <h2
                 className="text-2xl font-semibold text-gray-800 mb-4"
-                data-oid="-6uk5.p"
+                data-oid="7w6v1h6"
               >
                 1. Information We Collect
               </h2>
-              <p data-oid="z.c1wi5">
+              <p data-oid="uq--qrd">
                 At CareerX, we collect information you provide directly to us,
                 such as when you create an account, apply for jobs, or contact
                 us for support.
@@ -44,101 +44,101 @@ export default function PrivacyPolicyPage() {
 
               <h3
                 className="text-lg font-semibold text-gray-800 mt-4 mb-2"
-                data-oid="pknzncg"
+                data-oid="g:6s1h2"
               >
                 Personal Information
               </h3>
               <ul
                 className="list-disc list-inside ml-4 space-y-2"
-                data-oid=":3xs_0l"
+                data-oid="zrxa3b4"
               >
-                <li data-oid="ro:ubp0">
+                <li data-oid="rexoujv">
                   Name, email address, and phone number
                 </li>
-                <li data-oid="9nnulv3">
+                <li data-oid="yuw1289">
                   Resume, cover letters, and portfolio information
                 </li>
-                <li data-oid="qb-:by2">
+                <li data-oid="tz29348">
                   Educational background and work experience
                 </li>
-                <li data-oid="gansk-g">
+                <li data-oid="nqi6-_8">
                   Skills, certifications, and professional preferences
                 </li>
-                <li data-oid="xxsvw6p">
+                <li data-oid="_p8c.kj">
                   Profile photos and other uploaded content
                 </li>
               </ul>
 
               <h3
                 className="text-lg font-semibold text-gray-800 mt-4 mb-2"
-                data-oid="bsa_l0:"
+                data-oid="0gk8as."
               >
                 Usage Information
               </h3>
               <ul
                 className="list-disc list-inside ml-4 space-y-2"
-                data-oid="4y9.cjs"
+                data-oid="iq6s.fi"
               >
-                <li data-oid="cqvh8ys">
+                <li data-oid="uu7.m-f">
                   Job search queries and application history
                 </li>
-                <li data-oid="_d:61jr">Pages visited and features used</li>
-                <li data-oid="vbccjda">Device information and IP address</li>
-                <li data-oid="5v34we8">Browser type and operating system</li>
+                <li data-oid="7n6.qlo">Pages visited and features used</li>
+                <li data-oid="v88zqk9">Device information and IP address</li>
+                <li data-oid="1e7r-ll">Browser type and operating system</li>
               </ul>
             </section>
 
-            <section data-oid="t_11jh_">
+            <section data-oid="erhe1:j">
               <h2
                 className="text-2xl font-semibold text-gray-800 mb-4"
-                data-oid="iwzugrg"
+                data-oid="2yba45x"
               >
                 2. How We Use Your Information
               </h2>
-              <p data-oid="vj_pyi.">
+              <p data-oid="kdr7at.">
                 We use the information we collect to provide, maintain, and
                 improve our services:
               </p>
               <ul
                 className="list-disc list-inside ml-4 space-y-2"
-                data-oid=":hhey1m"
+                data-oid="rv:u75z"
               >
-                <li data-oid="jtijzdd">To create and manage your account</li>
-                <li data-oid="pg0er5v">
+                <li data-oid="3pshvj:">To create and manage your account</li>
+                <li data-oid="3k6n19z">
                   To match you with relevant job opportunities
                 </li>
-                <li data-oid="i2lsbd0">
+                <li data-oid="gdhd6v0">
                   To facilitate communication between you and employers
                 </li>
-                <li data-oid="ckd-:1h">
+                <li data-oid="8-fq9k9">
                   To send you job alerts and notifications
                 </li>
-                <li data-oid="pvbeavw">
+                <li data-oid="9uzuy9_">
                   To improve our platform and user experience
                 </li>
-                <li data-oid="360n5_7">To provide customer support</li>
-                <li data-oid="m0x.z6_">To comply with legal obligations</li>
+                <li data-oid="j2vfyi6">To provide customer support</li>
+                <li data-oid="4ry_e64">To comply with legal obligations</li>
               </ul>
             </section>
 
-            <section data-oid="91.0n9o">
+            <section data-oid="ob6-fq:">
               <h2
                 className="text-2xl font-semibold text-gray-800 mb-4"
-                data-oid=":t2lv_q"
+                data-oid="q8rgrxw"
               >
                 3. Information Sharing
               </h2>
-              <p data-oid="dgy7x8w">
+              <p data-oid="vhxhu08">
                 We may share your information in the following circumstances:
               </p>
 
               <h3
                 className="text-lg font-semibold text-gray-800 mt-4 mb-2"
-                data-oid="zzww2eg"
+                data-oid="1.04lap"
               >
                 With Employers
               </h3>
-              <p data-oid="phhs.zf">
+              <p data-oid="unp8cy6">
                 When you apply for a job, we share your application materials
                 with the relevant employer. This includes your resume, cover
                 letter, and any other information you choose to include in your
@@ -147,11 +147,11 @@ export default function PrivacyPolicyPage() {
 
               <h3
                 className="text-lg font-semibold text-gray-800 mt-4 mb-2"
-                data-oid=".:22yrd"
+                data-oid="1wc6i0r"
               >
                 With Service Providers
               </h3>
-              <p data-oid="rhzrw8_">
+              <p data-oid="bkym6g8">
                 We work with third-party service providers who help us operate
                 our platform, such as hosting providers, email services, and
                 analytics tools.
@@ -159,24 +159,24 @@ export default function PrivacyPolicyPage() {
 
               <h3
                 className="text-lg font-semibold text-gray-800 mt-4 mb-2"
-                data-oid="s_e46e_"
+                data-oid="f24uena"
               >
                 Legal Requirements
               </h3>
-              <p data-oid="8_ugv6r">
+              <p data-oid="8.tby5r">
                 We may disclose your information if required by law or in
                 response to valid legal requests from government authorities.
               </p>
             </section>
 
-            <section data-oid="vit8ok5">
+            <section data-oid="zm:lo:2">
               <h2
                 className="text-2xl font-semibold text-gray-800 mb-4"
-                data-oid="xab.cfu"
+                data-oid=":q.t3mm"
               >
                 4. Data Security
               </h2>
-              <p data-oid="rcqqxy8">
+              <p data-oid="scr9hlr">
                 We implement appropriate technical and organizational measures
                 to protect your personal information against unauthorized
                 access, alteration, disclosure, or destruction. These measures
@@ -184,152 +184,152 @@ export default function PrivacyPolicyPage() {
               </p>
               <ul
                 className="list-disc list-inside ml-4 space-y-2"
-                data-oid="dpnv9zv"
+                data-oid="0miefjf"
               >
-                <li data-oid="pw7mlbw">
+                <li data-oid="mqjifkh">
                   Encryption of data in transit and at rest
                 </li>
-                <li data-oid="ov09v7h">
+                <li data-oid="l3wtg2z">
                   Regular security assessments and updates
                 </li>
-                <li data-oid="nnat_45">
+                <li data-oid="afg5d5:">
                   Access controls and authentication measures
                 </li>
-                <li data-oid="kgsn66a">Employee training on data protection</li>
+                <li data-oid="m:80:cf">Employee training on data protection</li>
               </ul>
             </section>
 
-            <section data-oid="hj-3f7x">
+            <section data-oid="g-hc1ws">
               <h2
                 className="text-2xl font-semibold text-gray-800 mb-4"
-                data-oid="puoytb:"
+                data-oid="-8ru_66"
               >
                 5. Your Rights and Choices
               </h2>
-              <p data-oid="oyby0n8">
+              <p data-oid="2lsc8j-">
                 You have several rights regarding your personal information:
               </p>
 
               <h3
                 className="text-lg font-semibold text-gray-800 mt-4 mb-2"
-                data-oid="uvw4rzk"
+                data-oid="4gr945t"
               >
                 Access and Update
               </h3>
-              <p data-oid="6zrn3ku">
+              <p data-oid="8a_pfhg">
                 You can access and update your personal information through your
                 account settings at any time.
               </p>
 
               <h3
                 className="text-lg font-semibold text-gray-800 mt-4 mb-2"
-                data-oid="jq1.bj1"
+                data-oid="jonrvo1"
               >
                 Data Portability
               </h3>
-              <p data-oid="glet22h">
+              <p data-oid="j-hy2o_">
                 You can request a copy of your personal data in a structured,
                 machine-readable format.
               </p>
 
               <h3
                 className="text-lg font-semibold text-gray-800 mt-4 mb-2"
-                data-oid="ikjbzbn"
+                data-oid="qe572yy"
               >
                 Deletion
               </h3>
-              <p data-oid="wtar6wr">
+              <p data-oid="3ruw7u_">
                 You can request deletion of your account and personal
                 information, subject to certain legal obligations.
               </p>
 
               <h3
                 className="text-lg font-semibold text-gray-800 mt-4 mb-2"
-                data-oid="rjyk0.t"
+                data-oid="a:4n:1v"
               >
                 Communication Preferences
               </h3>
-              <p data-oid="zhcej2r">
+              <p data-oid="fqqyplp">
                 You can opt out of marketing communications while still
                 receiving important service-related messages.
               </p>
             </section>
 
-            <section data-oid="7sx:tgq">
+            <section data-oid="ve1.x0y">
               <h2
                 className="text-2xl font-semibold text-gray-800 mb-4"
-                data-oid="st5.qa5"
+                data-oid="se86tcy"
               >
                 6. Cookies and Tracking
               </h2>
-              <p data-oid="d13bk77">
+              <p data-oid="9ic:wzu">
                 We use cookies and similar tracking technologies to enhance your
                 experience on our platform:
               </p>
               <ul
                 className="list-disc list-inside ml-4 space-y-2"
-                data-oid="fi23a__"
+                data-oid="_kc5dhv"
               >
-                <li data-oid=".rb-q92">
-                  <strong data-oid="yhe3uxa">Essential Cookies:</strong>{" "}
+                <li data-oid="usexo-c">
+                  <strong data-oid="cv5-0ju">Essential Cookies:</strong>{" "}
                   Required for basic platform functionality
                 </li>
-                <li data-oid="_9s48yh">
-                  <strong data-oid="a7adp9f">Analytics Cookies:</strong> Help us
+                <li data-oid="xa-2l9x">
+                  <strong data-oid=".122j3a">Analytics Cookies:</strong> Help us
                   understand how users interact with our platform
                 </li>
-                <li data-oid="z674akh">
-                  <strong data-oid="lwzqub9">Preference Cookies:</strong>{" "}
+                <li data-oid="6xsb1qd">
+                  <strong data-oid="-6g6n6z">Preference Cookies:</strong>{" "}
                   Remember your settings and preferences
                 </li>
-                <li data-oid="owvjcy.">
-                  <strong data-oid="0sx7pj4">Marketing Cookies:</strong> Used to
+                <li data-oid="vi9v3gt">
+                  <strong data-oid="xnpsk:i">Marketing Cookies:</strong> Used to
                   deliver relevant advertisements
                 </li>
               </ul>
-              <p className="mt-4" data-oid="xp--y9b">
+              <p className="mt-4" data-oid="7cof0lm">
                 You can control cookie settings through your browser
                 preferences.
               </p>
             </section>
 
-            <section data-oid="9qaykm4">
+            <section data-oid="p2f98lk">
               <h2
                 className="text-2xl font-semibold text-gray-800 mb-4"
-                data-oid="ryyj2oa"
+                data-oid="7o53w8a"
               >
                 7. Data Retention
               </h2>
-              <p data-oid="1cs9zu4">
+              <p data-oid="2kpcwwv">
                 We retain your personal information for as long as necessary to
                 provide our services and fulfill the purposes outlined in this
                 policy. Specific retention periods include:
               </p>
               <ul
                 className="list-disc list-inside ml-4 space-y-2"
-                data-oid=".nag1jn"
+                data-oid="-ar4brs"
               >
-                <li data-oid="x:q0f8u">
+                <li data-oid="v.zmm-1">
                   Account information: Until account deletion
                 </li>
-                <li data-oid="kc6pu78">
+                <li data-oid="3lt18sw">
                   Application history: 3 years after application
                 </li>
-                <li data-oid=":v68d5:">Communication records: 2 years</li>
-                <li data-oid="qsny44_">
+                <li data-oid="bvg3nv5">Communication records: 2 years</li>
+                <li data-oid="d5_.m53">
                   Analytics data: 2 years in aggregated form
                 </li>
               </ul>
             </section>
 
-            <section data-oid="55s1518">
+            <section data-oid="euwwajw">
               <h2
                 className="text-2xl font-semibold text-gray-800 mb-4"
-                data-oid="f_7y6eo"
+                data-oid="ken7jv8"
               >
                 8. International Data Transfers
               </h2>
-              <p data-oid="_c1thpy">
+              <p data-oid="-0kh3hw">
                 Your information may be transferred to and processed in
                 countries other than your country of residence. We ensure
                 appropriate safeguards are in place to protect your personal
@@ -337,14 +337,14 @@ export default function PrivacyPolicyPage() {
               </p>
             </section>
 
-            <section data-oid="n06kcxo">
+            <section data-oid="et80a0i">
               <h2
                 className="text-2xl font-semibold text-gray-800 mb-4"
-                data-oid="sm3pwk-"
+                data-oid="21zc1q1"
               >
                 9. Children's Privacy
               </h2>
-              <p data-oid="i2gpjbd">
+              <p data-oid="fbjtiid">
                 Our services are not intended for individuals under the age of
                 16. We do not knowingly collect personal information from
                 children under 16. If we become aware that we have collected
@@ -352,14 +352,14 @@ export default function PrivacyPolicyPage() {
               </p>
             </section>
 
-            <section data-oid="7d:-26o">
+            <section data-oid="02qv.z_">
               <h2
                 className="text-2xl font-semibold text-gray-800 mb-4"
-                data-oid="2cz2dow"
+                data-oid=".3o53.y"
               >
                 10. Changes to This Policy
               </h2>
-              <p data-oid="29e3yau">
+              <p data-oid="c9mr.hj">
                 We may update this Privacy Policy from time to time. We will
                 notify you of any material changes by posting the new policy on
                 our website and updating the "Last Updated" date. Your continued
@@ -368,39 +368,39 @@ export default function PrivacyPolicyPage() {
               </p>
             </section>
 
-            <section data-oid="8ng0xle">
+            <section data-oid="1r5q.i3">
               <h2
                 className="text-2xl font-semibold text-gray-800 mb-4"
-                data-oid="yt0r20z"
+                data-oid="u-hxsoc"
               >
                 11. Contact Us
               </h2>
-              <p data-oid="7j:d2u5">
+              <p data-oid=".2u-xxt">
                 If you have any questions about this Privacy Policy or our data
                 practices, please contact us:
               </p>
               <div
                 className="bg-gray-50 p-4 rounded-lg mt-4"
-                data-oid="_y:g8jt"
+                data-oid="62h4lmk"
               >
-                <p data-oid="yjxfr2i">
-                  <strong data-oid="._1f6cq">Email:</strong> privacy@careerx.com
+                <p data-oid="ts0wj99">
+                  <strong data-oid="f_1vlqd">Email:</strong> privacy@careerx.com
                 </p>
-                <p data-oid="vz5d0sl">
-                  <strong data-oid="hq:9u-7">Address:</strong> CareerX Privacy
+                <p data-oid="y41_5nu">
+                  <strong data-oid="h0g-vql">Address:</strong> CareerX Privacy
                   Team, 123 Tech Street, Bangalore, India 560001
                 </p>
-                <p data-oid="qg:3ha6">
-                  <strong data-oid="gck0fze">Phone:</strong> +91 80 1234 5678
+                <p data-oid="3osfxqy">
+                  <strong data-oid="om33:ih">Phone:</strong> +91 80 1234 5678
                 </p>
               </div>
             </section>
 
             <div
               className="border-t border-gray-200 pt-6 mt-8"
-              data-oid="dw9ephq"
+              data-oid="7-6b9j5"
             >
-              <p className="text-sm text-gray-500" data-oid="37:92-2">
+              <p className="text-sm text-gray-500" data-oid="jcibpe2">
                 Last updated: January 2024
               </p>
             </div>

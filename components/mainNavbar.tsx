@@ -61,7 +61,7 @@ export default function MainNavbar() {
       viewBox="0 0 120 30"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      data-oid="_juqrqh"
+      data-oid="9zvo67x"
     >
       <path
         d="M10 5L20 15L10 25"
@@ -69,7 +69,7 @@ export default function MainNavbar() {
         strokeWidth="3"
         strokeLinecap="round"
         strokeLinejoin="round"
-        data-oid="mz__v:o"
+        data-oid="k9t_6as"
       />
 
       <path
@@ -78,7 +78,7 @@ export default function MainNavbar() {
         strokeWidth="3"
         strokeLinecap="round"
         strokeLinejoin="round"
-        data-oid=":vx1.z8"
+        data-oid="ebhtq0r"
       />
 
       <text
@@ -88,7 +88,7 @@ export default function MainNavbar() {
         fontSize="18"
         fontWeight="bold"
         fill="#1E3A8A"
-        data-oid="fdvpttu"
+        data-oid="kyvbko-"
       >
         Careers
       </text>
@@ -96,49 +96,49 @@ export default function MainNavbar() {
   );
 
   return (
-    <div data-oid="1o:2g3i">
+    <div data-oid="v1d6:aw">
       <header
         className="sticky top-0 z-50 bg-gradient-to-r from-blue-200/90 via-blue-300/90 to-blue-200/90 backdrop-blur-md shadow-sm border-b border-blue-300/70"
-        data-oid="onqf.a2"
+        data-oid="bjlxmwq"
       >
         <nav
           className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8"
-          data-oid="-jd9bxe"
+          data-oid="8j8x0my"
         >
           <div
             className="flex justify-between items-center h-14 sm:h-16"
-            data-oid="3w.2i3:"
+            data-oid="7qydogy"
           >
             {/* Logo */}
-            <div className="flex-shrink-0" data-oid="._58q_2">
-              <Link href="/" className="flex items-center" data-oid="on6h8ia">
-                <Logo data-oid="i_bqbbl" />
+            <div className="flex-shrink-0" data-oid="pn3mqrh">
+              <Link href="/" className="flex items-center" data-oid="h69_3bn">
+                <Logo data-oid="q7fhb.g" />
               </Link>
             </div>
 
             {/* Navigation Links - Hidden on mobile */}
             <div
               className="hidden lg:flex items-center space-x-2 xl:space-x-4"
-              data-oid="a0q:94c"
+              data-oid="po2to9r"
             >
               <Link
                 href="/jobs"
                 className="text-gray-700 hover:text-blue-800 px-2 xl:px-3 py-2 text-sm font-medium transition-colors duration-200"
-                data-oid=".cklr57"
+                data-oid="rfb7axc"
               >
                 Jobs
               </Link>
               <Link
                 href="/internships"
                 className="text-gray-700 hover:text-blue-800 px-2 xl:px-3 py-2 text-sm font-medium transition-colors duration-200"
-                data-oid="m6fzk-b"
+                data-oid="p3-ah97"
               >
                 Internships
               </Link>
               <Link
                 href="/resume-builder"
                 className="text-gray-700 hover:text-blue-800 px-2 xl:px-3 py-2 text-sm font-medium transition-colors duration-200"
-                data-oid="rh9f1l5"
+                data-oid="gic0q:."
               >
                 Resume Builder
               </Link>
@@ -147,27 +147,27 @@ export default function MainNavbar() {
             {/* Auth Section */}
             <div
               className="flex items-center space-x-2 sm:space-x-3"
-              data-oid="dt-ecgs"
+              data-oid="cw0m14z"
             >
               {isAuthenticated && user ? (
                 // Authenticated User Menu
-                <div className="relative" ref={userMenuRef} data-oid="mte:mv.">
+                <div className="relative" ref={userMenuRef} data-oid="3p_srl7">
                   <button
                     onClick={toggleUserMenu}
                     className="hidden lg:flex items-center space-x-2 px-2 xl:px-3 py-2 rounded-md text-gray-700 hover:text-blue-800 hover:bg-blue-50 transition-all duration-300"
-                    data-oid="511c_1y"
+                    data-oid="j411v0w"
                   >
                     <SafeAvatar
                       src={user.avatar}
                       name={user.name}
                       size={32}
                       className="xl:w-8 xl:h-8"
-                      data-oid="07:2_p3"
+                      data-oid="78h3meg"
                     />
 
                     <span
                       className="text-sm font-medium max-w-24 xl:max-w-none truncate"
-                      data-oid="0dw.-rz"
+                      data-oid="9rb1_kt"
                     >
                       {user.name}
                     </span>
@@ -176,14 +176,14 @@ export default function MainNavbar() {
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
-                      data-oid="k_j52j5"
+                      data-oid="98su266"
                     >
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         strokeWidth="2"
                         d="M19 9l-7 7-7-7"
-                        data-oid="o_k6fkt"
+                        data-oid="wwrn2zq"
                       />
                     </svg>
                   </button>
@@ -192,13 +192,13 @@ export default function MainNavbar() {
                   {userMenuOpen && (
                     <div
                       className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 border border-gray-200"
-                      data-oid="a3gci1r"
+                      data-oid="wei8dd0"
                     >
                       <Link
                         href="/dashboard"
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
                         onClick={() => setUserMenuOpen(false)}
-                        data-oid=":4vxu6_"
+                        data-oid=".sfsad3"
                       >
                         Dashboard
                       </Link>
@@ -206,7 +206,7 @@ export default function MainNavbar() {
                         href="/profile"
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
                         onClick={() => setUserMenuOpen(false)}
-                        data-oid="n:oo8lm"
+                        data-oid="paf3:go"
                       >
                         Profile
                       </Link>
@@ -214,7 +214,7 @@ export default function MainNavbar() {
                         href="/saved-jobs"
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
                         onClick={() => setUserMenuOpen(false)}
-                        data-oid="6z2vv33"
+                        data-oid="ugkov:w"
                       >
                         Saved Jobs
                       </Link>
@@ -222,15 +222,15 @@ export default function MainNavbar() {
                         href="/applications"
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
                         onClick={() => setUserMenuOpen(false)}
-                        data-oid="nk-gulu"
+                        data-oid="32vv97k"
                       >
                         My Applications
                       </Link>
-                      <hr className="my-1" data-oid="976ojd7" />
+                      <hr className="my-1" data-oid="a4hfsn_" />
                       <button
                         onClick={handleLogout}
                         className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100 transition-colors"
-                        data-oid="p.1fqr0"
+                        data-oid="smxfxr2"
                       >
                         Sign out
                       </button>
@@ -243,14 +243,14 @@ export default function MainNavbar() {
                   <Link
                     href="/login"
                     className="hidden lg:inline-flex items-center px-3 xl:px-4 py-2 border border-[hsl(196,80%,45%)] text-xs xl:text-sm font-medium rounded-md text-[hsl(196,80%,45%)] hover:bg-gradient-to-r hover:from-[hsl(196,80%,45%)]/10 hover:to-[hsl(196,80%,45%)]/25 transition-all duration-300"
-                    data-oid="7idaxhr"
+                    data-oid="tash:gc"
                   >
                     Login
                   </Link>
                   <Link
                     href="/register"
                     className="hidden lg:inline-flex items-center px-3 xl:px-4 py-2 border border-transparent text-xs xl:text-sm font-medium rounded-md text-white bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300"
-                    data-oid="j0tu:qj"
+                    data-oid="1_fa:dn"
                   >
                     Register
                   </Link>
@@ -267,7 +267,7 @@ export default function MainNavbar() {
                 )}
                 aria-expanded={mobileMenuOpen}
                 aria-label="Toggle navigation menu"
-                data-oid="q228:-2"
+                data-oid="u3dn-x6"
               >
                 <svg
                   className={enhance(
@@ -277,7 +277,7 @@ export default function MainNavbar() {
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
-                  data-oid="bhr63_y"
+                  data-oid="sfml20v"
                 >
                   {mobileMenuOpen ? (
                     <path
@@ -285,7 +285,7 @@ export default function MainNavbar() {
                       strokeLinejoin="round"
                       strokeWidth="2"
                       d="M6 18L18 6M6 6l12 12"
-                      data-oid="0g8ruj_"
+                      data-oid="etfkyl6"
                     />
                   ) : (
                     <path
@@ -293,7 +293,7 @@ export default function MainNavbar() {
                       strokeLinejoin="round"
                       strokeWidth="2"
                       d="M4 6h16M4 12h16M4 18h16"
-                      data-oid="65m7lr6"
+                      data-oid="iociq-y"
                     />
                   )}
                 </svg>
@@ -312,17 +312,17 @@ export default function MainNavbar() {
 
               `lg:hidden ${mobileMenuOpen ? "block" : "hidden"}`,
             )}
-            data-oid=":_8xqeb"
+            data-oid="f-g759m"
           >
             <div
               className="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t border-blue-200 bg-white/50 backdrop-blur-sm"
-              data-oid="kx.3:cx"
+              data-oid="tsa.2rb"
             >
               <Link
                 href="/jobs"
                 className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-blue-800 hover:bg-blue-50 transition-colors duration-200"
                 onClick={() => setMobileMenuOpen(false)}
-                data-oid="-q0l:xo"
+                data-oid="eiej2x."
               >
                 Jobs
               </Link>
@@ -330,7 +330,7 @@ export default function MainNavbar() {
                 href="/internships"
                 className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-blue-800 hover:bg-blue-50 transition-colors duration-200"
                 onClick={() => setMobileMenuOpen(false)}
-                data-oid="50rubdx"
+                data-oid="iuxhfux"
               >
                 Internships
               </Link>
@@ -338,32 +338,32 @@ export default function MainNavbar() {
                 href="/resume-builder"
                 className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-blue-800 hover:bg-blue-50 transition-colors duration-200"
                 onClick={() => setMobileMenuOpen(false)}
-                data-oid="w7my4t2"
+                data-oid=":nut3hc"
               >
                 Resume Builder
               </Link>
               <div
                 className="pt-2 space-y-2 border-t border-gray-200"
-                data-oid="vbm66yq"
+                data-oid="722ang7"
               >
                 {isAuthenticated && user ? (
                   // Mobile Authenticated Menu
                   <>
                     <div
                       className="flex items-center px-3 py-3 border-b border-gray-200 bg-blue-50 rounded-md"
-                      data-oid=":qoiiet"
+                      data-oid="4xu733r"
                     >
                       <SafeAvatar
                         src={user.avatar}
                         name={user.name}
                         size={32}
                         className="mr-3"
-                        data-oid="rk2dig1"
+                        data-oid="9-1w23r"
                       />
 
                       <span
                         className="text-sm font-medium text-gray-900"
-                        data-oid=".yqe8wc"
+                        data-oid="o8ayg57"
                       >
                         {user.name}
                       </span>
@@ -372,7 +372,7 @@ export default function MainNavbar() {
                       href="/dashboard"
                       className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-blue-800 hover:bg-blue-50 transition-colors duration-200"
                       onClick={() => setMobileMenuOpen(false)}
-                      data-oid="uig-c5d"
+                      data-oid="vx_iaq6"
                     >
                       Dashboard
                     </Link>
@@ -380,7 +380,7 @@ export default function MainNavbar() {
                       href="/profile"
                       className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-blue-800 hover:bg-blue-50 transition-colors duration-200"
                       onClick={() => setMobileMenuOpen(false)}
-                      data-oid="js-h_k2"
+                      data-oid=".kt0xwq"
                     >
                       Profile
                     </Link>
@@ -388,7 +388,7 @@ export default function MainNavbar() {
                       href="/saved-jobs"
                       className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-blue-800 hover:bg-blue-50 transition-colors duration-200"
                       onClick={() => setMobileMenuOpen(false)}
-                      data-oid="cgr71sa"
+                      data-oid="eqmmob0"
                     >
                       Saved Jobs
                     </Link>
@@ -396,7 +396,7 @@ export default function MainNavbar() {
                       href="/applications"
                       className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-blue-800 hover:bg-blue-50 transition-colors duration-200"
                       onClick={() => setMobileMenuOpen(false)}
-                      data-oid="21.mi0m"
+                      data-oid="kl3.5x7"
                     >
                       My Applications
                     </Link>
@@ -406,19 +406,19 @@ export default function MainNavbar() {
                         setMobileMenuOpen(false);
                       }}
                       className="block w-full text-left px-3 py-3 rounded-md text-base font-medium text-red-600 hover:bg-red-50 transition-colors duration-200"
-                      data-oid="3lzf-.g"
+                      data-oid="i29-.ic"
                     >
                       Sign out
                     </button>
                   </>
                 ) : (
                   // Mobile Unauthenticated Menu
-                  <div className="space-y-3" data-oid="i5.cvhc">
+                  <div className="space-y-3" data-oid="-elb5-u">
                     <Link
                       href="/login"
                       className="block w-full text-center px-4 py-3 border border-[hsl(196,80%,45%)] text-sm font-medium rounded-md text-[hsl(196,80%,45%)] hover:bg-gradient-to-r hover:from-[hsl(196,80%,45%)]/10 hover:to-[hsl(196,80%,45%)]/25 transition-all duration-300"
                       onClick={() => setMobileMenuOpen(false)}
-                      data-oid="20h:egv"
+                      data-oid="0kd6_4c"
                     >
                       Login
                     </Link>
@@ -426,7 +426,7 @@ export default function MainNavbar() {
                       href="/register"
                       className="block w-full text-center px-4 py-3 border border-transparent text-sm font-medium rounded-md text-white bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300"
                       onClick={() => setMobileMenuOpen(false)}
-                      data-oid="0m_bzz."
+                      data-oid="e:9duug"
                     >
                       Register
                     </Link>

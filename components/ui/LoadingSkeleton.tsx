@@ -39,7 +39,7 @@ export function LoadingSkeleton({
 
   if (variant === "text" && lines > 1) {
     return (
-      <div className={`space-y-2 ${className}`} data-oid="_h5bhmj">
+      <div className={`space-y-2 ${className}`} data-oid="nor.401">
         {Array.from({ length: lines }).map((_, index) => (
           <div
             key={index}
@@ -48,7 +48,7 @@ export function LoadingSkeleton({
               ...style,
               width: index === lines - 1 ? "75%" : "100%",
             }}
-            data-oid="o2_rk_g"
+            data-oid="g2am87w"
           />
         ))}
       </div>
@@ -59,7 +59,7 @@ export function LoadingSkeleton({
     <div
       className={`${baseClasses} ${getVariantClasses()} ${className}`}
       style={style}
-      data-oid="lmel083"
+      data-oid="9htmvgl"
     />
   );
 }
@@ -68,47 +68,47 @@ export function JobCardSkeleton() {
   return (
     <div
       className="bg-white rounded-lg shadow-md p-6 border border-gray-200"
-      data-oid="_oq_lzj"
+      data-oid="1wzo9-0"
     >
-      <div className="flex items-start justify-between mb-4" data-oid="m1uvtrs">
-        <div className="flex-1" data-oid="idb0a6f">
+      <div className="flex items-start justify-between mb-4" data-oid="bc9w:f4">
+        <div className="flex-1" data-oid="m:e3a8q">
           <LoadingSkeleton
             variant="text"
             className="mb-2"
             width="60%"
-            data-oid=":h69lft"
+            data-oid="wd0:osu"
           />
 
           <LoadingSkeleton
             variant="text"
             className="mb-1"
             width="40%"
-            data-oid="j97rpe2"
+            data-oid="ykv656q"
           />
 
-          <LoadingSkeleton variant="text" width="30%" data-oid="-q7_3.k" />
+          <LoadingSkeleton variant="text" width="30%" data-oid="e8h.eq:" />
         </div>
         <LoadingSkeleton
           variant="circular"
           width={48}
           height={48}
-          data-oid="svv-6i_"
+          data-oid="zraz3x_"
         />
       </div>
 
-      <div className="mb-4" data-oid="6wr1rhk">
-        <LoadingSkeleton variant="text" lines={2} data-oid="7pfp6m1" />
+      <div className="mb-4" data-oid="uqbw:lb">
+        <LoadingSkeleton variant="text" lines={2} data-oid="005_050" />
       </div>
 
-      <div className="flex flex-wrap gap-2 mb-4" data-oid="q4o20-z">
-        <LoadingSkeleton className="h-6" width={60} data-oid="sh7w8ci" />
-        <LoadingSkeleton className="h-6" width={80} data-oid="-lq7i-2" />
-        <LoadingSkeleton className="h-6" width={70} data-oid="b27vn0b" />
+      <div className="flex flex-wrap gap-2 mb-4" data-oid="33qzr8j">
+        <LoadingSkeleton className="h-6" width={60} data-oid="cd267m." />
+        <LoadingSkeleton className="h-6" width={80} data-oid="wn_7o1w" />
+        <LoadingSkeleton className="h-6" width={70} data-oid="c33uwbh" />
       </div>
 
-      <div className="flex items-center justify-between" data-oid=".o3wqlm">
-        <LoadingSkeleton variant="text" width="25%" data-oid="jfp.-an" />
-        <LoadingSkeleton className="h-10" width={100} data-oid="scq3a3g" />
+      <div className="flex items-center justify-between" data-oid="54sw.lk">
+        <LoadingSkeleton variant="text" width="25%" data-oid="c:g9w.i" />
+        <LoadingSkeleton className="h-10" width={100} data-oid="6tt2y.k" />
       </div>
     </div>
   );
@@ -118,30 +118,30 @@ export function NavbarSkeleton() {
   return (
     <div
       className="sticky top-0 z-50 bg-gradient-to-r from-blue-200/90 via-blue-300/90 to-blue-200/90 backdrop-blur-md shadow-sm border-b border-blue-300/70"
-      data-oid="b_mrksk"
+      data-oid="oebj8bb"
     >
       <nav
         className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8"
-        data-oid="_1ggkua"
+        data-oid="1t64gvj"
       >
         <div
           className="flex justify-between items-center h-14 sm:h-16"
-          data-oid="hyzamjd"
+          data-oid="cg8dsyj"
         >
-          <LoadingSkeleton width={120} height={32} data-oid="0zxfgtv" />
+          <LoadingSkeleton width={120} height={32} data-oid="_zeyujo" />
 
           <div
             className="hidden lg:flex items-center space-x-4"
-            data-oid="hdg8-6a"
+            data-oid="ylitpy5"
           >
-            <LoadingSkeleton width={60} height={20} data-oid="oy7oqbx" />
-            <LoadingSkeleton width={80} height={20} data-oid="kbflooz" />
-            <LoadingSkeleton width={100} height={20} data-oid="hhs-:gb" />
+            <LoadingSkeleton width={60} height={20} data-oid="u636ben" />
+            <LoadingSkeleton width={80} height={20} data-oid="snvauy9" />
+            <LoadingSkeleton width={100} height={20} data-oid="pj2lblz" />
           </div>
 
-          <div className="flex items-center space-x-3" data-oid="d58ij0f">
-            <LoadingSkeleton width={80} height={36} data-oid="lpjz-ic" />
-            <LoadingSkeleton width={100} height={36} data-oid="fkt-xl." />
+          <div className="flex items-center space-x-3" data-oid="sdy9t1v">
+            <LoadingSkeleton width={80} height={36} data-oid="b5kfro8" />
+            <LoadingSkeleton width={100} height={36} data-oid="tf05p0d" />
           </div>
         </div>
       </nav>

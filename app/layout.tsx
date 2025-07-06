@@ -38,13 +38,13 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" data-oid="m0hu0qs">
-      <head data-oid="t:5qk.9">
-        <link rel="icon" href="/favicon.ico" data-oid="ia5ham1" />
-        <link rel="canonical" href="https://careerx.com" data-oid="etgmhph" />
+    <html lang="en" data-oid="88m912h">
+      <head data-oid="it:gk9d">
+        <link rel="icon" href="/favicon.ico" data-oid="fzte:wi" />
+        <link rel="canonical" href="https://careerx.com" data-oid="ndy:2_7" />
       </head>
-      <body className="" data-oid="5ntnda_">
-        <Providers data-oid="tr..l98">{children}</Providers>
+      <body className="" data-oid=".0szs31">
+        <Providers data-oid="_1ynfw7">{children}</Providers>
       </body>
     </html>
   );

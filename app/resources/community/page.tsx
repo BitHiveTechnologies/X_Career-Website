@@ -98,44 +98,44 @@ export default function ResourcesCommunityPage() {
   return (
     <div
       className="min-h-screen bg-gradient-to-b from-[hsl(210,50%,98%)] to-[hsl(196,60%,95%)]"
-      data-oid="1lfxw4a"
+      data-oid="s_.bx01"
     >
       {/* Animated background elements */}
-      <div className="fixed inset-0 overflow-hidden -z-10" data-oid="y-:u10d">
+      <div className="fixed inset-0 overflow-hidden -z-10" data-oid="cjtj.ie">
         <div
           className="absolute -top-20 -left-20 w-96 h-96 bg-[hsl(196,80%,65%)] opacity-20 rounded-full blur-3xl animate-blob"
-          data-oid="62y-0f3"
+          data-oid="wg6s36l"
         ></div>
         <div
           className="absolute top-40 right-20 w-96 h-96 bg-[hsl(210,70%,65%)] opacity-20 rounded-full blur-3xl animate-blob animation-delay-2000"
-          data-oid="7kjtyum"
+          data-oid="sc9xlxs"
         ></div>
         <div
           className="absolute bottom-10 left-1/3 w-96 h-96 bg-[hsl(175,70%,61%)] opacity-20 rounded-full blur-3xl animate-blob animation-delay-4000"
-          data-oid="pjjjcsl"
+          data-oid="a390s0b"
         ></div>
       </div>
 
-      <div className="relative z-10" data-oid="h4r8.a_">
+      <div className="relative z-10" data-oid="98yon8n">
         {/* Hero Section */}
-        <section className="pt-24 pb-16 px-4" data-oid="_e:3th5">
-          <div className="max-w-6xl mx-auto text-center" data-oid="giyjc2h">
+        <section className="pt-24 pb-16 px-4" data-oid="y.655:7">
+          <div className="max-w-6xl mx-auto text-center" data-oid="692j88o">
             <div
               className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium text-[hsl(196,80%,45%)] border border-[hsl(210,30%,95%)] mb-6"
-              data-oid="4dh-kh6"
+              data-oid="ss6e447"
             >
-              <Users className="h-4 w-4" data-oid="br6od__" />
+              <Users className="h-4 w-4" data-oid="uj6qsnv" />
               Join 25,000+ Tech Professionals
             </div>
 
             <h1
               className="text-4xl md:text-6xl font-bold text-gray-800 mb-6"
-              data-oid="c34dmqy"
+              data-oid="ce96ro9"
             >
               Connect. Learn.
               <span
                 className="bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] bg-clip-text text-transparent"
-                data-oid="d3qgnfy"
+                data-oid="_nknwe1"
               >
                 {" "}
                 Grow Together.
@@ -144,7 +144,7 @@ export default function ResourcesCommunityPage() {
 
             <p
               className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto"
-              data-oid="akrunuo"
+              data-oid="vt2ipxg"
             >
               Join our vibrant community of developers, get instant help, share
               opportunities, and accelerate your career growth.
@@ -153,26 +153,26 @@ export default function ResourcesCommunityPage() {
             {/* Community Stats */}
             <div
               className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto mb-12"
-              data-oid="kizu5gc"
+              data-oid="rsu0bal"
             >
               {communityStats.map((stat, index) => (
                 <div
                   key={index}
                   className="bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-[hsl(210,30%,95%)]"
-                  data-oid="hx.bf_l"
+                  data-oid=":m8dn8f"
                 >
                   <stat.icon
                     className="h-8 w-8 text-[hsl(196,80%,45%)] mx-auto mb-2"
-                    data-oid="8706mjd"
+                    data-oid=".m2_5_f"
                   />
 
                   <div
                     className="text-2xl font-bold text-gray-800"
-                    data-oid="fu::bkq"
+                    data-oid="_t1882-"
                   >
                     {stat.value}
                   </div>
-                  <div className="text-sm text-gray-600" data-oid="j7717ez">
+                  <div className="text-sm text-gray-600" data-oid="fup:nuf">
                     {stat.label}
                   </div>
                 </div>
@@ -182,81 +182,81 @@ export default function ResourcesCommunityPage() {
         </section>
 
         {/* Platform Selection */}
-        <section className="py-16 px-4" data-oid="od_uk6s">
-          <div className="max-w-4xl mx-auto" data-oid="r97ir_b">
-            <div className="text-center mb-12" data-oid="qr.o1ly">
+        <section className="py-16 px-4" data-oid="vt:ohx8">
+          <div className="max-w-4xl mx-auto" data-oid="x3k4jhg">
+            <div className="text-center mb-12" data-oid="4-v4-d4">
               <h2
                 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4"
-                data-oid="eqtl.zu"
+                data-oid="ceca1as"
               >
                 Choose Your Platform
               </h2>
-              <p className="text-xl text-gray-600" data-oid="c-3whhy">
+              <p className="text-xl text-gray-600" data-oid=".h_pha4">
                 Join our community on your preferred messaging platform
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-8" data-oid="15-7bn9">
+            <div className="grid md:grid-cols-2 gap-8" data-oid="2p93cl.">
               {/* WhatsApp Community */}
               <div
                 className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-[hsl(210,30%,95%)] hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
-                data-oid="c2_yud."
+                data-oid="_xnir36"
               >
-                <div className="text-center mb-6" data-oid="0mt-uns">
+                <div className="text-center mb-6" data-oid="5hki_-e">
                   <div
                     className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4"
-                    data-oid=".qo:iu8"
+                    data-oid="aw8.v.-"
                   >
                     <MessageCircle
                       className="h-10 w-10 text-green-600"
-                      data-oid="3ygi4f5"
+                      data-oid="ez3k6cm"
                     />
                   </div>
                   <h3
                     className="text-2xl font-bold text-gray-800 mb-2"
-                    data-oid="f2vi19o"
+                    data-oid="yiqqwyz"
                   >
                     WhatsApp Community
                   </h3>
-                  <p className="text-gray-600" data-oid="_p7f5oh">
+                  <p className="text-gray-600" data-oid="tuk91vc">
                     Real-time discussions and instant networking
                   </p>
                 </div>
 
-                <div className="space-y-4 mb-8" data-oid="l7l67b5">
-                  <div className="flex items-center gap-3" data-oid="-9atfb:">
+                <div className="space-y-4 mb-8" data-oid="n1qi565">
+                  <div className="flex items-center gap-3" data-oid="myr3-f1">
                     <div
                       className="w-2 h-2 bg-green-500 rounded-full"
-                      data-oid="vr23ej6"
+                      data-oid="faui0oe"
                     ></div>
-                    <span className="text-gray-700" data-oid="4sty9k-">
+                    <span className="text-gray-700" data-oid="ofi3i94">
                       15,000+ Active Members
                     </span>
                   </div>
-                  <div className="flex items-center gap-3" data-oid="o6dwrij">
+                  <div className="flex items-center gap-3" data-oid="bti2bsa">
                     <div
                       className="w-2 h-2 bg-green-500 rounded-full"
-                      data-oid="nvih00k"
+                      data-oid="8v-e4zs"
                     ></div>
-                    <span className="text-gray-700" data-oid="f28.7mg">
+                    <span className="text-gray-700" data-oid="5v-swa0">
                       Daily Job Postings
                     </span>
                   </div>
-                  <div className="flex items-center gap-3" data-oid="iy-o8u1">
+                  <div className="flex items-center gap-3" data-oid="5ihmvf6">
                     <div
                       className="w-2 h-2 bg-green-500 rounded-full"
-                      data-oid="ra:q_gk"
+                      data-oid="m67sox."
                     ></div>
-                    <span className="text-gray-700" data-oid="la6ka4p">
+                    <span className="text-gray-700" data-oid="elzp8w-">
                       Quick Doubt Resolution
                     </span>
                   </div>
-                  <div className="flex items-center gap-3" data-oid="pqaouvt">
+                  <div className="flex items-center gap-3" data-oid="53j426z">
                     <div
                       className="w-2 h-2 bg-green-500 rounded-full"
-                      data-oid="4xyy2cp"
+                      data-oid="fu9u4r7"
                     ></div>
-                    <span className="text-gray-700" data-oid="uj1rvw_">
+                    <span className="text-gray-700" data-oid="c1pmzw0">
                       Referral Opportunities
                     </span>
                   </div>
@@ -265,74 +265,74 @@ export default function ResourcesCommunityPage() {
                 <button
                   onClick={() => handleJoinCommunity("whatsapp")}
                   className="w-full px-6 py-4 bg-green-500 text-white rounded-xl font-medium hover:bg-green-600 transition-all transform hover:scale-105 flex items-center justify-center gap-2"
-                  data-oid="0uxs1qr"
+                  data-oid="6oytmcv"
                 >
-                  <MessageCircle className="h-5 w-5" data-oid="9bj:bk9" />
+                  <MessageCircle className="h-5 w-5" data-oid="pk1g9o:" />
                   Join WhatsApp Group
-                  <ArrowRight className="h-5 w-5" data-oid="tk.x2bb" />
+                  <ArrowRight className="h-5 w-5" data-oid="su2pcv4" />
                 </button>
               </div>
 
               {/* Telegram Community */}
               <div
                 className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-[hsl(210,30%,95%)] hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
-                data-oid="wtn49:1"
+                data-oid="y74v4y4"
               >
-                <div className="text-center mb-6" data-oid="q_.6o-q">
+                <div className="text-center mb-6" data-oid="xveg71n">
                   <div
                     className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4"
-                    data-oid="-2rm6eb"
+                    data-oid="kpb9lfp"
                   >
                     <Zap
                       className="h-10 w-10 text-blue-600"
-                      data-oid="2xpdhx7"
+                      data-oid=".sofw5p"
                     />
                   </div>
                   <h3
                     className="text-2xl font-bold text-gray-800 mb-2"
-                    data-oid="q3pywyy"
+                    data-oid="i9ey_2l"
                   >
                     Telegram Channel
                   </h3>
-                  <p className="text-gray-600" data-oid="jz.095c">
+                  <p className="text-gray-600" data-oid="hyxddos">
                     Organized discussions and resource sharing
                   </p>
                 </div>
 
-                <div className="space-y-4 mb-8" data-oid="g09u79q">
-                  <div className="flex items-center gap-3" data-oid="w1za:t6">
+                <div className="space-y-4 mb-8" data-oid="zck5it0">
+                  <div className="flex items-center gap-3" data-oid="k.nhmpq">
                     <div
                       className="w-2 h-2 bg-blue-500 rounded-full"
-                      data-oid="ky0d8vn"
+                      data-oid="33a02we"
                     ></div>
-                    <span className="text-gray-700" data-oid="pu0d7yu">
+                    <span className="text-gray-700" data-oid="7:s4afd">
                       10,000+ Subscribers
                     </span>
                   </div>
-                  <div className="flex items-center gap-3" data-oid="zvvevgv">
+                  <div className="flex items-center gap-3" data-oid="l_tvjz9">
                     <div
                       className="w-2 h-2 bg-blue-500 rounded-full"
-                      data-oid="7mbh5_v"
+                      data-oid="8-o_i.2"
                     ></div>
-                    <span className="text-gray-700" data-oid="dan_3.6">
+                    <span className="text-gray-700" data-oid="h.i8jf1">
                       Structured Learning Content
                     </span>
                   </div>
-                  <div className="flex items-center gap-3" data-oid="rhi.fh2">
+                  <div className="flex items-center gap-3" data-oid="uy.qd..">
                     <div
                       className="w-2 h-2 bg-blue-500 rounded-full"
-                      data-oid="3q73aea"
+                      data-oid="_1h_7a1"
                     ></div>
-                    <span className="text-gray-700" data-oid="250s22w">
+                    <span className="text-gray-700" data-oid="u2:k6g_">
                       Weekly Tech Updates
                     </span>
                   </div>
-                  <div className="flex items-center gap-3" data-oid="bdm8ki4">
+                  <div className="flex items-center gap-3" data-oid="yjunpd:">
                     <div
                       className="w-2 h-2 bg-blue-500 rounded-full"
-                      data-oid="075we6_"
+                      data-oid="81u1ogr"
                     ></div>
-                    <span className="text-gray-700" data-oid="yilb9o.">
+                    <span className="text-gray-700" data-oid="e9wdy93">
                       Interview Experiences
                     </span>
                   </div>
@@ -341,11 +341,11 @@ export default function ResourcesCommunityPage() {
                 <button
                   onClick={() => handleJoinCommunity("telegram")}
                   className="w-full px-6 py-4 bg-blue-500 text-white rounded-xl font-medium hover:bg-blue-600 transition-all transform hover:scale-105 flex items-center justify-center gap-2"
-                  data-oid="rgjmk48"
+                  data-oid="rp.wm65"
                 >
-                  <Zap className="h-5 w-5" data-oid="aznlms0" />
+                  <Zap className="h-5 w-5" data-oid="7q17t9z" />
                   Join Telegram Channel
-                  <ArrowRight className="h-5 w-5" data-oid="1iujejm" />
+                  <ArrowRight className="h-5 w-5" data-oid="mau-52o" />
                 </button>
               </div>
             </div>
@@ -353,40 +353,40 @@ export default function ResourcesCommunityPage() {
         </section>
 
         {/* Community Features */}
-        <section className="py-16 px-4" data-oid="uifuu4d">
-          <div className="max-w-6xl mx-auto" data-oid="-39s-i6">
-            <div className="text-center mb-12" data-oid="34sle.a">
+        <section className="py-16 px-4" data-oid="zpur-0t">
+          <div className="max-w-6xl mx-auto" data-oid="kdhqqxc">
+            <div className="text-center mb-12" data-oid="yu3gbha">
               <h2
                 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4"
-                data-oid="ney-_w1"
+                data-oid="yn.988q"
               >
                 What You'll Get
               </h2>
-              <p className="text-xl text-gray-600" data-oid="dl.zcxl">
+              <p className="text-xl text-gray-600" data-oid="40bups6">
                 Exclusive benefits for community members
               </p>
             </div>
 
             <div
               className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
-              data-oid="zpw59n."
+              data-oid="_x:0403"
             >
               {communityFeatures.map((feature, index) => (
                 <div
                   key={index}
                   className="bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-[hsl(210,30%,95%)] hover:shadow-lg transition-all"
-                  data-oid="p42l2aq"
+                  data-oid="oz2hm4w"
                 >
-                  <div className="text-4xl mb-4" data-oid="uj69rjh">
+                  <div className="text-4xl mb-4" data-oid="w.ukx-2">
                     {feature.icon}
                   </div>
                   <h3
                     className="text-xl font-bold text-gray-800 mb-2"
-                    data-oid="ohvs974"
+                    data-oid="-yb-xud"
                   >
                     {feature.title}
                   </h3>
-                  <p className="text-gray-600" data-oid="7z9ap-s">
+                  <p className="text-gray-600" data-oid="99d4i-5">
                     {feature.description}
                   </p>
                 </div>
@@ -396,58 +396,58 @@ export default function ResourcesCommunityPage() {
         </section>
 
         {/* Success Stories */}
-        <section className="py-16 px-4" data-oid="7tp94hh">
-          <div className="max-w-6xl mx-auto" data-oid="8qcv:1x">
-            <div className="text-center mb-12" data-oid="ivjv4ft">
+        <section className="py-16 px-4" data-oid="jt4g8vx">
+          <div className="max-w-6xl mx-auto" data-oid="n7n8_0r">
+            <div className="text-center mb-12" data-oid="7ea-uo2">
               <h2
                 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4"
-                data-oid="6_.pjt0"
+                data-oid=":jaucka"
               >
                 Success Stories
               </h2>
-              <p className="text-xl text-gray-600" data-oid="-j5r2b7">
+              <p className="text-xl text-gray-600" data-oid="tl74gkg">
                 Real stories from our community members
               </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8" data-oid="ary4279">
+            <div className="grid md:grid-cols-3 gap-8" data-oid="xc3fu10">
               {testimonials.map((testimonial, index) => (
                 <div
                   key={index}
                   className="bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-[hsl(210,30%,95%)]"
-                  data-oid="j:w.ap5"
+                  data-oid="68om08l"
                 >
                   <div
                     className="flex items-center gap-4 mb-4"
-                    data-oid="q8m:inv"
+                    data-oid="zv:k-tu"
                   >
-                    <div className="text-3xl" data-oid="snvtjsk">
+                    <div className="text-3xl" data-oid="i0evbas">
                       {testimonial.image}
                     </div>
-                    <div data-oid="yu-vp2m">
+                    <div data-oid="lk3w7hp">
                       <h4
                         className="font-bold text-gray-800"
-                        data-oid="sl3bikk"
+                        data-oid="dj2thsb"
                       >
                         {testimonial.name}
                       </h4>
-                      <p className="text-sm text-gray-600" data-oid="lm9kx04">
+                      <p className="text-sm text-gray-600" data-oid="3.goykk">
                         {testimonial.role}
                       </p>
                     </div>
                   </div>
-                  <p className="text-gray-700 italic" data-oid="r3uln_t">
+                  <p className="text-gray-700 italic" data-oid="vnc5:8v">
                     "{testimonial.text}"
                   </p>
                   <div
                     className="flex items-center gap-1 mt-4"
-                    data-oid="v40es90"
+                    data-oid="-vzyqqm"
                   >
                     {[...Array(5)].map((_, i) => (
                       <Star
                         key={i}
                         className="h-4 w-4 text-yellow-500 fill-current"
-                        data-oid="-6cm6qy"
+                        data-oid="1hdfswo"
                       />
                     ))}
                   </div>
@@ -458,68 +458,68 @@ export default function ResourcesCommunityPage() {
         </section>
 
         {/* Community Guidelines */}
-        <section className="py-16 px-4" data-oid="ot2lfwb">
-          <div className="max-w-4xl mx-auto" data-oid="ni8w1s6">
+        <section className="py-16 px-4" data-oid="c-z5c9q">
+          <div className="max-w-4xl mx-auto" data-oid="9dl5z1q">
             <div
               className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-[hsl(210,30%,95%)]"
-              data-oid="e2e9m_q"
+              data-oid="p49xitd"
             >
-              <div className="text-center mb-8" data-oid="co43m91">
+              <div className="text-center mb-8" data-oid="0_-2sp4">
                 <Shield
                   className="h-12 w-12 text-[hsl(196,80%,45%)] mx-auto mb-4"
-                  data-oid="6jep--z"
+                  data-oid="dxqb6l3"
                 />
 
                 <h2
                   className="text-2xl font-bold text-gray-800 mb-4"
-                  data-oid="ozf2j_o"
+                  data-oid="9mv_1f2"
                 >
                   Community Guidelines
                 </h2>
-                <p className="text-gray-600" data-oid="bqclaqd">
+                <p className="text-gray-600" data-oid="gwk721s">
                   Help us maintain a positive and productive environment
                 </p>
               </div>
 
-              <div className="grid md:grid-cols-2 gap-6" data-oid="pr5hj4v">
-                <div className="space-y-4" data-oid="361suux">
+              <div className="grid md:grid-cols-2 gap-6" data-oid="_it3xbq">
+                <div className="space-y-4" data-oid="rn..078">
                   <h3
                     className="font-semibold text-gray-800"
-                    data-oid="gky:vim"
+                    data-oid="tr1jxz0"
                   >
                     ✅ Do's
                   </h3>
-                  <ul className="space-y-2 text-gray-600" data-oid="rhlw14-">
-                    <li data-oid="phi-tdg">
+                  <ul className="space-y-2 text-gray-600" data-oid="_e:qxmz">
+                    <li data-oid="43n9y09">
                       • Share relevant job opportunities
                     </li>
-                    <li data-oid="raszam-">
+                    <li data-oid="8-.xnhe">
                       • Help fellow members with doubts
                     </li>
-                    <li data-oid="ymg:4.c">• Share your success stories</li>
-                    <li data-oid="1gh:pp.">• Be respectful and professional</li>
-                    <li data-oid="3kxjadl">
+                    <li data-oid="n74txw.">• Share your success stories</li>
+                    <li data-oid="wmowgx0">• Be respectful and professional</li>
+                    <li data-oid="qs37sgu">
                       • Use appropriate channels for discussions
                     </li>
                   </ul>
                 </div>
-                <div className="space-y-4" data-oid="wa.xlmv">
+                <div className="space-y-4" data-oid="ffebyh_">
                   <h3
                     className="font-semibold text-gray-800"
-                    data-oid="oay43jz"
+                    data-oid="npw1gby"
                   >
                     ❌ Don'ts
                   </h3>
-                  <ul className="space-y-2 text-gray-600" data-oid="m-.o3-s">
-                    <li data-oid="0xyx:2g">• No spam or promotional content</li>
-                    <li data-oid="v70-gy0">
+                  <ul className="space-y-2 text-gray-600" data-oid="0ff005n">
+                    <li data-oid="oyfn6o:">• No spam or promotional content</li>
+                    <li data-oid="dyhmr-z">
                       • No offensive or inappropriate language
                     </li>
-                    <li data-oid=":rbqcp1">
+                    <li data-oid="mj9ojmj">
                       • No sharing of personal information
                     </li>
-                    <li data-oid=":ws9c_t">• No off-topic discussions</li>
-                    <li data-oid="cxborn9">• No duplicate job postings</li>
+                    <li data-oid="iutyw5_">• No off-topic discussions</li>
+                    <li data-oid="hp7tk__">• No duplicate job postings</li>
                   </ul>
                 </div>
               </div>
@@ -528,40 +528,40 @@ export default function ResourcesCommunityPage() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-16 px-4" data-oid="gf9pm93">
-          <div className="max-w-4xl mx-auto text-center" data-oid="xbyj7ln">
+        <section className="py-16 px-4" data-oid="gcdb48z">
+          <div className="max-w-4xl mx-auto text-center" data-oid="wu.k48t">
             <div
               className="bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] rounded-2xl p-8 text-white"
-              data-oid="tnjm-lh"
+              data-oid="q3_8myc"
             >
-              <h2 className="text-3xl font-bold mb-4" data-oid="t:hgmim">
+              <h2 className="text-3xl font-bold mb-4" data-oid="txr:6d7">
                 Ready to Join?
               </h2>
-              <p className="text-xl mb-6 text-blue-100" data-oid="87:4lxe">
+              <p className="text-xl mb-6 text-blue-100" data-oid="0n121-g">
                 Don't miss out on exclusive opportunities and valuable
                 connections
               </p>
               <div
                 className="flex flex-col sm:flex-row gap-4 justify-center"
-                data-oid="mxmy-xi"
+                data-oid="4.z4cu2"
               >
                 <button
                   onClick={() => handleJoinCommunity("whatsapp")}
                   className="px-6 py-3 bg-green-500 text-white rounded-xl font-medium hover:bg-green-600 transition-all transform hover:scale-105"
-                  data-oid="gbl2x1q"
+                  data-oid="s1.tjaj"
                 >
                   <MessageCircle
                     className="inline h-5 w-5 mr-2"
-                    data-oid="eke-9os"
+                    data-oid="xttlcmx"
                   />
                   Join WhatsApp
                 </button>
                 <button
                   onClick={() => handleJoinCommunity("telegram")}
                   className="px-6 py-3 bg-blue-500 text-white rounded-xl font-medium hover:bg-blue-600 transition-all transform hover:scale-105"
-                  data-oid="24gd:mt"
+                  data-oid="gybz8zi"
                 >
-                  <Zap className="inline h-5 w-5 mr-2" data-oid="9joyzna" />
+                  <Zap className="inline h-5 w-5 mr-2" data-oid="a71_00k" />
                   Join Telegram
                 </button>
               </div>

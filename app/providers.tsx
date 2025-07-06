@@ -10,8 +10,8 @@ interface ProvidersProps {
 
 export default function Providers({ children }: ProvidersProps) {
   return (
-    <ErrorBoundary data-oid="nc9ek12">
-      <AuthProvider data-oid="ymfie4-">{children}</AuthProvider>
+    <ErrorBoundary data-oid="4o2tdgr">
+      <AuthProvider data-oid="4zrz-x9">{children}</AuthProvider>
     </ErrorBoundary>
   );
 }

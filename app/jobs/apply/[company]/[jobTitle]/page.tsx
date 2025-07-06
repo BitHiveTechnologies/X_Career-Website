@@ -37,14 +37,14 @@ export default function JobApplyPage() {
   if (isLoading) {
     return (
       <>
-        <MainNavbar data-oid="r.1d57_" />
+        <MainNavbar data-oid="l82:8sa" />
         <div
           className="min-h-screen bg-gradient-to-b from-[hsl(196,60%,95%)] to-white flex items-center justify-center"
-          data-oid="dgn_y.d"
+          data-oid="z39psqg"
         >
           <div
             className="animate-spin rounded-full h-12 w-12 border-b-2 border-[hsl(196,80%,45%)]"
-            data-oid="mn7:-:i"
+            data-oid="z8u:f26"
           ></div>
         </div>
       </>
@@ -54,25 +54,25 @@ export default function JobApplyPage() {
   if (!job) {
     return (
       <>
-        <MainNavbar data-oid="hjt:53n" />
+        <MainNavbar data-oid="s3rx0cl" />
         <div
           className="min-h-screen bg-gradient-to-b from-[hsl(196,60%,95%)] to-white flex items-center justify-center"
-          data-oid="dyczydx"
+          data-oid="v_izfix"
         >
-          <div className="text-center" data-oid="rh6ksl-">
+          <div className="text-center" data-oid="k31dbcg">
             <h1
               className="text-2xl font-bold text-gray-800 mb-4"
-              data-oid="gn36898"
+              data-oid="6c91-1i"
             >
               Job Not Found
             </h1>
-            <p className="text-gray-600 mb-6" data-oid="3b1gj77">
+            <p className="text-gray-600 mb-6" data-oid="1ppd181">
               The job you're looking for doesn't exist.
             </p>
             <button
               onClick={() => router.push("/jobs")}
               className="px-6 py-3 bg-[hsl(196,80%,45%)] text-white rounded-lg hover:bg-[hsl(196,80%,40%)] transition-colors"
-              data-oid=":qgwqa8"
+              data-oid="am7fw87"
             >
               Back to Jobs
             </button>
@@ -84,17 +84,17 @@ export default function JobApplyPage() {
 
   return (
     <>
-      <MainNavbar data-oid="ujn4.bf" />
+      <MainNavbar data-oid="2r_-pip" />
       <div
         className="min-h-screen bg-gradient-to-b from-[hsl(196,60%,95%)] to-white"
-        data-oid="y-nj4oh"
+        data-oid="xr4f-:l"
       >
         <JobApplicationModal
           job={job}
           isOpen={true}
           onClose={handleClose}
           onSubmit={handleApplicationSubmit}
-          data-oid="a0hx5an"
+          data-oid="w7we.-3"
         />
       </div>
     </>

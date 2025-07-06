@@ -129,59 +129,59 @@ export default function ResumeBuilderPage() {
   return (
     <div
       className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50"
-      data-oid="1cmjb2l"
+      data-oid="revjqpd"
     >
-      <MainNavbar data-oid="8ifzx91" />
+      <MainNavbar data-oid="bfk2072" />
 
       {/* Hero Section */}
       <section
         className="bg-gradient-to-r from-[hsl(196,80%,45%)] via-[hsl(210,70%,45%)] to-[hsl(175,70%,41%)] text-white py-16"
-        data-oid="vtkalms"
+        data-oid="ixe-ddz"
       >
         <div
           className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
-          data-oid="lo390gj"
+          data-oid="7c_a2-5"
         >
           <h1
             className="text-4xl md:text-5xl font-bold mb-4"
-            data-oid="w:p7:tk"
+            data-oid="lqcox2t"
           >
             Professional Resume Builder
           </h1>
           <p
             className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto"
-            data-oid="srpcnxq"
+            data-oid="ahr0gbz"
           >
             Create a stunning resume in minutes with our AI-powered builder.
             Choose from professional templates and land your dream job.
           </p>
           <div
             className="flex flex-wrap justify-center gap-4 text-sm"
-            data-oid="_wcaukn"
+            data-oid="4vkojia"
           >
             <div
               className="flex items-center bg-white/20 px-4 py-2 rounded-full"
-              data-oid="p7tv0jk"
+              data-oid="t8s6jv9"
             >
-              <span className="mr-2" data-oid="t-6jvr_">
+              <span className="mr-2" data-oid=".bzw7yj">
                 ✨
               </span>
               ATS-Friendly Templates
             </div>
             <div
               className="flex items-center bg-white/20 px-4 py-2 rounded-full"
-              data-oid="2e7dua4"
+              data-oid="58b1rnk"
             >
-              <span className="mr-2" data-oid="4k0soel">
+              <span className="mr-2" data-oid="g-u_976">
                 📱
               </span>
               Mobile Responsive
             </div>
             <div
               className="flex items-center bg-white/20 px-4 py-2 rounded-full"
-              data-oid="n8mp:jg"
+              data-oid="1doj55o"
             >
-              <span className="mr-2" data-oid="0wxmf.q">
+              <span className="mr-2" data-oid=".r0nxth">
                 ⚡
               </span>
               Instant PDF Download
@@ -193,34 +193,34 @@ export default function ResumeBuilderPage() {
       {/* Main Content */}
       <div
         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8"
-        data-oid="yypwmjp"
+        data-oid="9awtm9_"
       >
         {/* Template Selection */}
-        <div className="mb-8" data-oid="i1bhab6">
+        <div className="mb-8" data-oid="rwg9n_l">
           <TemplateSelector
             selectedTemplate={selectedTemplate}
             onTemplateChange={setSelectedTemplate}
-            data-oid="hfdniw1"
+            data-oid="20:ggak"
           />
         </div>
 
         {/* Progress Bar */}
-        <div className="mb-8" data-oid="b30df.r">
+        <div className="mb-8" data-oid="28a97h2">
           <div
             className="bg-white rounded-lg shadow-sm border p-4"
-            data-oid="168:855"
+            data-oid="f7ljs0r"
           >
             <div
               className="flex items-center justify-between mb-2"
-              data-oid="bjftgg1"
+              data-oid="zeb2a4y"
             >
               <h3
                 className="text-lg font-semibold text-gray-800"
-                data-oid="__l-y21"
+                data-oid="1ftfohg"
               >
                 Resume Progress
               </h3>
-              <span className="text-sm text-gray-600" data-oid="yz4o-my">
+              <span className="text-sm text-gray-600" data-oid="dkjwzs5">
                 {Math.round(
                   (Object.values(resumeData).filter((section) =>
                     Array.isArray(section)
@@ -237,7 +237,7 @@ export default function ResumeBuilderPage() {
             </div>
             <div
               className="w-full bg-gray-200 rounded-full h-2"
-              data-oid="ks:7bf0"
+              data-oid="ui9kpro"
             >
               <div
                 className="bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] h-2 rounded-full transition-all duration-300"
@@ -254,24 +254,24 @@ export default function ResumeBuilderPage() {
                       100,
                   )}%`,
                 }}
-                data-oid="bdlodgc"
+                data-oid="p80ac0w"
               ></div>
             </div>
           </div>
         </div>
 
         {/* Main Builder Interface */}
-        <div className="grid lg:grid-cols-2 gap-8" data-oid="sce-_t2">
+        <div className="grid lg:grid-cols-2 gap-8" data-oid="vniotyt">
           {/* Form Section */}
-          <div className="space-y-6" data-oid="2jd15jx">
+          <div className="space-y-6" data-oid=".1uhu5l">
             {/* Section Navigation */}
             <div
               className="bg-white rounded-lg shadow-sm border p-4"
-              data-oid="7m61ad-"
+              data-oid="fdflrgu"
             >
               <div
                 className="grid grid-cols-2 md:grid-cols-3 gap-2"
-                data-oid="jxjuitd"
+                data-oid="pvdrerj"
               >
                 {sections.map((section) => (
                   <button
@@ -282,16 +282,16 @@ export default function ResumeBuilderPage() {
                         ? "bg-[hsl(196,80%,45%)] text-white shadow-md"
                         : "bg-gray-50 text-gray-700 hover:bg-gray-100"
                     }`}
-                    data-oid="h_hhx9p"
+                    data-oid="v3w2-qr"
                   >
                     <div
                       className="flex flex-col items-center"
-                      data-oid="pc93q30"
+                      data-oid="c3man79"
                     >
-                      <span className="text-lg mb-1" data-oid="tqf4og1">
+                      <span className="text-lg mb-1" data-oid="vnfe_c6">
                         {section.icon}
                       </span>
-                      <span data-oid="qt6luyu">{section.label}</span>
+                      <span data-oid="ln9yn1c">{section.label}</span>
                     </div>
                   </button>
                 ))}
@@ -301,29 +301,29 @@ export default function ResumeBuilderPage() {
             {/* Form Content */}
             <div
               className="bg-white rounded-lg shadow-sm border"
-              data-oid="0_bqpa1"
+              data-oid="08.p5np"
             >
               <ResumeForm
                 resumeData={resumeData}
                 activeSection={activeSection}
                 onDataChange={handleDataChange}
-                data-oid="-f0o4xe"
+                data-oid="iv1-faf"
               />
             </div>
 
             {/* Action Buttons */}
-            <div className="flex flex-wrap gap-4" data-oid="dqygmwm">
+            <div className="flex flex-wrap gap-4" data-oid="gu1whnb">
               <button
                 onClick={() => setIsPreviewMode(!isPreviewMode)}
                 className="flex-1 md:flex-none px-6 py-3 bg-gray-100 text-gray-700 rounded-lg font-medium hover:bg-gray-200 transition-colors duration-200"
-                data-oid="dp-safj"
+                data-oid="5a5jt0l"
               >
                 {isPreviewMode ? "Edit Resume" : "Preview Resume"}
               </button>
               <button
                 onClick={handleDownloadPDF}
                 className="flex-1 md:flex-none px-6 py-3 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white rounded-lg font-medium hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300 transform hover:scale-105"
-                data-oid="-c--ubr"
+                data-oid="h8y8a5n"
               >
                 Download PDF
               </button>
@@ -331,59 +331,59 @@ export default function ResumeBuilderPage() {
           </div>
 
           {/* Preview Section */}
-          <div className="lg:sticky lg:top-24 lg:h-fit" data-oid="cwics50">
+          <div className="lg:sticky lg:top-24 lg:h-fit" data-oid="1iq8cd1">
             <div
               className="bg-white rounded-lg shadow-lg border p-6"
-              data-oid="7e3qyqo"
+              data-oid="t:hbmrk"
             >
               <div
                 className="flex items-center justify-between mb-4"
-                data-oid="1n67:gk"
+                data-oid="n4if:3y"
               >
                 <h3
                   className="text-lg font-semibold text-gray-800"
-                  data-oid="o-vc3v7"
+                  data-oid="minhqj4"
                 >
                   Live Preview
                 </h3>
-                <div className="flex items-center space-x-2" data-oid="73yyf6b">
+                <div className="flex items-center space-x-2" data-oid="iytpfea">
                   <button
                     className="p-2 text-gray-500 hover:text-gray-700 rounded-md hover:bg-gray-100"
-                    data-oid="u2l4l79"
+                    data-oid="al52jug"
                   >
                     <svg
                       className="h-4 w-4"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
-                      data-oid="_isg3be"
+                      data-oid=":w7.52."
                     >
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         strokeWidth="2"
                         d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                        data-oid="v6vsrlg"
+                        data-oid="y81:aq3"
                       />
                     </svg>
                   </button>
                   <button
                     className="p-2 text-gray-500 hover:text-gray-700 rounded-md hover:bg-gray-100"
-                    data-oid="p5f-ag2"
+                    data-oid="-h24sir"
                   >
                     <svg
                       className="h-4 w-4"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
-                      data-oid="0d5r6j:"
+                      data-oid="79pnr14"
                     >
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         strokeWidth="2"
                         d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"
-                        data-oid="dn5xy68"
+                        data-oid="bhcg69b"
                       />
                     </svg>
                   </button>
@@ -397,13 +397,13 @@ export default function ResumeBuilderPage() {
                   width: "125%",
                   height: "125%",
                 }}
-                data-oid="hcxcv8r"
+                data-oid="qfzcim9"
               >
-                <div ref={resumeRef} data-oid="oh.mxr8">
+                <div ref={resumeRef} data-oid="yi3cn2n">
                   <ResumePreview
                     resumeData={resumeData}
                     template={selectedTemplate}
-                    data-oid="fm0oj46"
+                    data-oid="2v6l2a6"
                   />
                 </div>
               </div>
@@ -414,68 +414,68 @@ export default function ResumeBuilderPage() {
         {/* Tips Section */}
         <div
           className="mt-12 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-8"
-          data-oid="j3mwpu6"
+          data-oid="tdlm29s"
         >
           <h3
             className="text-2xl font-bold text-gray-800 mb-6 text-center"
-            data-oid="mgzwc-h"
+            data-oid="4wr2o6h"
           >
             Resume Writing Tips
           </h3>
           <div
             className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
-            data-oid="hrx3iif"
+            data-oid="grt63i."
           >
             <div
               className="bg-white p-6 rounded-lg shadow-sm"
-              data-oid="axrutw-"
+              data-oid="awi3ft8"
             >
-              <div className="text-2xl mb-3" data-oid="3t734im">
+              <div className="text-2xl mb-3" data-oid="zz8z8bt">
                 🎯
               </div>
               <h4
                 className="font-semibold text-gray-800 mb-2"
-                data-oid="-cxud6r"
+                data-oid="-faf5w1"
               >
                 Tailor Your Resume
               </h4>
-              <p className="text-gray-600 text-sm" data-oid="x8np094">
+              <p className="text-gray-600 text-sm" data-oid="9n8a.nb">
                 Customize your resume for each job application by highlighting
                 relevant skills and experiences.
               </p>
             </div>
             <div
               className="bg-white p-6 rounded-lg shadow-sm"
-              data-oid="tbfrqc5"
+              data-oid="d56msgz"
             >
-              <div className="text-2xl mb-3" data-oid="18ngly3">
+              <div className="text-2xl mb-3" data-oid="-5:9nls">
                 📊
               </div>
               <h4
                 className="font-semibold text-gray-800 mb-2"
-                data-oid="-_:93aj"
+                data-oid="jzm3:tl"
               >
                 Use Numbers
               </h4>
-              <p className="text-gray-600 text-sm" data-oid="7-tohmy">
+              <p className="text-gray-600 text-sm" data-oid="u3.5-_s">
                 Quantify your achievements with specific numbers, percentages,
                 and metrics whenever possible.
               </p>
             </div>
             <div
               className="bg-white p-6 rounded-lg shadow-sm"
-              data-oid="edo6rzb"
+              data-oid="311lerk"
             >
-              <div className="text-2xl mb-3" data-oid="gse.6j9">
+              <div className="text-2xl mb-3" data-oid="0g19j0l">
                 🔍
               </div>
               <h4
                 className="font-semibold text-gray-800 mb-2"
-                data-oid="krj41on"
+                data-oid="wkt-wud"
               >
                 Keywords Matter
               </h4>
-              <p className="text-gray-600 text-sm" data-oid="833-lwf">
+              <p className="text-gray-600 text-sm" data-oid="ovtdxnt">
                 Include relevant keywords from the job description to pass
                 through ATS systems.
               </p>
