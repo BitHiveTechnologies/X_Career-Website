@@ -1,94 +1,107 @@
 'use client';
 
-import MainNavbar from '@/components/mainNavbar';
+import { useState, useEffect, Suspense } from 'react';
+import { useAuth } from '@/lib/auth/AuthContext';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import MainNavbar from '@/components/mainNavbar';
 
-export default function RegisterPage() {
-    const router = useRouter();
+function RegisterForm() {
     const [name, setName] = useState('');
-    const [phone, setPhone] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+    const { register, isAuthenticated } = useAuth();
+    const router = useRouter();
+    const searchParams = useSearchParams();
+
+    // Redirect if already authenticated
+    useEffect(() => {
+        if (isAuthenticated) {
+            const redirectTo = searchParams.get('redirect') || '/dashboard';
+            router.push(redirectTo);
+        }
+    }, [isAuthenticated, router, searchParams]);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setIsLoading(true);
         setError('');
 
-        // Simulate API call
-        try {
-            // Replace with actual registration logic
-            await new Promise((resolve) => setTimeout(resolve, 1000));
-
-            // For demo purposes, just redirect to login
-            router.push('/login');
-        } catch (err) {
-            setError('Registration failed. Please try again.');
-        } finally {
-            setIsLoading(false);
+        if (password !== confirmPassword) {
+            setError('Passwords do not match');
+            return;
         }
+
+        if (password.length < 6) {
+            setError('Password must be at least 6 characters long');
+            return;
+        }
+
+        setIsLoading(true);
+
+        const result = await register(name, email, password);
+
+        if (!result.success) {
+            setError(result.error || 'Registration failed');
+        }
+
+        setIsLoading(false);
     };
 
     return (
         <>
-            <MainNavbar data-oid="3mk-:k4" />
             <div
-                className="min-h-screen bg-gradient-to-b from-[hsl(204, 100.00%, 50.00%)] to-[hsl(162, 100.00%, 50.00%)] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
-                data-oid="4:nda-v"
+                className="min-h-screen bg-gradient-to-br from-[hsl(196,80%,45%)] via-[hsl(210,70%,45%)] to-[hsl(175,70%,41%)] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
+                data-oid="pd-:u7m"
             >
-                {/* Animated background elements */}
-                <div className="fixed inset-0 overflow-hidden -z-10" data-oid="s3bkj4k">
+                <div className="max-w-md w-full space-y-8" data-oid="zkq:noq">
                     <div
-                        className="absolute -top-20 -left-20 w-96 h-96 bg-[hsl(196,80%,65%)] opacity-50 rounded-full blur-3xl animate-blob"
-                        data-oid="t.6or9c"
-                    ></div>
-                    <div
-                        className="absolute top-40 right-20 w-96 h-96 bg-[hsl(210,70%,65%)] opacity-50 rounded-full blur-3xl animate-blob animation-delay-2000"
-                        data-oid="29mu6li"
-                    ></div>
-                    <div
-                        className="absolute bottom-10 left-1/3 w-96 h-96 bg-[hsl(175,70%,61%)] opacity-40 rounded-full blur-3xl animate-blob animation-delay-4000"
-                        data-oid="a_8xd-l"
-                    ></div>
-                </div>
-
-                <div className="w-full sm:mx-auto sm:max-w-md z-10 -mt-20" data-oid="bv4632:">
-                    <div className="text-center mb-6" data-oid="f4uen3b">
-                        <h2 className="text-3xl font-extrabold text-gray-800" data-oid="eo5zi3-">
-                            Create an account
-                        </h2>
-                        <p className="mt-2 text-sm text-gray-600" data-oid="-x7lmsu">
-                            Sign up to get started with CareerX
-                        </p>
-                    </div>
-
-                    <div
-                        className="bg-white/80 backdrop-blur-md py-8 px-6 shadow-xl rounded-xl border border-[hsl(210,30%,95%)] sm:px-10 transform transition-all duration-500 hover:shadow-2xl"
-                        data-oid="n64fcn-"
+                        className="bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl p-8 border border-white/20"
+                        data-oid="y-3ix3r"
                     >
-                        {error && (
-                            <div
-                                className="mb-4 p-3 bg-red-50 text-red-700 text-sm rounded-md border border-red-200"
-                                data-oid="zqx1r2d"
+                        <div data-oid="inaj8l1">
+                            <h2
+                                className="mt-6 text-center text-3xl font-extrabold text-gray-900"
+                                data-oid="54-mefg"
                             >
-                                {error}
-                            </div>
-                        )}
-
-                        <form className="space-y-6" onSubmit={handleSubmit} data-oid="9z._1c2">
-                            <div data-oid="oz:xl.u">
-                                <label
-                                    htmlFor="name"
-                                    className="block text-sm font-medium text-gray-700"
-                                    data-oid="0pc4hi1"
+                                Create your account
+                            </h2>
+                            <p
+                                className="mt-2 text-center text-sm text-gray-600"
+                                data-oid="bfdh9zh"
+                            >
+                                Or{' '}
+                                <Link
+                                    href="/login"
+                                    className="font-medium text-[hsl(196,80%,45%)] hover:text-[hsl(196,80%,40%)] transition-colors"
+                                    data-oid="m9_tofm"
                                 >
-                                    Full Name
-                                </label>
-                                <div className="mt-1" data-oid="x59.par">
+                                    sign in to your existing account
+                                </Link>
+                            </p>
+                        </div>
+
+                        <form className="mt-8 space-y-6" onSubmit={handleSubmit} data-oid="zw-d088">
+                            {error && (
+                                <div
+                                    className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg"
+                                    data-oid="gye4mfj"
+                                >
+                                    {error}
+                                </div>
+                            )}
+
+                            <div className="space-y-4" data-oid="b.z5fix">
+                                <div data-oid="zjwc0q9">
+                                    <label
+                                        htmlFor="name"
+                                        className="block text-sm font-medium text-gray-700"
+                                        data-oid="wmip-sa"
+                                    >
+                                        Full Name
+                                    </label>
                                     <input
                                         id="name"
                                         name="name"
@@ -97,46 +110,20 @@ export default function RegisterPage() {
                                         required
                                         value={name}
                                         onChange={(e) => setName(e.target.value)}
-                                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[hsl(196,80%,45%)] focus:border-[hsl(196,80%,45%)] transition-colors duration-200"
-                                        placeholder="John Doe"
-                                        data-oid=":q-xp_h"
+                                        className="mt-1 appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-[hsl(196,80%,45%)] focus:z-10 sm:text-sm transition-all duration-200"
+                                        placeholder="Enter your full name"
+                                        data-oid="pjjt:sz"
                                     />
                                 </div>
-                            </div>
 
-                            <div data-oid="yc576y1">
-                                <label
-                                    htmlFor="phone"
-                                    className="block text-sm font-medium text-gray-700"
-                                    data-oid="est-def"
-                                >
-                                    Phone Number
-                                </label>
-                                <div className="mt-1" data-oid="hk3182_">
-                                    <input
-                                        id="phone"
-                                        name="phone"
-                                        type="tel"
-                                        autoComplete="tel"
-                                        required
-                                        value={phone}
-                                        onChange={(e) => setPhone(e.target.value)}
-                                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[hsl(196,80%,45%)] focus:border-[hsl(196,80%,45%)] transition-colors duration-200"
-                                        placeholder="+1 (123) 456-7890"
-                                        data-oid="929zv5x"
-                                    />
-                                </div>
-                            </div>
-
-                            <div data-oid="u_2rg12">
-                                <label
-                                    htmlFor="email"
-                                    className="block text-sm font-medium text-gray-700"
-                                    data-oid="iu2rrb9"
-                                >
-                                    Email address
-                                </label>
-                                <div className="mt-1" data-oid="v-8hlwh">
+                                <div data-oid="435ywj8">
+                                    <label
+                                        htmlFor="email"
+                                        className="block text-sm font-medium text-gray-700"
+                                        data-oid="kvdwkak"
+                                    >
+                                        Email address
+                                    </label>
                                     <input
                                         id="email"
                                         name="email"
@@ -145,22 +132,20 @@ export default function RegisterPage() {
                                         required
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
-                                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[hsl(196,80%,45%)] focus:border-[hsl(196,80%,45%)] transition-colors duration-200"
-                                        placeholder="you@example.com"
-                                        data-oid="4et9q1t"
+                                        className="mt-1 appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-[hsl(196,80%,45%)] focus:z-10 sm:text-sm transition-all duration-200"
+                                        placeholder="Enter your email"
+                                        data-oid="_0gq6j9"
                                     />
                                 </div>
-                            </div>
 
-                            <div data-oid="25pso7r">
-                                <label
-                                    htmlFor="password"
-                                    className="block text-sm font-medium text-gray-700"
-                                    data-oid="3.qrpb9"
-                                >
-                                    Password
-                                </label>
-                                <div className="mt-1" data-oid="l1p4kr1">
+                                <div data-oid="5nmlt_.">
+                                    <label
+                                        htmlFor="password"
+                                        className="block text-sm font-medium text-gray-700"
+                                        data-oid="nkdxgjs"
+                                    >
+                                        Password
+                                    </label>
                                     <input
                                         id="password"
                                         name="password"
@@ -169,65 +154,117 @@ export default function RegisterPage() {
                                         required
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
-                                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[hsl(196,80%,45%)] focus:border-[hsl(196,80%,45%)] transition-colors duration-200"
-                                        placeholder="••••••••"
-                                        data-oid="dqdgdk:"
+                                        className="mt-1 appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-[hsl(196,80%,45%)] focus:z-10 sm:text-sm transition-all duration-200"
+                                        placeholder="Create a password"
+                                        data-oid="r237u-v"
+                                    />
+                                </div>
+
+                                <div data-oid="bvmtxno">
+                                    <label
+                                        htmlFor="confirmPassword"
+                                        className="block text-sm font-medium text-gray-700"
+                                        data-oid="uz.nop_"
+                                    >
+                                        Confirm Password
+                                    </label>
+                                    <input
+                                        id="confirmPassword"
+                                        name="confirmPassword"
+                                        type="password"
+                                        autoComplete="new-password"
+                                        required
+                                        value={confirmPassword}
+                                        onChange={(e) => setConfirmPassword(e.target.value)}
+                                        className="mt-1 appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-[hsl(196,80%,45%)] focus:z-10 sm:text-sm transition-all duration-200"
+                                        placeholder="Confirm your password"
+                                        data-oid="mpl-8_q"
                                     />
                                 </div>
                             </div>
 
-                            <div data-oid="_epqc86">
+                            <div className="flex items-center" data-oid="l7jq:yy">
+                                <input
+                                    id="agree-terms"
+                                    name="agree-terms"
+                                    type="checkbox"
+                                    required
+                                    className="h-4 w-4 text-[hsl(196,80%,45%)] focus:ring-[hsl(196,80%,45%)] border-gray-300 rounded"
+                                    data-oid="esdlod9"
+                                />
+
+                                <label
+                                    htmlFor="agree-terms"
+                                    className="ml-2 block text-sm text-gray-900"
+                                    data-oid="5v8os9o"
+                                >
+                                    I agree to the{' '}
+                                    <Link
+                                        href="/terms"
+                                        className="text-[hsl(196,80%,45%)] hover:text-[hsl(196,80%,40%)]"
+                                        data-oid="x4.:a0p"
+                                    >
+                                        Terms of Service
+                                    </Link>{' '}
+                                    and{' '}
+                                    <Link
+                                        href="/privacy-policy"
+                                        className="text-[hsl(196,80%,45%)] hover:text-[hsl(196,80%,40%)]"
+                                        data-oid="sbyaxgj"
+                                    >
+                                        Privacy Policy
+                                    </Link>
+                                </label>
+                            </div>
+
+                            <div data-oid=":bfu_x_">
                                 <button
                                     type="submit"
                                     disabled={isLoading}
-                                    className={`w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[hsl(196,80%,45%)] transition-all duration-300 transform hover:translate-y-[-2px] ${isLoading ? 'opacity-70 cursor-not-allowed' : ''}`}
-                                    data-oid="cb6st9k"
+                                    className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[hsl(196,80%,45%)] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 transform hover:scale-105"
+                                    data-oid="bwlg.vu"
                                 >
                                     {isLoading ? (
-                                        <svg
-                                            className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            data-oid="tzhdp5x"
-                                        >
-                                            <circle
-                                                className="opacity-25"
-                                                cx="12"
-                                                cy="12"
-                                                r="10"
-                                                stroke="currentColor"
-                                                strokeWidth="4"
-                                                data-oid=".r.hcmq"
-                                            ></circle>
-                                            <path
-                                                className="opacity-75"
-                                                fill="currentColor"
-                                                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                                                data-oid="d1u8d93"
-                                            ></path>
-                                        </svg>
-                                    ) : null}
-                                    {isLoading ? 'Creating account...' : 'Create account'}
+                                        <div className="flex items-center" data-oid="5amwmje">
+                                            <div
+                                                className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"
+                                                data-oid="11-xgik"
+                                            ></div>
+                                            Creating account...
+                                        </div>
+                                    ) : (
+                                        'Create account'
+                                    )}
                                 </button>
                             </div>
                         </form>
                     </div>
-
-                    <div className="mt-6 text-center" data-oid=":cd69g7">
-                        <p className="text-sm text-gray-600" data-oid="d3qb67k">
-                            Already have an account?{' '}
-                            <Link
-                                href="/login"
-                                className="font-medium text-[hsl(196,80%,45%)] hover:text-[hsl(196,80%,35%)] transition-colors duration-200"
-                                data-oid="v65-mrl"
-                            >
-                                Sign in
-                            </Link>
-                        </p>
-                    </div>
                 </div>
             </div>
         </>
+    );
+}
+
+export default function RegisterPage() {
+    return (
+        <div className="min-h-screen bg-white text-gray-800 font-sans" data-oid="wdcsjfm">
+            <MainNavbar data-oid="shn5kza" />
+            <Suspense
+                fallback={
+                    <div
+                        className="min-h-screen bg-gradient-to-br from-[hsl(196,80%,45%)] via-[hsl(210,70%,45%)] to-[hsl(175,70%,41%)] flex items-center justify-center"
+                        data-oid="nww.z2f"
+                    >
+                        <div
+                            className="animate-spin rounded-full h-32 w-32 border-b-2 border-white"
+                            data-oid="_7ghd0s"
+                        ></div>
+                    </div>
+                }
+                data-oid="crw81vn"
+            >
+                <RegisterForm data-oid=".j2ptn_" />
+            </Suspense>
+        </div>
     );
 }
