@@ -1,10 +1,10 @@
 'use client';
 
 import MainNavbar from '@/components/mainNavbar';
-import { useState, useRef } from 'react';
 import ResumeForm from '@/components/ResumeForm';
 import ResumePreview from '@/components/ResumePreview';
 import TemplateSelector from '@/components/TemplateSelector';
+import { useRef, useState } from 'react';
 
 export interface PersonalInfo {
     fullName: string;
@@ -89,6 +89,7 @@ export default function ResumeBuilderPage() {
     const [selectedTemplate, setSelectedTemplate] = useState('modern');
     const [activeSection, setActiveSection] = useState('personal');
     const [isPreviewMode, setIsPreviewMode] = useState(false);
+    const [zoomLevel, setZoomLevel] = useState(0.8);
     const resumeRef = useRef<HTMLDivElement>(null);
 
     const handleDataChange = (section: keyof ResumeData, data: any) => {
@@ -117,6 +118,16 @@ export default function ResumeBuilderPage() {
         }
     };
 
+    const handleZoomIn = () => {
+        setZoomLevel(prev => Math.min(prev + 0.1, 1.5));
+    };
+
+    const handleZoomOut = () => {
+        setZoomLevel(prev => Math.max(prev - 0.1, 0.3));
+    };
+
+
+
     const sections = [
         { id: 'personal', label: 'Personal Info', icon: '👤' },
         { id: 'experience', label: 'Experience', icon: '💼' },
@@ -132,6 +143,13 @@ export default function ResumeBuilderPage() {
             data-oid="1cmjb2l"
         >
             <MainNavbar data-oid="8ifzx91" />
+
+            {/* Desktop-Only Banner */}
+            <div className="bg-yellow-50 border-b border-yellow-200 py-3 px-4 text-center">
+                <p className="text-yellow-800 text-sm font-medium">
+                    💻 For best experience, please use a desktop to build your resume.
+                </p>
+            </div>
 
             {/* Hero Section */}
             <section
@@ -188,6 +206,7 @@ export default function ResumeBuilderPage() {
                     <TemplateSelector
                         selectedTemplate={selectedTemplate}
                         onTemplateChange={setSelectedTemplate}
+                        userSubscription="free" // This would come from user auth context
                         data-oid="hfdniw1"
                     />
                 </div>
@@ -236,10 +255,25 @@ export default function ResumeBuilderPage() {
                     </div>
                 </div>
 
+                {/* Toggle Button - Always Visible */}
+                <div className="mb-6 flex justify-center">
+                    <button
+                        onClick={() => setIsPreviewMode(!isPreviewMode)}
+                        className={`px-8 py-3 rounded-lg font-medium transition-colors duration-200 ${
+                            isPreviewMode 
+                                ? 'bg-blue-100 text-blue-700 hover:bg-blue-200' 
+                                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                        }`}
+                        data-oid="toggle-button"
+                    >
+                        {isPreviewMode ? '📝 Edit Mode' : '👁️ Preview Mode'}
+                    </button>
+                </div>
+
                 {/* Main Builder Interface */}
-                <div className="grid lg:grid-cols-2 gap-8" data-oid="sce-_t2">
+                <div className={`${isPreviewMode ? 'lg:grid-cols-1' : 'lg:grid-cols-2'} grid gap-8`} data-oid="sce-_t2">
                     {/* Form Section */}
-                    <div className="space-y-6" data-oid="2jd15jx">
+                    <div className={`space-y-6 ${isPreviewMode ? 'hidden' : ''}`} data-oid="2jd15jx">
                         {/* Section Navigation */}
                         <div
                             className="bg-white rounded-lg shadow-sm border p-4"
@@ -280,6 +314,7 @@ export default function ResumeBuilderPage() {
                                 resumeData={resumeData}
                                 activeSection={activeSection}
                                 onDataChange={handleDataChange}
+                                selectedTemplate={selectedTemplate}
                                 data-oid="-f0o4xe"
                             />
                         </div>
@@ -287,24 +322,24 @@ export default function ResumeBuilderPage() {
                         {/* Action Buttons */}
                         <div className="flex flex-wrap gap-4" data-oid="dqygmwm">
                             <button
-                                onClick={() => setIsPreviewMode(!isPreviewMode)}
-                                className="flex-1 md:flex-none px-6 py-3 bg-gray-100 text-gray-700 rounded-lg font-medium hover:bg-gray-200 transition-colors duration-200"
-                                data-oid="dp-safj"
-                            >
-                                {isPreviewMode ? 'Edit Resume' : 'Preview Resume'}
-                            </button>
-                            <button
                                 onClick={handleDownloadPDF}
                                 className="flex-1 md:flex-none px-6 py-3 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white rounded-lg font-medium hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300 transform hover:scale-105"
                                 data-oid="-c--ubr"
                             >
                                 Download PDF
                             </button>
+                            <button
+                                onClick={() => window.open('/resume-writing-tips.pdf', '_blank')}
+                                className="flex-1 md:flex-none px-6 py-3 bg-blue-100 text-blue-700 rounded-lg font-medium hover:bg-blue-200 transition-colors duration-200"
+                                data-oid="tips-button"
+                            >
+                                📖 Resume Writing Tips
+                            </button>
                         </div>
                     </div>
 
                     {/* Preview Section */}
-                    <div className="lg:sticky lg:top-24 lg:h-fit" data-oid="cwics50">
+                    <div className={`${isPreviewMode ? 'lg:col-span-1' : 'lg:sticky lg:top-24 lg:h-fit'}`} data-oid="cwics50">
                         <div
                             className="bg-white rounded-lg shadow-lg border p-6"
                             data-oid="7e3qyqo"
@@ -320,52 +355,38 @@ export default function ResumeBuilderPage() {
                                     Live Preview
                                 </h3>
                                 <div className="flex items-center space-x-2" data-oid="73yyf6b">
-                                    <button
-                                        className="p-2 text-gray-500 hover:text-gray-700 rounded-md hover:bg-gray-100"
-                                        data-oid="u2l4l79"
-                                    >
-                                        <svg
-                                            className="h-4 w-4"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            viewBox="0 0 24 24"
-                                            data-oid="_isg3be"
+                                    {/* Zoom Controls */}
+                                    <div className="flex items-center space-x-1">
+                                        <button
+                                            onClick={handleZoomOut}
+                                            className="p-1.5 text-gray-500 hover:text-gray-700 rounded hover:bg-gray-100"
+                                            title="Zoom Out"
+                                            data-oid="zoom-out"
                                         >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth="2"
-                                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                                                data-oid="v6vsrlg"
-                                            />
-                                        </svg>
-                                    </button>
-                                    <button
-                                        className="p-2 text-gray-500 hover:text-gray-700 rounded-md hover:bg-gray-100"
-                                        data-oid="p5f-ag2"
-                                    >
-                                        <svg
-                                            className="h-4 w-4"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            viewBox="0 0 24 24"
-                                            data-oid="0d5r6j:"
+                                            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20 12H4" />
+                                            </svg>
+                                        </button>
+                                        <span className="text-sm text-gray-500 px-2">
+                                            {Math.round(zoomLevel * 100)}%
+                                        </span>
+                                        <button
+                                            onClick={handleZoomIn}
+                                            className="p-1.5 text-gray-500 hover:text-gray-700 rounded hover:bg-gray-100"
+                                            title="Zoom In"
+                                            data-oid="zoom-in"
                                         >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth="2"
-                                                d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"
-                                                data-oid="dn5xy68"
-                                            />
-                                        </svg>
-                                    </button>
+                                            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
+                                            </svg>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                             <div
                                 className="border rounded-lg overflow-hidden bg-white"
                                 style={{
-                                    transform: 'scale(0.8)',
+                                    transform: `scale(${zoomLevel})`,
                                     transformOrigin: 'top left',
                                     width: '125%',
                                     height: '125%',

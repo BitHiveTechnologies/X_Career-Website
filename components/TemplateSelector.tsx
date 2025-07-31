@@ -3,42 +3,41 @@
 interface TemplateSelectorProps {
     selectedTemplate: string;
     onTemplateChange: (template: string) => void;
+    userSubscription?: 'free' | 'starter' | 'mid-tier';
 }
 
 export default function TemplateSelector({
     selectedTemplate,
     onTemplateChange,
+    userSubscription = 'free',
 }: TemplateSelectorProps) {
     const templates = [
-        {
-            id: 'modern',
-            name: 'Modern Professional',
-            description: 'Clean design with blue accents, perfect for tech roles',
-            preview: '/template-previews/modern.png',
-            features: ['ATS-Friendly', 'Color Accents', 'Professional Layout'],
-        },
         {
             id: 'minimal',
             name: 'Minimal Clean',
             description: 'Simple and elegant design focusing on content',
             preview: '/template-previews/minimal.png',
             features: ['Minimalist', 'Typography Focus', 'Clean Lines'],
+            subscription: 'free',
+            candidateType: 'freshers',
         },
         {
-            id: 'creative',
-            name: 'Creative Design',
-            description: 'Eye-catching design for creative professionals',
-            preview: '/template-previews/creative.png',
-            features: ['Creative Layout', 'Visual Elements', 'Unique Design'],
-            comingSoon: true,
+            id: 'modern',
+            name: 'Modern Professional',
+            description: 'Clean design with blue accents, perfect for tech roles',
+            preview: '/template-previews/modern.png',
+            features: ['ATS-Friendly', 'Color Accents', 'Professional Layout'],
+            subscription: 'starter',
+            candidateType: 'fresher-interns',
         },
         {
             id: 'executive',
-            name: 'Executive',
+            name: 'Executive & Creative Design',
             description: 'Sophisticated design for senior positions',
             preview: '/template-previews/executive.png',
             features: ['Executive Style', 'Premium Look', 'Leadership Focus'],
-            comingSoon: true,
+            subscription: 'mid-tier',
+            candidateType: 'experienced-professionals',
         },
     ];
 
@@ -48,25 +47,32 @@ export default function TemplateSelector({
                 Choose Your Template
             </h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4" data-oid="v62dji9">
-                {templates.map((template) => (
-                    <div
-                        key={template.id}
-                        className={`relative border-2 rounded-lg p-4 cursor-pointer transition-all duration-200 ${
-                            selectedTemplate === template.id
-                                ? 'border-[hsl(196,80%,45%)] bg-blue-50'
-                                : 'border-gray-200 hover:border-gray-300'
-                        } ${template.comingSoon ? 'opacity-60 cursor-not-allowed' : ''}`}
-                        onClick={() => !template.comingSoon && onTemplateChange(template.id)}
-                        data-oid="yr0_1od"
-                    >
-                        {template.comingSoon && (
-                            <div
-                                className="absolute top-2 right-2 bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full"
-                                data-oid="uo4_47m"
-                            >
-                                Coming Soon
-                            </div>
-                        )}
+                {templates.map((template) => {
+                    const isAccessible = template.subscription === 'free' || 
+                        (template.subscription === 'starter' && ['starter', 'mid-tier'].includes(userSubscription)) ||
+                        (template.subscription === 'mid-tier' && userSubscription === 'mid-tier');
+                    
+                    const isLocked = !isAccessible;
+                    
+                    return (
+                        <div
+                            key={template.id}
+                            className={`relative border-2 rounded-lg p-4 transition-all duration-200 ${
+                                selectedTemplate === template.id
+                                    ? 'border-[hsl(196,80%,45%)] bg-blue-50'
+                                    : 'border-gray-200 hover:border-gray-300'
+                            } ${isLocked ? 'opacity-60 cursor-not-allowed' : 'cursor-pointer'}`}
+                            onClick={() => !isLocked && onTemplateChange(template.id)}
+                            data-oid="yr0_1od"
+                        >
+                            {isLocked && (
+                                <div
+                                    className="absolute top-2 right-2 bg-red-100 text-red-800 text-xs px-2 py-1 rounded-full"
+                                    data-oid="uo4_47m"
+                                >
+                                    {template.subscription === 'starter' ? 'Starter Plan' : 'Mid-tier Plan'}
+                                </div>
+                            )}
 
                         {/* Template Preview */}
                         <div
@@ -128,7 +134,7 @@ export default function TemplateSelector({
                             ))}
                         </div>
 
-                        {selectedTemplate === template.id && !template.comingSoon && (
+                        {selectedTemplate === template.id && !isLocked && (
                             <div
                                 className="absolute top-2 left-2 bg-[hsl(196,80%,45%)] text-white text-xs px-2 py-1 rounded-full"
                                 data-oid="3bwnqof"
@@ -136,8 +142,20 @@ export default function TemplateSelector({
                                 Selected
                             </div>
                         )}
+                        
+                        {isLocked && (
+                            <div className="absolute inset-0 bg-gray-900/20 rounded-lg flex items-center justify-center">
+                                <div className="bg-white rounded-lg p-3 text-center">
+                                    <svg className="w-6 h-6 text-gray-400 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                                    </svg>
+                                    <p className="text-xs text-gray-600 font-medium">Upgrade Required</p>
+                                </div>
+                            </div>
+                        )}
                     </div>
-                ))}
+                );
+                })}
             </div>
 
             <div className="mt-4 p-4 bg-blue-50 rounded-lg" data-oid="d208uo6">

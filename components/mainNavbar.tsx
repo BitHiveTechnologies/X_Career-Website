@@ -1,10 +1,10 @@
 'use client';
 
-import Link from 'next/link';
-import React, { useState, useEffect, useRef } from 'react';
-import { useAuth } from '@/lib/auth/AuthContext';
-import { useProgressiveEnhancement } from '@/hooks/useProgressiveEnhancement';
 import { SafeAvatar } from '@/components/ui/SafeImage';
+import { useProgressiveEnhancement } from '@/hooks/useProgressiveEnhancement';
+import { useAuth } from '@/lib/auth/AuthContext';
+import Link from 'next/link';
+import { useEffect, useRef, useState } from 'react';
 
 export default function MainNavbar() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -55,7 +55,7 @@ export default function MainNavbar() {
     const Logo = () => (
         <svg
             className="h-7 w-auto sm:h-8"
-            viewBox="0 0 120 30"
+            viewBox="0 0 140 30"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             data-oid="_juqrqh"
@@ -82,12 +82,12 @@ export default function MainNavbar() {
                 x="60"
                 y="22"
                 fontFamily="Arial"
-                fontSize="18"
+                fontSize="16"
                 fontWeight="bold"
                 fill="#1E3A8A"
                 data-oid="fdvpttu"
             >
-                Careers
+                X Careers
             </text>
         </svg>
     );

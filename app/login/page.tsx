@@ -1,10 +1,10 @@
 'use client';
 
-import { useState, useEffect, Suspense } from 'react';
+import MainNavbar from '@/components/mainNavbar';
 import { useAuth } from '@/lib/auth/AuthContext';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
-import MainNavbar from '@/components/mainNavbar';
+import { Suspense, useEffect, useState } from 'react';
 
 function LoginForm() {
     const [email, setEmail] = useState('');
@@ -205,7 +205,7 @@ function LoginForm() {
                                     data-oid="5:n_tun"
                                 >
                                     <p data-oid="8n9m:9-">
-                                        <strong data-oid="q.:cecq">Email:</strong> demo@careerx.com
+                                        <strong data-oid="q.:cecq">Email:</strong> demo@xcareers.com
                                     </p>
                                     <p data-oid="havau7-">
                                         <strong data-oid="0.8qdle">Password:</strong> Any password
