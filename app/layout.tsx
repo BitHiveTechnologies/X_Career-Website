@@ -3,26 +3,26 @@ import './globals.css';
 import Providers from './providers';
 
 export const metadata: Metadata = {
-    title: 'CareerX - Tech Jobs for Freshers | Entry Level Opportunities',
+    title: 'X Careers - Tech Jobs for Freshers | Entry Level Opportunities',
     description:
-        'Find your dream tech job with CareerX. Discover entry-level opportunities, internships, and resources tailored for freshers. Join 35,000+ tech professionals.',
+        'Find your dream tech job with X Careers. Discover entry-level opportunities, internships, and resources tailored for freshers. Join 35,000+ tech professionals.',
     keywords:
         'tech jobs, freshers, entry level, internships, career, software developer, programming jobs',
-    authors: [{ name: 'CareerX Team' }],
-    creator: 'CareerX',
-    publisher: 'CareerX',
+            authors: [{ name: 'X Careers Team' }],
+            creator: 'X Careers',
+            publisher: 'X Careers',
     robots: 'index, follow',
     openGraph: {
-        title: 'CareerX - Tech Jobs for Freshers',
-        description: 'Find your dream tech job with CareerX. Join 35,000+ tech professionals.',
+        title: 'X Careers - Tech Jobs for Freshers',
+        description: 'Find your dream tech job with X Careers. Join 35,000+ tech professionals.',
         type: 'website',
         locale: 'en_US',
-        siteName: 'CareerX',
+        siteName: 'X Careers',
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'CareerX - Tech Jobs for Freshers',
-        description: 'Find your dream tech job with CareerX. Join 35,000+ tech professionals.',
+        title: 'X Careers - Tech Jobs for Freshers',
+        description: 'Find your dream tech job with X Careers. Join 35,000+ tech professionals.',
     },
 };
 

@@ -1,174 +1,261 @@
 'use client';
 
-import { useState } from 'react';
-import Link from 'next/link';
+import MainNavbar from '@/components/mainNavbar';
 import {
-    MessageCircle,
-    Users,
-    ArrowRight,
-    Star,
-    TrendingUp,
-    Zap,
-    Shield,
+    Award,
+    BookOpen,
+    Calendar,
+    Code,
+    Coffee,
     Globe,
+    Heart,
+    MessageCircle,
+    Rocket,
+    TrendingUp,
+    Users,
+    Zap,
 } from 'lucide-react';
+import Link from 'next/link';
+import { useState } from 'react';
+import { useAuth } from '@/lib/auth/AuthContext';
 
-const communityStats = [
-    { label: 'Active Members', value: '25,000+', icon: Users },
-    { label: 'Daily Messages', value: '1,500+', icon: MessageCircle },
-    { label: 'Success Stories', value: '500+', icon: Star },
-    { label: 'Job Referrals', value: '200+', icon: TrendingUp },
-];
+const Logo = () => (
+    <div className="flex items-center space-x-2">
+        <div className="w-8 h-8 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] rounded-lg flex items-center justify-center">
+            <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H8a2 2 0 01-2-2V8a2 2 0 012-2V6" />
+            </svg>
+        </div>
+        <span className="text-xl font-bold text-white">X Careers</span>
+    </div>
+);
 
-const communityFeatures = [
-    {
-        icon: '💼',
-        title: 'Job Opportunities',
-        description: 'Exclusive job postings and referrals from community members',
-    },
+const communityHighlights = [
     {
         icon: '🎯',
-        title: 'Interview Prep',
-        description: 'Mock interviews, coding challenges, and peer practice sessions',
+        title: 'Weekly Challenges',
+        description: 'Coding challenges and hackathons to sharpen your skills',
+        participants: '5,000+',
+        color: 'from-purple-500 to-pink-500',
     },
     {
-        icon: '📚',
-        title: 'Learning Resources',
-        description: 'Curated study materials, courses, and learning paths',
+        icon: '💼',
+        title: 'Job Board',
+        description: 'Exclusive job postings from our partner companies',
+        participants: '200+ jobs',
+        color: 'from-blue-500 to-cyan-500',
     },
     {
-        icon: '🤝',
-        title: 'Networking',
-        description: 'Connect with industry professionals and fellow job seekers',
-    },
-    {
-        icon: '💡',
-        title: 'Career Guidance',
-        description: 'Get advice from experienced developers and career coaches',
+        icon: '🎓',
+        title: 'Mentorship Program',
+        description: 'Get guidance from industry experts and senior developers',
+        participants: '1,000+ mentors',
+        color: 'from-green-500 to-emerald-500',
     },
     {
         icon: '🚀',
-        title: 'Project Collaboration',
-        description: 'Find teammates for projects and build your portfolio together',
+        title: 'Project Showcase',
+        description: 'Share your projects and get feedback from the community',
+        participants: '3,000+ projects',
+        color: 'from-orange-500 to-red-500',
     },
 ];
 
-const testimonials = [
+const upcomingEvents = [
     {
-        name: 'Priya Sharma',
-        role: 'Software Engineer at Google',
-        image: '👩‍💻',
-        text: 'Found my dream job through a referral in the WhatsApp group. The community support was incredible!',
+        title: 'React.js Workshop',
+        date: 'Dec 15, 2024',
+        time: '7:00 PM IST',
+        attendees: 500,
+        type: 'Workshop',
+        speaker: 'Priya Sharma, Meta',
     },
     {
-        name: 'Rahul Kumar',
-        role: 'Full Stack Developer at Flipkart',
+        title: 'System Design Masterclass',
+        date: 'Dec 18, 2024',
+        time: '8:00 PM IST',
+        attendees: 800,
+        type: 'Masterclass',
+        speaker: 'Rahul Kumar, Google',
+    },
+    {
+        title: 'Career Guidance Session',
+        date: 'Dec 20, 2024',
+        time: '6:30 PM IST',
+        attendees: 300,
+        type: 'Session',
+        speaker: 'Anita Patel, Microsoft',
+    },
+];
+
+const communityStats = [
+    { label: 'Total Members', value: '50,000+', icon: Users, color: 'text-blue-600' },
+    { label: 'Daily Active Users', value: '15,000+', icon: TrendingUp, color: 'text-green-600' },
+    { label: 'Success Stories', value: '2,500+', icon: Award, color: 'text-purple-600' },
+    { label: 'Events Hosted', value: '500+', icon: Calendar, color: 'text-orange-600' },
+];
+
+const featuredMembers = [
+    {
+        name: 'Arjun Mehta',
+        role: 'Senior SDE at Amazon',
         image: '👨‍💻',
-        text: 'The interview prep sessions on Telegram helped me crack 5 interviews in a row!',
+        contribution: 'Helped 200+ members with interview prep',
+        badge: 'Top Contributor',
     },
     {
-        name: 'Anita Patel',
-        role: 'Frontend Developer at Zomato',
-        image: '👩‍🎨',
-        text: 'Amazing community! Got my resume reviewed and landed 3 job offers within a month.',
+        name: 'Sneha Gupta',
+        role: 'Product Manager at Flipkart',
+        image: '👩‍💼',
+        contribution: 'Mentored 50+ career transitions',
+        badge: 'Mentor of the Month',
+    },
+    {
+        name: 'Vikram Singh',
+        role: 'Full Stack Developer at Zomato',
+        image: '👨‍🔬',
+        contribution: 'Created 30+ learning resources',
+        badge: 'Resource Creator',
     },
 ];
 
-export default function ResourcesCommunityPage() {
-    const [selectedPlatform, setSelectedPlatform] = useState<'whatsapp' | 'telegram' | null>(null);
+const communityChannels = [
+    {
+        name: 'General Discussion',
+        members: '25K',
+        icon: MessageCircle,
+        description: 'Open discussions about tech and careers',
+    },
+    {
+        name: 'Job Opportunities',
+        members: '20K',
+        icon: Rocket,
+        description: 'Latest job postings and referrals',
+    },
+    {
+        name: 'Interview Prep',
+        members: '18K',
+        icon: BookOpen,
+        description: 'Interview experiences and preparation tips',
+    },
+    {
+        name: 'Code Review',
+        members: '15K',
+        icon: Code,
+        description: 'Get your code reviewed by experts',
+    },
+    {
+        name: 'Casual Chat',
+        members: '12K',
+        icon: Coffee,
+        description: 'Non-tech discussions and networking',
+    },
+];
 
-    const handleJoinCommunity = (platform: 'whatsapp' | 'telegram') => {
-        // These will be replaced with actual links later
-        const links = {
-            whatsapp: 'https://chat.whatsapp.com/your-group-link',
-            telegram: 'https://t.me/your-channel-link',
-        };
-
-        // For now, just show an alert
-        alert(
-            `Redirecting to ${platform.charAt(0).toUpperCase() + platform.slice(1)} community...`,
-        );
-        // window.open(links[platform], '_blank');
-    };
+export default function CommunityPage() {
+    const [activeTab, setActiveTab] = useState('overview');
+    const { isAuthenticated } = useAuth();
 
     return (
-        <div
-            className="min-h-screen bg-gradient-to-b from-[hsl(210,50%,98%)] to-[hsl(196,60%,95%)]"
-            data-oid="1lfxw4a"
-        >
+        <div className="min-h-screen bg-gradient-to-b from-[hsl(210,50%,98%)] to-[hsl(196,60%,95%)]">
+            <MainNavbar />
             {/* Animated background elements */}
-            <div className="fixed inset-0 overflow-hidden -z-10" data-oid="y-:u10d">
+            <div className="fixed inset-0 overflow-hidden -z-10" data-oid="1080y6o">
                 <div
                     className="absolute -top-20 -left-20 w-96 h-96 bg-[hsl(196,80%,65%)] opacity-20 rounded-full blur-3xl animate-blob"
-                    data-oid="62y-0f3"
+                    data-oid="pxjiuck"
                 ></div>
                 <div
                     className="absolute top-40 right-20 w-96 h-96 bg-[hsl(210,70%,65%)] opacity-20 rounded-full blur-3xl animate-blob animation-delay-2000"
-                    data-oid="7kjtyum"
+                    data-oid="i9f3g-1"
                 ></div>
                 <div
                     className="absolute bottom-10 left-1/3 w-96 h-96 bg-[hsl(175,70%,61%)] opacity-20 rounded-full blur-3xl animate-blob animation-delay-4000"
-                    data-oid="pjjjcsl"
+                    data-oid="2a0cfy8"
                 ></div>
             </div>
 
-            <div className="relative z-10" data-oid="h4r8.a_">
+            <div className="relative z-10" data-oid="an5821d">
                 {/* Hero Section */}
-                <section className="pt-24 pb-16 px-4" data-oid="_e:3th5">
-                    <div className="max-w-6xl mx-auto text-center" data-oid="giyjc2h">
+                <section className="pt-24 pb-16 px-4" data-oid="hc.3x_5">
+                    <div className="max-w-6xl mx-auto text-center" data-oid="b_o:9km">
                         <div
                             className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium text-[hsl(196,80%,45%)] border border-[hsl(210,30%,95%)] mb-6"
-                            data-oid="4dh-kh6"
+                            data-oid="kiil27v"
                         >
-                            <Users className="h-4 w-4" data-oid="br6od__" />
-                            Join 25,000+ Tech Professionals
+                            <Heart className="h-4 w-4" data-oid="ya:2d_0" />
+                            Built by developers, for developers
                         </div>
 
                         <h1
                             className="text-4xl md:text-6xl font-bold text-gray-800 mb-6"
-                            data-oid="c34dmqy"
+                            data-oid="_wexe_o"
                         >
-                            Connect. Learn.
+                            Welcome to Our
                             <span
                                 className="bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] bg-clip-text text-transparent"
-                                data-oid="d3qgnfy"
+                                data-oid="cz4uw8l"
                             >
                                 {' '}
-                                Grow Together.
+                                Tech Community
                             </span>
                         </h1>
 
                         <p
                             className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto"
-                            data-oid="akrunuo"
+                            data-oid="1r7v38_"
                         >
-                            Join our vibrant community of developers, get instant help, share
-                            opportunities, and accelerate your career growth.
+                            Join thousands of developers, share knowledge, find opportunities, and
+                            grow your career in the most supportive tech community in India.
                         </p>
+
+                        <div
+                            className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
+                            data-oid="0-2urdu"
+                        >
+                            <a
+                                href="https://whatsapp.com/channel/0029Vak7B1WLo4hdCrawMw3i"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="px-8 py-4 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white rounded-xl font-medium hover:shadow-lg transition-all transform hover:scale-105"
+                                data-oid="8:-v2qb"
+                            >
+                                <Users className="inline h-5 w-5 mr-2" data-oid=".rk-8xg" />
+                                Join Community
+                            </a>
+                            <Link
+                                href="/resources"
+                                className="px-8 py-4 border border-[hsl(196,80%,45%)] text-[hsl(196,80%,45%)] rounded-xl font-medium hover:bg-[hsl(196,80%,45%)]/10 transition-all"
+                                data-oid="0new.gs"
+                            >
+                                <BookOpen className="inline h-5 w-5 mr-2" data-oid="8ro9dsh" />
+                                Browse Resources
+                            </Link>
+                        </div>
 
                         {/* Community Stats */}
                         <div
-                            className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto mb-12"
-                            data-oid="kizu5gc"
+                            className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto"
+                            data-oid="2z-5.ra"
                         >
                             {communityStats.map((stat, index) => (
                                 <div
                                     key={index}
                                     className="bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-[hsl(210,30%,95%)]"
-                                    data-oid="hx.bf_l"
+                                    data-oid="_xwk6dv"
                                 >
                                     <stat.icon
-                                        className="h-8 w-8 text-[hsl(196,80%,45%)] mx-auto mb-2"
-                                        data-oid="8706mjd"
+                                        className={`h-8 w-8 ${stat.color} mx-auto mb-2`}
+                                        data-oid="ldyefs4"
                                     />
 
                                     <div
                                         className="text-2xl font-bold text-gray-800"
-                                        data-oid="fu::bkq"
+                                        data-oid="pcc8uj7"
                                     >
                                         {stat.value}
                                     </div>
-                                    <div className="text-sm text-gray-600" data-oid="j7717ez">
+                                    <div className="text-sm text-gray-600" data-oid="xo-.ca-">
                                         {stat.label}
                                     </div>
                                 </div>
@@ -177,275 +264,195 @@ export default function ResourcesCommunityPage() {
                     </div>
                 </section>
 
-                {/* Platform Selection */}
-                <section className="py-16 px-4" data-oid="od_uk6s">
-                    <div className="max-w-4xl mx-auto" data-oid="r97ir_b">
-                        <div className="text-center mb-12" data-oid="qr.o1ly">
+                {/* Community Highlights */}
+                <section className="py-16 px-4" data-oid="m2.b9ob">
+                    <div className="max-w-6xl mx-auto" data-oid="xxp3:3.">
+                        <div className="text-center mb-12" data-oid="_u.2aec">
                             <h2
                                 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4"
-                                data-oid="eqtl.zu"
+                                data-oid="64qeehx"
                             >
-                                Choose Your Platform
+                                Community Highlights
                             </h2>
-                            <p className="text-xl text-gray-600" data-oid="c-3whhy">
-                                Join our community on your preferred messaging platform
-                            </p>
-                        </div>
-
-                        <div className="grid md:grid-cols-2 gap-8" data-oid="15-7bn9">
-                            {/* WhatsApp Community */}
-                            <div
-                                className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-[hsl(210,30%,95%)] hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
-                                data-oid="c2_yud."
-                            >
-                                <div className="text-center mb-6" data-oid="0mt-uns">
-                                    <div
-                                        className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4"
-                                        data-oid=".qo:iu8"
-                                    >
-                                        <MessageCircle
-                                            className="h-10 w-10 text-green-600"
-                                            data-oid="3ygi4f5"
-                                        />
-                                    </div>
-                                    <h3
-                                        className="text-2xl font-bold text-gray-800 mb-2"
-                                        data-oid="f2vi19o"
-                                    >
-                                        WhatsApp Community
-                                    </h3>
-                                    <p className="text-gray-600" data-oid="_p7f5oh">
-                                        Real-time discussions and instant networking
-                                    </p>
-                                </div>
-
-                                <div className="space-y-4 mb-8" data-oid="l7l67b5">
-                                    <div className="flex items-center gap-3" data-oid="-9atfb:">
-                                        <div
-                                            className="w-2 h-2 bg-green-500 rounded-full"
-                                            data-oid="vr23ej6"
-                                        ></div>
-                                        <span className="text-gray-700" data-oid="4sty9k-">
-                                            15,000+ Active Members
-                                        </span>
-                                    </div>
-                                    <div className="flex items-center gap-3" data-oid="o6dwrij">
-                                        <div
-                                            className="w-2 h-2 bg-green-500 rounded-full"
-                                            data-oid="nvih00k"
-                                        ></div>
-                                        <span className="text-gray-700" data-oid="f28.7mg">
-                                            Daily Job Postings
-                                        </span>
-                                    </div>
-                                    <div className="flex items-center gap-3" data-oid="iy-o8u1">
-                                        <div
-                                            className="w-2 h-2 bg-green-500 rounded-full"
-                                            data-oid="ra:q_gk"
-                                        ></div>
-                                        <span className="text-gray-700" data-oid="la6ka4p">
-                                            Quick Doubt Resolution
-                                        </span>
-                                    </div>
-                                    <div className="flex items-center gap-3" data-oid="pqaouvt">
-                                        <div
-                                            className="w-2 h-2 bg-green-500 rounded-full"
-                                            data-oid="4xyy2cp"
-                                        ></div>
-                                        <span className="text-gray-700" data-oid="uj1rvw_">
-                                            Referral Opportunities
-                                        </span>
-                                    </div>
-                                </div>
-
-                                <button
-                                    onClick={() => handleJoinCommunity('whatsapp')}
-                                    className="w-full px-6 py-4 bg-green-500 text-white rounded-xl font-medium hover:bg-green-600 transition-all transform hover:scale-105 flex items-center justify-center gap-2"
-                                    data-oid="0uxs1qr"
-                                >
-                                    <MessageCircle className="h-5 w-5" data-oid="9bj:bk9" />
-                                    Join WhatsApp Group
-                                    <ArrowRight className="h-5 w-5" data-oid="tk.x2bb" />
-                                </button>
-                            </div>
-
-                            {/* Telegram Community */}
-                            <div
-                                className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-[hsl(210,30%,95%)] hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
-                                data-oid="wtn49:1"
-                            >
-                                <div className="text-center mb-6" data-oid="q_.6o-q">
-                                    <div
-                                        className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4"
-                                        data-oid="-2rm6eb"
-                                    >
-                                        <Zap
-                                            className="h-10 w-10 text-blue-600"
-                                            data-oid="2xpdhx7"
-                                        />
-                                    </div>
-                                    <h3
-                                        className="text-2xl font-bold text-gray-800 mb-2"
-                                        data-oid="q3pywyy"
-                                    >
-                                        Telegram Channel
-                                    </h3>
-                                    <p className="text-gray-600" data-oid="jz.095c">
-                                        Organized discussions and resource sharing
-                                    </p>
-                                </div>
-
-                                <div className="space-y-4 mb-8" data-oid="g09u79q">
-                                    <div className="flex items-center gap-3" data-oid="w1za:t6">
-                                        <div
-                                            className="w-2 h-2 bg-blue-500 rounded-full"
-                                            data-oid="ky0d8vn"
-                                        ></div>
-                                        <span className="text-gray-700" data-oid="pu0d7yu">
-                                            10,000+ Subscribers
-                                        </span>
-                                    </div>
-                                    <div className="flex items-center gap-3" data-oid="zvvevgv">
-                                        <div
-                                            className="w-2 h-2 bg-blue-500 rounded-full"
-                                            data-oid="7mbh5_v"
-                                        ></div>
-                                        <span className="text-gray-700" data-oid="dan_3.6">
-                                            Structured Learning Content
-                                        </span>
-                                    </div>
-                                    <div className="flex items-center gap-3" data-oid="rhi.fh2">
-                                        <div
-                                            className="w-2 h-2 bg-blue-500 rounded-full"
-                                            data-oid="3q73aea"
-                                        ></div>
-                                        <span className="text-gray-700" data-oid="250s22w">
-                                            Weekly Tech Updates
-                                        </span>
-                                    </div>
-                                    <div className="flex items-center gap-3" data-oid="bdm8ki4">
-                                        <div
-                                            className="w-2 h-2 bg-blue-500 rounded-full"
-                                            data-oid="075we6_"
-                                        ></div>
-                                        <span className="text-gray-700" data-oid="yilb9o.">
-                                            Interview Experiences
-                                        </span>
-                                    </div>
-                                </div>
-
-                                <button
-                                    onClick={() => handleJoinCommunity('telegram')}
-                                    className="w-full px-6 py-4 bg-blue-500 text-white rounded-xl font-medium hover:bg-blue-600 transition-all transform hover:scale-105 flex items-center justify-center gap-2"
-                                    data-oid="rgjmk48"
-                                >
-                                    <Zap className="h-5 w-5" data-oid="aznlms0" />
-                                    Join Telegram Channel
-                                    <ArrowRight className="h-5 w-5" data-oid="1iujejm" />
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                {/* Community Features */}
-                <section className="py-16 px-4" data-oid="uifuu4d">
-                    <div className="max-w-6xl mx-auto" data-oid="-39s-i6">
-                        <div className="text-center mb-12" data-oid="34sle.a">
-                            <h2
-                                className="text-3xl md:text-4xl font-bold text-gray-800 mb-4"
-                                data-oid="ney-_w1"
-                            >
-                                What You'll Get
-                            </h2>
-                            <p className="text-xl text-gray-600" data-oid="dl.zcxl">
-                                Exclusive benefits for community members
+                            <p className="text-xl text-gray-600" data-oid="5xxv_64">
+                                Discover what makes our community special
                             </p>
                         </div>
 
                         <div
-                            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
-                            data-oid="zpw59n."
+                            className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
+                            data-oid="3mh:byu"
                         >
-                            {communityFeatures.map((feature, index) => (
+                            {communityHighlights.map((highlight, index) => (
+                                <div
+                                    key={index}
+                                    className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-[hsl(210,30%,95%)] hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
+                                    data-oid="6u41cr_"
+                                >
+                                    <div
+                                        className={`w-16 h-16 bg-gradient-to-r ${highlight.color} rounded-xl flex items-center justify-center text-2xl mb-4 mx-auto`}
+                                        data-oid="99.mlz8"
+                                    >
+                                        {highlight.icon}
+                                    </div>
+                                    <h3
+                                        className="text-xl font-bold text-gray-800 mb-2 text-center"
+                                        data-oid="nxwc52k"
+                                    >
+                                        {highlight.title}
+                                    </h3>
+                                    <p
+                                        className="text-gray-600 text-center mb-4"
+                                        data-oid="z_xdla."
+                                    >
+                                        {highlight.description}
+                                    </p>
+                                    <div className="text-center" data-oid="aq9webv">
+                                        <span
+                                            className="inline-flex items-center gap-1 bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm font-medium"
+                                            data-oid="m::8wu6"
+                                        >
+                                            <Users className="h-3 w-3" data-oid="jtlvs_g" />
+                                            {highlight.participants}
+                                        </span>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+
+                {/* Upcoming Events */}
+                <section className="py-16 px-4" data-oid="_ma.b1k">
+                    <div className="max-w-6xl mx-auto" data-oid=".n3pkbt">
+                        <div className="text-center mb-12" data-oid="y8v072c">
+                            <h2
+                                className="text-3xl md:text-4xl font-bold text-gray-800 mb-4"
+                                data-oid="c6xr2q0"
+                            >
+                                Upcoming Events
+                            </h2>
+                            <p className="text-xl text-gray-600" data-oid="psbm2zn">
+                                Don't miss these amazing learning opportunities
+                            </p>
+                        </div>
+
+                        <div className="grid md:grid-cols-3 gap-8" data-oid="qohskt0">
+                            {upcomingEvents.map((event, index) => (
                                 <div
                                     key={index}
                                     className="bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-[hsl(210,30%,95%)] hover:shadow-lg transition-all"
-                                    data-oid="p42l2aq"
+                                    data-oid="5_-p7ot"
                                 >
-                                    <div className="text-4xl mb-4" data-oid="uj69rjh">
-                                        {feature.icon}
+                                    <div
+                                        className="flex items-center justify-between mb-4"
+                                        data-oid="0e9sp5n"
+                                    >
+                                        <span
+                                            className="px-3 py-1 bg-[hsl(196,80%,45%)]/10 text-[hsl(196,80%,45%)] rounded-full text-sm font-medium"
+                                            data-oid="vt7u0pd"
+                                        >
+                                            {event.type}
+                                        </span>
+                                        <div
+                                            className="flex items-center gap-1 text-sm text-gray-600"
+                                            data-oid="b6hwijs"
+                                        >
+                                            <Users className="h-4 w-4" data-oid="7x-104k" />
+                                            {event.attendees}
+                                        </div>
                                     </div>
+
                                     <h3
                                         className="text-xl font-bold text-gray-800 mb-2"
-                                        data-oid="ohvs974"
+                                        data-oid="gooyrmg"
                                     >
-                                        {feature.title}
+                                        {event.title}
                                     </h3>
-                                    <p className="text-gray-600" data-oid="7z9ap-s">
-                                        {feature.description}
+                                    <p className="text-gray-600 mb-4" data-oid="2vp0l9:">
+                                        by {event.speaker}
                                     </p>
+
+                                    <div
+                                        className="flex items-center gap-4 text-sm text-gray-600 mb-4"
+                                        data-oid="7_8ux9z"
+                                    >
+                                        <div className="flex items-center gap-1" data-oid="k:r_6xr">
+                                            <Calendar className="h-4 w-4" data-oid="upb8usx" />
+                                            {event.date}
+                                        </div>
+                                        <div className="flex items-center gap-1" data-oid="phzsmhi">
+                                            <Globe className="h-4 w-4" data-oid="vs.7nch" />
+                                            {event.time}
+                                        </div>
+                                    </div>
+
+                                    <button
+                                        className="w-full px-4 py-3 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white rounded-xl font-medium hover:shadow-lg transition-all transform hover:scale-105"
+                                        data-oid="c:848x."
+                                    >
+                                        Register Now
+                                    </button>
                                 </div>
                             ))}
                         </div>
                     </div>
                 </section>
 
-                {/* Success Stories */}
-                <section className="py-16 px-4" data-oid="7tp94hh">
-                    <div className="max-w-6xl mx-auto" data-oid="8qcv:1x">
-                        <div className="text-center mb-12" data-oid="ivjv4ft">
+                {/* Community Channels */}
+                <section className="py-16 px-4" data-oid="wtu-2y0">
+                    <div className="max-w-6xl mx-auto" data-oid="l5cql1k">
+                        <div className="text-center mb-12" data-oid="a7kukfc">
                             <h2
                                 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4"
-                                data-oid="6_.pjt0"
+                                data-oid="cs:eojg"
                             >
-                                Success Stories
+                                Community Channels
                             </h2>
-                            <p className="text-xl text-gray-600" data-oid="-j5r2b7">
-                                Real stories from our community members
+                            <p className="text-xl text-gray-600" data-oid="2y-4-5:">
+                                Find the right channel for your interests
                             </p>
                         </div>
 
-                        <div className="grid md:grid-cols-3 gap-8" data-oid="ary4279">
-                            {testimonials.map((testimonial, index) => (
+                        <div
+                            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+                            data-oid="pu4bqu4"
+                        >
+                            {communityChannels.map((channel, index) => (
                                 <div
                                     key={index}
-                                    className="bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-[hsl(210,30%,95%)]"
-                                    data-oid="j:w.ap5"
+                                    className="bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-[hsl(210,30%,95%)] hover:shadow-lg transition-all"
+                                    data-oid="03va.qx"
                                 >
                                     <div
-                                        className="flex items-center gap-4 mb-4"
-                                        data-oid="q8m:inv"
+                                        className="flex items-center gap-3 mb-3"
+                                        data-oid="8f240sn"
                                     >
-                                        <div className="text-3xl" data-oid="snvtjsk">
-                                            {testimonial.image}
-                                        </div>
-                                        <div data-oid="yu-vp2m">
-                                            <h4
-                                                className="font-bold text-gray-800"
-                                                data-oid="sl3bikk"
-                                            >
-                                                {testimonial.name}
-                                            </h4>
-                                            <p className="text-sm text-gray-600" data-oid="lm9kx04">
-                                                {testimonial.role}
-                                            </p>
-                                        </div>
+                                        <channel.icon
+                                            className="h-6 w-6 text-[hsl(196,80%,45%)]"
+                                            data-oid="_k6h21f"
+                                        />
+
+                                        <h3 className="font-bold text-gray-800" data-oid="6sxxg9d">
+                                            {channel.name}
+                                        </h3>
                                     </div>
-                                    <p className="text-gray-700 italic" data-oid="r3uln_t">
-                                        "{testimonial.text}"
+                                    <p className="text-gray-600 text-sm mb-3" data-oid="s8j3qi4">
+                                        {channel.description}
                                     </p>
                                     <div
-                                        className="flex items-center gap-1 mt-4"
-                                        data-oid="v40es90"
+                                        className="flex items-center justify-between"
+                                        data-oid="3rw5:bv"
                                     >
-                                        {[...Array(5)].map((_, i) => (
-                                            <Star
-                                                key={i}
-                                                className="h-4 w-4 text-yellow-500 fill-current"
-                                                data-oid="-6cm6qy"
-                                            />
-                                        ))}
+                                        <span className="text-sm text-gray-500" data-oid="8jikjfh">
+                                            {channel.members} members
+                                        </span>
+                                        <button
+                                            className="text-[hsl(196,80%,45%)] hover:text-[hsl(196,80%,35%)] text-sm font-medium"
+                                            data-oid="dv78num"
+                                        >
+                                            Join →
+                                        </button>
                                     </div>
                                 </div>
                             ))}
@@ -453,111 +460,237 @@ export default function ResourcesCommunityPage() {
                     </div>
                 </section>
 
-                {/* Community Guidelines */}
-                <section className="py-16 px-4" data-oid="ot2lfwb">
-                    <div className="max-w-4xl mx-auto" data-oid="ni8w1s6">
-                        <div
-                            className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-[hsl(210,30%,95%)]"
-                            data-oid="e2e9m_q"
-                        >
-                            <div className="text-center mb-8" data-oid="co43m91">
-                                <Shield
-                                    className="h-12 w-12 text-[hsl(196,80%,45%)] mx-auto mb-4"
-                                    data-oid="6jep--z"
-                                />
+                {/* Featured Members */}
+                <section className="py-16 px-4" data-oid="ytv9d2l">
+                    <div className="max-w-6xl mx-auto" data-oid="mqx2t.0">
+                        <div className="text-center mb-12" data-oid="g6q0kf6">
+                            <h2
+                                className="text-3xl md:text-4xl font-bold text-gray-800 mb-4"
+                                data-oid="m-7jva7"
+                            >
+                                Featured Community Members
+                            </h2>
+                            <p className="text-xl text-gray-600" data-oid="lhz3tiy">
+                                Meet the amazing people who make our community thrive
+                            </p>
+                        </div>
 
-                                <h2
-                                    className="text-2xl font-bold text-gray-800 mb-4"
-                                    data-oid="ozf2j_o"
+                        <div className="grid md:grid-cols-3 gap-8" data-oid="gzgsyyu">
+                            {featuredMembers.map((member, index) => (
+                                <div
+                                    key={index}
+                                    className="bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-[hsl(210,30%,95%)] text-center"
+                                    data-oid="yheu1dr"
                                 >
-                                    Community Guidelines
-                                </h2>
-                                <p className="text-gray-600" data-oid="bqclaqd">
-                                    Help us maintain a positive and productive environment
-                                </p>
-                            </div>
-
-                            <div className="grid md:grid-cols-2 gap-6" data-oid="pr5hj4v">
-                                <div className="space-y-4" data-oid="361suux">
-                                    <h3 className="font-semibold text-gray-800" data-oid="gky:vim">
-                                        ✅ Do's
+                                    <div className="text-4xl mb-4" data-oid="ph90hw1">
+                                        {member.image}
+                                    </div>
+                                    <h3
+                                        className="text-xl font-bold text-gray-800 mb-1"
+                                        data-oid="8yxxopz"
+                                    >
+                                        {member.name}
                                     </h3>
-                                    <ul className="space-y-2 text-gray-600" data-oid="rhlw14-">
-                                        <li data-oid="phi-tdg">
-                                            • Share relevant job opportunities
-                                        </li>
-                                        <li data-oid="raszam-">
-                                            • Help fellow members with doubts
-                                        </li>
-                                        <li data-oid="ymg:4.c">• Share your success stories</li>
-                                        <li data-oid="1gh:pp.">• Be respectful and professional</li>
-                                        <li data-oid="3kxjadl">
-                                            • Use appropriate channels for discussions
-                                        </li>
-                                    </ul>
+                                    <p
+                                        className="text-[hsl(196,80%,45%)] font-medium mb-3"
+                                        data-oid="vf0t_2w"
+                                    >
+                                        {member.role}
+                                    </p>
+                                    <p className="text-gray-600 text-sm mb-4" data-oid="qk1eabo">
+                                        {member.contribution}
+                                    </p>
+                                    <span
+                                        className="inline-block px-3 py-1 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white rounded-full text-xs font-medium"
+                                        data-oid="6514hww"
+                                    >
+                                        {member.badge}
+                                    </span>
                                 </div>
-                                <div className="space-y-4" data-oid="wa.xlmv">
-                                    <h3 className="font-semibold text-gray-800" data-oid="oay43jz">
-                                        ❌ Don'ts
-                                    </h3>
-                                    <ul className="space-y-2 text-gray-600" data-oid="m-.o3-s">
-                                        <li data-oid="0xyx:2g">• No spam or promotional content</li>
-                                        <li data-oid="v70-gy0">
-                                            • No offensive or inappropriate language
-                                        </li>
-                                        <li data-oid=":rbqcp1">
-                                            • No sharing of personal information
-                                        </li>
-                                        <li data-oid=":ws9c_t">• No off-topic discussions</li>
-                                        <li data-oid="cxborn9">• No duplicate job postings</li>
-                                    </ul>
-                                </div>
-                            </div>
+                            ))}
                         </div>
                     </div>
                 </section>
 
                 {/* CTA Section */}
-                <section className="py-16 px-4" data-oid="gf9pm93">
-                    <div className="max-w-4xl mx-auto text-center" data-oid="xbyj7ln">
+                <section className="py-16 px-4" data-oid="7:l-z7u">
+                    <div className="max-w-4xl mx-auto text-center" data-oid="wk9qv.0">
                         <div
                             className="bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] rounded-2xl p-8 text-white"
-                            data-oid="tnjm-lh"
+                            data-oid="bal8e8b"
                         >
-                            <h2 className="text-3xl font-bold mb-4" data-oid="t:hgmim">
-                                Ready to Join?
+                            <h2 className="text-3xl font-bold mb-4" data-oid="__hgheo">
+                                Ready to Join Our Community?
                             </h2>
-                            <p className="text-xl mb-6 text-blue-100" data-oid="87:4lxe">
-                                Don't miss out on exclusive opportunities and valuable connections
+                            <p className="text-xl mb-6 text-blue-100" data-oid=".4puspq">
+                                Connect with like-minded developers and accelerate your career
+                                growth
                             </p>
                             <div
                                 className="flex flex-col sm:flex-row gap-4 justify-center"
-                                data-oid="mxmy-xi"
+                                data-oid="i8xj4jh"
                             >
-                                <button
-                                    onClick={() => handleJoinCommunity('whatsapp')}
-                                    className="px-6 py-3 bg-green-500 text-white rounded-xl font-medium hover:bg-green-600 transition-all transform hover:scale-105"
-                                    data-oid="gbl2x1q"
+                                {!isAuthenticated && (
+                                    <Link
+                                        href="/resources/community"
+                                        className="px-6 py-3 bg-white text-[hsl(196,80%,45%)] rounded-xl font-medium hover:shadow-lg transition-all transform hover:scale-105"
+                                        data-oid="81rugv_"
+                                    >
+                                        <Users className="inline h-5 w-5 mr-2" data-oid="tnyq.wr" />
+                                        Join Now
+                                    </Link>
+                                )}
+                                <Link
+                                    href="/notify"
+                                    className="px-6 py-3 border border-white text-white rounded-xl font-medium hover:bg-white hover:text-[hsl(196,80%,45%)] transition-all"
+                                    data-oid="mastq8."
                                 >
-                                    <MessageCircle
-                                        className="inline h-5 w-5 mr-2"
-                                        data-oid="eke-9os"
-                                    />
-                                    Join WhatsApp
-                                </button>
-                                <button
-                                    onClick={() => handleJoinCommunity('telegram')}
-                                    className="px-6 py-3 bg-blue-500 text-white rounded-xl font-medium hover:bg-blue-600 transition-all transform hover:scale-105"
-                                    data-oid="24gd:mt"
-                                >
-                                    <Zap className="inline h-5 w-5 mr-2" data-oid="9joyzna" />
-                                    Join Telegram
-                                </button>
+                                    <Zap className="inline h-5 w-5 mr-2" data-oid="-d9sks8" />
+                                    Get Updates
+                                </Link>
                             </div>
                         </div>
                     </div>
                 </section>
             </div>
+
+            {/* Footer */}
+            <footer className="bg-gray-950 text-white">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                    <div className="grid md:grid-cols-4 gap-8">
+                        <div>
+                            <div className="mb-6">
+                                <Logo />
+                            </div>
+                            <p className="text-gray-400 mb-4">
+                                Helping tech freshers launch their careers with curated
+                                opportunities and resources.
+                            </p>
+                            <div className="flex space-x-4">
+                                <a
+                                    href="https://www.linkedin.com/company/x-careers/"
+                                    className="text-gray-400 hover:text-white transition-all duration-300"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                                    </svg>
+                                </a>
+                                <a
+                                    href="https://www.instagram.com/x_careers_official?igsh=Z3M3cTJyNndtdDdq"
+                                    className="text-gray-400 hover:text-white transition-all duration-300"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+                                    </svg>
+                                </a>
+                                <a
+                                    href="https://whatsapp.com/channel/0029Vak7B1WLo4hdCrawMw3i"
+                                    className="text-gray-400 hover:text-white transition-all duration-300"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488" />
+                                    </svg>
+                                </a>
+                                <a
+                                    href="https://t.me/xcareerconnect"
+                                    className="text-gray-400 hover:text-white transition-all duration-300"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 className="text-lg font-bold mb-4">Company</h3>
+                            <ul className="space-y-3">
+                                <li>
+                                    <a href="/about" className="text-gray-400 hover:text-white transition-all duration-300">
+                                        About Us
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/careers" className="text-gray-400 hover:text-white transition-all duration-300">
+                                        Careers
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/blog" className="text-gray-400 hover:text-white transition-all duration-300">
+                                        Blog
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 className="text-lg font-bold mb-4">Resources</h3>
+                            <ul className="space-y-3">
+                                <li>
+                                    <a href="/resources" className="text-gray-400 hover:text-white transition-all duration-300">
+                                        All Resources
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/resume-builder" className="text-gray-400 hover:text-white transition-all duration-300">
+                                        Resume Builder
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/notify" className="text-gray-400 hover:text-white transition-all duration-300">
+                                        NotifyX
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/subscriptions" className="text-gray-400 hover:text-white transition-all duration-300">
+                                        Subscriptions
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 className="text-lg font-bold mb-4">Legal</h3>
+                            <ul className="space-y-3">
+                                <li>
+                                    <a href="/privacy-policy" className="text-gray-400 hover:text-white transition-all duration-300">
+                                        Privacy Policy
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/terms-of-service" className="text-gray-400 hover:text-white transition-all duration-300">
+                                        Terms of Service
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/refund-policy" className="text-gray-400 hover:text-white transition-all duration-300">
+                                        Refund Policy
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/shipping-policy" className="text-gray-400 hover:text-white transition-all duration-300">
+                                        Shipping Policy
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/terms-and-conditions" className="text-gray-400 hover:text-white transition-all duration-300">
+                                        Terms and Conditions
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
+                        <p className="mb-2">© {new Date().getFullYear()} X Careers. All rights reserved.</p>
+                        <p>Built with ❤️ for tech freshers</p>
+                    </div>
+                </div>
+            </footer>
         </div>
     );
 }

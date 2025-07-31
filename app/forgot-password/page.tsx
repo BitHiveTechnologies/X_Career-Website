@@ -1,13 +1,13 @@
 'use client';
 
-import { useState } from 'react';
 import Link from 'next/link';
+import { useState } from 'react';
 
 // SVG Logo component
 const Logo = () => (
     <svg
         className="h-8 w-auto"
-        viewBox="0 0 120 30"
+        viewBox="0 0 140 30"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         data-oid="3.6sui8"
@@ -34,12 +34,12 @@ const Logo = () => (
             x="60"
             y="22"
             fontFamily="Arial"
-            fontSize="18"
+            fontSize="16"
             fontWeight="bold"
             fill="#1E3A8A"
             data-oid="8yic0am"
         >
-            Careers
+            X Careers
         </text>
     </svg>
 );
