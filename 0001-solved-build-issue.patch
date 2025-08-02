@@ -1,0 +1,62 @@
+From 227238509d71064a0000504784d54563efc6b807 Mon Sep 17 00:00:00 2001
+From: Saurabhsing21 <saurabhsingh881888@gmail.com>
+Date: Sat, 2 Aug 2025 11:48:58 +0530
+Subject: [PATCH] solved build issue
+
+---
+ components/flexible-data-table.tsx | 11 ++++++-----
+ 1 file changed, 6 insertions(+), 5 deletions(-)
+
+diff --git a/components/flexible-data-table.tsx b/components/flexible-data-table.tsx
+index e7fbc7d..83fbf9f 100644
+--- a/components/flexible-data-table.tsx
++++ b/components/flexible-data-table.tsx
+@@ -14,6 +14,7 @@ import {
+   getPaginationRowModel,
+   getSortedRowModel,
+   useReactTable,
++  Row,
+ } from "@tanstack/react-table"
+ import {
+   ChevronDownIcon,
+@@ -67,7 +68,7 @@ export function FlexibleDataTable({ data, columns }: FlexibleDataTableProps) {
+   const tableColumns: ColumnDef<any>[] = [
+     {
+       id: "select",
+-      header: ({ table }) => (
++      header: ({ table }: { table: any }) => (
+         <div className="flex items-center justify-center">
+           <Checkbox
+             checked={
+@@ -79,7 +80,7 @@ export function FlexibleDataTable({ data, columns }: FlexibleDataTableProps) {
+           />
+         </div>
+       ),
+-      cell: ({ row }) => (
++      cell: ({ row }: { row: Row<any> }) => (
+         <div className="flex items-center justify-center">
+           <Checkbox
+             checked={row.getIsSelected()}
+@@ -94,8 +95,8 @@ export function FlexibleDataTable({ data, columns }: FlexibleDataTableProps) {
+     ...columns.map((col) => ({
+       accessorKey: col.key,
+       header: col.label,
+-      cell: ({ row }) => {
+-        const value = row.getValue(col.key)
++      cell: ({ row }: { row: Row<any> }) => {
++        const value = row.getValue(col.key) as string
+         if (col.key === "status") {
+           return (
+             <Badge
+@@ -126,7 +127,7 @@ export function FlexibleDataTable({ data, columns }: FlexibleDataTableProps) {
+     {
+       id: "actions",
+       header: "Actions",
+-      cell: ({ row }) => (
++      cell: ({ row }: { row: Row<any> }) => (
+         <DropdownMenu>
+           <DropdownMenuTrigger asChild>
+             <Button variant="ghost" className="h-8 w-8 p-0">
+-- 
+2.48.1
+
