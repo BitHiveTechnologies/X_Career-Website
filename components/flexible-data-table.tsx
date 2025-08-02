@@ -14,6 +14,7 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
+  Row,
 } from "@tanstack/react-table"
 import {
   ChevronDownIcon,
@@ -67,7 +68,7 @@ export function FlexibleDataTable({ data, columns }: FlexibleDataTableProps) {
   const tableColumns: ColumnDef<any>[] = [
     {
       id: "select",
-      header: ({ table }) => (
+      header: ({ table }: { table: any }) => (
         <div className="flex items-center justify-center">
           <Checkbox
             checked={
@@ -79,7 +80,7 @@ export function FlexibleDataTable({ data, columns }: FlexibleDataTableProps) {
           />
         </div>
       ),
-      cell: ({ row }) => (
+      cell: ({ row }: { row: Row<any> }) => (
         <div className="flex items-center justify-center">
           <Checkbox
             checked={row.getIsSelected()}
@@ -94,8 +95,8 @@ export function FlexibleDataTable({ data, columns }: FlexibleDataTableProps) {
     ...columns.map((col) => ({
       accessorKey: col.key,
       header: col.label,
-      cell: ({ row }) => {
-        const value = row.getValue(col.key)
+      cell: ({ row }: { row: Row<any> }) => {
+        const value = row.getValue(col.key) as string
         if (col.key === "status") {
           return (
             <Badge
@@ -126,7 +127,7 @@ export function FlexibleDataTable({ data, columns }: FlexibleDataTableProps) {
     {
       id: "actions",
       header: "Actions",
-      cell: ({ row }) => (
+      cell: ({ row }: { row: Row<any> }) => (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="h-8 w-8 p-0">
