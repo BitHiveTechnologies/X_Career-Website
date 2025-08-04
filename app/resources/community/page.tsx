@@ -1,6 +1,7 @@
 'use client';
 
 import MainNavbar from '@/components/mainNavbar';
+import { useAuth } from '@/lib/auth/AuthContext';
 import {
     Award,
     BookOpen,
@@ -17,7 +18,6 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
-import { useAuth } from '@/lib/auth/AuthContext';
 
 const Logo = () => (
     <div className="flex items-center space-x-2">
@@ -648,9 +648,9 @@ export default function CommunityPage() {
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/subscriptions" className="text-gray-400 hover:text-white transition-all duration-300">
-                                        Subscriptions
-                                    </a>
+                                                            <a href="/notify" className="text-gray-400 hover:text-white transition-all duration-300">
+                            Subscriptions
+                        </a>
                                 </li>
                             </ul>
                         </div>

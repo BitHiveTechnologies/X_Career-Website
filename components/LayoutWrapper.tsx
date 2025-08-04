@@ -62,7 +62,7 @@ export default function LayoutWrapper({ children, showFooter = true }: LayoutWra
                                     <li><a href="/blog" className="text-gray-300 hover:text-white transition-colors">Blog</a></li>
                                     <li><a href="/resume-builder" className="text-gray-300 hover:text-white transition-colors">Resume Builder</a></li>
                                     <li><a href="/notify" className="text-gray-300 hover:text-white transition-colors">NotifyX</a></li>
-                                    <li><a href="/subscriptions" className="text-gray-300 hover:text-white transition-colors">Subscriptions</a></li>
+                                    <li><a href="/notify" className="text-gray-300 hover:text-white transition-colors">Subscriptions</a></li>
                                 </ul>
                             </div>
 

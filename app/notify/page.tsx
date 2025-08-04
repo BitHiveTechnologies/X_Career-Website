@@ -80,7 +80,7 @@ const pricingPlans = [
     },
     {
         name: 'NotifyX Premium',
-        price: '₹99',
+        price: '₹49',
         period: 'month',
         features: [
             'Priority job alerts',
@@ -95,7 +95,7 @@ const pricingPlans = [
     },
     {
         name: 'NotifyX Pro',
-        price: '₹199',
+        price: '₹79',
         period: 'month',
         features: [
             'Everything in Premium',

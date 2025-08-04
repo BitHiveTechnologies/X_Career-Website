@@ -9,6 +9,12 @@ export interface User {
     name: string;
     avatar?: string;
     createdAt: string;
+    subscription?: {
+        plan: 'free' | 'starter' | 'premium';
+        status: 'active' | 'inactive' | 'cancelled';
+        startDate?: string;
+        endDate?: string;
+    };
 }
 
 interface AuthContextType {
@@ -23,6 +29,8 @@ interface AuthContextType {
     ) => Promise<{ success: boolean; error?: string }>;
     logout: () => void;
     requireAuth: (redirectTo?: string) => boolean;
+    updateSubscription: (plan: 'free' | 'starter' | 'premium') => Promise<{ success: boolean; error?: string }>;
+    getUserSubscription: () => 'free' | 'starter' | 'premium';
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -92,6 +100,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
                     name: email.split('@')[0],
                     avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(email.split('@')[0])}&background=2563eb&color=fff`,
                     createdAt: new Date().toISOString(),
+                    subscription: {
+                        plan: 'free',
+                        status: 'active',
+                        startDate: new Date().toISOString(),
+                    },
                 };
 
                 // Store user data only if we're in the browser
@@ -143,6 +156,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
                     name,
                     avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=2563eb&color=fff`,
                     createdAt: new Date().toISOString(),
+                    subscription: {
+                        plan: 'free',
+                        status: 'active',
+                        startDate: new Date().toISOString(),
+                    },
                 };
 
                 // Store user data only if we're in the browser
@@ -199,6 +217,42 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         return !!user;
     };
 
+    const updateSubscription = async (plan: 'free' | 'starter' | 'premium'): Promise<{ success: boolean; error?: string }> => {
+        if (!user) {
+            return { success: false, error: 'User not authenticated' };
+        }
+
+        try {
+            // Simulate API call for subscription update
+            await new Promise((resolve) => setTimeout(resolve, 1000));
+
+            const updatedUser: User = {
+                ...user,
+                subscription: {
+                    plan,
+                    status: 'active',
+                    startDate: new Date().toISOString(),
+                    endDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(), // 30 days from now
+                },
+            };
+
+            setUser(updatedUser);
+
+            // Update localStorage
+            if (typeof window !== 'undefined') {
+                localStorage.setItem('careerx_user', JSON.stringify(updatedUser));
+            }
+
+            return { success: true };
+        } catch (error) {
+            return { success: false, error: 'Subscription update failed' };
+        }
+    };
+
+    const getUserSubscription = (): 'free' | 'starter' | 'premium' => {
+        return user?.subscription?.plan || 'free';
+    };
+
     const value: AuthContextType = {
         user,
         isLoading,
@@ -207,6 +261,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         register,
         logout,
         requireAuth,
+        updateSubscription,
+        getUserSubscription,
     };
 
     return (

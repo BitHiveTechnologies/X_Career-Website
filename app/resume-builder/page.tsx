@@ -3,6 +3,7 @@
 import MainNavbar from '@/components/mainNavbar';
 import ResumeForm from '@/components/ResumeForm';
 import ResumePreview from '@/components/ResumePreview';
+import SubscriptionStatus from '@/components/SubscriptionStatus';
 import TemplateSelector from '@/components/TemplateSelector';
 import { useRef, useState } from 'react';
 
@@ -86,7 +87,7 @@ const initialResumeData: ResumeData = {
 
 export default function ResumeBuilderPage() {
     const [resumeData, setResumeData] = useState<ResumeData>(initialResumeData);
-    const [selectedTemplate, setSelectedTemplate] = useState('modern');
+    const [selectedTemplate, setSelectedTemplate] = useState('minimal'); // Changed default to minimal for free users
     const [activeSection, setActiveSection] = useState('personal');
     const [isPreviewMode, setIsPreviewMode] = useState(false);
     const [zoomLevel, setZoomLevel] = useState(0.8);
@@ -167,7 +168,7 @@ export default function ResumeBuilderPage() {
                         Create a stunning resume in minutes with our AI-powered builder. Choose from
                         professional templates and land your dream job.
                     </p>
-                    <div className="flex flex-wrap justify-center gap-4 text-sm" data-oid="_wcaukn">
+                    <div className="flex flex-wrap justify-center gap-4 text-sm mb-6" data-oid="_wcaukn">
                         <div
                             className="flex items-center bg-white/20 px-4 py-2 rounded-full"
                             data-oid="p7tv0jk"
@@ -196,17 +197,28 @@ export default function ResumeBuilderPage() {
                             Instant PDF Download
                         </div>
                     </div>
+                    <div className="flex justify-center">
+                        <a
+                            href="/resume-builder/subscription"
+                            className="inline-flex items-center px-6 py-3 bg-white text-blue-600 rounded-lg font-medium hover:bg-gray-100 transition-colors duration-200"
+                        >
+                            <span className="mr-2">👑</span>
+                            View Subscription Plans
+                        </a>
+                    </div>
                 </div>
             </section>
 
             {/* Main Content */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8" data-oid="yypwmjp">
+                {/* Subscription Status */}
+                <SubscriptionStatus />
+                
                 {/* Template Selection */}
                 <div className="mb-8" data-oid="i1bhab6">
                     <TemplateSelector
                         selectedTemplate={selectedTemplate}
                         onTemplateChange={setSelectedTemplate}
-                        userSubscription="free" // This would come from user auth context
                         data-oid="hfdniw1"
                     />
                 </div>

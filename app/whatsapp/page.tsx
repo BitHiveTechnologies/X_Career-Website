@@ -444,9 +444,9 @@ export default function WhatsAppPage() {
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/subscriptions" className="text-gray-400 hover:text-white transition-all duration-300">
-                                        Subscriptions
-                                    </a>
+                                                            <a href="/notify" className="text-gray-400 hover:text-white transition-all duration-300">
+                            Subscriptions
+                        </a>
                                 </li>
                             </ul>
                         </div>

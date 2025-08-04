@@ -1,20 +1,19 @@
 'use client';
 
 import MainNavbar from '@/components/mainNavbar';
-import { useState } from 'react';
-import Link from 'next/link';
 import {
     ArrowRight,
     BookOpen,
-    Users,
-    Video,
-    FileText,
+    Clock,
     Download,
     ExternalLink,
+    FileText,
     Star,
-    Clock,
     TrendingUp,
+    Users
 } from 'lucide-react';
+import Link from 'next/link';
+import { useState } from 'react';
 
 const Logo = () => (
     <div className="flex items-center space-x-2">
@@ -759,9 +758,9 @@ export default function ResourcesPage() {
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/subscriptions" className="text-gray-400 hover:text-white transition-all duration-300">
-                                        Subscriptions
-                                    </a>
+                                                            <a href="/notify" className="text-gray-400 hover:text-white transition-all duration-300">
+                            Subscriptions
+                        </a>
                                 </li>
                             </ul>
                         </div>
