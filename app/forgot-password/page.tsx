@@ -2,47 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-
-// SVG Logo component
-const Logo = () => (
-    <svg
-        className="h-8 w-auto"
-        viewBox="0 0 140 30"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        data-oid="3.6sui8"
-    >
-        <path
-            d="M10 5L20 15L10 25"
-            stroke="#1E3A8A"
-            strokeWidth="3"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            data-oid="zj_f727"
-        />
-
-        <path
-            d="M30 5H40L50 25H40"
-            stroke="#1E3A8A"
-            strokeWidth="3"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            data-oid="q-amx3c"
-        />
-
-        <text
-            x="60"
-            y="22"
-            fontFamily="Arial"
-            fontSize="16"
-            fontWeight="bold"
-            fill="#1E3A8A"
-            data-oid="8yic0am"
-        >
-            X Careers
-        </text>
-    </svg>
-);
+import Logo from '@/components/ui/Logo';
 
 export default function ForgotPasswordPage() {
     const [email, setEmail] = useState('');
@@ -90,9 +50,7 @@ export default function ForgotPasswordPage() {
 
             <div className="sm:mx-auto sm:w-full sm:max-w-md px-4 py-8 z-10" data-oid="c3l57ox">
                 <div className="text-center mb-6" data-oid="2hxpkk2">
-                    <Link href="/" className="inline-block" data-oid=":uz08n5">
-                        <Logo data-oid="gq6l-vm" />
-                    </Link>
+                    <Logo data-oid="gq6l-vm" />
                     <h2 className="mt-6 text-3xl font-extrabold text-gray-800" data-oid="f-:ra-i">
                         Reset your password
                     </h2>

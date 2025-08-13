@@ -5,6 +5,7 @@ import { useProgressiveEnhancement } from '@/hooks/useProgressiveEnhancement';
 import { useAuth } from '@/lib/auth/AuthContext';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
+import Logo from '@/components/ui/Logo';
 
 export default function MainNavbar() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -52,45 +53,9 @@ export default function MainNavbar() {
         setUserMenuOpen(false);
     };
 
-    const Logo = () => (
-        <svg
-            className="h-7 w-auto sm:h-8"
-            viewBox="0 0 140 30"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            data-oid="_juqrqh"
-        >
-            <path
-                d="M10 5L20 15L10 25"
-                stroke="#1E3A8A"
-                strokeWidth="3"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                data-oid="mz__v:o"
-            />
 
-            <path
-                d="M30 5H40L50 25H40"
-                stroke="#1E3A8A"
-                strokeWidth="3"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                data-oid=":vx1.z8"
-            />
 
-            <text
-                x="60"
-                y="22"
-                fontFamily="Arial"
-                fontSize="16"
-                fontWeight="bold"
-                fill="#1E3A8A"
-                data-oid="fdvpttu"
-            >
-                X Careers
-            </text>
-        </svg>
-    );
+
 
     return (
         <div data-oid="1o:2g3i">
@@ -105,9 +70,7 @@ export default function MainNavbar() {
                     >
                         {/* Logo */}
                         <div className="flex-shrink-0" data-oid="._58q_2">
-                            <Link href="/" className="flex items-center" data-oid="on6h8ia">
-                                <Logo data-oid="i_bqbbl" />
-                            </Link>
+                            <Logo className="h-12 w-auto sm:h-14" data-oid="i_bqbbl" />
                         </div>
 
                         {/* Navigation Links - Hidden on mobile */}
