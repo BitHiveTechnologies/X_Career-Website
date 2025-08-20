@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
         // 4. Send welcome email
         // 5. Send immediate job alert
 
-        console.log('New subscription:', { email, preferences });
+
 
         // Simulate processing time
         await new Promise(resolve => setTimeout(resolve, 1000));
@@ -60,8 +60,6 @@ export async function POST(request: NextRequest) {
         };
 
         // Log email data (in production, this would be sent via email service)
-        console.log('Welcome email:', welcomeEmail);
-        console.log('Job alert email:', jobAlertEmail);
 
         // Return success response
         return NextResponse.json({
@@ -81,7 +79,7 @@ export async function POST(request: NextRequest) {
         });
 
     } catch (error) {
-        console.error('Subscription error:', error);
+        // Log error for debugging (server-side only)
         return NextResponse.json(
             { error: 'Internal server error' },
             { status: 500 }

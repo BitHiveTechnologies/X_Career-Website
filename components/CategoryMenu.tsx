@@ -1,7 +1,7 @@
 'use client';
 
-import { useRef, useState, useEffect } from 'react';
 import { Category } from '@/app/jobs/page';
+import { useEffect, useRef, useState } from 'react';
 
 interface CategoryMenuProps {
     categories: Category[];

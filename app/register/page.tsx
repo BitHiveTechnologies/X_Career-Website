@@ -1,10 +1,10 @@
 'use client';
 
-import { useState, useEffect, Suspense } from 'react';
+import MainNavbar from '@/components/mainNavbar';
 import { useAuth } from '@/lib/auth/AuthContext';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
-import MainNavbar from '@/components/mainNavbar';
+import { Suspense, useEffect, useState } from 'react';
 
 function RegisterForm() {
     const [name, setName] = useState('');

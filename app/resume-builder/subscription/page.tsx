@@ -1,6 +1,7 @@
 'use client';
 
 import MainNavbar from '@/components/mainNavbar';
+import { usePremiumTheme } from '@/hooks/usePremiumTheme';
 import { useAuth } from '@/lib/auth/AuthContext';
 import { Check, Star } from 'lucide-react';
 import { useState } from 'react';
@@ -97,6 +98,7 @@ const testimonials = [
 
 export default function ResumeBuilderSubscriptionPage() {
     const { getUserSubscription, updateSubscription } = useAuth();
+    const { isPremium, premiumColors } = usePremiumTheme();
     const [isUpgrading, setIsUpgrading] = useState(false);
     const [upgradeStatus, setUpgradeStatus] = useState<'idle' | 'success' | 'error'>('idle');
     
@@ -133,26 +135,40 @@ export default function ResumeBuilderSubscriptionPage() {
             <MainNavbar />
 
             {/* Hero Section */}
-            <section className="bg-gradient-to-r from-[hsl(196,80%,45%)] via-[hsl(210,70%,45%)] to-[hsl(175,70%,41%)] text-white py-16">
+            <section className={`${isPremium 
+                ? 'bg-premium-navy' 
+                : 'bg-gradient-to-r from-[hsl(196,80%,45%)] via-[hsl(210,70%,45%)] to-[hsl(175,70%,41%)]'
+            } text-white py-16`}>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                     <h1 className="text-4xl md:text-5xl font-bold mb-4">
-                        Resume Builder Subscription
+                        {isPremium ? '👑 Royal Premium Resume Builder' : 'Resume Builder Subscription'}
                     </h1>
-                    <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-                        Choose the perfect plan for your resume building needs. Unlock premium templates and features.
+                    <p className={`text-xl mb-8 max-w-2xl mx-auto ${
+                        isPremium ? 'text-premium-ivory' : 'text-blue-100'
+                    }`}>
+                        {isPremium 
+                            ? 'Experience the ultimate in resume building with our exclusive Royal Tech Luxe theme and premium templates.'
+                            : 'Choose the perfect plan for your resume building needs. Unlock premium templates and features.'
+                        }
                     </p>
                     <div className="flex flex-wrap justify-center gap-4 text-sm">
-                        <div className="flex items-center bg-white/20 px-4 py-2 rounded-full">
+                        <div className={`flex items-center px-4 py-2 rounded-full ${
+                            isPremium ? 'bg-premium-gold/20 border border-premium-gold/30' : 'bg-white/20'
+                        }`}>
                             <span className="mr-2">✨</span>
-                            Professional Templates
+                            {isPremium ? 'Royal Templates' : 'Professional Templates'}
                         </div>
-                        <div className="flex items-center bg-white/20 px-4 py-2 rounded-full">
+                        <div className={`flex items-center px-4 py-2 rounded-full ${
+                            isPremium ? 'bg-premium-gold/20 border border-premium-gold/30' : 'bg-white/20'
+                        }`}>
                             <span className="mr-2">📱</span>
                             ATS-Friendly
                         </div>
-                        <div className="flex items-center bg-white/20 px-4 py-2 rounded-full">
+                        <div className={`flex items-center px-4 py-2 rounded-full ${
+                            isPremium ? 'bg-premium-gold/20 border border-premium-gold/30' : 'bg-white/20'
+                        }`}>
                             <span className="mr-2">⚡</span>
-                            Instant Download
+                            {isPremium ? 'Premium Download' : 'Instant Download'}
                         </div>
                     </div>
                 </div>
@@ -162,11 +178,14 @@ export default function ResumeBuilderSubscriptionPage() {
             <section className="py-16">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-12">
-                        <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                            Choose Your Plan
+                        <h2 className={`text-3xl font-bold mb-4 ${isPremium ? 'text-premium-navy' : 'text-gray-900'}`}>
+                            {isPremium ? '👑 Royal Premium Plans' : 'Choose Your Plan'}
                         </h2>
-                        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                            Start with our free plan and upgrade as you need more features and templates.
+                        <p className={`text-lg max-w-2xl mx-auto ${isPremium ? 'text-premium-navy/80' : 'text-gray-600'}`}>
+                            {isPremium 
+                                ? 'Experience the ultimate in resume building with our exclusive Royal Tech Luxe theme.'
+                                : 'Start with our free plan and upgrade as you need more features and templates.'
+                            }
                         </p>
                     </div>
 
@@ -182,14 +201,20 @@ export default function ResumeBuilderSubscriptionPage() {
                                         isCurrentPlan
                                             ? 'border-blue-500 bg-blue-50'
                                             : isRecommended
-                                            ? 'border-purple-500 bg-gradient-to-br from-purple-50 to-pink-50'
+                                            ? isPremium 
+                                                ? 'border-premium-gold bg-gradient-to-br from-premium-gold/10 to-premium-emerald/10'
+                                                : 'border-purple-500 bg-gradient-to-br from-purple-50 to-pink-50'
                                             : plan.color + ' ' + plan.bgColor
                                     }`}
                                 >
                                     {isRecommended && (
                                         <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                                            <span className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-1 rounded-full text-sm font-medium">
-                                                Most Popular
+                                            <span className={`px-4 py-1 rounded-full text-sm font-medium ${
+                                                isPremium 
+                                                    ? 'bg-gradient-to-r from-premium-gold to-premium-emerald text-premium-navy'
+                                                    : 'bg-gradient-to-r from-purple-500 to-pink-500 text-white'
+                                            }`}>
+                                                {isPremium ? '👑 Royal Choice' : 'Most Popular'}
                                             </span>
                                         </div>
                                     )}
@@ -231,7 +256,9 @@ export default function ResumeBuilderSubscriptionPage() {
                                             isCurrentPlan
                                                 ? 'bg-gray-100 text-gray-500 cursor-not-allowed'
                                                 : isRecommended
-                                                ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:from-purple-600 hover:to-pink-600 transform hover:scale-105'
+                                                ? isPremium 
+                                                    ? 'bg-gradient-to-r from-premium-gold to-premium-emerald text-premium-navy hover:from-premium-gold-light hover:to-premium-emerald-light transform hover:scale-105'
+                                                    : 'bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:from-purple-600 hover:to-pink-600 transform hover:scale-105'
                                                 : 'bg-blue-500 text-white hover:bg-blue-600'
                                         } disabled:opacity-50 disabled:cursor-not-allowed`}
                                     >
@@ -277,14 +304,17 @@ export default function ResumeBuilderSubscriptionPage() {
             </section>
 
             {/* Testimonials Section */}
-            <section className="py-16 bg-white">
+            <section className={`py-16 ${isPremium ? 'bg-premium-platinum' : 'bg-white'}`}>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-12">
-                        <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                            What Our Users Say
+                        <h2 className={`text-3xl font-bold mb-4 ${isPremium ? 'text-premium-navy' : 'text-gray-900'}`}>
+                            {isPremium ? '👑 Royal Premium Testimonials' : 'What Our Users Say'}
                         </h2>
-                        <p className="text-lg text-gray-600">
-                            Join thousands of professionals who have landed their dream jobs with our resume builder.
+                        <p className={`text-lg ${isPremium ? 'text-premium-navy/80' : 'text-gray-600'}`}>
+                            {isPremium 
+                                ? 'Hear from our premium users who have experienced the Royal Tech Luxe difference.'
+                                : 'Join thousands of professionals who have landed their dream jobs with our resume builder.'
+                            }
                         </p>
                     </div>
 
@@ -316,11 +346,11 @@ export default function ResumeBuilderSubscriptionPage() {
             </section>
 
             {/* FAQ Section */}
-            <section className="py-16">
+            <section className={`py-16 ${isPremium ? 'bg-premium-navy/5' : ''}`}>
                 <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-12">
-                        <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                            Frequently Asked Questions
+                        <h2 className={`text-3xl font-bold mb-4 ${isPremium ? 'text-premium-navy' : 'text-gray-900'}`}>
+                            {isPremium ? '👑 Royal Premium FAQ' : 'Frequently Asked Questions'}
                         </h2>
                     </div>
 

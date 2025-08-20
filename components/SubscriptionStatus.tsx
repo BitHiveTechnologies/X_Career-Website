@@ -1,12 +1,14 @@
 'use client';
 
 import { useAuth } from '@/lib/auth/AuthContext';
+import { usePremiumTheme } from '@/hooks/usePremiumTheme';
 import { Crown, Zap } from 'lucide-react';
 import { useState } from 'react';
 import SubscriptionUpgradeModal from './SubscriptionUpgradeModal';
 
 export default function SubscriptionStatus() {
     const { getUserSubscription } = useAuth();
+    const { isPremium, premiumColors } = usePremiumTheme();
     const [showUpgradeModal, setShowUpgradeModal] = useState(false);
     
     const currentPlan = getUserSubscription();
@@ -79,9 +81,13 @@ export default function SubscriptionStatus() {
                     )}
                     
                     {currentPlan === 'premium' && (
-                        <div className="flex items-center space-x-2 px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium">
+                        <div className={`flex items-center space-x-2 px-3 py-1 rounded-full text-sm font-medium ${
+                            isPremium 
+                                ? 'bg-premium-gold text-premium-navy border border-premium-gold/30'
+                                : 'bg-purple-100 text-purple-700'
+                        }`}>
                             <Crown className="w-4 h-4" />
-                            <span>Premium Active</span>
+                            <span>{isPremium ? '👑 Royal Premium' : 'Premium Active'}</span>
                         </div>
                     )}
                 </div>

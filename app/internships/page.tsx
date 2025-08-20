@@ -1,11 +1,11 @@
 'use client';
 
-import MainNavbar from '@/components/mainNavbar';
-import { useState, useEffect } from 'react';
-import JobCard from '@/components/JobCard';
-import FiltersSidebar from '@/components/FiltersSidebar';
 import CategoryMenu from '@/components/CategoryMenu';
+import FiltersSidebar from '@/components/FiltersSidebar';
+import JobCard from '@/components/JobCard';
+import MainNavbar from '@/components/mainNavbar';
 import { mockInternships, type Internship } from '@/lib/mockData';
+import { useEffect, useState } from 'react';
 
 // TypeScript Interfaces for Internships
 export interface InternshipFilterOptions {

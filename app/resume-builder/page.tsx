@@ -102,19 +102,24 @@ export default function ResumeBuilderPage() {
 
     const handleDownloadPDF = async () => {
         if (typeof window !== 'undefined') {
-            const html2pdf = (await import('html2pdf.js')).default;
-            const element = resumeRef.current;
+            try {
+                const html2pdf = (await import('html2pdf.js')).default;
+                const element = resumeRef.current;
 
-            if (element) {
-                const opt = {
-                    margin: 0.5,
-                    filename: `${resumeData.personalInfo.fullName || 'resume'}.pdf`,
-                    image: { type: 'jpeg', quality: 0.98 },
-                    html2canvas: { scale: 2 },
-                    jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
-                };
+                if (element) {
+                    const opt = {
+                        margin: 0.5,
+                        filename: `${resumeData.personalInfo.fullName || 'resume'}.pdf`,
+                        image: { type: 'jpeg', quality: 0.98 },
+                        html2canvas: { scale: 2 },
+                        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
+                    };
 
-                html2pdf().set(opt).from(element).save();
+                    html2pdf().set(opt).from(element).save();
+                }
+            } catch (error) {
+                // Handle PDF generation error gracefully
+                alert('Failed to generate PDF. Please try again.');
             }
         }
     };

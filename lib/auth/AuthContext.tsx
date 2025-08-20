@@ -71,7 +71,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
                 }
             }
         } catch (error) {
-            console.error('Auth check failed:', error);
             // Clear invalid data only if we're in the browser
             if (typeof window !== 'undefined') {
                 localStorage.removeItem('careerx_user');

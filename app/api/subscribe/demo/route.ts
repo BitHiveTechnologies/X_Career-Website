@@ -61,7 +61,7 @@ export async function GET(request: NextRequest) {
         });
 
     } catch (error) {
-        console.error('Demo error:', error);
+        // Log error for debugging (server-side only)
         return NextResponse.json(
             { error: 'Internal server error' },
             { status: 500 }

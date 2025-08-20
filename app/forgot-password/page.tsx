@@ -1,8 +1,8 @@
 'use client';
 
+import Logo from '@/components/ui/Logo';
 import Link from 'next/link';
 import { useState } from 'react';
-import Logo from '@/components/ui/Logo';
 
 export default function ForgotPasswordPage() {
     const [email, setEmail] = useState('');

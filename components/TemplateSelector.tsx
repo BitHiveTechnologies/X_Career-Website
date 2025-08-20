@@ -1,5 +1,6 @@
 'use client';
 
+import { usePremiumTheme } from '@/hooks/usePremiumTheme';
 import { useAuth } from '@/lib/auth/AuthContext';
 import { Crown, Lock } from 'lucide-react';
 import { useState } from 'react';
@@ -15,6 +16,7 @@ export default function TemplateSelector({
     onTemplateChange,
 }: TemplateSelectorProps) {
     const { getUserSubscription } = useAuth();
+    const { isPremium, premiumColors } = usePremiumTheme();
     const [showUpgradeModal, setShowUpgradeModal] = useState(false);
     const [lockedTemplate, setLockedTemplate] = useState<string>('');
 
@@ -84,10 +86,11 @@ export default function TemplateSelector({
                         <span className={`px-2 py-1 rounded-full text-xs font-medium ${
                             userSubscription === 'free' ? 'bg-gray-100 text-gray-700' :
                             userSubscription === 'starter' ? 'bg-blue-100 text-blue-700' :
-                            'bg-purple-100 text-purple-700'
+                            isPremium ? 'bg-premium-gold text-premium-navy border border-premium-gold/30' : 'bg-purple-100 text-purple-700'
                         }`}>
                             {userSubscription === 'free' ? 'Free' :
-                             userSubscription === 'starter' ? 'Starter' : 'Premium'}
+                             userSubscription === 'starter' ? 'Starter' : 
+                             isPremium ? '👑 Royal Premium' : 'Premium'}
                         </span>
                     </div>
                 </div>

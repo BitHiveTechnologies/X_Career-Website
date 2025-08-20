@@ -26,7 +26,7 @@ export async function GET(request: NextRequest) {
             { status: 200 },
         );
     } catch (error) {
-        console.error('Token validation error:', error);
+        // Log error for debugging (server-side only)
         return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
     }
 }

@@ -1,8 +1,10 @@
 'use client';
 import MainNavbar from '@/components/mainNavbar';
+import { usePremiumTheme } from '@/hooks/usePremiumTheme';
 import { useAuth } from '@/lib/auth/AuthContext';
 import { useAuthAction } from '@/lib/auth/useAuthAction';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 // Dummy data for the page
@@ -248,9 +250,13 @@ export default function Page() {
     const [benefits, setBenefits] = useState<Benefit[]>([]);
     const { navigateWithAuth } = useAuthAction();
     const { isAuthenticated } = useAuth();
+    const { isPremium, premiumColors } = usePremiumTheme();
+    const router = useRouter();
 
     // Add custom CSS for animations
     useEffect(() => {
+        if (typeof window === 'undefined') return; // SSR safety
+        
         const style = document.createElement('style');
         style.innerHTML = `
             @keyframes scroll {
@@ -269,29 +275,42 @@ export default function Page() {
                 animation-play-state: paused;
             }
         `;
+        
         document.head.appendChild(style);
+        
         return () => {
-            document.head.removeChild(style);
+            try {
+                if (style && style.parentNode) {
+                    document.head.removeChild(style);
+                }
+            } catch (error) {
+                // Style already removed, ignore
+            }
         };
     }, []);
 
     useEffect(() => {
         // Simulate API calls
         const loadData = async () => {
-            const [statsData, testimonialsData, resourcesData, featuresData, benefitsData] =
-                await Promise.all([
-                    fetchStats(),
-                    fetchTestimonials(),
-                    fetchResources(),
-                    fetchFeatures(),
-                    fetchBenefits(),
-                ]);
+            try {
+                const [statsData, testimonialsData, resourcesData, featuresData, benefitsData] =
+                    await Promise.all([
+                        fetchStats(),
+                        fetchTestimonials(),
+                        fetchResources(),
+                        fetchFeatures(),
+                        fetchBenefits(),
+                    ]);
 
-            setStats(statsData);
-            setTestimonials(testimonialsData);
-            setResources(resourcesData);
-            setFeatures(featuresData);
-            setBenefits(benefitsData);
+                setStats(statsData);
+                setTestimonials(testimonialsData);
+                setResources(resourcesData);
+                setFeatures(featuresData);
+                setBenefits(benefitsData);
+            } catch (error) {
+                // Handle data loading errors gracefully
+                // console.warn('Failed to load some data, using defaults');
+            }
         };
 
         loadData();
@@ -299,10 +318,18 @@ export default function Page() {
 
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault();
-        // Implement search functionality with backend
-        console.log('Searching for:', searchQuery);
-        // Reset search field
-        setSearchQuery('');
+        const trimmedQuery = searchQuery.trim();
+        if (trimmedQuery) {
+            try {
+                // Redirect to jobs page with search query
+                const encodedQuery = encodeURIComponent(trimmedQuery);
+                router.push(`/jobs?search=${encodedQuery}`);
+            } catch (error) {
+                // console.error('Error redirecting to jobs page:', error);
+                // Fallback: just navigate to jobs page
+                router.push('/jobs');
+            }
+        }
     };
 
     return (
@@ -568,17 +595,16 @@ export default function Page() {
                                         <button
                                             onClick={(e) => {
                                                 e.preventDefault();
-                                            console.log('Browse Jobs button clicked!');
                                                 try {
                                                     if (typeof window !== 'undefined') {
                                                         window.location.href = '/jobs';
                                                     }
                                                 } catch (error) {
-                                                    console.error('Navigation error:', error);
+                                                    // Handle navigation error silently
                                                     try {
                                                         window.open('/jobs', '_self');
                                                     } catch (fallbackError) {
-                                                    console.error('Fallback navigation error:', fallbackError);
+                                                        // Use fallback navigation
                                                         document.location.href = '/jobs';
                                                     }
                                                 }
@@ -587,7 +613,7 @@ export default function Page() {
                                             type="button"
                                     >
                                         <svg className="mr-3 h-6 w-6 transition-transform group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H8a2 2 0 01-2-2V8a2 2 0 012-2V6" />
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                                             </svg>
                                             Browse Jobs
                                         <svg className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -2323,7 +2349,7 @@ export default function Page() {
                             </p>
                         </div>
                         
-                        {/* Three Row Placard Design */}
+                                                {/* Single Row Placard Design */}
                         <div className="space-y-6">
                             {/* Row 1: Left to Right */}
                             <div className="relative overflow-hidden py-3">
@@ -2422,214 +2448,6 @@ export default function Page() {
                                                 <div className="flex items-center justify-between text-xs text-gray-500">
                                                     <span>✅ Verified Success</span>
                                                     <span>🎯 Entry Level</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-
-                            {/* Row 2: Right to Left */}
-                            <div className="relative overflow-hidden py-3">
-                                <div 
-                                    className="flex animate-scroll-reverse gap-4"
-                                    style={{ width: `${testimonials.length * 320}px` }}
-                                >
-                                    {testimonials.map((testimonial) => (
-                                        <div
-                                            key={`row2-${testimonial.id}`}
-                                            className="bg-gradient-to-br from-blue-50/95 to-blue-100/85 backdrop-blur-md text-gray-800 p-6 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 relative z-10 border border-blue-200/30 w-[300px] h-[220px] flex-shrink-0 flex flex-col"
-                                        >
-                                            <div className="flex items-center mb-4">
-                                                <div className="relative">
-                                                    <img
-                                                        src={testimonial.image}
-                                                        alt={testimonial.name}
-                                                        className="w-12 h-12 rounded-full mr-3 object-cover border-3 border-blue-200 shadow-md"
-                                                    />
-                                                    <div className="absolute -top-1 -right-1 w-5 h-5 bg-blue-500 rounded-full border-2 border-white flex items-center justify-center">
-                                                        <svg className="w-2.5 h-2.5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                                        </svg>
-                                    </div>
-                                                </div>
-                                                <div>
-                                                    <h3 className="font-bold text-gray-800 text-base">
-                                                        {testimonial.name}
-                                                    </h3>
-                                                    <p className="text-blue-600 text-xs font-semibold">
-                                                        {testimonial.company}
-                                                    </p>
-                                                    <div className="flex items-center mt-1">
-                                                        <div className="flex text-yellow-400">
-                                                            {[...Array(5)].map((_, i) => (
-                                                                <svg key={i} className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                                                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.835 1.688-1.71 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.874.57-2.01-.197-1.71-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                                                </svg>
-                                                            ))}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <p className="text-gray-700 italic flex-grow text-sm leading-relaxed">
-                                                "{testimonial.quote}"
-                                            </p>
-                                            <div className="mt-3 pt-3 border-t border-blue-200">
-                                                <div className="flex items-center justify-between text-xs text-blue-600">
-                                                    <span>🚀 Fast Track</span>
-                                                    <span>💼 Tech Role</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    ))}
-                                    {/* Duplicate for seamless loop */}
-                                {testimonials.slice(0, 3).map((testimonial) => (
-                                    <div
-                                            key={`duplicate-2-${testimonial.id}`}
-                                            className="bg-gradient-to-br from-blue-50/95 to-blue-100/85 backdrop-blur-md text-gray-800 p-6 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 relative z-10 border border-blue-200/30 w-[300px] h-[220px] flex-shrink-0 flex flex-col"
-                                    >
-                                            <div className="flex items-center mb-4">
-                                                <div className="relative">
-                                            <img
-                                                src={testimonial.image}
-                                                alt={testimonial.name}
-                                                        className="w-12 h-12 rounded-full mr-3 object-cover border-3 border-blue-200 shadow-md"
-                                                    />
-                                                    <div className="absolute -top-1 -right-1 w-5 h-5 bg-blue-500 rounded-full border-2 border-white flex items-center justify-center">
-                                                        <svg className="w-2.5 h-2.5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                                        </svg>
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <h3 className="font-bold text-gray-800 text-base">
-                                                        {testimonial.name}
-                                                    </h3>
-                                                    <p className="text-blue-600 text-xs font-semibold">
-                                                        {testimonial.company}
-                                                    </p>
-                                                    <div className="flex items-center mt-1">
-                                                        <div className="flex text-yellow-400">
-                                                            {[...Array(5)].map((_, i) => (
-                                                                <svg key={i} className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                                                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.835 1.688-1.71 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.874.57-2.01-.197-1.71-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                                                </svg>
-                                                            ))}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <p className="text-gray-700 italic flex-grow text-sm leading-relaxed">
-                                                "{testimonial.quote}"
-                                            </p>
-                                            <div className="mt-3 pt-3 border-t border-blue-200">
-                                                <div className="flex items-center justify-between text-xs text-blue-600">
-                                                    <span>🚀 Fast Track</span>
-                                                    <span>💼 Tech Role</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-
-                            {/* Row 3: Left to Right (Slower) */}
-                            <div className="relative overflow-hidden py-3">
-                                <div 
-                                    className="flex animate-scroll-slow gap-4"
-                                    style={{ width: `${testimonials.length * 320}px` }}
-                                >
-                                    {testimonials.map((testimonial) => (
-                                        <div
-                                            key={`row3-${testimonial.id}`}
-                                            className="bg-gradient-to-br from-green-50/95 to-green-100/85 backdrop-blur-md text-gray-800 p-6 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 relative z-10 border border-green-200/30 w-[300px] h-[220px] flex-shrink-0 flex flex-col"
-                                        >
-                                            <div className="flex items-center mb-4">
-                                                <div className="relative">
-                                                    <img
-                                                        src={testimonial.image}
-                                                        alt={testimonial.name}
-                                                        className="w-12 h-12 rounded-full mr-3 object-cover border-3 border-green-200 shadow-md"
-                                                    />
-                                                    <div className="absolute -top-1 -right-1 w-5 h-5 bg-green-500 rounded-full border-2 border-white flex items-center justify-center">
-                                                        <svg className="w-2.5 h-2.5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                                        </svg>
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <h3 className="font-bold text-gray-800 text-base">
-                                                        {testimonial.name}
-                                                    </h3>
-                                                    <p className="text-green-600 text-xs font-semibold">
-                                                        {testimonial.company}
-                                                    </p>
-                                                    <div className="flex items-center mt-1">
-                                                        <div className="flex text-yellow-400">
-                                                            {[...Array(5)].map((_, i) => (
-                                                                <svg key={i} className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                                                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.835 1.688-1.71 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.874.57-2.01-.197-1.71-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                                                </svg>
-                                                            ))}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <p className="text-gray-700 italic flex-grow text-sm leading-relaxed">
-                                                "{testimonial.quote}"
-                                            </p>
-                                            <div className="mt-3 pt-3 border-t border-green-200">
-                                                <div className="flex items-center justify-between text-xs text-green-600">
-                                                    <span>🎓 Fresher Success</span>
-                                                    <span>⭐ Top Company</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    ))}
-                                    {/* Duplicate for seamless loop */}
-                                    {testimonials.slice(0, 3).map((testimonial) => (
-                                        <div
-                                            key={`duplicate-3-${testimonial.id}`}
-                                            className="bg-gradient-to-br from-green-50/95 to-green-100/85 backdrop-blur-md text-gray-800 p-6 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 relative z-10 border border-green-200/30 w-[300px] h-[220px] flex-shrink-0 flex flex-col"
-                                        >
-                                            <div className="flex items-center mb-4">
-                                                <div className="relative">
-                                                    <img
-                                                        src={testimonial.image}
-                                                        alt={testimonial.name}
-                                                        className="w-12 h-12 rounded-full mr-3 object-cover border-3 border-green-200 shadow-md"
-                                                    />
-                                                    <div className="absolute -top-1 -right-1 w-5 h-5 bg-green-500 rounded-full border-2 border-white flex items-center justify-center">
-                                                        <svg className="w-2.5 h-2.5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                                        </svg>
-                                    </div>
-                                                </div>
-                                                <div>
-                                                    <h3 className="font-bold text-gray-800 text-base">
-                                                        {testimonial.name}
-                                                    </h3>
-                                                    <p className="text-green-600 text-xs font-semibold">
-                                                        {testimonial.company}
-                                                    </p>
-                                                    <div className="flex items-center mt-1">
-                                                        <div className="flex text-yellow-400">
-                                                            {[...Array(5)].map((_, i) => (
-                                                                <svg key={i} className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                                                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.835 1.688-1.71 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.874.57-2.01-.197-1.71-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                                                </svg>
-                                                            ))}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <p className="text-gray-700 italic flex-grow text-sm leading-relaxed">
-                                                "{testimonial.quote}"
-                                            </p>
-                                            <div className="mt-3 pt-3 border-t border-green-200">
-                                                <div className="flex items-center justify-between text-xs text-green-600">
-                                                    <span>🎓 Fresher Success</span>
-                                                    <span>⭐ Top Company</span>
                                                 </div>
                                             </div>
                                         </div>

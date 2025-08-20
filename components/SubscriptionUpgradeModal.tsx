@@ -1,7 +1,8 @@
 'use client';
 
+import { usePremiumTheme } from '@/hooks/usePremiumTheme';
 import { useAuth } from '@/lib/auth/AuthContext';
-import { Check, Crown, Lock, Star, Zap } from 'lucide-react';
+import { Check, Crown, Star, Zap } from 'lucide-react';
 import { useState } from 'react';
 
 interface SubscriptionUpgradeModalProps {
@@ -70,6 +71,7 @@ export default function SubscriptionUpgradeModal({
     currentPlan,
 }: SubscriptionUpgradeModalProps) {
     const { updateSubscription, getUserSubscription } = useAuth();
+    const { isPremium, premiumColors } = usePremiumTheme();
     const [isUpgrading, setIsUpgrading] = useState(false);
     const [upgradeStatus, setUpgradeStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
@@ -106,20 +108,24 @@ export default function SubscriptionUpgradeModal({
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
             <div className="bg-white rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
                 {/* Header */}
-                <div className="p-6 border-b border-gray-200">
+                <div className={`p-6 border-b ${isPremium ? 'border-premium-gold/30' : 'border-gray-200'}`}>
                     <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-3">
-                            <div className="p-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg">
+                            <div className={`p-2 rounded-lg ${
+                                isPremium 
+                                    ? 'bg-gradient-to-r from-premium-gold to-premium-emerald'
+                                    : 'bg-gradient-to-r from-blue-500 to-purple-600'
+                            }`}>
                                 <Crown className="w-6 h-6 text-white" />
                             </div>
                             <div>
-                                <h2 className="text-2xl font-bold text-gray-900">
-                                    Upgrade Your Resume Builder
+                                <h2 className={`text-2xl font-bold ${isPremium ? 'text-premium-navy' : 'text-gray-900'}`}>
+                                    {isPremium ? '👑 Royal Premium Upgrade' : 'Upgrade Your Resume Builder'}
                                 </h2>
-                                <p className="text-gray-600">
+                                <p className={isPremium ? 'text-premium-navy/80' : 'text-gray-600'}>
                                     {lockedTemplate 
                                         ? `Unlock "${lockedTemplate}" template and more features`
-                                        : 'Get access to premium templates and features'
+                                        : isPremium ? 'Access exclusive Royal Tech Luxe templates and features' : 'Get access to premium templates and features'
                                     }
                                 </p>
                             </div>

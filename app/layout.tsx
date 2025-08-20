@@ -36,7 +36,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     return (
         <html lang="en" data-oid="m0hu0qs">
             <head data-oid="t:5qk.9">
-                <link rel="icon" href="/favicon.ico" data-oid="ia5ham1" />
+                <link rel="icon" href="/favicon.ico" type="image/x-icon" data-oid="ia5ham1" />
+                <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+                <link rel="apple-touch-icon" href="/favicon.svg" />
                 <link rel="canonical" href="https://careerx.com" data-oid="etgmhph" />
             </head>
             <body className="" data-oid="5ntnda_">
