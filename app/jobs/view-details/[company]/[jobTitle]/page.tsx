@@ -1,11 +1,11 @@
 'use client';
 
-import MainNavbar from '@/components/mainNavbar';
-import { useState, useEffect } from 'react';
-import { useParams, useRouter } from 'next/navigation';
 import { Job } from '@/app/jobs/page';
-import Link from 'next/link';
+import MainNavbar from '@/components/mainNavbar';
 import { findJobBySlug } from '@/lib/mockData';
+import Link from 'next/link';
+import { useParams, useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 export default function JobDetailsPage() {
     const params = useParams();

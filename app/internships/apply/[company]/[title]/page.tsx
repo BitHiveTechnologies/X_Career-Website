@@ -1,9 +1,9 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useParams } from 'next/navigation';
 import MainNavbar from '@/components/mainNavbar';
 import { mockInternships, type Internship } from '@/lib/mockData';
+import { useParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 export default function InternshipApplicationPage() {
     const params = useParams();

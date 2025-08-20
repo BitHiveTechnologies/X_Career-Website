@@ -27,6 +27,15 @@
     }
 }
 
+@keyframes scroll-reverse {
+    0% {
+        transform: translateX(-50%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
 @keyframes ring {
     0%,
     100% {
@@ -65,6 +74,18 @@
 
 .animate-scroll {
     animation: scroll 40s linear infinite;
+}
+
+.animate-scroll-reverse {
+    animation: scroll-reverse 40s linear infinite;
+}
+
+.animate-scroll-slow {
+    animation: scroll 60s linear infinite;
+}
+
+.animate-scroll-reverse-slow {
+    animation: scroll-reverse 60s linear infinite;
 }
 
 .pause-animation {

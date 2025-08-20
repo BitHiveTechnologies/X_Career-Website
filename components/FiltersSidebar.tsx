@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from 'react';
 import { FilterOptions } from '@/app/jobs/page';
+import { useState } from 'react';
 
 interface FiltersSidebarProps {
     filters: FilterOptions | any;

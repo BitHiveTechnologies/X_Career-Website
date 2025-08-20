@@ -59,17 +59,52 @@ const config: Config = {
     				'4': 'hsl(var(--chart-4))',
     				'5': 'hsl(var(--chart-5))'
     			},
-    			sidebar: {
-    				DEFAULT: 'hsl(var(--sidebar-background))',
-    				foreground: 'hsl(var(--sidebar-foreground))',
-    				primary: 'hsl(var(--sidebar-primary))',
-    				'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
-    				accent: 'hsl(var(--sidebar-accent))',
-    				'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
-    				border: 'hsl(var(--sidebar-border))',
-    				ring: 'hsl(var(--sidebar-ring))'
-    			}
-    		},
+    						sidebar: {
+				DEFAULT: 'hsl(var(--sidebar-background))',
+				foreground: 'hsl(var(--sidebar-foreground))',
+				primary: 'hsl(var(--sidebar-primary))',
+				'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
+				accent: 'hsl(var(--sidebar-accent))',
+				'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
+				border: 'hsl(var(--sidebar-border))',
+				ring: 'hsl(var(--sidebar-ring))'
+			},
+			// Luxury Emerald & Gold Premium Color Palette
+			premium: {
+				emerald: '#065F46',        // Deep Emerald - Primary background
+				forest: '#064E3B',         // Forest Green - Secondary background
+				gold: '#D97706',           // Gold - Primary accent
+				amber: '#F59E0B',          // Amber - Secondary accent
+				cream: '#FEF3C7',          // Cream - Light accent
+				'emerald-light': '#047857', // Lighter emerald for hover states
+				'forest-light': '#065F46',  // Lighter forest for hover states
+				'gold-light': '#F59E0B',   // Lighter gold for hover states
+				// New Premium Color Palette
+				navy: '#1a365d',          // Deep navy blue
+				burgundy: '#7c2d12',      // Rich burgundy
+				champagne: '#f7fafc',     // Soft champagne
+				copper: '#c05621',        // Warm copper
+				slate: '#2d3748',         // Sophisticated slate
+			},
+			// Elegant Dark Theme Colors
+			dark: {
+				charcoal: '#1f2937',   // Deep charcoal
+				gold: '#f59e0b',       // Rich gold
+				silver: '#e5e7eb',     // Light silver
+				emerald: '#059669',     // Emerald accent
+				slate: '#374151',       // Dark slate
+			},
+			// New Color Palette from Design
+			notify: {
+				'golden-yellow': '#FFC94D',  // Primary - Golden Yellow
+				'orange-gold': '#FFA726',     // Primary - Orange-Gold
+				'deep-black': '#0E0E0E',     // Primary - Deep Black
+				'royal-purple': '#8B5CF6',   // Secondary - Royal Purple
+				'pure-white': '#FFFFFF',     // Secondary - Pure White
+				'bright-red': '#FF3B30',     // Accent - Bright Red
+				'soft-gray': '#C7C7CC',      // Accent - Soft Gray
+			}
+		},
     		animation: {
     			blob: 'blob 7s infinite',
     			float: 'float 6s ease-in-out infinite',

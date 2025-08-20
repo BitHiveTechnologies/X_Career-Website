@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from 'react';
 import { Job } from '@/app/jobs/page';
+import { useState } from 'react';
 
 interface JobDetailsModalProps {
     job: Job;

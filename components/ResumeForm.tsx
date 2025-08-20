@@ -14,9 +14,10 @@ interface ResumeFormProps {
     resumeData: ResumeData;
     activeSection: string;
     onDataChange: (section: keyof ResumeData, data: any) => void;
+    selectedTemplate?: string;
 }
 
-export default function ResumeForm({ resumeData, activeSection, onDataChange }: ResumeFormProps) {
+export default function ResumeForm({ resumeData, activeSection, onDataChange, selectedTemplate }: ResumeFormProps) {
     const [newSkillCategory, setNewSkillCategory] = useState('');
 
     const handlePersonalInfoChange = (field: keyof PersonalInfo, value: string) => {
@@ -275,22 +276,42 @@ export default function ResumeForm({ resumeData, activeSection, onDataChange }: 
         </div>
     );
 
-    const renderExperience = () => (
-        <div className="p-6 space-y-6" data-oid="c1v:7-v">
-            <div className="flex items-center justify-between" data-oid="f2o7big">
-                <h3 className="text-xl font-semibold text-gray-800" data-oid="8i-iq51">
-                    Work Experience
-                </h3>
-                <button
-                    onClick={addExperience}
-                    className="px-4 py-2 bg-[hsl(196,80%,45%)] text-white rounded-md hover:bg-[hsl(196,80%,40%)] transition-colors duration-200"
-                    data-oid="_65--s:"
-                >
-                    Add Experience
-                </button>
-            </div>
+    const renderExperience = () => {
+        const isMinimalTemplate = selectedTemplate === 'minimal';
+        
+        return (
+            <div className="p-6 space-y-6" data-oid="c1v:7-v">
+                <div className="flex items-center justify-between" data-oid="f2o7big">
+                    <h3 className="text-xl font-semibold text-gray-800" data-oid="8i-iq51">
+                        Work Experience
+                    </h3>
+                    {!isMinimalTemplate && (
+                        <button
+                            onClick={addExperience}
+                            className="px-4 py-2 bg-[hsl(196,80%,45%)] text-white rounded-md hover:bg-[hsl(196,80%,40%)] transition-colors duration-200"
+                            data-oid="_65--s:"
+                        >
+                            Add Experience
+                        </button>
+                    )}
+                </div>
+                
+                {isMinimalTemplate && (
+                    <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                        <div className="flex items-center gap-2 text-yellow-800">
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span className="font-medium">Experience section is disabled for Minimal Clean template</span>
+                        </div>
+                        <p className="text-yellow-700 text-sm mt-2">
+                            This template is designed for freshers and focuses on education, projects, and skills. 
+                            Switch to another template if you need to include work experience.
+                        </p>
+                    </div>
+                )}
 
-            {resumeData.experience.map((exp, index) => (
+            {!isMinimalTemplate && resumeData.experience.map((exp, index) => (
                 <div
                     key={exp.id}
                     className="border border-gray-200 rounded-lg p-4 space-y-4"
@@ -443,7 +464,7 @@ export default function ResumeForm({ resumeData, activeSection, onDataChange }: 
                 </div>
             ))}
 
-            {resumeData.experience.length === 0 && (
+            {resumeData.experience.length === 0 && !isMinimalTemplate && (
                 <div className="text-center py-8 text-gray-500" data-oid="8cj925:">
                     <p data-oid="2h24tch">No work experience added yet.</p>
                     <p className="text-sm" data-oid=":snv5df">
@@ -453,6 +474,7 @@ export default function ResumeForm({ resumeData, activeSection, onDataChange }: 
             )}
         </div>
     );
+    };
 
     const renderEducation = () => (
         <div className="p-6 space-y-6" data-oid="bc4_vg9">

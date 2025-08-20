@@ -1,13 +1,12 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useAuth } from '@/lib/auth/AuthContext';
-import { useRouter } from 'next/navigation';
-import MainNavbar from '@/components/mainNavbar';
-import { mockJobs, mockInternships } from '@/lib/mockData';
 import { Job } from '@/app/jobs/page';
-import { Internship } from '@/lib/mockData';
+import MainNavbar from '@/components/mainNavbar';
+import { useAuth } from '@/lib/auth/AuthContext';
+import { Internship, mockInternships, mockJobs } from '@/lib/mockData';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 type ApplicationStatus = 'applied' | 'under-review' | 'interview' | 'rejected' | 'accepted';
 

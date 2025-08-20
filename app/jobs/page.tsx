@@ -1,10 +1,11 @@
 'use client';
 
-import MainNavbar from '@/components/mainNavbar';
-import { useState, useEffect } from 'react';
-import JobCard from '@/components/JobCard';
-import FiltersSidebar from '@/components/FiltersSidebar';
 import CategoryMenu from '@/components/CategoryMenu';
+import FiltersSidebar from '@/components/FiltersSidebar';
+import JobCard from '@/components/JobCard';
+import MainNavbar from '@/components/mainNavbar';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { Suspense, useEffect, useState } from 'react';
 
 // TypeScript Interfaces
 export interface Job {
@@ -332,7 +333,7 @@ const mockCategories: Category[] = [
     { id: 12, name: 'Sales & Business', count: 654, slug: 'sales' },
 ];
 
-export default function JobsPage() {
+function JobsPageContent() {
     const [jobs, setJobs] = useState<Job[]>(mockJobs);
     const [filteredJobs, setFilteredJobs] = useState<Job[]>(mockJobs);
     const [categories] = useState<Category[]>(mockCategories);
@@ -352,6 +353,57 @@ export default function JobsPage() {
     const [viewMode, setViewMode] = useState<'grid' | 'list'>('list');
     const [sortBy, setSortBy] = useState('relevance');
     const [visibleJobs, setVisibleJobs] = useState(6);
+    const router = useRouter();
+    const searchParams = useSearchParams();
+
+    // Read URL search parameters on component mount
+    useEffect(() => {
+        const searchParam = searchParams.get('search');
+        if (searchParam) {
+            setSearchQuery(decodeURIComponent(searchParam));
+        }
+    }, [searchParams]); // Include searchParams as dependency
+
+    // Cleanup effect for debounced functions
+    useEffect(() => {
+        return () => {
+            // Cleanup any pending timeouts when component unmounts
+        };
+    }, []);
+
+    // Function to update URL when search query changes (debounced)
+    const updateSearchURL = (query: string) => {
+        try {
+            // Debounce URL updates to avoid excessive router calls
+            const timeoutId = setTimeout(() => {
+                if (query.trim()) {
+                    const params = new URLSearchParams(searchParams.toString());
+                    params.set('search', query);
+                    router.replace(`/jobs?${params.toString()}`);
+                } else {
+                    const params = new URLSearchParams(searchParams.toString());
+                    params.delete('search');
+                    router.replace(`/jobs?${params.toString()}`);
+                }
+            }, 300); // 300ms debounce
+
+            return () => clearTimeout(timeoutId);
+        } catch (error) {
+            // console.error('Error updating search URL:', error);
+        }
+    };
+
+    // Function to clear search and update URL immediately
+    const clearSearch = () => {
+        setSearchQuery('');
+        try {
+            const params = new URLSearchParams(searchParams.toString());
+            params.delete('search');
+            router.replace(`/jobs?${params.toString()}`);
+        } catch (error) {
+            // console.error('Error clearing search URL:', error);
+        }
+    };
 
     // Enhanced filter logic with search and advanced filtering
     useEffect(() => {
@@ -519,6 +571,8 @@ export default function JobsPage() {
         setSelectedCategory('all');
         setSearchQuery('');
         setSearchLocation('');
+        // Clear URL search parameters
+        router.replace('/jobs');
     };
 
     const handleSearch = (e: React.FormEvent) => {
@@ -612,10 +666,28 @@ export default function JobsPage() {
                                         type="text"
                                         placeholder="Job title, skills, or company"
                                         value={searchQuery}
-                                        onChange={(e) => setSearchQuery(e.target.value)}
+                                        onChange={(e) => {
+                                            const value = e.target.value;
+                                            setSearchQuery(value);
+                                            // Only update URL when user stops typing (debounced)
+                                            if (value.trim()) {
+                                                updateSearchURL(value);
+                                            }
+                                        }}
                                         className="w-full pl-10 pr-4 py-3 bg-white/90 backdrop-blur-sm border border-white/30 rounded-xl text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all duration-300"
                                         data-oid="m0k26yz"
                                     />
+                                    {searchQuery && (
+                                        <button
+                                            type="button"
+                                            onClick={clearSearch}
+                                            className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 transition-colors"
+                                        >
+                                            <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                                            </svg>
+                                        </button>
+                                    )}
                                 </div>
 
                                 {/* Location Search */}
@@ -697,7 +769,17 @@ export default function JobsPage() {
                                 ].map((tag) => (
                                     <button
                                         key={tag}
-                                        onClick={() => setSearchQuery(tag)}
+                                        onClick={() => {
+                                            setSearchQuery(tag);
+                                            // Immediate URL update for quick search tags
+                                            try {
+                                                const params = new URLSearchParams(searchParams.toString());
+                                                params.set('search', tag);
+                                                router.replace(`/jobs?${params.toString()}`);
+                                            } catch (error) {
+                                                // console.error('Error updating quick search URL:', error);
+                                            }
+                                        }}
                                         className="px-3 py-1 bg-white/20 backdrop-blur-sm text-white text-sm rounded-full hover:bg-white/30 transition-all duration-300"
                                         data-oid="s463h6f"
                                     >
@@ -740,7 +822,7 @@ export default function JobsPage() {
                                     strokeLinecap="round"
                                     strokeLinejoin="round"
                                     strokeWidth="2"
-                                    d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H8a2 2 0 01-2-2V8a2 2 0 012-2V6"
+                                                                            d="M12 6v6m0 0v6m0-6h6m-6 0H6"
                                     data-oid="8ntyjob"
                                 />
                             </svg>
@@ -1051,5 +1133,23 @@ export default function JobsPage() {
                 </div>
             </section>
         </div>
+    );
+}
+
+export default function JobsPage() {
+    return (
+        <Suspense fallback={
+            <div className="min-h-screen bg-white text-gray-800 font-sans">
+                <MainNavbar />
+                <div className="flex items-center justify-center min-h-screen">
+                    <div className="text-center">
+                        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-[hsl(196,80%,45%)] mx-auto"></div>
+                        <p className="mt-4 text-lg text-gray-600">Loading jobs...</p>
+                    </div>
+                </div>
+            </div>
+        }>
+            <JobsPageContent />
+        </Suspense>
     );
 }

@@ -1,11 +1,11 @@
 'use client';
 
-import MainNavbar from '@/components/mainNavbar';
-import JobApplicationModal from '@/components/JobApplicationModal';
-import { useState, useEffect } from 'react';
-import { useParams, useRouter } from 'next/navigation';
 import { Job } from '@/app/jobs/page';
+import JobApplicationModal from '@/components/JobApplicationModal';
+import MainNavbar from '@/components/mainNavbar';
 import { findJobBySlug } from '@/lib/mockData';
+import { useParams, useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 export default function JobApplyPage() {
     const params = useParams();
@@ -25,7 +25,7 @@ export default function JobApplyPage() {
     }, [params]);
 
     const handleApplicationSubmit = (applicationData: any) => {
-        console.log('Application submitted:', applicationData);
+
         // Handle application submission
         router.push('/jobs?applied=true');
     };

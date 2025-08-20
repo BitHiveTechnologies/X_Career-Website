@@ -1,19 +1,19 @@
 "use client"
 
-import { useState } from "react"
 import { ChartAreaInteractive } from "@/components/chart-area-interactive"
 import { FlexibleDataTable } from "@/components/flexible-data-table"
-import { SectionCards } from "@/components/section-cards"
 import { QuickCreateModal } from "@/components/QuickCreateModal"
+import { SectionCards } from "@/components/section-cards"
 import { SharedLayout } from "@/components/shared-layout"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Plus, Users, Briefcase, GraduationCap, CreditCard } from "lucide-react"
+import { Briefcase, CreditCard, GraduationCap, Plus, Users } from "lucide-react"
+import { useState } from "react"
 
-import data from "./data.json"
 import customersData from "./customers-data.json"
-import jobsData from "./jobs-data.json"
+import data from "./data.json"
 import internshipsData from "./internships-data.json"
+import jobsData from "./jobs-data.json"
 import paymentsData from "./payments-data.json"
 
 export default function Page() {
@@ -21,7 +21,7 @@ export default function Page() {
   const [activeTab, setActiveTab] = useState("customers")
 
   const handleQuickCreate = (formData: any) => {
-    console.log("Quick Create Data:", formData)
+    
     // Here you would typically send the data to your backend
     // For now, we'll just log it to the console
     alert(`${formData.title ? 'Job' : 'Internship'} created successfully!`)
