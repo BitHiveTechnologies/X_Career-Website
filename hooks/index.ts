@@ -1,5 +1,6 @@
 export {
-    useProgressiveEnhancement,
     useClientOnly,
-    useGracefulDegradation,
+    useGracefulDegradation, useProgressiveEnhancement
 } from './useProgressiveEnhancement';
+
+export { usePremiumTheme } from './usePremiumTheme';

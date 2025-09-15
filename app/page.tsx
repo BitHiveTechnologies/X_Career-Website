@@ -1,8 +1,11 @@
 'use client';
 import MainNavbar from '@/components/mainNavbar';
-import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { usePremiumTheme } from '@/hooks/usePremiumTheme';
+import { useAuth } from '@/lib/auth/AuthContext';
 import { useAuthAction } from '@/lib/auth/useAuthAction';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 // Dummy data for the page
 const dummyData: {
@@ -28,7 +31,7 @@ const dummyData: {
             id: 1,
             name: 'Priya Sharma',
             company: 'Google',
-            quote: 'CareerX gave me the confidence to land my role at Google.',
+                            quote: 'X Careers gave me the confidence to land my role at Google.',
             image: 'https://randomuser.me/api/portraits/women/1.jpg',
         },
         {
@@ -56,7 +59,7 @@ const dummyData: {
             id: 5,
             name: 'Neha Gupta',
             company: 'Flipkart',
-            quote: 'From campus to Flipkart in 3 months thanks to CareerX resources!',
+                            quote: 'From campus to Flipkart in 3 months thanks to X Careers resources!',
             image: 'https://randomuser.me/api/portraits/women/5.jpg',
         },
         {
@@ -70,7 +73,7 @@ const dummyData: {
             id: 7,
             name: 'Kavita Desai',
             company: 'TCS',
-            quote: 'Found my first job through CareerX job board - so grateful!',
+                            quote: 'Found my first job through X Careers job board - so grateful!',
             image: 'https://randomuser.me/api/portraits/women/7.jpg',
         },
         {
@@ -84,7 +87,7 @@ const dummyData: {
             id: 9,
             name: 'Divya Sharma',
             company: 'IBM',
-            quote: 'CareerX helped me transition from college to a tech career seamlessly.',
+                            quote: 'X Careers helped me transition from college to a tech career seamlessly.',
             image: 'https://randomuser.me/api/portraits/women/9.jpg',
         },
     ],
@@ -201,7 +204,7 @@ interface Feature {
 const Logo = () => (
     <svg
         className="h-8 w-auto"
-        viewBox="0 0 120 30"
+        viewBox="0 0 140 30"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         data-oid="6g8ar7h"
@@ -228,12 +231,12 @@ const Logo = () => (
             x="60"
             y="22"
             fontFamily="Arial"
-            fontSize="18"
+            fontSize="16"
             fontWeight="bold"
             fill="#1E3A8A"
             data-oid="8own87j"
         >
-            Careers
+            X Careers
         </text>
     </svg>
 );
@@ -246,9 +249,14 @@ export default function Page() {
     const [features, setFeatures] = useState<Feature[]>([]);
     const [benefits, setBenefits] = useState<Benefit[]>([]);
     const { navigateWithAuth } = useAuthAction();
+    const { isAuthenticated } = useAuth();
+    const { isPremium, premiumColors } = usePremiumTheme();
+    const router = useRouter();
 
     // Add custom CSS for animations
     useEffect(() => {
+        if (typeof window === 'undefined') return; // SSR safety
+        
         const style = document.createElement('style');
         style.innerHTML = `
             @keyframes scroll {
@@ -267,29 +275,42 @@ export default function Page() {
                 animation-play-state: paused;
             }
         `;
+        
         document.head.appendChild(style);
+        
         return () => {
-            document.head.removeChild(style);
+            try {
+                if (style && style.parentNode) {
+                    document.head.removeChild(style);
+                }
+            } catch (error) {
+                // Style already removed, ignore
+            }
         };
     }, []);
 
     useEffect(() => {
         // Simulate API calls
         const loadData = async () => {
-            const [statsData, testimonialsData, resourcesData, featuresData, benefitsData] =
-                await Promise.all([
-                    fetchStats(),
-                    fetchTestimonials(),
-                    fetchResources(),
-                    fetchFeatures(),
-                    fetchBenefits(),
-                ]);
+            try {
+                const [statsData, testimonialsData, resourcesData, featuresData, benefitsData] =
+                    await Promise.all([
+                        fetchStats(),
+                        fetchTestimonials(),
+                        fetchResources(),
+                        fetchFeatures(),
+                        fetchBenefits(),
+                    ]);
 
-            setStats(statsData);
-            setTestimonials(testimonialsData);
-            setResources(resourcesData);
-            setFeatures(featuresData);
-            setBenefits(benefitsData);
+                setStats(statsData);
+                setTestimonials(testimonialsData);
+                setResources(resourcesData);
+                setFeatures(featuresData);
+                setBenefits(benefitsData);
+            } catch (error) {
+                // Handle data loading errors gracefully
+                // console.warn('Failed to load some data, using defaults');
+            }
         };
 
         loadData();
@@ -297,10 +318,18 @@ export default function Page() {
 
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault();
-        // Implement search functionality with backend
-        console.log('Searching for:', searchQuery);
-        // Reset search field
-        setSearchQuery('');
+        const trimmedQuery = searchQuery.trim();
+        if (trimmedQuery) {
+            try {
+                // Redirect to jobs page with search query
+                const encodedQuery = encodeURIComponent(trimmedQuery);
+                router.push(`/jobs?search=${encodedQuery}`);
+            } catch (error) {
+                // console.error('Error redirecting to jobs page:', error);
+                // Fallback: just navigate to jobs page
+                router.push('/jobs');
+            }
+        }
     };
 
     return (
@@ -390,10 +419,12 @@ export default function Page() {
                                         </svg>{' '}
                                     </a>{' '}
                                     <a
-                                        href="/whatsapp"
+                                        href="https://whatsapp.com/channel/0029Vak7B1WLo4hdCrawMw3i"
                                         className="inline-flex items-center justify-center w-7 h-7 bg-green-500 hover:bg-green-600 text-white rounded-full transition-all duration-300"
                                         title="Join WhatsApp Community"
                                         data-oid="1:1bicz"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
                                     >
                                         {' '}
                                         <svg
@@ -418,9 +449,11 @@ export default function Page() {
                                 >
                                     {' '}
                                     <a
-                                        href="/telegram"
+                                        href="https://t.me/xcareerconnect"
                                         className="inline-flex items-center px-3 py-1 bg-teal-500 hover:bg-teal-600 text-white text-xs font-medium rounded-md transition-all duration-300"
                                         data-oid="jog_-.-"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
                                     >
                                         {' '}
                                         <svg
@@ -439,9 +472,11 @@ export default function Page() {
                                         Join Telegram Community{' '}
                                     </a>{' '}
                                     <a
-                                        href="/whatsapp"
+                                        href="https://whatsapp.com/channel/0029Vak7B1WLo4hdCrawMw3i"
                                         className="inline-flex items-center px-3 py-1 bg-green-500 hover:bg-green-600 text-white text-xs font-medium rounded-md transition-all duration-300"
                                         data-oid="473:p05"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
                                     >
                                         {' '}
                                         <svg
@@ -459,9 +494,9 @@ export default function Page() {
                                         </svg>{' '}
                                         Join WhatsApp Community{' '}
                                     </a>{' '}
-                                </div>{' '}
-                            </div>{' '}
-                        </div>{' '}
+                                </div>
+                            </div>
+                        </div>
                     </div>{' '}
                 </div>{' '}
             </header>{' '}
@@ -494,206 +529,155 @@ export default function Page() {
                         ></div>{' '}
                     </div>{' '}
                     <div
-                        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-24"
+                        className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 md:py-28"
                         data-oid="by08u-x"
                     >
-                        {' '}
-                        <div
-                            className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center"
-                            data-oid="6aywrti"
-                        >
-                            {' '}
-                            <div
-                                className="text-center lg:text-left order-2 lg:order-1"
-                                data-oid="iccre4n"
-                            >
-                                {' '}
-                                <div
-                                    className="inline-block bg-blue-600 px-3 py-1 rounded-full text-xs font-bold tracking-wider mb-4 sm:mb-6 uppercase text-white"
-                                    data-oid="sjc-dts"
-                                >
-                                    {' '}
-                                    India's most trusted Platform For Tech Freshers{' '}
-                                </div>{' '}
-                                <h1
-                                    className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6 text-white drop-shadow-md leading-tight"
-                                    data-oid=".vfbeuv"
-                                >
-                                    {' '}
-                                    JOIN THOUSANDS GETTING JOBS IN TOP TECH COMPANIES{' '}
-                                </h1>{' '}
-                                <p
-                                    className="text-lg sm:text-xl lg:text-2xl mb-6 sm:mb-8 text-white/90"
-                                    data-oid="f3-eg-k"
-                                >
-                                    {' '}
+                        <div className="text-center max-w-5xl mx-auto">
+                            {/* Trust Badge */}
+                            <div className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-semibold tracking-wide mb-8 text-white border border-white/20 shadow-lg">
+                                <svg className="h-4 w-4 text-yellow-300" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                                </svg>
+                                India's most trusted Platform For Tech Freshers
+                            </div>
+                            
+                            {/* Main Heading */}
+                            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 sm:mb-8 text-white leading-tight">
+                                <span className="block bg-gradient-to-r from-white to-blue-100 bg-clip-text text-transparent">
+                                    JOIN THOUSANDS
+                                </span>
+                                <span className="block bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent">
+                                    GETTING JOBS
+                                </span>
+                                <span className="block bg-gradient-to-r from-white to-blue-100 bg-clip-text text-transparent">
+                                    IN TOP TECH COMPANIES
+                                </span>
+                            </h1>
+                            
+                            {/* Subtitle */}
+                            <p className="text-lg sm:text-xl lg:text-2xl mb-8 sm:mb-10 text-white/95 max-w-3xl mx-auto leading-relaxed">
                                     Discover Jobs, Internships, and Resources tailored for
-                                    Freshers{' '}
-                                </p>{' '}
-                                <div
-                                    className="flex flex-col sm:flex-row gap-4 mt-6 sm:mt-10 justify-center lg:justify-start"
-                                    data-oid="-2p0qoa"
+                                <span className="font-semibold text-yellow-300"> Freshers</span>
+                            </p>
+                            
+                            {/* Stats Row */}
+                            <div className="flex flex-wrap justify-center gap-6 mb-10 sm:mb-12">
+                                <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20">
+                                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                                    <span className="text-white/90 text-sm font-medium">35,000+ Active Members</span>
+                                </div>
+                                <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20">
+                                    <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
+                                    <span className="text-white/90 text-sm font-medium">10,000+ Jobs Posted</span>
+                                </div>
+                                <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20">
+                                    <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
+                                    <span className="text-white/90 text-sm font-medium">95% Success Rate</span>
+                                </div>
+                            </div>
+                            
+                            {/* CTA Buttons */}
+                            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                                <a
+                                    href="/community"
+                                    className="group inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] text-white rounded-xl font-semibold text-lg transition-all duration-300 hover:translate-y-[-3px] hover:shadow-2xl transform hover:scale-105 border-2 border-[hsl(196,80%,45%)]/30"
                                 >
-                                    {' '}
-                                    <button
-                                        onClick={() => navigateWithAuth('/community')}
-                                        className="inline-flex items-center justify-center px-6 py-3 bg-white/20 backdrop-blur-md border border-white/30 hover:bg-white/30 rounded-md font-medium transition-all duration-300 hover:translate-y-[-2px] hover:shadow-lg text-white"
-                                        data-oid="67cv_h4"
-                                    >
-                                        {' '}
-                                        Join Community{' '}
-                                        <svg
-                                            className="ml-2 h-5 w-5"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            viewBox="0 0 24 24"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            data-oid="wisz:ys"
-                                        >
-                                            {' '}
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth="2"
-                                                d="M14 5l7 7m0 0l-7 7m7-7H3"
-                                                data-oid="1o2nj.0"
-                                            ></path>{' '}
-                                        </svg>{' '}
-                                    </button>{' '}
-                                    <div className="relative group" data-oid="64ijo5v">
+                                    <svg className="mr-3 h-6 w-6 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                                    </svg>
+                                    Join Community
+                                    <svg className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                    </svg>
+                                </a>
+                                
+                                <div className="relative group">
                                         <button
                                             onClick={(e) => {
                                                 e.preventDefault();
-                                                console.log('Browse Jobs button clicked!'); // Debug log
                                                 try {
-                                                    // Multiple fallback methods
                                                     if (typeof window !== 'undefined') {
-                                                        // Method 1: Direct navigation
                                                         window.location.href = '/jobs';
                                                     }
                                                 } catch (error) {
-                                                    console.error('Navigation error:', error);
-                                                    // Method 2: Fallback
+                                                    // Handle navigation error silently
                                                     try {
                                                         window.open('/jobs', '_self');
                                                     } catch (fallbackError) {
-                                                        console.error(
-                                                            'Fallback navigation error:',
-                                                            fallbackError,
-                                                        );
-                                                        // Method 3: Last resort
+                                                        // Use fallback navigation
                                                         document.location.href = '/jobs';
                                                     }
                                                 }
                                             }}
-                                            className="inline-flex items-center justify-center px-6 py-3 bg-white text-[hsl(196,80%,45%)] hover:bg-gray-50 rounded-md font-medium transition-all duration-300 hover:translate-y-[-2px] hover:shadow-lg cursor-pointer border-2 border-transparent hover:border-[hsl(196,80%,45%)]/20 active:scale-95 group-hover:shadow-xl"
+                                        className="group inline-flex items-center justify-center px-8 py-4 bg-white hover:bg-gray-50 text-[hsl(196,80%,45%)] rounded-xl font-semibold text-lg transition-all duration-300 hover:translate-y-[-3px] hover:shadow-2xl cursor-pointer border-2 border-white/20 hover:border-white/40 transform hover:scale-105"
                                             type="button"
-                                            data-oid="u431.1a"
-                                        >
-                                            <svg
-                                                className="mr-2 h-5 w-5 transition-transform group-hover:scale-110"
-                                                fill="none"
-                                                stroke="currentColor"
-                                                viewBox="0 0 24 24"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                data-oid="htp87xe"
-                                            >
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    strokeWidth="2"
-                                                    d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H8a2 2 0 01-2-2V8a2 2 0 012-2V6"
-                                                    data-oid="mtgjsco"
-                                                />
+                                    >
+                                        <svg className="mr-3 h-6 w-6 transition-transform group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                                             </svg>
                                             Browse Jobs
+                                        <svg className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                        </svg>
                                         </button>
-                                        {/* Fallback link for accessibility and SEO */}
-                                        <a
-                                            href="/jobs"
-                                            className="absolute inset-0 opacity-0 pointer-events-none"
-                                            aria-label="Browse Jobs"
-                                            tabIndex={-1}
-                                            data-oid="vf.kvqc"
-                                        >
+                                    <a href="/jobs" className="absolute inset-0 opacity-0 pointer-events-none" aria-label="Browse Jobs" tabIndex={-1}>
                                             Browse Jobs
                                         </a>
-                                    </div>{' '}
-                                </div>{' '}
-                            </div>{' '}
-                            <div className="relative order-1 lg:order-2" data-oid="71i_8no">
-                                {' '}
-                                <div
-                                    className="bg-white/10 backdrop-blur-md rounded-2xl p-4 sm:p-6 border border-white/20 shadow-xl transform hover:scale-[1.01] transition-all duration-500 relative z-10"
-                                    data-oid="93vtz_v"
-                                >
-                                    {' '}
-                                    <div className="mb-4 sm:mb-6" data-oid=":5_cy-d">
-                                        {' '}
+                                </div>
+                            </div>
+                            
+                            {/* Search Section */}
+                            <div className="mt-12 sm:mt-16 max-w-4xl mx-auto">
+                                <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 sm:p-8 border border-white/20 shadow-xl transform hover:scale-[1.01] transition-all duration-500 relative z-10">
+                                    <div className="mb-6">
                                         <form
                                             onSubmit={handleSearch}
-                                            className="flex flex-col sm:flex-row gap-3 sm:gap-0 relative z-10 transform transition-all duration-500 hover:scale-[1.02]"
-                                            data-oid="hz9ryne"
+                                            className="flex flex-col sm:flex-row gap-4 relative z-10 transform transition-all duration-500 hover:scale-[1.02]"
                                         >
-                                            {' '}
                                             <input
                                                 type="text"
                                                 placeholder="Search Entry Level Jobs..."
-                                                className="w-full px-4 py-3 rounded-md sm:rounded-l-md sm:rounded-r-none text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-inner text-sm sm:text-base"
+                                                className="w-full px-6 py-4 rounded-xl sm:rounded-l-xl sm:rounded-r-none text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-inner text-base sm:text-lg font-medium"
                                                 value={searchQuery}
                                                 onChange={(e) => setSearchQuery(e.target.value)}
-                                                data-oid="gz:jftg"
-                                            />{' '}
+                                            />
                                             <button
                                                 type="submit"
-                                                className="bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] hover:from-[hsl(175,70%,41%)] hover:to-[hsl(196,80%,45%)] px-6 py-3 rounded-md sm:rounded-l-none sm:rounded-r-md font-medium transition-all duration-300 shadow-lg text-white text-sm sm:text-base"
-                                                data-oid="7g499s."
+                                                className="bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] hover:from-[hsl(175,70%,41%)] hover:to-[hsl(196,80%,45%)] px-8 py-4 rounded-xl sm:rounded-l-none sm:rounded-r-xl font-semibold transition-all duration-300 shadow-lg text-white text-base sm:text-lg transform hover:scale-105"
                                             >
-                                                {' '}
-                                                SEARCH{' '}
-                                            </button>{' '}
-                                        </form>{' '}
-                                    </div>{' '}
-                                    <div
-                                        className="flex flex-wrap gap-2 sm:gap-3 mb-4 sm:mb-6 justify-center"
-                                        data-oid="yecscms"
-                                    >
-                                        {' '}
-                                        <div
-                                            className="bg-white/20 backdrop-blur-md px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm border border-white/30 shadow-sm hover:shadow-md transition-all duration-300 hover:bg-white/30 text-white font-medium"
-                                            data-oid="c2a7c1g"
-                                        >
-                                            {' '}
-                                            {stats?.freshers.toLocaleString()} Freshers{' '}
-                                        </div>{' '}
-                                        <div
-                                            className="bg-white/20 backdrop-blur-md px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm border border-white/30 shadow-sm hover:shadow-md transition-all duration-300 hover:bg-white/30 text-white font-medium"
-                                            data-oid="zz2-m-o"
-                                        >
-                                            {' '}
-                                            {stats?.verifiedJobs} Verified Jobs{' '}
-                                        </div>{' '}
-                                        <div
-                                            className="bg-white/20 backdrop-blur-md px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm border border-white/30 shadow-sm hover:shadow-md transition-all duration-300 hover:bg-white/30 text-white font-medium"
-                                            data-oid="l2pnv8v"
-                                        >
-                                            {' '}
-                                            Entry-Level Focused{' '}
-                                        </div>{' '}
-                                    </div>{' '}
-                                    <div
-                                        className="absolute -bottom-3 -right-3 w-16 h-16 sm:w-20 sm:h-20 bg-[hsl(196,80%,65%)] opacity-60 rounded-full blur-xl"
-                                        data-oid="vbayuga"
-                                    ></div>{' '}
-                                    <div
-                                        className="absolute -top-3 -left-3 w-16 h-16 sm:w-20 sm:h-20 bg-[hsl(175,70%,61%)] opacity-60 rounded-full blur-xl"
-                                        data-oid="o45g_bj"
-                                    ></div>{' '}
-                                </div>{' '}
-                            </div>{' '}
-                        </div>{' '}
-                    </div>{' '}
-                </section>{' '}
+                                                SEARCH
+                                            </button>
+                                        </form>
+                                    </div>
+                                    <div className="flex flex-wrap gap-3 sm:gap-4 justify-center">
+                                        <div className="bg-white/20 backdrop-blur-md px-4 py-2 rounded-full text-sm border border-white/30 shadow-sm hover:shadow-md transition-all duration-300 hover:bg-white/30 text-white font-medium">
+                                            {stats?.freshers.toLocaleString()} Freshers
+                                        </div>
+                                        <div className="bg-white/20 backdrop-blur-md px-4 py-2 rounded-full text-sm border border-white/30 shadow-sm hover:shadow-md transition-all duration-300 hover:bg-white/30 text-white font-medium">
+                                            {stats?.verifiedJobs} Verified Jobs
+                                        </div>
+                                        <div className="bg-white/20 backdrop-blur-md px-4 py-2 rounded-full text-sm border border-white/30 shadow-sm hover:shadow-md transition-all duration-300 hover:bg-white/30 text-white font-medium">
+                                            Entry-Level Focused
+                                        </div>
+                                    </div>
+                                    <div className="absolute -bottom-3 -right-3 w-20 h-20 bg-[hsl(196,80%,65%)] opacity-60 rounded-full blur-xl"></div>
+                                    <div className="absolute -top-3 -left-3 w-20 h-20 bg-[hsl(175,70%,61%)] opacity-60 rounded-full blur-xl"></div>
+                                </div>
+                            </div>
+                            
+                            {/* Scroll Indicator */}
+                            <div className="mt-8 sm:mt-12 flex justify-center">
+                                <div className="flex flex-col items-center text-white/70 animate-bounce">
+                                    <span className="text-sm font-medium mb-2">Scroll to explore</span>
+                                    <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
                 {/* Platform Stats Section */}{' '}
                 <section
                     className="py-16 bg-gradient-to-b from-[hsl(210,50%,98%)] to-[hsl(196,60%,95%)]"
@@ -755,8 +739,9 @@ export default function Page() {
                                     {stats?.activeMembers.toLocaleString()} growing community
                                     members{' '}
                                 </p>{' '}
+                                {!isAuthenticated && (
                                 <button
-                                    onClick={() => navigateWithAuth('/community')}
+                                    onClick={() => navigateWithAuth('/resources/community')}
                                     className="text-blue-800 font-medium inline-flex items-center hover:text-blue-900 transition-all duration-300"
                                     data-oid="o-d:mk_"
                                 >
@@ -779,7 +764,8 @@ export default function Page() {
                                             data-oid="dq19x:6"
                                         ></path>{' '}
                                     </svg>{' '}
-                                </button>{' '}
+                                </button>
+                                )}
                             </div>{' '}
                             <div
                                 className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-md border-t-4 border-[hsl(196,80%,45%)] hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 hover:border-[hsl(175,70%,41%)]"
@@ -899,9 +885,11 @@ export default function Page() {
                                     {stats?.linkedInFollowers} professional followers{' '}
                                 </p>{' '}
                                 <a
-                                    href="/linkedin"
+                                    href="https://www.linkedin.com/company/x-careers/"
                                     className="text-blue-800 font-medium inline-flex items-center hover:text-blue-900 transition-all duration-300"
                                     data-oid="ixvj:s8"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                 >
                                     {' '}
                                     Connect{' '}
@@ -964,36 +952,11 @@ export default function Page() {
                                     {' '}
                                     {stats?.users.toLocaleString()} active accounts{' '}
                                 </p>{' '}
-                                <Link
-                                    href="/register"
-                                    className="text-blue-800 font-medium inline-flex items-center hover:text-blue-900 transition-all duration-300"
-                                    data-oid="p_52cfi"
-                                >
-                                    {' '}
-                                    Join Now{' '}
-                                    <svg
-                                        className="ml-1 h-4 w-4"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        data-oid="-8z159:"
-                                    >
-                                        {' '}
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth="2"
-                                            d="M14 5l7 7m0 0l-7 7m7-7H3"
-                                            data-oid=".0mbara"
-                                        ></path>{' '}
-                                    </svg>{' '}
-                                </Link>{' '}
                             </div>{' '}
                         </div>{' '}
                     </div>{' '}
                 </section>{' '}
-                {/* Why Choose CareerX */}{' '}
+                                        {/* Why Choose X Careers */}{' '}
                 <section
                     className="py-16 bg-gradient-to-b from-white to-[hsl(196,60%,95%)]"
                     data-oid="pmwti0t"
@@ -1008,7 +971,7 @@ export default function Page() {
                                 data-oid="txiyizg"
                             >
                                 {' '}
-                                Why Choose CareerX{' '}
+                                Why Choose X Careers{' '}
                             </h2>{' '}
                             <p className="text-xl text-blue-800" data-oid=".ih::ar">
                                 {' '}
@@ -2319,7 +2282,7 @@ export default function Page() {
                                             {resource.description}{' '}
                                         </p>{' '}
                                         <a
-                                            href={`/resources/${resource.title.toLowerCase().replace(/\s+/g, '-')}`}
+                                            href={resource.title === 'Community' ? '/community' : `/resources/${resource.title.toLowerCase().replace(/\s+/g, '-')}`}
                                             className="text-blue-800 font-medium inline-flex items-center hover:text-blue-900 transition-all duration-300"
                                             data-oid=":hff6i1"
                                         >
@@ -2377,125 +2340,121 @@ export default function Page() {
                         data-oid="zbo_ngk"
                     >
                         {' '}
-                        <div className="text-center mb-12" data-oid=".oy8:dm">
-                            {' '}
-                            <h2 className="text-3xl font-bold mb-4" data-oid="27ii4:-">
-                                {' '}
-                                Hear From Our Members{' '}
-                            </h2>{' '}
-                            <p className="text-blue-100 max-w-2xl mx-auto" data-oid="xvp4nxk">
-                                {' '}
-                                Success stories from freshers who found their dream tech jobs{' '}
-                            </p>{' '}
-                        </div>{' '}
-                        {/* Auto-scrolling testimonial carousel */}{' '}
-                        <div className="relative overflow-hidden py-8" data-oid="ftpj2_n">
-                            {' '}
-                            <div
-                                className="flex animate-scroll gap-5 hover:pause-animation focus:pause-animation pt-4 pb-2"
-                                onMouseEnter={(e) =>
-                                    (e.currentTarget.style.animationPlayState = 'paused')
-                                }
-                                onMouseLeave={(e) =>
-                                    (e.currentTarget.style.animationPlayState = 'running')
-                                }
-                                onClick={(e) => {
-                                    const currentState = e.currentTarget.style.animationPlayState;
-                                    e.currentTarget.style.animationPlayState =
-                                        currentState === 'paused' ? 'running' : 'paused';
-                                }}
-                                style={{ width: `${testimonials.length * 300}px` }}
-                                data-oid=":9bwxew"
-                            >
-                                {' '}
+                        <div className="text-center mb-12">
+                            <h2 className="text-3xl font-bold mb-4 text-white">
+                                Hear From Our Members
+                            </h2>
+                            <p className="text-blue-100 max-w-2xl mx-auto text-base">
+                                Success stories from freshers who found their dream tech jobs
+                            </p>
+                        </div>
+                        
+                                                {/* Single Row Placard Design */}
+                        <div className="space-y-6">
+                            {/* Row 1: Left to Right */}
+                            <div className="relative overflow-hidden py-3">
+                                <div 
+                                    className="flex animate-scroll gap-4"
+                                    style={{ width: `${testimonials.length * 320}px` }}
+                                >
                                 {testimonials.map((testimonial) => (
                                     <div
                                         key={testimonial.id}
-                                        className="bg-white/90 backdrop-blur-md text-gray-800 p-4 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 relative z-10 border border-white/20 w-[280px] h-[180px] flex-shrink-0 flex flex-col"
-                                        data-oid=":t_1.if"
+                                            className="bg-gradient-to-br from-white/95 to-white/85 backdrop-blur-md text-gray-800 p-6 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 relative z-10 border border-white/30 w-[300px] h-[220px] flex-shrink-0 flex flex-col"
                                     >
-                                        {' '}
-                                        <div className="flex items-center mb-2" data-oid="7-lcn4i">
-                                            {' '}
+                                            <div className="flex items-center mb-4">
+                                                <div className="relative">
                                             <img
                                                 src={testimonial.image}
                                                 alt={testimonial.name}
-                                                className="w-10 h-10 rounded-full mr-3 object-cover"
-                                                data-oid="b6wstbi"
-                                            />{' '}
-                                            <div data-oid="vwygngk">
-                                                {' '}
-                                                <h3
-                                                    className="font-bold text-gray-800 text-sm"
-                                                    data-oid=":jpuc_s"
-                                                >
-                                                    {' '}
-                                                    {testimonial.name}{' '}
-                                                </h3>{' '}
-                                                <p
-                                                    className="text-blue-700 text-xs"
-                                                    data-oid="nz_h-b-"
-                                                >
-                                                    {' '}
-                                                    {testimonial.company}{' '}
-                                                </p>{' '}
-                                            </div>{' '}
-                                        </div>{' '}
-                                        <p
-                                            className="text-gray-600 italic flex-grow overflow-y-auto text-sm"
-                                            data-oid="r.smluk"
+                                                        className="w-12 h-12 rounded-full mr-3 object-cover border-3 border-blue-100 shadow-md"
+                                                    />
+                                                    <div className="absolute -top-1 -right-1 w-5 h-5 bg-green-500 rounded-full border-2 border-white flex items-center justify-center">
+                                                        <svg className="w-2.5 h-2.5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <h3 className="font-bold text-gray-800 text-base">
+                                                        {testimonial.name}
+                                                    </h3>
+                                                    <p className="text-blue-600 text-xs font-semibold">
+                                                        {testimonial.company}
+                                                    </p>
+                                                    <div className="flex items-center mt-1">
+                                                        <div className="flex text-yellow-400">
+                                                            {[...Array(5)].map((_, i) => (
+                                                                <svg key={i} className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.835 1.688-1.71 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.874.57-2.01-.197-1.71-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                                                </svg>
+                                                            ))}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <p className="text-gray-700 italic flex-grow text-sm leading-relaxed">
+                                                "{testimonial.quote}"
+                                            </p>
+                                            <div className="mt-3 pt-3 border-t border-gray-200">
+                                                <div className="flex items-center justify-between text-xs text-gray-500">
+                                                    <span>✅ Verified Success</span>
+                                                    <span>🎯 Entry Level</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                    {/* Duplicate for seamless loop */}
+                                    {testimonials.slice(0, 3).map((testimonial) => (
+                                        <div
+                                            key={`duplicate-1-${testimonial.id}`}
+                                            className="bg-gradient-to-br from-white/95 to-white/85 backdrop-blur-md text-gray-800 p-6 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 relative z-10 border border-white/30 w-[300px] h-[220px] flex-shrink-0 flex flex-col"
                                         >
-                                            {' '}
-                                            "{testimonial.quote}"{' '}
-                                        </p>{' '}
-                                    </div>
-                                ))}{' '}
-                                {/* Duplicate first few testimonials to create seamless loop */}{' '}
-                                {testimonials.slice(0, 3).map((testimonial) => (
-                                    <div
-                                        key={`duplicate-${testimonial.id}`}
-                                        className="bg-white/90 backdrop-blur-md text-gray-800 p-4 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 relative z-10 border border-white/20 w-[280px] h-[180px] flex-shrink-0 flex flex-col"
-                                        data-oid="4t3g9ci"
-                                    >
-                                        {' '}
-                                        <div className="flex items-center mb-2" data-oid="pv_bim7">
-                                            {' '}
-                                            <img
-                                                src={testimonial.image}
-                                                alt={testimonial.name}
-                                                className="w-10 h-10 rounded-full mr-3 object-cover"
-                                                data-oid=":1bc8jq"
-                                            />{' '}
-                                            <div data-oid="ljn-kfd">
-                                                {' '}
-                                                <h3
-                                                    className="font-bold text-gray-800 text-sm"
-                                                    data-oid="73.fuo8"
-                                                >
-                                                    {' '}
-                                                    {testimonial.name}{' '}
-                                                </h3>{' '}
-                                                <p
-                                                    className="text-blue-700 text-xs"
-                                                    data-oid="kumdrw-"
-                                                >
-                                                    {' '}
-                                                    {testimonial.company}{' '}
-                                                </p>{' '}
-                                            </div>{' '}
-                                        </div>{' '}
-                                        <p
-                                            className="text-gray-600 italic flex-grow overflow-y-auto text-sm"
-                                            data-oid="6_sqzdv"
-                                        >
-                                            {' '}
-                                            "{testimonial.quote}"{' '}
-                                        </p>{' '}
-                                    </div>
-                                ))}{' '}
-                            </div>{' '}
-                            <div className="text-center mt-8" data-oid="49flnm1"></div>{' '}
-                        </div>{' '}
+                                            <div className="flex items-center mb-4">
+                                                <div className="relative">
+                                                    <img
+                                                        src={testimonial.image}
+                                                        alt={testimonial.name}
+                                                        className="w-12 h-12 rounded-full mr-3 object-cover border-3 border-blue-100 shadow-md"
+                                                    />
+                                                    <div className="absolute -top-1 -right-1 w-5 h-5 bg-green-500 rounded-full border-2 border-white flex items-center justify-center">
+                                                        <svg className="w-2.5 h-2.5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <h3 className="font-bold text-gray-800 text-base">
+                                                        {testimonial.name}
+                                                    </h3>
+                                                    <p className="text-blue-600 text-xs font-semibold">
+                                                        {testimonial.company}
+                                                    </p>
+                                                    <div className="flex items-center mt-1">
+                                                        <div className="flex text-yellow-400">
+                                                            {[...Array(5)].map((_, i) => (
+                                                                <svg key={i} className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.835 1.688-1.71 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.874.57-2.01-.197-1.71-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                                                </svg>
+                                                            ))}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <p className="text-gray-700 italic flex-grow text-sm leading-relaxed">
+                                                "{testimonial.quote}"
+                                            </p>
+                                            <div className="mt-3 pt-3 border-t border-gray-200">
+                                                <div className="flex items-center justify-between text-xs text-gray-500">
+                                                    <span>✅ Verified Success</span>
+                                                    <span>🎯 Entry Level</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
                     </div>{' '}
                 </section>{' '}
                 {/* Final CTA */}{' '}
@@ -2541,14 +2500,16 @@ export default function Page() {
                             data-oid="mxk.038"
                         >
                             {' '}
+                            {!isAuthenticated && (
                             <button
-                                onClick={() => navigateWithAuth('/community')}
+                                    onClick={() => navigateWithAuth('/resources/community')}
                                 className="px-8 py-4 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white rounded-md font-bold text-lg hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300 transform hover:scale-105 hover:shadow-xl animate-pulse-shadow relative z-10"
                                 data-oid="ph:f5ek"
                             >
                                 {' '}
                                 Create Free Account →{' '}
-                            </button>{' '}
+                                </button>
+                            )}{' '}
                             <Link
                                 href="/jobs"
                                 className="inline-flex items-center justify-center px-8 py-4 border-2 border-[hsl(196,80%,45%)] text-[hsl(196,80%,45%)] rounded-md font-bold text-lg hover:bg-[hsl(196,80%,45%)]/10 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-lg transform hover:scale-105 relative z-10"
@@ -2581,9 +2542,11 @@ export default function Page() {
                             <div className="flex space-x-4" data-oid="a4mkqe5">
                                 {' '}
                                 <a
-                                    href="/linkedin"
+                                    href="https://www.linkedin.com/company/x-careers/"
                                     className="text-gray-400 hover:text-white transition-all duration-300"
                                     data-oid="s50bayb"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                 >
                                     {' '}
                                     <svg
@@ -2600,9 +2563,11 @@ export default function Page() {
                                     </svg>{' '}
                                 </a>{' '}
                                 <a
-                                    href="/twitter"
+                                    href="https://www.instagram.com/x_careers_official?igsh=Z3M3cTJyNndtdDdq"
                                     className="text-gray-400 hover:text-white transition-all duration-300"
                                     data-oid="5rx5p5u"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                 >
                                     {' '}
                                     <svg
@@ -2619,9 +2584,11 @@ export default function Page() {
                                     </svg>{' '}
                                 </a>{' '}
                                 <a
-                                    href="/instagram"
+                                    href="https://www.instagram.com/x_careers_official?igsh=Z3M3cTJyNndtdDdq"
                                     className="text-gray-400 hover:text-white transition-all duration-300"
                                     data-oid="bixx5ue"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                 >
                                     {' '}
                                     <svg
@@ -2634,6 +2601,48 @@ export default function Page() {
                                         <path
                                             d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"
                                             data-oid="y3y..:8"
+                                        />{' '}
+                                    </svg>{' '}
+                                </a>{' '}
+                                <a
+                                    href="https://whatsapp.com/channel/0029Vak7B1WLo4hdCrawMw3i"
+                                    className="text-gray-400 hover:text-white transition-all duration-300"
+                                    data-oid="whatsapp-link"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    {' '}
+                                    <svg
+                                        className="h-6 w-6"
+                                        fill="currentColor"
+                                        viewBox="0 0 24 24"
+                                        data-oid="whatsapp-icon"
+                                    >
+                                        {' '}
+                                        <path
+                                            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"
+                                            data-oid="whatsapp-path"
+                                        />{' '}
+                                    </svg>{' '}
+                                </a>{' '}
+                                <a
+                                    href="https://t.me/xcareerconnect"
+                                    className="text-gray-400 hover:text-white transition-all duration-300"
+                                    data-oid="telegram-link"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    {' '}
+                                    <svg
+                                        className="h-6 w-6"
+                                        fill="currentColor"
+                                        viewBox="0 0 24 24"
+                                        data-oid="telegram-icon"
+                                    >
+                                        {' '}
+                                        <path
+                                            d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"
+                                            data-oid="telegram-path"
                                         />{' '}
                                     </svg>{' '}
                                 </a>{' '}
@@ -2658,28 +2667,7 @@ export default function Page() {
                                         About Us{' '}
                                     </a>{' '}
                                 </li>{' '}
-                                <li data-oid="jhb60jl">
-                                    {' '}
-                                    <a
-                                        href="/advertising"
-                                        className="text-gray-400 hover:text-white transition-all duration-300"
-                                        data-oid="715mg1m"
-                                    >
-                                        {' '}
-                                        Advertising{' '}
-                                    </a>{' '}
-                                </li>{' '}
-                                <li data-oid="3r:-v2f">
-                                    {' '}
-                                    <a
-                                        href="/contact"
-                                        className="text-gray-400 hover:text-white transition-all duration-300"
-                                        data-oid="3h:qp0w"
-                                    >
-                                        {' '}
-                                        Contact{' '}
-                                    </a>{' '}
-                                </li>{' '}
+
                                 <li data-oid="dyoar89">
                                     {' '}
                                     <a
@@ -2701,17 +2689,7 @@ export default function Page() {
                             </h3>{' '}
                             <ul className="space-y-3" data-oid="ug1pucs">
                                 {' '}
-                                <li data-oid="yj3nulb">
-                                    {' '}
-                                    <a
-                                        href="/tax-calculator"
-                                        className="text-gray-400 hover:text-white transition-all duration-300"
-                                        data-oid="6wc96mb"
-                                    >
-                                        {' '}
-                                        Tax Calculator{' '}
-                                    </a>{' '}
-                                </li>{' '}
+
                                 <li data-oid="eugd72:">
                                     {' '}
                                     <a
@@ -2723,17 +2701,7 @@ export default function Page() {
                                         Resume Review{' '}
                                     </a>{' '}
                                 </li>{' '}
-                                <li data-oid="kabu7kf">
-                                    {' '}
-                                    <a
-                                        href="/jobs-tracker"
-                                        className="text-gray-400 hover:text-white transition-all duration-300"
-                                        data-oid="fffk7:1"
-                                    >
-                                        {' '}
-                                        Jobs Tracker{' '}
-                                    </a>{' '}
-                                </li>{' '}
+
                                 <li data-oid="wsicpzb">
                                     {' '}
                                     <a
@@ -2769,7 +2737,7 @@ export default function Page() {
                                 <li data-oid="mjt0aqp">
                                     {' '}
                                     <a
-                                        href="/terms"
+                                        href="/terms-of-service"
                                         className="text-gray-400 hover:text-white transition-all duration-300"
                                         data-oid="2h:c87y"
                                     >
@@ -2780,7 +2748,7 @@ export default function Page() {
                                 <li data-oid="moimpf4">
                                     {' '}
                                     <a
-                                        href="/refunds"
+                                        href="/refund-policy"
                                         className="text-gray-400 hover:text-white transition-all duration-300"
                                         data-oid="8yxq:x-"
                                     >
@@ -2798,6 +2766,17 @@ export default function Page() {
                                         {' '}
                                         Shipping Policy{' '}
                                     </a>{' '}
+                                </li>
+                                <li data-oid="terms-conditions">
+                                    {' '}
+                                    <a
+                                        href="/terms-and-conditions"
+                                        className="text-gray-400 hover:text-white transition-all duration-300"
+                                        data-oid="terms-conditions-link"
+                                    >
+                                        {' '}
+                                        Terms and Conditions{' '}
+                                    </a>{' '}
                                 </li>{' '}
                             </ul>{' '}
                         </div>{' '}
@@ -2809,9 +2788,9 @@ export default function Page() {
                         {' '}
                         <p className="mb-2" data-oid="2_7b0p9">
                             {' '}
-                            © {new Date().getFullYear()} CareerX. All rights reserved.{' '}
+                            © {new Date().getFullYear()} X Careers. All rights reserved.{' '}
                         </p>{' '}
-                        <p data-oid="uuado7s">Built with ❤️ by BitHive Technologies</p>{' '}
+                        <p data-oid="uuado7s">Built with ❤️ for tech freshers</p>{' '}
                     </div>{' '}
                 </div>{' '}
             </footer>{' '}

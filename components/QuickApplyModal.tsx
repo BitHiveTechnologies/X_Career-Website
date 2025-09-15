@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from 'react';
 import { Job } from '@/app/jobs/page';
+import { useState } from 'react';
 
 interface QuickApplyModalProps {
     job: Job;
@@ -55,7 +55,7 @@ export default function QuickApplyModal({ job, isOpen, onClose, onSubmit }: Quic
             onSubmit(formData);
             onClose();
         } catch (error) {
-            console.error('Error submitting application:', error);
+            // Handle error silently or show user feedback
         } finally {
             setIsSubmitting(false);
         }

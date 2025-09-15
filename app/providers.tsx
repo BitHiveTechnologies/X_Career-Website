@@ -1,8 +1,8 @@
 'use client';
 
-import React from 'react';
-import { AuthProvider } from '@/lib/auth/AuthContext';
 import ErrorBoundary from '@/components/ErrorBoundary';
+import { AuthProvider } from '@/lib/auth/AuthContext';
+import React from 'react';
 
 interface ProvidersProps {
     children: React.ReactNode;

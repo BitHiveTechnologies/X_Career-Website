@@ -1,11 +1,11 @@
 'use client';
 
-import Link from 'next/link';
-import React, { useState, useEffect, useRef } from 'react';
-import { useAuth } from '@/lib/auth/AuthContext';
-import { useProgressiveEnhancement } from '@/hooks/useProgressiveEnhancement';
-import { SafeAvatar } from '@/components/ui/SafeImage';
 import Logo from '@/components/ui/Logo';
+import { SafeAvatar } from '@/components/ui/SafeImage';
+import { useProgressiveEnhancement } from '@/hooks/useProgressiveEnhancement';
+import { useAuth } from '@/lib/auth/AuthContext';
+import Link from 'next/link';
+import { useEffect, useRef, useState } from 'react';
 
 export default function MainNavbar() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -55,6 +55,8 @@ export default function MainNavbar() {
 
 
 
+
+
     return (
         <div data-oid="1o:2g3i">
             <header
@@ -76,6 +78,12 @@ export default function MainNavbar() {
                             className="hidden lg:flex items-center space-x-2 xl:space-x-4"
                             data-oid="a0q:94c"
                         >
+                            <Link
+                                href="/"
+                                className="text-gray-700 hover:text-blue-800 px-2 xl:px-3 py-2 text-sm font-medium transition-colors duration-200"
+                            >
+                                Home
+                            </Link>
                             <Link
                                 href="/jobs"
                                 className="text-gray-700 hover:text-blue-800 px-2 xl:px-3 py-2 text-sm font-medium transition-colors duration-200"
@@ -273,6 +281,13 @@ export default function MainNavbar() {
                             className="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t border-blue-200 bg-white/50 backdrop-blur-sm"
                             data-oid="kx.3:cx"
                         >
+                            <Link
+                                href="/"
+                                className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-blue-800 hover:bg-blue-50 transition-colors duration-200"
+                                onClick={() => setMobileMenuOpen(false)}
+                            >
+                                Home
+                            </Link>
                             <Link
                                 href="/jobs"
                                 className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-blue-800 hover:bg-blue-50 transition-colors duration-200"
