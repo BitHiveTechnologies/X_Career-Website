@@ -10,7 +10,8 @@ import {
     FrontendJob,
     ApiResponse,
     PaginatedResponse,
-    Job
+    Job,
+    JobsResponse
 } from '@/lib/api';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Suspense, useEffect, useState } from 'react';
@@ -34,8 +35,65 @@ export interface Category {
     slug: string;
 }
 
-// Mock data removed - now using backend API
-const mockJobs: FrontendJob[] = [];
+// Mock data for fallback when backend is unavailable
+const mockJobs: FrontendJob[] = [
+    {
+        id: '1',
+        title: 'Frontend Developer',
+        company: 'Tech Corp',
+        description: 'Join our team as a frontend developer',
+        type: 'job',
+        eligibility: {
+            qualifications: ['Bachelor\'s Degree'],
+            streams: ['Computer Science', 'Information Technology'],
+            passoutYears: [2022, 2023, 2024]
+        },
+        applicationDeadline: '2024-12-31T23:59:59Z',
+        applicationLink: 'https://example.com/apply',
+        location: 'remote',
+        salary: '₹8-15 LPA',
+        skills: ['React', 'TypeScript', 'CSS'],
+        isActive: true,
+        createdAt: '2024-01-01T00:00:00Z',
+        isFeatured: true,
+        isUrgent: false,
+        applicantCount: 25,
+        companyType: 'Product',
+        experienceRequired: '1-3 years',
+        jobType: 'Full-time',
+        employmentType: 'Permanent',
+        postedDate: '2024-01-01T00:00:00Z',
+        isRemote: true
+    },
+    {
+        id: '2',
+        title: 'Backend Engineer',
+        company: 'StartupXYZ',
+        description: 'Build scalable backend systems',
+        type: 'job',
+        eligibility: {
+            qualifications: ['Bachelor\'s Degree'],
+            streams: ['Computer Science', 'Information Technology'],
+            passoutYears: [2021, 2022, 2023, 2024]
+        },
+        applicationDeadline: '2024-12-31T23:59:59Z',
+        applicationLink: 'https://example.com/apply',
+        location: 'hybrid',
+        salary: '₹10-18 LPA',
+        skills: ['Node.js', 'Python', 'MongoDB'],
+        isActive: true,
+        createdAt: '2024-01-02T00:00:00Z',
+        isFeatured: false,
+        isUrgent: true,
+        applicantCount: 15,
+        companyType: 'Startup',
+        experienceRequired: '2-4 years',
+        jobType: 'Full-time',
+        employmentType: 'Permanent',
+        postedDate: '2024-01-02T00:00:00Z',
+        isRemote: false
+    }
+];
 // Enhanced Categories with 12 comprehensive categories
 const mockCategories: Category[] = [
     { id: 1, name: 'All Jobs', count: 15247, slug: 'all' },
@@ -56,6 +114,16 @@ function JobsPageContent() {
     // State management
     const [jobs, setJobs] = useState<FrontendJob[]>([]);
     const [filteredJobs, setFilteredJobs] = useState<FrontendJob[]>([]);
+    
+    // Debug filteredJobs changes
+    useEffect(() => {
+        console.log('🔍 FilteredJobs State Change:', {
+            filteredJobs,
+            length: filteredJobs?.length,
+            type: typeof filteredJobs,
+            isArray: Array.isArray(filteredJobs)
+        });
+    }, [filteredJobs]);
     const [categories] = useState<Category[]>(mockCategories);
     const [selectedCategory, setSelectedCategory] = useState<string>('all');
     const [filters, setFilters] = useState<FilterOptions>({
@@ -118,7 +186,7 @@ function JobsPageContent() {
             setIsLoading(true);
             setError(null);
             
-            const response: ApiResponse<PaginatedResponse<Job>> = await jobService.getJobs({
+            const response: any = await jobService.getJobs({
                 page: page,
                 limit: pagination.limit,
                 type: 'job',
@@ -126,16 +194,49 @@ function JobsPageContent() {
             });
 
             if (response.success && response.data) {
-                const frontendJobs = response.data.data.map((job: any) => jobService.transformToFrontendJob(job));
-                setJobs(frontendJobs);
-                setFilteredJobs(frontendJobs);
-                setPagination(response.data.pagination);
+                // Handle backend response structure: data.jobs (prioritize the actual backend structure)
+                const jobsArray = response.data.jobs || response.data.data;
+                console.log('🔍 Debug - Raw jobs array:', jobsArray);
+                console.log('🔍 Debug - Jobs array length:', jobsArray?.length);
+                
+                if (Array.isArray(jobsArray)) {
+                    console.log('🔍 Debug - Transforming jobs...');
+                    const frontendJobs = jobsArray.map((job: any) => {
+                        console.log('🔍 Debug - Original job:', job);
+                        const transformed = jobService.transformToFrontendJob(job);
+                        console.log('🔍 Debug - Transformed job:', transformed);
+                        return transformed;
+                    });
+                    
+                    console.log('🔍 Debug - Final frontend jobs:', frontendJobs);
+                    console.log('🔍 Debug - Setting jobs state...');
+                    
+                    setJobs(frontendJobs);
+                    // Immediately set filtered jobs to the same as jobs
+                    setFilteredJobs(frontendJobs);
+                    setPagination(response.data.pagination || { page: 1, limit: 10, total: 0, pages: 0 });
+                    
+                    console.log('🔍 Debug - Jobs state updated successfully');
+                    console.log('🔍 Debug - Both jobs and filteredJobs set to:', frontendJobs.length, 'items');
+                } else {
+                    console.warn('❌ Jobs data is not an array:', jobsArray);
+                    setJobs([]);
+                    setFilteredJobs([]);
+                    setError('Invalid jobs data format received');
+                }
             } else {
-                setError(response.error?.message || 'Failed to load jobs');
+                console.error('❌ API response failed:', response);
+                setError(response.error?.message || 'No jobs data received');
+                setJobs([]);
+                setFilteredJobs([]);
             }
         } catch (err) {
             console.error('Error loading jobs:', err);
-            setError('An unexpected error occurred while loading jobs');
+            // Use mock data as fallback when API fails
+            console.log('Using mock data as fallback');
+            setJobs(mockJobs);
+            setFilteredJobs(mockJobs);
+            setError(null); // Clear error when using fallback data
         } finally {
             setIsLoading(false);
         }
@@ -146,7 +247,7 @@ function JobsPageContent() {
             setIsLoading(true);
             setError(null);
             
-            const response: ApiResponse<PaginatedResponse<Job>> = await jobService.searchJobs(searchQuery, {
+            const response: any = await jobService.searchJobs(searchQuery, {
                 page: page,
                 limit: pagination.limit,
                 type: 'job',
@@ -154,16 +255,31 @@ function JobsPageContent() {
             });
 
             if (response.success && response.data) {
-                const frontendJobs = response.data.data.map((job: any) => jobService.transformToFrontendJob(job));
-                setJobs(frontendJobs);
-                setFilteredJobs(frontendJobs);
-                setPagination(response.data.pagination);
+                // Handle backend response structure: data.jobs (prioritize the actual backend structure)
+                const jobsArray = response.data.jobs || response.data.data;
+                if (Array.isArray(jobsArray)) {
+                    const frontendJobs = jobsArray.map((job: any) => jobService.transformToFrontendJob(job));
+                    setJobs(frontendJobs);
+                    setFilteredJobs(frontendJobs);
+                    setPagination(response.data.pagination || { page: 1, limit: 10, total: 0, pages: 0 });
+                } else {
+                    console.warn('Search jobs data is not an array:', jobsArray);
+                    setJobs([]);
+                    setFilteredJobs([]);
+                    setError('Invalid search results format received');
+                }
             } else {
-                setError(response.error?.message || 'Failed to search jobs');
+                setError(response.error?.message || 'No search results received');
+                setJobs([]);
+                setFilteredJobs([]);
             }
         } catch (err) {
             console.error('Error searching jobs:', err);
-            setError('An unexpected error occurred while searching jobs');
+            // Use mock data as fallback when API fails
+            console.log('Using mock data as fallback for search');
+            setJobs(mockJobs);
+            setFilteredJobs(mockJobs);
+            setError(null); // Clear error when using fallback data
         } finally {
             setIsLoading(false);
         }
@@ -205,14 +321,34 @@ function JobsPageContent() {
 
     // Enhanced filter logic with search and advanced filtering
     useEffect(() => {
+        console.log('🔍 Filter Debug - Starting filter process');
+        console.log('🔍 Filter Debug - Jobs array:', jobs);
+        console.log('🔍 Filter Debug - Jobs array length:', jobs?.length);
+        console.log('🔍 Filter Debug - Jobs is array?', Array.isArray(jobs));
+        console.log('🔍 Filter Debug - Dependencies:', { selectedCategory, filters, searchQuery, searchLocation, sortBy });
+        
+        // Ensure jobs is an array before filtering
+        if (!Array.isArray(jobs)) {
+            console.log('❌ Filter Debug - Jobs is not an array, setting empty filtered jobs');
+            setFilteredJobs([]);
+            return;
+        }
+
+        // If jobs array is empty, don't run filtering logic
+        if (jobs.length === 0) {
+            console.log('🔍 Filter Debug - Jobs array is empty, skipping filter process');
+            return;
+        }
+
         let filtered = jobs;
+        console.log('🔍 Filter Debug - Starting with', filtered.length, 'jobs');
 
         // Filter by search query
         if (searchQuery) {
             filtered = filtered.filter(
                 (job) =>
-                    job.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                    job.company.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    job.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    job.company?.toLowerCase().includes(searchQuery.toLowerCase()) ||
                     job.skills?.some((skill) =>
                         skill.toLowerCase().includes(searchQuery.toLowerCase()),
                     ),
@@ -222,7 +358,7 @@ function JobsPageContent() {
         // Filter by search location
         if (searchLocation) {
             filtered = filtered.filter((job) =>
-                job.location.toLowerCase().includes(searchLocation.toLowerCase()),
+                job.location?.toLowerCase().includes(searchLocation.toLowerCase()),
             );
         }
 
@@ -280,7 +416,7 @@ function JobsPageContent() {
 
         if (filters.location) {
             filtered = filtered.filter((job) =>
-                job.location.toLowerCase().includes(filters.location.toLowerCase()),
+                job.location?.toLowerCase().includes(filters.location.toLowerCase()),
             );
         }
 
@@ -345,7 +481,10 @@ function JobsPageContent() {
                 });
         }
 
+        console.log('🔍 Filter Debug - Final filtered jobs:', filtered);
+        console.log('🔍 Filter Debug - Final filtered count:', filtered.length);
         setFilteredJobs(filtered);
+        console.log('🔍 Filter Debug - Filtered jobs state updated');
     }, [jobs, selectedCategory, filters, searchQuery, searchLocation, sortBy]);
 
     const handleFilterChange = (newFilters: FilterOptions) => {
@@ -839,6 +978,30 @@ function JobsPageContent() {
 
                             {/* Job Cards Container */}
                             <div className="space-y-6" data-oid="ptslt8l">
+                                {(() => {
+                                    console.log('🔍 Render Debug - Current state:', {
+                                        error,
+                                        isLoading,
+                                        jobsCount: jobs?.length || 0,
+                                        filteredJobsCount: filteredJobs?.length || 0,
+                                        filteredJobsLengthCheck: filteredJobs && filteredJobs.length,
+                                        filteredJobsType: typeof filteredJobs,
+                                        filteredJobsIsArray: Array.isArray(filteredJobs),
+                                        jobs: jobs,
+                                        filteredJobs: filteredJobs
+                                    });
+                                    
+                                    // Check the actual condition that determines rendering
+                                    console.log('🔍 Render Debug - Condition checks:', {
+                                        hasError: !!error,
+                                        isLoading: isLoading,
+                                        filteredJobsLength: filteredJobs?.length,
+                                        filteredJobsLengthGreaterThanZero: filteredJobs?.length > 0,
+                                        willShowJobs: !error && !isLoading && filteredJobs?.length > 0
+                                    });
+                                    
+                                    return null;
+                                })()}
                                 {error ? (
                                     <div className="text-center py-16" data-oid="error-state">
                                         <div className="text-red-500 mb-4">

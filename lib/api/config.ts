@@ -10,6 +10,7 @@ export interface ApiConfig {
   timeout: number;
   retryAttempts: number;
   retryDelay: number;
+  enableLogging: boolean;
 }
 
 // Get current configuration based on environment
@@ -19,6 +20,7 @@ export const getApiConfig = (): ApiConfig => {
     timeout: 10000, // 10 seconds
     retryAttempts: 3,
     retryDelay: 1000, // 1 second
+    enableLogging: ENV.IS_DEVELOPMENT || ENV.ENABLE_API_LOGGING, // Enable logging in development or when explicitly enabled
   };
 
   // Adjust configuration based on environment

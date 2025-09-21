@@ -36,6 +36,12 @@ export interface JobsResponse {
   pagination: PaginationInfo;
 }
 
+// Alternative structure that some endpoints might use
+export interface JobsResponseAlternative {
+  data: Job[];
+  pagination: PaginationInfo;
+}
+
 // ============================================================================
 // AUTHENTICATION TYPES
 // ============================================================================

@@ -44,5 +44,8 @@ export * from './auth';
 // Services
 export * from './services';
 
+// Logger
+export * from './logger';
+
 // Re-export for convenience
 export { apiClient as api } from './client';

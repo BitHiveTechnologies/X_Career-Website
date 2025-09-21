@@ -5,6 +5,7 @@
 
 import { apiConfig, API_ENDPOINTS, DEFAULT_HEADERS, HTTP_METHODS } from './config';
 import { ApiResponse } from './types';
+import { isApiLoggingEnabled, logApiRequest, logApiResponse, logApiError } from './logger';
 
 // Request configuration interface
 export interface RequestConfig {
@@ -121,6 +122,11 @@ class ApiClient {
       return await requestFn();
     } catch (error) {
       if (retries > 0 && this.shouldRetry(error)) {
+        if (isApiLoggingEnabled()) {
+          console.warn(`🔄 Retrying request... (${retries} attempts left)`, {
+            error: error instanceof Error ? error.message : 'Unknown error'
+          });
+        }
         await new Promise(resolve => setTimeout(resolve, apiConfig.retryDelay));
         return this.retryRequest(requestFn, retries - 1);
       }
@@ -170,10 +176,38 @@ class ApiClient {
       }
 
       try {
+        // Log the request details if logging is enabled
+        if (isApiLoggingEnabled()) {
+          console.group(`🚀 API Request: ${method} ${fullUrl}`);
+          logApiRequest('📤 Request Headers:', requestHeaders);
+          if (data && method !== 'GET') {
+            logApiRequest('📤 Request Body:', data);
+          }
+          if (params) {
+            logApiRequest('📤 Request Params:', params);
+          }
+          console.groupEnd();
+        }
+
         const response = await fetch(fullUrl, requestConfig);
         const responseData: ApiResponse<T> = await response.json();
 
+        // Log the response details if logging is enabled
+        if (isApiLoggingEnabled()) {
+          console.group(`📥 API Response: ${method} ${fullUrl}`);
+          logApiResponse('📊 Response Status:', response.status, response.statusText);
+          logApiResponse('📊 Response Headers:', Object.fromEntries(response.headers.entries()));
+          logApiResponse('📊 Response Data:', responseData);
+          console.groupEnd();
+        }
+
         if (!response.ok) {
+          console.error('❌ API Error:', {
+            status: response.status,
+            message: responseData.error?.message || 'Request failed',
+            code: responseData.error?.code || 'UNKNOWN_ERROR',
+            details: responseData.error?.details
+          });
           throw new ApiError(
             responseData.error?.message || 'Request failed',
             response.status,
@@ -182,14 +216,26 @@ class ApiClient {
           );
         }
 
+        if (isApiLoggingEnabled()) {
+          logApiResponse('✅ API Request Successful:', fullUrl);
+        }
         return responseData;
       } catch (error) {
+        // Log the error details
+        console.error('💥 API Request Failed:', {
+          url: fullUrl,
+          method: method,
+          error: error instanceof Error ? error.message : 'Unknown error',
+          stack: error instanceof Error ? error.stack : undefined
+        });
+
         if (error instanceof ApiError) {
           throw error;
         }
         
         // Handle network errors
         if (error instanceof TypeError && error.message.includes('fetch')) {
+          console.error('🌐 Network Error:', error.message);
           throw new ApiError(
             'Network error - please check your connection',
             0,
@@ -199,6 +245,7 @@ class ApiClient {
         
         // Handle timeout errors
         if (error instanceof DOMException && error.name === 'AbortError') {
+          console.error('⏰ Timeout Error:', error.message);
           throw new ApiError(
             'Request timeout - please try again',
             408,
@@ -206,6 +253,7 @@ class ApiClient {
           );
         }
         
+        console.error('❓ Unexpected Error:', error);
         throw new ApiError(
           'An unexpected error occurred',
           500,
