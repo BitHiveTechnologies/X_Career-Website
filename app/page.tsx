@@ -1,7 +1,7 @@
 'use client';
 import MainNavbar from '@/components/mainNavbar';
 import { usePremiumTheme } from '@/hooks/usePremiumTheme';
-import { useAuth } from '@/lib/auth/AuthContext';
+import { useAuth } from '@/lib/auth/AuthContextBackend';
 import { useAuthAction } from '@/lib/auth/useAuthAction';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';

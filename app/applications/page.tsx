@@ -1,9 +1,8 @@
 'use client';
 
-import { Job } from '@/app/jobs/page';
+import { Job, FrontendJob, applicationService, ApiResponse, PaginatedResponse, JobApplication } from '@/lib/api';
 import MainNavbar from '@/components/mainNavbar';
-import { useAuth } from '@/lib/auth/AuthContext';
-import { Internship, mockInternships, mockJobs } from '@/lib/mockData';
+import { useAuth } from '@/lib/auth/AuthContextBackend';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -11,11 +10,10 @@ import { useEffect, useState } from 'react';
 type ApplicationStatus = 'applied' | 'under-review' | 'interview' | 'rejected' | 'accepted';
 
 interface Application {
-    id: number;
-    job: Job | Internship;
-    isInternship: boolean;
+    id: string;
+    job: FrontendJob;
     appliedDate: string;
-    status: ApplicationStatus;
+    status: 'applied' | 'shortlisted' | 'rejected' | 'withdrawn';
     lastUpdated: string;
     applicationMethod: 'quick-apply' | 'full-application' | 'external';
     notes: string;
@@ -65,68 +63,72 @@ export default function ApplicationsPage() {
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedApplication, setSelectedApplication] = useState<Application | null>(null);
 
-    // Mock applications data (in real app, this would come from backend)
-    const [applications, setApplications] = useState<Application[]>([
-        {
-            id: 1,
-            job: mockJobs[0],
-            isInternship: false,
-            appliedDate: '2024-01-20',
-            status: 'interview',
-            lastUpdated: '2024-01-22',
-            applicationMethod: 'full-application',
-            notes: 'Really excited about this role. Great company culture.',
-            interviewDate: '2024-01-25',
-            nextSteps: 'Technical interview scheduled for Friday',
-        },
-        {
-            id: 2,
-            job: mockJobs[1],
-            isInternship: false,
-            appliedDate: '2024-01-19',
-            status: 'under-review',
-            lastUpdated: '2024-01-21',
-            applicationMethod: 'quick-apply',
-            notes: 'Backend role with good growth opportunities',
-        },
-        {
-            id: 3,
-            job: mockInternships[0],
-            isInternship: true,
-            appliedDate: '2024-01-18',
-            status: 'accepted',
-            lastUpdated: '2024-01-23',
-            applicationMethod: 'full-application',
-            notes: 'Perfect internship for gaining frontend experience',
-            feedback: 'Impressed with your portfolio and enthusiasm for learning!',
-        },
-        {
-            id: 4,
-            job: mockJobs[3],
-            isInternship: false,
-            appliedDate: '2024-01-17',
-            status: 'applied',
-            lastUpdated: '2024-01-17',
-            applicationMethod: 'external',
-            notes: 'Data science role at top e-commerce company',
-        },
-        {
-            id: 5,
-            job: mockJobs[2],
-            isInternship: false,
-            appliedDate: '2024-01-15',
-            status: 'rejected',
-            lastUpdated: '2024-01-20',
-            applicationMethod: 'quick-apply',
-            notes: 'Full-stack position with competitive salary',
-            feedback:
-                'Thank you for your interest. We decided to move forward with other candidates.',
-        },
-    ]);
+    // Applications data from backend API
+    const [applications, setApplications] = useState<Application[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+
+    // Load applications from backend API
+    const loadApplications = async () => {
+        try {
+            setLoading(true);
+            setError(null);
+            
+            const response: ApiResponse<PaginatedResponse<JobApplication>> = await applicationService.getMyApplications();
+            
+            if (response.success && response.data) {
+                // Transform backend applications to frontend format
+                const transformedApplications: Application[] = response.data.data.map((app: JobApplication) => ({
+                    id: app.id,
+                    job: {
+                        id: app.job?.id || '',
+                        title: app.job?.title || '',
+                        company: app.job?.company || '',
+                        description: app.job?.description || '',
+                        location: app.job?.location || 'remote',
+                        salary: app.job?.salary || '',
+                        skills: app.job?.skills || [],
+                        type: app.job?.type || 'job',
+                        createdAt: app.job?.createdAt || new Date().toISOString(),
+                        isActive: app.job?.isActive || true,
+                        isFeatured: false,
+                        isUrgent: false,
+                        applicantCount: 0,
+                        companyLogo: '',
+                        companySize: '',
+                        industry: '',
+                        benefits: [],
+                        companyType: 'Startup',
+                        experienceRequired: '',
+                        jobType: '',
+                        employmentType: '',
+                        postedDate: app.job?.createdAt?.split('T')[0] || new Date().toISOString().split('T')[0],
+                        isRemote: app.job?.location === 'remote',
+                    },
+                    appliedDate: app.appliedAt?.split('T')[0] || new Date().toISOString().split('T')[0],
+                    status: app.status as 'applied' | 'shortlisted' | 'rejected' | 'withdrawn',
+                    lastUpdated: app.appliedAt?.split('T')[0] || new Date().toISOString().split('T')[0],
+                    applicationMethod: 'full-application',
+                    notes: app.coverLetter || '',
+                }));
+                
+                setApplications(transformedApplications);
+            } else {
+                setError('Failed to load applications');
+            }
+        } catch (err) {
+            console.error('Error loading applications:', err);
+            setError('Failed to load applications');
+        } finally {
+            setLoading(false);
+        }
+    };
 
     useEffect(() => {
         if (!isAuthenticated) {
             router.push('/login?redirect=/applications');
+        } else {
+            loadApplications();
         }
     }, [isAuthenticated, router]);
 
@@ -917,8 +919,8 @@ export default function ApplicationsPage() {
                                                         data-oid="8b05:4h"
                                                     >
                                                         {application.job.skills
-                                                            .slice(0, 5)
-                                                            .map((skill, index) => (
+                                                            ?.slice(0, 5)
+                                                            .map((skill: string, index: number) => (
                                                                 <span
                                                                     key={index}
                                                                     className="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full"
@@ -927,12 +929,12 @@ export default function ApplicationsPage() {
                                                                     {skill}
                                                                 </span>
                                                             ))}
-                                                        {application.job.skills.length > 5 && (
+                                                        {application.job.skills && application.job.skills.length > 5 && (
                                                             <span
                                                                 className="px-3 py-1 text-gray-500 text-xs"
                                                                 data-oid="tyxp.ef"
                                                             >
-                                                                +{application.job.skills.length - 5}{' '}
+                                                                +{(application.job.skills?.length || 0) - 5}{' '}
                                                                 more
                                                             </span>
                                                         )}

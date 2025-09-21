@@ -4,38 +4,24 @@ import CategoryMenu from '@/components/CategoryMenu';
 import FiltersSidebar from '@/components/FiltersSidebar';
 import JobCard from '@/components/JobCard';
 import MainNavbar from '@/components/mainNavbar';
+import {
+    jobService,
+    JobSearchParams,
+    FrontendJob,
+    ApiResponse,
+    PaginatedResponse,
+    Job
+} from '@/lib/api';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Suspense, useEffect, useState } from 'react';
 
 // TypeScript Interfaces
-export interface Job {
-    id: number;
-    title: string;
-    company: string;
-    location: string;
-    experienceRequired: string;
-    jobType: string;
-    employmentType: string;
-    skills: string[];
-    postedDate: string;
-    salary?: string;
-    description: string;
-    isRemote: boolean;
-    isFeatured: boolean;
-    isUrgent?: boolean;
-    applicantCount?: number;
-    companyLogo?: string;
-    companySize?: string;
-    industry?: string;
-    benefits?: string[];
-    companyType?: 'Startup' | 'MNC' | 'Product' | 'Service';
-}
 
 export interface FilterOptions {
     jobType: string;
     employmentType: string;
     skills: string;
-    location: string;
+    location: 'remote' | 'onsite' | 'hybrid' | 'all';
     experienceLevel: string;
     salaryRange: string;
     companyType: string;
@@ -48,275 +34,8 @@ export interface Category {
     slug: string;
 }
 
-// Enhanced Mock Data with 12 diverse jobs from major Indian companies
-const mockJobs: Job[] = [
-    {
-        id: 1,
-        title: 'Frontend Developer',
-        company: 'Swiggy',
-        location: 'Bangalore, India',
-        experienceRequired: '0-2 years',
-        jobType: 'Full-time',
-        employmentType: 'Permanent',
-        skills: ['React', 'TypeScript', 'JavaScript', 'CSS', 'Redux'],
-        postedDate: '2024-01-15',
-        salary: '₹6-10 LPA',
-        description:
-            'Join our team to build amazing user interfaces for millions of food lovers...',
-        isRemote: false,
-        isFeatured: true,
-        isUrgent: true,
-        applicantCount: 234,
-        companyLogo: '/logos/swiggy.png',
-        companySize: '5000-10000',
-        industry: 'Food Tech',
-        benefits: ['Health Insurance', 'Free Meals', 'Flexible Hours', 'Stock Options'],
-        companyType: 'Startup',
-    },
-    {
-        id: 2,
-        title: 'Backend Engineer',
-        company: 'Zomato',
-        location: 'Gurgaon, India',
-        experienceRequired: '1-3 years',
-        jobType: 'Full-time',
-        employmentType: 'Permanent',
-        skills: ['Java', 'Spring Boot', 'AWS', 'MySQL', 'Microservices'],
-        postedDate: '2024-01-14',
-        salary: '₹8-15 LPA',
-        description: 'Build scalable backend systems for food delivery platform...',
-        isRemote: true,
-        isFeatured: true,
-        isUrgent: false,
-        applicantCount: 189,
-        companyLogo: '/logos/zomato.png',
-        companySize: '1000-5000',
-        industry: 'Food Tech',
-        benefits: ['Health Insurance', 'Work from Home', 'Learning Budget', 'Team Outings'],
-        companyType: 'Startup',
-    },
-    {
-        id: 3,
-        title: 'Full Stack Developer',
-        company: 'Paytm',
-        location: 'Noida, India',
-        experienceRequired: '2-4 years',
-        jobType: 'Full-time',
-        employmentType: 'Permanent',
-        skills: ['React', 'Node.js', 'MongoDB', 'Express', 'Payment APIs'],
-        postedDate: '2024-01-13',
-        salary: '₹12-20 LPA',
-        description: 'Work on cutting-edge fintech applications...',
-        isRemote: false,
-        isFeatured: false,
-        isUrgent: true,
-        applicantCount: 456,
-        companyLogo: '/logos/paytm.png',
-        companySize: '10000+',
-        industry: 'Fintech',
-        benefits: ['Health Insurance', 'Bonus', 'Cab Facility', 'Gym Membership'],
-        companyType: 'MNC',
-    },
-    {
-        id: 4,
-        title: 'Data Scientist',
-        company: 'Flipkart',
-        location: 'Bangalore, India',
-        experienceRequired: '1-3 years',
-        jobType: 'Full-time',
-        employmentType: 'Permanent',
-        skills: ['Python', 'Machine Learning', 'SQL', 'Pandas', 'TensorFlow'],
-        postedDate: '2024-01-12',
-        salary: '₹10-18 LPA',
-        description: 'Analyze data to drive business decisions for e-commerce platform...',
-        isRemote: true,
-        isFeatured: false,
-        isUrgent: false,
-        applicantCount: 312,
-        companyLogo: '/logos/flipkart.png',
-        companySize: '10000+',
-        industry: 'E-commerce',
-        benefits: ['Health Insurance', 'Stock Options', 'Learning Budget', 'Flexible Hours'],
-        companyType: 'MNC',
-    },
-    {
-        id: 5,
-        title: 'UI/UX Designer',
-        company: 'Ola',
-        location: 'Bangalore, India',
-        experienceRequired: '0-2 years',
-        jobType: 'Full-time',
-        employmentType: 'Contract',
-        skills: ['Figma', 'Adobe XD', 'Photoshop', 'User Research', 'Prototyping'],
-        postedDate: '2024-01-11',
-        salary: '₹5-9 LPA',
-        description: 'Design beautiful and intuitive user experiences for mobility platform...',
-        isRemote: false,
-        isFeatured: false,
-        isUrgent: false,
-        applicantCount: 167,
-        companyLogo: '/logos/ola.png',
-        companySize: '1000-5000',
-        industry: 'Transportation',
-        benefits: ['Health Insurance', 'Free Rides', 'Team Events', 'Learning Budget'],
-        companyType: 'Startup',
-    },
-    {
-        id: 6,
-        title: 'DevOps Engineer',
-        company: 'PhonePe',
-        location: 'Bangalore, India',
-        experienceRequired: '2-5 years',
-        jobType: 'Full-time',
-        employmentType: 'Permanent',
-        skills: ['Docker', 'Kubernetes', 'AWS', 'Jenkins', 'Terraform'],
-        postedDate: '2024-01-10',
-        salary: '₹15-25 LPA',
-        description: 'Manage and optimize cloud infrastructure for digital payments...',
-        isRemote: true,
-        isFeatured: true,
-        isUrgent: true,
-        applicantCount: 89,
-        companyLogo: '/logos/phonepe.png',
-        companySize: '1000-5000',
-        industry: 'Fintech',
-        benefits: ['Health Insurance', 'Stock Options', 'Work from Home', 'Bonus'],
-        companyType: 'Product',
-    },
-    {
-        id: 7,
-        title: 'Mobile App Developer',
-        company: 'Dream11',
-        location: 'Mumbai, India',
-        experienceRequired: '1-3 years',
-        jobType: 'Full-time',
-        employmentType: 'Permanent',
-        skills: ['React Native', 'Flutter', 'iOS', 'Android', 'Firebase'],
-        postedDate: '2024-01-09',
-        salary: '₹8-14 LPA',
-        description: 'Build engaging mobile experiences for fantasy sports platform...',
-        isRemote: false,
-        isFeatured: false,
-        isUrgent: false,
-        applicantCount: 278,
-        companyLogo: '/logos/dream11.png',
-        companySize: '500-1000',
-        industry: 'Gaming',
-        benefits: ['Health Insurance', 'Game Credits', 'Team Outings', 'Flexible Hours'],
-        companyType: 'Startup',
-    },
-    {
-        id: 8,
-        title: 'Blockchain Developer',
-        company: 'CoinDCX',
-        location: 'Mumbai, India',
-        experienceRequired: '2-4 years',
-        jobType: 'Full-time',
-        employmentType: 'Permanent',
-        skills: ['Solidity', 'Web3.js', 'Ethereum', 'Smart Contracts', 'Node.js'],
-        postedDate: '2024-01-08',
-        salary: '₹18-30 LPA',
-        description: 'Develop blockchain solutions for cryptocurrency exchange...',
-        isRemote: true,
-        isFeatured: true,
-        isUrgent: false,
-        applicantCount: 45,
-        companyLogo: '/logos/coindcx.png',
-        companySize: '100-500',
-        industry: 'Cryptocurrency',
-        benefits: ['Health Insurance', 'Crypto Bonus', 'Work from Home', 'Learning Budget'],
-        companyType: 'Startup',
-    },
-    {
-        id: 9,
-        title: 'AI/ML Engineer',
-        company: 'Hotstar',
-        location: 'Bangalore, India',
-        experienceRequired: '3-5 years',
-        jobType: 'Full-time',
-        employmentType: 'Permanent',
-        skills: ['Python', 'TensorFlow', 'PyTorch', 'Computer Vision', 'NLP'],
-        postedDate: '2024-01-07',
-        salary: '₹20-35 LPA',
-        description: 'Build AI-powered recommendation systems for streaming platform...',
-        isRemote: false,
-        isFeatured: true,
-        isUrgent: true,
-        applicantCount: 123,
-        companyLogo: '/logos/hotstar.png',
-        companySize: '1000-5000',
-        industry: 'Entertainment',
-        benefits: ['Health Insurance', 'Stock Options', 'Content Access', 'Learning Budget'],
-        companyType: 'MNC',
-    },
-    {
-        id: 10,
-        title: 'Cybersecurity Analyst',
-        company: 'Razorpay',
-        location: 'Bangalore, India',
-        experienceRequired: '1-3 years',
-        jobType: 'Full-time',
-        employmentType: 'Permanent',
-        skills: ['Network Security', 'Penetration Testing', 'SIEM', 'Incident Response'],
-        postedDate: '2024-01-06',
-        salary: '₹12-20 LPA',
-        description: 'Secure payment infrastructure and protect against cyber threats...',
-        isRemote: true,
-        isFeatured: false,
-        isUrgent: false,
-        applicantCount: 156,
-        companyLogo: '/logos/razorpay.png',
-        companySize: '1000-5000',
-        industry: 'Fintech',
-        benefits: ['Health Insurance', 'Stock Options', 'Work from Home', 'Security Training'],
-        companyType: 'Product',
-    },
-    {
-        id: 11,
-        title: 'Product Manager',
-        company: "Byju's",
-        location: 'Bangalore, India',
-        experienceRequired: '3-6 years',
-        jobType: 'Full-time',
-        employmentType: 'Permanent',
-        skills: ['Product Strategy', 'Analytics', 'User Research', 'Agile', 'SQL'],
-        postedDate: '2024-01-05',
-        salary: '₹25-40 LPA',
-        description: 'Lead product development for educational technology platform...',
-        isRemote: false,
-        isFeatured: false,
-        isUrgent: false,
-        applicantCount: 89,
-        companyLogo: '/logos/byjus.png',
-        companySize: '10000+',
-        industry: 'EdTech',
-        benefits: ['Health Insurance', 'Learning Budget', 'Flexible Hours', 'Stock Options'],
-        companyType: 'Startup',
-    },
-    {
-        id: 12,
-        title: 'Cloud Architect',
-        company: 'Freshworks',
-        location: 'Chennai, India',
-        experienceRequired: '5+ years',
-        jobType: 'Full-time',
-        employmentType: 'Permanent',
-        skills: ['AWS', 'Azure', 'GCP', 'Microservices', 'Kubernetes', 'Terraform'],
-        postedDate: '2024-01-04',
-        salary: '₹30-50 LPA',
-        description: 'Design and implement cloud solutions for SaaS platform...',
-        isRemote: true,
-        isFeatured: true,
-        isUrgent: false,
-        applicantCount: 67,
-        companyLogo: '/logos/freshworks.png',
-        companySize: '1000-5000',
-        industry: 'SaaS',
-        benefits: ['Health Insurance', 'Stock Options', 'Work from Home', 'Learning Budget'],
-        companyType: 'Product',
-    },
-];
-
+// Mock data removed - now using backend API
+const mockJobs: FrontendJob[] = [];
 // Enhanced Categories with 12 comprehensive categories
 const mockCategories: Category[] = [
     { id: 1, name: 'All Jobs', count: 15247, slug: 'all' },
@@ -334,25 +53,33 @@ const mockCategories: Category[] = [
 ];
 
 function JobsPageContent() {
-    const [jobs, setJobs] = useState<Job[]>(mockJobs);
-    const [filteredJobs, setFilteredJobs] = useState<Job[]>(mockJobs);
+    // State management
+    const [jobs, setJobs] = useState<FrontendJob[]>([]);
+    const [filteredJobs, setFilteredJobs] = useState<FrontendJob[]>([]);
     const [categories] = useState<Category[]>(mockCategories);
     const [selectedCategory, setSelectedCategory] = useState<string>('all');
     const [filters, setFilters] = useState<FilterOptions>({
         jobType: '',
         employmentType: '',
         skills: '',
-        location: '',
+        location: 'all',
         experienceLevel: '',
         salaryRange: '',
         companyType: '',
     });
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     const [searchQuery, setSearchQuery] = useState('');
     const [searchLocation, setSearchLocation] = useState('');
     const [viewMode, setViewMode] = useState<'grid' | 'list'>('list');
     const [sortBy, setSortBy] = useState('relevance');
     const [visibleJobs, setVisibleJobs] = useState(6);
+    const [error, setError] = useState<string | null>(null);
+    const [pagination, setPagination] = useState({
+        page: 1,
+        limit: 10,
+        total: 0,
+        pages: 0
+    });
     const router = useRouter();
     const searchParams = useSearchParams();
 
@@ -370,6 +97,77 @@ function JobsPageContent() {
             // Cleanup any pending timeouts when component unmounts
         };
     }, []);
+
+    // Load jobs from backend on component mount
+    useEffect(() => {
+        loadJobs();
+    }, []);
+
+    // Load jobs when search parameters change
+    useEffect(() => {
+        if (searchQuery || searchLocation) {
+            searchJobs();
+        } else {
+            loadJobs();
+        }
+    }, [searchQuery, searchLocation]);
+
+    // Backend data loading functions
+    const loadJobs = async (page: number = pagination.page) => {
+        try {
+            setIsLoading(true);
+            setError(null);
+            
+            const response: ApiResponse<PaginatedResponse<Job>> = await jobService.getJobs({
+                page: page,
+                limit: pagination.limit,
+                type: 'job',
+                location: filters.location === 'all' ? undefined : filters.location
+            });
+
+            if (response.success && response.data) {
+                const frontendJobs = response.data.data.map((job: any) => jobService.transformToFrontendJob(job));
+                setJobs(frontendJobs);
+                setFilteredJobs(frontendJobs);
+                setPagination(response.data.pagination);
+            } else {
+                setError(response.error?.message || 'Failed to load jobs');
+            }
+        } catch (err) {
+            console.error('Error loading jobs:', err);
+            setError('An unexpected error occurred while loading jobs');
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    const searchJobs = async (page: number = pagination.page) => {
+        try {
+            setIsLoading(true);
+            setError(null);
+            
+            const response: ApiResponse<PaginatedResponse<Job>> = await jobService.searchJobs(searchQuery, {
+                page: page,
+                limit: pagination.limit,
+                type: 'job',
+                location: (searchLocation as 'remote' | 'onsite' | 'hybrid') || (filters.location === 'all' ? undefined : filters.location)
+            });
+
+            if (response.success && response.data) {
+                const frontendJobs = response.data.data.map((job: any) => jobService.transformToFrontendJob(job));
+                setJobs(frontendJobs);
+                setFilteredJobs(frontendJobs);
+                setPagination(response.data.pagination);
+            } else {
+                setError(response.error?.message || 'Failed to search jobs');
+            }
+        } catch (err) {
+            console.error('Error searching jobs:', err);
+            setError('An unexpected error occurred while searching jobs');
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
     // Function to update URL when search query changes (debounced)
     const updateSearchURL = (query: string) => {
@@ -415,7 +213,7 @@ function JobsPageContent() {
                 (job) =>
                     job.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                     job.company.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                    job.skills.some((skill) =>
+                    job.skills?.some((skill) =>
                         skill.toLowerCase().includes(searchQuery.toLowerCase()),
                     ),
             );
@@ -475,7 +273,7 @@ function JobsPageContent() {
                 .map((s) => s.trim());
             filtered = filtered.filter((job) =>
                 skillsArray.some((skill) =>
-                    job.skills.some((jobSkill) => jobSkill.toLowerCase().includes(skill)),
+                    job.skills?.some((jobSkill) => jobSkill.toLowerCase().includes(skill)),
                 ),
             );
         }
@@ -520,7 +318,7 @@ function JobsPageContent() {
         switch (sortBy) {
             case 'date':
                 filtered.sort(
-                    (a, b) => new Date(b.postedDate).getTime() - new Date(a.postedDate).getTime(),
+                    (a, b) => new Date(b.postedDate || '').getTime() - new Date(a.postedDate || '').getTime(),
                 );
                 break;
             case 'salary':
@@ -563,7 +361,7 @@ function JobsPageContent() {
             jobType: '',
             employmentType: '',
             skills: '',
-            location: '',
+            location: 'all',
             experienceLevel: '',
             salaryRange: '',
             companyType: '',
@@ -1041,7 +839,23 @@ function JobsPageContent() {
 
                             {/* Job Cards Container */}
                             <div className="space-y-6" data-oid="ptslt8l">
-                                {isLoading ? (
+                                {error ? (
+                                    <div className="text-center py-16" data-oid="error-state">
+                                        <div className="text-red-500 mb-4">
+                                            <svg className="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            </svg>
+                                        </div>
+                                        <h3 className="text-lg font-semibold text-gray-900 mb-2">Error Loading Jobs</h3>
+                                        <p className="text-gray-600 mb-4">{error}</p>
+                                        <button
+                                            onClick={() => loadJobs()}
+                                            className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                                        >
+                                            Try Again
+                                        </button>
+                                    </div>
+                                ) : isLoading ? (
                                     <div className="text-center py-16" data-oid="88afc--">
                                         <div
                                             className="animate-spin rounded-full h-12 w-12 border-b-2 border-[hsl(196,80%,45%)] mx-auto"
@@ -1083,6 +897,39 @@ function JobsPageContent() {
                                                 >
                                                     Load More Jobs (
                                                     {filteredJobs.length - visibleJobs} remaining)
+                                                </button>
+                                            </div>
+                                        )}
+
+                                        {/* Pagination Controls */}
+                                        {pagination.pages > 1 && (
+                                            <div className="flex justify-center items-center space-x-4 mt-8">
+                                                <button
+                                                    onClick={() => {
+                                                        const newPage = pagination.page - 1;
+                                                        setPagination(prev => ({ ...prev, page: newPage }));
+                                                        loadJobs(newPage);
+                                                    }}
+                                                    disabled={pagination.page <= 1}
+                                                    className="px-4 py-2 border border-gray-300 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+                                                >
+                                                    Previous
+                                                </button>
+                                                
+                                                <span className="text-sm text-gray-600">
+                                                    Page {pagination.page} of {pagination.pages}
+                                                </span>
+                                                
+                                                <button
+                                                    onClick={() => {
+                                                        const newPage = pagination.page + 1;
+                                                        setPagination(prev => ({ ...prev, page: newPage }));
+                                                        loadJobs(newPage);
+                                                    }}
+                                                    disabled={pagination.page >= pagination.pages}
+                                                    className="px-4 py-2 border border-gray-300 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+                                                >
+                                                    Next
                                                 </button>
                                             </div>
                                         )}

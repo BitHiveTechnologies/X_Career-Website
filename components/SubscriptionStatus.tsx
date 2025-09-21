@@ -1,6 +1,6 @@
 'use client';
 
-import { useAuth } from '@/lib/auth/AuthContext';
+import { useAuth } from '@/lib/auth/AuthContextBackend';
 import { usePremiumTheme } from '@/hooks/usePremiumTheme';
 import { Crown, Zap } from 'lucide-react';
 import { useState } from 'react';

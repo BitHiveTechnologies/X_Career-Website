@@ -1,19 +1,94 @@
 'use client';
 
-import { Job } from '@/app/jobs/page';
+import { FrontendJob, jobService, ApiResponse, PaginatedResponse, Job } from '@/lib/api';
 import JobCard from '@/components/JobCard';
 import MainNavbar from '@/components/mainNavbar';
-import { useAuth } from '@/lib/auth/AuthContext';
-import { Internship, mockInternships, mockJobs } from '@/lib/mockData';
+import { useAuth } from '@/lib/auth/AuthContextBackend';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-type SavedItem = (Job | Internship) & {
+type SavedItem = FrontendJob & {
     savedDate: string;
-    isInternship: boolean;
     tags: string[];
     notes: string;
+};
+
+// Convert SavedItem to FrontendJob
+const convertSavedItemToFrontendJob = (item: SavedItem): FrontendJob => {
+    if (item.isInternship) {
+        // Convert Internship to FrontendJob
+        return {
+            id: item.id.toString(),
+            title: item.title,
+            company: item.company,
+            description: item.description || '',
+            type: 'internship' as const,
+            eligibility: {
+                qualifications: [],
+                streams: [],
+                passoutYears: [],
+                minCGPA: 0
+            },
+            applicationDeadline: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
+            applicationLink: '#',
+            location: item.isRemote ? 'remote' : 'onsite',
+            salary: item.stipend,
+            skills: item.skills || [],
+            isActive: true,
+            createdAt: item.postedDate || new Date().toISOString(),
+            // FrontendJob specific properties
+            isFeatured: item.isFeatured || false,
+            isUrgent: item.isUrgent || false,
+            applicantCount: item.applicantCount || 0,
+            companyLogo: item.companyLogo,
+            companySize: item.companySize || '',
+            industry: item.industry || '',
+            benefits: item.benefits || [],
+            companyType: item.companyType || 'Startup',
+            experienceRequired: 'Fresher',
+            jobType: 'Internship',
+            employmentType: 'Internship',
+            postedDate: item.postedDate || new Date().toISOString().split('T')[0],
+            isRemote: item.isRemote || false,
+        };
+    } else {
+        // Convert MockJob to FrontendJob
+        return {
+            id: item.id.toString(),
+            title: item.title,
+            company: item.company,
+            description: item.description,
+            type: 'job' as const,
+            eligibility: {
+                qualifications: [],
+                streams: [],
+                passoutYears: [],
+                minCGPA: 0
+            },
+            applicationDeadline: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
+            applicationLink: '#',
+            location: item.isRemote ? 'remote' : 'onsite',
+            salary: item.isInternship ? item.stipend : (item as MockJob).salary,
+            skills: item.skills || [],
+            isActive: true,
+            createdAt: item.postedDate || new Date().toISOString(),
+            // FrontendJob specific properties
+            isFeatured: item.isFeatured || false,
+            isUrgent: item.isUrgent || false,
+            applicantCount: item.applicantCount || 0,
+            companyLogo: item.companyLogo,
+            companySize: item.companySize || '',
+            industry: item.industry || '',
+            benefits: item.benefits || [],
+            companyType: item.companyType || 'Startup',
+            experienceRequired: item.isInternship ? 'Fresher' : (item as MockJob).experienceRequired || '',
+            jobType: item.isInternship ? 'Internship' : (item as MockJob).jobType || '',
+            employmentType: item.isInternship ? 'Internship' : (item as MockJob).employmentType || '',
+            postedDate: item.postedDate || new Date().toISOString().split('T')[0],
+            isRemote: item.isRemote || false,
+        };
+    }
 };
 
 export default function SavedJobsPage() {
@@ -25,48 +100,69 @@ export default function SavedJobsPage() {
     const [selectedTags, setSelectedTags] = useState<string[]>([]);
     const [viewMode, setViewMode] = useState<'grid' | 'list'>('list');
 
-    // Mock saved items (in real app, this would come from backend)
-    const [savedItems, setSavedItems] = useState<SavedItem[]>([
-        {
-            ...mockJobs[0],
-            savedDate: '2024-01-20',
-            isInternship: false,
-            tags: ['Frontend', 'React', 'Remote'],
-            notes: 'Great company culture, good for career growth',
-        },
-        {
-            ...mockJobs[1],
-            savedDate: '2024-01-19',
-            isInternship: false,
-            tags: ['Backend', 'Java', 'Fintech'],
-            notes: 'Competitive salary, interesting tech stack',
-        },
-        {
-            ...mockInternships[0],
-            savedDate: '2024-01-18',
-            isInternship: true,
-            tags: ['Internship', 'Frontend', 'Learning'],
-            notes: 'Perfect for gaining experience in food tech',
-        },
-        {
-            ...mockJobs[3],
-            savedDate: '2024-01-17',
-            isInternship: false,
-            tags: ['Data Science', 'Python', 'ML'],
-            notes: 'Dream role in data science',
-        },
-        {
-            ...mockInternships[2],
-            savedDate: '2024-01-16',
-            isInternship: true,
-            tags: ['Internship', 'Data Science', 'Analytics'],
-            notes: 'Great learning opportunity',
-        },
-    ]);
+    // Saved items from backend API
+    const [savedItems, setSavedItems] = useState<SavedItem[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+
+    // Load saved jobs from backend API
+    const loadSavedJobs = async () => {
+        try {
+            setLoading(true);
+            setError(null);
+            
+            // For now, we'll load all jobs and mark them as saved
+            // In a real implementation, there would be a specific saved jobs endpoint
+            const response: ApiResponse<PaginatedResponse<Job>> = await jobService.getJobs();
+            
+            if (response.success && response.data) {
+                // Transform backend jobs to saved items format
+                const transformedSavedItems: SavedItem[] = response.data.data.map((job: Job) => ({
+                    id: job.id,
+                    title: job.title,
+                    company: job.company,
+                    description: job.description,
+                    location: job.location,
+                    salary: job.salary || '',
+                    skills: job.skills || [],
+                    type: job.type,
+                    createdAt: job.createdAt,
+                    isActive: job.isActive,
+                    isFeatured: false,
+                    isUrgent: false,
+                    applicantCount: 0,
+                    companyLogo: '',
+                    companySize: '',
+                    industry: '',
+                    benefits: [],
+                    companyType: 'Startup',
+                    experienceRequired: '',
+                    jobType: '',
+                    employmentType: '',
+                    postedDate: job.createdAt?.split('T')[0] || new Date().toISOString().split('T')[0],
+                    isRemote: job.location === 'remote',
+                    savedDate: new Date().toISOString().split('T')[0],
+                    tags: job.skills || [],
+                    notes: '',
+                }));
+                
+                setSavedItems(transformedSavedItems);
+            } else {
+                setError('Failed to load saved jobs');
+            }
+        } catch (err) {
+            console.error('Error loading saved jobs:', err);
+            setError('Failed to load saved jobs');
+        } finally {
+            setLoading(false);
+        }
+    };
 
     useEffect(() => {
         if (!isAuthenticated) {
             router.push('/login?redirect=/saved-jobs');
+        } else {
+            loadSavedJobs();
         }
     }, [isAuthenticated, router]);
 
@@ -529,7 +625,7 @@ export default function SavedJobsPage() {
                                         {/* Job Card */}
                                         <div className="p-6" data-oid="oh3rpg-">
                                             <JobCard
-                                                job={item as Job}
+                                                job={convertSavedItemToFrontendJob(item)}
                                                 viewMode={viewMode}
                                                 isInternship={item.isInternship}
                                                 data-oid="n1mo8o9"

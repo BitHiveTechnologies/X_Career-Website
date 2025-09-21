@@ -1,7 +1,7 @@
 'use client';
 
 import ErrorBoundary from '@/components/ErrorBoundary';
-import { AuthProvider } from '@/lib/auth/AuthContext';
+import { AuthProvider } from '@/lib/auth/AuthContextBackend';
 import React from 'react';
 
 interface ProvidersProps {

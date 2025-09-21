@@ -1,7 +1,7 @@
 'use client';
 
 import { usePremiumTheme } from '@/hooks/usePremiumTheme';
-import { useAuth } from '@/lib/auth/AuthContext';
+import { useAuth } from '@/lib/auth/AuthContextBackend';
 import { Crown, Lock } from 'lucide-react';
 import { useState } from 'react';
 import SubscriptionUpgradeModal from './SubscriptionUpgradeModal';

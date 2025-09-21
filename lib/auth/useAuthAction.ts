@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useAuth } from './AuthContext';
+import { useAuth } from './AuthContextBackend';
 
 export const useAuthAction = () => {
     const { isAuthenticated, requireAuth } = useAuth();

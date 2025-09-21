@@ -1,0 +1,615 @@
+{
+  "version": "1.0.0",
+  "projectName": "NotifyX Backend-Frontend Integration",
+  "description": "Integrate NotifyX frontend with backend API to create a fully functional job portal platform",
+  "createdAt": "2024-01-20T10:00:00.000Z",
+  "updatedAt": "2024-01-20T10:00:00.000Z",
+  "tags": {
+    "master": {
+      "name": "master",
+      "description": "Main integration tasks",
+      "createdAt": "2024-01-20T10:00:00.000Z",
+      "tasks": [
+        {
+          "id": "1",
+          "title": "Update AuthContext to use Backend Authentication",
+          "description": "Replace the existing mock AuthContext with the new backend-integrated AuthContextBackend to enable real JWT authentication",
+          "details": "Migrate from lib/auth/AuthContext.tsx to lib/auth/AuthContextBackend.tsx. Update all components that use useAuth() to work with the new authentication system. Ensure proper error handling and loading states during authentication.",
+          "status": "pending",
+          "priority": "high",
+          "dependencies": [],
+          "testStrategy": "Test login/logout flow, token persistence, role-based access control, and error handling scenarios",
+          "estimatedHours": 4,
+          "frontendAvailable": true,
+          "tags": [
+            "authentication",
+            "migration",
+            "critical"
+          ]
+        },
+        {
+          "id": "2",
+          "title": "Integrate User Profile Management with Backend",
+          "description": "Connect user profile forms and management to backend APIs for real-time profile updates and validation",
+          "details": "Update profile page components to use backend APIs. Implement profile completion tracking, real-time validation, and file upload for resumes. Handle profile data transformation between frontend and backend formats.",
+          "status": "pending",
+          "priority": "high",
+          "dependencies": [
+            "1"
+          ],
+          "testStrategy": "Test profile creation, updates, validation, file uploads, and completion tracking",
+          "estimatedHours": 6,
+          "frontendAvailable": true,
+          "tags": [
+            "profile",
+            "backend-integration",
+            "forms"
+          ]
+        },
+        {
+          "id": "3",
+          "title": "Replace Mock Job Data with Backend API Calls",
+          "description": "Integrate job listing, search, and detail pages with backend job APIs to display real job data",
+          "details": "Update jobs page, job cards, and job detail components to use JobService. Implement search functionality, filtering, pagination, and job data transformation. Handle loading states and error scenarios.",
+          "status": "pending",
+          "priority": "high",
+          "dependencies": [
+            "1"
+          ],
+          "testStrategy": "Test job listing, search, filtering, pagination, and job detail views with real backend data",
+          "estimatedHours": 8,
+          "frontendAvailable": true,
+          "tags": [
+            "jobs",
+            "search",
+            "pagination",
+            "data-integration"
+          ]
+        },
+        {
+          "id": "4",
+          "title": "Implement Job Application System with Backend",
+          "description": "Connect job application forms and management to backend APIs for real application processing",
+          "details": "Update application forms to use ApplicationService. Implement file upload for resumes, application status tracking, and application history. Handle application withdrawal and status updates.",
+          "status": "pending",
+          "priority": "high",
+          "dependencies": [
+            "1",
+            "3"
+          ],
+          "testStrategy": "Test job application submission, file uploads, status tracking, and application management",
+          "estimatedHours": 6,
+          "frontendAvailable": true,
+          "tags": [
+            "applications",
+            "file-upload",
+            "status-tracking"
+          ]
+        },
+        {
+          "id": "5",
+          "title": "Integrate Subscription and Payment System with Razorpay",
+          "description": "Connect subscription plans and payment processing to backend APIs and Razorpay gateway",
+          "details": "Update subscription components to use SubscriptionService and PaymentService. Implement Razorpay integration, payment verification, subscription status tracking, and payment history. Handle payment errors and retry logic.",
+          "status": "pending",
+          "priority": "medium",
+          "dependencies": [
+            "1"
+          ],
+          "testStrategy": "Test subscription plan selection, payment processing, verification, and subscription management",
+          "estimatedHours": 10,
+          "frontendAvailable": true,
+          "tags": [
+            "payments",
+            "subscriptions",
+            "razorpay",
+            "revenue"
+          ]
+        },
+        {
+          "id": "7",
+          "title": "Integrate Admin Dashboard with Backend APIs",
+          "description": "Connect admin dashboard components to backend admin APIs for real-time management data",
+          "details": "Update admin dashboard to use AdminService. Implement user management, job management, analytics display, and system health monitoring. Handle admin-specific permissions and error scenarios.",
+          "status": "pending",
+          "priority": "medium",
+          "dependencies": [
+            "1"
+          ],
+          "testStrategy": "Test admin dashboard functionality, user management, job management, and analytics display",
+          "estimatedHours": 8,
+          "frontendAvailable": true,
+          "tags": [
+            "admin",
+            "dashboard",
+            "management",
+            "analytics"
+          ]
+        },
+        {
+          "id": "8",
+          "title": "Implement Comprehensive Error Handling and Loading States",
+          "description": "Add comprehensive error handling, loading states, and user feedback throughout the application",
+          "details": "Implement error boundaries, loading skeletons, error messages, and retry mechanisms. Add network error handling, timeout management, and user-friendly error displays. Ensure consistent error handling across all components.",
+          "status": "pending",
+          "priority": "medium",
+          "dependencies": [
+            "2",
+            "3",
+            "4"
+          ],
+          "testStrategy": "Test error scenarios, loading states, retry mechanisms, and user feedback",
+          "estimatedHours": 6,
+          "frontendAvailable": true,
+          "tags": [
+            "error-handling",
+            "loading-states",
+            "ux",
+            "reliability"
+          ]
+        },
+        {
+          "id": "9",
+          "title": "Integrate Email Notification System",
+          "description": "Connect email notification components to backend notification APIs for real email functionality",
+          "details": "Update notification components to use NotificationService. Implement email preferences, notification testing, and queue status monitoring. Handle email errors and delivery status.",
+          "status": "pending",
+          "priority": "low",
+          "dependencies": [
+            "1"
+          ],
+          "testStrategy": "Test email notifications, preferences, and queue status monitoring",
+          "estimatedHours": 4,
+          "frontendAvailable": true,
+          "tags": [
+            "notifications",
+            "email",
+            "communication"
+          ]
+        },
+        {
+          "id": "10",
+          "title": "Update Login and Register Pages for Backend Integration",
+          "description": "Update authentication pages to use the new backend authentication system",
+          "details": "Modify login and register pages to use the new AuthContextBackend. Update form validation, error handling, and user feedback. Ensure proper redirect handling after authentication.",
+          "status": "pending",
+          "priority": "high",
+          "dependencies": [
+            "1"
+          ],
+          "testStrategy": "Test login, registration, form validation, and redirect flows",
+          "estimatedHours": 3,
+          "frontendAvailable": true,
+          "tags": [
+            "authentication",
+            "forms",
+            "pages",
+            "migration"
+          ]
+        },
+        {
+          "id": "11",
+          "title": "Update Dashboard Page with Real Backend Data",
+          "description": "Connect dashboard page to backend APIs to display real user and application data",
+          "details": "Update dashboard components to use backend APIs for user statistics, application data, and personalized content. Implement data visualization and real-time updates.",
+          "status": "pending",
+          "priority": "medium",
+          "dependencies": [
+            "1",
+            "2",
+            "4"
+          ],
+          "testStrategy": "Test dashboard data display, statistics, and real-time updates",
+          "estimatedHours": 5,
+          "frontendAvailable": true,
+          "tags": [
+            "dashboard",
+            "data-visualization",
+            "statistics"
+          ]
+        },
+        {
+          "id": "12",
+          "title": "Implement Data Validation and Type Safety",
+          "description": "Add comprehensive data validation and ensure type safety throughout the application",
+          "details": "Implement runtime data validation using validation utilities. Add form validation with backend rules, API response validation, and data transformation utilities. Ensure TypeScript type safety across all components.",
+          "status": "pending",
+          "priority": "medium",
+          "dependencies": [
+            "2",
+            "3",
+            "4"
+          ],
+          "testStrategy": "Test data validation, form validation, and type safety across all components",
+          "estimatedHours": 4,
+          "frontendAvailable": true,
+          "tags": [
+            "validation",
+            "typescript",
+            "data-safety",
+            "forms"
+          ]
+        },
+        {
+          "id": "13",
+          "title": "Update Saved Jobs and Applications Pages",
+          "description": "Connect saved jobs and applications pages to backend APIs for real data management",
+          "details": "Update saved jobs and applications pages to use backend APIs. Implement save/unsave functionality, application status updates, and data synchronization. Handle offline scenarios and data conflicts.",
+          "status": "pending",
+          "priority": "medium",
+          "dependencies": [
+            "1",
+            "3",
+            "4"
+          ],
+          "testStrategy": "Test save/unsave functionality, application management, and data synchronization",
+          "estimatedHours": 4,
+          "frontendAvailable": true,
+          "tags": [
+            "saved-jobs",
+            "applications",
+            "data-management",
+            "synchronization"
+          ]
+        },
+        {
+          "id": "14",
+          "title": "Implement Performance Optimization and Caching",
+          "description": "Add performance optimizations, caching, and lazy loading to improve application performance",
+          "details": "Implement request caching, lazy loading for large datasets, optimistic UI updates, and performance monitoring. Add pagination optimization and data prefetching where appropriate.",
+          "status": "pending",
+          "priority": "low",
+          "dependencies": [
+            "3",
+            "4",
+            "6"
+          ],
+          "testStrategy": "Test performance improvements, caching effectiveness, and loading times",
+          "estimatedHours": 6,
+          "frontendAvailable": true,
+          "tags": [
+            "performance",
+            "caching",
+            "optimization",
+            "lazy-loading"
+          ]
+        },
+        {
+          "id": "15",
+          "title": "Add Comprehensive Testing and Documentation",
+          "description": "Add comprehensive testing, documentation, and deployment preparation for the integrated application",
+          "details": "Implement unit tests, integration tests, and end-to-end tests for all integrated features. Update documentation, create deployment guides, and prepare production configuration. Add monitoring and logging.",
+          "status": "pending",
+          "priority": "low",
+          "dependencies": [
+            "8",
+            "12",
+            "14"
+          ],
+          "testStrategy": "Run comprehensive test suite and validate all integrated features",
+          "estimatedHours": 8,
+          "frontendAvailable": true,
+          "tags": [
+            "testing",
+            "documentation",
+            "deployment",
+            "monitoring"
+          ]
+        },
+        {
+          "id": "16",
+          "title": "Implement JWT Token Verification Endpoint",
+          "description": "Integrate JWT token verification functionality for secure authentication validation",
+          "details": "Add JWT token verification endpoint integration (POST /api/v1/jwt-auth/verify) to validate tokens before making authenticated requests. Implement token refresh logic and handle token expiration scenarios.",
+          "status": "pending",
+          "priority": "high",
+          "dependencies": [
+            "1"
+          ],
+          "testStrategy": "Test token verification, refresh logic, and expiration handling",
+          "estimatedHours": 2,
+          "frontendAvailable": true,
+          "tags": [
+            "authentication",
+            "jwt",
+            "security"
+          ]
+        },
+        {
+          "id": "25",
+          "title": "Implement Health Check and API Documentation",
+          "description": "Add health check endpoints (GET /health, GET /api/v1/) for system monitoring",
+          "details": "Implement health check endpoints for system monitoring and API documentation access. Add system status indicators, uptime monitoring, and API documentation display.",
+          "status": "pending",
+          "priority": "low",
+          "dependencies": [
+            "1"
+          ],
+          "testStrategy": "Test health check endpoints and API documentation access",
+          "estimatedHours": 2,
+          "frontendAvailable": true,
+          "tags": [
+            "health-check",
+            "monitoring",
+            "documentation",
+            "system"
+          ]
+        },
+        {
+          "id": "6",
+          "title": "Implement Job Matching and Recommendations",
+          "description": "Integrate personalized job recommendations and matching analytics with backend APIs",
+          "details": "Update recommendation components to use MatchingService. Implement recommendation display, matching analytics dashboard, and recommendation preferences. Handle recommendation filtering and sorting.",
+          "status": "pending",
+          "priority": "medium",
+          "dependencies": [
+            "1",
+            "3"
+          ],
+          "testStrategy": "Test recommendation generation, matching analytics, and recommendation preferences",
+          "estimatedHours": 6,
+          "frontendAvailable": false,
+          "tags": [
+            "recommendations",
+            "matching",
+            "analytics",
+            "personalization"
+          ]
+        },
+        {
+          "id": "17",
+          "title": "Implement User Profile Management for Other Users",
+          "description": "Add functionality to view and manage other user profiles (GET/PUT /api/v1/users/profile/{userId})",
+          "details": "Implement user profile viewing and editing for other users. Add profile sharing functionality, user search, and profile comparison features. Handle permissions and privacy settings.",
+          "status": "pending",
+          "priority": "medium",
+          "dependencies": [
+            "1",
+            "2"
+          ],
+          "testStrategy": "Test profile viewing, editing, sharing, and permission handling",
+          "estimatedHours": 4,
+          "frontendAvailable": false,
+          "tags": [
+            "profile",
+            "user-management",
+            "permissions"
+          ]
+        },
+        {
+          "id": "18",
+          "title": "Implement Admin User Management System",
+          "description": "Add admin functionality for user management (GET /api/v1/users/, DELETE /api/v1/users/{userId}, GET /api/v1/users/stats)",
+          "details": "Create admin interface for user management including user listing, deletion, and statistics. Implement user search, filtering, and bulk operations. Add user activity monitoring and admin controls.",
+          "status": "pending",
+          "priority": "medium",
+          "dependencies": [
+            "1",
+            "7"
+          ],
+          "testStrategy": "Test admin user management, statistics display, and bulk operations",
+          "estimatedHours": 5,
+          "frontendAvailable": false,
+          "tags": [
+            "admin",
+            "user-management",
+            "statistics"
+          ]
+        },
+        {
+          "id": "19",
+          "title": "Implement Payment Webhook Integration",
+          "description": "Add Razorpay webhook endpoint integration (POST /api/v1/payments/webhook) for payment status updates",
+          "details": "Implement webhook handler for Razorpay payment notifications. Add webhook signature verification, payment status updates, and subscription activation. Handle webhook retry logic and error scenarios.",
+          "status": "pending",
+          "priority": "high",
+          "dependencies": [
+            "5"
+          ],
+          "testStrategy": "Test webhook handling, signature verification, and payment status updates",
+          "estimatedHours": 3,
+          "frontendAvailable": false,
+          "tags": [
+            "payments",
+            "webhooks",
+            "razorpay",
+            "security"
+          ]
+        },
+        {
+          "id": "20",
+          "title": "Implement Advanced Subscription Management",
+          "description": "Add advanced subscription features (history, cancellation, renewal, analytics)",
+          "details": "Implement subscription history viewing, subscription cancellation, renewal functionality, and subscription analytics. Add subscription management dashboard and automated renewal notifications.",
+          "status": "pending",
+          "priority": "medium",
+          "dependencies": [
+            "5"
+          ],
+          "testStrategy": "Test subscription history, cancellation, renewal, and analytics",
+          "estimatedHours": 6,
+          "frontendAvailable": false,
+          "tags": [
+            "subscriptions",
+            "management",
+            "analytics",
+            "renewal"
+          ]
+        },
+        {
+          "id": "21",
+          "title": "Implement Admin Job Management System",
+          "description": "Add admin functionality for job management (POST, PUT, DELETE, PATCH /api/v1/jobs/, stats)",
+          "details": "Create admin interface for job management including job creation, editing, deletion, status toggling, and job statistics. Implement job approval workflow and bulk job operations.",
+          "status": "pending",
+          "priority": "medium",
+          "dependencies": [
+            "1",
+            "3",
+            "7"
+          ],
+          "testStrategy": "Test admin job management, statistics, and bulk operations",
+          "estimatedHours": 6,
+          "frontendAvailable": false,
+          "tags": [
+            "admin",
+            "job-management",
+            "statistics",
+            "workflow"
+          ]
+        },
+        {
+          "id": "22",
+          "title": "Implement Admin Application Management System",
+          "description": "Add admin functionality for application management (GET /api/v1/applications/job/{jobId}/applications, PATCH status, stats)",
+          "details": "Create admin interface for managing job applications including viewing applications by job, updating application status, and application statistics. Implement application review workflow and bulk status updates.",
+          "status": "pending",
+          "priority": "medium",
+          "dependencies": [
+            "1",
+            "4",
+            "7"
+          ],
+          "testStrategy": "Test admin application management, status updates, and statistics",
+          "estimatedHours": 5,
+          "frontendAvailable": false,
+          "tags": [
+            "admin",
+            "application-management",
+            "statistics",
+            "workflow"
+          ]
+        },
+        {
+          "id": "23",
+          "title": "Implement Advanced Job Matching Features",
+          "description": "Add advanced job matching endpoints (GET /api/v1/matching/jobs, POST /api/v1/matching/recommendations, admin features)",
+          "details": "Implement advanced job matching features including job matching by criteria, filtered recommendations, and admin matching tools. Add matching analytics and advanced search capabilities.",
+          "status": "pending",
+          "priority": "medium",
+          "dependencies": [
+            "1",
+            "6"
+          ],
+          "testStrategy": "Test advanced matching, filtered recommendations, and admin matching tools",
+          "estimatedHours": 5,
+          "frontendAvailable": false,
+          "tags": [
+            "matching",
+            "recommendations",
+            "admin",
+            "analytics"
+          ]
+        },
+        {
+          "id": "24",
+          "title": "Implement Admin Email Notification System",
+          "description": "Add admin email notification management (test connection, send emails, queue status)",
+          "details": "Create admin interface for email notification management including connection testing, sending welcome emails, job alerts, and monitoring email queue status. Implement email templates and delivery tracking.",
+          "status": "pending",
+          "priority": "low",
+          "dependencies": [
+            "1",
+            "7",
+            "9"
+          ],
+          "testStrategy": "Test email connection, sending, and queue monitoring",
+          "estimatedHours": 4,
+          "frontendAvailable": false,
+          "tags": [
+            "admin",
+            "email",
+            "notifications",
+            "monitoring"
+          ]
+        }
+      ]
+    }
+  },
+  "integration": {
+    "tasks": [
+      {
+        "id": 1,
+        "title": "Update AuthContext to use Backend Authentication",
+        "description": "Replace the existing mock AuthContext with the new backend-integrated AuthContextBackend to enable real JWT authentication",
+        "details": "Migrate from lib/auth/AuthContext.tsx to lib/auth/AuthContextBackend.tsx. Update all components that use useAuth() to work with the new authentication system. Ensure proper error handling and loading states during authentication.",
+        "status": "done",
+        "priority": "high",
+        "dependencies": [],
+        "testStrategy": "Test login/logout flow, token persistence, role-based access control, and error handling scenarios",
+        "estimatedHours": 4,
+        "frontendAvailable": true,
+        "tags": [
+          "authentication",
+          "migration",
+          "critical"
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Integrate User Profile Management with Backend",
+        "description": "Connect user profile forms and management to backend APIs for real-time profile updates and validation",
+        "details": "Update profile page components to use backend APIs. Implement profile completion tracking, real-time validation, and file upload for resumes. Handle profile data transformation between frontend and backend formats.",
+        "status": "done",
+        "priority": "high",
+        "dependencies": [
+          "1"
+        ],
+        "testStrategy": "Test profile creation, updates, validation, file uploads, and completion tracking",
+        "estimatedHours": 6,
+        "frontendAvailable": true,
+        "tags": [
+          "profile",
+          "backend-integration",
+          "forms"
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Replace Mock Job Data with Backend API Calls",
+        "description": "Integrate job listing, search, and detail pages with backend job APIs to display real job data",
+        "details": "Update jobs page, job cards, and job detail components to use JobService. Implement search functionality, filtering, pagination, and job data transformation. Handle loading states and error scenarios.",
+        "status": "done",
+        "priority": "high",
+        "dependencies": [
+          "1"
+        ],
+        "testStrategy": "Test job listing, search, filtering, pagination, and job detail views with real backend data",
+        "estimatedHours": 8,
+        "frontendAvailable": true,
+        "tags": [
+          "jobs",
+          "search",
+          "pagination",
+          "data-integration"
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Integrate Job Application System with Backend",
+        "description": "Connect job application forms and modals to backend APIs for real application submissions",
+        "details": "Update JobApplicationModal and QuickApplyModal to use applicationService.applyForJob(). Implement file upload for resumes, cover letter submission, and application status tracking. Handle success/error states and user feedback.",
+        "status": "pending",
+        "priority": "high",
+        "dependencies": [
+          "1",
+          "3"
+        ],
+        "testStrategy": "Test job application flow, file upload, form validation, and success/error handling",
+        "estimatedHours": 6,
+        "frontendAvailable": true,
+        "tags": [
+          "applications",
+          "forms",
+          "file-upload",
+          "backend-integration"
+        ]
+      }
+    ],
+    "metadata": {
+      "created": "2025-09-20T11:17:59.133Z",
+      "updated": "2025-09-21T05:52:14.988Z",
+      "description": "Backend-frontend integration tasks for NotifyX"
+    }
+  }
+}

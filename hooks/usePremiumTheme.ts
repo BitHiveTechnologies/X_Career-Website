@@ -1,4 +1,4 @@
-import { useAuth } from '@/lib/auth/AuthContext';
+import { useAuth } from '@/lib/auth/AuthContextBackend';
 
 export interface PremiumThemeColors {
     primary: string;

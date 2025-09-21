@@ -1,4 +1,31 @@
-import { Job } from '@/app/jobs/page';
+import { Job } from '@/lib/api';
+
+// Mock data interfaces (different from API interfaces)
+export interface MockJob {
+    id: number;
+    title: string;
+    company: string;
+    location: string;
+    experienceRequired: string;
+    jobType: string;
+    employmentType: string;
+    skills: string[];
+    postedDate: string;
+    salary?: string;
+    stipend?: string;
+    description: string;
+    requirements?: string[];
+    benefits: string[];
+    companySize: string;
+    industry: string;
+    isRemote: boolean;
+    isUrgent: boolean;
+    isFeatured: boolean;
+    applicantCount: number;
+    companyLogo?: string;
+    companyType: 'Startup' | 'MNC' | 'Product' | 'Service';
+    mentorshipIncluded?: boolean;
+}
 
 // Import internship type from internships page
 export interface Internship {
@@ -30,7 +57,7 @@ export interface Internship {
     mentorshipIncluded?: boolean;
 }
 
-export const mockJobs: Job[] = [
+export const mockJobs: MockJob[] = [
     {
         id: 1,
         title: 'Frontend Developer',
@@ -52,6 +79,7 @@ export const mockJobs: Job[] = [
         companySize: '5000-10000',
         industry: 'Food Tech',
         benefits: ['Health Insurance', 'Free Meals', 'Flexible Hours', 'Stock Options'],
+        requirements: ['Bachelor\'s degree in Computer Science or related field', 'Strong problem-solving skills', 'Experience with version control'],
         companyType: 'Startup',
     },
     {
@@ -737,7 +765,7 @@ export const mockInternships: Internship[] = [
     },
 ];
 
-export const findJobBySlug = (companySlug: string, jobTitleSlug: string): Job | null => {
+export const findJobBySlug = (companySlug: string, jobTitleSlug: string): MockJob | null => {
     return (
         mockJobs.find((job) => {
             const jobCompanySlug = job.company

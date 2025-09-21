@@ -1,6 +1,6 @@
 'use client';
 
-import { Job } from '@/app/jobs/page';
+import { FrontendJob } from '@/lib/api';
 import { useAuthAction } from '@/lib/auth/useAuthAction';
 import { useState } from 'react';
 import ApplicationSuccessModal from './ApplicationSuccessModal';
@@ -9,7 +9,7 @@ import JobDetailsModal from './JobDetailsModal';
 import QuickApplyModal from './QuickApplyModal';
 
 interface JobCardProps {
-    job: Job;
+    job: FrontendJob;
     viewMode?: 'grid' | 'list';
     isInternship?: boolean;
 }
@@ -365,7 +365,7 @@ export default function JobCard({ job, viewMode = 'list', isInternship = false }
                             <span className="font-medium" data-oid="yt1zo66">
                                 Posted:
                             </span>{' '}
-                            {formatDate(job.postedDate)}
+                            {formatDate(job.postedDate || '')}
                         </span>
                     </div>
 
@@ -390,7 +390,7 @@ export default function JobCard({ job, viewMode = 'list', isInternship = false }
                                 Skills Required:
                             </span>
                             <div className="flex flex-wrap gap-1 mt-1" data-oid="myyk4sa">
-                                {job.skills.slice(0, 4).map((skill, index) => (
+                                {job.skills?.slice(0, 4).map((skill, index) => (
                                     <span
                                         key={index}
                                         className="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded"
@@ -399,12 +399,12 @@ export default function JobCard({ job, viewMode = 'list', isInternship = false }
                                         {skill}
                                     </span>
                                 ))}
-                                {job.skills.length > 4 && (
+                                {job.skills && job.skills.length > 4 && (
                                     <span
                                         className="text-xs text-gray-500 px-2 py-1"
                                         data-oid="0mqmx9d"
                                     >
-                                        +{job.skills.length - 4} more
+                                        +{job.skills?.length - 4} more
                                     </span>
                                 )}
                             </div>

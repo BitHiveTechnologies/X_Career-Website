@@ -4,7 +4,7 @@ import CategoryMenu from '@/components/CategoryMenu';
 import FiltersSidebar from '@/components/FiltersSidebar';
 import JobCard from '@/components/JobCard';
 import MainNavbar from '@/components/mainNavbar';
-import { mockInternships, type Internship } from '@/lib/mockData';
+import { FrontendJob, jobService, ApiResponse, PaginatedResponse, Job } from '@/lib/api';
 import { useEffect, useState } from 'react';
 
 // TypeScript Interfaces for Internships
@@ -43,8 +43,8 @@ const mockCategories: Category[] = [
 ];
 
 export default function InternshipsPage() {
-    const [internships, setInternships] = useState<Internship[]>(mockInternships);
-    const [filteredInternships, setFilteredInternships] = useState<Internship[]>(mockInternships);
+    const [internships, setInternships] = useState<FrontendJob[]>([]);
+    const [filteredInternships, setFilteredInternships] = useState<FrontendJob[]>([]);
     const [categories] = useState<Category[]>(mockCategories);
     const [selectedCategory, setSelectedCategory] = useState<string>('all');
     const [filters, setFilters] = useState<InternshipFilterOptions>({
@@ -63,6 +63,39 @@ export default function InternshipsPage() {
     const [viewMode, setViewMode] = useState<'grid' | 'list'>('list');
     const [sortBy, setSortBy] = useState('relevance');
     const [visibleInternships, setVisibleInternships] = useState(6);
+
+    // Load internships from backend on mount
+    useEffect(() => {
+        const loadInternships = async () => {
+            try {
+                setIsLoading(true);
+                const response: ApiResponse<PaginatedResponse<Job>> = await jobService.getJobs({
+                    page: 1,
+                    limit: 20,
+                    type: 'internship',
+                });
+                if (response.success && response.data) {
+                    const frontendJobs: FrontendJob[] = response.data.data.map((job) => {
+                        const mapped = jobService.transformToFrontendJob(job);
+                        return {
+                            ...mapped,
+                            // prefer stipend when present
+                            salary: job.stipend || job.salary,
+                            jobType: 'Internship',
+                            employmentType: 'Internship',
+                        };
+                    });
+                    setInternships(frontendJobs);
+                    setFilteredInternships(frontendJobs);
+                }
+            } catch (e) {
+                // silently ignore; UI has loading/empty states
+            } finally {
+                setIsLoading(false);
+            }
+        };
+        loadInternships();
+    }, []);
 
     // Enhanced filter logic for internships
     useEffect(() => {
@@ -116,7 +149,7 @@ export default function InternshipsPage() {
 
         // Apply other filters
         if (filters.duration) {
-            filtered = filtered.filter((internship) => internship.duration === filters.duration);
+            filtered = filtered.filter((internship) => (internship as any).duration === filters.duration);
         }
 
         if (filters.skills) {
@@ -141,8 +174,8 @@ export default function InternshipsPage() {
 
         if (filters.stipendRange) {
             filtered = filtered.filter((internship) => {
-                if (!internship.stipend) return false;
-                const stipendNum = parseInt(internship.stipend.replace(/[^0-9]/g, ''));
+                if (!internship.salary) return false;
+                const stipendNum = parseInt(internship.salary.replace(/[^0-9]/g, ''));
                 switch (filters.stipendRange) {
                     case '0-15':
                         return stipendNum <= 15000;
@@ -174,13 +207,13 @@ export default function InternshipsPage() {
         switch (sortBy) {
             case 'date':
                 filtered.sort(
-                    (a, b) => new Date(b.postedDate).getTime() - new Date(a.postedDate).getTime(),
+                    (a, b) => new Date(a.postedDate || a.createdAt).getTime() < new Date(b.postedDate || b.createdAt).getTime() ? 1 : -1,
                 );
                 break;
             case 'stipend':
                 filtered.sort((a, b) => {
-                    const stipendA = a.stipend ? parseInt(a.stipend.replace(/[^0-9]/g, '')) : 0;
-                    const stipendB = b.stipend ? parseInt(b.stipend.replace(/[^0-9]/g, '')) : 0;
+                    const stipendA = a.salary ? parseInt(a.salary.replace(/[^0-9]/g, '')) : 0;
+                    const stipendB = b.salary ? parseInt(b.salary.replace(/[^0-9]/g, '')) : 0;
                     return stipendB - stipendA;
                 });
                 break;
@@ -245,10 +278,39 @@ export default function InternshipsPage() {
     };
 
     // Convert internship to job format for JobCard component
-    const convertInternshipToJob = (internship: Internship) => ({
-        ...internship,
-        experienceRequired: 'Fresher',
+    const convertInternshipToJob = (internship: Internship): FrontendJob => ({
+        id: internship.id.toString(),
+        title: internship.title,
+        company: internship.company,
+        description: internship.description || '',
+        type: 'internship' as const,
+        eligibility: {
+            qualifications: [],
+            streams: [],
+            passoutYears: [],
+            minCGPA: 0
+        },
+        applicationDeadline: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(), // 30 days from now
+        applicationLink: '#',
+        location: internship.isRemote ? 'remote' : 'onsite',
         salary: internship.stipend,
+        skills: internship.skills || [],
+        isActive: true,
+        createdAt: internship.postedDate || new Date().toISOString(),
+        // FrontendJob specific properties
+        isFeatured: internship.isFeatured || false,
+        isUrgent: internship.isUrgent || false,
+        applicantCount: internship.applicantCount || 0,
+        companyLogo: internship.companyLogo,
+        companySize: internship.companySize || '',
+        industry: internship.industry || '',
+        benefits: internship.benefits || [],
+        companyType: internship.companyType || 'Startup',
+        experienceRequired: 'Fresher',
+        jobType: 'Internship',
+        employmentType: 'Internship',
+        postedDate: internship.postedDate || new Date().toISOString().split('T')[0],
+        isRemote: internship.isRemote || false,
     });
 
     return (

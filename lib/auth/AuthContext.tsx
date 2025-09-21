@@ -61,16 +61,52 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         try {
             // Check if we're in the browser before accessing localStorage
             if (typeof window !== 'undefined') {
-                const storedUser = localStorage.getItem('careerx_user');
                 const storedToken = localStorage.getItem('careerx_token');
 
-                if (storedUser && storedToken) {
-                    const userData = JSON.parse(storedUser);
-                    // In a real app, you'd validate the token with your backend
-                    setUser(userData);
+                if (storedToken) {
+                    // Verify token with backend
+                    const response = await fetch('/api/v1/jwt-auth/me', {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': `Bearer ${storedToken}`,
+                            'Content-Type': 'application/json',
+                        },
+                    });
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        if (data.success && data.data && data.data.user) {
+                            const userData = data.data.user;
+                            
+                            // Transform backend user data to frontend User interface
+                            const user: User = {
+                                id: userData.id,
+                                email: userData.email,
+                                name: userData.firstName + ' ' + userData.lastName,
+                                avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(userData.firstName)}&background=2563eb&color=fff`,
+                                createdAt: new Date().toISOString(),
+                                subscription: {
+                                    plan: 'free', // Default plan, will be updated from backend
+                                    status: 'active',
+                                    startDate: new Date().toISOString(),
+                                },
+                            };
+                            
+                            setUser(user);
+                        } else {
+                            // Invalid token, clear storage
+                            localStorage.removeItem('careerx_user');
+                            localStorage.removeItem('careerx_token');
+                        }
+                    } else {
+                        // Token invalid or expired, clear storage
+                        localStorage.removeItem('careerx_user');
+                        localStorage.removeItem('careerx_token');
+                    }
                 }
             }
         } catch (error) {
+            console.error('Auth check error:', error);
             // Clear invalid data only if we're in the browser
             if (typeof window !== 'undefined') {
                 localStorage.removeItem('careerx_user');
@@ -88,31 +124,48 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         setIsLoading(true);
 
         try {
-            // Simulate API call - replace with actual API integration
-            await new Promise((resolve) => setTimeout(resolve, 1000));
-
-            // Mock validation - replace with real authentication
-            if (email && password.length >= 6) {
-                const userData: User = {
-                    id: Math.random().toString(36).substr(2, 9),
+            // Call backend authentication API
+            const response = await fetch('/api/v1/jwt-auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
                     email,
-                    name: email.split('@')[0],
-                    avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(email.split('@')[0])}&background=2563eb&color=fff`,
+                    password,
+                }),
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                return { success: false, error: data.error || 'Login failed' };
+            }
+
+            if (data.success && data.data) {
+                const { token, user: userData } = data.data;
+                
+                // Transform backend user data to frontend User interface
+                const user: User = {
+                    id: userData.id,
+                    email: userData.email,
+                    name: userData.firstName + ' ' + userData.lastName,
+                    avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(userData.firstName)}&background=2563eb&color=fff`,
                     createdAt: new Date().toISOString(),
                     subscription: {
-                        plan: 'free',
+                        plan: 'free', // Default plan, will be updated from backend
                         status: 'active',
                         startDate: new Date().toISOString(),
                     },
                 };
 
-                // Store user data only if we're in the browser
+                // Store user data and token only if we're in the browser
                 if (typeof window !== 'undefined') {
-                    localStorage.setItem('careerx_user', JSON.stringify(userData));
-                    localStorage.setItem('careerx_token', 'mock_jwt_token_' + userData.id);
+                    localStorage.setItem('careerx_user', JSON.stringify(user));
+                    localStorage.setItem('careerx_token', token);
                 }
 
-                setUser(userData);
+                setUser(user);
 
                 // Handle redirect after login
                 if (typeof window !== 'undefined') {
@@ -127,9 +180,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
                 return { success: true };
             } else {
-                return { success: false, error: 'Invalid email or password' };
+                return { success: false, error: 'Invalid response from server' };
             }
         } catch (error) {
+            console.error('Login error:', error);
             return { success: false, error: 'Login failed. Please try again.' };
         } finally {
             setIsLoading(false);
@@ -144,31 +198,50 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         setIsLoading(true);
 
         try {
-            // Simulate API call - replace with actual API integration
-            await new Promise((resolve) => setTimeout(resolve, 1000));
-
-            // Mock validation - replace with real registration
-            if (name && email && password.length >= 6) {
-                const userData: User = {
-                    id: Math.random().toString(36).substr(2, 9),
+            // Call backend registration API
+            const response = await fetch('/api/v1/jwt-auth/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    firstName: name.split(' ')[0],
+                    lastName: name.split(' ').slice(1).join(' ') || '',
                     email,
-                    name,
-                    avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=2563eb&color=fff`,
+                    password,
+                }),
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                return { success: false, error: data.error || 'Registration failed' };
+            }
+
+            if (data.success && data.data) {
+                const { token, user: userData } = data.data;
+                
+                // Transform backend user data to frontend User interface
+                const user: User = {
+                    id: userData.id,
+                    email: userData.email,
+                    name: userData.firstName + ' ' + userData.lastName,
+                    avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(userData.firstName)}&background=2563eb&color=fff`,
                     createdAt: new Date().toISOString(),
                     subscription: {
-                        plan: 'free',
+                        plan: 'free', // Default plan, will be updated from backend
                         status: 'active',
                         startDate: new Date().toISOString(),
                     },
                 };
 
-                // Store user data only if we're in the browser
+                // Store user data and token only if we're in the browser
                 if (typeof window !== 'undefined') {
-                    localStorage.setItem('careerx_user', JSON.stringify(userData));
-                    localStorage.setItem('careerx_token', 'mock_jwt_token_' + userData.id);
+                    localStorage.setItem('careerx_user', JSON.stringify(user));
+                    localStorage.setItem('careerx_token', token);
                 }
 
-                setUser(userData);
+                setUser(user);
 
                 // Handle redirect after registration
                 if (typeof window !== 'undefined') {
@@ -183,9 +256,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
                 return { success: true };
             } else {
-                return { success: false, error: 'Please fill all fields correctly' };
+                return { success: false, error: 'Invalid response from server' };
             }
         } catch (error) {
+            console.error('Registration error:', error);
             return { success: false, error: 'Registration failed. Please try again.' };
         } finally {
             setIsLoading(false);
