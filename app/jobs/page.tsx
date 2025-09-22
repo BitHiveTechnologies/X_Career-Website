@@ -9,7 +9,7 @@ import {
     jobService
 } from '@/lib/api';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { Suspense, useEffect, useState } from 'react';
+import { Suspense, useEffect, useState, useCallback } from 'react';
 
 // TypeScript Interfaces
 
@@ -102,22 +102,8 @@ function JobsPageContent() {
         };
     }, []);
 
-    // Load jobs from backend on component mount
-    useEffect(() => {
-        loadJobs();
-    }, []);
-
-    // Load jobs when search parameters change
-    useEffect(() => {
-        if (searchQuery || searchLocation) {
-            searchJobs();
-        } else {
-            loadJobs();
-        }
-    }, [searchQuery, searchLocation]);
-
     // Backend data loading functions
-    const loadJobs = async (page: number = pagination.page) => {
+    const loadJobs = useCallback(async (page: number = pagination.page) => {
         try {
             setIsLoading(true);
             setError(null);
@@ -175,9 +161,9 @@ function JobsPageContent() {
         } finally {
             setIsLoading(false);
         }
-    };
+    }, [pagination.page, pagination.limit, filters.location]);
 
-    const searchJobs = async (page: number = pagination.page) => {
+    const searchJobs = useCallback(async (page: number = pagination.page) => {
         try {
             setIsLoading(true);
             setError(null);
@@ -216,7 +202,21 @@ function JobsPageContent() {
         } finally {
             setIsLoading(false);
         }
-    };
+    }, [searchQuery, searchLocation, pagination.page, pagination.limit, filters.location]);
+
+    // Load jobs from backend on component mount
+    useEffect(() => {
+        loadJobs();
+    }, [loadJobs]);
+
+    // Load jobs when search parameters change
+    useEffect(() => {
+        if (searchQuery || searchLocation) {
+            searchJobs();
+        } else {
+            loadJobs();
+        }
+    }, [searchQuery, searchLocation, loadJobs, searchJobs]);
 
     // Function to update URL when search query changes (debounced)
     const updateSearchURL = (query: string) => {

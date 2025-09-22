@@ -122,7 +122,7 @@ export default function MainNavbar() {
                                     >
                                         <SafeAvatar
                                             src={user.avatar}
-                                            name={user.name}
+                                            name={`${user.firstName} ${user.lastName}`}
                                             size={32}
                                             className="xl:w-8 xl:h-8"
                                             data-oid="07:2_p3"
@@ -132,7 +132,7 @@ export default function MainNavbar() {
                                             className="text-sm font-medium max-w-24 xl:max-w-none truncate"
                                             data-oid="0dw.-rz"
                                         >
-                                            {user.name}
+                                            {`${user.firstName} ${user.lastName}`}
                                         </span>
                                         <svg
                                             className="w-4 h-4 flex-shrink-0"
@@ -325,7 +325,7 @@ export default function MainNavbar() {
                                         >
                                             <SafeAvatar
                                                 src={user.avatar}
-                                                name={user.name}
+                                                name={`${user.firstName} ${user.lastName}`}
                                                 size={32}
                                                 className="mr-3"
                                                 data-oid="rk2dig1"
@@ -335,7 +335,7 @@ export default function MainNavbar() {
                                                 className="text-sm font-medium text-gray-900"
                                                 data-oid=".yqe8wc"
                                             >
-                                                {user.name}
+                                                {`${user.firstName} ${user.lastName}`}
                                             </span>
                                         </div>
                                         <Link

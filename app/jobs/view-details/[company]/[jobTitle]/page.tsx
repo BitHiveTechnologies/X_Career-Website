@@ -1,6 +1,6 @@
 'use client';
 
-import { FrontendJob, jobService, ApiResponse, Job } from '@/lib/api';
+import { FrontendJob, jobService, ApiResponse, PaginatedResponse, Job, JobsResponse } from '@/lib/api';
 import MainNavbar from '@/components/mainNavbar';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
@@ -17,7 +17,7 @@ export default function JobDetailsPage() {
     const [isSaved, setIsSaved] = useState(false);
 
     // Convert MockJob to FrontendJob
-    const convertMockJobToFrontendJob = (mockJob: MockJob): FrontendJob => ({
+    const convertMockJobToFrontendJob = (mockJob: FrontendJob): FrontendJob => ({
         id: mockJob.id.toString(),
         title: mockJob.title,
         company: mockJob.company,
@@ -59,14 +59,14 @@ export default function JobDetailsPage() {
                 
                 // For now, we'll search for jobs and find the matching one
                 // In a real implementation, there would be a specific job detail endpoint
-                const response: ApiResponse<PaginatedResponse<Job>> = await jobService.getJobs();
+                const response: ApiResponse<JobsResponse> = await jobService.getJobs();
                 
                 if (response.success && response.data) {
                     const companySlug = params.company as string;
                     const jobTitleSlug = params.jobTitle as string;
                     
                     // Find job by matching company and title
-                    const foundJob = response.data.data.find((job: Job) => 
+                    const foundJob = response.data.jobs.find((job: Job) => 
                         job.company.toLowerCase().replace(/\s+/g, '-') === companySlug &&
                         job.title.toLowerCase().replace(/\s+/g, '-') === jobTitleSlug
                     );
@@ -78,12 +78,19 @@ export default function JobDetailsPage() {
                             title: foundJob.title,
                             company: foundJob.company,
                             description: foundJob.description,
+                            type: foundJob.type,
+                            eligibility: {
+                                qualifications: [],
+                                streams: [],
+                                passoutYears: [],
+                            },
+                            applicationDeadline: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
+                            applicationLink: '#',
                             location: foundJob.location,
                             salary: foundJob.salary || '',
                             skills: foundJob.skills || [],
-                            type: foundJob.type,
-                            createdAt: foundJob.createdAt,
                             isActive: foundJob.isActive,
+                            createdAt: foundJob.createdAt,
                             isFeatured: false,
                             isUrgent: false,
                             applicantCount: 0,
