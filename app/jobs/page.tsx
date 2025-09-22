@@ -118,29 +118,16 @@ function JobsPageContent() {
             if (response.success && response.data) {
                 // Backend returns: { success: true, data: { jobs: [...], pagination: {...} } }
                 const jobsArray = response.data.jobs;
-                console.log('🔍 Debug - Raw response:', response);
-                console.log('🔍 Debug - Raw jobs array:', jobsArray);
-                console.log('🔍 Debug - Jobs array length:', jobsArray?.length);
                 
                 if (Array.isArray(jobsArray)) {
-                    console.log('🔍 Debug - Transforming jobs...');
                     const frontendJobs = jobsArray.map((job: any) => {
-                        console.log('🔍 Debug - Original job:', job);
-                        const transformed = jobService.transformToFrontendJob(job);
-                        console.log('🔍 Debug - Transformed job:', transformed);
-                        return transformed;
+                        return jobService.transformToFrontendJob(job);
                     });
-                    
-                    console.log('🔍 Debug - Final frontend jobs:', frontendJobs);
-                    console.log('🔍 Debug - Setting jobs state...');
                     
                     setJobs(frontendJobs);
                     // Immediately set filtered jobs to the same as jobs
                     setFilteredJobs(frontendJobs);
                     setPagination(response.data.pagination || { page: 1, limit: 10, total: 0, pages: 0 });
-                    
-                    console.log('🔍 Debug - Jobs state updated successfully');
-                    console.log('🔍 Debug - Both jobs and filteredJobs set to:', frontendJobs.length, 'items');
                 } else {
                     console.warn('❌ Jobs data is not an array:', jobsArray);
                     setJobs([]);
@@ -254,27 +241,19 @@ function JobsPageContent() {
 
     // Enhanced filter logic with search and advanced filtering
     useEffect(() => {
-        console.log('🔍 Filter Debug - Starting filter process');
-        console.log('🔍 Filter Debug - Jobs array:', jobs);
-        console.log('🔍 Filter Debug - Jobs array length:', jobs?.length);
-        console.log('🔍 Filter Debug - Jobs is array?', Array.isArray(jobs));
-        console.log('🔍 Filter Debug - Dependencies:', { selectedCategory, filters, searchQuery, searchLocation, sortBy });
         
         // Ensure jobs is an array before filtering
         if (!Array.isArray(jobs)) {
-            console.log('❌ Filter Debug - Jobs is not an array, setting empty filtered jobs');
             setFilteredJobs([]);
             return;
         }
 
         // If jobs array is empty, don't run filtering logic
         if (jobs.length === 0) {
-            console.log('🔍 Filter Debug - Jobs array is empty, skipping filter process');
             return;
         }
 
         let filtered = jobs;
-        console.log('🔍 Filter Debug - Starting with', filtered.length, 'jobs');
 
         // Filter by search query
         if (searchQuery) {
@@ -447,10 +426,7 @@ function JobsPageContent() {
                 });
         }
 
-        console.log('🔍 Filter Debug - Final filtered jobs:', filtered);
-        console.log('🔍 Filter Debug - Final filtered count:', filtered.length);
         setFilteredJobs(filtered);
-        console.log('🔍 Filter Debug - Filtered jobs state updated');
     }, [jobs, selectedCategory, filters, searchQuery, searchLocation, sortBy]);
 
     const handleFilterChange = (newFilters: FilterOptions) => {
@@ -944,31 +920,6 @@ function JobsPageContent() {
 
                             {/* Job Cards Container */}
                             <div className="space-y-6" data-oid="ptslt8l">
-                                {(() => {
-                                    console.log('🔍 Render Debug - Current state:', {
-                                        error,
-                                        isLoading,
-                                        jobsCount: jobs?.length || 0,
-                                        filteredJobsCount: filteredJobs?.length || 0,
-                                        filteredJobsLengthCheck: filteredJobs && filteredJobs.length,
-                                        filteredJobsType: typeof filteredJobs,
-                                        filteredJobsIsArray: Array.isArray(filteredJobs),
-                                        firstJob: filteredJobs?.[0],
-                                        jobs: jobs,
-                                        filteredJobs: filteredJobs
-                                    });
-                                    
-                                    // Check the actual condition that determines rendering
-                                    console.log('🔍 Render Debug - Condition checks:', {
-                                        hasError: !!error,
-                                        isLoading: isLoading,
-                                        filteredJobsLength: filteredJobs?.length,
-                                        filteredJobsLengthGreaterThanZero: filteredJobs?.length > 0,
-                                        willShowJobs: !error && !isLoading && filteredJobs?.length > 0
-                                    });
-                                    
-                                    return null;
-                                })()}
                                 {error ? (
                                     <div className="text-center py-16" data-oid="error-state">
                                         <div className="text-red-500 mb-4">
