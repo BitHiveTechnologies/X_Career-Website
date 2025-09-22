@@ -5,13 +5,8 @@ import FiltersSidebar from '@/components/FiltersSidebar';
 import JobCard from '@/components/JobCard';
 import MainNavbar from '@/components/mainNavbar';
 import {
-    jobService,
-    JobSearchParams,
     FrontendJob,
-    ApiResponse,
-    PaginatedResponse,
-    Job,
-    JobsResponse
+    jobService
 } from '@/lib/api';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Suspense, useEffect, useState } from 'react';
@@ -35,65 +30,6 @@ export interface Category {
     slug: string;
 }
 
-// Mock data for fallback when backend is unavailable
-const mockJobs: FrontendJob[] = [
-    {
-        id: '1',
-        title: 'Frontend Developer',
-        company: 'Tech Corp',
-        description: 'Join our team as a frontend developer',
-        type: 'job',
-        eligibility: {
-            qualifications: ['Bachelor\'s Degree'],
-            streams: ['Computer Science', 'Information Technology'],
-            passoutYears: [2022, 2023, 2024]
-        },
-        applicationDeadline: '2024-12-31T23:59:59Z',
-        applicationLink: 'https://example.com/apply',
-        location: 'remote',
-        salary: '₹8-15 LPA',
-        skills: ['React', 'TypeScript', 'CSS'],
-        isActive: true,
-        createdAt: '2024-01-01T00:00:00Z',
-        isFeatured: true,
-        isUrgent: false,
-        applicantCount: 25,
-        companyType: 'Product',
-        experienceRequired: '1-3 years',
-        jobType: 'Full-time',
-        employmentType: 'Permanent',
-        postedDate: '2024-01-01T00:00:00Z',
-        isRemote: true
-    },
-    {
-        id: '2',
-        title: 'Backend Engineer',
-        company: 'StartupXYZ',
-        description: 'Build scalable backend systems',
-        type: 'job',
-        eligibility: {
-            qualifications: ['Bachelor\'s Degree'],
-            streams: ['Computer Science', 'Information Technology'],
-            passoutYears: [2021, 2022, 2023, 2024]
-        },
-        applicationDeadline: '2024-12-31T23:59:59Z',
-        applicationLink: 'https://example.com/apply',
-        location: 'hybrid',
-        salary: '₹10-18 LPA',
-        skills: ['Node.js', 'Python', 'MongoDB'],
-        isActive: true,
-        createdAt: '2024-01-02T00:00:00Z',
-        isFeatured: false,
-        isUrgent: true,
-        applicantCount: 15,
-        companyType: 'Startup',
-        experienceRequired: '2-4 years',
-        jobType: 'Full-time',
-        employmentType: 'Permanent',
-        postedDate: '2024-01-02T00:00:00Z',
-        isRemote: false
-    }
-];
 // Enhanced Categories with 12 comprehensive categories
 const mockCategories: Category[] = [
     { id: 1, name: 'All Jobs', count: 15247, slug: 'all' },
@@ -194,8 +130,9 @@ function JobsPageContent() {
             });
 
             if (response.success && response.data) {
-                // Handle backend response structure: data.jobs (prioritize the actual backend structure)
-                const jobsArray = response.data.jobs || response.data.data;
+                // Backend returns: { success: true, data: { jobs: [...], pagination: {...} } }
+                const jobsArray = response.data.jobs;
+                console.log('🔍 Debug - Raw response:', response);
                 console.log('🔍 Debug - Raw jobs array:', jobsArray);
                 console.log('🔍 Debug - Jobs array length:', jobsArray?.length);
                 
@@ -232,11 +169,9 @@ function JobsPageContent() {
             }
         } catch (err) {
             console.error('Error loading jobs:', err);
-            // Use mock data as fallback when API fails
-            console.log('Using mock data as fallback');
-            setJobs(mockJobs);
-            setFilteredJobs(mockJobs);
-            setError(null); // Clear error when using fallback data
+            setError('Failed to load jobs. Please try again later.');
+            setJobs([]);
+            setFilteredJobs([]);
         } finally {
             setIsLoading(false);
         }
@@ -255,8 +190,8 @@ function JobsPageContent() {
             });
 
             if (response.success && response.data) {
-                // Handle backend response structure: data.jobs (prioritize the actual backend structure)
-                const jobsArray = response.data.jobs || response.data.data;
+                // Backend returns: { success: true, data: { jobs: [...], pagination: {...} } }
+                const jobsArray = response.data.jobs;
                 if (Array.isArray(jobsArray)) {
                     const frontendJobs = jobsArray.map((job: any) => jobService.transformToFrontendJob(job));
                     setJobs(frontendJobs);
@@ -275,11 +210,9 @@ function JobsPageContent() {
             }
         } catch (err) {
             console.error('Error searching jobs:', err);
-            // Use mock data as fallback when API fails
-            console.log('Using mock data as fallback for search');
-            setJobs(mockJobs);
-            setFilteredJobs(mockJobs);
-            setError(null); // Clear error when using fallback data
+            setError('Failed to search jobs. Please try again later.');
+            setJobs([]);
+            setFilteredJobs([]);
         } finally {
             setIsLoading(false);
         }
@@ -414,7 +347,7 @@ function JobsPageContent() {
             );
         }
 
-        if (filters.location) {
+        if (filters.location && filters.location !== 'all') {
             filtered = filtered.filter((job) =>
                 job.location?.toLowerCase().includes(filters.location.toLowerCase()),
             );
@@ -987,6 +920,7 @@ function JobsPageContent() {
                                         filteredJobsLengthCheck: filteredJobs && filteredJobs.length,
                                         filteredJobsType: typeof filteredJobs,
                                         filteredJobsIsArray: Array.isArray(filteredJobs),
+                                        firstJob: filteredJobs?.[0],
                                         jobs: jobs,
                                         filteredJobs: filteredJobs
                                     });
@@ -1009,14 +943,25 @@ function JobsPageContent() {
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                             </svg>
                                         </div>
-                                        <h3 className="text-lg font-semibold text-gray-900 mb-2">Error Loading Jobs</h3>
+                                        <h3 className="text-lg font-semibold text-gray-900 mb-2">Unable to Load Jobs</h3>
                                         <p className="text-gray-600 mb-4">{error}</p>
-                                        <button
-                                            onClick={() => loadJobs()}
-                                            className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-                                        >
-                                            Try Again
-                                        </button>
+                                        <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                                            <button
+                                                onClick={() => loadJobs()}
+                                                className="px-6 py-2 bg-[hsl(196,80%,45%)] text-white rounded-lg hover:bg-[hsl(196,80%,40%)] transition-colors duration-200 font-medium"
+                                            >
+                                                Try Again
+                                            </button>
+                                            <button
+                                                onClick={() => {
+                                                    setError(null);
+                                                    window.location.reload();
+                                                }}
+                                                className="px-6 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors duration-200 font-medium"
+                                            >
+                                                Refresh Page
+                                            </button>
+                                        </div>
                                     </div>
                                 ) : isLoading ? (
                                     <div className="text-center py-16" data-oid="88afc--">

@@ -3,53 +3,43 @@
  * Provides high-level service functions for all backend endpoints
  */
 
-import { apiClient, API_ENDPOINTS } from './client';
+import { API_ENDPOINTS, apiClient } from './client';
 import {
-  // Job types
-  Job,
-  JobSearchParams,
-  JobStats,
-  FrontendJob,
-  
-  // Application types
-  JobApplication,
-  ApplyJobRequest,
-  ApplicationWithJob,
-  ApplicationStats,
-  
-  // Subscription types
-  Subscription,
-  SubscriptionPlan,
-  SubscriptionHistory,
-  
-  // Payment types
-  CreateOrderRequest,
-  CreateOrderResponse,
-  VerifyPaymentRequest,
-  PaymentHistory,
-  
-  // Matching types
-  JobRecommendation,
-  MatchingRecommendationsResponse,
-  MatchingAnalytics,
-  
-  // Admin types
-  AdminDashboardStats,
-  UserAnalytics,
-  JobAnalytics,
-  SystemHealth,
-  
-  // Notification types
-  EmailQueueStatus,
-  SendWelcomeEmailRequest,
-  SendJobAlertRequest,
-  
-  // Health types
-  BackendHealth,
-  
-  // Common types
-  ApiResponse,
-  PaginatedResponse,
+    // Admin types
+    AdminDashboardStats,
+    // Common types
+    ApiResponse,
+    ApplicationStats,
+    ApplicationWithJob,
+    ApplyJobRequest,
+    // Health types
+    BackendHealth,
+    // Payment types
+    CreateOrderRequest,
+    CreateOrderResponse,
+    // Notification types
+    EmailQueueStatus,
+    FrontendJob,
+    // Job types
+    Job,
+    JobAnalytics,
+    // Application types
+    JobApplication,
+    JobSearchParams,
+    JobStats,
+    MatchingAnalytics,
+    MatchingRecommendationsResponse,
+    PaginatedResponse,
+    PaymentHistory,
+    SendJobAlertRequest,
+    SendWelcomeEmailRequest,
+    // Subscription types
+    Subscription,
+    SubscriptionHistory,
+    SubscriptionPlan,
+    SystemHealth,
+    UserAnalytics,
+    VerifyPaymentRequest
 } from './types';
 
 // ============================================================================
@@ -60,14 +50,14 @@ export class JobService {
   /**
    * Get all jobs with optional filters
    */
-  static async getJobs(params?: JobSearchParams): Promise<ApiResponse<PaginatedResponse<Job>>> {
+  static async getJobs(params?: JobSearchParams): Promise<ApiResponse<JobsResponse>> {
     return apiClient.get(API_ENDPOINTS.JOBS.ALL, params);
   }
 
   /**
    * Search jobs with query and filters
    */
-  static async searchJobs(query: string, params?: Omit<JobSearchParams, 'search'>): Promise<ApiResponse<PaginatedResponse<Job>>> {
+  static async searchJobs(query: string, params?: Omit<JobSearchParams, 'search'>): Promise<ApiResponse<JobsResponse>> {
     return apiClient.get(API_ENDPOINTS.JOBS.SEARCH, { ...params, search: query });
   }
 

@@ -42,6 +42,12 @@ export interface JobsResponseAlternative {
   pagination: PaginationInfo;
 }
 
+// Backend API response structure for jobs endpoint
+export interface BackendJobsResponse {
+  jobs: Job[];
+  pagination: PaginationInfo;
+}
+
 // ============================================================================
 // AUTHENTICATION TYPES
 // ============================================================================
