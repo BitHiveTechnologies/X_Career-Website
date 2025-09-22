@@ -1,13 +1,13 @@
 'use client';
 
-import { Job, FrontendJob, applicationService, ApiResponse, PaginatedResponse, JobApplication } from '@/lib/api';
+import { Job, FrontendJob, applicationService, ApiResponse, PaginatedResponse, JobApplication, ApplicationWithJob } from '@/lib/api';
 import MainNavbar from '@/components/mainNavbar';
 import { useAuth } from '@/lib/auth/AuthContextBackend';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-type ApplicationStatus = 'applied' | 'under-review' | 'interview' | 'rejected' | 'accepted';
+type ApplicationStatus = 'applied' | 'under-review' | 'interview' | 'rejected' | 'accepted' | 'shortlisted' | 'withdrawn';
 
 interface Application {
     id: string;
@@ -53,6 +53,18 @@ const statusConfig = {
         icon: '🎉',
         description: 'Congratulations! Offer received',
     },
+    shortlisted: {
+        label: 'Shortlisted',
+        color: 'bg-green-100 text-green-800',
+        icon: '✅',
+        description: 'Application has been shortlisted',
+    },
+    withdrawn: {
+        label: 'Withdrawn',
+        color: 'bg-gray-100 text-gray-800',
+        icon: '↩️',
+        description: 'Application has been withdrawn',
+    },
 };
 
 export default function ApplicationsPage() {
@@ -74,23 +86,31 @@ export default function ApplicationsPage() {
             setLoading(true);
             setError(null);
             
-            const response: ApiResponse<PaginatedResponse<JobApplication>> = await applicationService.getMyApplications();
+            const response: ApiResponse<PaginatedResponse<ApplicationWithJob>> = await applicationService.getMyApplications();
             
             if (response.success && response.data) {
                 // Transform backend applications to frontend format
-                const transformedApplications: Application[] = response.data.data.map((app: JobApplication) => ({
+                const transformedApplications: Application[] = response.data.data.map((app: ApplicationWithJob) => ({
                     id: app.id,
                     job: {
                         id: app.job?.id || '',
                         title: app.job?.title || '',
                         company: app.job?.company || '',
-                        description: app.job?.description || '',
-                        location: app.job?.location || 'remote',
-                        salary: app.job?.salary || '',
-                        skills: app.job?.skills || [],
-                        type: app.job?.type || 'job',
-                        createdAt: app.job?.createdAt || new Date().toISOString(),
-                        isActive: app.job?.isActive || true,
+                        description: 'Job description not available',
+                        type: 'job' as const,
+                        eligibility: {
+                            qualifications: [],
+                            streams: [],
+                            passoutYears: [],
+                        },
+                        applicationDeadline: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(), // 30 days from now
+                        applicationLink: '#',
+                        location: 'remote' as const,
+                        salary: '',
+                        skills: [],
+                        isActive: true,
+                        createdAt: new Date().toISOString(),
+                        // FrontendJob additional properties
                         isFeatured: false,
                         isUrgent: false,
                         applicantCount: 0,
@@ -98,18 +118,18 @@ export default function ApplicationsPage() {
                         companySize: '',
                         industry: '',
                         benefits: [],
-                        companyType: 'Startup',
+                        companyType: 'Startup' as const,
                         experienceRequired: '',
                         jobType: '',
                         employmentType: '',
-                        postedDate: app.job?.createdAt?.split('T')[0] || new Date().toISOString().split('T')[0],
-                        isRemote: app.job?.location === 'remote',
+                        postedDate: new Date().toISOString().split('T')[0],
+                        isRemote: true,
                     },
                     appliedDate: app.appliedAt?.split('T')[0] || new Date().toISOString().split('T')[0],
                     status: app.status as 'applied' | 'shortlisted' | 'rejected' | 'withdrawn',
                     lastUpdated: app.appliedAt?.split('T')[0] || new Date().toISOString().split('T')[0],
                     applicationMethod: 'full-application',
-                    notes: app.coverLetter || '',
+                    notes: '',
                 }));
                 
                 setApplications(transformedApplications);
@@ -616,7 +636,7 @@ export default function ApplicationsPage() {
                                                         >
                                                             {statusInfo.icon} {statusInfo.label}
                                                         </span>
-                                                        {application.isInternship && (
+                                                        {application.job.type === 'internship' && (
                                                             <span
                                                                 className="px-3 py-1 bg-purple-100 text-purple-800 text-xs font-medium rounded-full"
                                                                 data-oid="x6-aq15"
@@ -673,7 +693,7 @@ export default function ApplicationsPage() {
                                                         </div>
                                                     </div>
 
-                                                    {!application.isInternship &&
+                                                    {application.job.type !== 'internship' &&
                                                         'salary' in application.job &&
                                                         application.job.salary && (
                                                             <div data-oid="o2-j3ns">
@@ -692,7 +712,7 @@ export default function ApplicationsPage() {
                                                             </div>
                                                         )}
 
-                                                    {application.isInternship &&
+                                                    {application.job.type === 'internship' &&
                                                         'stipend' in application.job &&
                                                         application.job.stipend && (
                                                             <div data-oid="nekhpj2">
@@ -760,7 +780,7 @@ export default function ApplicationsPage() {
                                                 {application.feedback && (
                                                     <div
                                                         className={`border rounded-lg p-4 mb-4 ${
-                                                            application.status === 'accepted'
+                                                            application.status === 'shortlisted'
                                                                 ? 'bg-green-50 border-green-200'
                                                                 : 'bg-red-50 border-red-200'
                                                         }`}
@@ -773,7 +793,7 @@ export default function ApplicationsPage() {
                                                             <svg
                                                                 className={`h-5 w-5 mt-0.5 ${
                                                                     application.status ===
-                                                                    'accepted'
+                                                                    'shortlisted'
                                                                         ? 'text-green-600'
                                                                         : 'text-red-600'
                                                                 }`}
@@ -794,7 +814,7 @@ export default function ApplicationsPage() {
                                                                 <p
                                                                     className={`text-sm font-medium ${
                                                                         application.status ===
-                                                                        'accepted'
+                                                                        'shortlisted'
                                                                             ? 'text-green-800'
                                                                             : 'text-red-800'
                                                                     }`}
@@ -805,7 +825,7 @@ export default function ApplicationsPage() {
                                                                 <p
                                                                     className={`text-sm ${
                                                                         application.status ===
-                                                                        'accepted'
+                                                                        'shortlisted'
                                                                             ? 'text-green-700'
                                                                             : 'text-red-700'
                                                                     }`}

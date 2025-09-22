@@ -1,6 +1,6 @@
 'use client';
 
-import { FrontendJob, jobService, ApiResponse, PaginatedResponse, Job } from '@/lib/api';
+import { FrontendJob, jobService, ApiResponse, PaginatedResponse, Job, JobsResponse } from '@/lib/api';
 import JobCard from '@/components/JobCard';
 import MainNavbar from '@/components/mainNavbar';
 import { useAuth } from '@/lib/auth/AuthContextBackend';
@@ -16,7 +16,7 @@ type SavedItem = FrontendJob & {
 
 // Convert SavedItem to FrontendJob
 const convertSavedItemToFrontendJob = (item: SavedItem): FrontendJob => {
-    if (item.isInternship) {
+    if (item.type === 'internship') {
         // Convert Internship to FrontendJob
         return {
             id: item.id.toString(),
@@ -69,7 +69,7 @@ const convertSavedItemToFrontendJob = (item: SavedItem): FrontendJob => {
             applicationDeadline: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
             applicationLink: '#',
             location: item.isRemote ? 'remote' : 'onsite',
-            salary: item.isInternship ? item.stipend : (item as MockJob).salary,
+            salary: (item as any).type === 'internship' ? (item as any).stipend : (item as any).salary,
             skills: item.skills || [],
             isActive: true,
             createdAt: item.postedDate || new Date().toISOString(),
@@ -82,9 +82,9 @@ const convertSavedItemToFrontendJob = (item: SavedItem): FrontendJob => {
             industry: item.industry || '',
             benefits: item.benefits || [],
             companyType: item.companyType || 'Startup',
-            experienceRequired: item.isInternship ? 'Fresher' : (item as MockJob).experienceRequired || '',
-            jobType: item.isInternship ? 'Internship' : (item as MockJob).jobType || '',
-            employmentType: item.isInternship ? 'Internship' : (item as MockJob).employmentType || '',
+            experienceRequired: (item as any).type === 'internship' ? 'Fresher' : (item as any).experienceRequired || '',
+            jobType: (item as any).type === 'internship' ? 'Internship' : (item as any).jobType || '',
+            employmentType: (item as any).type === 'internship' ? 'Internship' : (item as any).employmentType || '',
             postedDate: item.postedDate || new Date().toISOString().split('T')[0],
             isRemote: item.isRemote || false,
         };
@@ -113,21 +113,28 @@ export default function SavedJobsPage() {
             
             // For now, we'll load all jobs and mark them as saved
             // In a real implementation, there would be a specific saved jobs endpoint
-            const response: ApiResponse<PaginatedResponse<Job>> = await jobService.getJobs();
+            const response: ApiResponse<JobsResponse> = await jobService.getJobs();
             
             if (response.success && response.data) {
                 // Transform backend jobs to saved items format
-                const transformedSavedItems: SavedItem[] = response.data.data.map((job: Job) => ({
+                const transformedSavedItems: SavedItem[] = response.data.jobs.map((job: Job) => ({
                     id: job.id,
                     title: job.title,
                     company: job.company,
                     description: job.description,
+                    type: job.type,
+                    eligibility: {
+                        qualifications: [],
+                        streams: [],
+                        passoutYears: [],
+                    },
+                    applicationDeadline: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
+                    applicationLink: '#',
                     location: job.location,
                     salary: job.salary || '',
                     skills: job.skills || [],
-                    type: job.type,
-                    createdAt: job.createdAt,
                     isActive: job.isActive,
+                    createdAt: job.createdAt,
                     isFeatured: false,
                     isUrgent: false,
                     applicantCount: 0,
@@ -171,8 +178,8 @@ export default function SavedJobsPage() {
     const filteredItems = savedItems.filter((item) => {
         const matchesTab =
             activeTab === 'all' ||
-            (activeTab === 'jobs' && !item.isInternship) ||
-            (activeTab === 'internships' && item.isInternship);
+            (activeTab === 'jobs' && (item as any).type !== 'internship') ||
+            (activeTab === 'internships' && (item as any).type === 'internship');
 
         const matchesSearch =
             searchQuery === '' ||
@@ -198,11 +205,11 @@ export default function SavedJobsPage() {
         }
     });
 
-    const handleRemoveItem = (itemId: number) => {
+    const handleRemoveItem = (itemId: string) => {
         setSavedItems((prev) => prev.filter((item) => item.id !== itemId));
     };
 
-    const handleAddTag = (itemId: number, newTag: string) => {
+    const handleAddTag = (itemId: string, newTag: string) => {
         if (newTag.trim()) {
             setSavedItems((prev) =>
                 prev.map((item) =>
@@ -212,7 +219,7 @@ export default function SavedJobsPage() {
         }
     };
 
-    const handleRemoveTag = (itemId: number, tagToRemove: string) => {
+    const handleRemoveTag = (itemId: string, tagToRemove: string) => {
         setSavedItems((prev) =>
             prev.map((item) =>
                 item.id === itemId
@@ -222,7 +229,7 @@ export default function SavedJobsPage() {
         );
     };
 
-    const handleUpdateNotes = (itemId: number, notes: string) => {
+    const handleUpdateNotes = (itemId: string, notes: string) => {
         setSavedItems((prev) =>
             prev.map((item) => (item.id === itemId ? { ...item, notes } : item)),
         );
@@ -389,13 +396,13 @@ export default function SavedJobsPage() {
                                         {
                                             id: 'jobs',
                                             label: 'Jobs',
-                                            count: savedItems.filter((item) => !item.isInternship)
+                                            count: savedItems.filter((item) => (item as any).type !== 'internship')
                                                 .length,
                                         },
                                         {
                                             id: 'internships',
                                             label: 'Internships',
-                                            count: savedItems.filter((item) => item.isInternship)
+                                            count: savedItems.filter((item) => (item as any).type === 'internship')
                                                 .length,
                                         },
                                     ].map((tab) => (
@@ -627,7 +634,7 @@ export default function SavedJobsPage() {
                                             <JobCard
                                                 job={convertSavedItemToFrontendJob(item)}
                                                 viewMode={viewMode}
-                                                isInternship={item.isInternship}
+                                                isInternship={(item as any).type === 'internship'}
                                                 data-oid="n1mo8o9"
                                             />
                                         </div>

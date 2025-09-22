@@ -23,6 +23,7 @@ import {
     // Job types
     Job,
     JobAnalytics,
+    JobsResponse,
     // Application types
     JobApplication,
     JobSearchParams,

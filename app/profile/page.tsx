@@ -10,7 +10,7 @@ import {
 } from '@/lib/api';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 export default function ProfilePage() {
     const { 
@@ -36,16 +36,7 @@ export default function ProfilePage() {
     const [formData, setFormData] = useState<UpdateProfileRequest>({});
 
     // Load user profile on component mount
-    useEffect(() => {
-        if (!isAuthenticated) {
-            router.push('/login?redirect=/profile');
-            return;
-        }
-
-        loadUserProfile();
-    }, [isAuthenticated, router]);
-
-    const loadUserProfile = async () => {
+    const loadUserProfile = useCallback(async () => {
         try {
             setLoading(true);
             setError(null);
@@ -92,7 +83,16 @@ export default function ProfilePage() {
         } finally {
             setLoading(false);
         }
-    };
+    }, [getUserProfile, getProfileCompletion]);
+
+    useEffect(() => {
+        if (!isAuthenticated) {
+            router.push('/login?redirect=/profile');
+            return;
+        }
+
+        loadUserProfile();
+    }, [isAuthenticated, router, loadUserProfile]);
 
     const handleSave = async () => {
         try {

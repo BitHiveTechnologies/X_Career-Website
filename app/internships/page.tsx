@@ -4,7 +4,7 @@ import CategoryMenu from '@/components/CategoryMenu';
 import FiltersSidebar from '@/components/FiltersSidebar';
 import JobCard from '@/components/JobCard';
 import MainNavbar from '@/components/mainNavbar';
-import { FrontendJob, jobService, ApiResponse, PaginatedResponse, Job } from '@/lib/api';
+import { FrontendJob, jobService, ApiResponse, PaginatedResponse, Job, JobsResponse } from '@/lib/api';
 import { useEffect, useState } from 'react';
 
 // TypeScript Interfaces for Internships
@@ -69,13 +69,13 @@ export default function InternshipsPage() {
         const loadInternships = async () => {
             try {
                 setIsLoading(true);
-                const response: ApiResponse<PaginatedResponse<Job>> = await jobService.getJobs({
+                const response: ApiResponse<JobsResponse> = await jobService.getJobs({
                     page: 1,
                     limit: 20,
                     type: 'internship',
                 });
                 if (response.success && response.data) {
-                    const frontendJobs: FrontendJob[] = response.data.data.map((job) => {
+                    const frontendJobs: FrontendJob[] = response.data.jobs.map((job) => {
                         const mapped = jobService.transformToFrontendJob(job);
                         return {
                             ...mapped,
@@ -107,7 +107,7 @@ export default function InternshipsPage() {
                 (internship) =>
                     internship.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                     internship.company.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                    internship.skills.some((skill) =>
+                    internship.skills?.some((skill) =>
                         skill.toLowerCase().includes(searchQuery.toLowerCase()),
                     ),
             );
@@ -159,7 +159,7 @@ export default function InternshipsPage() {
                 .map((s) => s.trim());
             filtered = filtered.filter((internship) =>
                 skillsArray.some((skill) =>
-                    internship.skills.some((internshipSkill) =>
+                    internship.skills?.some((internshipSkill) =>
                         internshipSkill.toLowerCase().includes(skill),
                     ),
                 ),
@@ -199,7 +199,7 @@ export default function InternshipsPage() {
 
         if (filters.isPaid) {
             filtered = filtered.filter((internship) =>
-                filters.isPaid === 'paid' ? internship.isPaid : !internship.isPaid,
+                filters.isPaid === 'paid' ? !!internship.stipend : !internship.stipend,
             );
         }
 
@@ -218,11 +218,7 @@ export default function InternshipsPage() {
                 });
                 break;
             case 'duration':
-                filtered.sort((a, b) => {
-                    const durationA = parseInt(a.duration.replace(/[^0-9]/g, ''));
-                    const durationB = parseInt(b.duration.replace(/[^0-9]/g, ''));
-                    return durationB - durationA;
-                });
+                // Duration sorting not available for current data structure
                 break;
             case 'company':
                 filtered.sort((a, b) => a.company.localeCompare(b.company));
@@ -278,7 +274,7 @@ export default function InternshipsPage() {
     };
 
     // Convert internship to job format for JobCard component
-    const convertInternshipToJob = (internship: Internship): FrontendJob => ({
+    const convertInternshipToJob = (internship: FrontendJob): FrontendJob => ({
         id: internship.id.toString(),
         title: internship.title,
         company: internship.company,

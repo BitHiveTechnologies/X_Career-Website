@@ -195,7 +195,7 @@ class ApiClient {
         // Log the response details if logging is enabled
         if (isApiLoggingEnabled()) {
           console.group(`📥 API Response: ${method} ${fullUrl}`);
-          logApiResponse('📊 Response Status:', response.status, response.statusText);
+          logApiResponse('📊 Response Status:', `${response.status} ${response.statusText}`);
           logApiResponse('📊 Response Headers:', Object.fromEntries(response.headers.entries()));
           logApiResponse('📊 Response Data:', responseData);
           console.groupEnd();
