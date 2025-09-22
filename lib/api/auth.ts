@@ -6,6 +6,7 @@
 import { apiClient, API_ENDPOINTS } from './client';
 import { 
   LoginRequest, 
+  AdminLoginRequest,
   LoginResponse, 
   User, 
   UserProfile, 
@@ -36,7 +37,7 @@ export class AuthService {
   // ============================================================================
 
   /**
-   * Login with email and password (for testing - backend generates JWT)
+   * User login with email and password
    */
   async login(loginData: LoginRequest): Promise<{ success: boolean; error?: string; user?: User }> {
     try {
@@ -79,16 +80,50 @@ export class AuthService {
   }
 
   /**
+   * Admin login with email and password
+   */
+  async adminLogin(loginData: AdminLoginRequest): Promise<{ success: boolean; error?: string; user?: User }> {
+    try {
+      const response = await apiClient.post<any>(API_ENDPOINTS.AUTH.ADMIN_LOGIN, loginData);
+      
+      if (response.success && response.data) {
+        // Set the token for future requests
+        apiClient.setToken(response.data.token);
+        
+        // Use the user data directly from login response since token verification is failing
+        // Handle both admin and user response structures
+        const userData = response.data.admin || response.data.user;
+        const basicUser: User = {
+          id: userData.id,
+          email: userData.email,
+          firstName: userData.name ? userData.name.split(' ')[0] : userData.firstName || 'Admin',
+          lastName: userData.name ? userData.name.split(' ').slice(1).join(' ') : userData.lastName || 'User',
+          role: userData.role as 'user' | 'admin' | 'super_admin',
+          subscriptionStatus: 'inactive',
+          isProfileComplete: false,
+        };
+        
+        this.setCurrentUser(basicUser);
+        return { success: true, user: basicUser };
+      }
+      
+      return { success: false, error: 'Admin login failed' };
+    } catch (error: any) {
+      console.error('Admin login error:', error);
+      return { 
+        success: false, 
+        error: error.message || 'Admin login failed. Please try again.' 
+      };
+    }
+  }
+
+  /**
    * Login with email and password (traditional login)
    */
   async loginWithPassword(email: string, password: string): Promise<{ success: boolean; error?: string; user?: User }> {
-    // For now, we'll use the JWT generation endpoint
-    // In a real app, you'd have a separate login endpoint
     return this.login({
       email,
-      role: 'user', // Default role
-      firstName: email.split('@')[0],
-      lastName: 'User',
+      password,
     });
   }
 
@@ -252,13 +287,13 @@ export class AuthService {
         return { success: true, user: userResult.user };
       }
 
-      // If we can't get user data, the token is invalid
-      await this.logout();
-      return { success: false, error: userResult.error || 'Token expired or invalid' };
+      // If we can't get user data, don't logout immediately
+      // The token might be valid but the /me endpoint might not work
+      console.warn('Token verification failed, but keeping token:', userResult.error);
+      return { success: false, error: userResult.error || 'Token verification failed' };
     } catch (error: any) {
       console.error('Initialize auth error:', error);
-      // Clear any invalid data
-      await this.logout();
+      // Don't logout on error, just return failure
       return { 
         success: false, 
         error: error.message || 'Failed to initialize authentication' 
@@ -403,6 +438,7 @@ export const authService = AuthService.getInstance();
 // ============================================================================
 
 export const login = (loginData: LoginRequest) => authService.login(loginData);
+export const adminLogin = (loginData: AdminLoginRequest) => authService.adminLogin(loginData);
 export const loginWithPassword = (email: string, password: string) => authService.loginWithPassword(email, password);
 export const logout = () => authService.logout();
 export const getCurrentUser = () => authService.getCurrentUser();

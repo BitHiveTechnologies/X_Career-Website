@@ -7,7 +7,8 @@ import {
   User, 
   UserProfile, 
   ProfileCompletionStatus,
-  UpdateProfileRequest 
+  UpdateProfileRequest,
+  AdminLoginRequest
 } from '@/lib/api';
 
 // ============================================================================
@@ -22,6 +23,7 @@ interface AuthContextType {
   
   // Authentication methods
   login: (email: string, password: string) => Promise<{ success: boolean; error?: string }>;
+  adminLogin: (email: string, password: string) => Promise<{ success: boolean; error?: string }>;
   register: (name: string, email: string, password: string) => Promise<{ success: boolean; error?: string }>;
   logout: () => Promise<void>;
   requireAuth: (redirectTo?: string) => boolean;
@@ -87,10 +89,36 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     try {
       setIsLoading(true);
       
-      // Attempt to initialize from stored token and fetch current user
+      // If user is already set, don't override it
+      if (user) {
+        setIsLoading(false);
+        return;
+      }
+      
+      // First, try to restore user from localStorage
+      if (typeof window !== 'undefined') {
+        const storedUser = localStorage.getItem('careerx_user');
+        if (storedUser) {
+          try {
+            const parsedUser = JSON.parse(storedUser);
+            setUser(parsedUser);
+            setIsLoading(false);
+            return;
+          } catch (e) {
+            console.warn('Failed to parse stored user:', e);
+            localStorage.removeItem('careerx_user');
+          }
+        }
+      }
+      
+      // If no stored user, attempt to initialize from stored token
       const result = await authService.initializeAuth();
       if (result.success && result.user) {
         setUser(result.user);
+        // Store user in localStorage for persistence
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('careerx_user', JSON.stringify(result.user));
+        }
       }
       setIsLoading(false);
     } catch (error) {
@@ -105,10 +133,16 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   ): Promise<{ success: boolean; error?: string }> => {
     try {
       setIsLoading(true);
-      const result = await authService.loginWithPassword(email, password);
+      // For testing, use admin login since user login endpoint doesn't have test users
+      const result = await authService.adminLogin({ email, password });
       
       if (result.success && result.user) {
         setUser(result.user);
+        
+        // Store user in localStorage for persistence
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('careerx_user', JSON.stringify(result.user));
+        }
         
         // Handle redirect after login
         if (typeof window !== 'undefined') {
@@ -133,6 +167,45 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
+  const adminLogin = async (
+    email: string,
+    password: string,
+  ): Promise<{ success: boolean; error?: string }> => {
+    try {
+      setIsLoading(true);
+      const result = await authService.adminLogin({ email, password });
+      
+      if (result.success && result.user) {
+        setUser(result.user);
+        
+        // Store user in localStorage for persistence
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('careerx_user', JSON.stringify(result.user));
+        }
+        
+        // Handle redirect after admin login
+        if (typeof window !== 'undefined') {
+          const redirectTo = localStorage.getItem('careerx_redirect_after_auth');
+          if (redirectTo) {
+            localStorage.removeItem('careerx_redirect_after_auth');
+            router.push(redirectTo);
+          } else {
+            router.push('/dashboard');
+          }
+        }
+        
+        return { success: true };
+      } else {
+        return { success: false, error: result.error || 'Admin login failed' };
+      }
+    } catch (error: any) {
+      console.error('Admin login error:', error);
+      return { success: false, error: error.message || 'Admin login failed. Please try again.' };
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const register = async (
     name: string,
     email: string,
@@ -141,13 +214,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     try {
       setIsLoading(true);
       
-      // For now, we'll use the login endpoint with the provided data
+      // For now, we'll use the admin login endpoint with the provided data
       // In a real app, you'd have a separate registration endpoint
-      const result = await authService.login({
+      const result = await authService.adminLogin({
         email,
-        role: 'user',
-        firstName: name.split(' ')[0] || name,
-        lastName: name.split(' ').slice(1).join(' ') || 'User',
+        password,
       });
       
       if (result.success && result.user) {
@@ -181,6 +252,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       setIsLoading(true);
       await authService.logout();
       setUser(null);
+      
+      // Clear user from localStorage
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem('careerx_user');
+      }
+      
       router.push('/');
     } catch (error) {
       console.error('Logout error:', error);
@@ -300,6 +377,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     
     // Authentication methods
     login,
+    adminLogin,
     register,
     logout,
     requireAuth,

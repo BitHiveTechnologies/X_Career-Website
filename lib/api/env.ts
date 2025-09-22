@@ -10,7 +10,7 @@ export const ENV = {
   API_VERSION: process.env.NEXT_PUBLIC_API_VERSION || 'v1',
   
   // Frontend Configuration
-  FRONTEND_URL: process.env.NEXT_PUBLIC_FRONTEND_URL || 'http://localhost:3000',
+  FRONTEND_URL: process.env.NEXT_PUBLIC_FRONTEND_URL || 'http://localhost:3002',
   
   // Environment
   NODE_ENV: process.env.NODE_ENV || 'development',
