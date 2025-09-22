@@ -90,7 +90,8 @@ export function SafeAvatar({
     const [imgError, setImgError] = useState(false);
 
     // Generate initials from name
-    const getInitials = (name: string) => {
+    const getInitials = (name: string | undefined) => {
+        if (!name) return 'U';
         return name
             .split(' ')
             .map((word) => word.charAt(0))
@@ -100,7 +101,7 @@ export function SafeAvatar({
     };
 
     // Generate consistent color based on name
-    const getAvatarColor = (name: string) => {
+    const getAvatarColor = (name: string | undefined) => {
         const colors = [
             'bg-blue-500',
             'bg-green-500',
@@ -111,8 +112,13 @@ export function SafeAvatar({
             'bg-red-500',
         ];
 
+        if (!name) return colors[0];
         const index = name.charCodeAt(0) % colors.length;
         return colors[index];
+    };
+
+    const handleImageError = () => {
+        setImgError(true);
     };
 
     if (!src || imgError) {
@@ -133,7 +139,7 @@ export function SafeAvatar({
             alt={name}
             className={`rounded-full object-cover ${className}`}
             style={{ width: size, height: size }}
-            onError={() => setImgError(true)}
+            onError={handleImageError}
             loading="lazy"
             data-oid="q2pym80"
         />

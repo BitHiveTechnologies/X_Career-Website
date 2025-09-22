@@ -14,6 +14,31 @@ export default function MainNavbar() {
     const userMenuRef = useRef<HTMLDivElement>(null);
     const { isEnhanced, enhance } = useProgressiveEnhancement();
 
+    // Helper function to get display name
+    const getDisplayName = () => {
+        if (!user) return 'User';
+        
+        // If admin, show "Admin"
+        if (user.role === 'admin' || user.role === 'super_admin') {
+            return 'Admin';
+        }
+        
+        // For regular users, show their name or email
+        if (user.firstName && user.lastName) {
+            return `${user.firstName} ${user.lastName}`.trim();
+        }
+        
+        if (user.firstName) {
+            return user.firstName;
+        }
+        
+        if (user.email) {
+            return user.email.split('@')[0]; // Show part before @
+        }
+        
+        return 'User';
+    };
+
     // Close user menu when clicking outside
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -121,8 +146,8 @@ export default function MainNavbar() {
                                         data-oid="511c_1y"
                                     >
                                         <SafeAvatar
-                                            src={user.avatar}
-                                            name={`${user.firstName} ${user.lastName}`}
+                                            src={user?.avatar}
+                                            name={getDisplayName()}
                                             size={32}
                                             className="xl:w-8 xl:h-8"
                                             data-oid="07:2_p3"
@@ -132,7 +157,7 @@ export default function MainNavbar() {
                                             className="text-sm font-medium max-w-24 xl:max-w-none truncate"
                                             data-oid="0dw.-rz"
                                         >
-                                            {`${user.firstName} ${user.lastName}`}
+                                            {getDisplayName()}
                                         </span>
                                         <svg
                                             className="w-4 h-4 flex-shrink-0"
@@ -324,8 +349,8 @@ export default function MainNavbar() {
                                             data-oid=":qoiiet"
                                         >
                                             <SafeAvatar
-                                                src={user.avatar}
-                                                name={`${user.firstName} ${user.lastName}`}
+                                                src={user?.avatar}
+                                                name={getDisplayName()}
                                                 size={32}
                                                 className="mr-3"
                                                 data-oid="rk2dig1"
@@ -335,7 +360,7 @@ export default function MainNavbar() {
                                                 className="text-sm font-medium text-gray-900"
                                                 data-oid=".yqe8wc"
                                             >
-                                                {`${user.firstName} ${user.lastName}`}
+                                                {getDisplayName()}
                                             </span>
                                         </div>
                                         <Link

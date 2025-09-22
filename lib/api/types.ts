@@ -54,9 +54,12 @@ export interface BackendJobsResponse {
 
 export interface LoginRequest {
   email: string;
-  role: 'user' | 'admin' | 'super_admin';
-  firstName: string;
-  lastName: string;
+  password: string;
+}
+
+export interface AdminLoginRequest {
+  email: string;
+  password: string;
 }
 
 export interface LoginResponse {

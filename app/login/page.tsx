@@ -11,7 +11,8 @@ function LoginForm() {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-    const { login, isAuthenticated } = useAuth();
+    const [isAdminLogin, setIsAdminLogin] = useState(false);
+    const { login, adminLogin, isAuthenticated } = useAuth();
     const router = useRouter();
     const searchParams = useSearchParams();
 
@@ -28,7 +29,9 @@ function LoginForm() {
         setError('');
         setIsLoading(true);
 
-        const result = await login(email, password);
+        const result = isAdminLogin 
+            ? await adminLogin(email, password)
+            : await login(email, password);
 
         if (!result.success) {
             setError(result.error || 'Login failed');
@@ -53,20 +56,24 @@ function LoginForm() {
                                 className="mt-6 text-center text-3xl font-extrabold text-gray-900"
                                 data-oid="r7lzat-"
                             >
-                                Sign in to your account
+                                {isAdminLogin ? 'Admin Sign In' : 'Sign in to your account'}
                             </h2>
                             <p
                                 className="mt-2 text-center text-sm text-gray-600"
                                 data-oid="coutkf4"
                             >
-                                Or{' '}
-                                <Link
-                                    href="/register"
-                                    className="font-medium text-[hsl(196,80%,45%)] hover:text-[hsl(196,80%,40%)] transition-colors"
-                                    data-oid="5esl7f6"
-                                >
-                                    create a new account
-                                </Link>
+                                {!isAdminLogin && (
+                                    <>
+                                        Or{' '}
+                                        <Link
+                                            href="/register"
+                                            className="font-medium text-[hsl(196,80%,45%)] hover:text-[hsl(196,80%,40%)] transition-colors"
+                                            data-oid="5esl7f6"
+                                        >
+                                            create a new account
+                                        </Link>
+                                    </>
+                                )}
                             </p>
                         </div>
 
@@ -79,6 +86,29 @@ function LoginForm() {
                                     {error}
                                 </div>
                             )}
+
+                            {/* Admin Login Toggle */}
+                            <div className="flex items-center justify-center">
+                                <button
+                                    type="button"
+                                    onClick={() => {
+                                        setIsAdminLogin(!isAdminLogin);
+                                        setError('');
+                                    }}
+                                    className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:ring-offset-2 ${
+                                        isAdminLogin ? 'bg-[hsl(196,80%,45%)]' : 'bg-gray-200'
+                                    }`}
+                                >
+                                    <span
+                                        className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                                            isAdminLogin ? 'translate-x-6' : 'translate-x-1'
+                                        }`}
+                                    />
+                                </button>
+                                <span className="ml-3 text-sm text-gray-700">
+                                    {isAdminLogin ? 'Admin Login' : 'User Login'}
+                                </span>
+                            </div>
 
                             <div className="space-y-4" data-oid="-59:8k2">
                                 <div data-oid="32w1jh:">
@@ -169,10 +199,10 @@ function LoginForm() {
                                                 className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"
                                                 data-oid="c58dno-"
                                             ></div>
-                                            Signing in...
+                                            {isAdminLogin ? 'Signing in as Admin...' : 'Signing in...'}
                                         </div>
                                     ) : (
-                                        'Sign in'
+                                        isAdminLogin ? 'Sign in as Admin' : 'Sign in'
                                     )}
                                 </button>
                             </div>
@@ -204,13 +234,28 @@ function LoginForm() {
                                     className="mt-3 text-center text-xs text-gray-600 bg-gray-50 p-3 rounded-lg"
                                     data-oid="5:n_tun"
                                 >
-                                    <p data-oid="8n9m:9-">
-                                        <strong data-oid="q.:cecq">Email:</strong> demo@xcareers.com
-                                    </p>
-                                    <p data-oid="havau7-">
-                                        <strong data-oid="0.8qdle">Password:</strong> Any password
-                                        (6+ characters)
-                                    </p>
+                                    {isAdminLogin ? (
+                                        <>
+                                            <p data-oid="8n9m:9-">
+                                                <strong data-oid="q.:cecq">Admin Email:</strong> admin@notifyx.com
+                                            </p>
+                                            <p data-oid="havau7-">
+                                                <strong data-oid="0.8qdle">Admin Password:</strong> Admin123!
+                                            </p>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <p data-oid="8n9m:9-">
+                                                <strong data-oid="q.:cecq">Email:</strong> admin@notifyx.com
+                                            </p>
+                                            <p data-oid="havau7-">
+                                                <strong data-oid="0.8qdle">Password:</strong> Admin123!
+                                            </p>
+                                            <p className="text-xs text-gray-500 mt-1">
+                                                Note: Both admin and user login use the same credentials for testing
+                                            </p>
+                                        </>
+                                    )}
                                 </div>
                             </div>
                         </form>
