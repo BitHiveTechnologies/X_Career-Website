@@ -1,7 +1,7 @@
 'use client';
 
-import { FrontendJob, jobService, ApiResponse, PaginatedResponse, Job, JobsResponse } from '@/lib/api';
 import MainNavbar from '@/components/mainNavbar';
+import { ApiResponse, FrontendJob, Job, jobService, JobsResponse } from '@/lib/api';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';

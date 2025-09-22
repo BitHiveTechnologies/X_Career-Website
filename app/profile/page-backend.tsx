@@ -1,17 +1,15 @@
 'use client';
 
 import MainNavbar from '@/components/mainNavbar';
-import { useAuth } from '@/lib/auth/AuthContextBackend';
-import { 
-  UserProfile, 
-  UpdateProfileRequest, 
-  ProfileCompletionStatus,
-  validateUserProfile,
-  safeValidate 
+import {
+    ProfileCompletionStatus,
+    UpdateProfileRequest,
+    UserProfile
 } from '@/lib/api';
+import { useAuth } from '@/lib/auth/AuthContextBackend';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState, useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 export default function ProfilePageBackend() {
     const { 

@@ -4,7 +4,7 @@ import CategoryMenu from '@/components/CategoryMenu';
 import FiltersSidebar from '@/components/FiltersSidebar';
 import JobCard from '@/components/JobCard';
 import MainNavbar from '@/components/mainNavbar';
-import { FrontendJob, jobService, ApiResponse, PaginatedResponse, Job, JobsResponse } from '@/lib/api';
+import { ApiResponse, FrontendJob, jobService, JobsResponse } from '@/lib/api';
 import { useEffect, useState } from 'react';
 
 // TypeScript Interfaces for Internships
@@ -157,13 +157,23 @@ export default function InternshipsPage() {
                 .toLowerCase()
                 .split(',')
                 .map((s) => s.trim());
-            filtered = filtered.filter((internship) =>
-                skillsArray.some((skill) =>
-                    internship.skills?.some((internshipSkill) =>
-                        internshipSkill.toLowerCase().includes(skill),
-                    ),
-                ),
-            );
+            filtered = filtered.filter((internship) => {
+                // Check if any of the filter skills match internship skills or are mentioned in title/description
+                return skillsArray.some((skill) => {
+                    // Check in internship skills array
+                    const hasSkill = internship.skills?.some((internshipSkill) => 
+                        internshipSkill.toLowerCase().includes(skill)
+                    );
+                    
+                    // Check in internship title
+                    const hasInTitle = internship.title?.toLowerCase().includes(skill);
+                    
+                    // Check in internship description
+                    const hasInDescription = internship.description?.toLowerCase().includes(skill);
+                    
+                    return hasSkill || hasInTitle || hasInDescription;
+                });
+            });
         }
 
         if (filters.location) {
@@ -192,9 +202,7 @@ export default function InternshipsPage() {
         }
 
         if (filters.companyType) {
-            filtered = filtered.filter(
-                (internship) => internship.companyType === filters.companyType,
-            );
+            filtered = filtered.filter((internship) => internship.companyType === filters.companyType);
         }
 
         if (filters.isPaid) {

@@ -23,10 +23,10 @@ import {
     // Job types
     Job,
     JobAnalytics,
-    JobsResponse,
     // Application types
     JobApplication,
     JobSearchParams,
+    JobsResponse,
     JobStats,
     MatchingAnalytics,
     MatchingRecommendationsResponse,
@@ -108,6 +108,42 @@ export class JobService {
    * Transform backend job to frontend job format
    */
   static transformToFrontendJob(job: Job): FrontendJob {
+    // Determine company type based on company name patterns
+    const getCompanyType = (companyName: string): 'Startup' | 'MNC' | 'Product' | 'Service' => {
+      const name = companyName.toLowerCase();
+      if (['microsoft', 'google', 'amazon', 'apple', 'meta', 'netflix', 'uber', 'airbnb'].some(mnc => name.includes(mnc))) {
+        return 'MNC';
+      }
+      if (['startup', 'tech', 'innov', 'labs', 'ventures'].some(startup => name.includes(startup))) {
+        return 'Startup';
+      }
+      if (['product', 'platform', 'app', 'software'].some(product => name.includes(product))) {
+        return 'Product';
+      }
+      if (['consulting', 'services', 'solutions', 'advisory'].some(service => name.includes(service))) {
+        return 'Service';
+      }
+      return 'Product'; // Default
+    };
+
+    // Determine experience level based on job title patterns
+    const getExperienceLevel = (title: string): string => {
+      const titleLower = title.toLowerCase();
+      if (['senior', 'lead', 'principal', 'architect', 'manager'].some(senior => titleLower.includes(senior))) {
+        return '5+ years';
+      }
+      if (['mid', 'intermediate', 'experienced'].some(mid => titleLower.includes(mid))) {
+        return '3-5 years';
+      }
+      if (['junior', 'entry', 'associate', 'trainee'].some(junior => titleLower.includes(junior))) {
+        return '1-3 years';
+      }
+      if (['intern', 'internship', 'fresher'].some(intern => titleLower.includes(intern))) {
+        return '0-1 years';
+      }
+      return '1-3 years'; // Default
+    };
+
     return {
       ...job,
       isFeatured: false, // Default value
@@ -117,8 +153,8 @@ export class JobService {
       companySize: undefined, // Default value
       industry: undefined, // Default value
       benefits: [], // Default value
-      companyType: 'Product', // Default value
-      experienceRequired: '0-2 years', // Default value
+      companyType: getCompanyType(job.company),
+      experienceRequired: getExperienceLevel(job.title),
       jobType: job.type === 'job' ? 'Full-time' : 'Internship',
       employmentType: 'Permanent', // Default value
       skills: job.eligibility?.streams || [],

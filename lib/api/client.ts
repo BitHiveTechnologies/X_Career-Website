@@ -3,9 +3,9 @@
  * Handles HTTP requests, authentication, error handling, and response transformation
  */
 
-import { apiConfig, API_ENDPOINTS, DEFAULT_HEADERS, HTTP_METHODS } from './config';
+import { apiConfig, DEFAULT_HEADERS, HTTP_METHODS } from './config';
+import { isApiLoggingEnabled, logApiRequest, logApiResponse } from './logger';
 import { ApiResponse } from './types';
-import { isApiLoggingEnabled, logApiRequest, logApiResponse, logApiError } from './logger';
 
 // Request configuration interface
 export interface RequestConfig {
@@ -334,5 +334,6 @@ class ApiClient {
 export const apiClient = new ApiClient();
 
 // Export types and utilities
-export { TokenManager };
 export { API_ENDPOINTS } from './config';
+export { TokenManager };
+

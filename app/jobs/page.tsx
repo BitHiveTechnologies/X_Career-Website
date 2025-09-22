@@ -9,7 +9,7 @@ import {
     jobService
 } from '@/lib/api';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { Suspense, useEffect, useState, useCallback } from 'react';
+import { Suspense, useCallback, useEffect, useState } from 'react';
 
 // TypeScript Interfaces
 
@@ -324,7 +324,16 @@ function JobsPageContent() {
 
         // Apply all other filters
         if (filters.jobType) {
-            filtered = filtered.filter((job) => job.jobType === filters.jobType);
+            // Map filter values to job types
+            const jobTypeMap: { [key: string]: string[] } = {
+                'Full-time': ['job'],
+                'Part-time': ['job'],
+                'Contract': ['job'],
+                'Internship': ['internship'],
+                'Freelance': ['job'],
+            };
+            const allowedTypes = jobTypeMap[filters.jobType] || [];
+            filtered = filtered.filter((job) => allowedTypes.includes(job.type));
         }
 
         if (filters.employmentType) {
@@ -340,11 +349,23 @@ function JobsPageContent() {
                 .toLowerCase()
                 .split(',')
                 .map((s) => s.trim());
-            filtered = filtered.filter((job) =>
-                skillsArray.some((skill) =>
-                    job.skills?.some((jobSkill) => jobSkill.toLowerCase().includes(skill)),
-                ),
-            );
+            filtered = filtered.filter((job) => {
+                // Check if any of the filter skills match job skills or are mentioned in title/description
+                return skillsArray.some((skill) => {
+                    // Check in job skills array
+                    const hasSkill = job.skills?.some((jobSkill) => 
+                        jobSkill.toLowerCase().includes(skill)
+                    );
+                    
+                    // Check in job title
+                    const hasInTitle = job.title?.toLowerCase().includes(skill);
+                    
+                    // Check in job description
+                    const hasInDescription = job.description?.toLowerCase().includes(skill);
+                    
+                    return hasSkill || hasInTitle || hasInDescription;
+                });
+            });
         }
 
         if (filters.location && filters.location !== 'all') {
@@ -380,7 +401,19 @@ function JobsPageContent() {
         }
 
         if (filters.companyType) {
-            filtered = filtered.filter((job) => job.companyType === filters.companyType);
+            // Since we don't have company type from backend, we'll implement based on company name patterns
+            const companyTypePatterns: { [key: string]: string[] } = {
+                'Startup': ['startup', 'tech', 'innov', 'labs', 'ventures'],
+                'MNC': ['microsoft', 'google', 'amazon', 'apple', 'meta', 'netflix', 'uber', 'airbnb'],
+                'Product': ['product', 'platform', 'app', 'software'],
+                'Service': ['consulting', 'services', 'solutions', 'advisory'],
+            };
+            const patterns = companyTypePatterns[filters.companyType] || [];
+            filtered = filtered.filter((job) => 
+                patterns.some(pattern => 
+                    job.company.toLowerCase().includes(pattern)
+                )
+            );
         }
 
         // Sort filtered results
