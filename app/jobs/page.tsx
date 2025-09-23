@@ -30,20 +30,20 @@ export interface Category {
     slug: string;
 }
 
-// Enhanced Categories with 12 comprehensive categories
-const mockCategories: Category[] = [
-    { id: 1, name: 'All Jobs', count: 15247, slug: 'all' },
-    { id: 2, name: 'Software Development', count: 5821, slug: 'software-development' },
-    { id: 3, name: 'Data Science & AI', count: 2456, slug: 'data-science' },
-    { id: 4, name: 'UI/UX Design', count: 1876, slug: 'ui-ux-design' },
-    { id: 5, name: 'DevOps & Cloud', count: 1234, slug: 'devops' },
-    { id: 6, name: 'Product Management', count: 987, slug: 'product-management' },
-    { id: 7, name: 'Mobile Development', count: 1543, slug: 'mobile-development' },
-    { id: 8, name: 'Blockchain & Web3', count: 456, slug: 'blockchain' },
-    { id: 9, name: 'Cybersecurity', count: 678, slug: 'cybersecurity' },
-    { id: 10, name: 'Marketing & Growth', count: 1245, slug: 'marketing' },
-    { id: 11, name: 'Finance & Fintech', count: 876, slug: 'finance' },
-    { id: 12, name: 'Sales & Business', count: 654, slug: 'sales' },
+// Category definitions (without counts - will be populated dynamically)
+const categoryDefinitions: Omit<Category, 'count'>[] = [
+    { id: 1, name: 'All Jobs', slug: 'all' },
+    { id: 2, name: 'Software Development', slug: 'software-development' },
+    { id: 3, name: 'Data Science & AI', slug: 'data-science' },
+    { id: 4, name: 'UI/UX Design', slug: 'ui-ux-design' },
+    { id: 5, name: 'DevOps & Cloud', slug: 'devops' },
+    { id: 6, name: 'Product Management', slug: 'product-management' },
+    { id: 7, name: 'Mobile Development', slug: 'mobile-development' },
+    { id: 8, name: 'Blockchain & Web3', slug: 'blockchain' },
+    { id: 9, name: 'Cybersecurity', slug: 'cybersecurity' },
+    { id: 10, name: 'Marketing & Growth', slug: 'marketing' },
+    { id: 11, name: 'Finance & Fintech', slug: 'finance' },
+    { id: 12, name: 'Sales & Business', slug: 'sales' },
 ];
 
 function JobsPageContent() {
@@ -60,7 +60,9 @@ function JobsPageContent() {
             isArray: Array.isArray(filteredJobs)
         });
     }, [filteredJobs]);
-    const [categories] = useState<Category[]>(mockCategories);
+    
+    // Dynamic categories with real counts
+    const [categories, setCategories] = useState<Category[]>([]);
     const [selectedCategory, setSelectedCategory] = useState<string>('all');
     const [filters, setFilters] = useState<FilterOptions>({
         jobType: '',
@@ -87,6 +89,61 @@ function JobsPageContent() {
     });
     const router = useRouter();
     const searchParams = useSearchParams();
+
+    // Function to calculate category counts based on actual job data
+    const calculateCategoryCounts = useCallback((jobData: FrontendJob[]) => {
+        console.log('📊 Calculating category counts for', jobData.length, 'jobs');
+        
+        const categoryMap: { [key: string]: string[] } = {
+            'software-development': [
+                'frontend', 'backend', 'full stack', 'software', 'developer', 'engineer',
+                'react', 'angular', 'vue', 'node', 'python', 'java', 'javascript'
+            ],
+            'data-science': ['data scientist', 'ai', 'ml', 'machine learning', 'analyst', 'data engineer'],
+            'ui-ux-design': ['ui', 'ux', 'designer', 'design', 'figma', 'adobe'],
+            'devops': ['devops', 'cloud', 'aws', 'azure', 'kubernetes', 'docker', 'infrastructure'],
+            'product-management': ['product manager', 'product', 'pm', 'strategy'],
+            'mobile-development': ['mobile', 'ios', 'android', 'react native', 'flutter'],
+            'blockchain': ['blockchain', 'crypto', 'web3', 'solidity', 'ethereum'],
+            'cybersecurity': ['security', 'cyber', 'penetration', 'siem', 'incident'],
+            'marketing': ['marketing', 'growth', 'digital', 'social', 'content'],
+            'finance': ['finance', 'fintech', 'banking', 'financial', 'trading'],
+            'sales': ['sales', 'business development', 'bd', 'account', 'revenue']
+        };
+
+        const counts: { [key: string]: number } = {
+            'all': jobData.length
+        };
+
+        // Calculate count for each category
+        categoryDefinitions.forEach(category => {
+            if (category.slug === 'all') return;
+            
+            const keywords = categoryMap[category.slug] || [];
+            const count = jobData.filter(job => {
+                const titleLower = job.title?.toLowerCase() || '';
+                const descriptionLower = job.description?.toLowerCase() || '';
+                const skillsLower = job.skills?.map(s => s.toLowerCase()).join(' ') || '';
+                
+                return keywords.some(keyword => 
+                    titleLower.includes(keyword) || 
+                    descriptionLower.includes(keyword) ||
+                    skillsLower.includes(keyword)
+                );
+            }).length;
+            
+            counts[category.slug] = count;
+        });
+
+        // Create categories array with calculated counts
+        const categoriesWithCounts: Category[] = categoryDefinitions.map(category => ({
+            ...category,
+            count: counts[category.slug] || 0
+        }));
+
+        console.log('📊 Category counts calculated:', counts);
+        return categoriesWithCounts;
+    }, []);
 
     // Read URL search parameters on component mount
     useEffect(() => {
@@ -135,7 +192,7 @@ function JobsPageContent() {
                     
                     const frontendJobs = jobsArray.map((job: any) => {
                         try {
-                            return jobService.transformToFrontendJob(job);
+                        return jobService.transformToFrontendJob(job);
                         } catch (transformError) {
                             console.error('❌ Error transforming job:', job, transformError);
                             // Return a fallback job object
@@ -159,6 +216,10 @@ function JobsPageContent() {
                     setJobs(frontendJobs);
                     setFilteredJobs(frontendJobs);
                     setPagination(response.data.pagination || { page: 1, limit: 10, total: 0, pages: 0 });
+                    
+                    // Calculate and set category counts based on actual job data
+                    const categoriesWithCounts = calculateCategoryCounts(frontendJobs);
+                    setCategories(categoriesWithCounts);
                 } else {
                     console.warn('❌ Jobs data is not an array:', jobsArray);
                     setJobs([]);
@@ -195,12 +256,16 @@ function JobsPageContent() {
                 setJobs(frontendJobs);
                 setFilteredJobs(frontendJobs);
                 setError(null);
+                
+                // Calculate and set category counts for mock data too
+                const categoriesWithCounts = calculateCategoryCounts(frontendJobs);
+                setCategories(categoriesWithCounts);
                 console.log('✅ Fallback to mock data successful');
             } catch (fallbackError) {
                 console.error('❌ Fallback to mock data also failed:', fallbackError);
                 setError(`Failed to load jobs: ${err instanceof Error ? err.message : 'Unknown error'}`);
-                setJobs([]);
-                setFilteredJobs([]);
+            setJobs([]);
+            setFilteredJobs([]);
             }
         } finally {
             setIsLoading(false);
@@ -258,6 +323,10 @@ function JobsPageContent() {
                     setJobs(frontendJobs);
                     setFilteredJobs(frontendJobs);
                     setPagination(response.data.pagination || { page: 1, limit: 10, total: 0, pages: 0 });
+                    
+                    // Calculate and set category counts for search results
+                    const categoriesWithCounts = calculateCategoryCounts(frontendJobs);
+                    setCategories(categoriesWithCounts);
                 } else {
                     console.warn('❌ Search jobs data is not an array:', jobsArray);
                     setJobs([]);
@@ -301,6 +370,15 @@ function JobsPageContent() {
         console.log('🚀 Component mounted, loading jobs...');
         loadJobs();
     }, [loadJobs]);
+
+    // Recalculate category counts when jobs data changes
+    useEffect(() => {
+        if (jobs.length > 0) {
+            console.log('🔄 Recalculating category counts due to jobs change');
+            const categoriesWithCounts = calculateCategoryCounts(jobs);
+            setCategories(categoriesWithCounts);
+        }
+    }, [jobs, calculateCategoryCounts]);
 
     // Load jobs when search parameters change
     useEffect(() => {
@@ -359,22 +437,22 @@ function JobsPageContent() {
             });
 
             setFilterLoading(true);
-
-            // Ensure jobs is an array before filtering
-            if (!Array.isArray(jobs)) {
+        
+        // Ensure jobs is an array before filtering
+        if (!Array.isArray(jobs)) {
                 console.warn('❌ Jobs is not an array:', jobs);
-                setFilteredJobs([]);
+            setFilteredJobs([]);
                 setFilterLoading(false);
-                return;
-            }
+            return;
+        }
 
-            // If jobs array is empty, don't run filtering logic
-            if (jobs.length === 0) {
+        // If jobs array is empty, don't run filtering logic
+        if (jobs.length === 0) {
                 console.log('📭 No jobs to filter');
                 setFilteredJobs([]);
                 setFilterLoading(false);
-                return;
-            }
+            return;
+        }
 
         let filtered = [...jobs]; // Create a copy to avoid mutating original array
         console.log('🚀 Starting with', filtered.length, 'jobs');
@@ -709,13 +787,13 @@ function JobsPageContent() {
                 // Debug logging for salary filtering
                 if (filters.salaryRange === '10-20') {
                     console.log(`💰 Salary Filter Debug [${filters.salaryRange}]:`, {
-                        jobTitle: job.title,
+                    jobTitle: job.title,
                         salary: salary,
                         jobMinSalary,
                         jobMaxSalary,
-                        matches,
-                        filterRange: filters.salaryRange
-                    });
+                    matches,
+                    filterRange: filters.salaryRange
+                });
                 }
 
                 return matches;
@@ -1096,6 +1174,43 @@ function JobsPageContent() {
                                     </button>
                                 ))}
                             </div>
+
+                            {/* Quick Filters */}
+                            <div className="mt-6">
+                                <h3 className="text-sm font-medium text-white/90 mb-3 text-center">Quick Filters</h3>
+                                <div className="flex flex-wrap gap-2 justify-center">
+                                    {[
+                                        { label: 'Fresher Full-time Jobs', filters: { jobType: 'Full-time', experienceLevel: '0-1 years' } },
+                                        { label: 'Remote Jobs', filters: { location: 'remote' } },
+                                        { label: 'High Salary (10-20 LPA)', filters: { salaryRange: '10-20' } },
+                                        { label: 'Startup Jobs', filters: { companyType: 'Startup' } },
+                                        { label: 'Internships', filters: { jobType: 'Internship' } },
+                                    ].map((quickFilter) => (
+                                        <button
+                                            key={quickFilter.label}
+                                            onClick={() => {
+                                                console.log('🚀 Applying quick filter:', quickFilter);
+                                                setFilters(prevFilters => ({
+                                                    ...prevFilters,
+                                                    ...quickFilter.filters
+                                                }));
+                                                // Clear search query when applying quick filters
+                                                setSearchQuery('');
+                                                setSearchLocation('');
+                                                // Clear URL search parameters
+                                                try {
+                                                    router.replace('/jobs');
+                                                } catch (error) {
+                                                    console.error('Error clearing search URL:', error);
+                                                }
+                                            }}
+                                            className="px-4 py-2 bg-white/10 backdrop-blur-sm text-white text-sm rounded-full hover:bg-white/20 transition-all duration-300 border border-white/20"
+                                        >
+                                            {quickFilter.label}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -1249,7 +1364,7 @@ function JobsPageContent() {
                                                 {selectedCategory !== 'all' && (
                                                     <span className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full">
                                                         {selectedCategory.replace('-', ' ')}
-                                                    </span>
+                                            </span>
                                                 )}
                                             </div>
                                         )}

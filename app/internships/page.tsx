@@ -5,7 +5,7 @@ import FiltersSidebar from '@/components/FiltersSidebar';
 import JobCard from '@/components/JobCard';
 import MainNavbar from '@/components/mainNavbar';
 import { FrontendJob } from '@/lib/api';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 // TypeScript Interfaces for Internships
 export interface InternshipFilterOptions {
@@ -26,26 +26,26 @@ export interface Category {
     slug: string;
 }
 
-// Categories for Internships
-const mockCategories: Category[] = [
-    { id: 1, name: 'All Internships', count: 8247, slug: 'all' },
-    { id: 2, name: 'Software Development', count: 2821, slug: 'software-development' },
-    { id: 3, name: 'Data Science & AI', count: 1456, slug: 'data-science' },
-    { id: 4, name: 'UI/UX Design', count: 876, slug: 'ui-ux-design' },
-    { id: 5, name: 'Digital Marketing', count: 1234, slug: 'digital-marketing' },
-    { id: 6, name: 'Content Writing', count: 987, slug: 'content-writing' },
-    { id: 7, name: 'Mobile Development', count: 743, slug: 'mobile-development' },
-    { id: 8, name: 'DevOps & Cloud', count: 456, slug: 'devops' },
-    { id: 9, name: 'Product Management', count: 378, slug: 'product-management' },
-    { id: 10, name: 'Business Analysis', count: 645, slug: 'business-analysis' },
-    { id: 11, name: 'Quality Assurance', count: 534, slug: 'quality-assurance' },
-    { id: 12, name: 'Human Resources', count: 423, slug: 'human-resources' },
+// Category definitions for internships (without counts - will be calculated dynamically)
+const categoryDefinitions: Omit<Category, 'count'>[] = [
+    { id: 1, name: 'All Internships', slug: 'all' },
+    { id: 2, name: 'Software Development', slug: 'software-development' },
+    { id: 3, name: 'Data Science & AI', slug: 'data-science' },
+    { id: 4, name: 'UI/UX Design', slug: 'ui-ux-design' },
+    { id: 5, name: 'Digital Marketing', slug: 'digital-marketing' },
+    { id: 6, name: 'Content Writing', slug: 'content-writing' },
+    { id: 7, name: 'Mobile Development', slug: 'mobile-development' },
+    { id: 8, name: 'DevOps & Cloud', slug: 'devops' },
+    { id: 9, name: 'Product Management', slug: 'product-management' },
+    { id: 10, name: 'Business Analysis', slug: 'business-analysis' },
+    { id: 11, name: 'Quality Assurance', slug: 'quality-assurance' },
+    { id: 12, name: 'Human Resources', slug: 'human-resources' },
 ];
 
 export default function InternshipsPage() {
     const [internships, setInternships] = useState<FrontendJob[]>([]);
     const [filteredInternships, setFilteredInternships] = useState<FrontendJob[]>([]);
-    const [categories] = useState<Category[]>(mockCategories);
+    const [categories, setCategories] = useState<Category[]>([]);
     const [selectedCategory, setSelectedCategory] = useState<string>('all');
     const [filters, setFilters] = useState<InternshipFilterOptions>({
         jobType: '',
@@ -63,6 +63,59 @@ export default function InternshipsPage() {
     const [viewMode, setViewMode] = useState<'grid' | 'list'>('list');
     const [sortBy, setSortBy] = useState('relevance');
     const [visibleInternships, setVisibleInternships] = useState(6);
+
+    // Function to calculate category counts based on actual internship data
+    const calculateCategoryCounts = useCallback((internshipData: FrontendJob[]) => {
+        console.log('📊 Calculating category counts for', internshipData.length, 'internships');
+        
+        const categoryMap: { [key: string]: string[] } = {
+            'software-development': [
+                'frontend', 'backend', 'full stack', 'software', 'developer', 'engineer',
+                'react', 'angular', 'vue', 'node', 'python', 'java', 'javascript', 'programming'
+            ],
+            'data-science': ['data scientist', 'ai', 'ml', 'machine learning', 'analyst', 'data engineer', 'analytics'],
+            'ui-ux-design': ['ui', 'ux', 'designer', 'design', 'figma', 'adobe', 'user experience', 'user interface'],
+            'digital-marketing': ['marketing', 'digital marketing', 'social media', 'seo', 'sem', 'content marketing'],
+            'content-writing': ['content', 'writing', 'blog', 'copywriting', 'technical writing', 'content creator'],
+            'mobile-development': ['mobile', 'ios', 'android', 'react native', 'flutter', 'swift', 'kotlin'],
+            'devops': ['devops', 'cloud', 'aws', 'azure', 'docker', 'kubernetes', 'ci/cd', 'infrastructure'],
+            'product-management': ['product', 'product manager', 'product owner', 'strategy', 'roadmap'],
+            'business-analysis': ['business analyst', 'analysis', 'requirements', 'process', 'strategy'],
+            'quality-assurance': ['qa', 'testing', 'test', 'quality assurance', 'automation', 'manual testing'],
+            'human-resources': ['hr', 'human resources', 'recruitment', 'talent', 'people', 'employee relations']
+        };
+
+        const categoriesWithCounts = categoryDefinitions.map(category => {
+            let count = 0;
+            
+            if (category.slug === 'all') {
+                count = internshipData.length;
+            } else {
+                const keywords = categoryMap[category.slug] || [];
+                count = internshipData.filter(internship => {
+                    const title = (internship.title || '').toLowerCase();
+                    const description = (internship.description || '').toLowerCase();
+                    const skills = (internship.skills || []).join(' ').toLowerCase();
+                    const industry = (internship.industry || '').toLowerCase();
+                    
+                    return keywords.some(keyword => 
+                        title.includes(keyword) || 
+                        description.includes(keyword) || 
+                        skills.includes(keyword) ||
+                        industry.includes(keyword)
+                    );
+                }).length;
+            }
+            
+            return {
+                ...category,
+                count
+            };
+        });
+
+        console.log('📊 Category counts calculated:', categoriesWithCounts);
+        return categoriesWithCounts;
+    }, []);
 
     // Load internships from backend on mount
     useEffect(() => {
@@ -87,6 +140,10 @@ export default function InternshipsPage() {
                 setInternships(frontendInternships);
                 setFilteredInternships(frontendInternships);
                 
+                // Calculate and set category counts based on actual internship data
+                const categoriesWithCounts = calculateCategoryCounts(frontendInternships);
+                setCategories(categoriesWithCounts);
+                
             } catch (e) {
                 console.error('💥 Error loading internships:', e);
             } finally {
@@ -94,7 +151,16 @@ export default function InternshipsPage() {
             }
         };
         loadInternships();
-    }, []);
+    }, [calculateCategoryCounts]);
+
+    // Recalculate category counts when internships data changes
+    useEffect(() => {
+        if (internships.length > 0) {
+            console.log('🔄 Recalculating category counts due to internships change');
+            const categoriesWithCounts = calculateCategoryCounts(internships);
+            setCategories(categoriesWithCounts);
+        }
+    }, [internships, calculateCategoryCounts]);
 
     // Enhanced filter logic for internships
     useEffect(() => {
@@ -114,9 +180,18 @@ export default function InternshipsPage() {
 
         // Filter by search location
         if (searchLocation) {
-            filtered = filtered.filter((internship) =>
-                internship.location.toLowerCase().includes(searchLocation.toLowerCase()),
-            );
+            filtered = filtered.filter((internship) => {
+                const location = internship.location?.toLowerCase() || '';
+                const searchTerm = searchLocation.toLowerCase();
+                
+                // Check for exact matches or partial matches
+                return location.includes(searchTerm) || 
+                       location.includes(searchTerm.replace(' ', '')) ||
+                       location.includes(searchTerm.replace(',', '')) ||
+                       // Handle remote search
+                       (searchTerm === 'remote' && internship.isRemote) ||
+                       (searchTerm === 'onsite' && !internship.isRemote);
+            });
         }
 
         // Filter by category
@@ -176,9 +251,18 @@ export default function InternshipsPage() {
         }
 
         if (filters.location) {
-            filtered = filtered.filter((internship) =>
-                internship.location.toLowerCase().includes(filters.location.toLowerCase()),
-            );
+            filtered = filtered.filter((internship) => {
+                const location = internship.location?.toLowerCase() || '';
+                const searchTerm = filters.location.toLowerCase();
+                
+                // Check for exact matches or partial matches
+                return location.includes(searchTerm) || 
+                       location.includes(searchTerm.replace(' ', '')) ||
+                       location.includes(searchTerm.replace(',', '')) ||
+                       // Handle remote search
+                       (searchTerm === 'remote' && internship.isRemote) ||
+                       (searchTerm === 'onsite' && !internship.isRemote);
+            });
         }
 
         if (filters.stipendRange) {
@@ -295,7 +379,7 @@ export default function InternshipsPage() {
         },
         applicationDeadline: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(), // 30 days from now
         applicationLink: '#',
-        location: internship.isRemote ? 'remote' : 'onsite',
+        location: internship.location || (internship.isRemote ? 'Remote' : 'Onsite'), // Keep original location or use remote/onsite
         salary: internship.stipend,
         skills: internship.skills || [],
         isActive: true,
@@ -490,6 +574,37 @@ export default function InternshipsPage() {
                                         {tag}
                                     </button>
                                 ))}
+                            </div>
+
+                            {/* Quick Filters */}
+                            <div className="mt-6">
+                                <h3 className="text-sm font-medium text-white/90 mb-3 text-center">Quick Filters</h3>
+                                <div className="flex flex-wrap gap-2 justify-center">
+                                    {[
+                                        { label: 'Paid 3-month Internships', filters: { isPaid: 'paid', duration: '3 months' } },
+                                        { label: 'Remote Internships', filters: { location: 'remote' } },
+                                        { label: 'High Stipend (₹25-35k)', filters: { stipendRange: '25-35' } },
+                                        { label: 'Startup Internships', filters: { companyType: 'Startup' } },
+                                        { label: 'Long-term (6 months)', filters: { duration: '6 months' } },
+                                    ].map((quickFilter) => (
+                                        <button
+                                            key={quickFilter.label}
+                                            onClick={() => {
+                                                console.log('🚀 Applying quick filter:', quickFilter);
+                                                setFilters(prevFilters => ({
+                                                    ...prevFilters,
+                                                    ...quickFilter.filters
+                                                }));
+                                                // Clear search query when applying quick filters
+                                                setSearchQuery('');
+                                                setSearchLocation('');
+                                            }}
+                                            className="px-4 py-2 bg-white/10 backdrop-blur-sm text-white text-sm rounded-full hover:bg-white/20 transition-all duration-300 border border-white/20"
+                                        >
+                                            {quickFilter.label}
+                                        </button>
+                                    ))}
+                                </div>
                             </div>
                         </div>
                     </form>
