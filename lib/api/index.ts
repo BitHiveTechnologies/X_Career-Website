@@ -38,10 +38,7 @@ export * from './types';
 // Validation
 export * from './validation';
 
-// Authentication
-export * from './auth';
-
-// Services
+// Services (includes authentication)
 export * from './services';
 
 // Logger

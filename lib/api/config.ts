@@ -50,6 +50,7 @@ export const API_ENDPOINTS = {
   // Authentication
   AUTH: {
     LOGIN: '/api/v1/auth/login',
+    REGISTER: '/api/v1/auth/register',
     ADMIN_LOGIN: '/api/v1/admin/login',
     ME: '/api/v1/jwt-auth/me',
     VERIFY: '/api/v1/jwt-auth/me', // Use ME endpoint for verification

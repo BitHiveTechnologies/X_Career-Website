@@ -40,8 +40,54 @@ import {
     SubscriptionPlan,
     SystemHealth,
     UserAnalytics,
-    VerifyPaymentRequest
+    VerifyPaymentRequest,
+    // Auth types
+    LoginRequest,
+    RegisterRequest,
+    LoginResponse,
+    RegisterResponse
 } from './types';
+
+// ============================================================================
+// AUTH SERVICES
+// ============================================================================
+
+export class AuthService {
+  /**
+   * Register a new user
+   */
+  static async register(registerData: RegisterRequest): Promise<ApiResponse<RegisterResponse>> {
+    return apiClient.post(API_ENDPOINTS.AUTH.REGISTER, registerData);
+  }
+
+  /**
+   * Login user
+   */
+  static async login(loginData: LoginRequest): Promise<ApiResponse<LoginResponse>> {
+    return apiClient.post(API_ENDPOINTS.AUTH.LOGIN, loginData);
+  }
+
+  /**
+   * Admin login
+   */
+  static async adminLogin(loginData: LoginRequest): Promise<ApiResponse<LoginResponse>> {
+    return apiClient.post(API_ENDPOINTS.AUTH.ADMIN_LOGIN, loginData);
+  }
+
+  /**
+   * Get current user info
+   */
+  static async getMe(): Promise<ApiResponse<any>> {
+    return apiClient.get(API_ENDPOINTS.AUTH.ME);
+  }
+
+  /**
+   * Verify token
+   */
+  static async verifyToken(): Promise<ApiResponse<any>> {
+    return apiClient.get(API_ENDPOINTS.AUTH.VERIFY);
+  }
+}
 
 // ============================================================================
 // JOB SERVICES
@@ -556,6 +602,7 @@ export class HealthService {
 // ============================================================================
 
 // Export all services for easy access
+export const authService = AuthService;
 export const jobService = JobService;
 export const applicationService = ApplicationService;
 export const subscriptionService = SubscriptionService;
@@ -566,6 +613,14 @@ export const notificationService = NotificationService;
 export const healthService = HealthService;
 
 // Export individual service methods for convenience
+export const {
+  register,
+  login,
+  adminLogin,
+  getMe,
+  verifyToken,
+} = AuthService;
+
 export const {
   getJobs,
   searchJobs,

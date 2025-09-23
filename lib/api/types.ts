@@ -62,6 +62,17 @@ export interface AdminLoginRequest {
   password: string;
 }
 
+export interface RegisterRequest {
+  name: string;
+  email: string;
+  password: string;
+  mobile: string;
+  qualification: string;
+  stream: string;
+  yearOfPassout: number;
+  cgpaOrPercentage: number;
+}
+
 export interface LoginResponse {
   token: string;
   user: {
@@ -69,6 +80,22 @@ export interface LoginResponse {
     email: string;
     firstName: string;
     lastName: string;
+    role: string;
+  };
+}
+
+export interface RegisterResponse {
+  success: boolean;
+  message: string;
+  user: {
+    id: string;
+    name: string;
+    email: string;
+    mobile: string;
+    qualification: string;
+    stream: string;
+    yearOfPassout: number;
+    cgpaOrPercentage: number;
     role: string;
   };
 }
@@ -490,12 +517,15 @@ export interface LoginFormData {
 }
 
 export interface RegisterFormData {
+  name: string;
   email: string;
   password: string;
   confirmPassword: string;
-  firstName: string;
-  lastName: string;
-  mobile?: string;
+  mobile: string;
+  qualification: string;
+  stream: string;
+  yearOfPassout: number;
+  cgpaOrPercentage: number;
 }
 
 export interface ProfileFormData {
