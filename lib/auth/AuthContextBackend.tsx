@@ -10,6 +10,7 @@ import {
   UpdateProfileRequest,
   AdminLoginRequest
 } from '@/lib/api';
+import { apiClient, API_ENDPOINTS } from '@/lib/api/client';
 
 // ============================================================================
 // AUTH CONTEXT INTERFACE
@@ -76,31 +77,71 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     try {
       setIsLoading(true);
       
-      // Check if we have a stored user
+      // Check if we have a stored user and token
       if (typeof window !== 'undefined') {
         const storedUser = localStorage.getItem('careerx_user');
-        if (storedUser) {
+        const storedToken = localStorage.getItem('careerx_token');
+        console.log('Auth initialization - checking stored data:', {
+          hasUser: !!storedUser,
+          hasToken: !!storedToken,
+          tokenPreview: storedToken ? storedToken.substring(0, 20) + '...' : 'No token',
+          userPreview: storedUser ? JSON.parse(storedUser) : null
+        });
+        
+        if (storedUser && storedToken) {
           const user = JSON.parse(storedUser);
-          setUser(user);
+          // Ensure user data has required properties
+          if (user && user.id) {
+            setUser(user);
+            console.log('User and token loaded from localStorage');
+          } else {
+            console.log('Invalid user data in localStorage, clearing...');
+            localStorage.removeItem('careerx_user');
+            localStorage.removeItem('careerx_token');
+            setUser(null);
+          }
+          
+          // Verify the token is still valid by calling the backend
+          try {
+            const result = await authService.getMe();
+            console.log('Token validation response:', result);
+            if (result.success && result.data) {
+              // Token is valid, update user data if needed
+              // Handle different response structures
+              const userData = result.data.user || result.data;
+              if (userData && userData.id) {
+                setUser(userData);
+                if (typeof window !== 'undefined') {
+                  localStorage.setItem('careerx_user', JSON.stringify(userData));
+                }
+              } else {
+                console.log('Invalid user data structure:', result.data);
+                // Keep the stored user data if API response is malformed
+              }
+            } else {
+              // Token is invalid, clear stored data
+              console.log('Token validation failed - clearing stored data');
+              setUser(null);
+              if (typeof window !== 'undefined') {
+                localStorage.removeItem('careerx_user');
+                localStorage.removeItem('careerx_token');
+              }
+            }
+          } catch (error) {
+            // Token is invalid or expired, clear stored data
+            console.log('Token validation failed with error:', error);
+            setUser(null);
+            if (typeof window !== 'undefined') {
+              localStorage.removeItem('careerx_user');
+              localStorage.removeItem('careerx_token');
+            }
+          }
           return;
         }
       }
       
-      // Try to get user info from the backend
-      try {
-        const result = await authService.getMe();
-        if (result.success && result.data) {
-          setUser(result.data);
-          
-          // Store user in localStorage for persistence
-          if (typeof window !== 'undefined') {
-            localStorage.setItem('careerx_user', JSON.stringify(result.data));
-          }
-        }
-      } catch (error) {
-        // User is not authenticated
-        setUser(null);
-      }
+      // No stored user/token, user is not authenticated
+      setUser(null);
     } catch (error) {
       console.error('Auth initialization error:', error);
       setUser(null);
@@ -131,19 +172,42 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       }
       
       if (result.success && result.data) {
+        // Store the JWT token in localStorage
+        if (typeof window !== 'undefined') {
+          console.log('Login successful, storing token:', {
+            hasToken: !!result.data.token,
+            tokenPreview: result.data.token ? result.data.token.substring(0, 20) + '...' : 'No token',
+            fullResponse: result
+          });
+          localStorage.setItem('careerx_token', result.data.token);
+          console.log('Token stored in localStorage:', result.data.token);
+          
+          // Verify token was stored
+          const storedToken = localStorage.getItem('careerx_token');
+          console.log('Token verification - stored token:', storedToken ? storedToken.substring(0, 20) + '...' : 'No token found');
+        }
+        
         // Set user data from login response
         const userData = {
-          id: result.data.user.id,
-          email: result.data.user.email,
-          firstName: result.data.user.firstName,
-          lastName: result.data.user.lastName,
-          mobile: result.data.user.mobile || '',
-          role: (result.data.user.role as 'user' | 'admin' | 'super_admin') || 'user',
+          id: result.data.user?.id || (result.data as any).id,
+          email: result.data.user?.email || (result.data as any).email,
+          firstName: result.data.user?.firstName || (result.data as any).firstName || '',
+          lastName: result.data.user?.lastName || (result.data as any).lastName || '',
+          mobile: result.data.user?.mobile || (result.data as any).mobile || '',
+          role: (result.data.user?.role || (result.data as any).role || 'user') as 'user' | 'admin' | 'super_admin',
           subscriptionStatus: 'inactive' as const,
           isProfileComplete: true,
         };
         
-        setUser(userData);
+        console.log('Constructed user data:', userData);
+        
+        // Validate user data before setting
+        if (userData && userData.id && userData.email) {
+          setUser(userData);
+        } else {
+          console.error('Invalid user data structure:', userData);
+          return { success: false, error: 'Invalid user data received from server' };
+        }
         
         // Store user in localStorage for persistence
         if (typeof window !== 'undefined') {
@@ -183,19 +247,42 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       const result = await authService.adminLogin({ email, password });
       
       if (result.success && result.data) {
+        // Store the JWT token in localStorage
+        if (typeof window !== 'undefined') {
+          console.log('Admin login successful, storing token:', {
+            hasToken: !!result.data.token,
+            tokenPreview: result.data.token ? result.data.token.substring(0, 20) + '...' : 'No token',
+            fullResponse: result
+          });
+          localStorage.setItem('careerx_token', result.data.token);
+          console.log('Token stored in localStorage:', result.data.token);
+          
+          // Verify token was stored
+          const storedToken = localStorage.getItem('careerx_token');
+          console.log('Token verification - stored token:', storedToken ? storedToken.substring(0, 20) + '...' : 'No token found');
+        }
+        
         // Set user data from login response
         const userData = {
-          id: result.data.user.id,
-          email: result.data.user.email,
-          firstName: result.data.user.firstName,
-          lastName: result.data.user.lastName,
-          mobile: result.data.user.mobile || '',
-          role: (result.data.user.role as 'user' | 'admin' | 'super_admin') || 'admin',
+          id: result.data.user?.id || (result.data as any).id,
+          email: result.data.user?.email || (result.data as any).email,
+          firstName: result.data.user?.firstName || (result.data as any).firstName || '',
+          lastName: result.data.user?.lastName || (result.data as any).lastName || '',
+          mobile: result.data.user?.mobile || (result.data as any).mobile || '',
+          role: (result.data.user?.role || (result.data as any).role || 'admin') as 'user' | 'admin' | 'super_admin',
           subscriptionStatus: 'inactive' as const,
           isProfileComplete: true,
         };
         
-        setUser(userData);
+        console.log('Constructed admin user data:', userData);
+        
+        // Validate user data before setting
+        if (userData && userData.id && userData.email) {
+          setUser(userData);
+        } else {
+          console.error('Invalid admin user data structure:', userData);
+          return { success: false, error: 'Invalid user data received from server' };
+        }
         
         // Store user in localStorage for persistence
         if (typeof window !== 'undefined') {
@@ -252,17 +339,25 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       if (result.success && result.data) {
         // Set user data from registration response
         const userData = {
-          id: result.data.user.id,
-          email: result.data.user.email,
-          firstName: result.data.user.name.split(' ')[0],
-          lastName: result.data.user.name.split(' ').slice(1).join(' ') || '',
-          mobile: result.data.user.mobile,
-          role: (result.data.user.role as 'user' | 'admin' | 'super_admin') || 'user',
+          id: result.data.user?.id || (result.data as any).id,
+          email: result.data.user?.email || (result.data as any).email,
+          firstName: result.data.user?.name?.split(' ')[0] || (result.data.user as any)?.firstName || '',
+          lastName: result.data.user?.name?.split(' ').slice(1).join(' ') || (result.data.user as any)?.lastName || '',
+          mobile: result.data.user?.mobile || (result.data as any).mobile || '',
+          role: (result.data.user?.role || (result.data as any).role || 'user') as 'user' | 'admin' | 'super_admin',
           subscriptionStatus: 'inactive' as const,
           isProfileComplete: true,
         };
         
-        setUser(userData);
+        console.log('Constructed registration user data:', userData);
+        
+        // Validate user data before setting
+        if (userData && userData.id && userData.email) {
+          setUser(userData);
+        } else {
+          console.error('Invalid registration user data structure:', userData);
+          return { success: false, error: 'Invalid user data received from server' };
+        }
         
         // Store user data in localStorage
         if (typeof window !== 'undefined') {
@@ -297,9 +392,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       setIsLoading(true);
       setUser(null);
       
-      // Clear user from localStorage
+      // Clear user data and token from localStorage
       if (typeof window !== 'undefined') {
         localStorage.removeItem('careerx_user');
+        localStorage.removeItem('careerx_token');
+        console.log('User data and token cleared from localStorage');
       }
       
       router.push('/');
@@ -327,18 +424,77 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   // ============================================================================
 
   const getUserProfile = async (): Promise<UserProfile | null> => {
-    // Placeholder implementation
-    return null;
+    try {
+      // Ensure we have a valid token before making the request
+      const token = apiClient.getToken();
+      if (!token) {
+        console.error('No token available for profile request');
+        return null;
+      }
+
+      const result = await apiClient.get(API_ENDPOINTS.USERS.ME);
+      console.log('getUserProfile response:', result);
+      
+      if (result.success && result.data) {
+        // Handle different response structures
+        const userData = result.data.user || result.data;
+        if (userData && userData.profile) {
+          return userData.profile;
+        }
+        // If no profile exists, return null
+        console.log('No profile data found in response');
+        return null;
+      }
+      return null;
+    } catch (error: any) {
+      console.error('Error getting user profile:', error);
+      return null;
+    }
   };
 
   const updateProfile = async (profileData: UpdateProfileRequest): Promise<{ success: boolean; error?: string }> => {
-    // Placeholder implementation
-    return { success: false, error: 'Not implemented' };
+    try {
+      // Ensure we have a valid token before making the request
+      const token = apiClient.getToken();
+      if (!token) {
+        console.error('No token available for profile update request');
+        return { success: false, error: 'No authentication token available' };
+      }
+
+      const result = await apiClient.put(API_ENDPOINTS.USERS.ME, profileData);
+      if (result.success) {
+        // Update local user data if needed
+        if (result.data && result.data.user) {
+          setUser(prev => prev ? { ...prev, ...result.data.user } : null);
+        }
+        return { success: true };
+      } else {
+        return { success: false, error: result.error?.message || 'Failed to update profile' };
+      }
+    } catch (error: any) {
+      console.error('Error updating profile:', error);
+      return { success: false, error: error.message || 'Failed to update profile' };
+    }
   };
 
   const getProfileCompletion = async (): Promise<ProfileCompletionStatus | null> => {
-    // Placeholder implementation
-    return null;
+    try {
+      // Ensure we have a valid token before making the request
+      const token = apiClient.getToken();
+      if (!token) {
+        console.error('No token available for profile completion request');
+        return null;
+      }
+
+      const result = await apiClient.get(API_ENDPOINTS.USERS.ME_COMPLETION);
+      if (result.success && result.data) {
+        return result.data;
+      }
+      return null;
+    } catch (error: any) {
+      console.error('Error getting profile completion:', error);
+      return null;
+    }
   };
 
   // ============================================================================

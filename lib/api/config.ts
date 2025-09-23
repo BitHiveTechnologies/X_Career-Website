@@ -49,7 +49,7 @@ export const getApiConfig = (): ApiConfig => {
 export const API_ENDPOINTS = {
   // Authentication
   AUTH: {
-    LOGIN: '/api/v1/auth/login',
+    LOGIN: '/api/v1/jwt-auth/login',
     REGISTER: '/api/v1/auth/register',
     ADMIN_LOGIN: '/api/v1/admin/login',
     ME: '/api/v1/jwt-auth/me',
