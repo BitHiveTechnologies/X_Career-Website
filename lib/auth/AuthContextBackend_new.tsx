@@ -138,7 +138,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           firstName: result.data.user.firstName,
           lastName: result.data.user.lastName,
           mobile: result.data.user.mobile || '',
-          role: (result.data.user.role as 'user' | 'admin' | 'super_admin') || 'user',
+          role: result.data.user.role || 'user' as 'user' | 'admin' | 'super_admin',
           subscriptionStatus: 'inactive' as const,
           isProfileComplete: true,
         };
@@ -157,7 +157,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
             localStorage.removeItem('careerx_redirect_after_auth');
             router.push(redirectTo);
           } else {
-            router.push('/');
+            router.push('/dashboard');
           }
         }
         
@@ -190,7 +190,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           firstName: result.data.user.firstName,
           lastName: result.data.user.lastName,
           mobile: result.data.user.mobile || '',
-          role: (result.data.user.role as 'user' | 'admin' | 'super_admin') || 'admin',
+          role: result.data.user.role || 'admin' as 'user' | 'admin' | 'super_admin',
           subscriptionStatus: 'inactive' as const,
           isProfileComplete: true,
         };
@@ -209,7 +209,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
             localStorage.removeItem('careerx_redirect_after_auth');
             router.push(redirectTo);
           } else {
-            router.push('/');
+            router.push('/dashboard');
           }
         }
         
@@ -257,7 +257,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           firstName: result.data.user.name.split(' ')[0],
           lastName: result.data.user.name.split(' ').slice(1).join(' ') || '',
           mobile: result.data.user.mobile,
-          role: (result.data.user.role as 'user' | 'admin' | 'super_admin') || 'user',
+          role: result.data.user.role || 'user' as 'user' | 'admin' | 'super_admin',
           subscriptionStatus: 'inactive' as const,
           isProfileComplete: true,
         };
@@ -276,7 +276,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
             localStorage.removeItem('careerx_redirect_after_auth');
             router.push(redirectTo);
           } else {
-            router.push('/');
+            router.push('/dashboard');
           }
         }
         

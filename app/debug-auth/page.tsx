@@ -24,7 +24,7 @@ export default function DebugAuthPage() {
       const data = await response.json()
       setTestResult(data)
     } catch (error) {
-      setTestResult({ success: false, error: error.message })
+      setTestResult({ success: false, error: error instanceof Error ? error.message : 'Unknown error' })
     } finally {
       setIsTestingLogin(false)
     }
