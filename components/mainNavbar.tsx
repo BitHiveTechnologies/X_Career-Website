@@ -182,38 +182,48 @@ export default function MainNavbar() {
                                             className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 border border-gray-200"
                                             data-oid="a3gci1r"
                                         >
-                                            <Link
-                                                href="/dashboard"
-                                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
-                                                onClick={() => setUserMenuOpen(false)}
-                                                data-oid=":4vxu6_"
-                                            >
-                                                Dashboard
-                                            </Link>
-                                            <Link
-                                                href="/profile"
-                                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
-                                                onClick={() => setUserMenuOpen(false)}
-                                                data-oid="n:oo8lm"
-                                            >
-                                                Profile
-                                            </Link>
-                                            <Link
-                                                href="/saved-jobs"
-                                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
-                                                onClick={() => setUserMenuOpen(false)}
-                                                data-oid="6z2vv33"
-                                            >
-                                                Saved Jobs
-                                            </Link>
-                                            <Link
-                                                href="/applications"
-                                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
-                                                onClick={() => setUserMenuOpen(false)}
-                                                data-oid="nk-gulu"
-                                            >
-                                                My Applications
-                                            </Link>
+                                            {/* Admin only sees Dashboard */}
+                                            {(user.role === 'admin' || user.role === 'super_admin') && (
+                                                <Link
+                                                    href="/dashboard"
+                                                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+                                                    onClick={() => setUserMenuOpen(false)}
+                                                    data-oid=":4vxu6_"
+                                                >
+                                                    Dashboard
+                                                </Link>
+                                            )}
+                                            
+                                            {/* Regular users see all options except Dashboard */}
+                                            {user.role === 'user' && (
+                                                <>
+                                                    <Link
+                                                        href="/profile"
+                                                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+                                                        onClick={() => setUserMenuOpen(false)}
+                                                        data-oid="n:oo8lm"
+                                                    >
+                                                        Profile
+                                                    </Link>
+                                                    <Link
+                                                        href="/saved-jobs"
+                                                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+                                                        onClick={() => setUserMenuOpen(false)}
+                                                        data-oid="6z2vv33"
+                                                    >
+                                                        Saved Jobs
+                                                    </Link>
+                                                    <Link
+                                                        href="/applications"
+                                                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+                                                        onClick={() => setUserMenuOpen(false)}
+                                                        data-oid="nk-gulu"
+                                                    >
+                                                        My Applications
+                                                    </Link>
+                                                </>
+                                            )}
+                                            
                                             <hr className="my-1" data-oid="976ojd7" />
                                             <button
                                                 onClick={handleLogout}
@@ -363,38 +373,47 @@ export default function MainNavbar() {
                                                 {getDisplayName()}
                                             </span>
                                         </div>
-                                        <Link
-                                            href="/dashboard"
-                                            className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-blue-800 hover:bg-blue-50 transition-colors duration-200"
-                                            onClick={() => setMobileMenuOpen(false)}
-                                            data-oid="uig-c5d"
-                                        >
-                                            Dashboard
-                                        </Link>
-                                        <Link
-                                            href="/profile"
-                                            className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-blue-800 hover:bg-blue-50 transition-colors duration-200"
-                                            onClick={() => setMobileMenuOpen(false)}
-                                            data-oid="js-h_k2"
-                                        >
-                                            Profile
-                                        </Link>
-                                        <Link
-                                            href="/saved-jobs"
-                                            className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-blue-800 hover:bg-blue-50 transition-colors duration-200"
-                                            onClick={() => setMobileMenuOpen(false)}
-                                            data-oid="cgr71sa"
-                                        >
-                                            Saved Jobs
-                                        </Link>
-                                        <Link
-                                            href="/applications"
-                                            className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-blue-800 hover:bg-blue-50 transition-colors duration-200"
-                                            onClick={() => setMobileMenuOpen(false)}
-                                            data-oid="21.mi0m"
-                                        >
-                                            My Applications
-                                        </Link>
+                                        {/* Admin only sees Dashboard */}
+                                        {(user.role === 'admin' || user.role === 'super_admin') && (
+                                            <Link
+                                                href="/dashboard"
+                                                className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-blue-800 hover:bg-blue-50 transition-colors duration-200"
+                                                onClick={() => setMobileMenuOpen(false)}
+                                                data-oid="uig-c5d"
+                                            >
+                                                Dashboard
+                                            </Link>
+                                        )}
+                                        
+                                        {/* Regular users see all options except Dashboard */}
+                                        {user.role === 'user' && (
+                                            <>
+                                                <Link
+                                                    href="/profile"
+                                                    className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-blue-800 hover:bg-blue-50 transition-colors duration-200"
+                                                    onClick={() => setMobileMenuOpen(false)}
+                                                    data-oid="js-h_k2"
+                                                >
+                                                    Profile
+                                                </Link>
+                                                <Link
+                                                    href="/saved-jobs"
+                                                    className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-blue-800 hover:bg-blue-50 transition-colors duration-200"
+                                                    onClick={() => setMobileMenuOpen(false)}
+                                                    data-oid="cgr71sa"
+                                                >
+                                                    Saved Jobs
+                                                </Link>
+                                                <Link
+                                                    href="/applications"
+                                                    className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-blue-800 hover:bg-blue-50 transition-colors duration-200"
+                                                    onClick={() => setMobileMenuOpen(false)}
+                                                    data-oid="21.mi0m"
+                                                >
+                                                    My Applications
+                                                </Link>
+                                            </>
+                                        )}
                                         <button
                                             onClick={() => {
                                                 handleLogout();
