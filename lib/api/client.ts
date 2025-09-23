@@ -268,12 +268,22 @@ class ApiClient {
 
   // Convenience methods
   async get<T = any>(url: string, params?: Record<string, any>, config?: Partial<RequestConfig>): Promise<ApiResponse<T>> {
-    return this.request<T>({
-      method: 'GET',
-      url,
-      params,
-      ...config,
-    });
+    console.log('🔍 ApiClient.get called with:', { url, params, config });
+    console.log('🔍 Base URL:', this.baseUrl);
+    
+    try {
+      const result = await this.request<T>({
+        method: 'GET',
+        url,
+        params,
+        ...config,
+      });
+      console.log('✅ ApiClient.get result:', result);
+      return result;
+    } catch (error) {
+      console.error('❌ ApiClient.get error:', error);
+      throw error;
+    }
   }
 
   async post<T = any>(url: string, data?: any, config?: Partial<RequestConfig>): Promise<ApiResponse<T>> {

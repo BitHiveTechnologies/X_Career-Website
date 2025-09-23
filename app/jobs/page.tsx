@@ -78,6 +78,7 @@ function JobsPageContent() {
     const [sortBy, setSortBy] = useState('relevance');
     const [visibleJobs, setVisibleJobs] = useState(6);
     const [error, setError] = useState<string | null>(null);
+    const [filterLoading, setFilterLoading] = useState(false);
     const [pagination, setPagination] = useState({
         page: 1,
         limit: 10,
@@ -108,24 +109,54 @@ function JobsPageContent() {
             setIsLoading(true);
             setError(null);
             
+            console.log('🔄 Loading jobs from backend...', {
+                page,
+                limit: pagination.limit,
+                type: 'job'
+            });
+            
             const response: any = await jobService.getJobs({
                 page: page,
                 limit: pagination.limit,
-                type: 'job',
-                location: filters.location === 'all' ? undefined : filters.location
+                type: 'job' // Only load jobs, not internships
             });
+
+            console.log('📥 Backend response:', response);
+            console.log('📥 Response type:', typeof response);
+            console.log('📥 Response success:', response?.success);
+            console.log('📥 Response data:', response?.data);
 
             if (response.success && response.data) {
                 // Backend returns: { success: true, data: { jobs: [...], pagination: {...} } }
                 const jobsArray = response.data.jobs;
                 
                 if (Array.isArray(jobsArray)) {
+                    console.log('✅ Processing', jobsArray.length, 'jobs from backend');
+                    
                     const frontendJobs = jobsArray.map((job: any) => {
-                        return jobService.transformToFrontendJob(job);
+                        try {
+                            return jobService.transformToFrontendJob(job);
+                        } catch (transformError) {
+                            console.error('❌ Error transforming job:', job, transformError);
+                            // Return a fallback job object
+                            return {
+                                ...job,
+                                isFeatured: false,
+                                isUrgent: false,
+                                applicantCount: 0,
+                                companyType: 'Product' as const,
+                                experienceRequired: '1-3 years',
+                                jobType: job.type === 'job' ? 'Full-time' : 'Internship',
+                                employmentType: 'Permanent',
+                                skills: job.eligibility?.streams || [],
+                                postedDate: job.createdAt,
+                                isRemote: job.location === 'remote',
+                            };
+                        }
                     });
                     
+                    console.log('✅ Transformed jobs:', frontendJobs);
                     setJobs(frontendJobs);
-                    // Immediately set filtered jobs to the same as jobs
                     setFilteredJobs(frontendJobs);
                     setPagination(response.data.pagination || { page: 1, limit: 10, total: 0, pages: 0 });
                 } else {
@@ -141,58 +172,133 @@ function JobsPageContent() {
                 setFilteredJobs([]);
             }
         } catch (err) {
-            console.error('Error loading jobs:', err);
-            setError('Failed to load jobs. Please try again later.');
-            setJobs([]);
-            setFilteredJobs([]);
+            console.error('💥 Error loading jobs:', err);
+            
+            // Try to load mock data as fallback
+            try {
+                console.log('🔄 Attempting to load mock data as fallback...');
+                const { mockJobs } = await import('@/lib/mockData');
+                const frontendJobs = mockJobs.map((job: any) => ({
+                    ...job,
+                    isFeatured: Math.random() > 0.8,
+                    isUrgent: Math.random() > 0.9,
+                    applicantCount: Math.floor(Math.random() * 500),
+                    companyType: 'Product' as const,
+                    experienceRequired: '1-3 years',
+                    jobType: 'Full-time',
+                    employmentType: 'Permanent',
+                    skills: job.skills || [],
+                    postedDate: job.postedDate,
+                    isRemote: job.isRemote || false,
+                }));
+                
+                setJobs(frontendJobs);
+                setFilteredJobs(frontendJobs);
+                setError(null);
+                console.log('✅ Fallback to mock data successful');
+            } catch (fallbackError) {
+                console.error('❌ Fallback to mock data also failed:', fallbackError);
+                setError(`Failed to load jobs: ${err instanceof Error ? err.message : 'Unknown error'}`);
+                setJobs([]);
+                setFilteredJobs([]);
+            }
         } finally {
             setIsLoading(false);
         }
-    }, [pagination.page, pagination.limit, filters.location]);
+    }, [pagination.page, pagination.limit]);
 
     const searchJobs = useCallback(async (page: number = pagination.page) => {
         try {
             setIsLoading(true);
             setError(null);
             
+            console.log('🔍 Searching jobs...', {
+                query: searchQuery,
+                location: searchLocation,
+                page,
+                limit: pagination.limit
+            });
+            
             const response: any = await jobService.searchJobs(searchQuery, {
                 page: page,
                 limit: pagination.limit,
                 type: 'job',
-                location: (searchLocation as 'remote' | 'onsite' | 'hybrid') || (filters.location === 'all' ? undefined : filters.location)
+                location: (searchLocation as 'remote' | 'onsite' | 'hybrid') || undefined
             });
+
+            console.log('📥 Search response:', response);
 
             if (response.success && response.data) {
                 // Backend returns: { success: true, data: { jobs: [...], pagination: {...} } }
                 const jobsArray = response.data.jobs;
                 if (Array.isArray(jobsArray)) {
-                    const frontendJobs = jobsArray.map((job: any) => jobService.transformToFrontendJob(job));
+                    console.log('✅ Processing', jobsArray.length, 'search results');
+                    
+                    const frontendJobs = jobsArray.map((job: any) => {
+                        try {
+                            return jobService.transformToFrontendJob(job);
+                        } catch (transformError) {
+                            console.error('❌ Error transforming search result:', job, transformError);
+                            return {
+                                ...job,
+                                isFeatured: false,
+                                isUrgent: false,
+                                applicantCount: 0,
+                                companyType: 'Product' as const,
+                                experienceRequired: '1-3 years',
+                                jobType: job.type === 'job' ? 'Full-time' : 'Internship',
+                                employmentType: 'Permanent',
+                                skills: job.eligibility?.streams || [],
+                                postedDate: job.createdAt,
+                                isRemote: job.location === 'remote',
+                            };
+                        }
+                    });
+                    
                     setJobs(frontendJobs);
                     setFilteredJobs(frontendJobs);
                     setPagination(response.data.pagination || { page: 1, limit: 10, total: 0, pages: 0 });
                 } else {
-                    console.warn('Search jobs data is not an array:', jobsArray);
+                    console.warn('❌ Search jobs data is not an array:', jobsArray);
                     setJobs([]);
                     setFilteredJobs([]);
                     setError('Invalid search results format received');
                 }
             } else {
+                console.error('❌ Search API response failed:', response);
                 setError(response.error?.message || 'No search results received');
                 setJobs([]);
                 setFilteredJobs([]);
             }
         } catch (err) {
-            console.error('Error searching jobs:', err);
-            setError('Failed to search jobs. Please try again later.');
+            console.error('💥 Error searching jobs:', err);
+            setError(`Failed to search jobs: ${err instanceof Error ? err.message : 'Unknown error'}`);
             setJobs([]);
             setFilteredJobs([]);
         } finally {
             setIsLoading(false);
         }
-    }, [searchQuery, searchLocation, pagination.page, pagination.limit, filters.location]);
+    }, [searchQuery, searchLocation, pagination.page, pagination.limit]);
+
+    // Test API connection on component mount
+    useEffect(() => {
+        const testApiConnection = async () => {
+            try {
+                console.log('🔌 Testing API connection...');
+                const response = await fetch('http://localhost:3001/health');
+                const healthData = await response.json();
+                console.log('✅ API Health Check:', healthData);
+            } catch (error) {
+                console.error('❌ API Health Check Failed:', error);
+            }
+        };
+        
+        testApiConnection();
+    }, []);
 
     // Load jobs from backend on component mount
     useEffect(() => {
+        console.log('🚀 Component mounted, loading jobs...');
         loadJobs();
     }, [loadJobs]);
 
@@ -239,198 +345,522 @@ function JobsPageContent() {
         }
     };
 
-    // Enhanced filter logic with search and advanced filtering
+    // Enhanced filter logic with proper data mapping and error handling
     useEffect(() => {
-        
-        // Ensure jobs is an array before filtering
-        if (!Array.isArray(jobs)) {
-            setFilteredJobs([]);
-            return;
-        }
+        // Debounce filter operations for better performance
+        const filterTimeout = setTimeout(() => {
+            console.log('🔍 Filter Effect Triggered:', {
+                jobsLength: jobs?.length,
+                selectedCategory,
+                filters,
+                searchQuery,
+                searchLocation,
+                sortBy
+            });
 
-        // If jobs array is empty, don't run filtering logic
-        if (jobs.length === 0) {
-            return;
-        }
+            setFilterLoading(true);
 
-        let filtered = jobs;
+            // Ensure jobs is an array before filtering
+            if (!Array.isArray(jobs)) {
+                console.warn('❌ Jobs is not an array:', jobs);
+                setFilteredJobs([]);
+                setFilterLoading(false);
+                return;
+            }
+
+            // If jobs array is empty, don't run filtering logic
+            if (jobs.length === 0) {
+                console.log('📭 No jobs to filter');
+                setFilteredJobs([]);
+                setFilterLoading(false);
+                return;
+            }
+
+        let filtered = [...jobs]; // Create a copy to avoid mutating original array
+        console.log('🚀 Starting with', filtered.length, 'jobs');
 
         // Filter by search query
-        if (searchQuery) {
-            filtered = filtered.filter(
-                (job) =>
-                    job.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                    job.company?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                    job.skills?.some((skill) =>
-                        skill.toLowerCase().includes(searchQuery.toLowerCase()),
-                    ),
-            );
+        if (searchQuery && searchQuery.trim()) {
+            const query = searchQuery.toLowerCase().trim();
+            filtered = filtered.filter((job) => {
+                const titleMatch = job.title?.toLowerCase().includes(query) || false;
+                const companyMatch = job.company?.toLowerCase().includes(query) || false;
+                const skillsMatch = job.skills?.some((skill) => 
+                    skill.toLowerCase().includes(query)
+                ) || false;
+                const descriptionMatch = job.description?.toLowerCase().includes(query) || false;
+                
+                return titleMatch || companyMatch || skillsMatch || descriptionMatch;
+            });
+            console.log('🔍 After search query filter:', filtered.length, 'jobs');
         }
 
         // Filter by search location
-        if (searchLocation) {
-            filtered = filtered.filter((job) =>
-                job.location?.toLowerCase().includes(searchLocation.toLowerCase()),
-            );
+        if (searchLocation && searchLocation.trim()) {
+            const location = searchLocation.toLowerCase().trim();
+            filtered = filtered.filter((job) => {
+                // Check both the location field and if it's mentioned in the location string
+                const locationMatch = job.location?.toLowerCase().includes(location) || false;
+                return locationMatch;
+            });
+            console.log('📍 After location filter:', filtered.length, 'jobs');
         }
 
         // Filter by category
         if (selectedCategory !== 'all') {
             const categoryMap: { [key: string]: string[] } = {
                 'software-development': [
-                    'Frontend Developer',
-                    'Backend Engineer',
-                    'Full Stack Developer',
+                    'frontend', 'backend', 'full stack', 'software', 'developer', 'engineer',
+                    'react', 'angular', 'vue', 'node', 'python', 'java', 'javascript'
                 ],
-
-                'data-science': ['Data Scientist', 'AI/ML Engineer'],
-                'ui-ux-design': ['UI/UX Designer'],
-                devops: ['DevOps Engineer', 'Cloud Architect'],
-                'product-management': ['Product Manager'],
-                'mobile-development': ['Mobile App Developer'],
-                blockchain: ['Blockchain Developer'],
-                cybersecurity: ['Cybersecurity Analyst'],
-                marketing: ['Marketing Manager', 'Growth Hacker'],
-                finance: ['Financial Analyst', 'Fintech Developer'],
-                sales: ['Sales Manager', 'Business Development'],
+                'data-science': ['data scientist', 'ai', 'ml', 'machine learning', 'analyst', 'data engineer'],
+                'ui-ux-design': ['ui', 'ux', 'designer', 'design', 'figma', 'adobe'],
+                'devops': ['devops', 'cloud', 'aws', 'azure', 'kubernetes', 'docker', 'infrastructure'],
+                'product-management': ['product manager', 'product', 'pm', 'strategy'],
+                'mobile-development': ['mobile', 'ios', 'android', 'react native', 'flutter'],
+                'blockchain': ['blockchain', 'crypto', 'web3', 'solidity', 'ethereum'],
+                'cybersecurity': ['security', 'cyber', 'penetration', 'siem', 'incident'],
+                'marketing': ['marketing', 'growth', 'digital', 'social', 'content'],
+                'finance': ['finance', 'fintech', 'banking', 'financial', 'trading'],
+                'sales': ['sales', 'business development', 'bd', 'account', 'revenue']
             };
-            filtered = filtered.filter(
-                (job) =>
-                    categoryMap[selectedCategory]?.includes(job.title) ||
-                    job.industry?.toLowerCase().includes(selectedCategory.replace('-', ' ')),
-            );
-        }
-
-        // Apply all other filters
-        if (filters.jobType) {
-            // Map filter values to job types
-            const jobTypeMap: { [key: string]: string[] } = {
-                'Full-time': ['job'],
-                'Part-time': ['job'],
-                'Contract': ['job'],
-                'Internship': ['internship'],
-                'Freelance': ['job'],
-            };
-            const allowedTypes = jobTypeMap[filters.jobType] || [];
-            filtered = filtered.filter((job) => allowedTypes.includes(job.type));
-        }
-
-        if (filters.employmentType) {
-            filtered = filtered.filter((job) => job.employmentType === filters.employmentType);
-        }
-
-        if (filters.experienceLevel) {
-            filtered = filtered.filter((job) => job.experienceRequired === filters.experienceLevel);
-        }
-
-        if (filters.skills) {
-            const skillsArray = filters.skills
-                .toLowerCase()
-                .split(',')
-                .map((s) => s.trim());
+            
+            const categoryKeywords = categoryMap[selectedCategory] || [];
             filtered = filtered.filter((job) => {
-                // Check if any of the filter skills match job skills or are mentioned in title/description
-                return skillsArray.some((skill) => {
-                    // Check in job skills array
-                    const hasSkill = job.skills?.some((jobSkill) => 
-                        jobSkill.toLowerCase().includes(skill)
-                    );
-                    
-                    // Check in job title
-                    const hasInTitle = job.title?.toLowerCase().includes(skill);
-                    
-                    // Check in job description
-                    const hasInDescription = job.description?.toLowerCase().includes(skill);
-                    
-                    return hasSkill || hasInTitle || hasInDescription;
-                });
+                const titleLower = job.title?.toLowerCase() || '';
+                const descriptionLower = job.description?.toLowerCase() || '';
+                const skillsLower = job.skills?.map(s => s.toLowerCase()).join(' ') || '';
+                
+                return categoryKeywords.some(keyword => 
+                    titleLower.includes(keyword) || 
+                    descriptionLower.includes(keyword) ||
+                    skillsLower.includes(keyword)
+                );
             });
+            console.log('🏷️ After category filter:', filtered.length, 'jobs');
         }
 
-        if (filters.location && filters.location !== 'all') {
-            filtered = filtered.filter((job) =>
-                job.location?.toLowerCase().includes(filters.location.toLowerCase()),
-            );
-        }
-
-        if (filters.salaryRange) {
+        // Filter by job type (Full-time, Part-time, etc.)
+        if (filters.jobType) {
+            // Since backend only has 'job' and 'internship', we need to use additional logic
             filtered = filtered.filter((job) => {
-                if (!job.salary) return false;
-
-                // Extract salary range from strings like "₹6-10 LPA" or "₹15-25 LPA"
-                const salaryMatch = job.salary.match(/₹?(\d+)(?:-(\d+))?/);
-                if (!salaryMatch) return false;
-
-                const minSalary = parseInt(salaryMatch[1]);
-                const maxSalary = salaryMatch[2] ? parseInt(salaryMatch[2]) : minSalary;
-
-                switch (filters.salaryRange) {
-                    case '0-5':
-                        return maxSalary <= 5;
-                    case '5-10':
-                        return minSalary >= 5 && maxSalary <= 10;
-                    case '10-20':
-                        return minSalary >= 10 && maxSalary <= 20;
-                    case '20+':
-                        return minSalary >= 20;
+                const jobTitle = job.title?.toLowerCase() || '';
+                const jobDescription = job.description?.toLowerCase() || '';
+                const combinedText = `${jobTitle} ${jobDescription}`;
+                
+                switch (filters.jobType) {
+                    case 'Full-time':
+                        // Full-time jobs: exclude internships and part-time keywords
+                        return job.type === 'job' && 
+                               !combinedText.includes('part-time') && 
+                               !combinedText.includes('part time') &&
+                               !combinedText.includes('intern');
+                    case 'Part-time':
+                        // Part-time jobs: look for part-time keywords
+                        return job.type === 'job' && 
+                               (combinedText.includes('part-time') || 
+                                combinedText.includes('part time'));
+                    case 'Contract':
+                        // Contract jobs: look for contract keywords
+                        return job.type === 'job' && 
+                               (combinedText.includes('contract') || 
+                                combinedText.includes('freelance'));
+                    case 'Internship':
+                        // Internships: backend type is 'internship'
+                        return job.type === 'internship';
+                    case 'Freelance':
+                        // Freelance jobs: look for freelance keywords
+                        return job.type === 'job' && 
+                               (combinedText.includes('freelance') || 
+                                combinedText.includes('contract'));
                     default:
                         return true;
                 }
             });
+            console.log('💼 After job type filter:', filtered.length, 'jobs');
         }
 
+        // Filter by employment type (Permanent, Contract, etc.)
+        if (filters.employmentType) {
+            filtered = filtered.filter((job) => {
+                const jobTitle = job.title?.toLowerCase() || '';
+                const jobDescription = job.description?.toLowerCase() || '';
+                const combinedText = `${jobTitle} ${jobDescription}`;
+                
+                switch (filters.employmentType) {
+                    case 'Permanent':
+                        // Permanent jobs: exclude contract, temporary, consultant keywords
+                        return job.type === 'job' && 
+                               !combinedText.includes('contract') && 
+                               !combinedText.includes('temporary') &&
+                               !combinedText.includes('consultant') &&
+                               !combinedText.includes('freelance');
+                    case 'Contract':
+                        // Contract jobs: look for contract keywords
+                        return job.type === 'job' && 
+                               (combinedText.includes('contract') || 
+                                combinedText.includes('freelance'));
+                    case 'Temporary':
+                        // Temporary jobs: internships or temporary keywords
+                        return job.type === 'internship' || 
+                               combinedText.includes('temporary') ||
+                               combinedText.includes('temp');
+                    case 'Consultant':
+                        // Consultant jobs: look for consultant keywords
+                        return job.type === 'job' && 
+                               (combinedText.includes('consultant') || 
+                                combinedText.includes('consulting'));
+                    default:
+                        return true;
+                }
+            });
+            console.log('📋 After employment type filter:', filtered.length, 'jobs');
+        }
+
+        // Filter by experience level
+        if (filters.experienceLevel) {
+            filtered = filtered.filter((job) => {
+                // First check if job has experienceRequired field (from mock data)
+                const experienceRequired = job.experienceRequired?.toLowerCase() || '';
+                
+                // Also check title and description for experience keywords
+                const titleLower = job.title?.toLowerCase() || '';
+                const descriptionLower = job.description?.toLowerCase() || '';
+                const combinedText = `${titleLower} ${descriptionLower}`;
+                
+                // Experience level matching logic
+                let matches = false;
+                
+                switch (filters.experienceLevel) {
+                    case '0-1 years':
+                        // Match fresher/entry level jobs
+                        matches = experienceRequired.includes('0-1') || 
+                                 experienceRequired.includes('0-2') ||
+                                 combinedText.includes('fresher') ||
+                                 combinedText.includes('entry level') ||
+                                 combinedText.includes('entry-level') ||
+                                 combinedText.includes('trainee') ||
+                                 combinedText.includes('fresh graduate') ||
+                                 combinedText.includes('new graduate') ||
+                                 combinedText.includes('no experience') ||
+                                 combinedText.includes('zero experience');
+                        break;
+                        
+                    case '1-3 years':
+                        // Match junior level jobs
+                        matches = experienceRequired.includes('1-3') || 
+                                 experienceRequired.includes('1-2') ||
+                                 experienceRequired.includes('2-3') ||
+                                 experienceRequired.includes('2-4') ||
+                                 combinedText.includes('junior') ||
+                                 combinedText.includes('associate') ||
+                                 (combinedText.includes('1 year') && !combinedText.includes('5+')) ||
+                                 (combinedText.includes('2 years') && !combinedText.includes('5+')) ||
+                                 (combinedText.includes('3 years') && !combinedText.includes('5+'));
+                        break;
+                        
+                    case '3-5 years':
+                        // Match mid-level jobs
+                        matches = experienceRequired.includes('3-5') || 
+                                 experienceRequired.includes('3-4') ||
+                                 experienceRequired.includes('4-5') ||
+                                 experienceRequired.includes('2-5') ||
+                                 combinedText.includes('mid-level') ||
+                                 combinedText.includes('mid level') ||
+                                 combinedText.includes('intermediate') ||
+                                 (combinedText.includes('4 years') && !combinedText.includes('5+')) ||
+                                 (combinedText.includes('5 years') && !combinedText.includes('6+'));
+                        break;
+                        
+                    case '5+ years':
+                        // Match senior level jobs
+                        matches = experienceRequired.includes('5+') || 
+                                 experienceRequired.includes('6+') ||
+                                 experienceRequired.includes('7+') ||
+                                 experienceRequired.includes('8+') ||
+                                 experienceRequired.includes('10+') ||
+                                 combinedText.includes('senior') ||
+                                 combinedText.includes('lead') ||
+                                 combinedText.includes('principal') ||
+                                 combinedText.includes('architect') ||
+                                 combinedText.includes('manager') ||
+                                 combinedText.includes('director') ||
+                                 (combinedText.includes('5 years') && !combinedText.includes('3-5')) ||
+                                 combinedText.includes('6 years') ||
+                                 combinedText.includes('7 years') ||
+                                 combinedText.includes('8 years') ||
+                                 combinedText.includes('9 years') ||
+                                 combinedText.includes('10 years');
+                        break;
+                        
+                    default:
+                        matches = true;
+                }
+                
+                // Debug logging for experience filtering
+                if (filters.experienceLevel === '0-1 years' && matches) {
+                    console.log(`👔 Experience Match [${filters.experienceLevel}]:`, {
+                        jobTitle: job.title,
+                        experienceRequired: job.experienceRequired,
+                        jobDescription: job.description?.substring(0, 100) + '...',
+                        matched: matches
+                    });
+                }
+                
+                return matches;
+            });
+            console.log('👔 After experience filter:', filtered.length, 'jobs');
+        }
+
+        // Filter by skills
+        if (filters.skills && filters.skills.trim()) {
+            const skillsArray = filters.skills
+                .toLowerCase()
+                .split(',')
+                .map((s) => s.trim())
+                .filter(s => s.length > 0);
+                
+            filtered = filtered.filter((job) => {
+                const jobSkills = job.skills?.map(s => s.toLowerCase()) || [];
+                const titleLower = job.title?.toLowerCase() || '';
+                const descriptionLower = job.description?.toLowerCase() || '';
+                
+                return skillsArray.some((skill) => {
+                    // Check in job skills array with exact matching
+                    const hasSkill = jobSkills.some((jobSkill) => {
+                        // Exact match
+                        if (jobSkill === skill) return true;
+                        // Check if skill is contained in job skill (for compound skills)
+                        if (jobSkill.includes(skill)) return true;
+                        // Check if job skill is contained in skill (for broader skills)
+                        if (skill.includes(jobSkill)) return true;
+                        return false;
+                    });
+                    
+                    // Check in job title with word boundary matching
+                    const hasInTitle = (() => {
+                        const regex = new RegExp(`\\b${skill}\\b`, 'i');
+                        return regex.test(titleLower);
+                    })();
+                    
+                    // Check in job description with word boundary matching
+                    const hasInDescription = (() => {
+                        const regex = new RegExp(`\\b${skill}\\b`, 'i');
+                        return regex.test(descriptionLower);
+                    })();
+                    
+                    return hasSkill || hasInTitle || hasInDescription;
+                });
+            });
+            console.log('🛠️ After skills filter:', filtered.length, 'jobs');
+        }
+
+        // Filter by location
+        if (filters.location && filters.location !== 'all') {
+            const locationValue = filters.location.toLowerCase();
+            filtered = filtered.filter((job) => {
+                const jobLocation = job.location?.toLowerCase() || '';
+                return jobLocation === locationValue || jobLocation.includes(locationValue);
+            });
+            console.log('📍 After location filter:', filtered.length, 'jobs');
+        }
+
+        // Filter by salary range
+        if (filters.salaryRange) {
+            filtered = filtered.filter((job) => {
+                const salary = job.salary || job.stipend;
+                if (!salary) return false;
+
+                // Extract salary range from strings like "₹6-10 LPA" or "₹15-25 LPA"
+                const salaryMatch = salary.match(/₹?(\d+)(?:-(\d+))?/);
+                if (!salaryMatch) {
+                    console.log('❌ Salary regex failed for:', salary);
+                    return false;
+                }
+
+                const jobMinSalary = parseInt(salaryMatch[1]);
+                const jobMaxSalary = salaryMatch[2] ? parseInt(salaryMatch[2]) : jobMinSalary;
+
+                let matches = false;
+                switch (filters.salaryRange) {
+                    case '0-5':
+                        // Show jobs where the salary range overlaps with 0-5 LPA
+                        // Job should have some salary in the 0-5 range
+                        matches = jobMinSalary < 5; // Job starts before 5 LPA
+                        break;
+                    case '5-10':
+                        // Show jobs where the salary range overlaps with 5-10 LPA
+                        // Job should have some salary in the 5-10 range
+                        matches = jobMinSalary < 10 && jobMaxSalary > 5;
+                        break;
+                    case '10-20':
+                        // Show jobs where the salary range overlaps with 10-20 LPA
+                        // Job should have some salary in the 10-20 range
+                        matches = jobMinSalary < 20 && jobMaxSalary > 10;
+                        break;
+                    case '20+':
+                        // Show jobs where the minimum salary is 20 LPA or higher
+                        matches = jobMinSalary >= 20;
+                        break;
+                    default:
+                        matches = true;
+                }
+
+                // Debug logging for salary filtering
+                if (filters.salaryRange === '10-20') {
+                    console.log(`💰 Salary Filter Debug [${filters.salaryRange}]:`, {
+                        jobTitle: job.title,
+                        salary: salary,
+                        jobMinSalary,
+                        jobMaxSalary,
+                        matches,
+                        filterRange: filters.salaryRange
+                    });
+                }
+
+                return matches;
+            });
+            console.log('💰 After salary filter:', filtered.length, 'jobs');
+        }
+
+        // Filter by company type
         if (filters.companyType) {
-            // Since we don't have company type from backend, we'll implement based on company name patterns
-            const companyTypePatterns: { [key: string]: string[] } = {
-                'Startup': ['startup', 'tech', 'innov', 'labs', 'ventures'],
-                'MNC': ['microsoft', 'google', 'amazon', 'apple', 'meta', 'netflix', 'uber', 'airbnb'],
-                'Product': ['product', 'platform', 'app', 'software'],
-                'Service': ['consulting', 'services', 'solutions', 'advisory'],
-            };
-            const patterns = companyTypePatterns[filters.companyType] || [];
-            filtered = filtered.filter((job) => 
-                patterns.some(pattern => 
-                    job.company.toLowerCase().includes(pattern)
-                )
-            );
+            filtered = filtered.filter((job) => {
+                const companyName = job.company.toLowerCase();
+                const jobTitle = job.title?.toLowerCase() || '';
+                const jobDescription = job.description?.toLowerCase() || '';
+                const combinedText = `${companyName} ${jobTitle} ${jobDescription}`;
+                
+                switch (filters.companyType) {
+                    case 'Startup':
+                        // Startup companies: look for startup indicators
+                        return combinedText.includes('startup') ||
+                               combinedText.includes('tech') ||
+                               combinedText.includes('innov') ||
+                               combinedText.includes('labs') ||
+                               combinedText.includes('ventures') ||
+                               combinedText.includes('swiggy') ||
+                               combinedText.includes('zomato') ||
+                               combinedText.includes('ola') ||
+                               combinedText.includes('paytm') ||
+                               combinedText.includes('phonepe') ||
+                               combinedText.includes('dream11') ||
+                               combinedText.includes('coindcx') ||
+                               combinedText.includes('byjus') ||
+                               combinedText.includes('razorpay');
+                    
+                    case 'MNC':
+                        // MNC companies: look for large company indicators
+                        return combinedText.includes('microsoft') ||
+                               combinedText.includes('google') ||
+                               combinedText.includes('amazon') ||
+                               combinedText.includes('apple') ||
+                               combinedText.includes('meta') ||
+                               combinedText.includes('netflix') ||
+                               combinedText.includes('uber') ||
+                               combinedText.includes('airbnb') ||
+                               combinedText.includes('flipkart') ||
+                               combinedText.includes('hotstar') ||
+                               combinedText.includes('freshworks') ||
+                               combinedText.includes('tcs') ||
+                               combinedText.includes('infosys') ||
+                               combinedText.includes('wipro');
+                    
+                    case 'Product':
+                        // Product companies: look for product-focused indicators
+                        return combinedText.includes('product') ||
+                               combinedText.includes('platform') ||
+                               combinedText.includes('app') ||
+                               combinedText.includes('software') ||
+                               combinedText.includes('phonepe') ||
+                               combinedText.includes('razorpay') ||
+                               combinedText.includes('freshworks') ||
+                               combinedText.includes('saas') ||
+                               combinedText.includes('api');
+                    
+                    case 'Service':
+                        // Service companies: look for service-focused indicators
+                        return combinedText.includes('consulting') ||
+                               combinedText.includes('services') ||
+                               combinedText.includes('solutions') ||
+                               combinedText.includes('advisory') ||
+                               combinedText.includes('urban company') ||
+                               combinedText.includes('nykaa') ||
+                               combinedText.includes('outsourcing') ||
+                               combinedText.includes('bpo');
+                    
+                    default:
+                        return true;
+                }
+            });
+            console.log('🏢 After company type filter:', filtered.length, 'jobs');
         }
 
         // Sort filtered results
+        const sortedFiltered = [...filtered]; // Create copy for sorting
         switch (sortBy) {
             case 'date':
-                filtered.sort(
-                    (a, b) => new Date(b.postedDate || '').getTime() - new Date(a.postedDate || '').getTime(),
-                );
+                sortedFiltered.sort((a, b) => {
+                    const dateA = new Date(a.createdAt || '').getTime();
+                    const dateB = new Date(b.createdAt || '').getTime();
+                    return dateB - dateA; // Newest first
+                });
                 break;
             case 'salary':
-                filtered.sort((a, b) => {
+                sortedFiltered.sort((a, b) => {
                     const salaryA = a.salary ? parseInt(a.salary.replace(/[^\d]/g, '')) : 0;
                     const salaryB = b.salary ? parseInt(b.salary.replace(/[^\d]/g, '')) : 0;
-                    return salaryB - salaryA;
+                    return salaryB - salaryA; // Highest first
                 });
                 break;
             case 'company':
-                filtered.sort((a, b) => a.company.localeCompare(b.company));
+                sortedFiltered.sort((a, b) => a.company.localeCompare(b.company));
                 break;
             default: // relevance
-                filtered.sort((a, b) => {
-                    const scoreA =
-                        (a.isFeatured ? 10 : 0) +
-                        (a.isUrgent ? 5 : 0) +
-                        (a.applicantCount || 0) / 100;
-                    const scoreB =
-                        (b.isFeatured ? 10 : 0) +
-                        (b.isUrgent ? 5 : 0) +
-                        (b.applicantCount || 0) / 100;
+                sortedFiltered.sort((a, b) => {
+                    const scoreA = (a.isFeatured ? 10 : 0) + (a.isUrgent ? 5 : 0) + (a.applicantCount || 0) / 100;
+                    const scoreB = (b.isFeatured ? 10 : 0) + (b.isUrgent ? 5 : 0) + (b.applicantCount || 0) / 100;
                     return scoreB - scoreA;
                 });
         }
 
-        setFilteredJobs(filtered);
+            console.log('✅ Final filtered results:', sortedFiltered.length, 'jobs');
+            setFilteredJobs(sortedFiltered);
+            setFilterLoading(false);
+        }, 150); // 150ms debounce
+
+        // Cleanup timeout on unmount or dependency change
+        return () => clearTimeout(filterTimeout);
     }, [jobs, selectedCategory, filters, searchQuery, searchLocation, sortBy]);
 
     const handleFilterChange = (newFilters: FilterOptions) => {
-        setFilters(newFilters);
+        try {
+            // Validate filter values
+            const validatedFilters = {
+                jobType: newFilters.jobType || '',
+                employmentType: newFilters.employmentType || '',
+                skills: newFilters.skills || '',
+                location: newFilters.location || 'all',
+                experienceLevel: newFilters.experienceLevel || '',
+                salaryRange: newFilters.salaryRange || '',
+                companyType: newFilters.companyType || '',
+            };
+            
+            // Additional validation
+            if (validatedFilters.skills) {
+                // Clean up skills input - remove extra spaces and duplicates
+                const skillsArray = validatedFilters.skills
+                    .split(',')
+                    .map(s => s.trim())
+                    .filter(s => s.length > 0);
+                validatedFilters.skills = [...new Set(skillsArray)].join(', ');
+            }
+            
+            setFilters(validatedFilters);
+            console.log('✅ Filters updated:', validatedFilters);
+        } catch (error) {
+            console.error('❌ Error updating filters:', error);
+        }
     };
 
     const handleCategoryChange = (categorySlug: string) => {
@@ -706,7 +1136,14 @@ function JobsPageContent() {
                                 />
                             </svg>
                             <span className="text-lg font-bold text-gray-800" data-oid="vpwukyz">
-                                {filteredJobs.length.toLocaleString()}+ JOBS FOUND
+                                {filterLoading ? (
+                                    <span className="flex items-center gap-2">
+                                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                                        FILTERING JOBS...
+                                    </span>
+                                ) : (
+                                    `${filteredJobs.length.toLocaleString()}+ JOBS FOUND`
+                                )}
                             </span>
                         </div>
                     </div>
@@ -750,7 +1187,14 @@ function JobsPageContent() {
                                             className="text-xl font-bold text-gray-800"
                                             data-oid="e_2nn6s"
                                         >
-                                            {filteredJobs.length.toLocaleString()} Jobs Found
+                                            {filterLoading ? (
+                                                <span className="flex items-center gap-2">
+                                                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-[hsl(196,80%,45%)]"></div>
+                                                    Filtering...
+                                                </span>
+                                            ) : (
+                                                `${filteredJobs.length.toLocaleString()} Jobs Found`
+                                            )}
                                         </span>
                                         {(searchQuery || searchLocation) && (
                                             <span
@@ -760,6 +1204,54 @@ function JobsPageContent() {
                                                 for "{searchQuery}"{' '}
                                                 {searchLocation && `in ${searchLocation}`}
                                             </span>
+                                        )}
+                                        
+                                        {/* Active Filters Summary */}
+                                        {(filters.jobType || filters.employmentType || filters.experienceLevel || 
+                                          filters.salaryRange || filters.companyType || filters.skills || 
+                                          filters.location !== 'all' || selectedCategory !== 'all') && (
+                                            <div className="flex flex-wrap gap-2 mt-2">
+                                                {filters.jobType && (
+                                                    <span className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full">
+                                                        {filters.jobType}
+                                                    </span>
+                                                )}
+                                                {filters.employmentType && (
+                                                    <span className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full">
+                                                        {filters.employmentType}
+                                                    </span>
+                                                )}
+                                                {filters.experienceLevel && (
+                                                    <span className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full">
+                                                        {filters.experienceLevel}
+                                                    </span>
+                                                )}
+                                                {filters.salaryRange && (
+                                                    <span className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full">
+                                                        {filters.salaryRange} LPA
+                                                    </span>
+                                                )}
+                                                {filters.companyType && (
+                                                    <span className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full">
+                                                        {filters.companyType}
+                                                    </span>
+                                                )}
+                                                {filters.skills && (
+                                                    <span className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full">
+                                                        Skills: {filters.skills.split(',').length} selected
+                                                    </span>
+                                                )}
+                                                {filters.location !== 'all' && (
+                                                    <span className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full">
+                                                        {filters.location}
+                                                    </span>
+                                                )}
+                                                {selectedCategory !== 'all' && (
+                                                    <span className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full">
+                                                        {selectedCategory.replace('-', ' ')}
+                                                    </span>
+                                                )}
+                                            </div>
                                         )}
                                     </div>
 

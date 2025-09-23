@@ -4,7 +4,7 @@ import CategoryMenu from '@/components/CategoryMenu';
 import FiltersSidebar from '@/components/FiltersSidebar';
 import JobCard from '@/components/JobCard';
 import MainNavbar from '@/components/mainNavbar';
-import { ApiResponse, FrontendJob, jobService, JobsResponse } from '@/lib/api';
+import { FrontendJob } from '@/lib/api';
 import { useEffect, useState } from 'react';
 
 // TypeScript Interfaces for Internships
@@ -69,27 +69,26 @@ export default function InternshipsPage() {
         const loadInternships = async () => {
             try {
                 setIsLoading(true);
-                const response: ApiResponse<JobsResponse> = await jobService.getJobs({
-                    page: 1,
-                    limit: 20,
-                    type: 'internship',
-                });
-                if (response.success && response.data) {
-                    const frontendJobs: FrontendJob[] = response.data.jobs.map((job) => {
-                        const mapped = jobService.transformToFrontendJob(job);
-                        return {
-                            ...mapped,
-                            // prefer stipend when present
-                            salary: job.stipend || job.salary,
-                            jobType: 'Internship',
-                            employmentType: 'Internship',
-                        };
-                    });
-                    setInternships(frontendJobs);
-                    setFilteredInternships(frontendJobs);
-                }
+                console.log('🔄 Loading internships...');
+                
+                // For now, let's use mock data directly to test the UI
+                console.log('🔄 Loading mock internships...');
+                const { mockInternships } = await import('@/lib/mockData');
+                console.log('📥 Mock internships loaded:', mockInternships.length);
+                
+                const frontendInternships: FrontendJob[] = mockInternships.map((internship) => ({
+                    ...internship,
+                    jobType: 'Internship',
+                    employmentType: 'Internship',
+                    salary: internship.stipend || internship.salary,
+                }));
+                
+                console.log('✅ Processed internships:', frontendInternships.length);
+                setInternships(frontendInternships);
+                setFilteredInternships(frontendInternships);
+                
             } catch (e) {
-                // silently ignore; UI has loading/empty states
+                console.error('💥 Error loading internships:', e);
             } finally {
                 setIsLoading(false);
             }

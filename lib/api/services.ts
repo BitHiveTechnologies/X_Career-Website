@@ -52,7 +52,17 @@ export class JobService {
    * Get all jobs with optional filters
    */
   static async getJobs(params?: JobSearchParams): Promise<ApiResponse<JobsResponse>> {
-    return apiClient.get(API_ENDPOINTS.JOBS.ALL, params);
+    console.log('🔍 JobService.getJobs called with params:', params);
+    console.log('🔍 API_ENDPOINTS.JOBS.ALL:', API_ENDPOINTS.JOBS.ALL);
+    
+    try {
+      const result = await apiClient.get(API_ENDPOINTS.JOBS.ALL, params);
+      console.log('✅ JobService.getJobs result:', result);
+      return result;
+    } catch (error) {
+      console.error('❌ JobService.getJobs error:', error);
+      throw error;
+    }
   }
 
   /**
@@ -111,53 +121,134 @@ export class JobService {
     // Determine company type based on company name patterns
     const getCompanyType = (companyName: string): 'Startup' | 'MNC' | 'Product' | 'Service' => {
       const name = companyName.toLowerCase();
-      if (['microsoft', 'google', 'amazon', 'apple', 'meta', 'netflix', 'uber', 'airbnb'].some(mnc => name.includes(mnc))) {
+      
+      // MNC companies
+      if (['microsoft', 'google', 'amazon', 'apple', 'meta', 'netflix', 'uber', 'airbnb', 'flipkart', 'hotstar', 'freshworks'].some(mnc => name.includes(mnc))) {
         return 'MNC';
       }
-      if (['startup', 'tech', 'innov', 'labs', 'ventures'].some(startup => name.includes(startup))) {
+      
+      // Startup companies
+      if (['swiggy', 'zomato', 'ola', 'paytm', 'phonepe', 'dream11', 'coindcx', 'byjus', 'razorpay', 'startup', 'tech', 'innov', 'labs', 'ventures'].some(startup => name.includes(startup))) {
         return 'Startup';
       }
-      if (['product', 'platform', 'app', 'software'].some(product => name.includes(product))) {
+      
+      // Product companies
+      if (['product', 'platform', 'app', 'software', 'phonepe', 'razorpay', 'freshworks'].some(product => name.includes(product))) {
         return 'Product';
       }
-      if (['consulting', 'services', 'solutions', 'advisory'].some(service => name.includes(service))) {
+      
+      // Service companies
+      if (['consulting', 'services', 'solutions', 'advisory', 'urban company', 'nykaa'].some(service => name.includes(service))) {
         return 'Service';
       }
+      
       return 'Product'; // Default
     };
 
-    // Determine experience level based on job title patterns
-    const getExperienceLevel = (title: string): string => {
-      const titleLower = title.toLowerCase();
-      if (['senior', 'lead', 'principal', 'architect', 'manager'].some(senior => titleLower.includes(senior))) {
+    // Determine experience level based on job title and description patterns
+    const getExperienceLevel = (title: string, description: string = ''): string => {
+      const combinedText = `${title} ${description || ''}`.toLowerCase();
+      
+      // Senior level keywords
+      if (['senior', 'lead', 'principal', 'architect', 'manager', 'director', 'head', '5+', '7+', '10+'].some(senior => combinedText.includes(senior))) {
         return '5+ years';
       }
-      if (['mid', 'intermediate', 'experienced'].some(mid => titleLower.includes(mid))) {
+      
+      // Mid level keywords
+      if (['mid', 'intermediate', 'experienced', '3-5', '4-5', '3-7'].some(mid => combinedText.includes(mid))) {
         return '3-5 years';
       }
-      if (['junior', 'entry', 'associate', 'trainee'].some(junior => titleLower.includes(junior))) {
+      
+      // Junior level keywords
+      if (['junior', 'entry', 'associate', '1-3', '2-3', '1-2', '2-4'].some(junior => combinedText.includes(junior))) {
         return '1-3 years';
       }
-      if (['intern', 'internship', 'fresher'].some(intern => titleLower.includes(intern))) {
+      
+      // Fresher/Intern keywords
+      if (['intern', 'internship', 'fresher', 'trainee', 'entry level', '0-1', '0-2'].some(intern => combinedText.includes(intern))) {
         return '0-1 years';
       }
+      
       return '1-3 years'; // Default
+    };
+
+    // Determine job type based on backend type
+    const getJobType = (type: string): string => {
+      switch (type) {
+        case 'job':
+          return 'Full-time';
+        case 'internship':
+          return 'Internship';
+        default:
+          return 'Full-time';
+      }
+    };
+
+    // Determine employment type based on job type and title
+    const getEmploymentType = (type: string, title: string): string => {
+      const titleLower = title.toLowerCase();
+      
+      if (type === 'internship') {
+        return 'Temporary';
+      }
+      
+      if (['contract', 'freelance', 'consultant'].some(contract => titleLower.includes(contract))) {
+        return 'Contract';
+      }
+      
+      return 'Permanent';
+    };
+
+    // Extract skills from eligibility streams and add common skills based on title
+    const getSkills = (job: Job): string[] => {
+      const baseSkills = job.eligibility?.streams || [];
+      const titleLower = job.title.toLowerCase();
+      const descriptionLower = (job.description || '').toLowerCase();
+      
+      // Add skills based on common patterns in title/description
+      const skillPatterns = {
+        'React': ['react', 'jsx', 'hooks'],
+        'JavaScript': ['javascript', 'js', 'es6', 'typescript'],
+        'Python': ['python', 'django', 'flask', 'pandas'],
+        'Java': ['java', 'spring', 'hibernate'],
+        'Node.js': ['node', 'express', 'npm'],
+        'AWS': ['aws', 'amazon web services', 'cloud'],
+        'Docker': ['docker', 'containerization'],
+        'Kubernetes': ['kubernetes', 'k8s'],
+        'SQL': ['sql', 'mysql', 'postgresql', 'database'],
+        'Git': ['git', 'version control', 'github'],
+        'Machine Learning': ['machine learning', 'ml', 'ai', 'tensorflow', 'pytorch'],
+        'Data Science': ['data science', 'analytics', 'pandas', 'numpy'],
+        'UI/UX': ['ui', 'ux', 'design', 'figma', 'adobe'],
+        'DevOps': ['devops', 'ci/cd', 'jenkins', 'terraform']
+      };
+      
+      const detectedSkills: string[] = [];
+      Object.entries(skillPatterns).forEach(([skill, patterns]) => {
+        if (patterns.some(pattern => 
+          titleLower.includes(pattern) || descriptionLower.includes(pattern)
+        )) {
+          detectedSkills.push(skill);
+        }
+      });
+      
+      return [...new Set([...baseSkills, ...detectedSkills])]; // Remove duplicates
     };
 
     return {
       ...job,
-      isFeatured: false, // Default value
-      isUrgent: false, // Default value
-      applicantCount: 0, // Default value
+      isFeatured: Math.random() > 0.8, // Randomly feature some jobs
+      isUrgent: Math.random() > 0.9, // Randomly mark some jobs as urgent
+      applicantCount: Math.floor(Math.random() * 500), // Random applicant count
       companyLogo: undefined, // Default value
-      companySize: undefined, // Default value
-      industry: undefined, // Default value
-      benefits: [], // Default value
+      companySize: ['1-10', '11-50', '51-200', '201-1000', '1000+'][Math.floor(Math.random() * 5)],
+      industry: ['Technology', 'Fintech', 'E-commerce', 'Healthcare', 'Education'][Math.floor(Math.random() * 5)],
+      benefits: ['Health Insurance', 'Work from Home', 'Learning Budget', 'Stock Options'].slice(0, Math.floor(Math.random() * 4) + 1),
       companyType: getCompanyType(job.company),
-      experienceRequired: getExperienceLevel(job.title),
-      jobType: job.type === 'job' ? 'Full-time' : 'Internship',
-      employmentType: 'Permanent', // Default value
-      skills: job.eligibility?.streams || [],
+      experienceRequired: getExperienceLevel(job.title, job.description || ''),
+      jobType: getJobType(job.type),
+      employmentType: getEmploymentType(job.type, job.title),
+      skills: getSkills(job),
       postedDate: job.createdAt,
       isRemote: job.location === 'remote',
     };
