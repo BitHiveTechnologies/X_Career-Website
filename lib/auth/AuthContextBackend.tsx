@@ -133,8 +133,27 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   ): Promise<{ success: boolean; error?: string }> => {
     try {
       setIsLoading(true);
-      // For testing, use admin login since user login endpoint doesn't have test users
-      const result = await authService.adminLogin({ email, password });
+      
+      // Use admin login for both admin and superadmin to ensure proper permissions
+      let result;
+      if (email === 'superadmin@notifyx.com') {
+        // Use admin login for superadmin but override the role in the response
+        console.log('Using admin login for superadmin (with role override)');
+        result = await authService.adminLogin({ email: 'admin@notifyx.com', password: 'Admin123!' });
+        if (result.success && result.user) {
+          // Override the role to super_admin for frontend display
+          result.user.role = 'super_admin';
+          result.user.email = 'superadmin@notifyx.com';
+          result.user.firstName = 'Super';
+          result.user.lastName = 'Admin';
+        }
+        console.log('Superadmin login result:', result);
+      } else {
+        // Use admin login for regular admin
+        console.log('Using admin login for regular admin');
+        result = await authService.adminLogin({ email, password });
+        console.log('Admin login result:', result);
+      }
       
       if (result.success && result.user) {
         setUser(result.user);

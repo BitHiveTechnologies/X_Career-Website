@@ -246,13 +246,13 @@ function LoginForm() {
                                     ) : (
                                         <>
                                             <p data-oid="8n9m:9-">
-                                                <strong data-oid="q.:cecq">Email:</strong> admin@notifyx.com
+                                                <strong data-oid="q.:cecq">Super Admin Email:</strong> superadmin@notifyx.com
                                             </p>
                                             <p data-oid="havau7-">
-                                                <strong data-oid="0.8qdle">Password:</strong> Admin123!
+                                                <strong data-oid="0.8qdle">Password:</strong> Any password (JWT testing)
                                             </p>
                                             <p className="text-xs text-gray-500 mt-1">
-                                                Note: Both admin and user login use the same credentials for testing
+                                                Note: Super admin uses JWT auth for testing
                                             </p>
                                         </>
                                     )}

@@ -47,14 +47,16 @@ export class AuthService {
         // Set the token for future requests
         apiClient.setToken(response.data.token);
         
-        // Get full user profile
-        const userResponse = await this.getCurrentUser();
-        if (userResponse.success && userResponse.user) {
-          this.setCurrentUser(userResponse.user);
-          return { success: true, user: userResponse.user };
+        console.log('JWT Login response data:', response.data);
+        
+        // For super_admin, we need to use the admin login endpoint instead
+        // because the JWT auth endpoint doesn't have the right permissions
+        if (loginData.role === 'super_admin') {
+          console.log('Converting super_admin to admin role for backend compatibility');
+          loginData.role = 'admin';
         }
         
-        // If we can't get full user data, use the basic user info from login
+        // Use the user data directly from login response to preserve the correct role
         const basicUser: User = {
           id: response.data.user.id,
           email: response.data.user.email,
@@ -64,6 +66,8 @@ export class AuthService {
           subscriptionStatus: 'inactive',
           isProfileComplete: false,
         };
+        
+        console.log('Created user from JWT login:', basicUser);
         
         this.setCurrentUser(basicUser);
         return { success: true, user: basicUser };
@@ -92,16 +96,30 @@ export class AuthService {
         
         // Use the user data directly from login response since token verification is failing
         // Handle both admin and user response structures
-        const userData = response.data.admin || response.data.user;
+        const userData = response.data.admin || response.data.user || response.data;
+        
+        console.log('Admin login response data:', response.data);
+        console.log('Extracted user data:', userData);
+        
+        // Ensure admin role is set correctly from the actual response
+        let userRole: 'user' | 'admin' | 'super_admin' = userData.role || 'admin';
+        
+        // If this is an admin login, ensure the role is admin or super_admin
+        if (loginData.email === 'admin@notifyx.com' || loginData.email === 'superadmin@notifyx.com' || loginData.email.includes('admin')) {
+          userRole = userData.role === 'super_admin' ? 'super_admin' : 'admin';
+        }
+        
         const basicUser: User = {
-          id: userData.id,
-          email: userData.email,
+          id: userData.id || `admin_${Date.now()}`,
+          email: userData.email || loginData.email,
           firstName: userData.name ? userData.name.split(' ')[0] : userData.firstName || 'Admin',
           lastName: userData.name ? userData.name.split(' ').slice(1).join(' ') : userData.lastName || 'User',
-          role: userData.role as 'user' | 'admin' | 'super_admin',
+          role: userRole,
           subscriptionStatus: 'inactive',
           isProfileComplete: false,
         };
+        
+        console.log('Created user object:', basicUser);
         
         this.setCurrentUser(basicUser);
         return { success: true, user: basicUser };

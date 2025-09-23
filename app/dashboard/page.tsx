@@ -8,9 +8,11 @@ import { SharedLayout } from "@/components/shared-layout"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { useAuth } from "@/lib/auth/AuthContextBackend"
+import { adminService, jobService } from "@/lib/api/services"
 import { Briefcase, CreditCard, GraduationCap, Plus, Users } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
+import { toast } from "sonner"
 
 import customersData from "./customers-data.json"
 import data from "./data.json"
@@ -19,18 +21,33 @@ import jobsData from "./jobs-data.json"
 import paymentsData from "./payments-data.json"
 
 export default function Page() {
-  const { user, isLoading } = useAuth()
+  const { user, isLoading: authLoading } = useAuth()
   const router = useRouter()
+  
+  // All hooks must be called at the top level
+  const [isQuickCreateOpen, setIsQuickCreateOpen] = useState(false)
+  const [activeTab, setActiveTab] = useState("customers")
+  const [isLoading, setIsLoading] = useState(false)
+  const [dashboardStats, setDashboardStats] = useState<any>(null)
+  const [jobs, setJobs] = useState<any[]>([])
+  const [internships, setInternships] = useState<any[]>([])
 
   // Check if user is admin
   useEffect(() => {
-    if (!isLoading && (!user || user.role !== 'admin')) {
+    if (!authLoading && (!user || (user.role !== 'admin' && user.role !== 'super_admin'))) {
       router.push('/login')
     }
-  }, [user, isLoading, router])
+  }, [user, authLoading, router])
+
+  // Fetch dashboard data
+  useEffect(() => {
+    if (user && (user.role === 'admin' || user.role === 'super_admin')) {
+      fetchDashboardData()
+    }
+  }, [user])
 
   // Show loading while checking auth
-  if (isLoading) {
+  if (authLoading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-center">
@@ -42,12 +59,19 @@ export default function Page() {
   }
 
   // Show access denied if not admin
-  if (!user || user.role !== 'admin') {
+  if (!user || (user.role !== 'admin' && user.role !== 'super_admin')) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-red-600 mb-4">Access Denied</h1>
           <p className="text-gray-600 mb-4">You need admin privileges to access this page.</p>
+          {user && (
+            <div className="mb-4 p-4 bg-gray-100 rounded-lg">
+              <p className="text-sm text-gray-700">
+                Current user: {user.email} (Role: {user.role})
+              </p>
+            </div>
+          )}
           <Button onClick={() => router.push('/login')}>
             Go to Login
           </Button>
@@ -55,26 +79,111 @@ export default function Page() {
       </div>
     )
   }
-  const [isQuickCreateOpen, setIsQuickCreateOpen] = useState(false)
-  const [activeTab, setActiveTab] = useState("customers")
 
-  const handleQuickCreate = (formData: any) => {
-    
-    // Here you would typically send the data to your backend
-    // For now, we'll just log it to the console
-    alert(`${formData.title ? 'Job' : 'Internship'} created successfully!`)
+  const fetchDashboardData = async () => {
+    try {
+      setIsLoading(true)
+      
+      // Fetch dashboard stats
+      const statsResponse = await adminService.getDashboardStats()
+      if (statsResponse.success && statsResponse.data) {
+        setDashboardStats(statsResponse.data.stats)
+      }
+
+      // Fetch jobs
+      const jobsResponse = await jobService.getJobs({ limit: 50 })
+      if (jobsResponse.success && jobsResponse.data) {
+        const jobData = jobsResponse.data.jobs || []
+        setJobs(jobData.filter((job: any) => job.type === 'job'))
+        setInternships(jobData.filter((job: any) => job.type === 'internship'))
+      }
+    } catch (error) {
+      console.error('Error fetching dashboard data:', error)
+      toast.error('Failed to fetch dashboard data')
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  const handleQuickCreate = async (formData: any) => {
+    try {
+      setIsLoading(true)
+      
+      // Prepare the job data according to backend API requirements
+      const jobData = {
+        title: formData.title,
+        company: formData.company,
+        description: formData.description,
+        type: formData.type || (activeTab === "job" ? "job" : "internship"),
+        eligibility: formData.eligibility || {
+          qualifications: [],
+          streams: [],
+          passoutYears: [],
+          minCGPA: 0
+        },
+        applicationDeadline: formData.applicationDeadline,
+        applicationLink: formData.applicationLink,
+        location: formData.location,
+        ...(formData.type === 'job' ? { salary: formData.salary || "" } : {}), // Only include salary for jobs
+        ...(formData.type === 'internship' && formData.stipend ? { stipend: formData.stipend } : {}), // Only include stipend for internships
+        isActive: formData.isActive !== undefined ? formData.isActive : true,
+        ...(formData.type === 'internship' && {
+          duration: formData.duration,
+          startDate: formData.startDate,
+          isPartTime: formData.isPartTime,
+          isPaid: formData.isPaid,
+          certificateProvided: formData.certificateProvided,
+          mentorshipIncluded: formData.mentorshipIncluded,
+        })
+      }
+
+      console.log('Creating job with data:', jobData)
+      console.log('Current user:', user)
+      
+      // Check if we have a valid token
+      const token = localStorage.getItem('careerx_token')
+      console.log('Current token:', token ? 'Present' : 'Missing')
+      
+      const response = await jobService.createJob(jobData)
+      
+      if (response.success) {
+        toast.success(`${formData.type === 'job' ? 'Job' : 'Internship'} created successfully!`)
+        
+        // Refresh the data
+        await fetchDashboardData()
+        
+        // Close the modal
+        setIsQuickCreateOpen(false)
+      } else {
+        console.error('Job creation failed:', response)
+        if (response.error?.message === 'Admin access required') {
+          toast.error('Admin access required. The backend job creation endpoint needs to be fixed. Please contact the backend team.')
+        } else {
+          throw new Error(response.error?.message || 'Failed to create job')
+        }
+      }
+    } catch (error: any) {
+      console.error('Error creating job:', error)
+      if (error.message === 'Admin access required') {
+        toast.error('Admin access required. The backend job creation endpoint needs to be fixed. Please contact the backend team.')
+      } else {
+        toast.error(error.message || 'Failed to create job/internship')
+      }
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   const getTableData = () => {
     switch (activeTab) {
       case "customers":
-        return customersData
+        return customersData // Keep mock data for customers for now
       case "jobs":
-        return jobsData
+        return jobs.length > 0 ? jobs : jobsData
       case "internships":
-        return internshipsData
+        return internships.length > 0 ? internships : internshipsData
       case "payments":
-        return paymentsData
+        return paymentsData // Keep mock data for payments for now
       default:
         return data
     }
@@ -147,10 +256,11 @@ export default function Page() {
             </div>
             <Button 
               onClick={() => setIsQuickCreateOpen(true)}
+              disabled={isLoading}
               className="bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)]"
             >
               <Plus className="h-4 w-4 mr-2" />
-              Quick Create
+              {isLoading ? 'Loading...' : 'Quick Create'}
             </Button>
           </div>
         </div>
@@ -205,6 +315,7 @@ export default function Page() {
         isOpen={isQuickCreateOpen}
         onClose={() => setIsQuickCreateOpen(false)}
         onSubmit={handleQuickCreate}
+        isLoading={isLoading}
       />
     </SharedLayout>
   )

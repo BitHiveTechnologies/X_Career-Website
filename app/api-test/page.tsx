@@ -1,98 +1,160 @@
-'use client';
+"use client"
 
-import { useEffect, useState } from 'react';
-import { apiClient, API_ENDPOINTS } from '@/lib/api';
+import { useState } from 'react'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { healthService, jobService, adminService } from '@/lib/api/services'
+import { toast } from 'sonner'
 
 export default function ApiTestPage() {
-  const [results, setResults] = useState<any[]>([]);
-  const [loading, setLoading] = useState(false);
-
-  const addResult = (test: string, status: 'success' | 'error', data?: any) => {
-    setResults(prev => [...prev, {
-      test,
-      status,
-      data: data ? JSON.stringify(data, null, 2) : null,
-      timestamp: new Date().toLocaleTimeString()
-    }]);
-  };
+  const [testResults, setTestResults] = useState<any>(null)
+  const [isLoading, setIsLoading] = useState(false)
 
   const runTests = async () => {
-    setLoading(true);
-    setResults([]);
+    setIsLoading(true)
+    const results: any = {}
 
     try {
-      // Test 1: Backend Health
-      addResult('Backend Health Check', 'success', 'Starting...');
-      const health = await apiClient.get(API_ENDPOINTS.HEALTH.CHECK);
-      addResult('Backend Health Check', health.success ? 'success' : 'error', health);
-
-      // Test 2: Jobs API
-      addResult('Jobs API', 'success', 'Starting...');
-      const jobs = await apiClient.get(API_ENDPOINTS.JOBS.ALL);
-      addResult('Jobs API', jobs.success ? 'success' : 'error', jobs);
-
-      // Test 3: JWT Login
-      addResult('JWT Login', 'success', 'Starting...');
-      const login = await apiClient.post(API_ENDPOINTS.AUTH.LOGIN, {
-        email: 'test@example.com',
-        role: 'user',
-        firstName: 'Test',
-        lastName: 'User'
-      });
-      addResult('JWT Login', login.success ? 'success' : 'error', login);
-
-      // Test 4: JWT Verify (if login successful)
-      if (login.success && login.data?.token) {
-        apiClient.setToken(login.data.token);
-        addResult('JWT Verify', 'success', 'Starting...');
-        const verify = await apiClient.get(API_ENDPOINTS.AUTH.ME);
-        addResult('JWT Verify', verify.success ? 'success' : 'error', verify);
+      // Test 1: Health Check
+      try {
+        const healthResponse = await healthService.checkHealth()
+        results.healthCheck = {
+          success: true,
+          data: healthResponse
+        }
+      } catch (error: any) {
+        results.healthCheck = {
+          success: false,
+          error: error.message
+        }
       }
 
+      // Test 2: Get Jobs
+      try {
+        const jobsResponse = await jobService.getJobs({ limit: 5 })
+        results.getJobs = {
+          success: true,
+          data: jobsResponse.data
+        }
+      } catch (error: any) {
+        results.getJobs = {
+          success: false,
+          error: error.message
+        }
+      }
+
+      // Test 3: Admin Dashboard (will fail without admin token)
+      try {
+        const dashboardResponse = await adminService.getDashboardStats()
+        results.adminDashboard = {
+          success: true,
+          data: dashboardResponse.data
+        }
+      } catch (error: any) {
+        results.adminDashboard = {
+          success: false,
+          error: error.message
+        }
+      }
+
+      setTestResults(results)
+      toast.success('API tests completed!')
     } catch (error: any) {
-      addResult('Test Error', 'error', error.message);
+      toast.error('API tests failed: ' + error.message)
     } finally {
-      setLoading(false);
+      setIsLoading(false)
     }
-  };
+  }
+
+  const createTestJob = async () => {
+    try {
+      setIsLoading(true)
+      
+      const testJobData = {
+        title: "Test Frontend Developer",
+        company: "Test Company",
+        description: "This is a test job created from the frontend integration test.",
+        type: "job" as const,
+        eligibility: {
+          qualifications: ["B.Tech"],
+          streams: ["CSE", "IT"],
+          passoutYears: [2023, 2024],
+          minCGPA: 7.0
+        },
+        applicationDeadline: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(), // 30 days from now
+        applicationLink: "https://testcompany.com/apply",
+        location: "remote" as const,
+        salary: "₹6-10 LPA",
+        isActive: true
+      }
+
+      const response = await jobService.createJob(testJobData)
+      
+      if (response.success) {
+        toast.success('Test job created successfully!')
+        console.log('Created job:', response.data)
+      } else {
+        throw new Error(response.error?.message || 'Failed to create job')
+      }
+    } catch (error: any) {
+      console.error('Error creating test job:', error)
+      toast.error('Failed to create test job: ' + error.message)
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold mb-6">API Integration Test</h1>
-        
-        <button
-          onClick={runTests}
-          disabled={loading}
-          className="mb-6 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50"
-        >
-          {loading ? 'Running Tests...' : 'Run All Tests'}
-        </button>
+    <div className="container mx-auto p-6 max-w-4xl">
+      <Card className="mb-6">
+        <CardHeader>
+          <CardTitle>API Integration Test</CardTitle>
+          <CardDescription>
+            Test the backend API integration for the dashboard and job creation functionality.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="flex gap-4">
+            <Button onClick={runTests} disabled={isLoading}>
+              {isLoading ? 'Running Tests...' : 'Run API Tests'}
+            </Button>
+            <Button onClick={createTestJob} disabled={isLoading} variant="outline">
+              Create Test Job
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
 
+      {testResults && (
         <div className="space-y-4">
-          {results.map((result, index) => (
-            <div key={index} className={`p-4 rounded-lg border ${
-              result.status === 'success' ? 'bg-green-50 border-green-200' : 'bg-red-50 border-red-200'
-            }`}>
-              <div className="flex items-center justify-between mb-2">
-                <h3 className="font-semibold">{result.test}</h3>
-                <span className={`px-2 py-1 rounded text-sm ${
-                  result.status === 'success' ? 'bg-green-200 text-green-800' : 'bg-red-200 text-red-800'
-                }`}>
-                  {result.status.toUpperCase()}
-                </span>
+          <Card>
+            <CardHeader>
+              <CardTitle>Test Results</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                {Object.entries(testResults).map(([testName, result]: [string, any]) => (
+                  <div key={testName} className="p-4 border rounded-lg">
+                    <h3 className="font-semibold capitalize mb-2">
+                      {testName.replace(/([A-Z])/g, ' $1')}
+                      <span className={`ml-2 text-sm ${result.success ? 'text-green-600' : 'text-red-600'}`}>
+                        {result.success ? '✅ Success' : '❌ Failed'}
+                      </span>
+                    </h3>
+                    {result.success ? (
+                      <pre className="text-xs bg-gray-100 p-2 rounded overflow-auto max-h-40">
+                        {JSON.stringify(result.data, null, 2)}
+                      </pre>
+                    ) : (
+                      <p className="text-red-600 text-sm">{result.error}</p>
+                    )}
+                  </div>
+                ))}
               </div>
-              <p className="text-sm text-gray-600 mb-2">Time: {result.timestamp}</p>
-              {result.data && (
-                <pre className="text-xs bg-gray-100 p-2 rounded overflow-auto max-h-40">
-                  {result.data}
-                </pre>
-              )}
-            </div>
-          ))}
+            </CardContent>
+          </Card>
         </div>
-      </div>
+      )}
     </div>
-  );
+  )
 }
-
