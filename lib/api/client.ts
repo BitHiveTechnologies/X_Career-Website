@@ -106,10 +106,33 @@ class ApiClient {
 
   // Get authorization header
   private getAuthHeader(): Record<string, string> {
-    const token = this.tokenManager.getToken();
-    if (token && !this.tokenManager.isTokenExpired(token)) {
+    // Always check localStorage directly to ensure we get the latest token
+    let token = null;
+    if (typeof window !== 'undefined') {
+      token = localStorage.getItem('careerx_token');
+    }
+    
+    // Fallback to token manager if localStorage is not available
+    if (!token) {
+      token = this.tokenManager.getToken();
+    }
+    
+    if (token) {
+      // Check if token is expired
+      if (this.tokenManager.isTokenExpired(token)) {
+        console.log('Token is expired, clearing it');
+        this.tokenManager.clearToken();
+        if (typeof window !== 'undefined') {
+          localStorage.removeItem('careerx_token');
+        }
+        return {};
+      }
+      
+      console.log('Using token for API request:', token.substring(0, 20) + '...');
       return { Authorization: `Bearer ${token}` };
     }
+    
+    console.log('No token found for API request');
     return {};
   }
 
@@ -199,6 +222,16 @@ class ApiClient {
           logApiResponse('📊 Response Headers:', Object.fromEntries(Array.from(response.headers.entries())));
           logApiResponse('📊 Response Data:', responseData);
           console.groupEnd();
+        }
+
+        // Always log login responses for debugging
+        if (fullUrl.includes('/login') || fullUrl.includes('/jwt-auth')) {
+          console.log('🔐 Login API Response Debug:', {
+            url: fullUrl,
+            status: response.status,
+            responseData: responseData,
+            hasToken: !!(responseData as any)?.data?.token
+          });
         }
 
         if (!response.ok) {

@@ -11,6 +11,47 @@ import { useAuth } from '@/lib/auth/AuthContextBackend';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Badge } from '@/components/ui/badge';
+import { Separator } from '@/components/ui/separator';
+import { 
+    User, 
+    Mail, 
+    Phone, 
+    Calendar, 
+    GraduationCap, 
+    MapPin, 
+    Link as LinkIcon, 
+    Github, 
+    Linkedin, 
+    FileText,
+    Edit3,
+    Save,
+    X,
+    CheckCircle,
+    AlertCircle,
+    Loader2,
+    Plus,
+    Trash2
+} from 'lucide-react';
+
+// Qualification and Stream options from API documentation
+const QUALIFICATION_OPTIONS = [
+    "10th", "12th", "Diploma", "B.E", "B.Tech", "B.Sc", "B.Com", "BBA", "BCA",
+    "M.E", "M.Tech", "M.Sc", "M.Com", "MBA", "MCA", "PhD", "Others"
+];
+
+const STREAM_OPTIONS = [
+    "CSE", "IT", "ECE", "EEE", "ME", "CE", "Chemical", "Biotech", "Civil",
+    "Mechanical", "Electrical", "Computer Science", "Information Technology",
+    "Electronics", "Others"
+];
 
 export default function ProfilePage() {
     const { 
@@ -23,7 +64,7 @@ export default function ProfilePage() {
     
     // State management
     const [isEditing, setIsEditing] = useState(false);
-    const [activeTab, setActiveTab] = useState('overview');
+    const [activeTab, setActiveTab] = useState('personal');
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
     const [error, setError] = useState<string | null>(null);
@@ -33,6 +74,21 @@ export default function ProfilePage() {
     const [profile, setProfile] = useState<UserProfile | null>(null);
     const [completion, setCompletion] = useState<ProfileCompletionStatus | null>(null);
     const [formData, setFormData] = useState<UpdateProfileRequest>({});
+    const [newSkill, setNewSkill] = useState('');
+
+    // Debug function to check token status
+    const checkTokenStatus = useCallback(() => {
+        if (typeof window !== 'undefined') {
+            const token = localStorage.getItem('careerx_token');
+            const userData = localStorage.getItem('careerx_user');
+            console.log('Token status:', {
+                hasToken: !!token,
+                tokenPreview: token ? token.substring(0, 20) + '...' : 'No token',
+                hasUserData: !!userData,
+                userData: userData ? JSON.parse(userData) : null
+            });
+        }
+    }, []);
 
     // Load user profile on component mount
     const loadUserProfile = useCallback(async () => {
@@ -40,49 +96,80 @@ export default function ProfilePage() {
             setLoading(true);
             setError(null);
 
+            // Check if user is authenticated and has a token
+            if (!user) {
+                setError('User not authenticated');
+                return;
+            }
+
             // Load user profile data
             const profileResult = await getUserProfile();
-            if (profileResult && profileResult.success && profileResult.profile) {
-                setProfile(profileResult.profile.profile || null);
+            if (profileResult) {
+                setProfile(profileResult);
                 
                 // Initialize form data with current profile
-                if (profileResult.profile.profile) {
-                    setFormData({
-                        firstName: profileResult.profile.profile.firstName,
-                        lastName: profileResult.profile.profile.lastName,
-                        mobile: profileResult.profile.mobile,
-                        qualification: profileResult.profile.profile.qualification,
-                        stream: profileResult.profile.profile.stream,
-                        yearOfPassout: profileResult.profile.profile.yearOfPassout,
-                        cgpaOrPercentage: profileResult.profile.profile.cgpaOrPercentage,
-                        collegeName: profileResult.profile.profile.collegeName,
-                        dateOfBirth: profileResult.profile.profile.dateOfBirth,
-                        address: profileResult.profile.profile.address,
-                        city: profileResult.profile.profile.city,
-                        state: profileResult.profile.profile.state,
-                        pincode: profileResult.profile.profile.pincode,
-                        skills: profileResult.profile.profile.skills,
-                        resumeUrl: profileResult.profile.profile.resumeUrl,
-                        linkedinUrl: profileResult.profile.profile.linkedinUrl,
-                        githubUrl: profileResult.profile.profile.githubUrl,
-                    });
-                }
+                setFormData({
+                    firstName: profileResult.firstName,
+                    lastName: profileResult.lastName,
+                    mobile: user?.mobile || '',
+                    qualification: profileResult.qualification,
+                    stream: profileResult.stream,
+                    yearOfPassout: profileResult.yearOfPassout,
+                    cgpaOrPercentage: profileResult.cgpaOrPercentage,
+                    collegeName: profileResult.collegeName,
+                    dateOfBirth: profileResult.dateOfBirth,
+                    address: profileResult.address,
+                    city: profileResult.city,
+                    state: profileResult.state,
+                    pincode: profileResult.pincode,
+                    skills: profileResult.skills,
+                    resumeUrl: profileResult.resumeUrl,
+                    linkedinUrl: profileResult.linkedinUrl,
+                    githubUrl: profileResult.githubUrl,
+                });
             } else {
-                setError(profileResult.error || 'Failed to load profile');
+                // If no profile data, initialize with user data
+                setFormData({
+                    firstName: user?.firstName || '',
+                    lastName: user?.lastName || '',
+                    mobile: user?.mobile || '',
+                    qualification: '',
+                    stream: '',
+                    yearOfPassout: 0,
+                    cgpaOrPercentage: 0,
+                    collegeName: '',
+                    dateOfBirth: '',
+                    address: '',
+                    city: '',
+                    state: '',
+                    pincode: '',
+                    skills: '',
+                    resumeUrl: '',
+                    linkedinUrl: '',
+                    githubUrl: '',
+                });
+                setError('Profile data not found. Please complete your profile.');
             }
 
             // Load profile completion status
             const completionResult = await getProfileCompletion();
             if (completionResult) {
                 setCompletion(completionResult);
+            } else {
+                // Set default completion status if API fails
+                setCompletion({
+                    isComplete: false,
+                    completionPercentage: 0,
+                    missingFields: ['firstName', 'lastName', 'mobile', 'qualification', 'stream', 'yearOfPassout', 'cgpaOrPercentage', 'collegeName']
+                });
             }
         } catch (err) {
             console.error('Error loading profile:', err);
-            setError('An unexpected error occurred while loading your profile');
+            setError('An unexpected error occurred while loading your profile. Please try refreshing the page.');
         } finally {
             setLoading(false);
         }
-    }, [getProfileCompletion]);
+    }, [getUserProfile, getProfileCompletion, user]);
 
     useEffect(() => {
         if (!isAuthenticated) {
@@ -90,8 +177,11 @@ export default function ProfilePage() {
             return;
         }
 
+        // Debug token status
+        checkTokenStatus();
+        
         loadUserProfile();
-    }, [isAuthenticated, router, loadUserProfile]);
+    }, [isAuthenticated, router, loadUserProfile, checkTokenStatus]);
 
     const handleSave = async () => {
         try {
@@ -116,6 +206,8 @@ export default function ProfilePage() {
             // Update profile
             const result = await updateProfile(formData);
             if (result.success) {
+                // Reload profile data after successful update
+                await loadUserProfile();
                 setIsEditing(false);
                 setSuccess('Profile updated successfully!');
                 // Reload profile data to get updated information
@@ -169,12 +261,14 @@ export default function ProfilePage() {
         }));
     };
 
-    const handleSkillAdd = (skill: string) => {
-        if (skill && formData.skills && !formData.skills.includes(skill)) {
+    const handleSkillAdd = () => {
+        if (newSkill.trim() && formData.skills && !formData.skills.includes(newSkill.trim())) {
+            const currentSkills = formData.skills.split(',').filter(s => s.trim());
             setFormData(prev => ({
                 ...prev,
-                skills: [...(prev.skills || '').split(',').filter(s => s.trim()), skill].join(', ')
+                skills: [...currentSkills, newSkill.trim()].join(', ')
             }));
+            setNewSkill('');
         }
     };
 
@@ -192,6 +286,12 @@ export default function ProfilePage() {
         if (percentage >= 80) return 'text-green-600';
         if (percentage >= 60) return 'text-yellow-600';
         return 'text-red-600';
+    };
+
+    const getCompletionBgColor = (percentage: number) => {
+        if (percentage >= 80) return 'bg-green-500';
+        if (percentage >= 60) return 'bg-yellow-500';
+        return 'bg-red-500';
     };
 
     if (!isAuthenticated) {
@@ -221,18 +321,21 @@ export default function ProfilePage() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 {/* Error/Success Messages */}
                 {error && (
-                    <div className="mb-6 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
+                    <div className="mb-6 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg flex items-center gap-2">
+                        <AlertCircle className="w-5 h-5" />
                         {error}
                     </div>
                 )}
                 {success && (
-                    <div className="mb-6 bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg">
+                    <div className="mb-6 bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg flex items-center gap-2">
+                        <CheckCircle className="w-5 h-5" />
                         {success}
                     </div>
                 )}
 
                 {/* Header Section */}
-                <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 p-8 mb-8">
+                <Card className="mb-8 bg-white/80 backdrop-blur-sm border-white/20 shadow-xl">
+                    <CardContent className="p-8">
                     <div className="flex flex-col md:flex-row items-start md:items-center justify-between">
                         <div className="flex items-center space-x-6">
                             <div className="relative">
@@ -242,16 +345,17 @@ export default function ProfilePage() {
                                     className="w-24 h-24 rounded-full object-cover border-4 border-white shadow-lg"
                                 />
                                 <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-green-500 rounded-full border-4 border-white flex items-center justify-center">
-                                    <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                </svg>
-                                </div>
+                                        <CheckCircle className="w-4 h-4 text-white" />
+                                    </div>
                             </div>
                             <div>
                                 <h1 className="text-3xl font-bold text-gray-900">
                                     {user?.firstName} {user?.lastName}
                                 </h1>
-                                <p className="text-gray-600 text-lg">{user?.email}</p>
+                                    <p className="text-gray-600 text-lg flex items-center gap-2">
+                                        <Mail className="w-4 h-4" />
+                                        {user?.email}
+                                    </p>
                                 <div className="flex items-center mt-2">
                                     <span className="text-sm text-gray-500">Profile Completion:</span>
                                     <span className={`ml-2 font-semibold ${getCompletionColor(completion?.completionPercentage || 0)}`}>
@@ -263,290 +367,417 @@ export default function ProfilePage() {
                         <div className="mt-4 md:mt-0">
                             {isEditing ? (
                                 <div className="flex space-x-3">
-                                    <button
+                                        <Button
                                         onClick={handleSave}
                                         disabled={saving}
-                                        className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
-                                    >
-                                        {saving ? 'Saving...' : 'Save Changes'}
-                                    </button>
-                                    <button
+                                            className="bg-blue-600 hover:bg-blue-700"
+                                        >
+                                            {saving ? (
+                                                <>
+                                                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                                                    Saving...
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <Save className="w-4 h-4 mr-2" />
+                                                    Save Changes
+                                                </>
+                                            )}
+                                        </Button>
+                                        <Button
                                         onClick={handleCancel}
                                         disabled={saving}
-                                        className="px-6 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 disabled:opacity-50"
+                                            variant="outline"
                                     >
+                                            <X className="w-4 h-4 mr-2" />
                                         Cancel
-                                    </button>
+                                        </Button>
                                 </div>
                             ) : (
-                                <button
+                                    <Button
                                     onClick={() => setIsEditing(true)}
-                                    className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                                        className="bg-blue-600 hover:bg-blue-700"
                                 >
+                                        <Edit3 className="w-4 h-4 mr-2" />
                                     Edit Profile
-                                </button>
+                                    </Button>
                             )}
                         </div>
                     </div>
-                </div>
+                    </CardContent>
+                </Card>
 
                 {/* Profile Content */}
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     {/* Main Content */}
                     <div className="lg:col-span-2">
-                        <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 p-8">
-                            <h2 className="text-2xl font-bold text-gray-900 mb-6">Profile Information</h2>
-                            
-                            {profile ? (
-                                <div className="space-y-6">
-                                    {/* Basic Information */}
+                        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+                            <TabsList className="grid w-full grid-cols-4 mb-6">
+                                <TabsTrigger value="personal">Personal</TabsTrigger>
+                                <TabsTrigger value="education">Education</TabsTrigger>
+                                <TabsTrigger value="contact">Contact</TabsTrigger>
+                                <TabsTrigger value="links">Links</TabsTrigger>
+                            </TabsList>
+
+                            {/* Personal Information Tab */}
+                            <TabsContent value="personal">
+                                <Card className="bg-white/80 backdrop-blur-sm border-white/20 shadow-xl">
+                                    <CardHeader>
+                                        <CardTitle className="flex items-center gap-2">
+                                            <User className="w-5 h-5" />
+                                            Personal Information
+                                        </CardTitle>
+                                        <CardDescription>
+                                            Your basic personal details and preferences
+                                        </CardDescription>
+                                    </CardHeader>
+                                    <CardContent className="space-y-6">
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                        <div>
-                                            <label className="block text-sm font-medium text-gray-700 mb-2">
-                                                First Name
-                                            </label>
-                                            <input
-                                                type="text"
+                                            <div className="space-y-2">
+                                                <Label htmlFor="firstName">First Name *</Label>
+                                                <Input
+                                                    id="firstName"
                                                 value={formData.firstName || ''}
                                                 onChange={(e) => handleInputChange('firstName', e.target.value)}
                                                 disabled={!isEditing}
-                                                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100"
+                                                    placeholder="Enter your first name"
                                             />
                     </div>
-                                        <div>
-                                            <label className="block text-sm font-medium text-gray-700 mb-2">
-                                                Last Name
-                                        </label>
-                                            <input
-                                                type="text"
+                                            <div className="space-y-2">
+                                                <Label htmlFor="lastName">Last Name *</Label>
+                                                <Input
+                                                    id="lastName"
                                                 value={formData.lastName || ''}
                                                 onChange={(e) => handleInputChange('lastName', e.target.value)}
                                                 disabled={!isEditing}
-                                                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100"
+                                                    placeholder="Enter your last name"
                                             />
                                         </div>
                                     </div>
 
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                        <div>
-                                            <label className="block text-sm font-medium text-gray-700 mb-2">
-                                            Email
-                                        </label>
-                                            <input
-                                                type="email"
+                                        <div className="space-y-2">
+                                            <Label htmlFor="email">Email Address</Label>
+                                            <Input
+                                                id="email"
                                                 value={user?.email || ''}
                                                 disabled
-                                                className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-100 text-gray-500"
+                                                className="bg-gray-100"
+                                                placeholder="your.email@example.com"
                                             />
                                     </div>
-                                        <div>
-                                            <label className="block text-sm font-medium text-gray-700 mb-2">
-                                                Mobile Number
-                                        </label>
-                                            <input
-                                                type="tel"
+
+                                        <div className="space-y-2">
+                                            <Label htmlFor="mobile">Mobile Number *</Label>
+                                            <Input
+                                                id="mobile"
                                                 value={formData.mobile || ''}
                                                 onChange={(e) => handleInputChange('mobile', e.target.value)}
                                                 disabled={!isEditing}
-                                                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100"
+                                                placeholder="9876543210"
                                             />
                                         </div>
-                                    </div>
 
-                                    {/* Education Information */}
-                                    <div className="border-t pt-6">
-                                        <h3 className="text-lg font-semibold text-gray-900 mb-4">Education</h3>
+                                        <div className="space-y-2">
+                                            <Label htmlFor="dateOfBirth">Date of Birth</Label>
+                                            <Input
+                                                id="dateOfBirth"
+                                                type="date"
+                                                value={formData.dateOfBirth ? formData.dateOfBirth.split('T')[0] : ''}
+                                                onChange={(e) => handleInputChange('dateOfBirth', e.target.value)}
+                                                disabled={!isEditing}
+                                            />
+                                    </div>
+                                    </CardContent>
+                                </Card>
+                            </TabsContent>
+
+                            {/* Education Information Tab */}
+                            <TabsContent value="education">
+                                <Card className="bg-white/80 backdrop-blur-sm border-white/20 shadow-xl">
+                                    <CardHeader>
+                                        <CardTitle className="flex items-center gap-2">
+                                            <GraduationCap className="w-5 h-5" />
+                                            Education Details
+                                        </CardTitle>
+                                        <CardDescription>
+                                            Your academic background and qualifications
+                                        </CardDescription>
+                                    </CardHeader>
+                                    <CardContent className="space-y-6">
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                            <div>
-                                                <label className="block text-sm font-medium text-gray-700 mb-2">
-                                                    Qualification
-                                                </label>
-                                                <input
-                                                    type="text"
+                                            <div className="space-y-2">
+                                                <Label htmlFor="qualification">Qualification *</Label>
+                                                <Select
                                                     value={formData.qualification || ''}
-                                                    onChange={(e) => handleInputChange('qualification', e.target.value)}
+                                                    onValueChange={(value) => handleInputChange('qualification', value)}
                                                     disabled={!isEditing}
-                                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100"
-                                                />
+                                                >
+                                                    <SelectTrigger>
+                                                        <SelectValue placeholder="Select qualification" />
+                                                    </SelectTrigger>
+                                                    <SelectContent>
+                                                        {QUALIFICATION_OPTIONS.map((qual) => (
+                                                            <SelectItem key={qual} value={qual}>
+                                                                {qual}
+                                                            </SelectItem>
+                                                        ))}
+                                                    </SelectContent>
+                                                </Select>
                                             </div>
-                                            <div>
-                                                <label className="block text-sm font-medium text-gray-700 mb-2">
-                                                    Stream
-                                                </label>
-                                                <input
-                                                    type="text"
+                                            <div className="space-y-2">
+                                                <Label htmlFor="stream">Stream *</Label>
+                                                <Select
                                                     value={formData.stream || ''}
-                                                    onChange={(e) => handleInputChange('stream', e.target.value)}
+                                                    onValueChange={(value) => handleInputChange('stream', value)}
                                                     disabled={!isEditing}
-                                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100"
-                                                />
+                                                >
+                                                    <SelectTrigger>
+                                                        <SelectValue placeholder="Select stream" />
+                                                    </SelectTrigger>
+                                                    <SelectContent>
+                                                        {STREAM_OPTIONS.map((stream) => (
+                                                            <SelectItem key={stream} value={stream}>
+                                                                {stream}
+                                                            </SelectItem>
+                                                        ))}
+                                                    </SelectContent>
+                                                </Select>
                                             </div>
                                         </div>
-                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
-                                            <div>
-                                                <label className="block text-sm font-medium text-gray-700 mb-2">
-                                                    Year of Passout
-                                                </label>
-                                                <input
+
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                            <div className="space-y-2">
+                                                <Label htmlFor="yearOfPassout">Year of Passout *</Label>
+                                                <Input
+                                                    id="yearOfPassout"
                                                     type="number"
+                                                    min="2000"
+                                                    max="2030"
                                                     value={formData.yearOfPassout || ''}
                                                     onChange={(e) => handleInputChange('yearOfPassout', parseInt(e.target.value))}
                                                     disabled={!isEditing}
-                                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100"
+                                                    placeholder="2023"
                                                 />
                                             </div>
-                                            <div>
-                                                <label className="block text-sm font-medium text-gray-700 mb-2">
-                                                    CGPA/Percentage
-                                                </label>
-                                                <input
+                                            <div className="space-y-2">
+                                                <Label htmlFor="cgpaOrPercentage">CGPA/Percentage *</Label>
+                                                <Input
+                                                    id="cgpaOrPercentage"
                                                     type="number"
                                                     step="0.01"
+                                                    min="0"
+                                                    max="100"
                                                     value={formData.cgpaOrPercentage || ''}
                                                     onChange={(e) => handleInputChange('cgpaOrPercentage', parseFloat(e.target.value))}
                                                     disabled={!isEditing}
-                                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100"
+                                                    placeholder="8.5"
                                                 />
                                     </div>
                                 </div>
-                                        <div className="mt-4">
-                                            <label className="block text-sm font-medium text-gray-700 mb-2">
-                                                College Name
-                                        </label>
-                                            <input
-                                                type="text"
+
+                                        <div className="space-y-2">
+                                            <Label htmlFor="collegeName">College Name *</Label>
+                                            <Input
+                                                id="collegeName"
                                                 value={formData.collegeName || ''}
                                                 onChange={(e) => handleInputChange('collegeName', e.target.value)}
                                                 disabled={!isEditing}
-                                                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100"
+                                                placeholder="Enter your college name"
                                             />
                                     </div>
-                                    </div>
 
-                                    {/* Skills */}
-                                    <div className="border-t pt-6">
-                                        <h3 className="text-lg font-semibold text-gray-900 mb-4">Skills</h3>
+                                        {/* Skills Section */}
+                                        <div className="space-y-4">
+                                            <Label>Skills</Label>
                                         <div className="flex flex-wrap gap-2 mb-4">
                                             {formData.skills?.split(',').filter(s => s.trim()).map((skill, index) => (
-                                                <span
+                                                    <Badge
                                                     key={index}
-                                                    className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-blue-100 text-blue-800"
+                                                        variant="secondary"
+                                                        className="px-3 py-1"
                                                 >
                                                     {skill.trim()}
                                                     {isEditing && (
                                                         <button
                                                             onClick={() => handleSkillRemove(skill.trim())}
-                                                            className="ml-2 text-blue-600 hover:text-blue-800"
+                                                                className="ml-2 text-gray-500 hover:text-red-500"
                                                         >
-                                                            ×
+                                                                <X className="w-3 h-3" />
                                                         </button>
                                                     )}
-                                                </span>
+                                                    </Badge>
                                             ))}
                         </div>
                                 {isEditing && (
-                                            <div className="flex">
-                                        <input
-                                            type="text"
+                                                <div className="flex gap-2">
+                                                    <Input
+                                                        value={newSkill}
+                                                        onChange={(e) => setNewSkill(e.target.value)}
                                                     placeholder="Add a skill"
                                             onKeyPress={(e) => {
                                                 if (e.key === 'Enter') {
-                                                    handleSkillAdd(e.currentTarget.value);
-                                                    e.currentTarget.value = '';
-                                                }
-                                            }}
-                                                    className="flex-1 px-3 py-2 border border-gray-300 rounded-l-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                        />
-                                        <button
-                                                    onClick={(e) => {
-                                                        const input = e.currentTarget.previousElementSibling as HTMLInputElement;
-                                                        handleSkillAdd(input.value);
-                                                        input.value = '';
-                                                    }}
-                                                    className="px-4 py-2 bg-blue-600 text-white rounded-r-lg hover:bg-blue-700"
-                                        >
-                                            Add
-                                        </button>
+                                                                e.preventDefault();
+                                                                handleSkillAdd();
+                                                            }
+                                                        }}
+                                                    />
+                                                    <Button
+                                                        onClick={handleSkillAdd}
+                                                        size="sm"
+                                                        variant="outline"
+                                                    >
+                                                        <Plus className="w-4 h-4" />
+                                                    </Button>
                                     </div>
                                 )}
                             </div>
+                                    </CardContent>
+                                </Card>
+                            </TabsContent>
 
-                                    {/* Links */}
-                                    <div className="border-t pt-6">
-                                        <h3 className="text-lg font-semibold text-gray-900 mb-4">Links</h3>
-                                        <div className="space-y-4">
-                                            <div>
-                                                <label className="block text-sm font-medium text-gray-700 mb-2">
-                                                    Resume URL
-                                                </label>
-                                                <input
-                                                    type="url"
-                                                    value={formData.resumeUrl || ''}
-                                                    onChange={(e) => handleInputChange('resumeUrl', e.target.value)}
+                            {/* Contact Information Tab */}
+                            <TabsContent value="contact">
+                                <Card className="bg-white/80 backdrop-blur-sm border-white/20 shadow-xl">
+                                    <CardHeader>
+                                        <CardTitle className="flex items-center gap-2">
+                                            <MapPin className="w-5 h-5" />
+                                            Contact Information
+                                        </CardTitle>
+                                        <CardDescription>
+                                            Your address and location details
+                                        </CardDescription>
+                                    </CardHeader>
+                                    <CardContent className="space-y-6">
+                                        <div className="space-y-2">
+                                            <Label htmlFor="address">Address</Label>
+                                            <Textarea
+                                                id="address"
+                                                value={formData.address || ''}
+                                                onChange={(e) => handleInputChange('address', e.target.value)}
+                                                disabled={!isEditing}
+                                                placeholder="Enter your full address"
+                                                rows={3}
+                                            />
+                                        </div>
+
+                                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                            <div className="space-y-2">
+                                                <Label htmlFor="city">City</Label>
+                                                <Input
+                                                    id="city"
+                                                    value={formData.city || ''}
+                                                    onChange={(e) => handleInputChange('city', e.target.value)}
                                                     disabled={!isEditing}
-                                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100"
+                                                    placeholder="Enter city"
                                                 />
                                             </div>
-                                            <div>
-                                                <label className="block text-sm font-medium text-gray-700 mb-2">
-                                                    LinkedIn URL
-                                                </label>
-                                                <input
-                                                    type="url"
-                                                    value={formData.linkedinUrl || ''}
-                                                    onChange={(e) => handleInputChange('linkedinUrl', e.target.value)}
+                                            <div className="space-y-2">
+                                                <Label htmlFor="state">State</Label>
+                                                <Input
+                                                    id="state"
+                                                    value={formData.state || ''}
+                                                    onChange={(e) => handleInputChange('state', e.target.value)}
                                                     disabled={!isEditing}
-                                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100"
+                                                    placeholder="Enter state"
                                                 />
                                             </div>
-                                            <div>
-                                                <label className="block text-sm font-medium text-gray-700 mb-2">
-                                                    GitHub URL
-                                                </label>
-                                                <input
-                                                    type="url"
-                                                    value={formData.githubUrl || ''}
-                                                    onChange={(e) => handleInputChange('githubUrl', e.target.value)}
+                                            <div className="space-y-2">
+                                                <Label htmlFor="pincode">Pincode</Label>
+                                                <Input
+                                                    id="pincode"
+                                                    value={formData.pincode || ''}
+                                                    onChange={(e) => handleInputChange('pincode', e.target.value)}
                                                     disabled={!isEditing}
-                                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100"
+                                                    placeholder="123456"
+                                                    maxLength={6}
                                                 />
                                             </div>
                                         </div>
+                                    </CardContent>
+                                </Card>
+                            </TabsContent>
+
+                            {/* Links Tab */}
+                            <TabsContent value="links">
+                                <Card className="bg-white/80 backdrop-blur-sm border-white/20 shadow-xl">
+                                    <CardHeader>
+                                        <CardTitle className="flex items-center gap-2">
+                                            <LinkIcon className="w-5 h-5" />
+                                            Professional Links
+                                        </CardTitle>
+                                        <CardDescription>
+                                            Your professional profiles and resume
+                                        </CardDescription>
+                                    </CardHeader>
+                                    <CardContent className="space-y-6">
+                                        <div className="space-y-2">
+                                            <Label htmlFor="resumeUrl" className="flex items-center gap-2">
+                                                <FileText className="w-4 h-4" />
+                                                Resume URL
+                                            </Label>
+                                            <Input
+                                                id="resumeUrl"
+                                                type="url"
+                                                value={formData.resumeUrl || ''}
+                                                onChange={(e) => handleInputChange('resumeUrl', e.target.value)}
+                                                disabled={!isEditing}
+                                                placeholder="https://example.com/resume.pdf"
+                                            />
                                     </div>
+
+                                        <div className="space-y-2">
+                                            <Label htmlFor="linkedinUrl" className="flex items-center gap-2">
+                                                <Linkedin className="w-4 h-4" />
+                                                LinkedIn Profile
+                                            </Label>
+                                            <Input
+                                                id="linkedinUrl"
+                                                type="url"
+                                                value={formData.linkedinUrl || ''}
+                                                onChange={(e) => handleInputChange('linkedinUrl', e.target.value)}
+                                                disabled={!isEditing}
+                                                placeholder="https://linkedin.com/in/yourprofile"
+                                            />
                             </div>
-                            ) : (
-                                <div className="text-center py-8">
-                                    <p className="text-gray-500">No profile data available. Please complete your profile.</p>
-                                    <button
-                                        onClick={() => setIsEditing(true)}
-                                        className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-                                    >
-                                        Complete Profile
-                                    </button>
+
+                                        <div className="space-y-2">
+                                            <Label htmlFor="githubUrl" className="flex items-center gap-2">
+                                                <Github className="w-4 h-4" />
+                                                GitHub Profile
+                                            </Label>
+                                            <Input
+                                                id="githubUrl"
+                                                type="url"
+                                                value={formData.githubUrl || ''}
+                                                onChange={(e) => handleInputChange('githubUrl', e.target.value)}
+                                                disabled={!isEditing}
+                                                placeholder="https://github.com/yourusername"
+                                            />
                                 </div>
-                            )}
-                        </div>
+                                    </CardContent>
+                                </Card>
+                            </TabsContent>
+                        </Tabs>
                     </div>
 
                     {/* Sidebar */}
                     <div className="space-y-6">
                         {/* Profile Completion */}
                         {completion && (
-                            <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 p-6">
-                                <h3 className="text-lg font-semibold text-gray-900 mb-4">Profile Completion</h3>
-                                <div className="space-y-3">
+                            <Card className="bg-white/80 backdrop-blur-sm border-white/20 shadow-xl">
+                                <CardHeader>
+                                    <CardTitle className="text-lg">Profile Completion</CardTitle>
+                                </CardHeader>
+                                <CardContent className="space-y-4">
                                     <div className="flex justify-between items-center">
                                         <span className="text-sm text-gray-600">Overall Progress</span>
                                         <span className={`font-semibold ${getCompletionColor(completion.completionPercentage)}`}>
                                             {completion.completionPercentage}%
                                         </span>
                                     </div>
-                                    <div className="w-full bg-gray-200 rounded-full h-2">
+                                    <div className="w-full bg-gray-200 rounded-full h-3">
                                         <div
-                                            className={`h-2 rounded-full ${
-                                                completion.completionPercentage >= 80 ? 'bg-green-500' :
-                                                completion.completionPercentage >= 60 ? 'bg-yellow-500' : 'bg-red-500'
-                                            }`}
+                                            className={`h-3 rounded-full transition-all duration-300 ${getCompletionBgColor(completion.completionPercentage)}`}
                                             style={{ width: `${completion.completionPercentage}%` }}
                                         ></div>
                                     </div>
@@ -555,39 +786,67 @@ export default function ProfilePage() {
                                             <p className="text-sm text-gray-600 mb-2">Missing fields:</p>
                                             <ul className="text-sm text-gray-500 space-y-1">
                                                 {completion.missingFields.map((field, index) => (
-                                                    <li key={index}>• {field}</li>
+                                                    <li key={index} className="flex items-center gap-2">
+                                                        <AlertCircle className="w-3 h-3" />
+                                                        {field}
+                                                    </li>
                                                 ))}
                                             </ul>
                                         </div>
                                     )}
-                                </div>
-                            </div>
+                                </CardContent>
+                            </Card>
                         )}
 
                         {/* Quick Actions */}
-                        <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 p-6">
-                            <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
-                            <div className="space-y-3">
-                                <Link
-                                    href="/jobs"
-                                    className="block w-full px-4 py-2 text-center bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-                                >
+                        <Card className="bg-white/80 backdrop-blur-sm border-white/20 shadow-xl">
+                            <CardHeader>
+                                <CardTitle className="text-lg">Quick Actions</CardTitle>
+                            </CardHeader>
+                            <CardContent className="space-y-3">
+                                <Link href="/jobs" className="block">
+                                    <Button className="w-full bg-blue-600 hover:bg-blue-700">
                                     Browse Jobs
+                                    </Button>
                                 </Link>
-                                <Link
-                                    href="/applications"
-                                    className="block w-full px-4 py-2 text-center bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
-                                >
+                                <Link href="/applications" className="block">
+                                    <Button variant="outline" className="w-full">
                                     My Applications
+                                    </Button>
                                 </Link>
-                                <Link
-                                    href="/saved-jobs"
-                                    className="block w-full px-4 py-2 text-center bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
-                                >
+                                <Link href="/saved-jobs" className="block">
+                                    <Button variant="outline" className="w-full">
                                     Saved Jobs
+                                    </Button>
                                 </Link>
+                                <Link href="/resume-builder" className="block">
+                                    <Button variant="outline" className="w-full">
+                                        Resume Builder
+                                    </Button>
+                                </Link>
+                            </CardContent>
+                        </Card>
+
+                        {/* Profile Stats */}
+                        <Card className="bg-white/80 backdrop-blur-sm border-white/20 shadow-xl">
+                            <CardHeader>
+                                <CardTitle className="text-lg">Profile Stats</CardTitle>
+                            </CardHeader>
+                            <CardContent className="space-y-4">
+                                <div className="flex justify-between items-center">
+                                    <span className="text-sm text-gray-600">Profile Views</span>
+                                    <span className="font-semibold">0</span>
+                                </div>
+                                <div className="flex justify-between items-center">
+                                    <span className="text-sm text-gray-600">Applications</span>
+                                    <span className="font-semibold">0</span>
                             </div>
+                                <div className="flex justify-between items-center">
+                                    <span className="text-sm text-gray-600">Saved Jobs</span>
+                                    <span className="font-semibold">0</span>
                         </div>
+                            </CardContent>
+                        </Card>
                         </div>
                 </div>
             </div>
