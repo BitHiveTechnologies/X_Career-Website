@@ -6,6 +6,7 @@ import {
     UpdateProfileRequest,
     UserProfile
 } from '@/lib/api';
+import { getUserProfile } from '@/lib/api/auth';
 import { useAuth } from '@/lib/auth/AuthContextBackend';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -15,7 +16,6 @@ export default function ProfilePage() {
     const { 
         user, 
         isAuthenticated, 
-        getUserProfile, 
         updateProfile, 
         getProfileCompletion 
     } = useAuth();
@@ -42,7 +42,7 @@ export default function ProfilePage() {
 
             // Load user profile data
             const profileResult = await getUserProfile();
-            if (profileResult.success && profileResult.profile) {
+            if (profileResult && profileResult.success && profileResult.profile) {
                 setProfile(profileResult.profile.profile || null);
                 
                 // Initialize form data with current profile
@@ -73,8 +73,8 @@ export default function ProfilePage() {
 
             // Load profile completion status
             const completionResult = await getProfileCompletion();
-            if (completionResult.success && completionResult.completion) {
-                setCompletion(completionResult.completion);
+            if (completionResult) {
+                setCompletion(completionResult);
             }
         } catch (err) {
             console.error('Error loading profile:', err);
@@ -82,7 +82,7 @@ export default function ProfilePage() {
         } finally {
             setLoading(false);
         }
-    }, [getUserProfile, getProfileCompletion]);
+    }, [getProfileCompletion]);
 
     useEffect(() => {
         if (!isAuthenticated) {
@@ -115,10 +115,11 @@ export default function ProfilePage() {
 
             // Update profile
             const result = await updateProfile(formData);
-            if (result.success && result.user) {
-                setProfile(result.user.profile || null);
+            if (result.success) {
                 setIsEditing(false);
                 setSuccess('Profile updated successfully!');
+                // Reload profile data to get updated information
+                await loadUserProfile();
                 
                 // Clear success message after 3 seconds
                 setTimeout(() => setSuccess(null), 3000);

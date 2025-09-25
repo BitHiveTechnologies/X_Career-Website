@@ -318,6 +318,7 @@ export function QuickCreateModal({ isOpen, onClose, onSubmit, isLoading = false 
         applicationLink: "https://techcorp.com/careers/frontend-developer",
         location: "remote",
         salary: "₹8-15 LPA",
+        stipend: "",
         isActive: true,
         skills: ["React", "JavaScript", "TypeScript", "CSS"],
         benefits: ["Health Insurance", "Flexible Hours", "Remote Work"],

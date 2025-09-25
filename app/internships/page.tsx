@@ -130,10 +130,39 @@ export default function InternshipsPage() {
                 console.log('📥 Mock internships loaded:', mockInternships.length);
                 
                 const frontendInternships: FrontendJob[] = mockInternships.map((internship) => ({
-                    ...internship,
+                    // Core Job interface properties
+                    id: internship.id.toString(),
+                    title: internship.title,
+                    company: internship.company,
+                    description: internship.description,
+                    type: 'internship' as const,
+                    eligibility: {
+                        qualifications: [],
+                        streams: [],
+                        passoutYears: [],
+                    },
+                    applicationDeadline: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(), // 30 days from now
+                    applicationLink: `#`,
+                    location: internship.isRemote ? 'remote' as const : 'onsite' as const,
+                    salary: internship.stipend,
+                    skills: internship.skills || [],
+                    isActive: true,
+                    createdAt: new Date(internship.postedDate).toISOString(),
+                    
+                    // FrontendJob additional properties
+                    isFeatured: internship.isFeatured || false,
+                    isUrgent: internship.isUrgent || false,
+                    applicantCount: internship.applicantCount || 0,
+                    companyLogo: internship.companyLogo,
+                    companySize: internship.companySize || '',
+                    industry: internship.industry || '',
+                    benefits: internship.benefits || [],
+                    companyType: internship.companyType || 'Startup',
+                    experienceRequired: '', // Internships typically don't require experience
                     jobType: 'Internship',
                     employmentType: 'Internship',
-                    salary: internship.stipend || internship.salary,
+                    postedDate: internship.postedDate,
+                    isRemote: internship.isRemote,
                 }));
                 
                 console.log('✅ Processed internships:', frontendInternships.length);

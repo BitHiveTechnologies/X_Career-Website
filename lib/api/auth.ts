@@ -3,18 +3,16 @@
  * Handles JWT authentication, user management, and session handling
  */
 
-import { apiClient, API_ENDPOINTS } from './client';
-import { 
-  LoginRequest, 
-  AdminLoginRequest,
-  LoginResponse, 
-  User, 
-  UserProfile, 
-  ProfileCompletionStatus,
-  UpdateProfileRequest,
-  ApiResponse 
+import { API_ENDPOINTS, apiClient } from './client';
+import {
+    AdminLoginRequest,
+    LoginRequest,
+    LoginResponse,
+    ProfileCompletionStatus,
+    UpdateProfileRequest,
+    User
 } from './types';
-import { validateUser, validateUserProfile, safeValidate } from './validation';
+import { safeValidate, validateUser } from './validation';
 
 // ============================================================================
 // AUTHENTICATION SERVICE CLASS
@@ -49,12 +47,7 @@ export class AuthService {
         
         console.log('JWT Login response data:', response.data);
         
-        // For super_admin, we need to use the admin login endpoint instead
-        // because the JWT auth endpoint doesn't have the right permissions
-        if (loginData.role === 'super_admin') {
-          console.log('Converting super_admin to admin role for backend compatibility');
-          loginData.role = 'admin';
-        }
+        // Note: Role is determined from the response, not from the request
         
         // Use the user data directly from login response to preserve the correct role
         const basicUser: User = {

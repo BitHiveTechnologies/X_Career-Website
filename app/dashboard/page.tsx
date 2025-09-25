@@ -7,8 +7,8 @@ import { SectionCards } from "@/components/section-cards"
 import { SharedLayout } from "@/components/shared-layout"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { useAuth } from "@/lib/auth/AuthContextBackend"
 import { adminService, jobService } from "@/lib/api/services"
+import { useAuth } from "@/lib/auth/AuthContextBackend"
 import { Briefcase, CreditCard, GraduationCap, Plus, Users } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
@@ -42,7 +42,14 @@ export default function Page() {
   // Fetch dashboard data
   useEffect(() => {
     if (user && (user.role === 'admin' || user.role === 'super_admin')) {
-      fetchDashboardData()
+      // Only try to fetch from API if we have a valid token
+      const token = typeof window !== 'undefined' ? localStorage.getItem('careerx_token') : null
+      if (token) {
+        fetchDashboardData()
+      } else {
+        console.log('⚠️ No auth token found, using mock data only')
+        toast.info('Using mock data - please log in to see live data')
+      }
     }
   }, [user])
 
@@ -84,18 +91,66 @@ export default function Page() {
     try {
       setIsLoading(true)
       
-      // Fetch dashboard stats
-      const statsResponse = await adminService.getDashboardStats()
-      if (statsResponse.success && statsResponse.data) {
-        setDashboardStats(statsResponse.data.stats)
+      // Fetch dashboard stats (optional, don't fail if this fails)
+      try {
+        const statsResponse = await adminService.getDashboardStats()
+        if (statsResponse.success && statsResponse.data) {
+          setDashboardStats(statsResponse.data.stats)
+        }
+      } catch (statsError) {
+        console.log('⚠️ Dashboard stats API failed, continuing without stats:', statsError)
       }
 
       // Fetch jobs
-      const jobsResponse = await jobService.getJobs({ limit: 50 })
-      if (jobsResponse.success && jobsResponse.data) {
-        const jobData = jobsResponse.data.jobs || []
-        setJobs(jobData.filter((job: any) => job.type === 'job'))
-        setInternships(jobData.filter((job: any) => job.type === 'internship'))
+      try {
+        const jobsResponse = await jobService.getJobs({ limit: 50 })
+        console.log('🔍 API Response:', jobsResponse)
+        
+        if (jobsResponse.success && jobsResponse.data && jobsResponse.data.jobs) {
+          const jobData = jobsResponse.data.jobs || []
+          
+          // Debug: Log the data distribution
+          const jobCount = jobData.filter((job: any) => job.type === 'job').length
+          const internshipCount = jobData.filter((job: any) => job.type === 'internship').length
+          console.log(`📊 Dashboard Data Summary:`)
+          console.log(`   Total records: ${jobData.length}`)
+          console.log(`   Jobs: ${jobCount}`)
+          console.log(`   Internships: ${internshipCount}`)
+          
+          // Transform job data for dashboard display
+          const transformedJobs = jobData
+            .filter((job: any) => job.type === 'job')
+            .map((job: any) => ({
+              ...job,
+              status: job.isActive ? 'Active' : 'Inactive',
+              applications: 0, // TODO: Get actual application count from backend
+              postedDate: job.createdAt ? new Date(job.createdAt).toLocaleDateString() : 'N/A',
+              expiryDate: job.applicationDeadline ? new Date(job.applicationDeadline).toLocaleDateString() : 'N/A'
+            }))
+          
+          // Transform internship data for dashboard display
+          const transformedInternships = jobData
+            .filter((job: any) => job.type === 'internship')
+            .map((job: any) => ({
+              ...job,
+              status: job.isActive ? 'Active' : 'Inactive',
+              applications: 0, // TODO: Get actual application count from backend
+              postedDate: job.createdAt ? new Date(job.createdAt).toLocaleDateString() : 'N/A',
+              expiryDate: job.applicationDeadline ? new Date(job.applicationDeadline).toLocaleDateString() : 'N/A'
+            }))
+          
+          setJobs(transformedJobs)
+          setInternships(transformedInternships)
+          
+          // Show success message with counts
+          toast.success(`Loaded ${jobCount} jobs and ${internshipCount} internships from backend`)
+        } else {
+          console.log('⚠️ API response unsuccessful, using mock data')
+          toast.info('Using mock data - backend API not available')
+        }
+      } catch (apiError) {
+        console.log('⚠️ API call failed, using mock data:', apiError)
+        toast.info('Using mock data - backend API not available')
       }
     } catch (error) {
       console.error('Error fetching dashboard data:', error)
@@ -179,8 +234,10 @@ export default function Page() {
       case "customers":
         return customersData // Keep mock data for customers for now
       case "jobs":
+        // Always return data - either real data from API or mock data
         return jobs.length > 0 ? jobs : jobsData
       case "internships":
+        // Always return data - either real data from API or mock data
         return internships.length > 0 ? internships : internshipsData
       case "payments":
         return paymentsData // Keep mock data for payments for now
@@ -221,7 +278,6 @@ export default function Page() {
           { key: "postedDate", label: "Posted Date" },
           { key: "expiryDate", label: "Expiry Date" },
           { key: "stipend", label: "Stipend" },
-          { key: "duration", label: "Duration" },
           { key: "location", label: "Location" }
         ]
       case "payments":
@@ -281,10 +337,20 @@ export default function Page() {
               <TabsTrigger value="jobs" className="flex items-center gap-2">
                 <Briefcase className="h-4 w-4" />
                 Jobs
+                {jobs.length > 0 && (
+                  <span className="ml-1 px-1.5 py-0.5 text-xs bg-blue-100 text-blue-800 rounded-full">
+                    {jobs.length}
+                  </span>
+                )}
               </TabsTrigger>
               <TabsTrigger value="internships" className="flex items-center gap-2">
                 <GraduationCap className="h-4 w-4" />
                 Internships
+                {internships.length > 0 && (
+                  <span className="ml-1 px-1.5 py-0.5 text-xs bg-green-100 text-green-800 rounded-full">
+                    {internships.length}
+                  </span>
+                )}
               </TabsTrigger>
               <TabsTrigger value="payments" className="flex items-center gap-2">
                 <CreditCard className="h-4 w-4" />
@@ -297,10 +363,38 @@ export default function Page() {
             </TabsContent>
             
             <TabsContent value="jobs" className="mt-6">
+              <div className="mb-4 flex items-center justify-between">
+                <div className="text-sm text-gray-600">
+                  Showing {getTableData().length} jobs
+                  {jobs.length > 0 ? (
+                    <span className="ml-2 px-2 py-1 text-xs bg-green-100 text-green-800 rounded-full">
+                      Live Data
+                    </span>
+                  ) : (
+                    <span className="ml-2 px-2 py-1 text-xs bg-yellow-100 text-yellow-800 rounded-full">
+                      Mock Data
+                    </span>
+                  )}
+                </div>
+              </div>
               <FlexibleDataTable data={getTableData()} columns={getTableColumns()} />
             </TabsContent>
             
             <TabsContent value="internships" className="mt-6">
+              <div className="mb-4 flex items-center justify-between">
+                <div className="text-sm text-gray-600">
+                  Showing {getTableData().length} internships
+                  {internships.length > 0 ? (
+                    <span className="ml-2 px-2 py-1 text-xs bg-green-100 text-green-800 rounded-full">
+                      Live Data
+                    </span>
+                  ) : (
+                    <span className="ml-2 px-2 py-1 text-xs bg-yellow-100 text-yellow-800 rounded-full">
+                      Mock Data
+                    </span>
+                  )}
+                </div>
+              </div>
               <FlexibleDataTable data={getTableData()} columns={getTableColumns()} />
             </TabsContent>
             

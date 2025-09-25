@@ -6,6 +6,7 @@ import {
     UpdateProfileRequest,
     UserProfile
 } from '@/lib/api';
+import { getUserProfile } from '@/lib/api/auth';
 import { useAuth } from '@/lib/auth/AuthContextBackend';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -15,7 +16,6 @@ export default function ProfilePageBackend() {
     const { 
         user, 
         isAuthenticated, 
-        getUserProfile, 
         updateProfile, 
         getProfileCompletion 
     } = useAuth();
@@ -42,29 +42,29 @@ export default function ProfilePageBackend() {
 
             // Load user profile data
             const profileResult = await getUserProfile();
-            if (profileResult.success && profileResult.profile) {
+            if (profileResult && profileResult.success && profileResult.profile) {
                 setProfile(profileResult.profile.profile || null);
                 
                 // Initialize form data with current profile
-                if (profileResult.profile.profile) {
+                if (profileResult.profile && profileResult.profile.profile) {
                     setFormData({
-                        firstName: profileResult.profile.profile.firstName,
-                        lastName: profileResult.profile.profile.lastName,
-                        mobile: profileResult.profile.mobile,
-                        qualification: profileResult.profile.profile.qualification,
-                        stream: profileResult.profile.profile.stream,
-                        yearOfPassout: profileResult.profile.profile.yearOfPassout,
-                        cgpaOrPercentage: profileResult.profile.profile.cgpaOrPercentage,
-                        collegeName: profileResult.profile.profile.collegeName,
-                        dateOfBirth: profileResult.profile.profile.dateOfBirth,
-                        address: profileResult.profile.profile.address,
-                        city: profileResult.profile.profile.city,
-                        state: profileResult.profile.profile.state,
-                        pincode: profileResult.profile.profile.pincode,
-                        skills: profileResult.profile.profile.skills,
-                        resumeUrl: profileResult.profile.profile.resumeUrl,
-                        linkedinUrl: profileResult.profile.profile.linkedinUrl,
-                        githubUrl: profileResult.profile.profile.githubUrl,
+                        firstName: profileResult.profile.profile.firstName || '',
+                        lastName: profileResult.profile.profile.lastName || '',
+                        mobile: profileResult.profile.mobile || '',
+                        qualification: profileResult.profile.profile.qualification || '',
+                        stream: profileResult.profile.profile.stream || '',
+                        yearOfPassout: profileResult.profile.profile.yearOfPassout || 0,
+                        cgpaOrPercentage: profileResult.profile.profile.cgpaOrPercentage || 0,
+                        collegeName: profileResult.profile.profile.collegeName || '',
+                        dateOfBirth: profileResult.profile.profile.dateOfBirth || '',
+                        address: profileResult.profile.profile.address || '',
+                        city: profileResult.profile.profile.city || '',
+                        state: profileResult.profile.profile.state || '',
+                        pincode: profileResult.profile.profile.pincode || '',
+                        skills: profileResult.profile.profile.skills || '',
+                        resumeUrl: profileResult.profile.profile.resumeUrl || '',
+                        linkedinUrl: profileResult.profile.profile.linkedinUrl || '',
+                        githubUrl: profileResult.profile.profile.githubUrl || '',
                     });
                 }
             } else {
@@ -73,8 +73,8 @@ export default function ProfilePageBackend() {
 
             // Load profile completion status
             const completionResult = await getProfileCompletion();
-            if (completionResult.success && completionResult.completion) {
-                setCompletion(completionResult.completion);
+            if (completionResult) {
+                setCompletion(completionResult);
             }
         } catch (err) {
             console.error('Error loading profile:', err);
@@ -82,7 +82,7 @@ export default function ProfilePageBackend() {
         } finally {
             setLoading(false);
         }
-    }, [getUserProfile, getProfileCompletion]);
+    }, [getProfileCompletion]);
 
     useEffect(() => {
         if (!isAuthenticated) {
@@ -115,10 +115,11 @@ export default function ProfilePageBackend() {
 
             // Update profile
             const result = await updateProfile(formData);
-            if (result.success && result.user) {
-                setProfile(result.user.profile || null);
+            if (result.success) {
                 setIsEditing(false);
                 setSuccess('Profile updated successfully!');
+                // Reload profile data to get updated information
+                await loadUserProfile();
                 
                 // Clear success message after 3 seconds
                 setTimeout(() => setSuccess(null), 3000);

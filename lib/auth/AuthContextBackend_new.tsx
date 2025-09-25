@@ -1,15 +1,14 @@
 'use client';
 
+import {
+    authService,
+    ProfileCompletionStatus,
+    UpdateProfileRequest,
+    User,
+    UserProfile
+} from '@/lib/api';
 import { useRouter } from 'next/navigation';
 import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react';
-import { 
-  authService, 
-  User, 
-  UserProfile, 
-  ProfileCompletionStatus,
-  UpdateProfileRequest,
-  AdminLoginRequest
-} from '@/lib/api';
 
 // ============================================================================
 // AUTH CONTEXT INTERFACE
@@ -137,8 +136,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           email: result.data.user.email,
           firstName: result.data.user.firstName,
           lastName: result.data.user.lastName,
-          mobile: result.data.user.mobile || '',
-          role: result.data.user.role || 'user' as 'user' | 'admin' | 'super_admin',
+          role: (result.data.user.role as 'user' | 'admin' | 'super_admin') || 'user',
           subscriptionStatus: 'inactive' as const,
           isProfileComplete: true,
         };
@@ -189,8 +187,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           email: result.data.user.email,
           firstName: result.data.user.firstName,
           lastName: result.data.user.lastName,
-          mobile: result.data.user.mobile || '',
-          role: result.data.user.role || 'admin' as 'user' | 'admin' | 'super_admin',
+          role: (result.data.user.role as 'user' | 'admin' | 'super_admin') || 'admin',
           subscriptionStatus: 'inactive' as const,
           isProfileComplete: true,
         };
@@ -256,8 +253,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           email: result.data.user.email,
           firstName: result.data.user.name.split(' ')[0],
           lastName: result.data.user.name.split(' ').slice(1).join(' ') || '',
-          mobile: result.data.user.mobile,
-          role: result.data.user.role || 'user' as 'user' | 'admin' | 'super_admin',
+          role: (result.data.user.role as 'user' | 'admin' | 'super_admin') || 'user',
           subscriptionStatus: 'inactive' as const,
           isProfileComplete: true,
         };

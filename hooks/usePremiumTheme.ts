@@ -1,4 +1,5 @@
 import { useAuth } from '@/lib/auth/AuthContextBackend';
+import { useEffect, useState } from 'react';
 
 export interface PremiumThemeColors {
     primary: string;
@@ -12,7 +13,20 @@ export interface PremiumThemeColors {
 
 export const usePremiumTheme = () => {
     const { getUserSubscription } = useAuth();
-    const isPremium = getUserSubscription() === 'premium';
+    const [isPremium, setIsPremium] = useState(false);
+
+    useEffect(() => {
+        const loadSubscription = async () => {
+            try {
+                const subscription = await getUserSubscription();
+                setIsPremium(subscription === 'premium');
+            } catch (error) {
+                console.error('Error loading subscription:', error);
+                setIsPremium(false);
+            }
+        };
+        loadSubscription();
+    }, [getUserSubscription]);
 
     const premiumColors: PremiumThemeColors = {
         primary: 'bg-premium-emerald text-white',

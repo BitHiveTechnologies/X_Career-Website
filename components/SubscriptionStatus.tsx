@@ -1,17 +1,29 @@
 'use client';
 
-import { useAuth } from '@/lib/auth/AuthContextBackend';
 import { usePremiumTheme } from '@/hooks/usePremiumTheme';
+import { useAuth } from '@/lib/auth/AuthContextBackend';
 import { Crown, Zap } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import SubscriptionUpgradeModal from './SubscriptionUpgradeModal';
 
 export default function SubscriptionStatus() {
     const { getUserSubscription } = useAuth();
     const { isPremium, premiumColors } = usePremiumTheme();
     const [showUpgradeModal, setShowUpgradeModal] = useState(false);
+    const [currentPlan, setCurrentPlan] = useState<string | null>(null);
     
-    const currentPlan = getUserSubscription();
+    // Load current subscription on component mount
+    useEffect(() => {
+        const loadCurrentPlan = async () => {
+            try {
+                const plan = await getUserSubscription();
+                setCurrentPlan(plan);
+            } catch (error) {
+                console.error('Error loading current plan:', error);
+            }
+        };
+        loadCurrentPlan();
+    }, [getUserSubscription]);
     
     const getPlanInfo = (plan: string) => {
         switch (plan) {
@@ -46,6 +58,10 @@ export default function SubscriptionStatus() {
         }
     };
 
+    if (!currentPlan) {
+        return <div>Loading subscription status...</div>;
+    }
+    
     const planInfo = getPlanInfo(currentPlan);
 
     return (
@@ -112,7 +128,7 @@ export default function SubscriptionStatus() {
             <SubscriptionUpgradeModal
                 isOpen={showUpgradeModal}
                 onClose={() => setShowUpgradeModal(false)}
-                currentPlan={currentPlan}
+                currentPlan={currentPlan as "free" | "premium" | "starter"}
             />
         </>
     );

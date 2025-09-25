@@ -270,7 +270,7 @@ function JobsPageContent() {
         } finally {
             setIsLoading(false);
         }
-    }, [pagination.page, pagination.limit]);
+    }, [pagination.page, pagination.limit, calculateCategoryCounts]);
 
     const searchJobs = useCallback(async (page: number = pagination.page) => {
         try {
@@ -347,7 +347,7 @@ function JobsPageContent() {
         } finally {
             setIsLoading(false);
         }
-    }, [searchQuery, searchLocation, pagination.page, pagination.limit]);
+    }, [searchQuery, searchLocation, pagination.page, pagination.limit, calculateCategoryCounts]);
 
     // Test API connection on component mount
     useEffect(() => {
@@ -1180,11 +1180,11 @@ function JobsPageContent() {
                                 <h3 className="text-sm font-medium text-white/90 mb-3 text-center">Quick Filters</h3>
                                 <div className="flex flex-wrap gap-2 justify-center">
                                     {[
-                                        { label: 'Fresher Full-time Jobs', filters: { jobType: 'Full-time', experienceLevel: '0-1 years' } },
-                                        { label: 'Remote Jobs', filters: { location: 'remote' } },
-                                        { label: 'High Salary (10-20 LPA)', filters: { salaryRange: '10-20' } },
-                                        { label: 'Startup Jobs', filters: { companyType: 'Startup' } },
-                                        { label: 'Internships', filters: { jobType: 'Internship' } },
+                                        { label: 'Fresher Full-time Jobs', filters: { jobType: 'Full-time', experienceLevel: '0-1 years' } as Partial<FilterOptions> },
+                                        { label: 'Remote Jobs', filters: { location: 'remote' as const } as Partial<FilterOptions> },
+                                        { label: 'High Salary (10-20 LPA)', filters: { salaryRange: '10-20' } as Partial<FilterOptions> },
+                                        { label: 'Startup Jobs', filters: { companyType: 'Startup' } as Partial<FilterOptions> },
+                                        { label: 'Internships', filters: { jobType: 'Internship' } as Partial<FilterOptions> },
                                     ].map((quickFilter) => (
                                         <button
                                             key={quickFilter.label}
