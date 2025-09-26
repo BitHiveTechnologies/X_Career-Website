@@ -1,6 +1,14 @@
 'use client';
 
 import MainNavbar from '@/components/mainNavbar';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Textarea } from '@/components/ui/textarea';
 import {
     ProfileCompletionStatus,
     UpdateProfileRequest,
@@ -8,38 +16,26 @@ import {
 } from '@/lib/api';
 import { getUserProfile } from '@/lib/api/auth';
 import { useAuth } from '@/lib/auth/AuthContextBackend';
+import {
+    AlertCircle,
+    CheckCircle,
+    Edit3,
+    FileText,
+    Github,
+    GraduationCap,
+    Linkedin,
+    Link as LinkIcon,
+    Loader2,
+    Mail,
+    MapPin,
+    Plus,
+    Save,
+    User,
+    X
+} from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Badge } from '@/components/ui/badge';
-import { Separator } from '@/components/ui/separator';
-import { 
-    User, 
-    Mail, 
-    Phone, 
-    Calendar, 
-    GraduationCap, 
-    MapPin, 
-    Link as LinkIcon, 
-    Github, 
-    Linkedin, 
-    FileText,
-    Edit3,
-    Save,
-    X,
-    CheckCircle,
-    AlertCircle,
-    Loader2,
-    Plus,
-    Trash2
-} from 'lucide-react';
 
 // Qualification and Stream options from API documentation
 const QUALIFICATION_OPTIONS = [

@@ -1,109 +1,140 @@
-"use client"
+'use client';
 
-import { useAuth } from '@/lib/auth/AuthContextBackend'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { useState } from 'react'
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { paymentService } from '@/lib/api/payment';
+import { useAuth } from '@/lib/auth/AuthContextBackend';
+import { useState } from 'react';
 
 export default function DebugAuthPage() {
-  const { user, isLoading, isAuthenticated, isAdmin, isSuperAdmin, canAccessAdmin, logout } = useAuth()
-  const [testResult, setTestResult] = useState<any>(null)
-  const [isTestingLogin, setIsTestingLogin] = useState(false)
+  const { user, isAuthenticated, isLoading, login, logout } = useAuth();
+  const [subscriptionData, setSubscriptionData] = useState<any>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const testAdminLogin = async () => {
-    setIsTestingLogin(true)
+  const testSubscriptionData = async () => {
     try {
-      const response = await fetch('/api/test-admin-login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email: 'admin@notifyx.com',
-          password: 'Admin123!'
-        })
-      })
-      const data = await response.json()
-      setTestResult(data)
-    } catch (error) {
-      setTestResult({ success: false, error: error instanceof Error ? error.message : 'Unknown error' })
+      setLoading(true);
+      setError(null);
+
+      // Test subscription plans
+      const plansResponse = await paymentService.getSubscriptionPlans();
+      console.log('Plans response:', plansResponse);
+
+      // Test current subscription
+      const subscriptionResponse = await paymentService.getCurrentSubscription();
+      console.log('Subscription response:', subscriptionResponse);
+
+      setSubscriptionData({
+        plans: plansResponse,
+        subscription: subscriptionResponse
+      });
+
+    } catch (err) {
+      console.error('Error testing subscription data:', err);
+      setError(err instanceof Error ? err.message : 'Unknown error');
     } finally {
-      setIsTestingLogin(false)
+      setLoading(false);
     }
-  }
+  };
+
+  const handleLogin = async () => {
+    const result = await login('user@example.com', 'password');
+    console.log('Login result:', result);
+  };
+
+  const handleLogout = async () => {
+    await logout();
+  };
 
   return (
-    <div className="container mx-auto p-6 max-w-4xl">
-      <Card className="mb-6">
+    <div className="container mx-auto p-6 space-y-6">
+      <h1 className="text-3xl font-bold">Authentication Debug</h1>
+
+      {/* Authentication Status */}
+      <Card>
         <CardHeader>
-          <CardTitle>Authentication Debug</CardTitle>
-          <CardDescription>
-            Debug information about the current authentication state
-          </CardDescription>
+          <CardTitle>Authentication Status</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
-            <div className="p-4 border rounded-lg">
-              <h3 className="font-semibold mb-2">Auth Status</h3>
-              <p><strong>Loading:</strong> {isLoading ? 'Yes' : 'No'}</p>
-              <p><strong>Authenticated:</strong> {isAuthenticated ? 'Yes' : 'No'}</p>
-              <p><strong>Is Admin:</strong> {isAdmin() ? 'Yes' : 'No'}</p>
-              <p><strong>Is Super Admin:</strong> {isSuperAdmin() ? 'Yes' : 'No'}</p>
-              <p><strong>Can Access Admin:</strong> {canAccessAdmin() ? 'Yes' : 'No'}</p>
+            <div>
+              <p className="font-medium">Loading:</p>
+              <p className={isLoading ? 'text-yellow-600' : 'text-green-600'}>
+                {isLoading ? 'Yes' : 'No'}
+              </p>
             </div>
-            
-            <div className="p-4 border rounded-lg">
-              <h3 className="font-semibold mb-2">User Data</h3>
-              {user ? (
-                <div>
-                  <p><strong>ID:</strong> {user.id}</p>
-                  <p><strong>Email:</strong> {user.email}</p>
-                  <p><strong>First Name:</strong> {user.firstName}</p>
-                  <p><strong>Last Name:</strong> {user.lastName}</p>
-                  <p><strong>Role:</strong> {user.role}</p>
-                  <p><strong>Type:</strong> {user.type || 'Not set'}</p>
-                </div>
-              ) : (
-                <p className="text-gray-500">No user data</p>
-              )}
+            <div>
+              <p className="font-medium">Authenticated:</p>
+              <p className={isAuthenticated ? 'text-green-600' : 'text-red-600'}>
+                {isAuthenticated ? 'Yes' : 'No'}
+              </p>
             </div>
           </div>
+          
+          {user && (
+            <div>
+              <p className="font-medium">User Data:</p>
+              <pre className="bg-gray-100 p-2 rounded text-sm overflow-auto">
+                {JSON.stringify(user, null, 2)}
+              </pre>
+            </div>
+          )}
 
-          <div className="p-4 border rounded-lg">
-            <h3 className="font-semibold mb-2">Raw User Object</h3>
-            <pre className="text-xs bg-gray-100 p-2 rounded overflow-auto max-h-40">
-              {JSON.stringify(user, null, 2)}
-            </pre>
+          <div className="flex gap-2">
+            <Button onClick={handleLogin} disabled={isAuthenticated}>
+              Login as user@example.com
+            </Button>
+            <Button onClick={handleLogout} disabled={!isAuthenticated} variant="outline">
+              Logout
+            </Button>
           </div>
+        </CardContent>
+      </Card>
 
-          <div className="p-4 border rounded-lg">
-            <h3 className="font-semibold mb-2">Test Admin Login</h3>
-            <Button onClick={testAdminLogin} disabled={isTestingLogin} className="mb-4">
-              {isTestingLogin ? 'Testing...' : 'Test Admin Login API'}
-            </Button>
-            {testResult && (
-              <div>
-                <h4 className="font-medium mb-2">Test Result:</h4>
-                <pre className="text-xs bg-gray-100 p-2 rounded overflow-auto max-h-40">
-                  {JSON.stringify(testResult, null, 2)}
-                </pre>
-              </div>
-            )}
-          </div>
+      {/* Subscription Data Test */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Subscription Data Test</CardTitle>
+          <CardDescription>Test subscription API calls</CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <Button onClick={testSubscriptionData} disabled={loading}>
+            {loading ? 'Testing...' : 'Test Subscription Data'}
+          </Button>
 
-          <div className="flex gap-4">
-            <Button onClick={() => window.location.href = '/login'}>
-              Go to Login
-            </Button>
-            <Button onClick={() => window.location.href = '/dashboard'}>
-              Go to Dashboard
-            </Button>
-            {isAuthenticated && (
-              <Button onClick={logout} variant="outline">
-                Logout
-              </Button>
-            )}
+          {error && (
+            <div className="bg-red-50 border border-red-200 rounded p-3">
+              <p className="text-red-600 font-medium">Error:</p>
+              <p className="text-red-600">{error}</p>
+            </div>
+          )}
+
+          {subscriptionData && (
+            <div>
+              <p className="font-medium">API Response:</p>
+              <pre className="bg-gray-100 p-2 rounded text-sm overflow-auto max-h-96">
+                {JSON.stringify(subscriptionData, null, 2)}
+              </pre>
+            </div>
+          )}
+        </CardContent>
+      </Card>
+
+      {/* Token Debug */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Token Debug</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div>
+            <p className="font-medium">Local Storage Token:</p>
+            <p className="text-sm bg-gray-100 p-2 rounded break-all">
+              {typeof window !== 'undefined' ? localStorage.getItem('token') || 'No token found' : 'Server side'}
+            </p>
           </div>
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

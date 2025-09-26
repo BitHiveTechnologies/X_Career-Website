@@ -1,8 +1,9 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { Crown, CheckCircle, Clock, AlertCircle, XCircle } from 'lucide-react';
-import { subscriptionService, UserSubscription } from '@/lib/api/subscriptionService';
+import { paymentService } from '@/lib/api/payment';
+import { UserSubscription } from '@/lib/api/subscriptionService';
+import { AlertCircle, CheckCircle, Clock, Crown, XCircle } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 interface SubscriptionStatusProps {
   onUpgrade?: () => void;
@@ -23,10 +24,30 @@ export default function SubscriptionStatus({ onUpgrade, className = '' }: Subscr
       setIsLoading(true);
       setError(null);
       
-      const response = await subscriptionService.getCurrentSubscription();
+      const response = await paymentService.getCurrentSubscription();
       
       if (response.success && response.data?.subscription) {
-        setSubscription(response.data.subscription);
+        // Convert the response to match UserSubscription interface
+        const subscription = response.data.subscription;
+        setSubscription({
+          id: subscription.id,
+          plan: subscription.plan,
+          planDetails: {
+            id: subscription.plan,
+            name: subscription.plan,
+            price: 0,
+            duration: 30,
+            features: subscription.features || [],
+            maxJobs: 50,
+            priority: 'low' as const
+          },
+          status: subscription.status as 'pending' | 'completed' | 'cancelled' | 'expired' | 'failed',
+          startDate: new Date().toISOString(),
+          endDate: subscription.expiresAt,
+          amount: 0,
+          daysRemaining: 0,
+          isActive: subscription.status === 'active'
+        });
       } else {
         setSubscription(null);
       }

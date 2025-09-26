@@ -4,6 +4,8 @@ import MainNavbar from '@/components/mainNavbar';
 import PaymentModal from '@/components/PaymentModal';
 import SubscriptionStatus from '@/components/SubscriptionStatus';
 
+import { paymentService } from '@/lib/api/payment';
+import { UserSubscription } from '@/lib/api/subscriptionService';
 import {
     Bell,
     CheckCircle,
@@ -17,7 +19,6 @@ import {
     Zap
 } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { subscriptionService, SubscriptionPlan, UserSubscription } from '@/lib/api/subscriptionService';
 
 const notificationTypes = [
     {
@@ -192,7 +193,7 @@ export default function NotifyPage() {
         try {
             // Load subscription plans
             setIsLoadingPlans(true);
-            const plansResponse = await subscriptionService.getPlans();
+            const plansResponse = await paymentService.getSubscriptionPlans();
             if (plansResponse.success && plansResponse.data?.plans) {
                 const apiPlans = plansResponse.data.plans.map(plan => ({
                     id: plan.id,
@@ -209,7 +210,7 @@ export default function NotifyPage() {
 
             // Load current subscription
             setIsLoadingSubscription(true);
-            const subscriptionResponse = await subscriptionService.getCurrentSubscription();
+            const subscriptionResponse = await paymentService.getCurrentSubscription();
             if (subscriptionResponse.success && subscriptionResponse.data?.subscription) {
                 setCurrentSubscription(subscriptionResponse.data.subscription);
             }

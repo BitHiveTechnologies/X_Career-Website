@@ -6,7 +6,7 @@
 // Environment variables with fallbacks
 export const ENV = {
   // API Configuration
-  API_BASE_URL: process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3001',
+  API_BASE_URL: process.env.NEXT_PUBLIC_API_BASE_URL || 'https://unstaffed-semipictorially-sunshine.ngrok-free.dev',
   API_VERSION: process.env.NEXT_PUBLIC_API_VERSION || 'v1',
   
   // Frontend Configuration

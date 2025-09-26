@@ -5,12 +5,11 @@ import {
     ProfileCompletionStatus,
     UpdateProfileRequest,
     User,
-    UserProfile,
-    AdminLoginRequest
+    UserProfile
 } from '@/lib/api';
+import { API_ENDPOINTS, apiClient } from '@/lib/api/client';
 import { useRouter } from 'next/navigation';
 import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react';
-import { apiClient, API_ENDPOINTS } from '@/lib/api/client';
 
 // ============================================================================
 // AUTH CONTEXT INTERFACE

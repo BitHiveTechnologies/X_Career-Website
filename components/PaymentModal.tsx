@@ -1,8 +1,8 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { X, CreditCard, Shield, Clock } from 'lucide-react';
-import { subscriptionService, CreateOrderRequest, VerifyPaymentRequest } from '@/lib/api/subscriptionService';
+import { CreateOrderRequest, paymentService, VerifyPaymentRequest } from '@/lib/api/payment';
+import { Clock, CreditCard, Shield, X } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 interface PaymentModalProps {
   isOpen: boolean;
@@ -48,6 +48,13 @@ export default function PaymentModal({ isOpen, onClose, plan, onSuccess, onError
   const handlePayment = async () => {
     if (!plan) return;
 
+    // Check if user is authenticated
+    const token = typeof window !== 'undefined' ? localStorage.getItem('careerx_token') : null;
+    if (!token) {
+      alert('Please login first to make a payment');
+      return;
+    }
+
     setIsLoading(true);
     setStep('order');
 
@@ -55,28 +62,30 @@ export default function PaymentModal({ isOpen, onClose, plan, onSuccess, onError
       // Create order
       const orderRequest: CreateOrderRequest = {
         plan: plan.id,
-        amount: plan.price * 100, // Convert to paise
+        amount: plan.price, // Send amount in rupees, backend will convert to paise
         currency: 'INR'
       };
 
-      const orderResponse = await subscriptionService.createOrder(orderRequest);
+      console.log('Creating order with request:', orderRequest);
+      const orderResponse = await paymentService.createOrder(orderRequest);
+      console.log('Order response:', orderResponse);
       
       if (!orderResponse.success || !orderResponse.data) {
         throw new Error(orderResponse.error?.message || 'Failed to create order');
       }
 
-      const { order, razorpay } = orderResponse.data;
+      const { order, keyId } = orderResponse.data;
       setOrderId(order.id);
       setStep('payment');
 
       // Configure Razorpay options
       const options = {
-        key: razorpay.keyId,
+        key: keyId,
         amount: order.amount,
         currency: order.currency,
         name: 'X Careers',
         description: `${plan.name} Subscription`,
-        order_id: razorpay.orderId,
+        order_id: order.id,
         handler: async (response: any) => {
           setStep('verification');
           await handlePaymentVerification(response, order.id);
@@ -103,7 +112,9 @@ export default function PaymentModal({ isOpen, onClose, plan, onSuccess, onError
 
     } catch (error) {
       console.error('Payment error:', error);
-      onError(error instanceof Error ? error.message : 'Payment failed');
+      const errorMessage = error instanceof Error ? error.message : 'Payment failed';
+      onError(errorMessage);
+      alert(`Payment Error: ${errorMessage}`);
       setIsLoading(false);
       setStep('order');
     }
@@ -119,7 +130,7 @@ export default function PaymentModal({ isOpen, onClose, plan, onSuccess, onError
         amount: plan.price * 100
       };
 
-      const verifyResponse = await subscriptionService.verifyPayment(verifyRequest);
+      const verifyResponse = await paymentService.verifyPayment(verifyRequest);
       
       if (verifyResponse.success) {
         onSuccess(verifyResponse.data);
