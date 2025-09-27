@@ -129,6 +129,7 @@ export const API_ENDPOINTS = {
   // Admin
   ADMIN: {
     DASHBOARD: '/api/v1/admin/dashboard',
+    USERS: '/api/v1/admin/users',
     USER_ANALYTICS: '/api/v1/admin/analytics/users',
     JOB_ANALYTICS: '/api/v1/admin/analytics/jobs',
     HEALTH: '/api/v1/admin/health',

@@ -173,13 +173,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       if (result.success && result.data) {
         // Store the JWT token in localStorage
         if (typeof window !== 'undefined') {
+          const token = result.data.token || (result.data as any).accessToken;
           console.log('Login successful, storing token:', {
-            hasToken: !!result.data.token,
-            tokenPreview: result.data.token ? result.data.token.substring(0, 20) + '...' : 'No token',
+            hasToken: !!token,
+            tokenPreview: token ? token.substring(0, 20) + '...' : 'No token',
             fullResponse: result
           });
-          localStorage.setItem('careerx_token', result.data.token);
-          console.log('Token stored in localStorage:', result.data.token);
+          localStorage.setItem('careerx_token', token);
+          console.log('Token stored in localStorage:', token);
           
           // Verify token was stored
           const storedToken = localStorage.getItem('careerx_token');
@@ -281,13 +282,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       if (result.success && result.data) {
         // Store the JWT token in localStorage
         if (typeof window !== 'undefined') {
+          const token = result.data.token || (result.data as any).accessToken;
           console.log('Admin login successful, storing token:', {
-            hasToken: !!result.data.token,
-            tokenPreview: result.data.token ? result.data.token.substring(0, 20) + '...' : 'No token',
+            hasToken: !!token,
+            tokenPreview: token ? token.substring(0, 20) + '...' : 'No token',
             fullResponse: result
           });
-          localStorage.setItem('careerx_token', result.data.token);
-          console.log('Token stored in localStorage:', result.data.token);
+          localStorage.setItem('careerx_token', token);
+          console.log('Token stored in localStorage:', token);
           
           // Verify token was stored
           const storedToken = localStorage.getItem('careerx_token');

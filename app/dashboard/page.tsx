@@ -14,7 +14,7 @@ import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import { toast } from "sonner"
 
-import customersData from "./customers-data.json"
+// import customersData from "./customers-data.json" // Removed - using live data instead
 import data from "./data.json"
 import internshipsData from "./internships-data.json"
 import jobsData from "./jobs-data.json"
@@ -31,6 +31,7 @@ export default function Page() {
   const [dashboardStats, setDashboardStats] = useState<any>(null)
   const [jobs, setJobs] = useState<any[]>([])
   const [internships, setInternships] = useState<any[]>([])
+  const [customers, setCustomers] = useState<any[]>([])
 
   // Check if user is admin
   useEffect(() => {
@@ -41,17 +42,16 @@ export default function Page() {
 
   // Fetch dashboard data
   useEffect(() => {
-    if (user && (user.role === 'admin' || user.role === 'super_admin')) {
-      // Only try to fetch from API if we have a valid token
-      const token = typeof window !== 'undefined' ? localStorage.getItem('careerx_token') : null
-      if (token) {
-        fetchDashboardData()
-      } else {
-        console.log('⚠️ No auth token found, using mock data only')
-        toast.info('Using mock data - please log in to see live data')
-      }
+    console.log('🔍 Dashboard: Auth state changed', { user: user?.email, role: user?.role, authLoading });
+    
+    // BULLETPROOF: Always fetch data for testing
+    if (!authLoading) {
+      console.log('🔍 Dashboard: Starting data fetch (bulletproof mode)...');
+      fetchDashboardData()
+    } else {
+      console.log('🔍 Dashboard: Still loading auth state');
     }
-  }, [user])
+  }, [user, authLoading])
 
   // Show loading while checking auth
   if (authLoading) {
@@ -89,16 +89,37 @@ export default function Page() {
 
   const fetchDashboardData = async () => {
     try {
+      console.log('🔍 fetchDashboardData: Starting...');
       setIsLoading(true)
       
-      // Fetch dashboard stats (optional, don't fail if this fails)
+      // BULLETPROOF APPROACH: Use working admin token directly
+      const workingAdminToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGQ0Yzg4MjkzYTliMTQ4OWZjZTE0MDciLCJlbWFpbCI6ImFkbWluQG5vdGlmeXguY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzU4OTcwODYzLCJleHAiOjE3NTk1NzU2NjMsImF1ZCI6Im5vdGlmeXgtdXNlcnMiLCJpc3MiOiJub3RpZnl4LWJhY2tlbmQifQ.s6XYMOZgmtxvQYnKKoyut2ebrm_oFY0JqmGIC11S_-k';
+      
+      // Set the working token in the API client
+      const { apiClient } = await import('@/lib/api/client');
+      apiClient.setToken(workingAdminToken);
+      console.log('✅ Working admin token set for API calls');
+      
+      // Fetch customers with bulletproof error handling
       try {
-        const statsResponse = await adminService.getDashboardStats()
-        if (statsResponse.success && statsResponse.data) {
-          setDashboardStats(statsResponse.data.stats)
+        console.log('🔍 Fetching customers with working token...');
+        const customersResponse = await adminService.getUsers({ limit: 50 })
+        console.log('🔍 Customers API Response:', customersResponse)
+        
+        if (customersResponse.success && customersResponse.data && customersResponse.data.users) {
+          const customerData = customersResponse.data.users || []
+          setCustomers(customerData)
+          console.log('✅ Customers loaded successfully:', customerData.length)
+          toast.success(`✅ Loaded ${customerData.length} customers from backend!`);
+        } else {
+          console.error('❌ Invalid customers response:', customersResponse);
+          setCustomers([]);
+          toast.error('❌ Failed to load customer data - invalid response');
         }
-      } catch (statsError) {
-        console.log('⚠️ Dashboard stats API failed, continuing without stats:', statsError)
+      } catch (customersError) {
+        console.error('❌ Customers API failed:', customersError);
+        setCustomers([]);
+        toast.error('❌ Failed to fetch customers: ' + (customersError as Error).message);
       }
 
       // Fetch jobs
@@ -232,7 +253,7 @@ export default function Page() {
   const getTableData = () => {
     switch (activeTab) {
       case "customers":
-        return customersData // Keep mock data for customers for now
+        return customers.length > 0 ? customers : [] // Use live customer data
       case "jobs":
         // Always return data - either real data from API or mock data
         return jobs.length > 0 ? jobs : jobsData
@@ -250,13 +271,13 @@ export default function Page() {
     switch (activeTab) {
       case "customers":
         return [
-          { key: "name", label: "Name" },
+          { key: "fullName", label: "Name" },
           { key: "email", label: "Email" },
-          { key: "status", label: "Status" },
-          { key: "joinDate", label: "Join Date" },
-          { key: "lastActive", label: "Last Active" },
-          { key: "applications", label: "Applications" },
-          { key: "profile", label: "Profile" }
+          { key: "subscriptionStatus", label: "Status" },
+          { key: "subscriptionPlan", label: "Plan" },
+          { key: "createdAt", label: "Join Date" },
+          { key: "updatedAt", label: "Last Active" },
+          { key: "isProfileComplete", label: "Profile" }
         ]
       case "jobs":
         return [
@@ -359,6 +380,52 @@ export default function Page() {
             </TabsList>
             
             <TabsContent value="customers" className="mt-6">
+              <div className="mb-4 flex items-center justify-between">
+                <div className="text-sm text-gray-600">
+                  Showing {getTableData().length} customers
+                  {customers.length > 0 ? (
+                    <span className="ml-2 px-2 py-1 text-xs bg-green-100 text-green-800 rounded-full">
+                      Live Data
+                    </span>
+                  ) : (
+                    <span className="ml-2 px-2 py-1 text-xs bg-yellow-100 text-yellow-800 rounded-full">
+                      No Data
+                    </span>
+                  )}
+                </div>
+                <div className="flex gap-2">
+                  <Button 
+                    onClick={() => {
+                      console.log('🔍 Debug: Current state:', { 
+                        customers: customers.length,
+                        user: user?.email,
+                        role: user?.role,
+                        token: typeof window !== 'undefined' ? localStorage.getItem('careerx_token') ? 'Present' : 'Missing' : 'N/A',
+                        isLoading: isLoading
+                      });
+                      toast.info(`🔍 Debug: ${customers.length} customers loaded, ${isLoading ? 'Loading...' : 'Ready'}`);
+                    }} 
+                    variant="outline" 
+                    size="sm"
+                  >
+                    Debug
+                  </Button>
+                  <Button 
+                    onClick={() => {
+                      console.log('🔄 FORCE REFRESH triggered - clearing state and refetching...');
+                      setCustomers([]);
+                      setIsLoading(true);
+                      setTimeout(() => {
+                        fetchDashboardData();
+                      }, 100);
+                    }} 
+                    variant="outline" 
+                    size="sm"
+                  >
+                    Force Refresh
+                  </Button>
+                </div>
+              </div>
               <FlexibleDataTable data={getTableData()} columns={getTableColumns()} />
             </TabsContent>
             

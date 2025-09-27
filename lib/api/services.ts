@@ -28,10 +28,15 @@ import {
     JobSearchParams,
     JobsResponse,
     JobStats,
+    // Auth types
+    LoginRequest,
+    LoginResponse,
     MatchingAnalytics,
     MatchingRecommendationsResponse,
     PaginatedResponse,
     PaymentHistory,
+    RegisterRequest,
+    RegisterResponse,
     SendJobAlertRequest,
     SendWelcomeEmailRequest,
     // Subscription types
@@ -40,12 +45,7 @@ import {
     SubscriptionPlan,
     SystemHealth,
     UserAnalytics,
-    VerifyPaymentRequest,
-    // Auth types
-    LoginRequest,
-    RegisterRequest,
-    LoginResponse,
-    RegisterResponse
+    VerifyPaymentRequest
 } from './types';
 
 // ============================================================================
@@ -541,6 +541,20 @@ export class AdminService {
   static async getSystemHealth(): Promise<ApiResponse<SystemHealth>> {
     return apiClient.get(API_ENDPOINTS.ADMIN.HEALTH);
   }
+
+  /**
+   * Get all users (admin only)
+   */
+  static async getUsers(params?: {
+    page?: number;
+    limit?: number;
+    subscriptionPlan?: string;
+    subscriptionStatus?: string;
+    search?: string;
+  }): Promise<ApiResponse<any>> {
+    console.log('🔍 AdminService.getUsers called with params:', params);
+    return apiClient.get(API_ENDPOINTS.ADMIN.USERS, params);
+  }
 }
 
 // ============================================================================
@@ -672,6 +686,7 @@ export const {
   getUserAnalytics,
   getJobAnalytics,
   getSystemHealth,
+  getUsers,
 } = AdminService;
 
 export const {

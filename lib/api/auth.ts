@@ -43,7 +43,8 @@ export class AuthService {
       
       if (response.success && response.data) {
         // Set the token for future requests
-        apiClient.setToken(response.data.token);
+        const token = response.data.token || response.data.accessToken;
+        apiClient.setToken(token);
         
         console.log('JWT Login response data:', response.data);
         
@@ -85,7 +86,8 @@ export class AuthService {
       
       if (response.success && response.data) {
         // Set the token for future requests
-        apiClient.setToken(response.data.token);
+        const token = response.data.token || response.data.accessToken;
+        apiClient.setToken(token);
         
         // Use the user data directly from login response since token verification is failing
         // Handle both admin and user response structures

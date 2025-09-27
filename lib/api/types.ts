@@ -74,7 +74,8 @@ export interface RegisterRequest {
 }
 
 export interface LoginResponse {
-  token: string;
+  token?: string;
+  accessToken?: string;
   user?: {
     id: string;
     email: string;
