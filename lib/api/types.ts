@@ -75,13 +75,20 @@ export interface RegisterRequest {
 
 export interface LoginResponse {
   token: string;
-  user: {
+  user?: {
     id: string;
     email: string;
     firstName: string;
     lastName: string;
     role: string;
     mobile?: string;
+  };
+  admin?: {
+    id: string;
+    email: string;
+    name: string;
+    role: string;
+    permissions?: string[];
   };
 }
 

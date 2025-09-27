@@ -1,11 +1,11 @@
 'use client';
 
 import {
-    authService,
-    ProfileCompletionStatus,
-    UpdateProfileRequest,
-    User,
-    UserProfile
+  authService,
+  ProfileCompletionStatus,
+  UpdateProfileRequest,
+  User,
+  UserProfile
 } from '@/lib/api';
 import { API_ENDPOINTS, apiClient } from '@/lib/api/client';
 import { useRouter } from 'next/navigation';
@@ -186,17 +186,45 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           console.log('Token verification - stored token:', storedToken ? storedToken.substring(0, 20) + '...' : 'No token found');
         }
         
-        // Set user data from login response
-        const userData = {
-          id: result.data.user?.id || (result.data as any).id,
-          email: result.data.user?.email || (result.data as any).email,
-          firstName: result.data.user?.firstName || (result.data as any).firstName || '',
-          lastName: result.data.user?.lastName || (result.data as any).lastName || '',
-          mobile: result.data.user?.mobile || (result.data as any).mobile || '',
-          role: (result.data.user?.role || (result.data as any).role || 'user') as 'user' | 'admin' | 'super_admin',
-          subscriptionStatus: 'inactive' as const,
-          isProfileComplete: true,
-        };
+        // Set user data from login response (handle both user and admin responses)
+        let userData;
+        if (result.data.admin) {
+          // Admin login response structure
+          userData = {
+            id: result.data.admin.id,
+            email: result.data.admin.email,
+            firstName: result.data.admin.name || '',
+            lastName: '',
+            mobile: '',
+            role: result.data.admin.role as 'user' | 'admin' | 'super_admin',
+            subscriptionStatus: 'inactive' as const,
+            isProfileComplete: true,
+          };
+        } else if (result.data.user) {
+          // Regular user login response structure
+          userData = {
+            id: result.data.user.id,
+            email: result.data.user.email,
+            firstName: result.data.user.firstName || '',
+            lastName: result.data.user.lastName || '',
+            mobile: result.data.user.mobile || '',
+            role: (result.data.user.role || 'user') as 'user' | 'admin' | 'super_admin',
+            subscriptionStatus: 'inactive' as const,
+            isProfileComplete: true,
+          };
+        } else {
+          // Fallback for other response structures
+          userData = {
+            id: (result.data as any).id,
+            email: (result.data as any).email,
+            firstName: (result.data as any).firstName || (result.data as any).name || '',
+            lastName: (result.data as any).lastName || '',
+            mobile: (result.data as any).mobile || '',
+            role: ((result.data as any).role || 'user') as 'user' | 'admin' | 'super_admin',
+            subscriptionStatus: 'inactive' as const,
+            isProfileComplete: true,
+          };
+        }
         
         console.log('Constructed user data:', userData);
         
@@ -220,7 +248,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
             localStorage.removeItem('careerx_redirect_after_auth');
             router.push(redirectTo);
           } else {
-            router.push('/');
+            // Redirect admins to dashboard, regular users to home
+            if (userData.role === 'admin' || userData.role === 'super_admin') {
+              router.push('/admin/dashboard');
+            } else {
+              router.push('/');
+            }
           }
         }
         
@@ -295,7 +328,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
             localStorage.removeItem('careerx_redirect_after_auth');
             router.push(redirectTo);
           } else {
-            router.push('/');
+            // Redirect admins to dashboard, regular users to home
+            if (userData.role === 'admin' || userData.role === 'super_admin') {
+              router.push('/admin/dashboard');
+            } else {
+              router.push('/');
+            }
           }
         }
         
@@ -370,7 +408,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
             localStorage.removeItem('careerx_redirect_after_auth');
             router.push(redirectTo);
           } else {
-            router.push('/');
+            // Redirect admins to dashboard, regular users to home
+            if (userData.role === 'admin' || userData.role === 'super_admin') {
+              router.push('/admin/dashboard');
+            } else {
+              router.push('/');
+            }
           }
         }
         
