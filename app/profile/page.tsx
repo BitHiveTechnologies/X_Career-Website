@@ -15,7 +15,7 @@ import {
     UserProfile
 } from '@/lib/api';
 import { getUserProfile } from '@/lib/api/auth';
-import { useAuth } from '@/lib/auth/AuthContextBackend';
+import { useAuth } from '@/lib/auth/AuthContext';
 import {
     AlertCircle,
     CheckCircle,

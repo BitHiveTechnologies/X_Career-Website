@@ -8,7 +8,7 @@ import { SharedLayout } from "@/components/shared-layout"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { adminService, jobService } from "@/lib/api/services"
-import { useAuth } from "@/lib/auth/AuthContextBackend"
+import { useAuth } from "@/lib/auth/AuthContext"
 import { Briefcase, CreditCard, GraduationCap, Plus, Users } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
@@ -35,10 +35,30 @@ export default function Page() {
 
   // Check if user is admin
   useEffect(() => {
-    if (!authLoading && (!user || (user.role !== 'admin' && user.role !== 'super_admin'))) {
+    if (!authLoading && user) {
+      if (user.role !== 'admin' && user.role !== 'super_admin') {
+        // Regular users should go to home page, not login
+        router.push('/')
+      }
+    } else if (!authLoading && !user) {
+      // No user, redirect to login
       router.push('/login')
     }
   }, [user, authLoading, router])
+
+  // Show loading while checking authentication
+  if (authLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
+      </div>
+    )
+  }
+
+  // Don't render dashboard if user is not admin
+  if (!user || (user.role !== 'admin' && user.role !== 'super_admin')) {
+    return null
+  }
 
   // Fetch dashboard data
   useEffect(() => {

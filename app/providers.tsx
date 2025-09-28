@@ -1,7 +1,7 @@
 'use client';
 
 import ErrorBoundary from '@/components/ErrorBoundary';
-import { AuthProvider } from '@/lib/auth/AuthContextBackend';
+import { AuthProvider } from '@/lib/auth/AuthContext';
 import { Toaster } from '@/components/ui/sonner';
 import React from 'react';
 

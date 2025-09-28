@@ -1,21 +1,13 @@
 'use client';
 
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { useRouter } from 'next/navigation';
-import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react';
+import { User } from '@/lib/api/types';
+import { AuthService } from '@/lib/api/auth';
 
-export interface User {
-    id: string;
-    email: string;
-    name: string;
-    avatar?: string;
-    createdAt: string;
-    subscription?: {
-        plan: 'free' | 'starter' | 'premium';
-        status: 'active' | 'inactive' | 'cancelled';
-        startDate?: string;
-        endDate?: string;
-    };
-}
+// ============================================================================
+// TYPES AND INTERFACES
+// ============================================================================
 
 interface AuthContextType {
     user: User | null;
@@ -26,12 +18,25 @@ interface AuthContextType {
         name: string,
         email: string,
         password: string,
+    mobile: string,
+    qualification: string,
+    stream: string,
+    yearOfPassout: number,
+    cgpaOrPercentage: number
     ) => Promise<{ success: boolean; error?: string }>;
     logout: () => void;
-    requireAuth: (redirectTo?: string) => boolean;
-    updateSubscription: (plan: 'free' | 'starter' | 'premium') => Promise<{ success: boolean; error?: string }>;
-    getUserSubscription: () => 'free' | 'starter' | 'premium';
+  checkAuthStatus: () => Promise<void>;
+  updateProfile: (profileData: any) => Promise<{ success: boolean; error?: string }>;
+  getProfileCompletion: () => Promise<any>;
 }
+
+interface AuthProviderProps {
+  children: ReactNode;
+}
+
+// ============================================================================
+// AUTH CONTEXT
+// ============================================================================
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
@@ -43,75 +48,63 @@ export const useAuth = () => {
     return context;
 };
 
-interface AuthProviderProps {
-    children: ReactNode;
-}
+// ============================================================================
+// AUTH PROVIDER
+// ============================================================================
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const [user, setUser] = useState<User | null>(null);
     const [isLoading, setIsLoading] = useState(true);
     const router = useRouter();
+  const authService = AuthService.getInstance();
 
-    // Check for existing session on mount
-    useEffect(() => {
-        checkAuthStatus();
-    }, []);
+  const isAuthenticated = !!user;
+
+  // ============================================================================
+  // AUTHENTICATION METHODS
+  // ============================================================================
 
     const checkAuthStatus = async () => {
         try {
-            // Check if we're in the browser before accessing localStorage
+      setIsLoading(true);
+      
+      // Check if we have a stored user and token
             if (typeof window !== 'undefined') {
+        const storedUser = localStorage.getItem('careerx_user');
                 const storedToken = localStorage.getItem('careerx_token');
 
-                if (storedToken) {
-                    // Verify token with backend
-                    const response = await fetch('/api/v1/jwt-auth/me', {
-                        method: 'GET',
-                        headers: {
-                            'Authorization': `Bearer ${storedToken}`,
-                            'Content-Type': 'application/json',
-                        },
-                    });
-
-                    if (response.ok) {
-                        const data = await response.json();
-                        if (data.success && data.data && data.data.user) {
-                            const userData = data.data.user;
-                            
-                            // Transform backend user data to frontend User interface
-                            const user: User = {
-                                id: userData.id,
-                                email: userData.email,
-                                name: userData.firstName + ' ' + userData.lastName,
-                                avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(userData.firstName)}&background=2563eb&color=fff`,
-                                createdAt: new Date().toISOString(),
-                                subscription: {
-                                    plan: 'free', // Default plan, will be updated from backend
-                                    status: 'active',
-                                    startDate: new Date().toISOString(),
-                                },
-                            };
-                            
-                            setUser(user);
+        if (storedUser && storedToken) {
+          try {
+            const userData = JSON.parse(storedUser);
+            
+            // Validate token with backend
+            const isValid = await authService.validateToken(storedToken);
+            if (isValid) {
+              setUser(userData);
+              return;
                         } else {
-                            // Invalid token, clear storage
+              // Token is invalid or expired, clear stored data
+              console.log('Token validation failed');
+              setUser(null);
                             localStorage.removeItem('careerx_user');
                             localStorage.removeItem('careerx_token');
                         }
-                    } else {
-                        // Token invalid or expired, clear storage
+          } catch (error) {
+            // Token is invalid or expired, clear stored data
+            console.log('Token validation failed with error:', error);
+            setUser(null);
                         localStorage.removeItem('careerx_user');
                         localStorage.removeItem('careerx_token');
                     }
+          return;
                 }
             }
+      
+      // No stored user/token, user is not authenticated
+      setUser(null);
         } catch (error) {
-            console.error('Auth check error:', error);
-            // Clear invalid data only if we're in the browser
-            if (typeof window !== 'undefined') {
-                localStorage.removeItem('careerx_user');
-                localStorage.removeItem('careerx_token');
-            }
+      console.error('Auth initialization error:', error);
+      setUser(null);
         } finally {
             setIsLoading(false);
         }
@@ -121,70 +114,70 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         email: string,
         password: string,
     ): Promise<{ success: boolean; error?: string }> => {
+    try {
         setIsLoading(true);
 
-        try {
-            // Call backend authentication API
-            const response = await fetch('/api/v1/jwt-auth/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    email,
-                    password,
-                }),
-            });
-
-            const data = await response.json();
-
-            if (!response.ok) {
-                return { success: false, error: data.error || 'Login failed' };
-            }
-
-            if (data.success && data.data) {
-                const { token, user: userData } = data.data;
-                
-                // Transform backend user data to frontend User interface
-                const user: User = {
-                    id: userData.id,
-                    email: userData.email,
-                    name: userData.firstName + ' ' + userData.lastName,
-                    avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(userData.firstName)}&background=2563eb&color=fff`,
-                    createdAt: new Date().toISOString(),
-                    subscription: {
-                        plan: 'free', // Default plan, will be updated from backend
-                        status: 'active',
-                        startDate: new Date().toISOString(),
-                    },
-                };
-
-                // Store user data and token only if we're in the browser
+      // Use regular user login for normal users, admin login for admin users
+      let result;
+      if (email === 'superadmin@notifyx.com' || email === 'admin@notifyx.com') {
+        // Use admin login for admin users
+        console.log('Using admin login for admin user');
+        result = await authService.adminLogin({ email, password });
+        console.log('Admin login result:', result);
+      } else {
+        // Use regular user login
+        console.log('Using regular user login');
+        result = await authService.login({ email, password });
+        console.log('User login result:', result);
+      }
+      
+      if (result.success && result.user) {
+        // Set user data from login response
+        const userData = {
+          id: result.user.id,
+          email: result.user.email,
+          firstName: result.user.firstName,
+          lastName: result.user.lastName,
+          role: result.user.role as 'user' | 'admin' | 'super_admin',
+          subscriptionStatus: 'inactive' as const,
+          isProfileComplete: true,
+        };
+        
+        setUser(userData);
+        
+        // Store user in localStorage for persistence
                 if (typeof window !== 'undefined') {
-                    localStorage.setItem('careerx_user', JSON.stringify(user));
+          localStorage.setItem('careerx_user', JSON.stringify(userData));
+          // Store token if available
+          const token = authService.getCurrentToken();
+          if (token) {
                     localStorage.setItem('careerx_token', token);
+          }
                 }
 
-                setUser(user);
-
-                // Handle redirect after login
+        // Handle redirect after login based on role
                 if (typeof window !== 'undefined') {
                     const redirectTo = localStorage.getItem('careerx_redirect_after_auth');
                     if (redirectTo) {
                         localStorage.removeItem('careerx_redirect_after_auth');
                         router.push(redirectTo);
                     } else {
+            // Role-based routing
+            if (userData.role === 'admin' || userData.role === 'super_admin') {
                         router.push('/dashboard');
+            } else {
+              router.push('/');
+            }
                     }
                 }
 
                 return { success: true };
             } else {
-                return { success: false, error: 'Invalid response from server' };
+        return { success: false, error: result.error || 'Login failed. Please try again.' };
             }
-        } catch (error) {
+    } catch (error: any) {
             console.error('Login error:', error);
-            return { success: false, error: 'Login failed. Please try again.' };
+      return { success: false, error: error.message || 'Login failed. Please try again.' };
         } finally {
             setIsLoading(false);
         }
@@ -194,54 +187,49 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         name: string,
         email: string,
         password: string,
+    mobile: string,
+    qualification: string,
+    stream: string,
+    yearOfPassout: number,
+    cgpaOrPercentage: number,
     ): Promise<{ success: boolean; error?: string }> => {
+    try {
         setIsLoading(true);
 
-        try {
-            // Call backend registration API
-            const response = await fetch('/api/v1/jwt-auth/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    firstName: name.split(' ')[0],
-                    lastName: name.split(' ').slice(1).join(' ') || '',
+      const result = await authService.register({
+        name,
                     email,
                     password,
-                }),
-            });
-
-            const data = await response.json();
-
-            if (!response.ok) {
-                return { success: false, error: data.error || 'Registration failed' };
-            }
-
-            if (data.success && data.data) {
-                const { token, user: userData } = data.data;
-                
-                // Transform backend user data to frontend User interface
-                const user: User = {
-                    id: userData.id,
-                    email: userData.email,
-                    name: userData.firstName + ' ' + userData.lastName,
-                    avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(userData.firstName)}&background=2563eb&color=fff`,
-                    createdAt: new Date().toISOString(),
-                    subscription: {
-                        plan: 'free', // Default plan, will be updated from backend
-                        status: 'active',
-                        startDate: new Date().toISOString(),
-                    },
-                };
-
-                // Store user data and token only if we're in the browser
+        mobile,
+        qualification,
+        stream,
+        yearOfPassout,
+        cgpaOrPercentage,
+      });
+      
+      if (result.success && result.user) {
+        // Set user data from registration response
+        const userData = {
+          id: result.user.id,
+          email: result.user.email,
+          firstName: result.user.firstName,
+          lastName: result.user.lastName,
+          role: (result.user.role as 'user' | 'admin' | 'super_admin') || 'user',
+          subscriptionStatus: 'inactive' as const,
+          isProfileComplete: true,
+        };
+        
+        setUser(userData);
+        
+        // Store user data in localStorage
                 if (typeof window !== 'undefined') {
-                    localStorage.setItem('careerx_user', JSON.stringify(user));
+          localStorage.setItem('careerx_user', JSON.stringify(userData));
+          // Store token if available
+          const token = authService.getCurrentToken();
+          if (token) {
                     localStorage.setItem('careerx_token', token);
                 }
-
-                setUser(user);
+        }
 
                 // Handle redirect after registration
                 if (typeof window !== 'undefined') {
@@ -250,96 +238,101 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
                         localStorage.removeItem('careerx_redirect_after_auth');
                         router.push(redirectTo);
                     } else {
+            // Role-based routing
+            if (userData.role === 'admin' || userData.role === 'super_admin') {
                         router.push('/dashboard');
+            } else {
+              router.push('/');
+            }
                     }
                 }
 
                 return { success: true };
             } else {
-                return { success: false, error: 'Invalid response from server' };
+        return { success: false, error: result.error || 'Registration failed' };
             }
-        } catch (error) {
+    } catch (error: any) {
             console.error('Registration error:', error);
-            return { success: false, error: 'Registration failed. Please try again.' };
+      return { success: false, error: error.message || 'Registration failed. Please try again.' };
         } finally {
             setIsLoading(false);
         }
     };
 
     const logout = () => {
+    setUser(null);
         if (typeof window !== 'undefined') {
             localStorage.removeItem('careerx_user');
             localStorage.removeItem('careerx_token');
-            localStorage.removeItem('careerx_redirect_after_auth');
         }
-        setUser(null);
+    authService.logout();
         router.push('/');
     };
 
-    const requireAuth = (redirectTo?: string): boolean => {
-        if (!user && !isLoading) {
-            // Store the intended destination
-            if (redirectTo && typeof window !== 'undefined') {
-                localStorage.setItem('careerx_redirect_after_auth', redirectTo);
-            }
-
-            // Redirect to login
-            router.push('/login');
-            return false;
-        }
-        return !!user;
-    };
-
-    const updateSubscription = async (plan: 'free' | 'starter' | 'premium'): Promise<{ success: boolean; error?: string }> => {
-        if (!user) {
-            return { success: false, error: 'User not authenticated' };
-        }
-
-        try {
-            // Simulate API call for subscription update
-            await new Promise((resolve) => setTimeout(resolve, 1000));
-
-            const updatedUser: User = {
-                ...user,
-                subscription: {
-                    plan,
-                    status: 'active',
-                    startDate: new Date().toISOString(),
-                    endDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(), // 30 days from now
-                },
-            };
-
-            setUser(updatedUser);
+  const updateProfile = async (profileData: any): Promise<{ success: boolean; error?: string }> => {
+    try {
+      const result = await authService.updateProfile(profileData);
+      
+      if (result.success && result.user) {
+        // Update local user state
+        setUser(result.user);
 
             // Update localStorage
             if (typeof window !== 'undefined') {
-                localStorage.setItem('careerx_user', JSON.stringify(updatedUser));
+          localStorage.setItem('careerx_user', JSON.stringify(result.user));
             }
 
             return { success: true };
-        } catch (error) {
-            return { success: false, error: 'Subscription update failed' };
-        }
-    };
+      } else {
+        return { success: false, error: result.error || 'Failed to update profile' };
+      }
+    } catch (error: any) {
+      console.error('Update profile error:', error);
+      return { success: false, error: error.message || 'Failed to update profile' };
+    }
+  };
 
-    const getUserSubscription = (): 'free' | 'starter' | 'premium' => {
-        return user?.subscription?.plan || 'free';
-    };
+  const getProfileCompletion = async (): Promise<any> => {
+    try {
+      const result = await authService.getProfileCompletion();
+      
+      if (result.success && result.completion) {
+        return result.completion;
+      } else {
+        return null;
+      }
+    } catch (error: any) {
+      console.error('Get profile completion error:', error);
+      return null;
+    }
+  };
+
+  // ============================================================================
+  // EFFECTS
+  // ============================================================================
+
+  useEffect(() => {
+    checkAuthStatus();
+  }, []);
+
+  // ============================================================================
+  // CONTEXT VALUE
+  // ============================================================================
 
     const value: AuthContextType = {
         user,
         isLoading,
-        isAuthenticated: !!user,
+    isAuthenticated,
         login,
         register,
         logout,
-        requireAuth,
-        updateSubscription,
-        getUserSubscription,
+    checkAuthStatus,
+    updateProfile,
+    getProfileCompletion,
     };
 
     return (
-        <AuthContext.Provider value={value} data-oid="xpar59t">
+    <AuthContext.Provider value={value}>
             {children}
         </AuthContext.Provider>
     );

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useAuth } from '@/lib/auth/AuthContextBackend';
+import { useAuth } from '@/lib/auth/AuthContext';
 import { X, User, Lock } from 'lucide-react';
 
 interface LoginModalProps {
@@ -15,7 +15,7 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isAdminLogin, setIsAdminLogin] = useState(false);
-  const { login, adminLogin } = useAuth();
+  const { login } = useAuth();
 
   const handleInputChange = (field: string, value: string) => {
     if (field === 'email') setEmail(value);
@@ -39,9 +39,7 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
 
     setIsLoading(true);
 
-    const result = isAdminLogin 
-      ? await adminLogin(email, password)
-      : await login(email, password);
+    const result = await login(email, password);
 
     if (result.success) {
       onClose();

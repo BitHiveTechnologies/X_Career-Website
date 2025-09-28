@@ -1,4 +1,4 @@
-import { useAuth } from '@/lib/auth/AuthContextBackend';
+import { useAuth } from '@/lib/auth/AuthContext';
 import { useEffect, useState } from 'react';
 
 export interface PremiumThemeColors {

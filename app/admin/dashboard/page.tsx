@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { apiClient } from '@/lib/api/client';
 import { adminService } from '@/lib/api/services';
-import { useAuth } from '@/lib/auth/AuthContextBackend';
+import { useAuth } from '@/lib/auth/AuthContext';
 import {
   Activity,
   AlertCircle,

@@ -39,6 +39,19 @@ export class AuthService {
    */
   async login(loginData: LoginRequest): Promise<{ success: boolean; error?: string; user?: User }> {
     try {
+      // Validate input
+      if (!loginData.email || !loginData.password) {
+        return { success: false, error: 'Email and password are required' };
+      }
+
+      if (!loginData.email.includes('@')) {
+        return { success: false, error: 'Please enter a valid email address' };
+      }
+
+      if (loginData.password.length < 6) {
+        return { success: false, error: 'Password must be at least 6 characters long' };
+      }
+
       const response = await apiClient.post<LoginResponse>(API_ENDPOINTS.AUTH.LOGIN, loginData);
       
       if (response.success && response.data) {
@@ -278,6 +291,43 @@ export class AuthService {
     }
   }
 
+  /**
+   * Register a new user
+   */
+  async register(registerData: any): Promise<{ success: boolean; user?: User; error?: string }> {
+    try {
+      const response = await apiClient.post<any>(API_ENDPOINTS.AUTH.REGISTER, registerData);
+      
+      if (response.success && response.data) {
+        // Set the token for future requests
+        const token = response.data.token || response.data.accessToken;
+        apiClient.setToken(token);
+        
+        // Create user object from registration response
+        const basicUser: User = {
+          id: response.data.user.id,
+          email: response.data.user.email,
+          firstName: response.data.user.firstName,
+          lastName: response.data.user.lastName,
+          role: response.data.user.role as 'user' | 'admin' | 'super_admin',
+          subscriptionStatus: 'inactive',
+          isProfileComplete: false,
+        };
+        
+        this.setCurrentUser(basicUser);
+        return { success: true, user: basicUser };
+      }
+      
+      return { success: false, error: 'Registration failed' };
+    } catch (error: any) {
+      console.error('Registration error:', error);
+      return { 
+        success: false, 
+        error: error.message || 'Registration failed. Please try again.' 
+      };
+    }
+  }
+
   // ============================================================================
   // SESSION MANAGEMENT
   // ============================================================================
@@ -389,6 +439,48 @@ export class AuthService {
    */
   canAccessAdmin(): boolean {
     return this.isAdmin();
+  }
+
+  /**
+   * Get current authentication token
+   */
+  getCurrentToken(): string | null {
+    return apiClient.getToken();
+  }
+
+  /**
+   * Validate token with backend
+   */
+  async validateToken(token: string): Promise<boolean> {
+    try {
+      // Set the token temporarily for validation
+      const originalToken = apiClient.getToken();
+      apiClient.setToken(token);
+      
+      // Make a simple API call to validate the token
+      const response = await apiClient.get('/auth/validate');
+      
+      // Restore original token
+      if (originalToken) {
+        apiClient.setToken(originalToken);
+      } else {
+        apiClient.clearToken();
+      }
+      
+      return response.success;
+    } catch (error) {
+      console.error('Token validation error:', error);
+      return false;
+    }
+  }
+
+  /**
+   * Logout and clear all authentication data
+   */
+  logout(): void {
+    this.currentUser = null;
+    apiClient.clearToken();
+    this.notifyListeners(null);
   }
 
   // ============================================================================

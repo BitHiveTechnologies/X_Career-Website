@@ -2,7 +2,7 @@
 
 import MainNavbar from '@/components/mainNavbar';
 import LoginModal from '@/components/LoginModal';
-import { useAuth } from '@/lib/auth/AuthContextBackend';
+import { useAuth } from '@/lib/auth/AuthContext';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Suspense, useEffect, useState } from 'react';

@@ -2,7 +2,7 @@
 
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { useAuth } from '@/lib/auth/AuthContextBackend'
+import { useAuth } from '@/lib/auth/AuthContext'
 import { useState } from 'react'
 
 export default function TestLoginPage() {

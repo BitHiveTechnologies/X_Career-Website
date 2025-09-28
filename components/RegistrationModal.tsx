@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useAuth } from '@/lib/auth/AuthContextBackend';
+import { useAuth } from '@/lib/auth/AuthContext';
 import { X, ChevronLeft, ChevronRight, User, GraduationCap } from 'lucide-react';
 
 interface RegistrationModalProps {
@@ -27,11 +27,44 @@ export default function RegistrationModal({ isOpen, onClose }: RegistrationModal
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [passwordStrength, setPasswordStrength] = useState(0);
   const { register } = useAuth();
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
     setError(''); // Clear error when user starts typing
+    
+    // Calculate password strength
+    if (field === 'password') {
+      const strength = calculatePasswordStrength(value);
+      setPasswordStrength(strength);
+    }
+  };
+
+  const calculatePasswordStrength = (password: string): number => {
+    let strength = 0;
+    if (password.length >= 8) strength++;
+    if (/[A-Z]/.test(password)) strength++;
+    if (/[a-z]/.test(password)) strength++;
+    if (/\d/.test(password)) strength++;
+    if (/[!@#$%^&*(),.?":{}|<>]/.test(password)) strength++;
+    return strength;
+  };
+
+  const getPasswordStrengthColor = (strength: number): string => {
+    if (strength <= 1) return 'bg-red-500';
+    if (strength <= 2) return 'bg-orange-500';
+    if (strength <= 3) return 'bg-yellow-500';
+    if (strength <= 4) return 'bg-blue-500';
+    return 'bg-green-500';
+  };
+
+  const getPasswordStrengthText = (strength: number): string => {
+    if (strength <= 1) return 'Very Weak';
+    if (strength <= 2) return 'Weak';
+    if (strength <= 3) return 'Fair';
+    if (strength <= 4) return 'Good';
+    return 'Strong';
   };
 
   const validateStep1 = () => {
@@ -51,16 +84,40 @@ export default function RegistrationModal({ isOpen, onClose }: RegistrationModal
       setError('Please enter a password');
       return false;
     }
-    if (formData.password.length < 6) {
-      setError('Password must be at least 6 characters long');
+    
+    // Enhanced password validation
+    const passwordErrors = [];
+    if (formData.password.length < 8) {
+      passwordErrors.push('Password must be at least 8 characters long');
+    }
+    if (!/[A-Z]/.test(formData.password)) {
+      passwordErrors.push('Password must contain at least one uppercase letter');
+    }
+    if (!/[a-z]/.test(formData.password)) {
+      passwordErrors.push('Password must contain at least one lowercase letter');
+    }
+    if (!/\d/.test(formData.password)) {
+      passwordErrors.push('Password must contain at least one number');
+    }
+    if (!/[!@#$%^&*(),.?":{}|<>]/.test(formData.password)) {
+      passwordErrors.push('Password must contain at least one special character');
+    }
+    
+    if (passwordErrors.length > 0) {
+      setError(passwordErrors.join(', '));
       return false;
     }
+    
     if (formData.password !== formData.confirmPassword) {
       setError('Passwords do not match');
       return false;
     }
     if (!formData.mobile || formData.mobile.length !== 10) {
       setError('Please enter a valid 10-digit mobile number');
+      return false;
+    }
+    if (!/^[6-9]\d{9}$/.test(formData.mobile)) {
+      setError('Please enter a valid mobile number starting with 6-9');
       return false;
     }
     return true;
@@ -114,50 +171,79 @@ export default function RegistrationModal({ isOpen, onClose }: RegistrationModal
     setIsLoading(true);
     setError('');
 
-    const year = parseInt(formData.yearOfPassout);
-    const cgpa = parseFloat(formData.cgpaOrPercentage);
+    try {
+      const year = parseInt(formData.yearOfPassout);
+      const cgpa = parseFloat(formData.cgpaOrPercentage);
 
-    const result = await register(
-      formData.name,
-      formData.email,
-      formData.password,
-      formData.mobile,
-      formData.qualification,
-      formData.stream,
-      year,
-      cgpa
-    );
+      // Validate year and CGPA before sending
+      if (isNaN(year) || year < 1990 || year > new Date().getFullYear() + 5) {
+        setError('Please enter a valid year of passout');
+        setIsLoading(false);
+        return;
+      }
 
-    if (result.success) {
-      setShowSuccess(true);
-      // Reset form
-      setFormData({
-        name: '',
-        email: '',
-        password: '',
-        confirmPassword: '',
-        mobile: '',
-        qualification: '',
-        stream: '',
-        yearOfPassout: '',
-        cgpaOrPercentage: '',
-      });
-      setCurrentStep(1);
-      
-      // Close modal and redirect after showing success message
-      setTimeout(() => {
-        setShowSuccess(false);
-        onClose();
-        // Navigate to homepage
-        if (typeof window !== 'undefined') {
-          window.location.href = '/';
+      if (isNaN(cgpa) || cgpa < 0 || cgpa > 100) {
+        setError('Please enter a valid CGPA/Percentage (0-100)');
+        setIsLoading(false);
+        return;
+      }
+
+      const result = await register(
+        formData.name,
+        formData.email,
+        formData.password,
+        formData.mobile,
+        formData.qualification,
+        formData.stream,
+        year,
+        cgpa
+      );
+
+      if (result.success) {
+        setShowSuccess(true);
+        // Reset form
+        setFormData({
+          name: '',
+          email: '',
+          password: '',
+          confirmPassword: '',
+          mobile: '',
+          qualification: '',
+          stream: '',
+          yearOfPassout: '',
+          cgpaOrPercentage: '',
+        });
+        setCurrentStep(1);
+        
+        // Close modal and redirect after showing success message
+        setTimeout(() => {
+          setShowSuccess(false);
+          onClose();
+          // Navigate to homepage
+          if (typeof window !== 'undefined') {
+            window.location.href = '/';
+          }
+        }, 2000);
+      } else {
+        // Handle different types of errors
+        if (result.error?.includes('Password does not meet requirements')) {
+          setError('Password requirements not met. Please check the password criteria.');
+        } else if (result.error?.includes('User already exists')) {
+          setError('An account with this email already exists. Please try logging in instead.');
+        } else if (result.error?.includes('Invalid email')) {
+          setError('Please enter a valid email address.');
+        } else if (result.error?.includes('Invalid mobile')) {
+          setError('Please enter a valid 10-digit mobile number starting with 6-9.');
+        } else {
+          setError(result.error || 'Registration failed. Please try again.');
         }
-      }, 2000);
-    } else {
-      setError(result.error || 'Registration failed');
+      }
+    } catch (error) {
+      console.error('Registration error:', error);
+      setError('An unexpected error occurred. Please try again.');
+    } finally {
+      setIsLoading(false);
     }
-
-    setIsLoading(false);
   };
 
   const fillTestData = () => {
@@ -311,6 +397,28 @@ export default function RegistrationModal({ isOpen, onClose }: RegistrationModal
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-[hsl(196,80%,45%)]"
                   placeholder="Create a password"
                 />
+                {formData.password && (
+                  <div className="mt-2">
+                    <div className="flex items-center space-x-2">
+                      <div className="flex-1 bg-gray-200 rounded-full h-2">
+                        <div
+                          className={`h-2 rounded-full transition-all duration-300 ${getPasswordStrengthColor(passwordStrength)}`}
+                          style={{ width: `${(passwordStrength / 5) * 100}%` }}
+                        />
+                      </div>
+                      <span className={`text-xs font-medium ${
+                        passwordStrength <= 2 ? 'text-red-600' :
+                        passwordStrength <= 3 ? 'text-yellow-600' :
+                        passwordStrength <= 4 ? 'text-blue-600' : 'text-green-600'
+                      }`}>
+                        {getPasswordStrengthText(passwordStrength)}
+                      </span>
+                    </div>
+                    <div className="mt-1 text-xs text-gray-600">
+                      Password must contain: 8+ characters, uppercase, lowercase, number, and special character
+                    </div>
+                  </div>
+                )}
               </div>
 
               <div>

@@ -3,7 +3,7 @@
 import Logo from '@/components/ui/Logo';
 import { SafeAvatar } from '@/components/ui/SafeImage';
 import { useProgressiveEnhancement } from '@/hooks/useProgressiveEnhancement';
-import { useAuth } from '@/lib/auth/AuthContextBackend';
+import { useAuth } from '@/lib/auth/AuthContext';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 

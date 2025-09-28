@@ -1,7 +1,7 @@
 'use client';
 
 import MainNavbar from '@/components/mainNavbar';
-import { useAuth } from '@/lib/auth/AuthContextBackend';
+import { useAuth } from '@/lib/auth/AuthContext';
 import {
     Award,
     BookOpen,

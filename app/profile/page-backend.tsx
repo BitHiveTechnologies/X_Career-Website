@@ -7,7 +7,7 @@ import {
     UserProfile
 } from '@/lib/api';
 import { getUserProfile } from '@/lib/api/auth';
-import { useAuth } from '@/lib/auth/AuthContextBackend';
+import { useAuth } from '@/lib/auth/AuthContext';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';

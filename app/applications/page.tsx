@@ -2,7 +2,7 @@
 
 import MainNavbar from '@/components/mainNavbar';
 import { ApiResponse, ApplicationWithJob, FrontendJob, PaginatedResponse, applicationService } from '@/lib/api';
-import { useAuth } from '@/lib/auth/AuthContextBackend';
+import { useAuth } from '@/lib/auth/AuthContext';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
