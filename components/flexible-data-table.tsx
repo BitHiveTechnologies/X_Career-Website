@@ -57,9 +57,24 @@ import {
 interface FlexibleDataTableProps {
   data: any[]
   columns: { key: string; label: string }[]
+  onSendNotification?: (jobId: string, jobTitle: string) => void
+  onViewDetails?: (jobId: string) => void
+  onEdit?: (jobId: string) => void
+  onDelete?: (jobId: string) => void
+  showNotificationAction?: boolean
+  sendingNotifications?: {[key: string]: boolean}
 }
 
-export function FlexibleDataTable({ data, columns }: FlexibleDataTableProps) {
+export function FlexibleDataTable({ 
+  data, 
+  columns, 
+  onSendNotification,
+  onViewDetails,
+  onEdit,
+  onDelete,
+  showNotificationAction = false,
+  sendingNotifications = {}
+}: FlexibleDataTableProps) {
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
@@ -127,22 +142,62 @@ export function FlexibleDataTable({ data, columns }: FlexibleDataTableProps) {
     {
       id: "actions",
       header: "Actions",
-      cell: ({ row }: { row: Row<any> }) => (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreVerticalIcon className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuItem>View Details</DropdownMenuItem>
-            <DropdownMenuItem>Edit</DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem className="text-red-600">Delete</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      ),
+      cell: ({ row }: { row: Row<any> }) => {
+        const jobId = row.original._id || row.original.id;
+        const jobTitle = row.original.title;
+        
+        return (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="h-8 w-8 p-0">
+                <span className="sr-only">Open menu</span>
+                <MoreVerticalIcon className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              {onViewDetails && (
+                <DropdownMenuItem onClick={() => onViewDetails(jobId)}>
+                  View Details
+                </DropdownMenuItem>
+              )}
+              {onEdit && (
+                <DropdownMenuItem onClick={() => onEdit(jobId)}>
+                  Edit
+                </DropdownMenuItem>
+              )}
+              {showNotificationAction && onSendNotification && (
+                <DropdownMenuItem 
+                  onClick={() => onSendNotification(jobId, jobTitle)}
+                  className="text-blue-600"
+                  disabled={sendingNotifications[jobId]}
+                >
+                  {sendingNotifications[jobId] ? (
+                    <>
+                      <span className="animate-spin mr-2">⏳</span>
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      📧 Send Notification
+                    </>
+                  )}
+                </DropdownMenuItem>
+              )}
+              {onDelete && (
+                <>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem 
+                    onClick={() => onDelete(jobId)}
+                    className="text-red-600"
+                  >
+                    Delete
+                  </DropdownMenuItem>
+                </>
+              )}
+            </DropdownMenuContent>
+          </DropdownMenu>
+        );
+      },
     },
   ]
 

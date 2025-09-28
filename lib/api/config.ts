@@ -126,6 +126,16 @@ export const API_ENDPOINTS = {
     QUEUE_STATUS: '/api/v1/notifications/queue-status',
   },
   
+  // Job Alerts (Enhanced Email Notification System)
+  JOB_ALERTS: {
+    STATISTICS: '/api/v1/jobs/alerts/statistics',
+    SEND_FOR_JOB: (jobId: string) => `/api/v1/jobs/alerts/send/${jobId}`,
+    SEND_ALL: '/api/v1/jobs/alerts/send-all',
+    RETRY_FAILED: '/api/v1/jobs/alerts/retry-failed',
+    SCHEDULER_STATUS: '/api/v1/jobs/alerts/scheduler/status',
+    SCHEDULER_TRIGGER: '/api/v1/jobs/alerts/scheduler/trigger',
+  },
+  
   // Admin
   ADMIN: {
     DASHBOARD: '/api/v1/admin/dashboard',

@@ -7,7 +7,7 @@ import { SectionCards } from "@/components/section-cards"
 import { SharedLayout } from "@/components/shared-layout"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { adminService, jobService } from "@/lib/api/services"
+import { adminService, jobService, jobAlertService } from "@/lib/api/services"
 import { useAuth } from "@/lib/auth/AuthContext"
 import { Briefcase, CreditCard, GraduationCap, Plus, Users } from "lucide-react"
 import { useRouter } from "next/navigation"
@@ -32,6 +32,7 @@ export default function Page() {
   const [jobs, setJobs] = useState<any[]>([])
   const [internships, setInternships] = useState<any[]>([])
   const [customers, setCustomers] = useState<any[]>([])
+  const [sendingNotifications, setSendingNotifications] = useState<{[key: string]: boolean}>({})
 
   // Check if user is admin
   useEffect(() => {
@@ -200,6 +201,40 @@ export default function Page() {
       setIsLoading(false)
     }
   }
+
+  const handleSendNotification = async (jobId: string, jobTitle: string) => {
+    try {
+      setSendingNotifications(prev => ({ ...prev, [jobId]: true }));
+      
+      console.log(`📧 Sending job alerts for job: ${jobTitle} (${jobId})`);
+      
+      const response = await jobAlertService.sendForJob(jobId, {
+        minMatchScore: 50, // 50% minimum match
+        maxUsers: 100,
+        dryRun: false
+      });
+      
+      if (response.success) {
+        const stats = response.data.stats;
+        toast.success(`📧 Job alerts sent successfully for "${jobTitle}"!
+        
+📊 Results:
+• Eligible Users: ${stats.totalEligibleUsers}
+• Emails Sent: ${stats.emailsSent}
+• Failed: ${stats.emailsFailed}
+• Duplicates Prevented: ${stats.duplicateNotifications}
+• Users Without Profile: ${stats.usersWithoutProfile}
+• Users With Inactive Subscription: ${stats.usersWithInactiveSubscription}`);
+      } else {
+        toast.error(`Failed to send job alerts for "${jobTitle}": ${response.error?.message || 'Unknown error'}`);
+      }
+    } catch (error: any) {
+      console.error('Error sending job alerts:', error);
+      toast.error(`Error sending job alerts for "${jobTitle}": ${error.message}`);
+    } finally {
+      setSendingNotifications(prev => ({ ...prev, [jobId]: false }));
+    }
+  };
 
   const handleQuickCreate = async (formData: any) => {
     try {
@@ -464,7 +499,13 @@ export default function Page() {
                   )}
                 </div>
               </div>
-              <FlexibleDataTable data={getTableData()} columns={getTableColumns()} />
+              <FlexibleDataTable 
+                data={getTableData()} 
+                columns={getTableColumns()} 
+                onSendNotification={handleSendNotification}
+                showNotificationAction={true}
+                sendingNotifications={sendingNotifications}
+              />
             </TabsContent>
             
             <TabsContent value="internships" className="mt-6">
@@ -482,7 +523,13 @@ export default function Page() {
                   )}
                 </div>
               </div>
-              <FlexibleDataTable data={getTableData()} columns={getTableColumns()} />
+              <FlexibleDataTable 
+                data={getTableData()} 
+                columns={getTableColumns()} 
+                onSendNotification={handleSendNotification}
+                showNotificationAction={true}
+                sendingNotifications={sendingNotifications}
+              />
             </TabsContent>
             
             <TabsContent value="payments" className="mt-6">

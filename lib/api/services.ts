@@ -592,6 +592,77 @@ export class NotificationService {
 }
 
 // ============================================================================
+// JOB ALERT SERVICES (Enhanced Email Notification System)
+// ============================================================================
+
+export class JobAlertService {
+  /**
+   * Get job alert statistics (admin only)
+   */
+  static async getStatistics(jobId?: string): Promise<ApiResponse<any>> {
+    const url = jobId 
+      ? `${API_ENDPOINTS.JOB_ALERTS.STATISTICS}?jobId=${jobId}`
+      : API_ENDPOINTS.JOB_ALERTS.STATISTICS;
+    return apiClient.get(url);
+  }
+
+  /**
+   * Send job alerts for a specific job (admin only)
+   */
+  static async sendForJob(jobId: string, options: {
+    minMatchScore?: number;
+    maxUsers?: number;
+    dryRun?: boolean;
+  } = {}): Promise<ApiResponse<any>> {
+    const payload = {
+      minMatchScore: options.minMatchScore || 50,
+      maxUsers: options.maxUsers || 100,
+      dryRun: options.dryRun || false
+    };
+    return apiClient.post(API_ENDPOINTS.JOB_ALERTS.SEND_FOR_JOB(jobId), payload);
+  }
+
+  /**
+   * Send job alerts for all active jobs (admin only)
+   */
+  static async sendForAllJobs(options: {
+    minMatchScore?: number;
+    maxUsersPerJob?: number;
+    dryRun?: boolean;
+  } = {}): Promise<ApiResponse<any>> {
+    const payload = {
+      minMatchScore: options.minMatchScore || 50,
+      maxUsersPerJob: options.maxUsersPerJob || 100,
+      dryRun: options.dryRun || false
+    };
+    return apiClient.post(API_ENDPOINTS.JOB_ALERTS.SEND_ALL, payload);
+  }
+
+  /**
+   * Retry failed notifications (admin only)
+   */
+  static async retryFailed(jobId?: string): Promise<ApiResponse<any>> {
+    const payload = jobId ? { jobId } : {};
+    return apiClient.post(API_ENDPOINTS.JOB_ALERTS.RETRY_FAILED, payload);
+  }
+
+  /**
+   * Get scheduler status (admin only)
+   */
+  static async getSchedulerStatus(): Promise<ApiResponse<any>> {
+    return apiClient.get(API_ENDPOINTS.JOB_ALERTS.SCHEDULER_STATUS);
+  }
+
+  /**
+   * Trigger scheduler task (admin only)
+   */
+  static async triggerSchedulerTask(task: 'jobAlerts' | 'retryFailed', dryRun: boolean = false): Promise<ApiResponse<any>> {
+    const payload = { task, dryRun };
+    return apiClient.post(API_ENDPOINTS.JOB_ALERTS.SCHEDULER_TRIGGER, payload);
+  }
+}
+
+// ============================================================================
 // HEALTH SERVICES
 // ============================================================================
 
@@ -624,6 +695,7 @@ export const paymentService = PaymentService;
 export const matchingService = MatchingService;
 export const adminService = AdminService;
 export const notificationService = NotificationService;
+export const jobAlertService = JobAlertService;
 export const healthService = HealthService;
 
 // Export individual service methods for convenience
@@ -695,6 +767,15 @@ export const {
   sendJobAlertEmail,
   getEmailQueueStatus,
 } = NotificationService;
+
+export const {
+  getStatistics,
+  sendForJob,
+  sendForAllJobs,
+  retryFailed,
+  getSchedulerStatus,
+  triggerSchedulerTask,
+} = JobAlertService;
 
 export const {
   checkHealth,
