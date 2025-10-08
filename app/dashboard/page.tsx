@@ -33,6 +33,9 @@ export default function Page() {
   const [internships, setInternships] = useState<any[]>([])
   const [customers, setCustomers] = useState<any[]>([])
   const [sendingNotifications, setSendingNotifications] = useState<{[key: string]: boolean}>({})
+  const [alertStats, setAlertStats] = useState<any>(null)
+  const [sendingAllAlerts, setSendingAllAlerts] = useState(false)
+  const [retryingFailed, setRetryingFailed] = useState(false)
 
   // Check if user is admin
   useEffect(() => {
@@ -69,6 +72,7 @@ export default function Page() {
     if (!authLoading) {
       console.log('🔍 Dashboard: Starting data fetch (bulletproof mode)...');
       fetchDashboardData()
+      fetchAlertStats() // Fetch job alert statistics
     } else {
       console.log('🔍 Dashboard: Still loading auth state');
     }
@@ -113,13 +117,20 @@ export default function Page() {
       console.log('🔍 fetchDashboardData: Starting...');
       setIsLoading(true)
       
-      // BULLETPROOF APPROACH: Use working admin token directly
-      const workingAdminToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGQ0Yzg4MjkzYTliMTQ4OWZjZTE0MDciLCJlbWFpbCI6ImFkbWluQG5vdGlmeXguY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzU4OTcwODYzLCJleHAiOjE3NTk1NzU2NjMsImF1ZCI6Im5vdGlmeXgtdXNlcnMiLCJpc3MiOiJub3RpZnl4LWJhY2tlbmQifQ.s6XYMOZgmtxvQYnKKoyut2ebrm_oFY0JqmGIC11S_-k';
+      // Use the authenticated user's token from localStorage
+      const token = typeof window !== 'undefined' ? localStorage.getItem('careerx_token') : null;
       
-      // Set the working token in the API client
+      if (!token) {
+        console.error('❌ No authentication token found');
+        toast.error('Please log in again');
+        router.push('/login');
+        return;
+      }
+      
+      // Ensure the token is set in the API client
       const { apiClient } = await import('@/lib/api/client');
-      apiClient.setToken(workingAdminToken);
-      console.log('✅ Working admin token set for API calls');
+      apiClient.setToken(token);
+      console.log('✅ Using authenticated user token for API calls');
       
       // Fetch customers with bulletproof error handling
       try {
@@ -202,6 +213,19 @@ export default function Page() {
     }
   }
 
+  // Fetch job alert statistics
+  const fetchAlertStats = async () => {
+    try {
+      const response = await jobAlertService.getStatistics();
+      if (response.success) {
+        setAlertStats(response.data.statistics);
+      }
+    } catch (error) {
+      console.error('Error fetching alert statistics:', error);
+    }
+  };
+
+  // Send alerts for a specific job
   const handleSendNotification = async (jobId: string, jobTitle: string) => {
     try {
       setSendingNotifications(prev => ({ ...prev, [jobId]: true }));
@@ -225,6 +249,9 @@ export default function Page() {
 • Duplicates Prevented: ${stats.duplicateNotifications}
 • Users Without Profile: ${stats.usersWithoutProfile}
 • Users With Inactive Subscription: ${stats.usersWithInactiveSubscription}`);
+        
+        // Refresh statistics
+        fetchAlertStats();
       } else {
         toast.error(`Failed to send job alerts for "${jobTitle}": ${response.error?.message || 'Unknown error'}`);
       }
@@ -235,6 +262,122 @@ export default function Page() {
       setSendingNotifications(prev => ({ ...prev, [jobId]: false }));
     }
   };
+
+  // Send alerts to ALL active jobs
+  const handleSendAllAlerts = async () => {
+    try {
+      setSendingAllAlerts(true);
+      
+      console.log('📧 Sending job alerts for ALL active jobs...');
+      toast.info('Sending alerts to all active jobs. This may take a minute...');
+      
+      const response = await jobAlertService.sendForAllJobs({
+        minMatchScore: 50,
+        maxUsersPerJob: 100,
+        dryRun: false
+      });
+      
+      if (response.success) {
+        const totalStats = response.data.totalStats;
+        toast.success(`📧 All job alerts sent successfully!
+        
+📊 Total Results:
+• Jobs Processed: ${response.data.totalJobs}
+• Total Eligible Users: ${totalStats.totalEligibleUsers}
+• Total Emails Sent: ${totalStats.emailsSent}
+• Total Failed: ${totalStats.emailsFailed}
+• Duplicates Prevented: ${totalStats.duplicateNotifications}
+• Users Without Profile: ${totalStats.usersWithoutProfile}
+• Inactive Subscriptions: ${totalStats.usersWithInactiveSubscription}`);
+        
+        // Refresh statistics
+        fetchAlertStats();
+      } else {
+        toast.error(`Failed to send all job alerts: ${response.error?.message || 'Unknown error'}`);
+      }
+    } catch (error: any) {
+      console.error('Error sending all job alerts:', error);
+      toast.error(`Error sending all job alerts: ${error.message}`);
+    } finally {
+      setSendingAllAlerts(false);
+    }
+  };
+
+  // Retry failed notifications
+  const handleRetryFailed = async () => {
+    try {
+      setRetryingFailed(true);
+      
+      console.log('🔄 Retrying failed notifications...');
+      toast.info('Retrying failed notifications...');
+      
+      const response = await jobAlertService.retryFailed();
+      
+      if (response.success) {
+        const result = response.data.result;
+        toast.success(`🔄 Retry completed!
+        
+📊 Results:
+• Retried: ${result.retried}
+• Successful: ${result.successful}
+• Still Failed: ${result.failed}`);
+        
+        // Refresh statistics
+        fetchAlertStats();
+      } else {
+        toast.error(`Failed to retry notifications: ${response.error?.message || 'Unknown error'}`);
+      }
+    } catch (error: any) {
+      console.error('Error retrying failed notifications:', error);
+      toast.error(`Error retrying notifications: ${error.message}`);
+    } finally {
+      setRetryingFailed(false);
+    }
+  };
+
+  // Send job matching alerts to all users (triggered from user row for convenience)
+  const handleSendUserNotification = async (userId: string, userEmail: string) => {
+    try {
+      setSendingNotifications(prev => ({ ...prev, [userId]: true }));
+      
+      console.log(`📧 Triggering job alerts for all users (initiated from ${userEmail})`);
+      toast.info(`Sending job alerts to all users with matching profiles (including ${userEmail})...`);
+      
+      // Send alerts for all active jobs to all matching users
+      // Note: Backend doesn't support user-specific filtering, so this sends to all matching users
+      const response = await jobAlertService.sendForAllJobs({
+        minMatchScore: 50,
+        maxUsersPerJob: 100,
+        dryRun: false
+      });
+      
+      if (response.success) {
+        const totalStats = response.data.totalStats;
+        const matchingJobs = response.data.totalJobs || 0;
+        
+        toast.success(`📧 Job alerts sent successfully!
+        
+📊 Results:
+• Jobs Processed: ${matchingJobs}
+• Total Users Notified: ${totalStats.emailsSent}
+• Failed: ${totalStats.emailsFailed}
+• Duplicates Prevented: ${totalStats.duplicateNotifications}
+
+Note: All users with matching profiles (≥50%) were notified, including ${userEmail} if their profile matches.`);
+        
+        // Refresh statistics
+        fetchAlertStats();
+      } else {
+        toast.error(`Failed to send job alerts: ${response.error?.message || 'Unknown error'}`);
+      }
+    } catch (error: any) {
+      console.error('Error sending notifications:', error);
+      toast.error(`Error sending job alerts: ${error.message}`);
+    } finally {
+      setSendingNotifications(prev => ({ ...prev, [userId]: false }));
+    }
+  };
+
 
   const handleQuickCreate = async (formData: any) => {
     try {
@@ -401,6 +544,120 @@ export default function Page() {
         <div className="px-4 lg:px-6">
           <ChartAreaInteractive />
         </div>
+
+        {/* Job Alert Statistics & Actions */}
+        <div className="px-4 lg:px-6">
+          <div className="bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 rounded-lg p-6 border border-blue-200 dark:border-blue-800">
+            <div className="flex items-center justify-between mb-4">
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 flex items-center gap-2">
+                  📧 Job Alert System
+                  {alertStats && (
+                    <span className="text-sm font-normal text-gray-600 dark:text-gray-400">
+                      (Percentage-based matching ≥50%)
+                    </span>
+                  )}
+                </h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                  Send job/internship alerts to users with matching profiles
+                </p>
+              </div>
+              <Button
+                onClick={fetchAlertStats}
+                variant="outline"
+                size="sm"
+                className="text-xs"
+              >
+                🔄 Refresh Stats
+              </Button>
+            </div>
+
+            {/* Statistics Cards */}
+            {alertStats && (
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+                <div className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border border-gray-200 dark:border-gray-700">
+                  <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">
+                    {alertStats.totalNotifications || 0}
+                  </div>
+                  <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+                    Total Notifications
+                  </div>
+                </div>
+                <div className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border border-green-200 dark:border-green-700">
+                  <div className="text-2xl font-bold text-green-600 dark:text-green-400">
+                    {alertStats.sentNotifications || 0}
+                  </div>
+                  <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+                    Sent Successfully
+                  </div>
+                </div>
+                <div className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border border-red-200 dark:border-red-700">
+                  <div className="text-2xl font-bold text-red-600 dark:text-red-400">
+                    {alertStats.failedNotifications || 0}
+                  </div>
+                  <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+                    Failed
+                  </div>
+                </div>
+                <div className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border border-yellow-200 dark:border-yellow-700">
+                  <div className="text-2xl font-bold text-yellow-600 dark:text-yellow-400">
+                    {alertStats.pendingNotifications || 0}
+                  </div>
+                  <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+                    Pending
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Action Buttons */}
+            <div className="flex flex-wrap gap-3">
+              <Button
+                onClick={handleSendAllAlerts}
+                disabled={sendingAllAlerts || isLoading}
+                className="bg-blue-600 hover:bg-blue-700 text-white"
+              >
+                {sendingAllAlerts ? (
+                  <>
+                    <span className="animate-spin mr-2">⏳</span>
+                    Sending to All Jobs...
+                  </>
+                ) : (
+                  <>
+                    📧 Send Alerts to All Jobs
+                  </>
+                )}
+              </Button>
+              
+              <Button
+                onClick={handleRetryFailed}
+                disabled={retryingFailed || isLoading || (alertStats?.failedNotifications === 0)}
+                variant="outline"
+                className="border-orange-300 hover:bg-orange-50 dark:border-orange-700 dark:hover:bg-orange-900/20"
+              >
+                {retryingFailed ? (
+                  <>
+                    <span className="animate-spin mr-2">⏳</span>
+                    Retrying...
+                  </>
+                ) : (
+                  <>
+                    🔄 Retry Failed Notifications
+                  </>
+                )}
+              </Button>
+
+              <div className="ml-auto flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+                <span className="px-3 py-1 bg-white dark:bg-gray-800 rounded-full border border-gray-300 dark:border-gray-600">
+                  Min Match: 50%
+                </span>
+                <span className="px-3 py-1 bg-white dark:bg-gray-800 rounded-full border border-gray-300 dark:border-gray-600">
+                  Max Users: 100/job
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
         
         {/* Tabbed Data Tables */}
         <div className="px-4 lg:px-6">
@@ -481,7 +738,17 @@ export default function Page() {
                   </Button>
                 </div>
               </div>
-              <FlexibleDataTable data={getTableData()} columns={getTableColumns()} />
+              <FlexibleDataTable 
+                data={getTableData()} 
+                columns={getTableColumns()}
+                onSendNotification={(id, email) => {
+                  // For customers, send job matching alerts
+                  handleSendUserNotification(id, email);
+                }}
+                showNotificationAction={true}
+                notificationLabel="Send Job Alerts"
+                sendingNotifications={sendingNotifications}
+              />
             </TabsContent>
             
             <TabsContent value="jobs" className="mt-6">
@@ -504,6 +771,7 @@ export default function Page() {
                 columns={getTableColumns()} 
                 onSendNotification={handleSendNotification}
                 showNotificationAction={true}
+                notificationLabel="Send Job Alert"
                 sendingNotifications={sendingNotifications}
               />
             </TabsContent>
@@ -528,10 +796,11 @@ export default function Page() {
                 columns={getTableColumns()} 
                 onSendNotification={handleSendNotification}
                 showNotificationAction={true}
+                notificationLabel="Send Internship Alert"
                 sendingNotifications={sendingNotifications}
               />
             </TabsContent>
-            
+
             <TabsContent value="payments" className="mt-6">
               <FlexibleDataTable data={getTableData()} columns={getTableColumns()} />
             </TabsContent>

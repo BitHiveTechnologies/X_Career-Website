@@ -62,6 +62,7 @@ interface FlexibleDataTableProps {
   onEdit?: (jobId: string) => void
   onDelete?: (jobId: string) => void
   showNotificationAction?: boolean
+  notificationLabel?: string
   sendingNotifications?: {[key: string]: boolean}
 }
 
@@ -73,6 +74,7 @@ export function FlexibleDataTable({
   onEdit,
   onDelete,
   showNotificationAction = false,
+  notificationLabel = "Send Notification",
   sendingNotifications = {}
 }: FlexibleDataTableProps) {
   const [sorting, setSorting] = React.useState<SortingState>([])
@@ -178,7 +180,7 @@ export function FlexibleDataTable({
                     </>
                   ) : (
                     <>
-                      📧 Send Notification
+                      📧 {notificationLabel}
                     </>
                   )}
                 </DropdownMenuItem>

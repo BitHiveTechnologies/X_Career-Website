@@ -457,8 +457,9 @@ export class AuthService {
       const originalToken = apiClient.getToken();
       apiClient.setToken(token);
       
-      // Make a simple API call to validate the token
-      const response = await apiClient.get('/auth/validate');
+      // Use the correct backend endpoint for token validation
+      // The backend uses /api/v1/jwt-auth/me to verify tokens
+      const response = await apiClient.get(API_ENDPOINTS.AUTH.ME);
       
       // Restore original token
       if (originalToken) {
@@ -472,15 +473,6 @@ export class AuthService {
       console.error('Token validation error:', error);
       return false;
     }
-  }
-
-  /**
-   * Logout and clear all authentication data
-   */
-  logout(): void {
-    this.currentUser = null;
-    apiClient.clearToken();
-    this.notifyListeners(null);
   }
 
   // ============================================================================
