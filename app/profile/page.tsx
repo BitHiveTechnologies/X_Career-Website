@@ -19,6 +19,7 @@ import { useAuth } from '@/lib/auth/AuthContext';
 import {
     AlertCircle,
     CheckCircle,
+    Crown,
     Edit3,
     FileText,
     Github,
@@ -30,6 +31,7 @@ import {
     MapPin,
     Plus,
     Save,
+    Sparkles,
     User,
     X
 } from 'lucide-react';
@@ -345,13 +347,35 @@ export default function ProfilePage() {
                                     </div>
                             </div>
                             <div>
-                                <h1 className="text-3xl font-bold text-gray-900">
-                                    {user?.firstName} {user?.lastName}
-                                </h1>
-                                    <p className="text-gray-600 text-lg flex items-center gap-2">
+                                <div className="flex items-center gap-3">
+                                    <h1 className="text-3xl font-bold text-gray-900">
+                                        {user?.firstName} {user?.lastName}
+                                    </h1>
+                                    {/* Premium Badge */}
+                                    {user?.subscriptionInfo?.isActive && (
+                                        <Badge className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-white border-0 px-3 py-1 flex items-center gap-1">
+                                            <Crown className="w-4 h-4" />
+                                            {user.subscriptionPlan?.charAt(0).toUpperCase() + user.subscriptionPlan?.slice(1) || 'Premium'}
+                                        </Badge>
+                                    )}
+                                </div>
+                                    <p className="text-gray-600 text-lg flex items-center gap-2 mt-1">
                                         <Mail className="w-4 h-4" />
                                         {user?.email}
                                     </p>
+                                {/* Subscription Info */}
+                                {user?.subscriptionInfo?.isActive && (
+                                    <div className="flex items-center gap-2 mt-2 text-sm">
+                                        <Sparkles className="w-4 h-4 text-yellow-600" />
+                                        <span className="text-yellow-700 font-medium">
+                                            {user.subscriptionInfo.daysRemaining} days remaining
+                                        </span>
+                                        <span className="text-gray-400">•</span>
+                                        <span className="text-gray-600">
+                                            Valid until {new Date(user.subscriptionInfo.endDate).toLocaleDateString()}
+                                        </span>
+                                    </div>
+                                )}
                                 <div className="flex items-center mt-2">
                                     <span className="text-sm text-gray-500">Profile Completion:</span>
                                     <span className={`ml-2 font-semibold ${getCompletionColor(completion?.completionPercentage || 0)}`}>
@@ -822,6 +846,60 @@ export default function ProfilePage() {
                                 </Link>
                             </CardContent>
                         </Card>
+
+                        {/* Subscription Status Card */}
+                        {user?.subscriptionInfo && (
+                            <Card className={`bg-gradient-to-br ${user.subscriptionInfo.isActive ? 'from-yellow-50 to-orange-50 border-yellow-200' : 'from-gray-50 to-gray-100 border-gray-200'} backdrop-blur-sm shadow-xl mb-6`}>
+                                <CardHeader>
+                                    <CardTitle className="text-lg flex items-center gap-2">
+                                        <Crown className={`w-5 h-5 ${user.subscriptionInfo.isActive ? 'text-yellow-600' : 'text-gray-400'}`} />
+                                        Subscription Status
+                                    </CardTitle>
+                                </CardHeader>
+                                <CardContent className="space-y-3">
+                                    <div className="flex justify-between items-center">
+                                        <span className="text-sm text-gray-600">Plan</span>
+                                        <Badge className={user.subscriptionInfo.isActive ? 'bg-yellow-600 text-white' : 'bg-gray-400 text-white'}>
+                                            {user.subscriptionInfo.plan}
+                                        </Badge>
+                                    </div>
+                                    <div className="flex justify-between items-center">
+                                        <span className="text-sm text-gray-600">Status</span>
+                                        <Badge className={user.subscriptionInfo.isActive ? 'bg-green-600 text-white' : 'bg-gray-400 text-white'}>
+                                            {user.subscriptionInfo.isActive ? 'Active' : 'Inactive'}
+                                        </Badge>
+                                    </div>
+                                    {user.subscriptionInfo.isActive && (
+                                        <>
+                                            <div className="flex justify-between items-center">
+                                                <span className="text-sm text-gray-600">Days Remaining</span>
+                                                <span className="font-semibold text-yellow-700">{user.subscriptionInfo.daysRemaining}</span>
+                                            </div>
+                                            <div className="flex justify-between items-center">
+                                                <span className="text-sm text-gray-600">Expires On</span>
+                                                <span className="text-sm font-medium">{new Date(user.subscriptionInfo.endDate).toLocaleDateString()}</span>
+                                            </div>
+                                            <div className="pt-3 border-t border-yellow-200">
+                                                <div className="flex items-center gap-2 text-xs text-yellow-700">
+                                                    <Sparkles className="w-3 h-3" />
+                                                    <span>Enjoying premium benefits</span>
+                                                </div>
+                                            </div>
+                                        </>
+                                    )}
+                                    {!user.subscriptionInfo.isActive && (
+                                        <div className="pt-3 border-t border-gray-200">
+                                            <Link href="/subscriptions" className="block">
+                                                <Button className="w-full bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-white">
+                                                    <Crown className="w-4 h-4 mr-2" />
+                                                    Upgrade to Premium
+                                                </Button>
+                                            </Link>
+                                        </div>
+                                    )}
+                                </CardContent>
+                            </Card>
+                        )}
 
                         {/* Profile Stats */}
                         <Card className="bg-white/80 backdrop-blur-sm border-white/20 shadow-xl">

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 // Container component - using div with max-width instead
-import { PaymentModal } from '@/components/PaymentModal';
+import PaymentModal from '@/components/PaymentModal';
 import { SubscriptionManager } from '@/components/SubscriptionManager';
 import { SubscriptionPlan } from '@/lib/api/payment';
 

@@ -109,6 +109,19 @@ export interface RegisterResponse {
   };
 }
 
+export interface SubscriptionInfo {
+  id: string;
+  plan: string;
+  status: string;
+  amount: number;
+  startDate: string;
+  endDate: string;
+  daysRemaining: number;
+  isActive: boolean;
+  paymentId?: string;
+  orderId?: string;
+}
+
 export interface User {
   id: string;
   email: string;
@@ -117,6 +130,8 @@ export interface User {
   mobile?: string;
   role: 'user' | 'admin' | 'super_admin';
   subscriptionStatus: 'active' | 'inactive' | 'expired' | 'cancelled';
+  subscriptionPlan?: string; // 'free' | 'starter' | 'premium'
+  subscriptionInfo?: SubscriptionInfo;
   profile?: UserProfile;
   isProfileComplete: boolean;
   type?: string;

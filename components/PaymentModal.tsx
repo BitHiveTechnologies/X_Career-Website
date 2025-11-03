@@ -1,7 +1,9 @@
 'use client';
 
 import { CreateOrderRequest, paymentService, VerifyPaymentRequest } from '@/lib/api/payment';
+import { useAuth } from '@/lib/auth/AuthContext';
 import { Clock, CreditCard, Shield, X } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 interface PaymentModalProps {
@@ -24,6 +26,8 @@ declare global {
 }
 
 export default function PaymentModal({ isOpen, onClose, plan, onSuccess, onError }: PaymentModalProps) {
+  const router = useRouter();
+  const { refreshUser } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const [step, setStep] = useState<'order' | 'payment' | 'verification'>('order');
   const [orderId, setOrderId] = useState<string | null>(null);
@@ -133,8 +137,20 @@ export default function PaymentModal({ isOpen, onClose, plan, onSuccess, onError
       const verifyResponse = await paymentService.verifyPayment(verifyRequest);
       
       if (verifyResponse.success) {
+        // Call onSuccess callback
         onSuccess(verifyResponse.data);
+        
+        // Refresh user data to get updated subscription info from /me API
+        await refreshUser();
+        
+        // Close modal
         onClose();
+        
+        // Show success message
+        alert('🎉 Payment successful! Your subscription has been activated.');
+        
+        // Navigate to profile page
+        router.push('/profile');
       } else {
         throw new Error(verifyResponse.error?.message || 'Payment verification failed');
       }

@@ -54,10 +54,12 @@ export class AuthService {
 
       const response = await apiClient.post<LoginResponse>(API_ENDPOINTS.AUTH.LOGIN, loginData);
       
-      if (response.success && response.data) {
+      if (response.success && response.data && response.data.user) {
         // Set the token for future requests
         const token = response.data.token || response.data.accessToken;
-        apiClient.setToken(token);
+        if (token) {
+          apiClient.setToken(token);
+        }
         
         console.log('JWT Login response data:', response.data);
         
@@ -158,15 +160,28 @@ export class AuthService {
    */
   async getCurrentUser(): Promise<{ success: boolean; user?: User; error?: string }> {
     try {
-      const response = await apiClient.get<User>(API_ENDPOINTS.AUTH.ME);
+      const response = await apiClient.get<any>(API_ENDPOINTS.AUTH.ME);
       
       if (response.success && response.data) {
-        const validation = safeValidate(response.data, validateUser);
-        if (validation.isValid) {
-          return { success: true, user: validation.data! };
-        } else {
-          return { success: false, error: 'Invalid user data received' };
-        }
+        // Extract user data from response (could be nested in data.user)
+        const userData = response.data.user || response.data;
+        
+        // Build user object with subscription info
+        const user: User = {
+          id: userData.id,
+          email: userData.email,
+          firstName: userData.firstName,
+          lastName: userData.lastName,
+          mobile: userData.mobile,
+          role: userData.role as 'user' | 'admin' | 'super_admin',
+          subscriptionStatus: userData.subscriptionStatus || 'inactive',
+          subscriptionPlan: userData.subscriptionPlan,
+          subscriptionInfo: userData.subscriptionInfo,
+          isProfileComplete: userData.isProfileComplete || false,
+          avatar: userData.avatar
+        };
+        
+        return { success: true, user };
       }
       
       return { success: false, error: 'Failed to get user data' };

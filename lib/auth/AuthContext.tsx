@@ -26,6 +26,7 @@ interface AuthContextType {
     ) => Promise<{ success: boolean; error?: string }>;
     logout: () => void;
   checkAuthStatus: () => Promise<void>;
+  refreshUser: () => Promise<void>;
   updateProfile: (profileData: any) => Promise<{ success: boolean; error?: string }>;
   getProfileCompletion: () => Promise<any>;
 }
@@ -307,6 +308,23 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
+  const refreshUser = async (): Promise<void> => {
+    try {
+      const result = await authService.getCurrentUser();
+      
+      if (result.success && result.user) {
+        setUser(result.user);
+        
+        // Update localStorage
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('careerx_user', JSON.stringify(result.user));
+        }
+      }
+    } catch (error: any) {
+      console.error('Refresh user error:', error);
+    }
+  };
+
   // ============================================================================
   // EFFECTS
   // ============================================================================
@@ -327,6 +345,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         register,
         logout,
     checkAuthStatus,
+    refreshUser,
     updateProfile,
     getProfileCompletion,
     };

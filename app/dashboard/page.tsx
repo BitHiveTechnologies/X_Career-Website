@@ -50,6 +50,21 @@ export default function Page() {
     }
   }, [user, authLoading, router])
 
+  // Fetch dashboard data - MUST be before any early returns
+  useEffect(() => {
+    console.log('🔍 Dashboard: Auth state changed', { user: user?.email, role: user?.role, authLoading });
+    
+    // BULLETPROOF: Always fetch data for testing
+    if (!authLoading && user && (user.role === 'admin' || user.role === 'super_admin')) {
+      console.log('🔍 Dashboard: Starting data fetch (bulletproof mode)...');
+      fetchDashboardData()
+      fetchAlertStats() // Fetch job alert statistics
+    } else {
+      console.log('🔍 Dashboard: Still loading auth state or not admin');
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user, authLoading])
+
   // Show loading while checking authentication
   if (authLoading) {
     return (
@@ -63,20 +78,6 @@ export default function Page() {
   if (!user || (user.role !== 'admin' && user.role !== 'super_admin')) {
     return null
   }
-
-  // Fetch dashboard data
-  useEffect(() => {
-    console.log('🔍 Dashboard: Auth state changed', { user: user?.email, role: user?.role, authLoading });
-    
-    // BULLETPROOF: Always fetch data for testing
-    if (!authLoading) {
-      console.log('🔍 Dashboard: Starting data fetch (bulletproof mode)...');
-      fetchDashboardData()
-      fetchAlertStats() // Fetch job alert statistics
-    } else {
-      console.log('🔍 Dashboard: Still loading auth state');
-    }
-  }, [user, authLoading])
 
   // Show loading while checking auth
   if (authLoading) {

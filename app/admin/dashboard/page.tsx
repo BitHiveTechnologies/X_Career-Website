@@ -101,7 +101,8 @@ interface CustomerAnalytics {
 }
 
 export default function AdminDashboard() {
-  const { user, isAuthenticated, isAdmin } = useAuth();
+  const { user, isAuthenticated } = useAuth();
+  const isAdmin = user?.role === 'admin' || user?.role === 'super_admin';
   
   // Core data state
   const [customers, setCustomers] = useState<Customer[]>([]);
@@ -380,9 +381,9 @@ export default function AdminDashboard() {
 
   // Initial data fetch - wait for authentication to be ready
   useEffect(() => {
-    console.log('🔍 Admin Dashboard: Auth state changed', { isAuthenticated, isAdmin: isAdmin() });
+    console.log('🔍 Admin Dashboard: Auth state changed', { isAuthenticated, isAdmin });
     
-    if (isAuthenticated && isAdmin()) {
+    if (isAuthenticated && isAdmin) {
       console.log('🔍 Admin Dashboard: Starting data fetch...');
       fetchCustomers();
       fetchCustomerAnalytics();
@@ -393,7 +394,7 @@ export default function AdminDashboard() {
 
   // Refetch when filters or pagination change
   useEffect(() => {
-    if (isAuthenticated && isAdmin()) {
+    if (isAuthenticated && isAdmin) {
       fetchCustomers();
     }
   }, [filters, debouncedSearchQuery, pagination.currentPage, pagination.limit, fetchCustomers, isAuthenticated, isAdmin]);
@@ -476,7 +477,7 @@ export default function AdminDashboard() {
     );
   }
 
-  if (!isAdmin()) {
+  if (!isAdmin) {
     return (
       <div className="container mx-auto p-6">
         <Card>
@@ -525,7 +526,7 @@ export default function AdminDashboard() {
             onClick={() => {
               console.log('🔍 Debug: Current auth state:', { 
                 isAuthenticated, 
-                isAdmin: isAdmin(), 
+                isAdmin: isAdmin, 
                 user: user?.email,
                 token: getUserToken() ? 'Present' : 'Missing'
               });
@@ -961,7 +962,7 @@ export default function AdminDashboard() {
               <h4 className="font-medium">Authentication</h4>
               <p><strong>User Token:</strong> {getUserToken() ? 'Set' : 'Missing'}</p>
               <p><strong>Current User:</strong> {user?.email || 'Not logged in'}</p>
-            <p><strong>Is Admin:</strong> {isAdmin() ? 'Yes' : 'No'}</p>
+            <p><strong>Is Admin:</strong> {isAdmin ? 'Yes' : 'No'}</p>
             </div>
             <div className="space-y-2">
               <h4 className="font-medium">Data Status</h4>
