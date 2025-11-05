@@ -1,21 +1,19 @@
 'use client';
 
-import { Job } from '@/app/jobs/page';
 import MainNavbar from '@/components/mainNavbar';
+import { ApiResponse, ApplicationWithJob, FrontendJob, PaginatedResponse, applicationService } from '@/lib/api';
 import { useAuth } from '@/lib/auth/AuthContext';
-import { Internship, mockInternships, mockJobs } from '@/lib/mockData';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-type ApplicationStatus = 'applied' | 'under-review' | 'interview' | 'rejected' | 'accepted';
+type ApplicationStatus = 'applied' | 'under-review' | 'interview' | 'rejected' | 'accepted' | 'shortlisted' | 'withdrawn';
 
 interface Application {
-    id: number;
-    job: Job | Internship;
-    isInternship: boolean;
+    id: string;
+    job: FrontendJob;
     appliedDate: string;
-    status: ApplicationStatus;
+    status: 'applied' | 'shortlisted' | 'rejected' | 'withdrawn';
     lastUpdated: string;
     applicationMethod: 'quick-apply' | 'full-application' | 'external';
     notes: string;
@@ -55,6 +53,18 @@ const statusConfig = {
         icon: '🎉',
         description: 'Congratulations! Offer received',
     },
+    shortlisted: {
+        label: 'Shortlisted',
+        color: 'bg-green-100 text-green-800',
+        icon: '✅',
+        description: 'Application has been shortlisted',
+    },
+    withdrawn: {
+        label: 'Withdrawn',
+        color: 'bg-gray-100 text-gray-800',
+        icon: '↩️',
+        description: 'Application has been withdrawn',
+    },
 };
 
 export default function ApplicationsPage() {
@@ -65,68 +75,80 @@ export default function ApplicationsPage() {
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedApplication, setSelectedApplication] = useState<Application | null>(null);
 
-    // Mock applications data (in real app, this would come from backend)
-    const [applications, setApplications] = useState<Application[]>([
-        {
-            id: 1,
-            job: mockJobs[0],
-            isInternship: false,
-            appliedDate: '2024-01-20',
-            status: 'interview',
-            lastUpdated: '2024-01-22',
-            applicationMethod: 'full-application',
-            notes: 'Really excited about this role. Great company culture.',
-            interviewDate: '2024-01-25',
-            nextSteps: 'Technical interview scheduled for Friday',
-        },
-        {
-            id: 2,
-            job: mockJobs[1],
-            isInternship: false,
-            appliedDate: '2024-01-19',
-            status: 'under-review',
-            lastUpdated: '2024-01-21',
-            applicationMethod: 'quick-apply',
-            notes: 'Backend role with good growth opportunities',
-        },
-        {
-            id: 3,
-            job: mockInternships[0],
-            isInternship: true,
-            appliedDate: '2024-01-18',
-            status: 'accepted',
-            lastUpdated: '2024-01-23',
-            applicationMethod: 'full-application',
-            notes: 'Perfect internship for gaining frontend experience',
-            feedback: 'Impressed with your portfolio and enthusiasm for learning!',
-        },
-        {
-            id: 4,
-            job: mockJobs[3],
-            isInternship: false,
-            appliedDate: '2024-01-17',
-            status: 'applied',
-            lastUpdated: '2024-01-17',
-            applicationMethod: 'external',
-            notes: 'Data science role at top e-commerce company',
-        },
-        {
-            id: 5,
-            job: mockJobs[2],
-            isInternship: false,
-            appliedDate: '2024-01-15',
-            status: 'rejected',
-            lastUpdated: '2024-01-20',
-            applicationMethod: 'quick-apply',
-            notes: 'Full-stack position with competitive salary',
-            feedback:
-                'Thank you for your interest. We decided to move forward with other candidates.',
-        },
-    ]);
+    // Applications data from backend API
+    const [applications, setApplications] = useState<Application[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+
+    // Load applications from backend API
+    const loadApplications = async () => {
+        try {
+            setLoading(true);
+            setError(null);
+            
+            const response: ApiResponse<PaginatedResponse<ApplicationWithJob>> = await applicationService.getMyApplications();
+            
+            if (response.success && response.data) {
+                // Transform backend applications to frontend format
+                const transformedApplications: Application[] = response.data.data.map((app: ApplicationWithJob) => ({
+                    id: app.id,
+                    job: {
+                        id: app.job?.id || '',
+                        title: app.job?.title || '',
+                        company: app.job?.company || '',
+                        description: 'Job description not available',
+                        type: 'job' as const,
+                        eligibility: {
+                            qualifications: [],
+                            streams: [],
+                            passoutYears: [],
+                        },
+                        applicationDeadline: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(), // 30 days from now
+                        applicationLink: '#',
+                        location: 'remote' as const,
+                        salary: '',
+                        skills: [],
+                        isActive: true,
+                        createdAt: new Date().toISOString(),
+                        // FrontendJob additional properties
+                        isFeatured: false,
+                        isUrgent: false,
+                        applicantCount: 0,
+                        companyLogo: '',
+                        companySize: '',
+                        industry: '',
+                        benefits: [],
+                        companyType: 'Startup' as const,
+                        experienceRequired: '',
+                        jobType: '',
+                        employmentType: '',
+                        postedDate: new Date().toISOString().split('T')[0],
+                        isRemote: true,
+                    },
+                    appliedDate: app.appliedAt?.split('T')[0] || new Date().toISOString().split('T')[0],
+                    status: app.status as 'applied' | 'shortlisted' | 'rejected' | 'withdrawn',
+                    lastUpdated: app.appliedAt?.split('T')[0] || new Date().toISOString().split('T')[0],
+                    applicationMethod: 'full-application',
+                    notes: '',
+                }));
+                
+                setApplications(transformedApplications);
+            } else {
+                setError('Failed to load applications');
+            }
+        } catch (err) {
+            console.error('Error loading applications:', err);
+            setError('Failed to load applications');
+        } finally {
+            setLoading(false);
+        }
+    };
 
     useEffect(() => {
         if (!isAuthenticated) {
             router.push('/login?redirect=/applications');
+        } else {
+            loadApplications();
         }
     }, [isAuthenticated, router]);
 
@@ -614,7 +636,7 @@ export default function ApplicationsPage() {
                                                         >
                                                             {statusInfo.icon} {statusInfo.label}
                                                         </span>
-                                                        {application.isInternship && (
+                                                        {application.job.type === 'internship' && (
                                                             <span
                                                                 className="px-3 py-1 bg-purple-100 text-purple-800 text-xs font-medium rounded-full"
                                                                 data-oid="x6-aq15"
@@ -671,7 +693,7 @@ export default function ApplicationsPage() {
                                                         </div>
                                                     </div>
 
-                                                    {!application.isInternship &&
+                                                    {application.job.type !== 'internship' &&
                                                         'salary' in application.job &&
                                                         application.job.salary && (
                                                             <div data-oid="o2-j3ns">
@@ -690,7 +712,7 @@ export default function ApplicationsPage() {
                                                             </div>
                                                         )}
 
-                                                    {application.isInternship &&
+                                                    {application.job.type === 'internship' &&
                                                         'stipend' in application.job &&
                                                         application.job.stipend && (
                                                             <div data-oid="nekhpj2">
@@ -758,7 +780,7 @@ export default function ApplicationsPage() {
                                                 {application.feedback && (
                                                     <div
                                                         className={`border rounded-lg p-4 mb-4 ${
-                                                            application.status === 'accepted'
+                                                            application.status === 'shortlisted'
                                                                 ? 'bg-green-50 border-green-200'
                                                                 : 'bg-red-50 border-red-200'
                                                         }`}
@@ -771,7 +793,7 @@ export default function ApplicationsPage() {
                                                             <svg
                                                                 className={`h-5 w-5 mt-0.5 ${
                                                                     application.status ===
-                                                                    'accepted'
+                                                                    'shortlisted'
                                                                         ? 'text-green-600'
                                                                         : 'text-red-600'
                                                                 }`}
@@ -792,7 +814,7 @@ export default function ApplicationsPage() {
                                                                 <p
                                                                     className={`text-sm font-medium ${
                                                                         application.status ===
-                                                                        'accepted'
+                                                                        'shortlisted'
                                                                             ? 'text-green-800'
                                                                             : 'text-red-800'
                                                                     }`}
@@ -803,7 +825,7 @@ export default function ApplicationsPage() {
                                                                 <p
                                                                     className={`text-sm ${
                                                                         application.status ===
-                                                                        'accepted'
+                                                                        'shortlisted'
                                                                             ? 'text-green-700'
                                                                             : 'text-red-700'
                                                                     }`}
@@ -917,8 +939,8 @@ export default function ApplicationsPage() {
                                                         data-oid="8b05:4h"
                                                     >
                                                         {application.job.skills
-                                                            .slice(0, 5)
-                                                            .map((skill, index) => (
+                                                            ?.slice(0, 5)
+                                                            .map((skill: string, index: number) => (
                                                                 <span
                                                                     key={index}
                                                                     className="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full"
@@ -927,12 +949,12 @@ export default function ApplicationsPage() {
                                                                     {skill}
                                                                 </span>
                                                             ))}
-                                                        {application.job.skills.length > 5 && (
+                                                        {application.job.skills && application.job.skills.length > 5 && (
                                                             <span
                                                                 className="px-3 py-1 text-gray-500 text-xs"
                                                                 data-oid="tyxp.ef"
                                                             >
-                                                                +{application.job.skills.length - 5}{' '}
+                                                                +{(application.job.skills?.length || 0) - 5}{' '}
                                                                 more
                                                             </span>
                                                         )}

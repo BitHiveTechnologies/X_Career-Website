@@ -1,10 +1,10 @@
 'use client';
 
-import { Job } from '@/app/jobs/page';
+import { FrontendJob } from '@/lib/api';
 import { useState } from 'react';
 
 interface JobDetailsModalProps {
-    job: Job;
+    job: FrontendJob;
     isOpen: boolean;
     onClose: () => void;
     onApply: () => void;
@@ -251,7 +251,7 @@ export default function JobDetailsModal({ job, isOpen, onClose, onApply }: JobDe
                                             className="text-2xl font-bold text-orange-600"
                                             data-oid="w6rv_k7"
                                         >
-                                            {formatDate(job.postedDate).split(' ')[0]}
+                                            {formatDate(job.postedDate || '').split(' ')[0]}
                                         </div>
                                         <div className="text-sm text-gray-600" data-oid="mti6nnm">
                                             Posted
@@ -462,7 +462,7 @@ export default function JobDetailsModal({ job, isOpen, onClose, onApply }: JobDe
                                         Required Skills
                                     </h3>
                                     <div className="flex flex-wrap gap-2" data-oid="bt.lnxr">
-                                        {job.skills.map((skill, index) => (
+                                        {job.skills?.map((skill: string, index: number) => (
                                             <span
                                                 key={index}
                                                 className="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-2 rounded-full"
@@ -1112,7 +1112,7 @@ export default function JobDetailsModal({ job, isOpen, onClose, onApply }: JobDe
                         data-oid="::u1_8v"
                     >
                         <div className="text-sm text-gray-600" data-oid=".5ha9dp">
-                            Posted on {formatDate(job.postedDate)} • {job.applicantCount} applicants
+                            Posted on {formatDate(job.postedDate || '')} • {job.applicantCount} applicants
                         </div>
                         <div className="flex gap-3" data-oid="z7wvrz5">
                             <button

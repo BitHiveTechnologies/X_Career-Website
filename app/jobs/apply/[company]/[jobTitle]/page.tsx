@@ -1,33 +1,136 @@
 'use client';
 
-import { Job } from '@/app/jobs/page';
 import JobApplicationModal from '@/components/JobApplicationModal';
 import MainNavbar from '@/components/mainNavbar';
-import { findJobBySlug } from '@/lib/mockData';
+import { ApiResponse, applicationService, FrontendJob, Job, jobService, JobsResponse } from '@/lib/api';
 import { useParams, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 export default function JobApplyPage() {
     const params = useParams();
     const router = useRouter();
-    const [job, setJob] = useState<Job | null>(null);
+    const [job, setJob] = useState<FrontendJob | null>(null);
     const [isLoading, setIsLoading] = useState(true);
 
+    // Convert MockJob to FrontendJob
+    const convertMockJobToFrontendJob = (mockJob: FrontendJob): FrontendJob => ({
+        id: mockJob.id.toString(),
+        title: mockJob.title,
+        company: mockJob.company,
+        description: mockJob.description,
+        type: 'job' as const,
+        eligibility: {
+            qualifications: [],
+            streams: [],
+            passoutYears: [],
+            minCGPA: 0
+        },
+        applicationDeadline: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(), // 30 days from now
+        applicationLink: '#',
+        location: mockJob.isRemote ? 'remote' : 'onsite',
+        salary: mockJob.salary,
+        skills: mockJob.skills || [],
+        isActive: true,
+        createdAt: mockJob.postedDate || new Date().toISOString(),
+        // FrontendJob specific properties
+        isFeatured: mockJob.isFeatured || false,
+        isUrgent: mockJob.isUrgent || false,
+        applicantCount: mockJob.applicantCount || 0,
+        companyLogo: mockJob.companyLogo,
+        companySize: mockJob.companySize || '',
+        industry: mockJob.industry || '',
+        benefits: mockJob.benefits || [],
+        companyType: mockJob.companyType || 'Startup',
+        experienceRequired: mockJob.experienceRequired || '',
+        jobType: mockJob.jobType || '',
+        employmentType: mockJob.employmentType || '',
+        postedDate: mockJob.postedDate || new Date().toISOString().split('T')[0],
+        isRemote: mockJob.isRemote || false,
+    });
+
     useEffect(() => {
-        const companySlug = params.company as string;
-        const jobTitleSlug = params.jobTitle as string;
+        const loadJob = async () => {
+            try {
+                setIsLoading(true);
+                
+                // Load job from backend API
+                const response: ApiResponse<JobsResponse> = await jobService.getJobs();
+                
+                if (response.success && response.data) {
+                    const companySlug = params.company as string;
+                    const jobTitleSlug = params.jobTitle as string;
+                    
+                    // Find job by matching company and title
+                    const foundJob = response.data.jobs.find((job: Job) => 
+                        job.company.toLowerCase().replace(/\s+/g, '-') === companySlug &&
+                        job.title.toLowerCase().replace(/\s+/g, '-') === jobTitleSlug
+                    );
+                    
+                    if (foundJob) {
+                        // Transform backend job to frontend format
+                        const frontendJob: FrontendJob = {
+                            id: foundJob.id,
+                            title: foundJob.title,
+                            company: foundJob.company,
+                            description: foundJob.description,
+                            type: foundJob.type,
+                            eligibility: {
+                                qualifications: [],
+                                streams: [],
+                                passoutYears: [],
+                            },
+                            applicationDeadline: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
+                            applicationLink: '#',
+                            location: foundJob.location,
+                            salary: foundJob.salary || '',
+                            skills: foundJob.skills || [],
+                            isActive: foundJob.isActive,
+                            createdAt: foundJob.createdAt,
+                            isFeatured: false,
+                            isUrgent: false,
+                            applicantCount: 0,
+                            companyLogo: '',
+                            companySize: '',
+                            industry: '',
+                            benefits: [],
+                            companyType: 'Startup',
+                            experienceRequired: '',
+                            jobType: '',
+                            employmentType: '',
+                            postedDate: foundJob.createdAt?.split('T')[0] || new Date().toISOString().split('T')[0],
+                            isRemote: foundJob.location === 'remote',
+                        };
+                        setJob(frontendJob);
+                    } else {
+                        // Job not found, redirect to jobs page
+                        router.push('/jobs');
+                    }
+                } else {
+                    router.push('/jobs');
+                }
+            } catch (error) {
+                console.error('Error loading job:', error);
+                router.push('/jobs');
+            } finally {
+                setIsLoading(false);
+            }
+        };
 
-        // Find job by matching company and title slugs
-        const foundJob = findJobBySlug(companySlug, jobTitleSlug);
+        loadJob();
+    }, [params, router]);
 
-        setJob(foundJob || null);
-        setIsLoading(false);
-    }, [params]);
-
-    const handleApplicationSubmit = (applicationData: any) => {
-
-        // Handle application submission
-        router.push('/jobs?applied=true');
+    const handleApplicationSubmit = async (applicationData: any) => {
+        try {
+            if (!job) return;
+            // Map modal data to API shape. Since backend expects resumeUrl string, use provided URL if present
+            // or fallback to a placeholder for testing.
+            const resumeUrl = applicationData.resumeUrl || 'https://example.com/resume.pdf';
+            const coverLetter = applicationData.coverLetter || '';
+            await applicationService.applyForJob(job.id, { resumeUrl, coverLetter });
+            router.push('/applications');
+        } catch (e) {
+            router.push('/jobs?applied=false');
+        }
     };
 
     const handleClose = () => {

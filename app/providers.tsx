@@ -2,6 +2,7 @@
 
 import ErrorBoundary from '@/components/ErrorBoundary';
 import { AuthProvider } from '@/lib/auth/AuthContext';
+import { Toaster } from '@/components/ui/sonner';
 import React from 'react';
 
 interface ProvidersProps {
@@ -11,7 +12,10 @@ interface ProvidersProps {
 export default function Providers({ children }: ProvidersProps) {
     return (
         <ErrorBoundary data-oid="nc9ek12">
-            <AuthProvider data-oid="ymfie4-">{children}</AuthProvider>
+            <AuthProvider data-oid="ymfie4-">
+                {children}
+                <Toaster />
+            </AuthProvider>
         </ErrorBoundary>
     );
 }

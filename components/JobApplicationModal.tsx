@@ -1,8 +1,8 @@
 'use client';
 import { useState } from 'react';
-import { Job } from '@/app/jobs/page';
+import { FrontendJob } from '@/lib/api';
 interface JobApplicationModalProps {
-    job: Job;
+    job: FrontendJob;
     isOpen: boolean;
     onClose: () => void;
     onSubmit: (applicationData: any) => void;

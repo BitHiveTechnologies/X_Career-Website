@@ -4,38 +4,20 @@ import CategoryMenu from '@/components/CategoryMenu';
 import FiltersSidebar from '@/components/FiltersSidebar';
 import JobCard from '@/components/JobCard';
 import MainNavbar from '@/components/mainNavbar';
+import {
+    FrontendJob,
+    jobService
+} from '@/lib/api';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { Suspense, useEffect, useState } from 'react';
+import { Suspense, useCallback, useEffect, useState } from 'react';
 
 // TypeScript Interfaces
-export interface Job {
-    id: number;
-    title: string;
-    company: string;
-    location: string;
-    experienceRequired: string;
-    jobType: string;
-    employmentType: string;
-    skills: string[];
-    postedDate: string;
-    salary?: string;
-    description: string;
-    isRemote: boolean;
-    isFeatured: boolean;
-    isUrgent?: boolean;
-    applicantCount?: number;
-    companyLogo?: string;
-    companySize?: string;
-    industry?: string;
-    benefits?: string[];
-    companyType?: 'Startup' | 'MNC' | 'Product' | 'Service';
-}
 
 export interface FilterOptions {
     jobType: string;
     employmentType: string;
     skills: string;
-    location: string;
+    location: 'remote' | 'onsite' | 'hybrid' | 'all';
     experienceLevel: string;
     salaryRange: string;
     companyType: string;
@@ -48,313 +30,120 @@ export interface Category {
     slug: string;
 }
 
-// Enhanced Mock Data with 12 diverse jobs from major Indian companies
-const mockJobs: Job[] = [
-    {
-        id: 1,
-        title: 'Frontend Developer',
-        company: 'Swiggy',
-        location: 'Bangalore, India',
-        experienceRequired: '0-2 years',
-        jobType: 'Full-time',
-        employmentType: 'Permanent',
-        skills: ['React', 'TypeScript', 'JavaScript', 'CSS', 'Redux'],
-        postedDate: '2024-01-15',
-        salary: '₹6-10 LPA',
-        description:
-            'Join our team to build amazing user interfaces for millions of food lovers...',
-        isRemote: false,
-        isFeatured: true,
-        isUrgent: true,
-        applicantCount: 234,
-        companyLogo: '/logos/swiggy.png',
-        companySize: '5000-10000',
-        industry: 'Food Tech',
-        benefits: ['Health Insurance', 'Free Meals', 'Flexible Hours', 'Stock Options'],
-        companyType: 'Startup',
-    },
-    {
-        id: 2,
-        title: 'Backend Engineer',
-        company: 'Zomato',
-        location: 'Gurgaon, India',
-        experienceRequired: '1-3 years',
-        jobType: 'Full-time',
-        employmentType: 'Permanent',
-        skills: ['Java', 'Spring Boot', 'AWS', 'MySQL', 'Microservices'],
-        postedDate: '2024-01-14',
-        salary: '₹8-15 LPA',
-        description: 'Build scalable backend systems for food delivery platform...',
-        isRemote: true,
-        isFeatured: true,
-        isUrgent: false,
-        applicantCount: 189,
-        companyLogo: '/logos/zomato.png',
-        companySize: '1000-5000',
-        industry: 'Food Tech',
-        benefits: ['Health Insurance', 'Work from Home', 'Learning Budget', 'Team Outings'],
-        companyType: 'Startup',
-    },
-    {
-        id: 3,
-        title: 'Full Stack Developer',
-        company: 'Paytm',
-        location: 'Noida, India',
-        experienceRequired: '2-4 years',
-        jobType: 'Full-time',
-        employmentType: 'Permanent',
-        skills: ['React', 'Node.js', 'MongoDB', 'Express', 'Payment APIs'],
-        postedDate: '2024-01-13',
-        salary: '₹12-20 LPA',
-        description: 'Work on cutting-edge fintech applications...',
-        isRemote: false,
-        isFeatured: false,
-        isUrgent: true,
-        applicantCount: 456,
-        companyLogo: '/logos/paytm.png',
-        companySize: '10000+',
-        industry: 'Fintech',
-        benefits: ['Health Insurance', 'Bonus', 'Cab Facility', 'Gym Membership'],
-        companyType: 'MNC',
-    },
-    {
-        id: 4,
-        title: 'Data Scientist',
-        company: 'Flipkart',
-        location: 'Bangalore, India',
-        experienceRequired: '1-3 years',
-        jobType: 'Full-time',
-        employmentType: 'Permanent',
-        skills: ['Python', 'Machine Learning', 'SQL', 'Pandas', 'TensorFlow'],
-        postedDate: '2024-01-12',
-        salary: '₹10-18 LPA',
-        description: 'Analyze data to drive business decisions for e-commerce platform...',
-        isRemote: true,
-        isFeatured: false,
-        isUrgent: false,
-        applicantCount: 312,
-        companyLogo: '/logos/flipkart.png',
-        companySize: '10000+',
-        industry: 'E-commerce',
-        benefits: ['Health Insurance', 'Stock Options', 'Learning Budget', 'Flexible Hours'],
-        companyType: 'MNC',
-    },
-    {
-        id: 5,
-        title: 'UI/UX Designer',
-        company: 'Ola',
-        location: 'Bangalore, India',
-        experienceRequired: '0-2 years',
-        jobType: 'Full-time',
-        employmentType: 'Contract',
-        skills: ['Figma', 'Adobe XD', 'Photoshop', 'User Research', 'Prototyping'],
-        postedDate: '2024-01-11',
-        salary: '₹5-9 LPA',
-        description: 'Design beautiful and intuitive user experiences for mobility platform...',
-        isRemote: false,
-        isFeatured: false,
-        isUrgent: false,
-        applicantCount: 167,
-        companyLogo: '/logos/ola.png',
-        companySize: '1000-5000',
-        industry: 'Transportation',
-        benefits: ['Health Insurance', 'Free Rides', 'Team Events', 'Learning Budget'],
-        companyType: 'Startup',
-    },
-    {
-        id: 6,
-        title: 'DevOps Engineer',
-        company: 'PhonePe',
-        location: 'Bangalore, India',
-        experienceRequired: '2-5 years',
-        jobType: 'Full-time',
-        employmentType: 'Permanent',
-        skills: ['Docker', 'Kubernetes', 'AWS', 'Jenkins', 'Terraform'],
-        postedDate: '2024-01-10',
-        salary: '₹15-25 LPA',
-        description: 'Manage and optimize cloud infrastructure for digital payments...',
-        isRemote: true,
-        isFeatured: true,
-        isUrgent: true,
-        applicantCount: 89,
-        companyLogo: '/logos/phonepe.png',
-        companySize: '1000-5000',
-        industry: 'Fintech',
-        benefits: ['Health Insurance', 'Stock Options', 'Work from Home', 'Bonus'],
-        companyType: 'Product',
-    },
-    {
-        id: 7,
-        title: 'Mobile App Developer',
-        company: 'Dream11',
-        location: 'Mumbai, India',
-        experienceRequired: '1-3 years',
-        jobType: 'Full-time',
-        employmentType: 'Permanent',
-        skills: ['React Native', 'Flutter', 'iOS', 'Android', 'Firebase'],
-        postedDate: '2024-01-09',
-        salary: '₹8-14 LPA',
-        description: 'Build engaging mobile experiences for fantasy sports platform...',
-        isRemote: false,
-        isFeatured: false,
-        isUrgent: false,
-        applicantCount: 278,
-        companyLogo: '/logos/dream11.png',
-        companySize: '500-1000',
-        industry: 'Gaming',
-        benefits: ['Health Insurance', 'Game Credits', 'Team Outings', 'Flexible Hours'],
-        companyType: 'Startup',
-    },
-    {
-        id: 8,
-        title: 'Blockchain Developer',
-        company: 'CoinDCX',
-        location: 'Mumbai, India',
-        experienceRequired: '2-4 years',
-        jobType: 'Full-time',
-        employmentType: 'Permanent',
-        skills: ['Solidity', 'Web3.js', 'Ethereum', 'Smart Contracts', 'Node.js'],
-        postedDate: '2024-01-08',
-        salary: '₹18-30 LPA',
-        description: 'Develop blockchain solutions for cryptocurrency exchange...',
-        isRemote: true,
-        isFeatured: true,
-        isUrgent: false,
-        applicantCount: 45,
-        companyLogo: '/logos/coindcx.png',
-        companySize: '100-500',
-        industry: 'Cryptocurrency',
-        benefits: ['Health Insurance', 'Crypto Bonus', 'Work from Home', 'Learning Budget'],
-        companyType: 'Startup',
-    },
-    {
-        id: 9,
-        title: 'AI/ML Engineer',
-        company: 'Hotstar',
-        location: 'Bangalore, India',
-        experienceRequired: '3-5 years',
-        jobType: 'Full-time',
-        employmentType: 'Permanent',
-        skills: ['Python', 'TensorFlow', 'PyTorch', 'Computer Vision', 'NLP'],
-        postedDate: '2024-01-07',
-        salary: '₹20-35 LPA',
-        description: 'Build AI-powered recommendation systems for streaming platform...',
-        isRemote: false,
-        isFeatured: true,
-        isUrgent: true,
-        applicantCount: 123,
-        companyLogo: '/logos/hotstar.png',
-        companySize: '1000-5000',
-        industry: 'Entertainment',
-        benefits: ['Health Insurance', 'Stock Options', 'Content Access', 'Learning Budget'],
-        companyType: 'MNC',
-    },
-    {
-        id: 10,
-        title: 'Cybersecurity Analyst',
-        company: 'Razorpay',
-        location: 'Bangalore, India',
-        experienceRequired: '1-3 years',
-        jobType: 'Full-time',
-        employmentType: 'Permanent',
-        skills: ['Network Security', 'Penetration Testing', 'SIEM', 'Incident Response'],
-        postedDate: '2024-01-06',
-        salary: '₹12-20 LPA',
-        description: 'Secure payment infrastructure and protect against cyber threats...',
-        isRemote: true,
-        isFeatured: false,
-        isUrgent: false,
-        applicantCount: 156,
-        companyLogo: '/logos/razorpay.png',
-        companySize: '1000-5000',
-        industry: 'Fintech',
-        benefits: ['Health Insurance', 'Stock Options', 'Work from Home', 'Security Training'],
-        companyType: 'Product',
-    },
-    {
-        id: 11,
-        title: 'Product Manager',
-        company: "Byju's",
-        location: 'Bangalore, India',
-        experienceRequired: '3-6 years',
-        jobType: 'Full-time',
-        employmentType: 'Permanent',
-        skills: ['Product Strategy', 'Analytics', 'User Research', 'Agile', 'SQL'],
-        postedDate: '2024-01-05',
-        salary: '₹25-40 LPA',
-        description: 'Lead product development for educational technology platform...',
-        isRemote: false,
-        isFeatured: false,
-        isUrgent: false,
-        applicantCount: 89,
-        companyLogo: '/logos/byjus.png',
-        companySize: '10000+',
-        industry: 'EdTech',
-        benefits: ['Health Insurance', 'Learning Budget', 'Flexible Hours', 'Stock Options'],
-        companyType: 'Startup',
-    },
-    {
-        id: 12,
-        title: 'Cloud Architect',
-        company: 'Freshworks',
-        location: 'Chennai, India',
-        experienceRequired: '5+ years',
-        jobType: 'Full-time',
-        employmentType: 'Permanent',
-        skills: ['AWS', 'Azure', 'GCP', 'Microservices', 'Kubernetes', 'Terraform'],
-        postedDate: '2024-01-04',
-        salary: '₹30-50 LPA',
-        description: 'Design and implement cloud solutions for SaaS platform...',
-        isRemote: true,
-        isFeatured: true,
-        isUrgent: false,
-        applicantCount: 67,
-        companyLogo: '/logos/freshworks.png',
-        companySize: '1000-5000',
-        industry: 'SaaS',
-        benefits: ['Health Insurance', 'Stock Options', 'Work from Home', 'Learning Budget'],
-        companyType: 'Product',
-    },
-];
-
-// Enhanced Categories with 12 comprehensive categories
-const mockCategories: Category[] = [
-    { id: 1, name: 'All Jobs', count: 15247, slug: 'all' },
-    { id: 2, name: 'Software Development', count: 5821, slug: 'software-development' },
-    { id: 3, name: 'Data Science & AI', count: 2456, slug: 'data-science' },
-    { id: 4, name: 'UI/UX Design', count: 1876, slug: 'ui-ux-design' },
-    { id: 5, name: 'DevOps & Cloud', count: 1234, slug: 'devops' },
-    { id: 6, name: 'Product Management', count: 987, slug: 'product-management' },
-    { id: 7, name: 'Mobile Development', count: 1543, slug: 'mobile-development' },
-    { id: 8, name: 'Blockchain & Web3', count: 456, slug: 'blockchain' },
-    { id: 9, name: 'Cybersecurity', count: 678, slug: 'cybersecurity' },
-    { id: 10, name: 'Marketing & Growth', count: 1245, slug: 'marketing' },
-    { id: 11, name: 'Finance & Fintech', count: 876, slug: 'finance' },
-    { id: 12, name: 'Sales & Business', count: 654, slug: 'sales' },
+// Category definitions (without counts - will be populated dynamically)
+const categoryDefinitions: Omit<Category, 'count'>[] = [
+    { id: 1, name: 'All Jobs', slug: 'all' },
+    { id: 2, name: 'Software Development', slug: 'software-development' },
+    { id: 3, name: 'Data Science & AI', slug: 'data-science' },
+    { id: 4, name: 'UI/UX Design', slug: 'ui-ux-design' },
+    { id: 5, name: 'DevOps & Cloud', slug: 'devops' },
+    { id: 6, name: 'Product Management', slug: 'product-management' },
+    { id: 7, name: 'Mobile Development', slug: 'mobile-development' },
+    { id: 8, name: 'Blockchain & Web3', slug: 'blockchain' },
+    { id: 9, name: 'Cybersecurity', slug: 'cybersecurity' },
+    { id: 10, name: 'Marketing & Growth', slug: 'marketing' },
+    { id: 11, name: 'Finance & Fintech', slug: 'finance' },
+    { id: 12, name: 'Sales & Business', slug: 'sales' },
 ];
 
 function JobsPageContent() {
-    const [jobs, setJobs] = useState<Job[]>(mockJobs);
-    const [filteredJobs, setFilteredJobs] = useState<Job[]>(mockJobs);
-    const [categories] = useState<Category[]>(mockCategories);
+    // State management
+    const [jobs, setJobs] = useState<FrontendJob[]>([]);
+    const [filteredJobs, setFilteredJobs] = useState<FrontendJob[]>([]);
+    
+    // Debug filteredJobs changes
+    useEffect(() => {
+        console.log('🔍 FilteredJobs State Change:', {
+            filteredJobs,
+            length: filteredJobs?.length,
+            type: typeof filteredJobs,
+            isArray: Array.isArray(filteredJobs)
+        });
+    }, [filteredJobs]);
+    
+    // Dynamic categories with real counts
+    const [categories, setCategories] = useState<Category[]>([]);
     const [selectedCategory, setSelectedCategory] = useState<string>('all');
     const [filters, setFilters] = useState<FilterOptions>({
         jobType: '',
         employmentType: '',
         skills: '',
-        location: '',
+        location: 'all',
         experienceLevel: '',
         salaryRange: '',
         companyType: '',
     });
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     const [searchQuery, setSearchQuery] = useState('');
     const [searchLocation, setSearchLocation] = useState('');
     const [viewMode, setViewMode] = useState<'grid' | 'list'>('list');
     const [sortBy, setSortBy] = useState('relevance');
     const [visibleJobs, setVisibleJobs] = useState(6);
+    const [error, setError] = useState<string | null>(null);
+    const [filterLoading, setFilterLoading] = useState(false);
+    const [pagination, setPagination] = useState({
+        page: 1,
+        limit: 10,
+        total: 0,
+        pages: 0
+    });
     const router = useRouter();
     const searchParams = useSearchParams();
+
+    // Function to calculate category counts based on actual job data
+    const calculateCategoryCounts = useCallback((jobData: FrontendJob[]) => {
+        console.log('📊 Calculating category counts for', jobData.length, 'jobs');
+        
+        const categoryMap: { [key: string]: string[] } = {
+            'software-development': [
+                'frontend', 'backend', 'full stack', 'software', 'developer', 'engineer',
+                'react', 'angular', 'vue', 'node', 'python', 'java', 'javascript'
+            ],
+            'data-science': ['data scientist', 'ai', 'ml', 'machine learning', 'analyst', 'data engineer'],
+            'ui-ux-design': ['ui', 'ux', 'designer', 'design', 'figma', 'adobe'],
+            'devops': ['devops', 'cloud', 'aws', 'azure', 'kubernetes', 'docker', 'infrastructure'],
+            'product-management': ['product manager', 'product', 'pm', 'strategy'],
+            'mobile-development': ['mobile', 'ios', 'android', 'react native', 'flutter'],
+            'blockchain': ['blockchain', 'crypto', 'web3', 'solidity', 'ethereum'],
+            'cybersecurity': ['security', 'cyber', 'penetration', 'siem', 'incident'],
+            'marketing': ['marketing', 'growth', 'digital', 'social', 'content'],
+            'finance': ['finance', 'fintech', 'banking', 'financial', 'trading'],
+            'sales': ['sales', 'business development', 'bd', 'account', 'revenue']
+        };
+
+        const counts: { [key: string]: number } = {
+            'all': jobData.length
+        };
+
+        // Calculate count for each category
+        categoryDefinitions.forEach(category => {
+            if (category.slug === 'all') return;
+            
+            const keywords = categoryMap[category.slug] || [];
+            const count = jobData.filter(job => {
+                const titleLower = job.title?.toLowerCase() || '';
+                const descriptionLower = job.description?.toLowerCase() || '';
+                const skillsLower = job.skills?.map(s => s.toLowerCase()).join(' ') || '';
+                
+                return keywords.some(keyword => 
+                    titleLower.includes(keyword) || 
+                    descriptionLower.includes(keyword) ||
+                    skillsLower.includes(keyword)
+                );
+            }).length;
+            
+            counts[category.slug] = count;
+        });
+
+        // Create categories array with calculated counts
+        const categoriesWithCounts: Category[] = categoryDefinitions.map(category => ({
+            ...category,
+            count: counts[category.slug] || 0
+        }));
+
+        console.log('📊 Category counts calculated:', counts);
+        return categoriesWithCounts;
+    }, []);
 
     // Read URL search parameters on component mount
     useEffect(() => {
@@ -370,6 +159,235 @@ function JobsPageContent() {
             // Cleanup any pending timeouts when component unmounts
         };
     }, []);
+
+    // Backend data loading functions
+    const loadJobs = useCallback(async (page: number = pagination.page) => {
+        try {
+            setIsLoading(true);
+            setError(null);
+            
+            console.log('🔄 Loading jobs from backend...', {
+                page,
+                limit: pagination.limit,
+                type: 'job'
+            });
+            
+            const response: any = await jobService.getJobs({
+                page: page,
+                limit: pagination.limit,
+                type: 'job' // Only load jobs, not internships
+            });
+
+            console.log('📥 Backend response:', response);
+            console.log('📥 Response type:', typeof response);
+            console.log('📥 Response success:', response?.success);
+            console.log('📥 Response data:', response?.data);
+
+            if (response.success && response.data) {
+                // Backend returns: { success: true, data: { jobs: [...], pagination: {...} } }
+                const jobsArray = response.data.jobs;
+                
+                if (Array.isArray(jobsArray)) {
+                    console.log('✅ Processing', jobsArray.length, 'jobs from backend');
+                    
+                    const frontendJobs = jobsArray.map((job: any) => {
+                        try {
+                        return jobService.transformToFrontendJob(job);
+                        } catch (transformError) {
+                            console.error('❌ Error transforming job:', job, transformError);
+                            // Return a fallback job object
+                            return {
+                                ...job,
+                                isFeatured: false,
+                                isUrgent: false,
+                                applicantCount: 0,
+                                companyType: 'Product' as const,
+                                experienceRequired: '1-3 years',
+                                jobType: job.type === 'job' ? 'Full-time' : 'Internship',
+                                employmentType: 'Permanent',
+                                skills: job.eligibility?.streams || [],
+                                postedDate: job.createdAt,
+                                isRemote: job.location === 'remote',
+                            };
+                        }
+                    });
+                    
+                    console.log('✅ Transformed jobs:', frontendJobs);
+                    setJobs(frontendJobs);
+                    setFilteredJobs(frontendJobs);
+                    setPagination(response.data.pagination || { page: 1, limit: 10, total: 0, pages: 0 });
+                    
+                    // Calculate and set category counts based on actual job data
+                    const categoriesWithCounts = calculateCategoryCounts(frontendJobs);
+                    setCategories(categoriesWithCounts);
+                } else {
+                    console.warn('❌ Jobs data is not an array:', jobsArray);
+                    setJobs([]);
+                    setFilteredJobs([]);
+                    setError('Invalid jobs data format received');
+                }
+            } else {
+                console.error('❌ API response failed:', response);
+                setError(response.error?.message || 'No jobs data received');
+                setJobs([]);
+                setFilteredJobs([]);
+            }
+        } catch (err) {
+            console.error('💥 Error loading jobs:', err);
+            
+            // Try to load mock data as fallback
+            try {
+                console.log('🔄 Attempting to load mock data as fallback...');
+                const { mockJobs } = await import('@/lib/mockData');
+                const frontendJobs = mockJobs.map((job: any) => ({
+                    ...job,
+                    isFeatured: Math.random() > 0.8,
+                    isUrgent: Math.random() > 0.9,
+                    applicantCount: Math.floor(Math.random() * 500),
+                    companyType: 'Product' as const,
+                    experienceRequired: '1-3 years',
+                    jobType: 'Full-time',
+                    employmentType: 'Permanent',
+                    skills: job.skills || [],
+                    postedDate: job.postedDate,
+                    isRemote: job.isRemote || false,
+                }));
+                
+                setJobs(frontendJobs);
+                setFilteredJobs(frontendJobs);
+                setError(null);
+                
+                // Calculate and set category counts for mock data too
+                const categoriesWithCounts = calculateCategoryCounts(frontendJobs);
+                setCategories(categoriesWithCounts);
+                console.log('✅ Fallback to mock data successful');
+            } catch (fallbackError) {
+                console.error('❌ Fallback to mock data also failed:', fallbackError);
+                setError(`Failed to load jobs: ${err instanceof Error ? err.message : 'Unknown error'}`);
+            setJobs([]);
+            setFilteredJobs([]);
+            }
+        } finally {
+            setIsLoading(false);
+        }
+    }, [pagination.page, pagination.limit, calculateCategoryCounts]);
+
+    const searchJobs = useCallback(async (page: number = pagination.page) => {
+        try {
+            setIsLoading(true);
+            setError(null);
+            
+            console.log('🔍 Searching jobs...', {
+                query: searchQuery,
+                location: searchLocation,
+                page,
+                limit: pagination.limit
+            });
+            
+            const response: any = await jobService.searchJobs(searchQuery, {
+                page: page,
+                limit: pagination.limit,
+                type: 'job',
+                location: (searchLocation as 'remote' | 'onsite' | 'hybrid') || undefined
+            });
+
+            console.log('📥 Search response:', response);
+
+            if (response.success && response.data) {
+                // Backend returns: { success: true, data: { jobs: [...], pagination: {...} } }
+                const jobsArray = response.data.jobs;
+                if (Array.isArray(jobsArray)) {
+                    console.log('✅ Processing', jobsArray.length, 'search results');
+                    
+                    const frontendJobs = jobsArray.map((job: any) => {
+                        try {
+                            return jobService.transformToFrontendJob(job);
+                        } catch (transformError) {
+                            console.error('❌ Error transforming search result:', job, transformError);
+                            return {
+                                ...job,
+                                isFeatured: false,
+                                isUrgent: false,
+                                applicantCount: 0,
+                                companyType: 'Product' as const,
+                                experienceRequired: '1-3 years',
+                                jobType: job.type === 'job' ? 'Full-time' : 'Internship',
+                                employmentType: 'Permanent',
+                                skills: job.eligibility?.streams || [],
+                                postedDate: job.createdAt,
+                                isRemote: job.location === 'remote',
+                            };
+                        }
+                    });
+                    
+                    setJobs(frontendJobs);
+                    setFilteredJobs(frontendJobs);
+                    setPagination(response.data.pagination || { page: 1, limit: 10, total: 0, pages: 0 });
+                    
+                    // Calculate and set category counts for search results
+                    const categoriesWithCounts = calculateCategoryCounts(frontendJobs);
+                    setCategories(categoriesWithCounts);
+                } else {
+                    console.warn('❌ Search jobs data is not an array:', jobsArray);
+                    setJobs([]);
+                    setFilteredJobs([]);
+                    setError('Invalid search results format received');
+                }
+            } else {
+                console.error('❌ Search API response failed:', response);
+                setError(response.error?.message || 'No search results received');
+                setJobs([]);
+                setFilteredJobs([]);
+            }
+        } catch (err) {
+            console.error('💥 Error searching jobs:', err);
+            setError(`Failed to search jobs: ${err instanceof Error ? err.message : 'Unknown error'}`);
+            setJobs([]);
+            setFilteredJobs([]);
+        } finally {
+            setIsLoading(false);
+        }
+    }, [searchQuery, searchLocation, pagination.page, pagination.limit, calculateCategoryCounts]);
+
+    // Test API connection on component mount
+    useEffect(() => {
+        const testApiConnection = async () => {
+            try {
+                console.log('🔌 Testing API connection...');
+                const response = await fetch('http://localhost:3001/health');
+                const healthData = await response.json();
+                console.log('✅ API Health Check:', healthData);
+            } catch (error) {
+                console.error('❌ API Health Check Failed:', error);
+            }
+        };
+        
+        testApiConnection();
+    }, []);
+
+    // Load jobs from backend on component mount
+    useEffect(() => {
+        console.log('🚀 Component mounted, loading jobs...');
+        loadJobs();
+    }, [loadJobs]);
+
+    // Recalculate category counts when jobs data changes
+    useEffect(() => {
+        if (jobs.length > 0) {
+            console.log('🔄 Recalculating category counts due to jobs change');
+            const categoriesWithCounts = calculateCategoryCounts(jobs);
+            setCategories(categoriesWithCounts);
+        }
+    }, [jobs, calculateCategoryCounts]);
+
+    // Load jobs when search parameters change
+    useEffect(() => {
+        if (searchQuery || searchLocation) {
+            searchJobs();
+        } else {
+            loadJobs();
+        }
+    }, [searchQuery, searchLocation, loadJobs, searchJobs]);
 
     // Function to update URL when search query changes (debounced)
     const updateSearchURL = (query: string) => {
@@ -405,153 +423,522 @@ function JobsPageContent() {
         }
     };
 
-    // Enhanced filter logic with search and advanced filtering
+    // Enhanced filter logic with proper data mapping and error handling
     useEffect(() => {
-        let filtered = jobs;
+        // Debounce filter operations for better performance
+        const filterTimeout = setTimeout(() => {
+            console.log('🔍 Filter Effect Triggered:', {
+                jobsLength: jobs?.length,
+                selectedCategory,
+                filters,
+                searchQuery,
+                searchLocation,
+                sortBy
+            });
+
+            setFilterLoading(true);
+        
+        // Ensure jobs is an array before filtering
+        if (!Array.isArray(jobs)) {
+                console.warn('❌ Jobs is not an array:', jobs);
+            setFilteredJobs([]);
+                setFilterLoading(false);
+            return;
+        }
+
+        // If jobs array is empty, don't run filtering logic
+        if (jobs.length === 0) {
+                console.log('📭 No jobs to filter');
+                setFilteredJobs([]);
+                setFilterLoading(false);
+            return;
+        }
+
+        let filtered = [...jobs]; // Create a copy to avoid mutating original array
+        console.log('🚀 Starting with', filtered.length, 'jobs');
 
         // Filter by search query
-        if (searchQuery) {
-            filtered = filtered.filter(
-                (job) =>
-                    job.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                    job.company.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                    job.skills.some((skill) =>
-                        skill.toLowerCase().includes(searchQuery.toLowerCase()),
-                    ),
-            );
+        if (searchQuery && searchQuery.trim()) {
+            const query = searchQuery.toLowerCase().trim();
+            filtered = filtered.filter((job) => {
+                const titleMatch = job.title?.toLowerCase().includes(query) || false;
+                const companyMatch = job.company?.toLowerCase().includes(query) || false;
+                const skillsMatch = job.skills?.some((skill) => 
+                    skill.toLowerCase().includes(query)
+                ) || false;
+                const descriptionMatch = job.description?.toLowerCase().includes(query) || false;
+                
+                return titleMatch || companyMatch || skillsMatch || descriptionMatch;
+            });
+            console.log('🔍 After search query filter:', filtered.length, 'jobs');
         }
 
         // Filter by search location
-        if (searchLocation) {
-            filtered = filtered.filter((job) =>
-                job.location.toLowerCase().includes(searchLocation.toLowerCase()),
-            );
+        if (searchLocation && searchLocation.trim()) {
+            const location = searchLocation.toLowerCase().trim();
+            filtered = filtered.filter((job) => {
+                // Check both the location field and if it's mentioned in the location string
+                const locationMatch = job.location?.toLowerCase().includes(location) || false;
+                return locationMatch;
+            });
+            console.log('📍 After location filter:', filtered.length, 'jobs');
         }
 
         // Filter by category
         if (selectedCategory !== 'all') {
             const categoryMap: { [key: string]: string[] } = {
                 'software-development': [
-                    'Frontend Developer',
-                    'Backend Engineer',
-                    'Full Stack Developer',
+                    'frontend', 'backend', 'full stack', 'software', 'developer', 'engineer',
+                    'react', 'angular', 'vue', 'node', 'python', 'java', 'javascript'
                 ],
-
-                'data-science': ['Data Scientist', 'AI/ML Engineer'],
-                'ui-ux-design': ['UI/UX Designer'],
-                devops: ['DevOps Engineer', 'Cloud Architect'],
-                'product-management': ['Product Manager'],
-                'mobile-development': ['Mobile App Developer'],
-                blockchain: ['Blockchain Developer'],
-                cybersecurity: ['Cybersecurity Analyst'],
-                marketing: ['Marketing Manager', 'Growth Hacker'],
-                finance: ['Financial Analyst', 'Fintech Developer'],
-                sales: ['Sales Manager', 'Business Development'],
+                'data-science': ['data scientist', 'ai', 'ml', 'machine learning', 'analyst', 'data engineer'],
+                'ui-ux-design': ['ui', 'ux', 'designer', 'design', 'figma', 'adobe'],
+                'devops': ['devops', 'cloud', 'aws', 'azure', 'kubernetes', 'docker', 'infrastructure'],
+                'product-management': ['product manager', 'product', 'pm', 'strategy'],
+                'mobile-development': ['mobile', 'ios', 'android', 'react native', 'flutter'],
+                'blockchain': ['blockchain', 'crypto', 'web3', 'solidity', 'ethereum'],
+                'cybersecurity': ['security', 'cyber', 'penetration', 'siem', 'incident'],
+                'marketing': ['marketing', 'growth', 'digital', 'social', 'content'],
+                'finance': ['finance', 'fintech', 'banking', 'financial', 'trading'],
+                'sales': ['sales', 'business development', 'bd', 'account', 'revenue']
             };
-            filtered = filtered.filter(
-                (job) =>
-                    categoryMap[selectedCategory]?.includes(job.title) ||
-                    job.industry?.toLowerCase().includes(selectedCategory.replace('-', ' ')),
-            );
-        }
-
-        // Apply all other filters
-        if (filters.jobType) {
-            filtered = filtered.filter((job) => job.jobType === filters.jobType);
-        }
-
-        if (filters.employmentType) {
-            filtered = filtered.filter((job) => job.employmentType === filters.employmentType);
-        }
-
-        if (filters.experienceLevel) {
-            filtered = filtered.filter((job) => job.experienceRequired === filters.experienceLevel);
-        }
-
-        if (filters.skills) {
-            const skillsArray = filters.skills
-                .toLowerCase()
-                .split(',')
-                .map((s) => s.trim());
-            filtered = filtered.filter((job) =>
-                skillsArray.some((skill) =>
-                    job.skills.some((jobSkill) => jobSkill.toLowerCase().includes(skill)),
-                ),
-            );
-        }
-
-        if (filters.location) {
-            filtered = filtered.filter((job) =>
-                job.location.toLowerCase().includes(filters.location.toLowerCase()),
-            );
-        }
-
-        if (filters.salaryRange) {
+            
+            const categoryKeywords = categoryMap[selectedCategory] || [];
             filtered = filtered.filter((job) => {
-                if (!job.salary) return false;
+                const titleLower = job.title?.toLowerCase() || '';
+                const descriptionLower = job.description?.toLowerCase() || '';
+                const skillsLower = job.skills?.map(s => s.toLowerCase()).join(' ') || '';
+                
+                return categoryKeywords.some(keyword => 
+                    titleLower.includes(keyword) || 
+                    descriptionLower.includes(keyword) ||
+                    skillsLower.includes(keyword)
+                );
+            });
+            console.log('🏷️ After category filter:', filtered.length, 'jobs');
+        }
 
-                // Extract salary range from strings like "₹6-10 LPA" or "₹15-25 LPA"
-                const salaryMatch = job.salary.match(/₹?(\d+)(?:-(\d+))?/);
-                if (!salaryMatch) return false;
-
-                const minSalary = parseInt(salaryMatch[1]);
-                const maxSalary = salaryMatch[2] ? parseInt(salaryMatch[2]) : minSalary;
-
-                switch (filters.salaryRange) {
-                    case '0-5':
-                        return maxSalary <= 5;
-                    case '5-10':
-                        return minSalary >= 5 && maxSalary <= 10;
-                    case '10-20':
-                        return minSalary >= 10 && maxSalary <= 20;
-                    case '20+':
-                        return minSalary >= 20;
+        // Filter by job type (Full-time, Part-time, etc.)
+        if (filters.jobType) {
+            // Since backend only has 'job' and 'internship', we need to use additional logic
+            filtered = filtered.filter((job) => {
+                const jobTitle = job.title?.toLowerCase() || '';
+                const jobDescription = job.description?.toLowerCase() || '';
+                const combinedText = `${jobTitle} ${jobDescription}`;
+                
+                switch (filters.jobType) {
+                    case 'Full-time':
+                        // Full-time jobs: exclude internships and part-time keywords
+                        return job.type === 'job' && 
+                               !combinedText.includes('part-time') && 
+                               !combinedText.includes('part time') &&
+                               !combinedText.includes('intern');
+                    case 'Part-time':
+                        // Part-time jobs: look for part-time keywords
+                        return job.type === 'job' && 
+                               (combinedText.includes('part-time') || 
+                                combinedText.includes('part time'));
+                    case 'Contract':
+                        // Contract jobs: look for contract keywords
+                        return job.type === 'job' && 
+                               (combinedText.includes('contract') || 
+                                combinedText.includes('freelance'));
+                    case 'Internship':
+                        // Internships: backend type is 'internship'
+                        return job.type === 'internship';
+                    case 'Freelance':
+                        // Freelance jobs: look for freelance keywords
+                        return job.type === 'job' && 
+                               (combinedText.includes('freelance') || 
+                                combinedText.includes('contract'));
                     default:
                         return true;
                 }
             });
+            console.log('💼 After job type filter:', filtered.length, 'jobs');
         }
 
+        // Filter by employment type (Permanent, Contract, etc.)
+        if (filters.employmentType) {
+            filtered = filtered.filter((job) => {
+                const jobTitle = job.title?.toLowerCase() || '';
+                const jobDescription = job.description?.toLowerCase() || '';
+                const combinedText = `${jobTitle} ${jobDescription}`;
+                
+                switch (filters.employmentType) {
+                    case 'Permanent':
+                        // Permanent jobs: exclude contract, temporary, consultant keywords
+                        return job.type === 'job' && 
+                               !combinedText.includes('contract') && 
+                               !combinedText.includes('temporary') &&
+                               !combinedText.includes('consultant') &&
+                               !combinedText.includes('freelance');
+                    case 'Contract':
+                        // Contract jobs: look for contract keywords
+                        return job.type === 'job' && 
+                               (combinedText.includes('contract') || 
+                                combinedText.includes('freelance'));
+                    case 'Temporary':
+                        // Temporary jobs: internships or temporary keywords
+                        return job.type === 'internship' || 
+                               combinedText.includes('temporary') ||
+                               combinedText.includes('temp');
+                    case 'Consultant':
+                        // Consultant jobs: look for consultant keywords
+                        return job.type === 'job' && 
+                               (combinedText.includes('consultant') || 
+                                combinedText.includes('consulting'));
+                    default:
+                        return true;
+                }
+            });
+            console.log('📋 After employment type filter:', filtered.length, 'jobs');
+        }
+
+        // Filter by experience level
+        if (filters.experienceLevel) {
+            filtered = filtered.filter((job) => {
+                // First check if job has experienceRequired field (from mock data)
+                const experienceRequired = job.experienceRequired?.toLowerCase() || '';
+                
+                // Also check title and description for experience keywords
+                const titleLower = job.title?.toLowerCase() || '';
+                const descriptionLower = job.description?.toLowerCase() || '';
+                const combinedText = `${titleLower} ${descriptionLower}`;
+                
+                // Experience level matching logic
+                let matches = false;
+                
+                switch (filters.experienceLevel) {
+                    case '0-1 years':
+                        // Match fresher/entry level jobs
+                        matches = experienceRequired.includes('0-1') || 
+                                 experienceRequired.includes('0-2') ||
+                                 combinedText.includes('fresher') ||
+                                 combinedText.includes('entry level') ||
+                                 combinedText.includes('entry-level') ||
+                                 combinedText.includes('trainee') ||
+                                 combinedText.includes('fresh graduate') ||
+                                 combinedText.includes('new graduate') ||
+                                 combinedText.includes('no experience') ||
+                                 combinedText.includes('zero experience');
+                        break;
+                        
+                    case '1-3 years':
+                        // Match junior level jobs
+                        matches = experienceRequired.includes('1-3') || 
+                                 experienceRequired.includes('1-2') ||
+                                 experienceRequired.includes('2-3') ||
+                                 experienceRequired.includes('2-4') ||
+                                 combinedText.includes('junior') ||
+                                 combinedText.includes('associate') ||
+                                 (combinedText.includes('1 year') && !combinedText.includes('5+')) ||
+                                 (combinedText.includes('2 years') && !combinedText.includes('5+')) ||
+                                 (combinedText.includes('3 years') && !combinedText.includes('5+'));
+                        break;
+                        
+                    case '3-5 years':
+                        // Match mid-level jobs
+                        matches = experienceRequired.includes('3-5') || 
+                                 experienceRequired.includes('3-4') ||
+                                 experienceRequired.includes('4-5') ||
+                                 experienceRequired.includes('2-5') ||
+                                 combinedText.includes('mid-level') ||
+                                 combinedText.includes('mid level') ||
+                                 combinedText.includes('intermediate') ||
+                                 (combinedText.includes('4 years') && !combinedText.includes('5+')) ||
+                                 (combinedText.includes('5 years') && !combinedText.includes('6+'));
+                        break;
+                        
+                    case '5+ years':
+                        // Match senior level jobs
+                        matches = experienceRequired.includes('5+') || 
+                                 experienceRequired.includes('6+') ||
+                                 experienceRequired.includes('7+') ||
+                                 experienceRequired.includes('8+') ||
+                                 experienceRequired.includes('10+') ||
+                                 combinedText.includes('senior') ||
+                                 combinedText.includes('lead') ||
+                                 combinedText.includes('principal') ||
+                                 combinedText.includes('architect') ||
+                                 combinedText.includes('manager') ||
+                                 combinedText.includes('director') ||
+                                 (combinedText.includes('5 years') && !combinedText.includes('3-5')) ||
+                                 combinedText.includes('6 years') ||
+                                 combinedText.includes('7 years') ||
+                                 combinedText.includes('8 years') ||
+                                 combinedText.includes('9 years') ||
+                                 combinedText.includes('10 years');
+                        break;
+                        
+                    default:
+                        matches = true;
+                }
+                
+                // Debug logging for experience filtering
+                if (filters.experienceLevel === '0-1 years' && matches) {
+                    console.log(`👔 Experience Match [${filters.experienceLevel}]:`, {
+                        jobTitle: job.title,
+                        experienceRequired: job.experienceRequired,
+                        jobDescription: job.description?.substring(0, 100) + '...',
+                        matched: matches
+                    });
+                }
+                
+                return matches;
+            });
+            console.log('👔 After experience filter:', filtered.length, 'jobs');
+        }
+
+        // Filter by skills
+        if (filters.skills && filters.skills.trim()) {
+            const skillsArray = filters.skills
+                .toLowerCase()
+                .split(',')
+                .map((s) => s.trim())
+                .filter(s => s.length > 0);
+                
+            filtered = filtered.filter((job) => {
+                const jobSkills = job.skills?.map(s => s.toLowerCase()) || [];
+                const titleLower = job.title?.toLowerCase() || '';
+                const descriptionLower = job.description?.toLowerCase() || '';
+                
+                return skillsArray.some((skill) => {
+                    // Check in job skills array with exact matching
+                    const hasSkill = jobSkills.some((jobSkill) => {
+                        // Exact match
+                        if (jobSkill === skill) return true;
+                        // Check if skill is contained in job skill (for compound skills)
+                        if (jobSkill.includes(skill)) return true;
+                        // Check if job skill is contained in skill (for broader skills)
+                        if (skill.includes(jobSkill)) return true;
+                        return false;
+                    });
+                    
+                    // Check in job title with word boundary matching
+                    const hasInTitle = (() => {
+                        const regex = new RegExp(`\\b${skill}\\b`, 'i');
+                        return regex.test(titleLower);
+                    })();
+                    
+                    // Check in job description with word boundary matching
+                    const hasInDescription = (() => {
+                        const regex = new RegExp(`\\b${skill}\\b`, 'i');
+                        return regex.test(descriptionLower);
+                    })();
+                    
+                    return hasSkill || hasInTitle || hasInDescription;
+                });
+            });
+            console.log('🛠️ After skills filter:', filtered.length, 'jobs');
+        }
+
+        // Filter by location
+        if (filters.location && filters.location !== 'all') {
+            const locationValue = filters.location.toLowerCase();
+            filtered = filtered.filter((job) => {
+                const jobLocation = job.location?.toLowerCase() || '';
+                return jobLocation === locationValue || jobLocation.includes(locationValue);
+            });
+            console.log('📍 After location filter:', filtered.length, 'jobs');
+        }
+
+        // Filter by salary range
+        if (filters.salaryRange) {
+            filtered = filtered.filter((job) => {
+                const salary = job.salary || job.stipend;
+                if (!salary) return false;
+
+                // Extract salary range from strings like "₹6-10 LPA" or "₹15-25 LPA"
+                const salaryMatch = salary.match(/₹?(\d+)(?:-(\d+))?/);
+                if (!salaryMatch) {
+                    console.log('❌ Salary regex failed for:', salary);
+                    return false;
+                }
+
+                const jobMinSalary = parseInt(salaryMatch[1]);
+                const jobMaxSalary = salaryMatch[2] ? parseInt(salaryMatch[2]) : jobMinSalary;
+
+                let matches = false;
+                switch (filters.salaryRange) {
+                    case '0-5':
+                        // Show jobs where the salary range overlaps with 0-5 LPA
+                        // Job should have some salary in the 0-5 range
+                        matches = jobMinSalary < 5; // Job starts before 5 LPA
+                        break;
+                    case '5-10':
+                        // Show jobs where the salary range overlaps with 5-10 LPA
+                        // Job should have some salary in the 5-10 range
+                        matches = jobMinSalary < 10 && jobMaxSalary > 5;
+                        break;
+                    case '10-20':
+                        // Show jobs where the salary range overlaps with 10-20 LPA
+                        // Job should have some salary in the 10-20 range
+                        matches = jobMinSalary < 20 && jobMaxSalary > 10;
+                        break;
+                    case '20+':
+                        // Show jobs where the minimum salary is 20 LPA or higher
+                        matches = jobMinSalary >= 20;
+                        break;
+                    default:
+                        matches = true;
+                }
+
+                // Debug logging for salary filtering
+                if (filters.salaryRange === '10-20') {
+                    console.log(`💰 Salary Filter Debug [${filters.salaryRange}]:`, {
+                    jobTitle: job.title,
+                        salary: salary,
+                        jobMinSalary,
+                        jobMaxSalary,
+                    matches,
+                    filterRange: filters.salaryRange
+                });
+                }
+
+                return matches;
+            });
+            console.log('💰 After salary filter:', filtered.length, 'jobs');
+        }
+
+        // Filter by company type
         if (filters.companyType) {
-            filtered = filtered.filter((job) => job.companyType === filters.companyType);
+            filtered = filtered.filter((job) => {
+                const companyName = job.company.toLowerCase();
+                const jobTitle = job.title?.toLowerCase() || '';
+                const jobDescription = job.description?.toLowerCase() || '';
+                const combinedText = `${companyName} ${jobTitle} ${jobDescription}`;
+                
+                switch (filters.companyType) {
+                    case 'Startup':
+                        // Startup companies: look for startup indicators
+                        return combinedText.includes('startup') ||
+                               combinedText.includes('tech') ||
+                               combinedText.includes('innov') ||
+                               combinedText.includes('labs') ||
+                               combinedText.includes('ventures') ||
+                               combinedText.includes('swiggy') ||
+                               combinedText.includes('zomato') ||
+                               combinedText.includes('ola') ||
+                               combinedText.includes('paytm') ||
+                               combinedText.includes('phonepe') ||
+                               combinedText.includes('dream11') ||
+                               combinedText.includes('coindcx') ||
+                               combinedText.includes('byjus') ||
+                               combinedText.includes('razorpay');
+                    
+                    case 'MNC':
+                        // MNC companies: look for large company indicators
+                        return combinedText.includes('microsoft') ||
+                               combinedText.includes('google') ||
+                               combinedText.includes('amazon') ||
+                               combinedText.includes('apple') ||
+                               combinedText.includes('meta') ||
+                               combinedText.includes('netflix') ||
+                               combinedText.includes('uber') ||
+                               combinedText.includes('airbnb') ||
+                               combinedText.includes('flipkart') ||
+                               combinedText.includes('hotstar') ||
+                               combinedText.includes('freshworks') ||
+                               combinedText.includes('tcs') ||
+                               combinedText.includes('infosys') ||
+                               combinedText.includes('wipro');
+                    
+                    case 'Product':
+                        // Product companies: look for product-focused indicators
+                        return combinedText.includes('product') ||
+                               combinedText.includes('platform') ||
+                               combinedText.includes('app') ||
+                               combinedText.includes('software') ||
+                               combinedText.includes('phonepe') ||
+                               combinedText.includes('razorpay') ||
+                               combinedText.includes('freshworks') ||
+                               combinedText.includes('saas') ||
+                               combinedText.includes('api');
+                    
+                    case 'Service':
+                        // Service companies: look for service-focused indicators
+                        return combinedText.includes('consulting') ||
+                               combinedText.includes('services') ||
+                               combinedText.includes('solutions') ||
+                               combinedText.includes('advisory') ||
+                               combinedText.includes('urban company') ||
+                               combinedText.includes('nykaa') ||
+                               combinedText.includes('outsourcing') ||
+                               combinedText.includes('bpo');
+                    
+                    default:
+                        return true;
+                }
+            });
+            console.log('🏢 After company type filter:', filtered.length, 'jobs');
         }
 
         // Sort filtered results
+        const sortedFiltered = [...filtered]; // Create copy for sorting
         switch (sortBy) {
             case 'date':
-                filtered.sort(
-                    (a, b) => new Date(b.postedDate).getTime() - new Date(a.postedDate).getTime(),
-                );
+                sortedFiltered.sort((a, b) => {
+                    const dateA = new Date(a.createdAt || '').getTime();
+                    const dateB = new Date(b.createdAt || '').getTime();
+                    return dateB - dateA; // Newest first
+                });
                 break;
             case 'salary':
-                filtered.sort((a, b) => {
+                sortedFiltered.sort((a, b) => {
                     const salaryA = a.salary ? parseInt(a.salary.replace(/[^\d]/g, '')) : 0;
                     const salaryB = b.salary ? parseInt(b.salary.replace(/[^\d]/g, '')) : 0;
-                    return salaryB - salaryA;
+                    return salaryB - salaryA; // Highest first
                 });
                 break;
             case 'company':
-                filtered.sort((a, b) => a.company.localeCompare(b.company));
+                sortedFiltered.sort((a, b) => a.company.localeCompare(b.company));
                 break;
             default: // relevance
-                filtered.sort((a, b) => {
-                    const scoreA =
-                        (a.isFeatured ? 10 : 0) +
-                        (a.isUrgent ? 5 : 0) +
-                        (a.applicantCount || 0) / 100;
-                    const scoreB =
-                        (b.isFeatured ? 10 : 0) +
-                        (b.isUrgent ? 5 : 0) +
-                        (b.applicantCount || 0) / 100;
+                sortedFiltered.sort((a, b) => {
+                    const scoreA = (a.isFeatured ? 10 : 0) + (a.isUrgent ? 5 : 0) + (a.applicantCount || 0) / 100;
+                    const scoreB = (b.isFeatured ? 10 : 0) + (b.isUrgent ? 5 : 0) + (b.applicantCount || 0) / 100;
                     return scoreB - scoreA;
                 });
         }
 
-        setFilteredJobs(filtered);
+            console.log('✅ Final filtered results:', sortedFiltered.length, 'jobs');
+            setFilteredJobs(sortedFiltered);
+            setFilterLoading(false);
+        }, 150); // 150ms debounce
+
+        // Cleanup timeout on unmount or dependency change
+        return () => clearTimeout(filterTimeout);
     }, [jobs, selectedCategory, filters, searchQuery, searchLocation, sortBy]);
 
     const handleFilterChange = (newFilters: FilterOptions) => {
-        setFilters(newFilters);
+        try {
+            // Validate filter values
+            const validatedFilters = {
+                jobType: newFilters.jobType || '',
+                employmentType: newFilters.employmentType || '',
+                skills: newFilters.skills || '',
+                location: newFilters.location || 'all',
+                experienceLevel: newFilters.experienceLevel || '',
+                salaryRange: newFilters.salaryRange || '',
+                companyType: newFilters.companyType || '',
+            };
+            
+            // Additional validation
+            if (validatedFilters.skills) {
+                // Clean up skills input - remove extra spaces and duplicates
+                const skillsArray = validatedFilters.skills
+                    .split(',')
+                    .map(s => s.trim())
+                    .filter(s => s.length > 0);
+                validatedFilters.skills = [...new Set(skillsArray)].join(', ');
+            }
+            
+            setFilters(validatedFilters);
+            console.log('✅ Filters updated:', validatedFilters);
+        } catch (error) {
+            console.error('❌ Error updating filters:', error);
+        }
     };
 
     const handleCategoryChange = (categorySlug: string) => {
@@ -563,7 +950,7 @@ function JobsPageContent() {
             jobType: '',
             employmentType: '',
             skills: '',
-            location: '',
+            location: 'all',
             experienceLevel: '',
             salaryRange: '',
             companyType: '',
@@ -787,6 +1174,43 @@ function JobsPageContent() {
                                     </button>
                                 ))}
                             </div>
+
+                            {/* Quick Filters */}
+                            <div className="mt-6">
+                                <h3 className="text-sm font-medium text-white/90 mb-3 text-center">Quick Filters</h3>
+                                <div className="flex flex-wrap gap-2 justify-center">
+                                    {[
+                                        { label: 'Fresher Full-time Jobs', filters: { jobType: 'Full-time', experienceLevel: '0-1 years' } as Partial<FilterOptions> },
+                                        { label: 'Remote Jobs', filters: { location: 'remote' as const } as Partial<FilterOptions> },
+                                        { label: 'High Salary (10-20 LPA)', filters: { salaryRange: '10-20' } as Partial<FilterOptions> },
+                                        { label: 'Startup Jobs', filters: { companyType: 'Startup' } as Partial<FilterOptions> },
+                                        { label: 'Internships', filters: { jobType: 'Internship' } as Partial<FilterOptions> },
+                                    ].map((quickFilter) => (
+                                        <button
+                                            key={quickFilter.label}
+                                            onClick={() => {
+                                                console.log('🚀 Applying quick filter:', quickFilter);
+                                                setFilters(prevFilters => ({
+                                                    ...prevFilters,
+                                                    ...quickFilter.filters
+                                                }));
+                                                // Clear search query when applying quick filters
+                                                setSearchQuery('');
+                                                setSearchLocation('');
+                                                // Clear URL search parameters
+                                                try {
+                                                    router.replace('/jobs');
+                                                } catch (error) {
+                                                    console.error('Error clearing search URL:', error);
+                                                }
+                                            }}
+                                            className="px-4 py-2 bg-white/10 backdrop-blur-sm text-white text-sm rounded-full hover:bg-white/20 transition-all duration-300 border border-white/20"
+                                        >
+                                            {quickFilter.label}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -827,7 +1251,14 @@ function JobsPageContent() {
                                 />
                             </svg>
                             <span className="text-lg font-bold text-gray-800" data-oid="vpwukyz">
-                                {filteredJobs.length.toLocaleString()}+ JOBS FOUND
+                                {filterLoading ? (
+                                    <span className="flex items-center gap-2">
+                                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                                        FILTERING JOBS...
+                                    </span>
+                                ) : (
+                                    `${filteredJobs.length.toLocaleString()}+ JOBS FOUND`
+                                )}
                             </span>
                         </div>
                     </div>
@@ -871,7 +1302,14 @@ function JobsPageContent() {
                                             className="text-xl font-bold text-gray-800"
                                             data-oid="e_2nn6s"
                                         >
-                                            {filteredJobs.length.toLocaleString()} Jobs Found
+                                            {filterLoading ? (
+                                                <span className="flex items-center gap-2">
+                                                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-[hsl(196,80%,45%)]"></div>
+                                                    Filtering...
+                                                </span>
+                                            ) : (
+                                                `${filteredJobs.length.toLocaleString()} Jobs Found`
+                                            )}
                                         </span>
                                         {(searchQuery || searchLocation) && (
                                             <span
@@ -881,6 +1319,54 @@ function JobsPageContent() {
                                                 for "{searchQuery}"{' '}
                                                 {searchLocation && `in ${searchLocation}`}
                                             </span>
+                                        )}
+                                        
+                                        {/* Active Filters Summary */}
+                                        {(filters.jobType || filters.employmentType || filters.experienceLevel || 
+                                          filters.salaryRange || filters.companyType || filters.skills || 
+                                          filters.location !== 'all' || selectedCategory !== 'all') && (
+                                            <div className="flex flex-wrap gap-2 mt-2">
+                                                {filters.jobType && (
+                                                    <span className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full">
+                                                        {filters.jobType}
+                                                    </span>
+                                                )}
+                                                {filters.employmentType && (
+                                                    <span className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full">
+                                                        {filters.employmentType}
+                                                    </span>
+                                                )}
+                                                {filters.experienceLevel && (
+                                                    <span className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full">
+                                                        {filters.experienceLevel}
+                                                    </span>
+                                                )}
+                                                {filters.salaryRange && (
+                                                    <span className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full">
+                                                        {filters.salaryRange} LPA
+                                                    </span>
+                                                )}
+                                                {filters.companyType && (
+                                                    <span className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full">
+                                                        {filters.companyType}
+                                                    </span>
+                                                )}
+                                                {filters.skills && (
+                                                    <span className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full">
+                                                        Skills: {filters.skills.split(',').length} selected
+                                                    </span>
+                                                )}
+                                                {filters.location !== 'all' && (
+                                                    <span className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full">
+                                                        {filters.location}
+                                                    </span>
+                                                )}
+                                                {selectedCategory !== 'all' && (
+                                                    <span className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full">
+                                                        {selectedCategory.replace('-', ' ')}
+                                            </span>
+                                                )}
+                                            </div>
                                         )}
                                     </div>
 
@@ -1041,7 +1527,34 @@ function JobsPageContent() {
 
                             {/* Job Cards Container */}
                             <div className="space-y-6" data-oid="ptslt8l">
-                                {isLoading ? (
+                                {error ? (
+                                    <div className="text-center py-16" data-oid="error-state">
+                                        <div className="text-red-500 mb-4">
+                                            <svg className="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            </svg>
+                                        </div>
+                                        <h3 className="text-lg font-semibold text-gray-900 mb-2">Unable to Load Jobs</h3>
+                                        <p className="text-gray-600 mb-4">{error}</p>
+                                        <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                                            <button
+                                                onClick={() => loadJobs()}
+                                                className="px-6 py-2 bg-[hsl(196,80%,45%)] text-white rounded-lg hover:bg-[hsl(196,80%,40%)] transition-colors duration-200 font-medium"
+                                            >
+                                                Try Again
+                                            </button>
+                                            <button
+                                                onClick={() => {
+                                                    setError(null);
+                                                    window.location.reload();
+                                                }}
+                                                className="px-6 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors duration-200 font-medium"
+                                            >
+                                                Refresh Page
+                                            </button>
+                                        </div>
+                                    </div>
+                                ) : isLoading ? (
                                     <div className="text-center py-16" data-oid="88afc--">
                                         <div
                                             className="animate-spin rounded-full h-12 w-12 border-b-2 border-[hsl(196,80%,45%)] mx-auto"
@@ -1083,6 +1596,39 @@ function JobsPageContent() {
                                                 >
                                                     Load More Jobs (
                                                     {filteredJobs.length - visibleJobs} remaining)
+                                                </button>
+                                            </div>
+                                        )}
+
+                                        {/* Pagination Controls */}
+                                        {pagination.pages > 1 && (
+                                            <div className="flex justify-center items-center space-x-4 mt-8">
+                                                <button
+                                                    onClick={() => {
+                                                        const newPage = pagination.page - 1;
+                                                        setPagination(prev => ({ ...prev, page: newPage }));
+                                                        loadJobs(newPage);
+                                                    }}
+                                                    disabled={pagination.page <= 1}
+                                                    className="px-4 py-2 border border-gray-300 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+                                                >
+                                                    Previous
+                                                </button>
+                                                
+                                                <span className="text-sm text-gray-600">
+                                                    Page {pagination.page} of {pagination.pages}
+                                                </span>
+                                                
+                                                <button
+                                                    onClick={() => {
+                                                        const newPage = pagination.page + 1;
+                                                        setPagination(prev => ({ ...prev, page: newPage }));
+                                                        loadJobs(newPage);
+                                                    }}
+                                                    disabled={pagination.page >= pagination.pages}
+                                                    className="px-4 py-2 border border-gray-300 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+                                                >
+                                                    Next
                                                 </button>
                                             </div>
                                         )}

@@ -1,10 +1,12 @@
 'use client';
 
+export const dynamic = 'force-dynamic'
+
 import MainNavbar from '@/components/mainNavbar';
 import { usePremiumTheme } from '@/hooks/usePremiumTheme';
-import { useAuth } from '@/lib/auth/AuthContext';
+import { useAuth } from '@/lib/auth/AuthContextBackend';
 import { Check, Star } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const subscriptionPlans = [
     {
@@ -102,7 +104,20 @@ export default function ResumeBuilderSubscriptionPage() {
     const [isUpgrading, setIsUpgrading] = useState(false);
     const [upgradeStatus, setUpgradeStatus] = useState<'idle' | 'success' | 'error'>('idle');
     
-    const currentPlan = getUserSubscription();
+    const [currentPlan, setCurrentPlan] = useState<string | null>(null);
+
+    // Load current subscription on component mount
+    useEffect(() => {
+        const loadCurrentPlan = async () => {
+            try {
+                const plan = await getUserSubscription();
+                setCurrentPlan(plan);
+            } catch (error) {
+                console.error('Error loading current plan:', error);
+            }
+        };
+        loadCurrentPlan();
+    }, [getUserSubscription]);
 
     const handleUpgrade = async (planId: 'starter' | 'premium') => {
         if (planId === currentPlan) return;

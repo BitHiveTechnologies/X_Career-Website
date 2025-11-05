@@ -1,7 +1,10 @@
 'use client';
 
 import MainNavbar from '@/components/mainNavbar';
+import PaymentModal from '@/components/PaymentModal';
+import SubscriptionStatus from '@/components/SubscriptionStatus';
 
+import { paymentService } from '@/lib/api/payment';
 import {
     Bell,
     CheckCircle,
@@ -70,18 +73,21 @@ const premiumFeatures = [
     },
 ];
 
-const pricingPlans = [
+// Default pricing plans (will be replaced by API data)
+const defaultPricingPlans = [
     {
+        id: 'basic',
         name: 'Free',
-        price: '₹0',
+        price: 0,
         period: 'forever',
         features: ['Basic job alerts', 'Weekly newsletter', 'Community access', 'Basic resources'],
         buttonText: 'Get Started',
         popular: false,
     },
     {
+        id: 'premium',
         name: 'NotifyX Premium',
-        price: '₹49',
+        price: 49,
         period: 'month',
         features: [
             'Priority job alerts',
@@ -91,12 +97,13 @@ const pricingPlans = [
             'Resume review',
             'Interview prep calls',
         ],
-        buttonText: 'Start Free Trial',
+        buttonText: 'Start Premium',
         popular: true,
     },
     {
+        id: 'enterprise',
         name: 'NotifyX Pro',
-        price: '₹99',
+        price: 99,
         period: 'month',
         features: [
             'Everything in Premium',
@@ -106,7 +113,7 @@ const pricingPlans = [
             'Direct recruiter connect',
             'Custom job search strategy',
         ],
-        buttonText: 'Contact Sales',
+        buttonText: 'Go Pro',
         popular: false,
     },
 ];
@@ -166,6 +173,60 @@ export default function NotifyPage() {
         careerUpdates: true,
     });
 
+    // Subscription state
+    const [pricingPlans, setPricingPlans] = useState(defaultPricingPlans);
+    const [currentSubscription, setCurrentSubscription] = useState<{
+        id: string;
+        plan: string;
+        status: string;
+        expiresAt: string;
+        features: string[];
+    } | null>(null);
+    const [isLoadingPlans, setIsLoadingPlans] = useState(true);
+    const [isLoadingSubscription, setIsLoadingSubscription] = useState(true);
+    const [paymentModal, setPaymentModal] = useState<{
+        isOpen: boolean;
+        plan: any;
+    }>({ isOpen: false, plan: null });
+
+    // Load subscription plans and current subscription
+    useEffect(() => {
+        loadSubscriptionData();
+    }, []);
+
+    const loadSubscriptionData = async () => {
+        try {
+            // Load subscription plans
+            setIsLoadingPlans(true);
+            const plansResponse = await paymentService.getSubscriptionPlans();
+            if (plansResponse.success && plansResponse.data?.plans) {
+                const apiPlans = plansResponse.data.plans.map(plan => ({
+                    id: plan.id,
+                    name: plan.name,
+                    price: plan.price,
+                    period: plan.duration === 999999 ? 'forever' : 'month',
+                    features: plan.features,
+                    buttonText: plan.id === 'basic' ? 'Get Started' : 
+                               plan.id === 'premium' ? 'Start Premium' : 'Go Pro',
+                    popular: plan.id === 'premium'
+                }));
+                setPricingPlans(apiPlans);
+            }
+
+            // Load current subscription
+            setIsLoadingSubscription(true);
+            const subscriptionResponse = await paymentService.getCurrentSubscription();
+            if (subscriptionResponse.success && subscriptionResponse.data?.subscription) {
+                setCurrentSubscription(subscriptionResponse.data.subscription);
+            }
+        } catch (error) {
+            console.error('Failed to load subscription data:', error);
+        } finally {
+            setIsLoadingPlans(false);
+            setIsLoadingSubscription(false);
+        }
+    };
+
     // Add custom CSS for animations
     useEffect(() => {
         if (typeof window === 'undefined') return; // SSR safety
@@ -202,50 +263,70 @@ export default function NotifyPage() {
         };
     }, []);
 
-    const handleSubscribe = async (plan: string) => {
-        if (!email || !email.includes('@')) {
-            setSubscriptionStatus('error');
-            setTimeout(() => setSubscriptionStatus('idle'), 3000);
-            return;
-        }
-
-        setIsSubmitting(true);
-        setSubscriptionStatus('idle');
-
-        try {
-            // Call the API to subscribe
-            const response = await fetch('/api/subscribe', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    email,
-                    preferences
-                }),
-            });
-
-            const data = await response.json();
-
-            if (!response.ok) {
-                throw new Error(data.error || 'Subscription failed');
+    const handleSubscribe = async (planId: string) => {
+        // Handle free plan subscription (email notification)
+        if (planId === 'basic' || planId === 'free') {
+            if (!email || !email.includes('@')) {
+                setSubscriptionStatus('error');
+                setTimeout(() => setSubscriptionStatus('idle'), 3000);
+                return;
             }
 
-            // The API already handles email sending
-            
-            setSubscriptionStatus('success');
-            setEmail(''); // Clear the form
-            
-            // Reset success message after 5 seconds
-            setTimeout(() => setSubscriptionStatus('idle'), 5000);
-            
-        } catch (error) {
-            // Handle subscription error gracefully
-            setSubscriptionStatus('error');
-            setTimeout(() => setSubscriptionStatus('idle'), 3000);
-        } finally {
-            setIsSubmitting(false);
+            setIsSubmitting(true);
+            setSubscriptionStatus('idle');
+
+            try {
+                // Call the API to subscribe
+                const response = await fetch('/api/subscribe', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email,
+                        preferences
+                    }),
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.error || 'Subscription failed');
+                }
+
+                setSubscriptionStatus('success');
+                setEmail(''); // Clear the form
+                
+                // Reset success message after 5 seconds
+                setTimeout(() => setSubscriptionStatus('idle'), 5000);
+                
+            } catch (error) {
+                setSubscriptionStatus('error');
+                setTimeout(() => setSubscriptionStatus('idle'), 3000);
+            } finally {
+                setIsSubmitting(false);
+            }
+        } else {
+            // Handle paid plan subscription (open payment modal)
+            const selectedPlan = pricingPlans.find(p => p.id === planId);
+            if (selectedPlan) {
+                setPaymentModal({ isOpen: true, plan: selectedPlan });
+            }
         }
+    };
+
+    const handlePaymentSuccess = (subscription: any) => {
+        console.log('Payment successful:', subscription);
+        setCurrentSubscription(subscription);
+        setPaymentModal({ isOpen: false, plan: null });
+        setSubscriptionStatus('success');
+        setTimeout(() => setSubscriptionStatus('idle'), 5000);
+    };
+
+    const handlePaymentError = (error: string) => {
+        console.error('Payment error:', error);
+        setSubscriptionStatus('error');
+        setTimeout(() => setSubscriptionStatus('idle'), 5000);
     };
 
     const sendWelcomeNotification = async (userEmail: string) => {
@@ -334,6 +415,20 @@ export default function NotifyPage() {
                             <p className="text-xl text-notify-soft-gray mb-10 max-w-3xl mx-auto leading-relaxed">
                                 Experience the ultimate in career notifications with our platform. Get exclusive access to priority alerts and personalized insights with an elegant, sophisticated design.
                             </p>
+
+                        {/* Current Subscription Status */}
+                        {!isLoadingSubscription && (
+                            <div className="max-w-md mx-auto mb-8">
+                                <SubscriptionStatus 
+                                    onUpgrade={() => {
+                                        const premiumPlan = pricingPlans.find(p => p.id === 'premium');
+                                        if (premiumPlan) {
+                                            setPaymentModal({ isOpen: true, plan: premiumPlan });
+                                        }
+                                    }}
+                                />
+                            </div>
+                        )}
 
                         {/* Quick Subscribe Form */}
                             <div className="max-w-2xl mx-auto mb-16">
@@ -466,48 +561,65 @@ export default function NotifyPage() {
                                 Experience the ultimate in career notifications with our exclusive platform
                             </p>
                         </div>
-                        <div className="grid md:grid-cols-3 gap-8">
-                            {pricingPlans.map((plan, index) => (
-                                <div key={index} className={`bg-notify-pure-white rounded-3xl p-8 border transition-all duration-500 transform hover:-translate-y-3 ${
-                                    plan.popular 
-                                        ? 'border-notify-golden-yellow shadow-2xl scale-105' 
-                                        : 'border-notify-golden-yellow/30 hover:shadow-xl'
-                                }`}>
-                                    {plan.popular && (
-                                        <div className="text-center mb-6">
-                                            <span className="inline-block px-4 py-2 rounded-full text-sm font-semibold shadow-lg bg-gradient-to-r from-notify-golden-yellow to-notify-orange-gold text-notify-deep-black">
-                                                Most Popular
-                                            </span>
+                        {isLoadingPlans ? (
+                            <div className="grid md:grid-cols-3 gap-8">
+                                {[1, 2, 3].map((i) => (
+                                    <div key={i} className="bg-notify-pure-white rounded-3xl p-8 border border-notify-golden-yellow/30 animate-pulse">
+                                        <div className="h-6 bg-gray-200 rounded w-1/2 mx-auto mb-4"></div>
+                                        <div className="h-8 bg-gray-200 rounded w-1/3 mx-auto mb-6"></div>
+                                        <div className="space-y-3 mb-8">
+                                            {[1, 2, 3, 4].map((j) => (
+                                                <div key={j} className="h-4 bg-gray-200 rounded"></div>
+                                            ))}
                                         </div>
-                                    )}
-                                    <div className="text-center mb-8">
-                                        <h3 className="text-2xl font-bold mb-3 text-notify-deep-black">{plan.name}</h3>
-                                        <div className="text-4xl font-bold mb-2 text-notify-golden-yellow">
-                                            {plan.price}
-                                            <span className="text-lg text-notify-deep-black/70">/{plan.period}</span>
-                                        </div>
+                                        <div className="h-12 bg-gray-200 rounded"></div>
                                     </div>
-                                    <div className="space-y-4 mb-8">
-                                        {plan.features.map((feature, featureIndex) => (
-                                            <div key={featureIndex} className="flex items-center gap-3">
-                                                <CheckCircle className="h-5 w-5 text-notify-deep-black flex-shrink-0" />
-                                                <span className="text-notify-deep-black text-sm">{feature}</span>
+                                ))}
+                            </div>
+                        ) : (
+                            <div className="grid md:grid-cols-3 gap-8">
+                                {pricingPlans.map((plan, index) => (
+                                    <div key={index} className={`bg-notify-pure-white rounded-3xl p-8 border transition-all duration-500 transform hover:-translate-y-3 ${
+                                        plan.popular 
+                                            ? 'border-notify-golden-yellow shadow-2xl scale-105' 
+                                            : 'border-notify-golden-yellow/30 hover:shadow-xl'
+                                    }`}>
+                                        {plan.popular && (
+                                            <div className="text-center mb-6">
+                                                <span className="inline-block px-4 py-2 rounded-full text-sm font-semibold shadow-lg bg-gradient-to-r from-notify-golden-yellow to-notify-orange-gold text-notify-deep-black">
+                                                    Most Popular
+                                                </span>
                                             </div>
-                                        ))}
+                                        )}
+                                        <div className="text-center mb-8">
+                                            <h3 className="text-2xl font-bold mb-3 text-notify-deep-black">{plan.name}</h3>
+                                            <div className="text-4xl font-bold mb-2 text-notify-golden-yellow">
+                                                ₹{plan.price}
+                                                <span className="text-lg text-notify-deep-black/70">/{plan.period}</span>
+                                            </div>
+                                        </div>
+                                        <div className="space-y-4 mb-8">
+                                            {plan.features.map((feature, featureIndex) => (
+                                                <div key={featureIndex} className="flex items-center gap-3">
+                                                    <CheckCircle className="h-5 w-5 text-notify-deep-black flex-shrink-0" />
+                                                    <span className="text-notify-deep-black text-sm">{feature}</span>
+                                                </div>
+                                            ))}
+                                        </div>
+                                        <button
+                                            onClick={() => handleSubscribe(plan.id)}
+                                            className={`w-full px-6 py-4 rounded-2xl font-semibold transition-all transform hover:scale-105 ${
+                                                plan.popular
+                                                    ? 'bg-gradient-to-r from-notify-golden-yellow to-notify-orange-gold text-notify-deep-black hover:shadow-xl'
+                                                    : 'border-2 border-notify-golden-yellow text-notify-golden-yellow hover:bg-notify-golden-yellow hover:text-notify-deep-black'
+                                            }`}
+                                        >
+                                            {plan.buttonText}
+                                        </button>
                                     </div>
-                                    <button
-                                        onClick={() => handleSubscribe(plan.name.toLowerCase())}
-                                        className={`w-full px-6 py-4 rounded-2xl font-semibold transition-all transform hover:scale-105 ${
-                                            plan.popular
-                                                ? 'bg-gradient-to-r from-notify-golden-yellow to-notify-orange-gold text-notify-deep-black hover:shadow-xl'
-                                                : 'border-2 border-notify-golden-yellow text-notify-golden-yellow hover:bg-notify-golden-yellow hover:text-notify-deep-black'
-                                        }`}
-                                    >
-                                        {plan.buttonText}
-                                    </button>
-                                </div>
-                            ))}
-                        </div>
+                                ))}
+                            </div>
+                        )}
                     </div>
                 </section>
 
@@ -848,6 +960,15 @@ export default function NotifyPage() {
                     </div>
             </div>
             </footer>
+
+            {/* Payment Modal */}
+            <PaymentModal
+                isOpen={paymentModal.isOpen}
+                onClose={() => setPaymentModal({ isOpen: false, plan: null })}
+                plan={paymentModal.plan}
+                onSuccess={handlePaymentSuccess}
+                onError={handlePaymentError}
+            />
         </div>
     );
 }

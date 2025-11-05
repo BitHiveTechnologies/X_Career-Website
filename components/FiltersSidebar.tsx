@@ -395,15 +395,18 @@ export default function FiltersSidebar({
                     >
                         Location
                     </label>
-                    <input
-                        type="text"
+                    <select
                         id="location"
                         value={filters.location}
                         onChange={(e) => handleInputChange('location', e.target.value)}
-                        placeholder="e.g. Bangalore, Mumbai, Remote"
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[hsl(196,80%,45%)] focus:border-[hsl(196,80%,45%)] transition-colors duration-200"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[hsl(196,80%,45%)] focus:border-[hsl(196,80%,45%)] transition-colors duration-200 bg-white"
                         data-oid="p-bfzja"
-                    />
+                    >
+                        <option value="all">All Locations</option>
+                        <option value="remote">Remote</option>
+                        <option value="onsite">Onsite</option>
+                        <option value="hybrid">Hybrid</option>
+                    </select>
                 </div>
 
                 {/* Action Buttons */}

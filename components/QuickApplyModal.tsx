@@ -1,10 +1,10 @@
 'use client';
 
-import { Job } from '@/app/jobs/page';
+import { FrontendJob } from '@/lib/api';
 import { useState } from 'react';
 
 interface QuickApplyModalProps {
-    job: Job;
+    job: FrontendJob;
     isOpen: boolean;
     onClose: () => void;
     onSubmit: (applicationData: any) => void;

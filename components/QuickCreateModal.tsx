@@ -16,48 +16,52 @@ interface QuickCreateModalProps {
   isOpen: boolean
   onClose: () => void
   onSubmit: (data: any) => void
+  isLoading?: boolean
 }
 
-export function QuickCreateModal({ isOpen, onClose, onSubmit }: QuickCreateModalProps) {
+export function QuickCreateModal({ isOpen, onClose, onSubmit, isLoading = false }: QuickCreateModalProps) {
   const [activeTab, setActiveTab] = useState<"job" | "internship">("job")
   const [jobForm, setJobForm] = useState({
     title: "",
     company: "",
-    location: "",
-    experienceRequired: "",
-    jobType: "",
-    employmentType: "",
-    skills: [] as string[],
-    salary: "",
     description: "",
-    isRemote: false,
-    isFeatured: false,
-    isUrgent: false,
+    type: "job" as "job" | "internship",
+    eligibility: {
+      qualifications: [] as string[],
+      streams: [] as string[],
+      passoutYears: [] as number[],
+      minCGPA: 0
+    },
+    applicationDeadline: "",
+    applicationLink: "",
+    location: "remote" as "remote" | "onsite" | "hybrid",
+    salary: "",
+    stipend: "",
+    isActive: true,
+    skills: [] as string[],
     benefits: [] as string[],
-    industry: "",
-    companySize: "",
-    companyType: "",
   })
 
   const [internshipForm, setInternshipForm] = useState({
     title: "",
     company: "",
-    location: "",
-    duration: "",
-    stipend: "",
-    jobType: "Internship",
-    employmentType: "Temporary",
-    skills: [] as string[],
     description: "",
-    isRemote: false,
-    isFeatured: false,
-    isUrgent: false,
-    benefits: [] as string[],
-    industry: "",
-    companySize: "",
-    companyType: "",
-    startDate: "",
+    type: "internship" as "job" | "internship",
+    eligibility: {
+      qualifications: [] as string[],
+      streams: [] as string[],
+      passoutYears: [] as number[],
+      minCGPA: 0
+    },
     applicationDeadline: "",
+    applicationLink: "",
+    location: "remote" as "remote" | "onsite" | "hybrid",
+    stipend: "",
+    isActive: true,
+    skills: [] as string[],
+    benefits: [] as string[],
+    duration: "",
+    startDate: "",
     isPartTime: false,
     isPaid: true,
     certificateProvided: true,
@@ -66,13 +70,32 @@ export function QuickCreateModal({ isOpen, onClose, onSubmit }: QuickCreateModal
 
   const [skillInput, setSkillInput] = useState("")
   const [benefitInput, setBenefitInput] = useState("")
+  const [qualificationInput, setQualificationInput] = useState("")
+  const [streamInput, setStreamInput] = useState("")
+  const [passoutYearInput, setPassoutYearInput] = useState("")
 
   const handleJobFormChange = (field: string, value: any) => {
+    if (field.startsWith('eligibility.')) {
+      const eligibilityField = field.split('.')[1]
+      setJobForm(prev => ({
+        ...prev,
+        eligibility: { ...prev.eligibility, [eligibilityField]: value }
+      }))
+    } else {
     setJobForm(prev => ({ ...prev, [field]: value }))
+    }
   }
 
   const handleInternshipFormChange = (field: string, value: any) => {
+    if (field.startsWith('eligibility.')) {
+      const eligibilityField = field.split('.')[1]
+      setInternshipForm(prev => ({
+        ...prev,
+        eligibility: { ...prev.eligibility, [eligibilityField]: value }
+      }))
+    } else {
     setInternshipForm(prev => ({ ...prev, [field]: value }))
+    }
   }
 
   const addSkill = (formType: "job" | "internship") => {
@@ -137,6 +160,138 @@ export function QuickCreateModal({ isOpen, onClose, onSubmit }: QuickCreateModal
     }
   }
 
+  const addQualification = (formType: "job" | "internship") => {
+    if (qualificationInput.trim()) {
+      if (formType === "job") {
+        setJobForm(prev => ({
+          ...prev,
+          eligibility: {
+            ...prev.eligibility,
+            qualifications: [...prev.eligibility.qualifications, qualificationInput.trim()]
+          }
+        }))
+      } else {
+        setInternshipForm(prev => ({
+          ...prev,
+          eligibility: {
+            ...prev.eligibility,
+            qualifications: [...prev.eligibility.qualifications, qualificationInput.trim()]
+          }
+        }))
+      }
+      setQualificationInput("")
+    }
+  }
+
+  const removeQualification = (qualification: string, formType: "job" | "internship") => {
+    if (formType === "job") {
+      setJobForm(prev => ({
+        ...prev,
+        eligibility: {
+          ...prev.eligibility,
+          qualifications: prev.eligibility.qualifications.filter(q => q !== qualification)
+        }
+      }))
+    } else {
+      setInternshipForm(prev => ({
+        ...prev,
+        eligibility: {
+          ...prev.eligibility,
+          qualifications: prev.eligibility.qualifications.filter(q => q !== qualification)
+        }
+      }))
+    }
+  }
+
+  const addStream = (formType: "job" | "internship") => {
+    if (streamInput.trim()) {
+      if (formType === "job") {
+        setJobForm(prev => ({
+          ...prev,
+          eligibility: {
+            ...prev.eligibility,
+            streams: [...prev.eligibility.streams, streamInput.trim()]
+          }
+        }))
+      } else {
+        setInternshipForm(prev => ({
+          ...prev,
+          eligibility: {
+            ...prev.eligibility,
+            streams: [...prev.eligibility.streams, streamInput.trim()]
+          }
+        }))
+      }
+      setStreamInput("")
+    }
+  }
+
+  const removeStream = (stream: string, formType: "job" | "internship") => {
+    if (formType === "job") {
+      setJobForm(prev => ({
+        ...prev,
+        eligibility: {
+          ...prev.eligibility,
+          streams: prev.eligibility.streams.filter(s => s !== stream)
+        }
+      }))
+    } else {
+      setInternshipForm(prev => ({
+        ...prev,
+        eligibility: {
+          ...prev.eligibility,
+          streams: prev.eligibility.streams.filter(s => s !== stream)
+        }
+      }))
+    }
+  }
+
+  const addPassoutYear = (formType: "job" | "internship") => {
+    if (passoutYearInput.trim()) {
+      const year = parseInt(passoutYearInput.trim())
+      if (!isNaN(year)) {
+        if (formType === "job") {
+          setJobForm(prev => ({
+            ...prev,
+            eligibility: {
+              ...prev.eligibility,
+              passoutYears: [...prev.eligibility.passoutYears, year]
+            }
+          }))
+        } else {
+          setInternshipForm(prev => ({
+            ...prev,
+            eligibility: {
+              ...prev.eligibility,
+              passoutYears: [...prev.eligibility.passoutYears, year]
+            }
+          }))
+        }
+        setPassoutYearInput("")
+      }
+    }
+  }
+
+  const removePassoutYear = (year: number, formType: "job" | "internship") => {
+    if (formType === "job") {
+      setJobForm(prev => ({
+        ...prev,
+        eligibility: {
+          ...prev.eligibility,
+          passoutYears: prev.eligibility.passoutYears.filter(y => y !== year)
+        }
+      }))
+    } else {
+      setInternshipForm(prev => ({
+        ...prev,
+        eligibility: {
+          ...prev.eligibility,
+          passoutYears: prev.eligibility.passoutYears.filter(y => y !== year)
+        }
+      }))
+    }
+  }
+
   const handleSubmit = () => {
     if (activeTab === "job") {
       onSubmit(jobForm)
@@ -144,6 +299,57 @@ export function QuickCreateModal({ isOpen, onClose, onSubmit }: QuickCreateModal
       onSubmit(internshipForm)
     }
     onClose()
+  }
+
+  const loadTestData = () => {
+    if (activeTab === "job") {
+      setJobForm({
+        title: "Frontend Developer",
+        company: "TechCorp Solutions",
+        description: "We are looking for a talented Frontend Developer to join our team. You will be responsible for building user interfaces and ensuring great user experience.",
+        type: "job",
+        eligibility: {
+          qualifications: ["B.Tech", "M.Tech", "BCA", "MCA"],
+          streams: ["CSE", "IT"],
+          passoutYears: [2022, 2023, 2024],
+          minCGPA: 7.0
+        },
+        applicationDeadline: "2025-12-31T23:59:59.000Z",
+        applicationLink: "https://techcorp.com/careers/frontend-developer",
+        location: "remote",
+        salary: "₹8-15 LPA",
+        stipend: "",
+        isActive: true,
+        skills: ["React", "JavaScript", "TypeScript", "CSS"],
+        benefits: ["Health Insurance", "Flexible Hours", "Remote Work"],
+      })
+    } else {
+      setInternshipForm({
+        title: "Software Development Intern",
+        company: "StartupXYZ",
+        description: "Join our team as a Software Development Intern and gain hands-on experience in building modern web applications. You'll work on real projects and learn from experienced developers.",
+        type: "internship",
+        eligibility: {
+          qualifications: ["B.Tech", "BCA", "MCA"],
+          streams: ["CSE", "IT"],
+          passoutYears: [2024, 2025, 2026],
+          minCGPA: 6.5
+        },
+        applicationDeadline: "2025-11-30T23:59:59.000Z",
+        applicationLink: "https://startupxyz.com/internships/software-dev",
+        location: "hybrid",
+        stipend: "₹15,000/month",
+        duration: "3 months",
+        startDate: "2025-12-01T00:00:00.000Z",
+        isPartTime: false,
+        isPaid: true,
+        certificateProvided: true,
+        mentorshipIncluded: true,
+        isActive: true,
+        skills: ["JavaScript", "React", "Node.js", "Git"],
+        benefits: ["Mentorship", "Certificate", "Stipend", "Flexible Hours"],
+      })
+    }
   }
 
   if (!isOpen) return null
@@ -210,67 +416,47 @@ export function QuickCreateModal({ isOpen, onClose, onSubmit }: QuickCreateModal
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="job-location">Location *</Label>
+                      <Label htmlFor="job-location">Location Type *</Label>
+                      <Select value={jobForm.location} onValueChange={(value) => handleJobFormChange("location", value)}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select location type" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="remote">Remote</SelectItem>
+                          <SelectItem value="onsite">On-site</SelectItem>
+                          <SelectItem value="hybrid">Hybrid</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="job-application-deadline">Application Deadline *</Label>
                       <Input
-                        id="job-location"
-                        placeholder="e.g., Bangalore, India"
-                        value={jobForm.location}
-                        onChange={(e) => handleJobFormChange("location", e.target.value)}
+                        id="job-application-deadline"
+                        type="date"
+                        value={jobForm.applicationDeadline}
+                        onChange={(e) => handleJobFormChange("applicationDeadline", e.target.value)}
                       />
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="job-experience">Experience Required *</Label>
-                      <Select value={jobForm.experienceRequired} onValueChange={(value) => handleJobFormChange("experienceRequired", value)}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select experience level" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="0-2 years">0-2 years</SelectItem>
-                          <SelectItem value="1-3 years">1-3 years</SelectItem>
-                          <SelectItem value="2-4 years">2-4 years</SelectItem>
-                          <SelectItem value="3-5 years">3-5 years</SelectItem>
-                          <SelectItem value="5+ years">5+ years</SelectItem>
-                        </SelectContent>
-                      </Select>
+                      <Label htmlFor="job-application-link">Application Link *</Label>
+                      <Input
+                        id="job-application-link"
+                        placeholder="https://company.com/apply"
+                        value={jobForm.applicationLink}
+                        onChange={(e) => handleJobFormChange("applicationLink", e.target.value)}
+                      />
                     </div>
                   </CardContent>
                 </Card>
 
                 <Card>
                   <CardHeader>
-                    <CardTitle>Job Type & Employment</CardTitle>
-                    <CardDescription>Employment details</CardDescription>
+                    <CardTitle>Compensation</CardTitle>
+                    <CardDescription>Salary and compensation details</CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="job-type">Job Type *</Label>
-                      <Select value={jobForm.jobType} onValueChange={(value) => handleJobFormChange("jobType", value)}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select job type" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="Full-time">Full-time</SelectItem>
-                          <SelectItem value="Part-time">Part-time</SelectItem>
-                          <SelectItem value="Contract">Contract</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="job-employment-type">Employment Type *</Label>
-                      <Select value={jobForm.employmentType} onValueChange={(value) => handleJobFormChange("employmentType", value)}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select employment type" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="Permanent">Permanent</SelectItem>
-                          <SelectItem value="Contract">Contract</SelectItem>
-                          <SelectItem value="Temporary">Temporary</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-
                     <div className="space-y-2">
                       <Label htmlFor="job-salary">Salary Range</Label>
                       <Input
@@ -283,11 +469,117 @@ export function QuickCreateModal({ isOpen, onClose, onSubmit }: QuickCreateModal
 
                     <div className="flex items-center space-x-2">
                       <Checkbox
-                        id="job-remote"
-                        checked={jobForm.isRemote}
-                        onCheckedChange={(checked) => handleJobFormChange("isRemote", checked)}
+                        id="job-active"
+                        checked={jobForm.isActive}
+                        onCheckedChange={(checked) => handleJobFormChange("isActive", checked)}
                       />
-                      <Label htmlFor="job-remote">Remote position</Label>
+                      <Label htmlFor="job-active">Active job posting</Label>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Eligibility - Qualifications</CardTitle>
+                    <CardDescription>Required qualifications</CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="flex gap-2">
+                      <Input
+                        placeholder="e.g., B.Tech, M.Tech"
+                        value={qualificationInput}
+                        onChange={(e) => setQualificationInput(e.target.value)}
+                        onKeyPress={(e: React.KeyboardEvent) => e.key === "Enter" && (e.preventDefault(), addQualification("job"))}
+                      />
+                      <Button onClick={() => addQualification("job")} size="sm">
+                        Add
+                      </Button>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {jobForm.eligibility.qualifications.map((qualification, index) => (
+                        <Badge key={index} variant="secondary" className="flex items-center gap-1">
+                          {qualification}
+                          <X
+                            className="h-3 w-3 cursor-pointer"
+                            onClick={() => removeQualification(qualification, "job")}
+                          />
+                        </Badge>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Eligibility - Streams</CardTitle>
+                    <CardDescription>Required academic streams</CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="flex gap-2">
+                      <Input
+                        placeholder="e.g., CSE, IT, ECE"
+                        value={streamInput}
+                        onChange={(e) => setStreamInput(e.target.value)}
+                        onKeyPress={(e: React.KeyboardEvent) => e.key === "Enter" && (e.preventDefault(), addStream("job"))}
+                      />
+                      <Button onClick={() => addStream("job")} size="sm">
+                        Add
+                      </Button>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {jobForm.eligibility.streams.map((stream, index) => (
+                        <Badge key={index} variant="secondary" className="flex items-center gap-1">
+                          {stream}
+                          <X
+                            className="h-3 w-3 cursor-pointer"
+                            onClick={() => removeStream(stream, "job")}
+                          />
+                        </Badge>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Eligibility - Passout Years</CardTitle>
+                    <CardDescription>Eligible graduation years</CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="flex gap-2">
+                      <Input
+                        placeholder="e.g., 2023, 2024"
+                        value={passoutYearInput}
+                        onChange={(e) => setPassoutYearInput(e.target.value)}
+                        onKeyPress={(e: React.KeyboardEvent) => e.key === "Enter" && (e.preventDefault(), addPassoutYear("job"))}
+                      />
+                      <Button onClick={() => addPassoutYear("job")} size="sm">
+                        Add
+                      </Button>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {jobForm.eligibility.passoutYears.map((year, index) => (
+                        <Badge key={index} variant="secondary" className="flex items-center gap-1">
+                          {year}
+                          <X
+                            className="h-3 w-3 cursor-pointer"
+                            onClick={() => removePassoutYear(year, "job")}
+                          />
+                        </Badge>
+                      ))}
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="job-min-cgpa">Minimum CGPA</Label>
+                      <Input
+                        id="job-min-cgpa"
+                        type="number"
+                        step="0.1"
+                        min="0"
+                        max="10"
+                        placeholder="e.g., 7.5"
+                        value={jobForm.eligibility.minCGPA || ""}
+                        onChange={(e) => handleJobFormChange("eligibility.minCGPA", parseFloat(e.target.value) || 0)}
+                      />
                     </div>
                   </CardContent>
                 </Card>
@@ -400,13 +692,17 @@ export function QuickCreateModal({ isOpen, onClose, onSubmit }: QuickCreateModal
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="internship-location">Location *</Label>
-                      <Input
-                        id="internship-location"
-                        placeholder="e.g., Bangalore, India"
-                        value={internshipForm.location}
-                        onChange={(e) => handleInternshipFormChange("location", e.target.value)}
-                      />
+                      <Label htmlFor="internship-location">Location Type *</Label>
+                      <Select value={internshipForm.location} onValueChange={(value) => handleInternshipFormChange("location", value)}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select location type" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="remote">Remote</SelectItem>
+                          <SelectItem value="onsite">On-site</SelectItem>
+                          <SelectItem value="hybrid">Hybrid</SelectItem>
+                        </SelectContent>
+                      </Select>
                     </div>
 
                     <div className="space-y-2">
@@ -424,6 +720,26 @@ export function QuickCreateModal({ isOpen, onClose, onSubmit }: QuickCreateModal
                           <SelectItem value="6 months">6 months</SelectItem>
                         </SelectContent>
                       </Select>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="internship-application-deadline">Application Deadline *</Label>
+                      <Input
+                        id="internship-application-deadline"
+                        type="date"
+                        value={internshipForm.applicationDeadline}
+                        onChange={(e) => handleInternshipFormChange("applicationDeadline", e.target.value)}
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="internship-application-link">Application Link *</Label>
+                      <Input
+                        id="internship-application-link"
+                        placeholder="https://company.com/apply"
+                        value={internshipForm.applicationLink}
+                        onChange={(e) => handleInternshipFormChange("applicationLink", e.target.value)}
+                      />
                     </div>
                   </CardContent>
                 </Card>
@@ -454,25 +770,6 @@ export function QuickCreateModal({ isOpen, onClose, onSubmit }: QuickCreateModal
                       />
                     </div>
 
-                    <div className="space-y-2">
-                      <Label htmlFor="internship-deadline">Application Deadline</Label>
-                      <Input
-                        id="internship-deadline"
-                        type="date"
-                        value={internshipForm.applicationDeadline}
-                        onChange={(e) => handleInternshipFormChange("applicationDeadline", e.target.value)}
-                      />
-                    </div>
-
-                    <div className="flex items-center space-x-2">
-                      <Checkbox
-                        id="internship-remote"
-                        checked={internshipForm.isRemote}
-                        onCheckedChange={(checked) => handleInternshipFormChange("isRemote", checked)}
-                      />
-                      <Label htmlFor="internship-remote">Remote internship</Label>
-                    </div>
-
                     <div className="flex items-center space-x-2">
                       <Checkbox
                         id="internship-part-time"
@@ -480,6 +777,148 @@ export function QuickCreateModal({ isOpen, onClose, onSubmit }: QuickCreateModal
                         onCheckedChange={(checked) => handleInternshipFormChange("isPartTime", checked)}
                       />
                       <Label htmlFor="internship-part-time">Part-time</Label>
+                    </div>
+
+                    <div className="flex items-center space-x-2">
+                      <Checkbox
+                        id="internship-paid"
+                        checked={internshipForm.isPaid}
+                        onCheckedChange={(checked) => handleInternshipFormChange("isPaid", checked)}
+                      />
+                      <Label htmlFor="internship-paid">Paid internship</Label>
+                    </div>
+
+                    <div className="flex items-center space-x-2">
+                      <Checkbox
+                        id="internship-certificate"
+                        checked={internshipForm.certificateProvided}
+                        onCheckedChange={(checked) => handleInternshipFormChange("certificateProvided", checked)}
+                      />
+                      <Label htmlFor="internship-certificate">Certificate provided</Label>
+                    </div>
+
+                    <div className="flex items-center space-x-2">
+                      <Checkbox
+                        id="internship-mentorship"
+                        checked={internshipForm.mentorshipIncluded}
+                        onCheckedChange={(checked) => handleInternshipFormChange("mentorshipIncluded", checked)}
+                      />
+                      <Label htmlFor="internship-mentorship">Mentorship included</Label>
+                    </div>
+
+                    <div className="flex items-center space-x-2">
+                      <Checkbox
+                        id="internship-active"
+                        checked={internshipForm.isActive}
+                        onCheckedChange={(checked) => handleInternshipFormChange("isActive", checked)}
+                      />
+                      <Label htmlFor="internship-active">Active internship posting</Label>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Eligibility - Qualifications</CardTitle>
+                    <CardDescription>Required qualifications</CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="flex gap-2">
+                      <Input
+                        placeholder="e.g., B.Tech, M.Tech"
+                        value={qualificationInput}
+                        onChange={(e) => setQualificationInput(e.target.value)}
+                        onKeyPress={(e: React.KeyboardEvent) => e.key === "Enter" && (e.preventDefault(), addQualification("internship"))}
+                      />
+                      <Button onClick={() => addQualification("internship")} size="sm">
+                        Add
+                      </Button>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {internshipForm.eligibility.qualifications.map((qualification, index) => (
+                        <Badge key={index} variant="secondary" className="flex items-center gap-1">
+                          {qualification}
+                          <X
+                            className="h-3 w-3 cursor-pointer"
+                            onClick={() => removeQualification(qualification, "internship")}
+                          />
+                        </Badge>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Eligibility - Streams</CardTitle>
+                    <CardDescription>Required academic streams</CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="flex gap-2">
+                      <Input
+                        placeholder="e.g., CSE, IT, ECE"
+                        value={streamInput}
+                        onChange={(e) => setStreamInput(e.target.value)}
+                        onKeyPress={(e: React.KeyboardEvent) => e.key === "Enter" && (e.preventDefault(), addStream("internship"))}
+                      />
+                      <Button onClick={() => addStream("internship")} size="sm">
+                        Add
+                      </Button>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {internshipForm.eligibility.streams.map((stream, index) => (
+                        <Badge key={index} variant="secondary" className="flex items-center gap-1">
+                          {stream}
+                          <X
+                            className="h-3 w-3 cursor-pointer"
+                            onClick={() => removeStream(stream, "internship")}
+                          />
+                        </Badge>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Eligibility - Passout Years</CardTitle>
+                    <CardDescription>Eligible graduation years</CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="flex gap-2">
+                      <Input
+                        placeholder="e.g., 2023, 2024"
+                        value={passoutYearInput}
+                        onChange={(e) => setPassoutYearInput(e.target.value)}
+                        onKeyPress={(e: React.KeyboardEvent) => e.key === "Enter" && (e.preventDefault(), addPassoutYear("internship"))}
+                      />
+                      <Button onClick={() => addPassoutYear("internship")} size="sm">
+                        Add
+                      </Button>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {internshipForm.eligibility.passoutYears.map((year, index) => (
+                        <Badge key={index} variant="secondary" className="flex items-center gap-1">
+                          {year}
+                          <X
+                            className="h-3 w-3 cursor-pointer"
+                            onClick={() => removePassoutYear(year, "internship")}
+                          />
+                        </Badge>
+                      ))}
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="internship-min-cgpa">Minimum CGPA</Label>
+                      <Input
+                        id="internship-min-cgpa"
+                        type="number"
+                        step="0.1"
+                        min="0"
+                        max="10"
+                        placeholder="e.g., 7.5"
+                        value={internshipForm.eligibility.minCGPA || ""}
+                        onChange={(e) => handleInternshipFormChange("eligibility.minCGPA", parseFloat(e.target.value) || 0)}
+                      />
                     </div>
                   </CardContent>
                 </Card>
@@ -567,14 +1006,24 @@ export function QuickCreateModal({ isOpen, onClose, onSubmit }: QuickCreateModal
 
         <div className="p-6 border-t border-gray-200 bg-gray-50 rounded-b-2xl">
           <div className="flex justify-between items-center">
+            <div className="flex gap-2">
             <Button variant="outline" onClick={onClose}>
               Cancel
             </Button>
+              <Button 
+                variant="secondary" 
+                onClick={loadTestData}
+                className="bg-blue-100 hover:bg-blue-200 text-blue-700 border-blue-300"
+              >
+                Load Test Data
+              </Button>
+            </div>
             <Button 
               onClick={handleSubmit}
+              disabled={isLoading}
               className="bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)]"
             >
-              Create {activeTab === "job" ? "Job" : "Internship"}
+              {isLoading ? 'Creating...' : `Create ${activeTab === "job" ? "Job" : "Internship"}`}
             </Button>
           </div>
         </div>

@@ -1,9 +1,9 @@
 'use client';
 
 import { usePremiumTheme } from '@/hooks/usePremiumTheme';
-import { useAuth } from '@/lib/auth/AuthContext';
+import { useAuth } from '@/lib/auth/AuthContextBackend';
 import { Crown, Lock } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import SubscriptionUpgradeModal from './SubscriptionUpgradeModal';
 
 interface TemplateSelectorProps {
@@ -19,8 +19,20 @@ export default function TemplateSelector({
     const { isPremium, premiumColors } = usePremiumTheme();
     const [showUpgradeModal, setShowUpgradeModal] = useState(false);
     const [lockedTemplate, setLockedTemplate] = useState<string>('');
+    const [userSubscription, setUserSubscription] = useState<string | null>(null);
 
-    const userSubscription = getUserSubscription();
+    // Load user subscription on component mount
+    useEffect(() => {
+        const loadUserSubscription = async () => {
+            try {
+                const subscription = await getUserSubscription();
+                setUserSubscription(subscription);
+            } catch (error) {
+                console.error('Error loading user subscription:', error);
+            }
+        };
+        loadUserSubscription();
+    }, [getUserSubscription]);
 
     const templates = [
         {
@@ -56,6 +68,8 @@ export default function TemplateSelector({
     ];
 
     const handleTemplateClick = (template: any) => {
+        if (!userSubscription) return;
+        
         const isAccessible = template.subscription === 'free' || 
             (template.subscription === 'starter' && ['starter', 'premium'].includes(userSubscription)) ||
             (template.subscription === 'premium' && userSubscription === 'premium');
@@ -88,7 +102,8 @@ export default function TemplateSelector({
                             userSubscription === 'starter' ? 'bg-blue-100 text-blue-700' :
                             isPremium ? 'bg-premium-gold text-premium-navy border border-premium-gold/30' : 'bg-purple-100 text-purple-700'
                         }`}>
-                            {userSubscription === 'free' ? 'Free' :
+                            {!userSubscription ? 'Loading...' :
+                             userSubscription === 'free' ? 'Free' :
                              userSubscription === 'starter' ? 'Starter' : 
                              isPremium ? '👑 Royal Premium' : 'Premium'}
                         </span>
@@ -98,8 +113,8 @@ export default function TemplateSelector({
                 <div className="grid md:grid-cols-3 gap-4" data-oid="v62dji9">
                     {templates.map((template) => {
                         const isAccessible = template.subscription === 'free' || 
-                            (template.subscription === 'starter' && ['starter', 'premium'].includes(userSubscription)) ||
-                            (template.subscription === 'premium' && userSubscription === 'premium');
+                            (userSubscription && template.subscription === 'starter' && ['starter', 'premium'].includes(userSubscription)) ||
+                            (userSubscription && template.subscription === 'premium' && userSubscription === 'premium');
                         
                         const isLocked = !isAccessible;
                         
@@ -255,8 +270,12 @@ export default function TemplateSelector({
             <SubscriptionUpgradeModal
                 isOpen={showUpgradeModal}
                 onClose={() => setShowUpgradeModal(false)}
-                lockedTemplate={lockedTemplate}
-                currentPlan={userSubscription}
+                currentPlan={userSubscription as "free" | "premium" | "starter" || "free"}
+                onUpgrade={(planId) => {
+                    console.log('Upgrading to plan:', planId);
+                    // Implement upgrade logic here
+                    setShowUpgradeModal(false);
+                }}
             />
         </>
     );

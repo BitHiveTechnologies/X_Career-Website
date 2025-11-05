@@ -11,6 +11,20 @@ const users = [
         name: 'Demo User',
         role: 'user',
     },
+    {
+        id: '2',
+        email: 'admin@notifyx.com',
+        password: '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+        name: 'Admin User',
+        role: 'admin',
+    },
+    {
+        id: '3',
+        email: 'superadmin@notifyx.com',
+        password: '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+        name: 'Super Admin',
+        role: 'super_admin',
+    },
 ];
 
 export async function POST(request: NextRequest) {
@@ -20,6 +34,12 @@ export async function POST(request: NextRequest) {
         // Validate input
         if (!email || !password) {
             return NextResponse.json({ error: 'Email and password are required' }, { status: 400 });
+        }
+
+        // Validate email format
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            return NextResponse.json({ error: 'Please enter a valid email address' }, { status: 400 });
         }
 
         // Find user
@@ -49,12 +69,17 @@ export async function POST(request: NextRequest) {
         // Create response
         const response = NextResponse.json(
             {
+                success: true,
                 message: 'Login successful',
-                user: {
-                    id: user.id,
-                    email: user.email,
-                    name: user.name,
-                    role: user.role,
+                data: {
+                    user: {
+                        id: user.id,
+                        email: user.email,
+                        firstName: user.name.split(' ')[0],
+                        lastName: user.name.split(' ').slice(1).join(' ') || '',
+                        role: user.role,
+                    },
+                    token,
                 },
             },
             { status: 200 },
@@ -70,11 +95,7 @@ export async function POST(request: NextRequest) {
 
         return response;
     } catch (error) {
-        // Log error for debugging (server-side only)
+        console.error('Login error:', error);
         return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
     }
-}
-
-export async function GET() {
-    return NextResponse.json({ message: 'Login endpoint - use POST method' }, { status: 405 });
 }

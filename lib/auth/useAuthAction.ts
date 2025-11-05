@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from './AuthContext';
 
 export const useAuthAction = () => {
-    const { isAuthenticated, requireAuth } = useAuth();
+    const { isAuthenticated } = useAuth();
     const router = useRouter();
 
     const executeWithAuth = (action: () => void, redirectPath?: string) => {
