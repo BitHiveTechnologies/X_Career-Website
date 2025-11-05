@@ -78,13 +78,13 @@ export default function PaymentModal({ isOpen, onClose, plan, onSuccess, onError
         throw new Error(orderResponse.error?.message || 'Failed to create order');
       }
 
-      const { order, keyId } = orderResponse.data;
+      const { order, razorpay } = orderResponse.data;
       setOrderId(order.id);
       setStep('payment');
 
       // Configure Razorpay options
       const options = {
-        key: keyId,
+        key: razorpay.keyId,
         amount: order.amount,
         currency: order.currency,
         name: 'X Careers',
@@ -129,9 +129,7 @@ export default function PaymentModal({ isOpen, onClose, plan, onSuccess, onError
       const verifyRequest: VerifyPaymentRequest = {
         razorpay_order_id: response.razorpay_order_id,
         razorpay_payment_id: response.razorpay_payment_id,
-        razorpay_signature: response.razorpay_signature,
-        plan: plan.id,
-        amount: plan.price * 100
+        razorpay_signature: response.razorpay_signature
       };
 
       const verifyResponse = await paymentService.verifyPayment(verifyRequest);

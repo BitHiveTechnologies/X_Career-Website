@@ -27,8 +27,9 @@ export function PremiumBadge({ user, size = 'md', showText = true }: PremiumBadg
     lg: 'w-5 h-5',
   };
 
-  const planName = user.subscriptionPlan?.charAt(0).toUpperCase() + 
-                   user.subscriptionPlan?.slice(1) || 'Premium';
+  const planName = user.subscriptionPlan 
+    ? (user.subscriptionPlan.charAt(0).toUpperCase() + user.subscriptionPlan.slice(1)) 
+    : 'Premium';
 
   return (
     <Badge 

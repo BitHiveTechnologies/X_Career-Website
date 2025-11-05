@@ -5,7 +5,6 @@ import PaymentModal from '@/components/PaymentModal';
 import SubscriptionStatus from '@/components/SubscriptionStatus';
 
 import { paymentService } from '@/lib/api/payment';
-import { UserSubscription } from '@/lib/api/subscriptionService';
 import {
     Bell,
     CheckCircle,
@@ -176,7 +175,13 @@ export default function NotifyPage() {
 
     // Subscription state
     const [pricingPlans, setPricingPlans] = useState(defaultPricingPlans);
-    const [currentSubscription, setCurrentSubscription] = useState<UserSubscription | null>(null);
+    const [currentSubscription, setCurrentSubscription] = useState<{
+        id: string;
+        plan: string;
+        status: string;
+        expiresAt: string;
+        features: string[];
+    } | null>(null);
     const [isLoadingPlans, setIsLoadingPlans] = useState(true);
     const [isLoadingSubscription, setIsLoadingSubscription] = useState(true);
     const [paymentModal, setPaymentModal] = useState<{

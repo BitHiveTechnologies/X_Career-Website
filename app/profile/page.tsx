@@ -12,6 +12,7 @@ import { Textarea } from '@/components/ui/textarea';
 import {
     ProfileCompletionStatus,
     UpdateProfileRequest,
+    User as UserType,
     UserProfile
 } from '@/lib/api';
 import { getUserProfile } from '@/lib/api/auth';
@@ -69,7 +70,7 @@ export default function ProfilePage() {
     const [success, setSuccess] = useState<string | null>(null);
     
     // Profile data
-    const [profile, setProfile] = useState<UserProfile | null>(null);
+    const [profile, setProfile] = useState<UserType | null>(null);
     const [completion, setCompletion] = useState<ProfileCompletionStatus | null>(null);
     const [formData, setFormData] = useState<UpdateProfileRequest>({});
     const [newSkill, setNewSkill] = useState('');
@@ -102,28 +103,29 @@ export default function ProfilePage() {
 
             // Load user profile data
             const profileResult = await getUserProfile();
-            if (profileResult) {
-                setProfile(profileResult);
+            if (profileResult.success && profileResult.profile) {
+                setProfile(profileResult.profile);
                 
                 // Initialize form data with current profile
+                const userProfile = profileResult.profile.profile;
                 setFormData({
-                    firstName: profileResult.firstName,
-                    lastName: profileResult.lastName,
-                    mobile: user?.mobile || '',
-                    qualification: profileResult.qualification,
-                    stream: profileResult.stream,
-                    yearOfPassout: profileResult.yearOfPassout,
-                    cgpaOrPercentage: profileResult.cgpaOrPercentage,
-                    collegeName: profileResult.collegeName,
-                    dateOfBirth: profileResult.dateOfBirth,
-                    address: profileResult.address,
-                    city: profileResult.city,
-                    state: profileResult.state,
-                    pincode: profileResult.pincode,
-                    skills: profileResult.skills,
-                    resumeUrl: profileResult.resumeUrl,
-                    linkedinUrl: profileResult.linkedinUrl,
-                    githubUrl: profileResult.githubUrl,
+                    firstName: profileResult.profile.firstName,
+                    lastName: profileResult.profile.lastName,
+                    mobile: profileResult.profile.mobile || user?.mobile || '',
+                    qualification: userProfile?.qualification || '',
+                    stream: userProfile?.stream || '',
+                    yearOfPassout: userProfile?.yearOfPassout || 0,
+                    cgpaOrPercentage: userProfile?.cgpaOrPercentage || 0,
+                    collegeName: userProfile?.collegeName || '',
+                    dateOfBirth: userProfile?.dateOfBirth || '',
+                    address: userProfile?.address || '',
+                    city: userProfile?.city || '',
+                    state: userProfile?.state || '',
+                    pincode: userProfile?.pincode || '',
+                    skills: userProfile?.skills || '',
+                    resumeUrl: userProfile?.resumeUrl || '',
+                    linkedinUrl: userProfile?.linkedinUrl || '',
+                    githubUrl: userProfile?.githubUrl || '',
                 });
             } else {
                 // If no profile data, initialize with user data
@@ -227,24 +229,25 @@ export default function ProfilePage() {
     const handleCancel = () => {
         // Reset form data to current profile
         if (profile) {
+            const userProfile = profile.profile;
             setFormData({
                 firstName: profile.firstName,
                 lastName: profile.lastName,
-                mobile: user?.mobile || '',
-                qualification: profile.qualification,
-                stream: profile.stream,
-                yearOfPassout: profile.yearOfPassout,
-                cgpaOrPercentage: profile.cgpaOrPercentage,
-                collegeName: profile.collegeName,
-                dateOfBirth: profile.dateOfBirth,
-                address: profile.address,
-                city: profile.city,
-                state: profile.state,
-                pincode: profile.pincode,
-                skills: profile.skills,
-                resumeUrl: profile.resumeUrl,
-                linkedinUrl: profile.linkedinUrl,
-                githubUrl: profile.githubUrl,
+                mobile: profile.mobile || user?.mobile || '',
+                qualification: userProfile?.qualification || '',
+                stream: userProfile?.stream || '',
+                yearOfPassout: userProfile?.yearOfPassout || 0,
+                cgpaOrPercentage: userProfile?.cgpaOrPercentage || 0,
+                collegeName: userProfile?.collegeName || '',
+                dateOfBirth: userProfile?.dateOfBirth || '',
+                address: userProfile?.address || '',
+                city: userProfile?.city || '',
+                state: userProfile?.state || '',
+                pincode: userProfile?.pincode || '',
+                skills: userProfile?.skills || '',
+                resumeUrl: userProfile?.resumeUrl || '',
+                linkedinUrl: userProfile?.linkedinUrl || '',
+                githubUrl: userProfile?.githubUrl || '',
             });
         }
         setIsEditing(false);
@@ -355,7 +358,7 @@ export default function ProfilePage() {
                                     {user?.subscriptionInfo?.isActive && (
                                         <Badge className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-white border-0 px-3 py-1 flex items-center gap-1">
                                             <Crown className="w-4 h-4" />
-                                            {user.subscriptionPlan?.charAt(0).toUpperCase() + user.subscriptionPlan?.slice(1) || 'Premium'}
+                                            {user?.subscriptionPlan ? (user.subscriptionPlan.charAt(0).toUpperCase() + user.subscriptionPlan.slice(1)) : 'Premium'}
                                         </Badge>
                                     )}
                                 </div>

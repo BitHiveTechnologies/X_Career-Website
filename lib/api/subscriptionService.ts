@@ -291,17 +291,3 @@ class SubscriptionService {
 
 // Export singleton instance
 export const subscriptionService = new SubscriptionService();
-
-// Export types
-export type {
-  SubscriptionPlan,
-  SubscriptionPlanResponse,
-  UserSubscription,
-  SubscriptionHistoryItem,
-  SubscriptionHistoryResponse,
-  CreateOrderRequest,
-  CreateOrderResponse,
-  VerifyPaymentRequest,
-  CancelSubscriptionRequest,
-  RenewSubscriptionRequest
-};

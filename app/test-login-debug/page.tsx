@@ -1,5 +1,7 @@
 'use client';
 
+export const dynamic = 'force-dynamic'
+
 import { useState } from 'react';
 import { useAuth } from '@/lib/auth/AuthContextBackend';
 import { authService } from '@/lib/api';
@@ -20,7 +22,7 @@ export default function TestLoginDebugPage() {
       setResult({ type: 'direct', response });
     } catch (error) {
       console.error('Direct API error:', error);
-      setResult({ type: 'direct', error: error.message });
+      setResult({ type: 'direct', error: error instanceof Error ? error.message : 'Unknown error' });
     } finally {
       setLoading(false);
     }
@@ -35,7 +37,7 @@ export default function TestLoginDebugPage() {
       setResult({ type: 'context', response });
     } catch (error) {
       console.error('Auth context error:', error);
-      setResult({ type: 'context', error: error.message });
+      setResult({ type: 'context', error: error instanceof Error ? error.message : 'Unknown error' });
     } finally {
       setLoading(false);
     }

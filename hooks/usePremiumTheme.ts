@@ -12,21 +12,18 @@ export interface PremiumThemeColors {
 }
 
 export const usePremiumTheme = () => {
-    const { getUserSubscription } = useAuth();
+    const { user } = useAuth();
     const [isPremium, setIsPremium] = useState(false);
 
     useEffect(() => {
-        const loadSubscription = async () => {
-            try {
-                const subscription = await getUserSubscription();
-                setIsPremium(subscription === 'premium');
-            } catch (error) {
-                console.error('Error loading subscription:', error);
-                setIsPremium(false);
-            }
-        };
-        loadSubscription();
-    }, [getUserSubscription]);
+        if (user) {
+            const hasPremium = user.subscriptionPlan === 'premium' && 
+                             user.subscriptionInfo?.isActive === true;
+            setIsPremium(hasPremium);
+        } else {
+            setIsPremium(false);
+        }
+    }, [user]);
 
     const premiumColors: PremiumThemeColors = {
         primary: 'bg-premium-emerald text-white',

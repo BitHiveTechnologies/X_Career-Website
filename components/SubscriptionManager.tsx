@@ -11,7 +11,7 @@ interface SubscriptionManagerProps {
   onUpgrade?: (plan: SubscriptionPlan) => void;
 }
 
-export default function SubscriptionManager({ onUpgrade }: SubscriptionManagerProps) {
+function SubscriptionManager({ onUpgrade }: SubscriptionManagerProps) {
   const [plans, setPlans] = useState<SubscriptionPlan[]>([]);
   const [currentSubscription, setCurrentSubscription] = useState<any>(null);
   const [loading, setLoading] = useState(true);
@@ -210,3 +210,6 @@ export default function SubscriptionManager({ onUpgrade }: SubscriptionManagerPr
     </div>
   );
 }
+
+export { SubscriptionManager };
+export default SubscriptionManager;

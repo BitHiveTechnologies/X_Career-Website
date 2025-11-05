@@ -129,7 +129,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         console.log('User login result:', result);
       }
       
-      if (result.success && result.data) {
+      if (result.success && result.data && result.data.user) {
         // Set user data from login response
         const userData = {
           id: result.data.user.id,
@@ -180,7 +180,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       
       const result = await authService.adminLogin({ email, password });
       
-      if (result.success && result.data) {
+      if (result.success && result.data && result.data.user) {
         // Set user data from login response
         const userData = {
           id: result.data.user.id,
@@ -246,7 +246,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         cgpaOrPercentage,
       });
       
-      if (result.success && result.data) {
+      if (result.success && result.data && result.data.user) {
         // Set user data from registration response
         const userData = {
           id: result.data.user.id,

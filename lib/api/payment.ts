@@ -291,12 +291,3 @@ class PaymentService {
 // Export singleton instance
 export const paymentService = new PaymentService();
 
-// Export types for use in components
-export type {
-  CreateOrderRequest,
-  CreateOrderResponse, CurrentSubscriptionResponse, PaymentHistoryResponse,
-  SubscriptionPlan,
-  SubscriptionPlansResponse, VerifyPaymentRequest,
-  VerifyPaymentResponse
-};
-

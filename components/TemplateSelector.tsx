@@ -270,8 +270,12 @@ export default function TemplateSelector({
             <SubscriptionUpgradeModal
                 isOpen={showUpgradeModal}
                 onClose={() => setShowUpgradeModal(false)}
-                lockedTemplate={lockedTemplate}
                 currentPlan={userSubscription as "free" | "premium" | "starter" || "free"}
+                onUpgrade={(planId) => {
+                    console.log('Upgrading to plan:', planId);
+                    // Implement upgrade logic here
+                    setShowUpgradeModal(false);
+                }}
             />
         </>
     );

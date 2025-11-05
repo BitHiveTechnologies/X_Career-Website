@@ -12,7 +12,7 @@ interface AuthGuardProps {
   fallback?: ReactNode;
 }
 
-export default function AuthGuard({
+function AuthGuard({
   children,
   requireAuth = true,
   requireRole,
@@ -147,3 +147,6 @@ export function GuestGuard({ children }: { children: ReactNode }) {
     </AuthGuard>
   );
 }
+
+export { AuthGuard };
+export default AuthGuard;
