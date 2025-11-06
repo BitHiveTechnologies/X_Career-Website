@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { healthService } from '@/lib/api/services';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET(request: NextRequest) {
   try {
     // Test the backend connection

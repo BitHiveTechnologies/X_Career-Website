@@ -2,6 +2,8 @@ import { apiClient } from '@/lib/api/client';
 import { adminService } from '@/lib/api/services';
 import { NextRequest, NextResponse } from 'next/server';
 
+export const dynamic = 'force-dynamic';
+
 // Admin JWT token for backend authentication
 const ADMIN_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGQ0Yzg4MjkzYTliMTQ4OWZjZTE0MDciLCJlbWFpbCI6ImFkbWluQG5vdGlmeXguY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzU4OTYxMjkzLCJleHAiOjE3NTk1NjYwOTMsImF1ZCI6Im5vdGlmeXgtdXNlcnMiLCJpc3MiOiJub3RpZnl4LWJhY2tlbmQifQ.GLH4DwLqBYKnBcHyTHLkiQO32J945kna4dUVbN5YkcQ';
 
