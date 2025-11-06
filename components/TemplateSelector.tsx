@@ -15,7 +15,7 @@ export default function TemplateSelector({
     selectedTemplate,
     onTemplateChange,
 }: TemplateSelectorProps) {
-    const { getUserSubscription } = useAuth();
+    const auth = useAuth();
     const { isPremium, premiumColors } = usePremiumTheme();
     const [showUpgradeModal, setShowUpgradeModal] = useState(false);
     const [lockedTemplate, setLockedTemplate] = useState<string>('');
@@ -25,14 +25,16 @@ export default function TemplateSelector({
     useEffect(() => {
         const loadUserSubscription = async () => {
             try {
-                const subscription = await getUserSubscription();
-                setUserSubscription(subscription);
+                if (auth?.getUserSubscription) {
+                    const subscription = await auth.getUserSubscription();
+                    setUserSubscription(subscription);
+                }
             } catch (error) {
                 console.error('Error loading user subscription:', error);
             }
         };
         loadUserSubscription();
-    }, [getUserSubscription]);
+    }, [auth]);
 
     const templates = [
         {

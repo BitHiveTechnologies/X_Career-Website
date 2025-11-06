@@ -619,11 +619,18 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 // AUTH HOOK
 // ============================================================================
 
-export const useAuth = (): AuthContextType => {
+export const useAuth = (): AuthContextType | null => {
   const context = useContext(AuthContext);
+  
+  // During SSR/build time or if context is not available, return null instead of throwing
   if (context === undefined) {
-    throw new Error('useAuth must be used within an AuthProvider');
+    // Only log warning on client-side, not during SSR
+    if (typeof window !== 'undefined') {
+      console.warn('useAuth: Auth context not available');
+    }
+    return null as any;
   }
+  
   return context;
 };
 

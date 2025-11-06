@@ -99,7 +99,7 @@ const testimonials = [
 ];
 
 export default function ResumeBuilderSubscriptionPage() {
-    const { getUserSubscription, updateSubscription } = useAuth();
+    const auth = useAuth();
     const { isPremium, premiumColors } = usePremiumTheme();
     const [isUpgrading, setIsUpgrading] = useState(false);
     const [upgradeStatus, setUpgradeStatus] = useState<'idle' | 'success' | 'error'>('idle');
@@ -110,14 +110,16 @@ export default function ResumeBuilderSubscriptionPage() {
     useEffect(() => {
         const loadCurrentPlan = async () => {
             try {
-                const plan = await getUserSubscription();
-                setCurrentPlan(plan);
+                if (auth?.getUserSubscription) {
+                    const plan = await auth.getUserSubscription();
+                    setCurrentPlan(plan);
+                }
             } catch (error) {
                 console.error('Error loading current plan:', error);
             }
         };
         loadCurrentPlan();
-    }, [getUserSubscription]);
+    }, [auth]);
 
     const handleUpgrade = async (planId: 'starter' | 'premium') => {
         if (planId === currentPlan) return;
@@ -126,7 +128,10 @@ export default function ResumeBuilderSubscriptionPage() {
         setUpgradeStatus('idle');
 
         try {
-            const result = await updateSubscription(planId);
+            if (!auth?.updateSubscription) {
+                throw new Error('Auth context not available');
+            }
+            const result = await auth.updateSubscription(planId);
             
             if (result.success) {
                 setUpgradeStatus('success');
