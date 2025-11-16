@@ -2,6 +2,7 @@
 
 import MainNavbar from '@/components/mainNavbar';
 import { ApiResponse, FrontendJob, Job, jobService, JobsResponse } from '@/lib/api';
+import { getCompanyLogo } from '@/lib/utils/companyLogo';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -264,15 +265,18 @@ export default function JobDetailsPage() {
                             <div className="flex-1" data-oid="j6e_fcd">
                                 <div className="flex items-center gap-4 mb-4" data-oid="ppi0pla">
                                     <div
-                                        className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center"
+                                        className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center overflow-hidden"
                                         data-oid="a8l24h1"
                                     >
-                                        <span
-                                            className="text-2xl font-bold text-white"
-                                            data-oid="lhx:9b:"
-                                        >
-                                            {job.company.charAt(0)}
-                                        </span>
+                                        <img
+                                            src={getCompanyLogo(job.company, job.companyLogo || (job as any).companyLogoUrl, 64)}
+                                            alt={`${job.company} logo`}
+                                            className="w-full h-full object-contain p-2"
+                                            onError={(e) => {
+                                                const target = e.target as HTMLImageElement;
+                                                target.src = getCompanyLogo(job.company, null, 64);
+                                            }}
+                                        />
                                     </div>
                                     <div data-oid="xp:t2r8">
                                         <h1

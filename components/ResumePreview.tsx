@@ -14,6 +14,8 @@ export default function ResumePreview({ resumeData, template }: ResumePreviewPro
         return date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
     };
 
+    // NOTE: The getDisplayUrl function has been removed as the text is now a static label.
+
     const ModernTemplate = () => (
         <div
             className="max-w-4xl mx-auto bg-white p-8 shadow-lg"
@@ -81,8 +83,16 @@ export default function ResumePreview({ resumeData, template }: ResumePreviewPro
                             {resumeData.personalInfo.location}
                         </span>
                     )}
+                    
+                    {/* FIX APPLIED: LINKEDIN - Display text is hardcoded to 'LinkedIn' */}
                     {resumeData.personalInfo.linkedin && (
-                        <span className="flex items-center" data-oid="1bra8:h">
+                        <a 
+                            href={resumeData.personalInfo.linkedin} // Uses the correct, full URL
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="flex items-center hover:underline text-[hsl(196,80%,45%)]"
+                            data-oid="1bra8:h"
+                        >
                             <svg
                                 className="w-4 h-4 mr-1"
                                 fill="currentColor"
@@ -96,11 +106,19 @@ export default function ResumePreview({ resumeData, template }: ResumePreviewPro
                                     data-oid="1j7wodd"
                                 />
                             </svg>
-                            LinkedIn
-                        </span>
+                            {"LinkedIn"} 
+                        </a>
                     )}
+                    
+                    {/* FIX APPLIED: GITHUB - Display text is hardcoded to 'GitHub' */}
                     {resumeData.personalInfo.github && (
-                        <span className="flex items-center" data-oid="7ckvg2-">
+                        <a 
+                            href={resumeData.personalInfo.github} // Uses the correct, full URL
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="flex items-center hover:underline text-[hsl(196,80%,45%)]"
+                            data-oid="7ckvg2-"
+                        >
                             <svg
                                 className="w-4 h-4 mr-1"
                                 fill="currentColor"
@@ -114,8 +132,22 @@ export default function ResumePreview({ resumeData, template }: ResumePreviewPro
                                     data-oid="sl:n1kx"
                                 />
                             </svg>
-                            GitHub
-                        </span>
+                            {"GitHub"} 
+                        </a>
+                    )}
+
+                    {/* FIX APPLIED: PORTFOLIO - Display text is hardcoded to 'Portfolio' */}
+                    {resumeData.personalInfo.portfolio && (
+                        <a 
+                            href={resumeData.personalInfo.portfolio}
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="flex items-center hover:underline text-[hsl(196,80%,45%)]"
+                            data-oid="portfolio_link"
+                        >
+                            <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20"><path d="M12 2a1 1 0 00-1-1H3a1 1 0 00-1 1v16a1 1 0 001 1h8a1 1 0 001-1v-5a1 1 0 00-2 0v4H4V3h7v4a1 1 0 002 0V2zm5 4h-2a1 1 0 000 2h2a1 1 0 000-2zM15 9h-2a1 1 0 000 2h2a1 1 0 000-2zM15 12h-2a1 1 0 000 2h2a1 1 0 000-2zM17 15h-2a1 1 0 000 2h2a1 1 0 000-2z" /></svg>
+                            {"Portfolio"}
+                        </a>
                     )}
                 </div>
             </header>
@@ -301,13 +333,29 @@ export default function ResumePreview({ resumeData, template }: ResumePreviewPro
                                         className="flex space-x-4 text-sm text-gray-600"
                                         data-oid="eu._201"
                                     >
+                                        {/* Live Demo Link */}
                                         {project.link && (
-                                            <span data-oid="0pei95n">
-                                                Live Demo: {project.link}
-                                            </span>
+                                            <a 
+                                                href={project.link} 
+                                                target="_blank" 
+                                                rel="noopener noreferrer"
+                                                className="text-[hsl(196,80%,45%)] hover:underline"
+                                                data-oid="0pei95n"
+                                            >
+                                                Live Demo
+                                            </a>
                                         )}
+                                        {/* GitHub Link */}
                                         {project.github && (
-                                            <span data-oid="5z_pf2t">GitHub: {project.github}</span>
+                                            <a 
+                                                href={project.github} 
+                                                target="_blank" 
+                                                rel="noopener noreferrer"
+                                                className="text-[hsl(196,80%,45%)] hover:underline"
+                                                data-oid="5z_pf2t"
+                                            >
+                                                GitHub Repo
+                                            </a>
                                         )}
                                     </div>
                                 </div>
@@ -442,8 +490,45 @@ export default function ResumePreview({ resumeData, template }: ResumePreviewPro
                     {resumeData.personalInfo.location && (
                         <span data-oid="-s_xfbh">{resumeData.personalInfo.location}</span>
                     )}
-                    {resumeData.personalInfo.linkedin && <span data-oid="kcrjpy:">LinkedIn</span>}
-                    {resumeData.personalInfo.github && <span data-oid="43.jj::">GitHub</span>}
+                    
+                    {/* FIX APPLIED: LINKEDIN - Display text is hardcoded to 'LinkedIn' */}
+                    {resumeData.personalInfo.linkedin && (
+                        <a 
+                            href={resumeData.personalInfo.linkedin}
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="hover:underline text-gray-700"
+                            data-oid="kcrjpy:"
+                        >
+                            {"LinkedIn"}
+                        </a>
+                    )}
+                    
+                    {/* FIX APPLIED: GITHUB - Display text is hardcoded to 'GitHub' */}
+                    {resumeData.personalInfo.github && (
+                        <a 
+                            href={resumeData.personalInfo.github}
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="hover:underline text-gray-700"
+                            data-oid="43.jj::"
+                        >
+                            {"GitHub"}
+                        </a>
+                    )}
+
+                    {/* FIX APPLIED: PORTFOLIO - Display text is hardcoded to 'Portfolio' */}
+                    {resumeData.personalInfo.portfolio && (
+                        <a 
+                            href={resumeData.personalInfo.portfolio}
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="hover:underline text-gray-700"
+                            data-oid="portfolio_link_min"
+                        >
+                            {"Portfolio"}
+                        </a>
+                    )}
                 </div>
             </header>
 
@@ -589,6 +674,29 @@ export default function ResumePreview({ resumeData, template }: ResumePreviewPro
                                         {project.description}
                                     </p>
                                 )}
+                                {/* Minimal Template Project Links - Add clickable links */}
+                                <div className="mt-2 flex justify-center space-x-4 text-sm">
+                                    {project.link && (
+                                        <a 
+                                            href={project.link} 
+                                            target="_blank" 
+                                            rel="noopener noreferrer"
+                                            className="text-blue-600 hover:underline"
+                                        >
+                                            Live Demo
+                                        </a>
+                                    )}
+                                    {project.github && (
+                                        <a 
+                                            href={project.github} 
+                                            target="_blank" 
+                                            rel="noopener noreferrer"
+                                            className="text-blue-600 hover:underline"
+                                        >
+                                            GitHub Repo
+                                        </a>
+                                    )}
+                                </div>
                             </div>
                         ))}
                     </div>

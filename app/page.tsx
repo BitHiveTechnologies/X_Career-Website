@@ -529,12 +529,12 @@ export default function Page() {
                         ></div>{' '}
                     </div>{' '}
                     <div
-                        className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 md:py-28"
+                        className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 md:py-14"
                         data-oid="by08u-x"
                     >
                         <div className="text-center max-w-5xl mx-auto">
                             {/* Trust Badge */}
-                            <div className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-semibold tracking-wide mb-8 text-white border border-white/20 shadow-lg">
+                            <div className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-semibold tracking-wide mb-4 text-white border border-white/20 shadow-lg">
                                 <svg className="h-4 w-4 text-yellow-300" fill="currentColor" viewBox="0 0 20 20">
                                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                                 </svg>
@@ -542,7 +542,7 @@ export default function Page() {
                             </div>
                             
                             {/* Main Heading */}
-                            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 sm:mb-8 text-white leading-tight">
+                            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 text-white leading-tight">
                                 <span className="block bg-gradient-to-r from-white to-blue-100 bg-clip-text text-transparent">
                                     JOIN THOUSANDS
                                 </span>
@@ -555,28 +555,66 @@ export default function Page() {
                             </h1>
                             
                             {/* Subtitle */}
-                            <p className="text-lg sm:text-xl lg:text-2xl mb-8 sm:mb-10 text-white/95 max-w-3xl mx-auto leading-relaxed">
+                            <p className="text-lg sm:text-xl lg:text-2xl mb-4 text-white/95 max-w-3xl mx-auto leading-relaxed">
                                     Discover Jobs, Internships, and Resources tailored for
                                 <span className="font-semibold text-yellow-300"> Freshers</span>
                             </p>
                             
-                            {/* Stats Row */}
-                            <div className="flex flex-wrap justify-center gap-6 mb-10 sm:mb-12">
-                                <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20">
-                                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                                    <span className="text-white/90 text-sm font-medium">35,000+ Active Members</span>
-                                </div>
-                                <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20">
-                                    <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
-                                    <span className="text-white/90 text-sm font-medium">10,000+ Jobs Posted</span>
-                                </div>
-                                <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20">
-                                    <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
-                                    <span className="text-white/90 text-sm font-medium">95% Success Rate</span>
+                            {/* Stats Row (REMOVED OLD BADGES) */}
+                            {/* <div className="flex flex-wrap justify-center gap-6 mb-10 sm:mb-12">
+                                ... old stats badges removed ...
+                            </div> 
+                            */}
+
+                            {/* START: Placeholder for New 4-Card Grid */}
+                            <div className="mb-8">
+                                {/* TODO: Insert new 4-card grid design here as per instructions.
+                                  The code for this component was not provided in the list of changes.
+                                */}
+                            </div>
+                            {/* END: Placeholder for New 4-Card Grid */}
+
+
+                            {/* Search Section (MOVED UP) */}
+                            <div className="mb-8 max-w-4xl mx-auto">
+                                <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 sm:p-8 border border-white/20 shadow-xl transform hover:scale-[1.01] transition-all duration-500 relative z-10">
+                                    <div className="mb-6">
+                                        <form
+                                            onSubmit={handleSearch}
+                                            className="flex flex-col sm:flex-row gap-4 relative z-10 transform transition-all duration-500 hover:scale-[1.02]"
+                                        >
+                                            <input
+                                                type="text"
+                                                placeholder="Search Entry Level Jobs..."
+                                                className="w-full px-6 py-4 rounded-xl sm:rounded-l-xl sm:rounded-r-none text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-inner text-base sm:text-lg font-medium"
+                                                value={searchQuery}
+                                                onChange={(e) => setSearchQuery(e.target.value)}
+                                            />
+                                            <button
+                                                type="submit"
+                                                className="bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] hover:from-[hsl(175,70%,41%)] hover:to-[hsl(196,80%,45%)] px-8 py-4 rounded-xl sm:rounded-l-none sm:rounded-r-xl font-semibold transition-all duration-300 shadow-lg text-white text-base sm:text-lg transform hover:scale-105"
+                                            >
+                                                SEARCH
+                                            </button>
+                                        </form>
+                                    </div>
+                                    <div className="flex flex-wrap gap-3 sm:gap-4 justify-center">
+                                        <div className="bg-white/20 backdrop-blur-md px-4 py-2 rounded-full text-sm border border-white/30 shadow-sm hover:shadow-md transition-all duration-300 hover:bg-white/30 text-white font-medium">
+                                            {stats?.freshers.toLocaleString()} Freshers
+                                        </div>
+                                        <div className="bg-white/20 backdrop-blur-md px-4 py-2 rounded-full text-sm border border-white/30 shadow-sm hover:shadow-md transition-all duration-300 hover:bg-white/30 text-white font-medium">
+                                            {stats?.verifiedJobs} Verified Jobs
+                                        </div>
+                                        <div className="bg-white/20 backdrop-blur-md px-4 py-2 rounded-full text-sm border border-white/30 shadow-sm hover:shadow-md transition-all duration-300 hover:bg-white/30 text-white font-medium">
+                                            Entry-Level Focused
+                                        </div>
+                                    </div>
+                                    <div className="absolute -bottom-3 -right-3 w-20 h-20 bg-[hsl(196,80%,65%)] opacity-60 rounded-full blur-xl"></div>
+                                    <div className="absolute -top-3 -left-3 w-20 h-20 bg-[hsl(175,70%,61%)] opacity-60 rounded-full blur-xl"></div>
                                 </div>
                             </div>
                             
-                            {/* CTA Buttons */}
+                            {/* CTA Buttons (MOVED DOWN) */}
                             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                                 <a
                                     href="/community"
@@ -626,47 +664,8 @@ export default function Page() {
                                 </div>
                             </div>
                             
-                            {/* Search Section */}
-                            <div className="mt-12 sm:mt-16 max-w-4xl mx-auto">
-                                <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 sm:p-8 border border-white/20 shadow-xl transform hover:scale-[1.01] transition-all duration-500 relative z-10">
-                                    <div className="mb-6">
-                                        <form
-                                            onSubmit={handleSearch}
-                                            className="flex flex-col sm:flex-row gap-4 relative z-10 transform transition-all duration-500 hover:scale-[1.02]"
-                                        >
-                                            <input
-                                                type="text"
-                                                placeholder="Search Entry Level Jobs..."
-                                                className="w-full px-6 py-4 rounded-xl sm:rounded-l-xl sm:rounded-r-none text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-inner text-base sm:text-lg font-medium"
-                                                value={searchQuery}
-                                                onChange={(e) => setSearchQuery(e.target.value)}
-                                            />
-                                            <button
-                                                type="submit"
-                                                className="bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] hover:from-[hsl(175,70%,41%)] hover:to-[hsl(196,80%,45%)] px-8 py-4 rounded-xl sm:rounded-l-none sm:rounded-r-xl font-semibold transition-all duration-300 shadow-lg text-white text-base sm:text-lg transform hover:scale-105"
-                                            >
-                                                SEARCH
-                                            </button>
-                                        </form>
-                                    </div>
-                                    <div className="flex flex-wrap gap-3 sm:gap-4 justify-center">
-                                        <div className="bg-white/20 backdrop-blur-md px-4 py-2 rounded-full text-sm border border-white/30 shadow-sm hover:shadow-md transition-all duration-300 hover:bg-white/30 text-white font-medium">
-                                            {stats?.freshers.toLocaleString()} Freshers
-                                        </div>
-                                        <div className="bg-white/20 backdrop-blur-md px-4 py-2 rounded-full text-sm border border-white/30 shadow-sm hover:shadow-md transition-all duration-300 hover:bg-white/30 text-white font-medium">
-                                            {stats?.verifiedJobs} Verified Jobs
-                                        </div>
-                                        <div className="bg-white/20 backdrop-blur-md px-4 py-2 rounded-full text-sm border border-white/30 shadow-sm hover:shadow-md transition-all duration-300 hover:bg-white/30 text-white font-medium">
-                                            Entry-Level Focused
-                                        </div>
-                                    </div>
-                                    <div className="absolute -bottom-3 -right-3 w-20 h-20 bg-[hsl(196,80%,65%)] opacity-60 rounded-full blur-xl"></div>
-                                    <div className="absolute -top-3 -left-3 w-20 h-20 bg-[hsl(175,70%,61%)] opacity-60 rounded-full blur-xl"></div>
-                                </div>
-                            </div>
-                            
                             {/* Scroll Indicator */}
-                            <div className="mt-8 sm:mt-12 flex justify-center">
+                            <div className="mt-8 flex justify-center">
                                 <div className="flex flex-col items-center text-white/70 animate-bounce">
                                     <span className="text-sm font-medium mb-2">Scroll to explore</span>
                                     <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -680,14 +679,14 @@ export default function Page() {
                 
                 {/* Platform Stats Section */}{' '}
                 <section
-                    className="py-16 bg-gradient-to-b from-[hsl(210,50%,98%)] to-[hsl(196,60%,95%)]"
+                    className="py-10 sm:py-12 bg-gradient-to-b from-[hsl(210,50%,98%)] to-[hsl(196,60%,95%)]"
                     data-oid="8sqt026"
                 >
                     {' '}
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-oid="fp690kv">
                         {' '}
                         <h2
-                            className="text-3xl font-bold text-center mb-12 text-gray-800"
+                            className="text-3xl font-bold text-center mb-8 text-gray-800"
                             data-oid="oao5.vl"
                         >
                             {' '}
@@ -958,13 +957,13 @@ export default function Page() {
                 </section>{' '}
                                         {/* Why Choose X Careers */}{' '}
                 <section
-                    className="py-16 bg-gradient-to-b from-white to-[hsl(196,60%,95%)]"
+                    className="py-10 sm:py-12 bg-gradient-to-b from-white to-[hsl(196,60%,95%)]"
                     data-oid="pmwti0t"
                 >
                     {' '}
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-oid="-jq.rtv">
                         {' '}
-                        <div className="text-center mb-12" data-oid="676qc-r">
+                        <div className="text-center mb-8" data-oid="676qc-r">
                             {' '}
                             <h2
                                 className="text-3xl font-bold mb-4 text-gray-800"
@@ -1132,7 +1131,7 @@ export default function Page() {
                 </section>{' '}
                 {/* NotifyX Section */}{' '}
                 <section
-                    className="py-16 bg-gradient-to-r from-[hsl(210,60%,92%)] via-[hsl(196,70%,90%)] to-[hsl(175,60%,92%)] relative overflow-hidden"
+                    className="py-10 sm:py-12 bg-gradient-to-r from-[hsl(210,60%,92%)] via-[hsl(196,70%,90%)] to-[hsl(175,60%,92%)] relative overflow-hidden"
                     data-oid="9l:7dgu"
                 >
                     {' '}
@@ -1153,7 +1152,7 @@ export default function Page() {
                         data-oid="5llkgbx"
                     >
                         {' '}
-                        <div className="text-center mb-12" data-oid="_r5:z3u">
+                        <div className="text-center mb-8" data-oid="_r5:z3u">
                             {' '}
                             <h2
                                 className="text-4xl font-bold mb-4 text-gray-800 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] inline-block text-transparent bg-clip-text"
@@ -1319,7 +1318,7 @@ export default function Page() {
                 </section>{' '}
                 {/* Community Integration */}{' '}
                 <section
-                    className="py-16 bg-gradient-to-b from-[hsl(210,50%,98%)] to-[hsl(196,60%,95%)] relative overflow-hidden"
+                    className="py-10 sm:py-12 bg-gradient-to-b from-[hsl(210,50%,98%)] to-[hsl(196,60%,95%)] relative overflow-hidden"
                     data-oid="c__5puu"
                 >
                     {' '}
@@ -1337,7 +1336,7 @@ export default function Page() {
                     </div>{' '}
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-oid="8yb7347">
                         {' '}
-                        <div className="text-center mb-12" data-oid="y-hmn._">
+                        <div className="text-center mb-8" data-oid="y-hmn._">
                             {' '}
                             <h2
                                 className="text-3xl font-bold mb-4 text-gray-800"
@@ -1504,6 +1503,7 @@ export default function Page() {
                         </div>{' '}
                     </div>{' '}
                 </section>{' '}
+                
                 {/* Featured Jobs Section */}{' '}
                 <section
                     className="py-16 bg-gradient-to-r from-[hsl(210,60%,92%)] via-[hsl(196,70%,90%)] to-[hsl(175,60%,92%)] relative overflow-hidden"
@@ -2797,3 +2797,6 @@ export default function Page() {
         </div>
     );
 }
+
+
+

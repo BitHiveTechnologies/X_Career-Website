@@ -2,6 +2,7 @@
 
 import MainNavbar from '@/components/mainNavbar';
 import { mockInternships, type Internship } from '@/lib/mockData';
+import { getCompanyLogo } from '@/lib/utils/companyLogo';
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
@@ -143,12 +144,23 @@ export default function InternshipDetailsPage() {
                                     >
                                         {internship.title}
                                     </h1>
-                                    <p
-                                        className="text-xl text-blue-600 font-semibold mb-2"
-                                        data-oid="hyugbqv"
-                                    >
-                                        {internship.company}
-                                    </p>
+                                    <div className="flex items-center gap-3 mb-2">
+                                        <img
+                                            src={getCompanyLogo(internship.company, internship.companyLogo, 48)}
+                                            alt={`${internship.company} logo`}
+                                            className="w-12 h-12 object-contain rounded-lg border border-gray-200 bg-white"
+                                            onError={(e) => {
+                                                const target = e.target as HTMLImageElement;
+                                                target.src = getCompanyLogo(internship.company, null, 48);
+                                            }}
+                                        />
+                                        <p
+                                            className="text-xl text-blue-600 font-semibold"
+                                            data-oid="hyugbqv"
+                                        >
+                                            {internship.company}
+                                        </p>
+                                    </div>
                                     <div
                                         className="flex items-center gap-1 text-sm text-gray-600 mb-2"
                                         data-oid="k_etaxb"

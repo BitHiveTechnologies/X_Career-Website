@@ -399,6 +399,7 @@ Note: All users with matching profiles (≥50%) were notified, including ${userE
         applicationDeadline: formData.applicationDeadline,
         applicationLink: formData.applicationLink,
         location: formData.location,
+        ...(formData.companyLogoUrl ? { companyLogoUrl: formData.companyLogoUrl } : {}), // Include logo URL if provided
         ...(formData.type === 'job' ? { salary: formData.salary || "" } : {}), // Only include salary for jobs
         ...(formData.type === 'internship' && formData.stipend ? { stipend: formData.stipend } : {}), // Only include stipend for internships
         isActive: formData.isActive !== undefined ? formData.isActive : true,

@@ -9,6 +9,8 @@ import SubscriptionStatus from '@/components/SubscriptionStatus';
 import TemplateSelector from '@/components/TemplateSelector';
 import { useRef, useState } from 'react';
 
+// --- INTERFACE DEFINITIONS ---
+
 export interface PersonalInfo {
     fullName: string;
     email: string;
@@ -87,15 +89,59 @@ const initialResumeData: ResumeData = {
     languages: [],
 };
 
+// --- START: Helper Function for URL Sanitization (CRITICAL FIX) ---
+
+/**
+ * Ensures a URL starts with 'http://' or 'https://'.
+ * This is crucial for making links clickable in the PDF generation process (html2pdf).
+ * @param url The input URL string.
+ * @returns The sanitized URL string.
+ */
+const sanitizeUrl = (url: string): string => {
+    if (!url) return '';
+    const trimmedUrl = url.trim();
+    if (!trimmedUrl) return '';
+
+    // Check if the URL already has a protocol prefix
+    if (!/^https?:\/\//i.test(trimmedUrl)) {
+        // Assume https and prepend it
+        return `https://${trimmedUrl}`;
+    }
+    return trimmedUrl;
+};
+
+// --- END: Helper Function for URL Sanitization ---
+
 export default function ResumeBuilderPage() {
     const [resumeData, setResumeData] = useState<ResumeData>(initialResumeData);
-    const [selectedTemplate, setSelectedTemplate] = useState('minimal'); // Changed default to minimal for free users
+    // FIX: Changed default to 'minimal'
+    const [selectedTemplate, setSelectedTemplate] = useState('minimal'); 
     const [activeSection, setActiveSection] = useState('personal');
     const [isPreviewMode, setIsPreviewMode] = useState(false);
     const [zoomLevel, setZoomLevel] = useState(0.8);
     const resumeRef = useRef<HTMLDivElement>(null);
 
     const handleDataChange = (section: keyof ResumeData, data: any) => {
+        
+        // FIX: Implement URL Sanitization for Personal Info section
+        if (section === 'personalInfo') {
+            const personalInfoData = data as PersonalInfo;
+            
+            const sanitizedData: PersonalInfo = {
+                ...personalInfoData,
+                linkedin: sanitizeUrl(personalInfoData.linkedin),
+                github: sanitizeUrl(personalInfoData.github),
+                portfolio: sanitizeUrl(personalInfoData.portfolio),
+            };
+
+            setResumeData((prev) => ({
+                ...prev,
+                [section]: sanitizedData,
+            }));
+            return;
+        }
+
+        // Standard data change for other sections
         setResumeData((prev) => ({
             ...prev,
             [section]: data,
@@ -105,6 +151,7 @@ export default function ResumeBuilderPage() {
     const handleDownloadPDF = async () => {
         if (typeof window !== 'undefined') {
             try {
+                // Ensure html2pdf.js is imported dynamically
                 const html2pdf = (await import('html2pdf.js')).default;
                 const element = resumeRef.current;
 
@@ -120,21 +167,19 @@ export default function ResumeBuilderPage() {
                     html2pdf().set(opt).from(element).save();
                 }
             } catch (error) {
-                // Handle PDF generation error gracefully
+                console.error('PDF generation error:', error);
                 alert('Failed to generate PDF. Please try again.');
             }
         }
     };
 
     const handleZoomIn = () => {
-        setZoomLevel(prev => Math.min(prev + 0.1, 1.5));
+        setZoomLevel((prev) => Math.min(prev + 0.1, 1.5));
     };
 
     const handleZoomOut = () => {
-        setZoomLevel(prev => Math.max(prev - 0.1, 0.3));
+        setZoomLevel((prev) => Math.max(prev - 0.1, 0.3));
     };
-
-
 
     const sections = [
         { id: 'personal', label: 'Personal Info', icon: '👤' },
@@ -290,9 +335,11 @@ export default function ResumeBuilderPage() {
                 </div>
 
                 {/* Main Builder Interface */}
-                <div className={`${isPreviewMode ? 'lg:grid-cols-1' : 'lg:grid-cols-2'} grid gap-8`} data-oid="sce-_t2">
+                {/* Default to a single column grid, switch to 2 columns only on large screens */}
+                <div className={`grid gap-8 ${isPreviewMode ? 'grid-cols-1' : 'grid-cols-1 lg:grid-cols-2'}`} data-oid="sce-_t2">
+                    
                     {/* Form Section */}
-                    <div className={`space-y-6 ${isPreviewMode ? 'hidden' : ''}`} data-oid="2jd15jx">
+                    <div className={`space-y-6 ${isPreviewMode ? 'hidden' : 'block'}`} data-oid="2jd15jx">
                         {/* Section Navigation */}
                         <div
                             className="bg-white rounded-lg shadow-sm border p-4"
@@ -357,10 +404,10 @@ export default function ResumeBuilderPage() {
                         </div>
                     </div>
 
-                    {/* Preview Section */}
-                    <div className={`${isPreviewMode ? 'lg:col-span-1' : 'lg:sticky lg:top-24 lg:h-fit'}`} data-oid="cwics50">
+                    {/* Preview Section - Corrected visibility and zoom styles */}
+                    <div className={`${isPreviewMode ? 'block lg:col-span-1' : 'hidden lg:block lg:sticky lg:top-24 lg:h-fit'}`} data-oid="cwics50">
                         <div
-                            className="bg-white rounded-lg shadow-lg border p-6"
+                            className="bg-white rounded-lg shadow-lg border p-6 overflow-x-auto" 
                             data-oid="7e3qyqo"
                         >
                             <div
@@ -403,16 +450,21 @@ export default function ResumeBuilderPage() {
                                 </div>
                             </div>
                             <div
-                                className="border rounded-lg overflow-hidden bg-white"
-                                style={{
-                                    transform: `scale(${zoomLevel})`,
-                                    transformOrigin: 'top left',
-                                    width: '125%',
-                                    height: '125%',
-                                }}
+                                className="border rounded-lg bg-white"
                                 data-oid="hcxcv8r"
                             >
-                                <div ref={resumeRef} data-oid="oh.mxr8">
+                                <div 
+                                    ref={resumeRef} 
+                                    data-oid="oh.mxr8"
+                                    style={{
+                                        // Apply scaling to the inner content
+                                        transform: `scale(${zoomLevel})`,
+                                        transformOrigin: 'top left',
+                                        // Use calculated width/height to ensure the full scaled size is respected in the container
+                                        width: `calc(100% / ${zoomLevel})`,
+                                        height: `calc(100% / ${zoomLevel})`,
+                                    }}
+                                >
                                     <ResumePreview
                                         resumeData={resumeData}
                                         template={selectedTemplate}
