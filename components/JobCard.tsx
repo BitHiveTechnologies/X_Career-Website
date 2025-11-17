@@ -2,6 +2,7 @@
 
 import { FrontendJob } from '@/lib/api';
 import { useAuthAction } from '@/lib/auth/useAuthAction';
+import { getCompanyLogo } from '@/lib/utils/companyLogo';
 import { useState } from 'react';
 import ApplicationSuccessModal from './ApplicationSuccessModal';
 import JobApplicationModal from './JobApplicationModal';
@@ -149,12 +150,25 @@ export default function JobCard({ job, viewMode = 'list', isInternship = false }
                             {job.title}
                         </h3>
                         <div className="flex flex-wrap items-center gap-2 mb-2" data-oid="zppnm0i">
-                            <p
-                                className="text-[hsl(196,80%,45%)] font-semibold text-base sm:text-lg"
-                                data-oid="59pfrv5"
-                            >
-                                {job.company}
-                            </p>
+                            {/* Company Logo */}
+                            <div className="flex items-center gap-2">
+                                <img
+                                    src={getCompanyLogo(job.company, job.companyLogo || (job as any).companyLogoUrl, 48)}
+                                    alt={`${job.company} logo`}
+                                    className="w-12 h-12 object-contain rounded-lg border border-gray-200 bg-white flex-shrink-0"
+                                    onError={(e) => {
+                                        // Fallback to generated logo if image fails to load
+                                        const target = e.target as HTMLImageElement;
+                                        target.src = getCompanyLogo(job.company, null, 48);
+                                    }}
+                                />
+                                <p
+                                    className="text-[hsl(196,80%,45%)] font-semibold text-base sm:text-lg"
+                                    data-oid="59pfrv5"
+                                >
+                                    {job.company}
+                                </p>
+                            </div>
                             {job.companySize && (
                                 <span
                                     className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full hidden sm:inline"

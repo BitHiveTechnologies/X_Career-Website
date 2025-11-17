@@ -73,6 +73,11 @@ export function QuickCreateModal({ isOpen, onClose, onSubmit, isLoading = false 
   const [qualificationInput, setQualificationInput] = useState("")
   const [streamInput, setStreamInput] = useState("")
   const [passoutYearInput, setPassoutYearInput] = useState("")
+  const [jobLogoFile, setJobLogoFile] = useState<File | null>(null)
+  const [jobLogoPreview, setJobLogoPreview] = useState<string | null>(null)
+  const [internshipLogoFile, setInternshipLogoFile] = useState<File | null>(null)
+  const [internshipLogoPreview, setInternshipLogoPreview] = useState<string | null>(null)
+  const [uploadingLogo, setUploadingLogo] = useState(false)
 
   const handleJobFormChange = (field: string, value: any) => {
     if (field.startsWith('eligibility.')) {
@@ -292,13 +297,90 @@ export function QuickCreateModal({ isOpen, onClose, onSubmit, isLoading = false 
     }
   }
 
-  const handleSubmit = () => {
-    if (activeTab === "job") {
-      onSubmit(jobForm)
-    } else {
-      onSubmit(internshipForm)
+  const handleLogoUpload = async (file: File, formType: "job" | "internship") => {
+    if (!file) return null;
+
+    // Validate file type
+    const allowedTypes = ['image/png', 'image/jpeg', 'image/jpg', 'image/webp'];
+    if (!allowedTypes.includes(file.type)) {
+      alert('Please upload a PNG, JPEG, JPG, or WebP image');
+      return null;
     }
-    onClose()
+
+    // Validate file size (2MB max)
+    if (file.size > 2 * 1024 * 1024) {
+      alert('File size must be less than 2MB');
+      return null;
+    }
+
+    try {
+      setUploadingLogo(true);
+      const formData = new FormData();
+      formData.append('logo', file);
+
+      const response = await fetch('/api/upload/company-logo', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const result = await response.json();
+
+      if (result.success && result.data?.url) {
+        return result.data.url;
+      } else {
+        throw new Error(result.error?.message || 'Failed to upload logo');
+      }
+    } catch (error) {
+      console.error('Error uploading logo:', error);
+      alert('Failed to upload logo. Please try again.');
+      return null;
+    } finally {
+      setUploadingLogo(false);
+    }
+  };
+
+  const handleLogoFileChange = (e: React.ChangeEvent<HTMLInputElement>, formType: "job" | "internship") => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (formType === "job") {
+      setJobLogoFile(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setJobLogoPreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    } else {
+      setInternshipLogoFile(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setInternshipLogoPreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleSubmit = async () => {
+    try {
+      let logoUrl: string | null = null;
+
+      // Upload logo if provided
+      if (activeTab === "job" && jobLogoFile) {
+        logoUrl = await handleLogoUpload(jobLogoFile, "job");
+      } else if (activeTab === "internship" && internshipLogoFile) {
+        logoUrl = await handleLogoUpload(internshipLogoFile, "internship");
+      }
+
+      if (activeTab === "job") {
+        onSubmit({ ...jobForm, companyLogoUrl: logoUrl || undefined })
+      } else {
+        onSubmit({ ...internshipForm, companyLogoUrl: logoUrl || undefined })
+      }
+      onClose()
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      alert('Failed to submit. Please try again.');
+    }
   }
 
   const loadTestData = () => {
@@ -413,6 +495,41 @@ export function QuickCreateModal({ isOpen, onClose, onSubmit, isLoading = false 
                         value={jobForm.company}
                         onChange={(e) => handleJobFormChange("company", e.target.value)}
                       />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="job-logo">Company Logo (Optional)</Label>
+                      <div className="flex items-center gap-4">
+                        <Input
+                          id="job-logo"
+                          type="file"
+                          accept="image/png,image/jpeg,image/jpg,image/webp"
+                          onChange={(e) => handleLogoFileChange(e, "job")}
+                          className="flex-1"
+                        />
+                        {jobLogoPreview && (
+                          <div className="relative">
+                            <img
+                              src={jobLogoPreview}
+                              alt="Logo preview"
+                              className="w-16 h-16 object-contain rounded border border-gray-300"
+                            />
+                            <button
+                              type="button"
+                              onClick={() => {
+                                setJobLogoFile(null);
+                                setJobLogoPreview(null);
+                                const input = document.getElementById('job-logo') as HTMLInputElement;
+                                if (input) input.value = '';
+                              }}
+                              className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs hover:bg-red-600"
+                            >
+                              ×
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                      <p className="text-xs text-gray-500">PNG, JPEG, JPG, or WebP (max 2MB)</p>
                     </div>
 
                     <div className="space-y-2">
@@ -689,6 +806,41 @@ export function QuickCreateModal({ isOpen, onClose, onSubmit, isLoading = false 
                         value={internshipForm.company}
                         onChange={(e) => handleInternshipFormChange("company", e.target.value)}
                       />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="internship-logo">Company Logo (Optional)</Label>
+                      <div className="flex items-center gap-4">
+                        <Input
+                          id="internship-logo"
+                          type="file"
+                          accept="image/png,image/jpeg,image/jpg,image/webp"
+                          onChange={(e) => handleLogoFileChange(e, "internship")}
+                          className="flex-1"
+                        />
+                        {internshipLogoPreview && (
+                          <div className="relative">
+                            <img
+                              src={internshipLogoPreview}
+                              alt="Logo preview"
+                              className="w-16 h-16 object-contain rounded border border-gray-300"
+                            />
+                            <button
+                              type="button"
+                              onClick={() => {
+                                setInternshipLogoFile(null);
+                                setInternshipLogoPreview(null);
+                                const input = document.getElementById('internship-logo') as HTMLInputElement;
+                                if (input) input.value = '';
+                              }}
+                              className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs hover:bg-red-600"
+                            >
+                              ×
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                      <p className="text-xs text-gray-500">PNG, JPEG, JPG, or WebP (max 2MB)</p>
                     </div>
 
                     <div className="space-y-2">
@@ -1020,10 +1172,10 @@ export function QuickCreateModal({ isOpen, onClose, onSubmit, isLoading = false 
             </div>
             <Button 
               onClick={handleSubmit}
-              disabled={isLoading}
+              disabled={isLoading || uploadingLogo}
               className="bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)]"
             >
-              {isLoading ? 'Creating...' : `Create ${activeTab === "job" ? "Job" : "Internship"}`}
+              {uploadingLogo ? 'Uploading Logo...' : isLoading ? 'Creating...' : `Create ${activeTab === "job" ? "Job" : "Internship"}`}
             </Button>
           </div>
         </div>

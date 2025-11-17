@@ -21,6 +21,8 @@ export default function ResumeForm({ resumeData, activeSection, onDataChange, se
     const [newSkillCategory, setNewSkillCategory] = useState('');
 
     const handlePersonalInfoChange = (field: keyof PersonalInfo, value: string) => {
+        // NOTE: The URL sanitization logic is now handled in the parent component (ResumeBuilderPage.tsx)
+        // before calling onDataChange('personalInfo', ...), ensuring full URLs are stored.
         onDataChange('personalInfo', {
             ...resumeData.personalInfo,
             [field]: value,
@@ -216,7 +218,7 @@ export default function ResumeForm({ resumeData, activeSection, onDataChange, se
                         className="block text-sm font-medium text-gray-700 mb-2"
                         data-oid="3daetmi"
                     >
-                        LinkedIn
+                        LinkedIn **(Full URL)**
                     </label>
                     <input
                         type="url"
@@ -233,7 +235,7 @@ export default function ResumeForm({ resumeData, activeSection, onDataChange, se
                         className="block text-sm font-medium text-gray-700 mb-2"
                         data-oid="4wrpgh4"
                     >
-                        GitHub
+                        GitHub **(Full URL)**
                     </label>
                     <input
                         type="url"
@@ -248,7 +250,7 @@ export default function ResumeForm({ resumeData, activeSection, onDataChange, se
 
             <div data-oid="9w6uldg">
                 <label className="block text-sm font-medium text-gray-700 mb-2" data-oid="c-z.ozg">
-                    Portfolio Website
+                    Portfolio Website **(Full URL)**
                 </label>
                 <input
                     type="url"
@@ -728,7 +730,7 @@ export default function ResumeForm({ resumeData, activeSection, onDataChange, se
                                 className="block text-sm font-medium text-gray-700 mb-1"
                                 data-oid="1o20bu5"
                             >
-                                Live Demo Link
+                                Live Demo Link **(Full URL)**
                             </label>
                             <input
                                 type="url"
@@ -745,7 +747,7 @@ export default function ResumeForm({ resumeData, activeSection, onDataChange, se
                                 className="block text-sm font-medium text-gray-700 mb-1"
                                 data-oid="sryeuma"
                             >
-                                GitHub Repository
+                                GitHub Repository **(Full URL)**
                             </label>
                             <input
                                 type="url"

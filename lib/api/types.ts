@@ -286,6 +286,7 @@ export interface Job {
   salary?: string;
   stipend?: string;
   skills?: string[];
+  companyLogoUrl?: string; // URL to company logo image
   isActive: boolean;
   createdAt: string; // ISO date
 }
@@ -506,7 +507,8 @@ export interface FrontendJob extends Job {
   isFeatured?: boolean;
   isUrgent?: boolean;
   applicantCount?: number;
-  companyLogo?: string;
+  companyLogo?: string; // Legacy field, use companyLogoUrl from Job interface
+  companyLogoUrl?: string; // URL to company logo image (preferred)
   companySize?: string;
   industry?: string;
   benefits?: string[];

@@ -31,7 +31,7 @@ const dummyData: {
             id: 1,
             name: 'Priya Sharma',
             company: 'Google',
-                            quote: 'X Careers gave me the confidence to land my role at Google.',
+            quote: 'X Careers gave me the confidence to land my role at Google.',
             image: 'https://randomuser.me/api/portraits/women/1.jpg',
         },
         {
@@ -59,7 +59,7 @@ const dummyData: {
             id: 5,
             name: 'Neha Gupta',
             company: 'Flipkart',
-                            quote: 'From campus to Flipkart in 3 months thanks to X Careers resources!',
+            quote: 'From campus to Flipkart in 3 months thanks to X Careers resources!',
             image: 'https://randomuser.me/api/portraits/women/5.jpg',
         },
         {
@@ -73,7 +73,7 @@ const dummyData: {
             id: 7,
             name: 'Kavita Desai',
             company: 'TCS',
-                            quote: 'Found my first job through X Careers job board - so grateful!',
+            quote: 'Found my first job through X Careers job board - so grateful!',
             image: 'https://randomuser.me/api/portraits/women/7.jpg',
         },
         {
@@ -87,7 +87,7 @@ const dummyData: {
             id: 9,
             name: 'Divya Sharma',
             company: 'IBM',
-                            quote: 'X Careers helped me transition from college to a tech career seamlessly.',
+            quote: 'X Careers helped me transition from college to a tech career seamlessly.',
             image: 'https://randomuser.me/api/portraits/women/9.jpg',
         },
     ],
@@ -256,7 +256,7 @@ export default function Page() {
     // Add custom CSS for animations
     useEffect(() => {
         if (typeof window === 'undefined') return; // SSR safety
-        
+
         const style = document.createElement('style');
         style.innerHTML = `
             @keyframes scroll {
@@ -275,9 +275,9 @@ export default function Page() {
                 animation-play-state: paused;
             }
         `;
-        
+
         document.head.appendChild(style);
-        
+
         return () => {
             try {
                 if (style && style.parentNode) {
@@ -529,20 +529,28 @@ export default function Page() {
                         ></div>{' '}
                     </div>{' '}
                     <div
-                        className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 md:py-28"
+                        className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-2 pb-8 sm:pt-4 sm:pb-10 md:pt-8 md:pb-14"
                         data-oid="by08u-x"
                     >
                         <div className="text-center max-w-5xl mx-auto">
                             {/* Trust Badge */}
-                            <div className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-semibold tracking-wide mb-8 text-white border border-white/20 shadow-lg">
-                                <svg className="h-4 w-4 text-yellow-300" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                            <div className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-semibold tracking-wide mb-4 text-white border border-white/20 shadow-lg">
+                                <svg
+                                    className="h-4 w-4 text-yellow-300"
+                                    fill="currentColor"
+                                    viewBox="0 0 20 20"
+                                >
+                                    <path
+                                        fillRule="evenodd"
+                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                        clipRule="evenodd"
+                                    />
                                 </svg>
                                 India's most trusted Platform For Tech Freshers
                             </div>
-                            
+
                             {/* Main Heading */}
-                            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 sm:mb-8 text-white leading-tight">
+                            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 text-white leading-tight">
                                 <span className="block bg-gradient-to-r from-white to-blue-100 bg-clip-text text-transparent">
                                     JOIN THOUSANDS
                                 </span>
@@ -553,141 +561,205 @@ export default function Page() {
                                     IN TOP TECH COMPANIES
                                 </span>
                             </h1>
-                            
+
                             {/* Subtitle */}
-                            <p className="text-lg sm:text-xl lg:text-2xl mb-8 sm:mb-10 text-white/95 max-w-3xl mx-auto leading-relaxed">
-                                    Discover Jobs, Internships, and Resources tailored for
+                            <p className="text-lg sm:text-xl lg:text-2xl mb-4 text-white/95 max-w-3xl mx-auto leading-relaxed">
+                                Discover Jobs, Internships, and Resources tailored for
                                 <span className="font-semibold text-yellow-300"> Freshers</span>
                             </p>
-                            
-                            {/* Stats Row */}
-                            <div className="flex flex-wrap justify-center gap-6 mb-10 sm:mb-12">
-                                <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20">
-                                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                                    <span className="text-white/90 text-sm font-medium">35,000+ Active Members</span>
-                                </div>
-                                <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20">
-                                    <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
-                                    <span className="text-white/90 text-sm font-medium">10,000+ Jobs Posted</span>
-                                </div>
-                                <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20">
-                                    <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
-                                    <span className="text-white/90 text-sm font-medium">95% Success Rate</span>
-                                </div>
+
+                            {/* Stats Row (REMOVED OLD BADGES) */}
+                            {/* <div className="flex flex-wrap justify-center gap-6 mb-10 sm:mb-12">
+                                ... old stats badges removed ...
+                            </div> 
+                            */}
+
+                            {/* START: Placeholder for New 4-Card Grid */}
+                            <div className="mb-8">
+                                {/* TODO: Insert new 4-card grid design here as per instructions.
+                                  The code for this component was not provided in the list of changes.
+                                */}
                             </div>
-                            
-                            {/* CTA Buttons */}
-                            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                                <a
-                                    href="/community"
-                                    className="group inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] text-white rounded-xl font-semibold text-lg transition-all duration-300 hover:translate-y-[-3px] hover:shadow-2xl transform hover:scale-105 border-2 border-[hsl(196,80%,45%)]/30"
-                                >
-                                    <svg className="mr-3 h-6 w-6 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                                    </svg>
-                                    Join Community
-                                    <svg className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                    </svg>
-                                </a>
-                                
-                                <div className="relative group">
-                                        <button
-                                            onClick={(e) => {
-                                                e.preventDefault();
-                                                try {
-                                                    if (typeof window !== 'undefined') {
-                                                        window.location.href = '/jobs';
-                                                    }
-                                                } catch (error) {
-                                                    // Handle navigation error silently
-                                                    try {
-                                                        window.open('/jobs', '_self');
-                                                    } catch (fallbackError) {
-                                                        // Use fallback navigation
-                                                        document.location.href = '/jobs';
-                                                    }
-                                                }
-                                            }}
-                                        className="group inline-flex items-center justify-center px-8 py-4 bg-white hover:bg-gray-50 text-[hsl(196,80%,45%)] rounded-xl font-semibold text-lg transition-all duration-300 hover:translate-y-[-3px] hover:shadow-2xl cursor-pointer border-2 border-white/20 hover:border-white/40 transform hover:scale-105"
-                                            type="button"
-                                    >
-                                        <svg className="mr-3 h-6 w-6 transition-transform group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                                            </svg>
-                                            Browse Jobs
-                                        <svg className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                        </svg>
-                                        </button>
-                                    <a href="/jobs" className="absolute inset-0 opacity-0 pointer-events-none" aria-label="Browse Jobs" tabIndex={-1}>
-                                            Browse Jobs
-                                        </a>
-                                </div>
-                            </div>
-                            
-                            {/* Search Section */}
-                            <div className="mt-12 sm:mt-16 max-w-4xl mx-auto">
-                                <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 sm:p-8 border border-white/20 shadow-xl transform hover:scale-[1.01] transition-all duration-500 relative z-10">
-                                    <div className="mb-6">
+                            {/* END: Placeholder for New 4-Card Grid */}
+
+                            {/* Search Section (MOVED UP) */}
+                            <div className="mb-8 max-w-3xl mx-auto">
+                                {' '}
+                                {/* Changed max-w-4xl to max-w-3xl for a tighter look */}
+                                <div className="bg-white/10 backdrop-blur-md rounded-xl p-4 sm:p-6 border border-white/20 shadow-xl transform hover:scale-[1.01] transition-all duration-500 relative z-10">
+                                    <div className="mb-4">
+                                        {' '}
+                                        {/* Reduced from mb-6 to mb-4 */}
                                         <form
                                             onSubmit={handleSearch}
-                                            className="flex flex-col sm:flex-row gap-4 relative z-10 transform transition-all duration-500 hover:scale-[1.02]"
+                                            className="flex flex-col sm:flex-row gap-2 relative z-10 transform transition-all duration-500 hover:scale-[1.01]"
                                         >
                                             <input
                                                 type="text"
                                                 placeholder="Search Entry Level Jobs..."
-                                                className="w-full px-6 py-4 rounded-xl sm:rounded-l-xl sm:rounded-r-none text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-inner text-base sm:text-lg font-medium"
+                                                className="w-full px-5 py-3 rounded-lg sm:rounded-l-lg sm:rounded-r-none text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-inner text-sm sm:text-base font-medium"
+                                                /* Reduced padding (py-4->py-3) and text size */
                                                 value={searchQuery}
                                                 onChange={(e) => setSearchQuery(e.target.value)}
                                             />
                                             <button
                                                 type="submit"
-                                                className="bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] hover:from-[hsl(175,70%,41%)] hover:to-[hsl(196,80%,45%)] px-8 py-4 rounded-xl sm:rounded-l-none sm:rounded-r-xl font-semibold transition-all duration-300 shadow-lg text-white text-base sm:text-lg transform hover:scale-105"
+                                                className="bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] hover:from-[hsl(175,70%,41%)] hover:to-[hsl(196,80%,45%)] px-6 py-3 rounded-lg sm:rounded-l-none sm:rounded-r-lg font-semibold transition-all duration-300 shadow-lg text-white text-sm sm:text-base transform hover:scale-105"
+                                                /* Reduced padding (py-4->py-3) and text size */
                                             >
                                                 SEARCH
                                             </button>
                                         </form>
                                     </div>
-                                    <div className="flex flex-wrap gap-3 sm:gap-4 justify-center">
-                                        <div className="bg-white/20 backdrop-blur-md px-4 py-2 rounded-full text-sm border border-white/30 shadow-sm hover:shadow-md transition-all duration-300 hover:bg-white/30 text-white font-medium">
+
+                                    {/* Compact Stats Badges */}
+                                    <div className="flex flex-wrap gap-2 sm:gap-3 justify-center">
+                                        <div className="bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-full text-xs sm:text-sm border border-white/30 shadow-sm hover:shadow-md transition-all duration-300 hover:bg-white/30 text-white font-medium">
                                             {stats?.freshers.toLocaleString()} Freshers
                                         </div>
-                                        <div className="bg-white/20 backdrop-blur-md px-4 py-2 rounded-full text-sm border border-white/30 shadow-sm hover:shadow-md transition-all duration-300 hover:bg-white/30 text-white font-medium">
+                                        <div className="bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-full text-xs sm:text-sm border border-white/30 shadow-sm hover:shadow-md transition-all duration-300 hover:bg-white/30 text-white font-medium">
                                             {stats?.verifiedJobs} Verified Jobs
                                         </div>
-                                        <div className="bg-white/20 backdrop-blur-md px-4 py-2 rounded-full text-sm border border-white/30 shadow-sm hover:shadow-md transition-all duration-300 hover:bg-white/30 text-white font-medium">
+                                        <div className="bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-full text-xs sm:text-sm border border-white/30 shadow-sm hover:shadow-md transition-all duration-300 hover:bg-white/30 text-white font-medium">
                                             Entry-Level Focused
                                         </div>
                                     </div>
+
+                                    {/* Background blobs remain the same */}
                                     <div className="absolute -bottom-3 -right-3 w-20 h-20 bg-[hsl(196,80%,65%)] opacity-60 rounded-full blur-xl"></div>
                                     <div className="absolute -top-3 -left-3 w-20 h-20 bg-[hsl(175,70%,61%)] opacity-60 rounded-full blur-xl"></div>
                                 </div>
                             </div>
-                            
+
+                            {/* CTA Buttons (MOVED DOWN) */}
+                            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                                <a
+                                    href="/community"
+                                    className="group inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] text-white rounded-xl font-semibold text-lg transition-all duration-300 hover:translate-y-[-3px] hover:shadow-2xl transform hover:scale-105 border-2 border-[hsl(196,80%,45%)]/30"
+                                >
+                                    <svg
+                                        className="mr-3 h-6 w-6 group-hover:scale-110 transition-transform"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth="2"
+                                            d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                                        />
+                                    </svg>
+                                    Join Community
+                                    <svg
+                                        className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth="2"
+                                            d="M14 5l7 7m0 0l-7 7m7-7H3"
+                                        />
+                                    </svg>
+                                </a>
+
+                                <div className="relative group">
+                                    <button
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            try {
+                                                if (typeof window !== 'undefined') {
+                                                    window.location.href = '/jobs';
+                                                }
+                                            } catch (error) {
+                                                // Handle navigation error silently
+                                                try {
+                                                    window.open('/jobs', '_self');
+                                                } catch (fallbackError) {
+                                                    // Use fallback navigation
+                                                    document.location.href = '/jobs';
+                                                }
+                                            }
+                                        }}
+                                        className="group inline-flex items-center justify-center px-8 py-4 bg-white hover:bg-gray-50 text-[hsl(196,80%,45%)] rounded-xl font-semibold text-lg transition-all duration-300 hover:translate-y-[-3px] hover:shadow-2xl cursor-pointer border-2 border-white/20 hover:border-white/40 transform hover:scale-105"
+                                        type="button"
+                                    >
+                                        <svg
+                                            className="mr-3 h-6 w-6 transition-transform group-hover:scale-110"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth="2"
+                                                d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                                            />
+                                        </svg>
+                                        Browse Jobs
+                                        <svg
+                                            className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth="2"
+                                                d="M14 5l7 7m0 0l-7 7m7-7H3"
+                                            />
+                                        </svg>
+                                    </button>
+                                    <a
+                                        href="/jobs"
+                                        className="absolute inset-0 opacity-0 pointer-events-none"
+                                        aria-label="Browse Jobs"
+                                        tabIndex={-1}
+                                    >
+                                        Browse Jobs
+                                    </a>
+                                </div>
+                            </div>
+
                             {/* Scroll Indicator */}
-                            <div className="mt-8 sm:mt-12 flex justify-center">
+                            <div className="mt-8 flex justify-center">
                                 <div className="flex flex-col items-center text-white/70 animate-bounce">
-                                    <span className="text-sm font-medium mb-2">Scroll to explore</span>
-                                    <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                                    <span className="text-sm font-medium mb-2">
+                                        Scroll to explore
+                                    </span>
+                                    <svg
+                                        className="h-6 w-6"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth="2"
+                                            d="M19 14l-7 7m0 0l-7-7m7 7V3"
+                                        />
                                     </svg>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </section>
-                
                 {/* Platform Stats Section */}{' '}
                 <section
-                    className="py-16 bg-gradient-to-b from-[hsl(210,50%,98%)] to-[hsl(196,60%,95%)]"
+                    className="py-10 sm:py-12 bg-gradient-to-b from-[hsl(210,50%,98%)] to-[hsl(196,60%,95%)]"
                     data-oid="8sqt026"
                 >
                     {' '}
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-oid="fp690kv">
                         {' '}
                         <h2
-                            className="text-3xl font-bold text-center mb-12 text-gray-800"
+                            className="text-3xl font-bold text-center mb-8 text-gray-800"
                             data-oid="oao5.vl"
                         >
                             {' '}
@@ -740,31 +812,31 @@ export default function Page() {
                                     members{' '}
                                 </p>{' '}
                                 {!isAuthenticated && (
-                                <button
-                                    onClick={() => navigateWithAuth('/resources/community')}
-                                    className="text-blue-800 font-medium inline-flex items-center hover:text-blue-900 transition-all duration-300"
-                                    data-oid="o-d:mk_"
-                                >
-                                    {' '}
-                                    Join Now{' '}
-                                    <svg
-                                        className="ml-1 h-4 w-4"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        data-oid=":89z18k"
+                                    <button
+                                        onClick={() => navigateWithAuth('/resources/community')}
+                                        className="text-blue-800 font-medium inline-flex items-center hover:text-blue-900 transition-all duration-300"
+                                        data-oid="o-d:mk_"
                                     >
                                         {' '}
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth="2"
-                                            d="M14 5l7 7m0 0l-7 7m7-7H3"
-                                            data-oid="dq19x:6"
-                                        ></path>{' '}
-                                    </svg>{' '}
-                                </button>
+                                        Join Now{' '}
+                                        <svg
+                                            className="ml-1 h-4 w-4"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            data-oid=":89z18k"
+                                        >
+                                            {' '}
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth="2"
+                                                d="M14 5l7 7m0 0l-7 7m7-7H3"
+                                                data-oid="dq19x:6"
+                                            ></path>{' '}
+                                        </svg>{' '}
+                                    </button>
                                 )}
                             </div>{' '}
                             <div
@@ -875,74 +947,6 @@ export default function Page() {
                                 </div>{' '}
                                 <h3
                                     className="text-xl font-bold mb-2 text-gray-800"
-                                    data-oid="9bpx7b5"
-                                >
-                                    {' '}
-                                    LinkedIn{' '}
-                                </h3>{' '}
-                                <p className="text-gray-600 mb-4" data-oid="208ii:8">
-                                    {' '}
-                                    {stats?.linkedInFollowers} professional followers{' '}
-                                </p>{' '}
-                                <a
-                                    href="https://www.linkedin.com/company/x-careers/"
-                                    className="text-blue-800 font-medium inline-flex items-center hover:text-blue-900 transition-all duration-300"
-                                    data-oid="ixvj:s8"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    {' '}
-                                    Connect{' '}
-                                    <svg
-                                        className="ml-1 h-4 w-4"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        data-oid="eulvr8_"
-                                    >
-                                        {' '}
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth="2"
-                                            d="M14 5l7 7m0 0l-7 7m7-7H3"
-                                            data-oid="tw1wt8b"
-                                        ></path>{' '}
-                                    </svg>{' '}
-                                </a>{' '}
-                            </div>{' '}
-                            <div
-                                className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-md border-t-4 border-[hsl(196,80%,45%)] hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 hover:border-[hsl(175,70%,41%)]"
-                                data-oid="qyf.s1e"
-                            >
-                                {' '}
-                                <div
-                                    className="text-4xl mb-4 text-[hsl(196,80%,45%)]"
-                                    data-oid="z3.nyu2"
-                                >
-                                    {' '}
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="40"
-                                        height="40"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        strokeWidth="2"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        data-oid="0.hg-s."
-                                    >
-                                        {' '}
-                                        <path
-                                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                                            data-oid="j2vz0uy"
-                                        />{' '}
-                                    </svg>{' '}
-                                </div>{' '}
-                                <h3
-                                    className="text-xl font-bold mb-2 text-gray-800"
                                     data-oid="ein.i4r"
                                 >
                                     {' '}
@@ -956,15 +960,15 @@ export default function Page() {
                         </div>{' '}
                     </div>{' '}
                 </section>{' '}
-                                        {/* Why Choose X Careers */}{' '}
+                {/* Why Choose X Careers */}{' '}
                 <section
-                    className="py-16 bg-gradient-to-b from-white to-[hsl(196,60%,95%)]"
+                    className="py-10 sm:py-12 bg-gradient-to-b from-white to-[hsl(196,60%,95%)]"
                     data-oid="pmwti0t"
                 >
                     {' '}
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-oid="-jq.rtv">
                         {' '}
-                        <div className="text-center mb-12" data-oid="676qc-r">
+                        <div className="text-center mb-8" data-oid="676qc-r">
                             {' '}
                             <h2
                                 className="text-3xl font-bold mb-4 text-gray-800"
@@ -979,8 +983,7 @@ export default function Page() {
                             </p>{' '}
                             <p className="mt-4 text-gray-600 max-w-2xl mx-auto" data-oid="8m.hnq5">
                                 {' '}
-                                Our platform focuses on the unique needs of entry-level tech
-                                talent.{' '}
+                                Our platform focuses on the unique needs of entry-level tech talent.{' '}
                             </p>{' '}
                         </div>{' '}
                         {/* Full-Width Banner */}{' '}
@@ -1012,8 +1015,7 @@ export default function Page() {
                                     </h3>{' '}
                                     <p className="text-blue-100" data-oid="o-woi:y">
                                         {' '}
-                                        Get real-time alerts for freshers jobs matching your
-                                        profile{' '}
+                                        Get real-time alerts for freshers jobs matching your profile{' '}
                                     </p>{' '}
                                 </div>{' '}
                                 <a
@@ -1083,10 +1085,7 @@ export default function Page() {
                                                     d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"
                                                     data-oid="wh.umbz"
                                                 ></path>{' '}
-                                                <path
-                                                    d="m9 12 2 2 4-4"
-                                                    data-oid="cqv.jr7"
-                                                ></path>{' '}
+                                                <path d="m9 12 2 2 4-4" data-oid="cqv.jr7"></path>{' '}
                                             </svg>
                                         )}{' '}
                                         {benefit.icon === 'handshake' && (
@@ -1132,7 +1131,7 @@ export default function Page() {
                 </section>{' '}
                 {/* NotifyX Section */}{' '}
                 <section
-                    className="py-16 bg-gradient-to-r from-[hsl(210,60%,92%)] via-[hsl(196,70%,90%)] to-[hsl(175,60%,92%)] relative overflow-hidden"
+                    className="py-10 sm:py-12 bg-gradient-to-r from-[hsl(210,60%,92%)] via-[hsl(196,70%,90%)] to-[hsl(175,60%,92%)] relative overflow-hidden"
                     data-oid="9l:7dgu"
                 >
                     {' '}
@@ -1153,7 +1152,7 @@ export default function Page() {
                         data-oid="5llkgbx"
                     >
                         {' '}
-                        <div className="text-center mb-12" data-oid="_r5:z3u">
+                        <div className="text-center mb-8" data-oid="_r5:z3u">
                             {' '}
                             <h2
                                 className="text-4xl font-bold mb-4 text-gray-800 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] inline-block text-transparent bg-clip-text"
@@ -1319,7 +1318,7 @@ export default function Page() {
                 </section>{' '}
                 {/* Community Integration */}{' '}
                 <section
-                    className="py-16 bg-gradient-to-b from-[hsl(210,50%,98%)] to-[hsl(196,60%,95%)] relative overflow-hidden"
+                    className="py-10 sm:py-12 bg-gradient-to-b from-[hsl(210,50%,98%)] to-[hsl(196,60%,95%)] relative overflow-hidden"
                     data-oid="c__5puu"
                 >
                     {' '}
@@ -1337,7 +1336,7 @@ export default function Page() {
                     </div>{' '}
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-oid="8yb7347">
                         {' '}
-                        <div className="text-center mb-12" data-oid="y-hmn._">
+                        <div className="text-center mb-8" data-oid="y-hmn._">
                             {' '}
                             <h2
                                 className="text-3xl font-bold mb-4 text-gray-800"
@@ -1373,81 +1372,7 @@ export default function Page() {
                                     >
                                         {' '}
                                         <path
-                                            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
-                                            data-oid="n38s_i2"
-                                        ></path>{' '}
-                                    </svg>{' '}
-                                </div>{' '}
-                                <h3
-                                    className="text-xl font-bold mb-1 text-gray-800"
-                                    data-oid="x0xx_nh"
-                                >
-                                    {' '}
-                                    WhatsApp{' '}
-                                </h3>{' '}
-                                <p className="text-gray-600" data-oid=".l_n92d">
-                                    {' '}
-                                    {stats?.whatsappMembers.toLocaleString()} members{' '}
-                                </p>{' '}
-                            </a>{' '}
-                            <a
-                                href="/linkedin"
-                                className="flex flex-col items-center p-6 bg-white/80 backdrop-blur-sm rounded-xl shadow-md hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 relative z-10 border border-[hsl(210,30%,95%)] border-t-4 border-t-blue-600"
-                                data-oid="o27:.ai"
-                            >
-                                {' '}
-                                <div
-                                    className="w-16 h-16 flex items-center justify-center bg-blue-600 text-white rounded-full mb-4"
-                                    data-oid="maz-w-1"
-                                >
-                                    {' '}
-                                    <svg
-                                        className="h-8 w-8"
-                                        fill="currentColor"
-                                        viewBox="0 0 24 24"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        data-oid=":7hy-_:"
-                                    >
-                                        {' '}
-                                        <path
-                                            d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
-                                            data-oid="ljs0mkb"
-                                        ></path>{' '}
-                                    </svg>{' '}
-                                </div>{' '}
-                                <h3
-                                    className="text-xl font-bold mb-1 text-gray-800"
-                                    data-oid="z.-i3u3"
-                                >
-                                    {' '}
-                                    LinkedIn{' '}
-                                </h3>{' '}
-                                <p className="text-gray-600" data-oid="d:a2i82">
-                                    {' '}
-                                    {stats?.linkedinMembers.toLocaleString()} followers{' '}
-                                </p>{' '}
-                            </a>{' '}
-                            <a
-                                href="/telegram"
-                                className="flex flex-col items-center p-6 bg-white/80 backdrop-blur-sm rounded-xl shadow-md hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 relative z-10 border border-[hsl(210,30%,95%)] border-t-4 border-t-blue-500"
-                                data-oid="9g.6j9w"
-                            >
-                                {' '}
-                                <div
-                                    className="w-16 h-16 flex items-center justify-center bg-blue-500 text-white rounded-full mb-4"
-                                    data-oid="l8nv6v7"
-                                >
-                                    {' '}
-                                    <svg
-                                        className="h-8 w-8"
-                                        fill="currentColor"
-                                        viewBox="0 0 24 24"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        data-oid="2-1-y3f"
-                                    >
-                                        {' '}
-                                        <path
-                                            d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.96 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"
+                                            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"
                                             data-oid="d7xuf2o"
                                         ></path>{' '}
                                     </svg>{' '}
@@ -2108,10 +2033,7 @@ export default function Page() {
                                                     ></path>{' '}
                                                     <path d="M18 17V9" data-oid="vfs_88u"></path>{' '}
                                                     <path d="M13 17V5" data-oid="qt51__j"></path>{' '}
-                                                    <path
-                                                        d="M8 17v-3"
-                                                        data-oid="1yznx52"
-                                                    ></path>{' '}
+                                                    <path d="M8 17v-3" data-oid="1yznx52"></path>{' '}
                                                 </svg>
                                             )}{' '}
                                             {resource.icon === 'search' && (
@@ -2282,7 +2204,11 @@ export default function Page() {
                                             {resource.description}{' '}
                                         </p>{' '}
                                         <a
-                                            href={resource.title === 'Community' ? '/community' : `/resources/${resource.title.toLowerCase().replace(/\s+/g, '-')}`}
+                                            href={
+                                                resource.title === 'Community'
+                                                    ? '/community'
+                                                    : `/resources/${resource.title.toLowerCase().replace(/\s+/g, '-')}`
+                                            }
                                             className="text-blue-800 font-medium inline-flex items-center hover:text-blue-900 transition-all duration-300"
                                             data-oid=":hff6i1"
                                         >
@@ -2348,30 +2274,37 @@ export default function Page() {
                                 Success stories from freshers who found their dream tech jobs
                             </p>
                         </div>
-                        
-                                                {/* Single Row Placard Design */}
+                        {/* Single Row Placard Design */}
                         <div className="space-y-6">
                             {/* Row 1: Left to Right */}
                             <div className="relative overflow-hidden py-3">
-                                <div 
+                                <div
                                     className="flex animate-scroll gap-4"
                                     style={{ width: `${testimonials.length * 320}px` }}
                                 >
-                                {testimonials.map((testimonial) => (
-                                    <div
-                                        key={testimonial.id}
+                                    {testimonials.map((testimonial) => (
+                                        <div
+                                            key={testimonial.id}
                                             className="bg-gradient-to-br from-white/95 to-white/85 backdrop-blur-md text-gray-800 p-6 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 relative z-10 border border-white/30 w-[300px] h-[220px] flex-shrink-0 flex flex-col"
-                                    >
+                                        >
                                             <div className="flex items-center mb-4">
                                                 <div className="relative">
-                                            <img
-                                                src={testimonial.image}
-                                                alt={testimonial.name}
+                                                    <img
+                                                        src={testimonial.image}
+                                                        alt={testimonial.name}
                                                         className="w-12 h-12 rounded-full mr-3 object-cover border-3 border-blue-100 shadow-md"
                                                     />
                                                     <div className="absolute -top-1 -right-1 w-5 h-5 bg-green-500 rounded-full border-2 border-white flex items-center justify-center">
-                                                        <svg className="w-2.5 h-2.5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                                        <svg
+                                                            className="w-2.5 h-2.5 text-white"
+                                                            fill="currentColor"
+                                                            viewBox="0 0 20 20"
+                                                        >
+                                                            <path
+                                                                fillRule="evenodd"
+                                                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                                clipRule="evenodd"
+                                                            />
                                                         </svg>
                                                     </div>
                                                 </div>
@@ -2385,7 +2318,12 @@ export default function Page() {
                                                     <div className="flex items-center mt-1">
                                                         <div className="flex text-yellow-400">
                                                             {[...Array(5)].map((_, i) => (
-                                                                <svg key={i} className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                                                <svg
+                                                                    key={i}
+                                                                    className="w-3 h-3"
+                                                                    fill="currentColor"
+                                                                    viewBox="0 0 20 20"
+                                                                >
                                                                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.835 1.688-1.71 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.874.57-2.01-.197-1.71-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                                                                 </svg>
                                                             ))}
@@ -2418,8 +2356,16 @@ export default function Page() {
                                                         className="w-12 h-12 rounded-full mr-3 object-cover border-3 border-blue-100 shadow-md"
                                                     />
                                                     <div className="absolute -top-1 -right-1 w-5 h-5 bg-green-500 rounded-full border-2 border-white flex items-center justify-center">
-                                                        <svg className="w-2.5 h-2.5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                                        <svg
+                                                            className="w-2.5 h-2.5 text-white"
+                                                            fill="currentColor"
+                                                            viewBox="0 0 20 20"
+                                                        >
+                                                            <path
+                                                                fillRule="evenodd"
+                                                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                                clipRule="evenodd"
+                                                            />
                                                         </svg>
                                                     </div>
                                                 </div>
@@ -2433,7 +2379,12 @@ export default function Page() {
                                                     <div className="flex items-center mt-1">
                                                         <div className="flex text-yellow-400">
                                                             {[...Array(5)].map((_, i) => (
-                                                                <svg key={i} className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                                                <svg
+                                                                    key={i}
+                                                                    className="w-3 h-3"
+                                                                    fill="currentColor"
+                                                                    viewBox="0 0 20 20"
+                                                                >
                                                                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.835 1.688-1.71 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.874.57-2.01-.197-1.71-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                                                                 </svg>
                                                             ))}
@@ -2501,13 +2452,13 @@ export default function Page() {
                         >
                             {' '}
                             {!isAuthenticated && (
-                            <button
+                                <button
                                     onClick={() => navigateWithAuth('/resources/community')}
-                                className="px-8 py-4 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white rounded-md font-bold text-lg hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300 transform hover:scale-105 hover:shadow-xl animate-pulse-shadow relative z-10"
-                                data-oid="ph:f5ek"
-                            >
-                                {' '}
-                                Create Free Account →{' '}
+                                    className="px-8 py-4 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white rounded-md font-bold text-lg hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300 transform hover:scale-105 hover:shadow-xl animate-pulse-shadow relative z-10"
+                                    data-oid="ph:f5ek"
+                                >
+                                    {' '}
+                                    Create Free Account →{' '}
                                 </button>
                             )}{' '}
                             <Link
@@ -2599,7 +2550,7 @@ export default function Page() {
                                     >
                                         {' '}
                                         <path
-                                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"
+                                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"
                                             data-oid="y3y..:8"
                                         />{' '}
                                     </svg>{' '}
@@ -2667,7 +2618,6 @@ export default function Page() {
                                         About Us{' '}
                                     </a>{' '}
                                 </li>{' '}
-
                                 <li data-oid="dyoar89">
                                     {' '}
                                     <a
@@ -2689,7 +2639,6 @@ export default function Page() {
                             </h3>{' '}
                             <ul className="space-y-3" data-oid="ug1pucs">
                                 {' '}
-
                                 <li data-oid="eugd72:">
                                     {' '}
                                     <a
@@ -2701,7 +2650,6 @@ export default function Page() {
                                         Resume Review{' '}
                                     </a>{' '}
                                 </li>{' '}
-
                                 <li data-oid="wsicpzb">
                                     {' '}
                                     <a
@@ -2766,7 +2714,7 @@ export default function Page() {
                                         {' '}
                                         Shipping Policy{' '}
                                     </a>{' '}
-                                </li>
+                                </li>{' '}
                                 <li data-oid="terms-conditions">
                                     {' '}
                                     <a
