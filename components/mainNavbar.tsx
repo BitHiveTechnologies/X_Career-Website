@@ -94,8 +94,11 @@ export default function MainNavbar() {
                         data-oid="3w.2i3:"
                     >
                         {/* Logo */}
-                        <div className="flex-shrink-0" data-oid="._58q_2">
+                        <div className="flex-shrink-0 flex items-center gap-2 sm:gap-3" data-oid="._58q_2">
                             <Logo className="h-12 w-auto sm:h-14" data-oid="i_bqbbl" />
+                            <span className="text-lg sm:text-xl font-semibold text-gray-800 hidden sm:inline-block">
+                                xcareer
+                            </span>
                         </div>
 
                         {/* Navigation Links - Hidden on mobile */}
