@@ -96,7 +96,7 @@ export default function MainNavbar() {
                         {/* Logo */}
                         <Link href="/" className="flex-shrink-0 flex items-center gap-2 sm:gap-3" data-oid="._58q_2">
                             <Logo className="h-12 w-auto sm:h-14" showLink={false} data-oid="i_bqbbl" />
-                            <span className="text-lg sm:text-xl font-semibold text-gray-800 hidden sm:inline-block">
+                            <span className="text-base sm:text-lg md:text-xl font-semibold text-gray-800">
                                 xcareer
                             </span>
                         </Link>
