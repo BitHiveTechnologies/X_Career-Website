@@ -17,25 +17,25 @@ export default function MainNavbar() {
     // Helper function to get display name
     const getDisplayName = () => {
         if (!user) return 'User';
-        
+
         // If admin, show "Admin"
         if (user.role === 'admin' || user.role === 'super_admin') {
             return 'Admin';
         }
-        
+
         // For regular users, show their name or email
         if (user.firstName && user.lastName) {
             return `${user.firstName} ${user.lastName}`.trim();
         }
-        
+
         if (user.firstName) {
             return user.firstName;
         }
-        
+
         if (user.email) {
             return user.email.split('@')[0]; // Show part before @
         }
-        
+
         return 'User';
     };
 
@@ -94,13 +94,27 @@ export default function MainNavbar() {
                         data-oid="3w.2i3:"
                     >
                         {/* Logo */}
-                        <Link href="/" className="flex-shrink-0 flex items-center gap-2 sm:gap-3" data-oid="._58q_2">
-                            <Logo className="h-12 w-auto sm:h-14" showLink={false} data-oid="i_bqbbl" />
-                            <span className="text-base sm:text-lg md:text-xl font-semibold text-gray-800">
-                                xcareer
-                            </span>
-                        </Link>
+                        <Link href="/" className="group flex flex-shrink-0 items-center gap-3.5" data-oid="._58q_2">
 
+                            {/* 1. The Logo Container: Vibrant Gradient + Glassy feel */}
+                            {/* 1. The Logo Container: Vibrant Gradient + Glassy feel */}
+                            <div className="relative flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 shadow-lg shadow-blue-500/25 ring-1 ring-white/20 transition-all duration-300 ease-out group-hover:scale-105 group-hover:shadow-blue-600/30 sm:h-14 sm:w-14" data-oid="i_bqbbl">
+                                {/* Inner glow effect */}
+                                <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-white/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+
+                                {/* Logo Image */}
+                                <Logo className="relative h-full w-full p-1 text-white drop-shadow-md transform transition-transform duration-300 group-hover:rotate-3" showLink={false} data-oid="i_bqbbl" />
+                            </div>
+
+                            {/* 2. The Text: Modern Typography */}
+                            <div className="flex flex-col justify-center">
+                                <span className="text-xl sm:text-2xl font-bold tracking-tight text-slate-800 transition-colors duration-300">
+                                    <span className="bg-gradient-to-r from-blue-700 to-indigo-700 bg-clip-text text-transparent group-hover:from-blue-600 group-hover:to-indigo-600 transition-all duration-300">X</span>
+                                    <span className="text-slate-700 group-hover:text-slate-900 transition-colors duration-300">Careers</span>
+                                </span>
+                            </div>
+
+                        </Link>
                         {/* Navigation Links - Hidden on mobile */}
                         <div
                             className="hidden lg:flex items-center space-x-2 xl:space-x-4"
@@ -196,7 +210,7 @@ export default function MainNavbar() {
                                                     Dashboard
                                                 </Link>
                                             )}
-                                            
+
                                             {/* Regular users see all options except Dashboard */}
                                             {user.role === 'user' && (
                                                 <>
@@ -226,7 +240,7 @@ export default function MainNavbar() {
                                                     </Link>
                                                 </>
                                             )}
-                                            
+
                                             <hr className="my-1" data-oid="976ojd7" />
                                             <button
                                                 onClick={handleLogout}
@@ -305,10 +319,9 @@ export default function MainNavbar() {
                     {/* Mobile menu, show/hide based on menu state */}
                     <div
                         className={enhance(
-                            `lg:hidden transition-all duration-300 ease-in-out ${
-                                mobileMenuOpen
-                                    ? 'max-h-screen opacity-100'
-                                    : 'max-h-0 opacity-0 overflow-hidden'
+                            `lg:hidden transition-all duration-300 ease-in-out ${mobileMenuOpen
+                                ? 'max-h-screen opacity-100'
+                                : 'max-h-0 opacity-0 overflow-hidden'
                             }`,
 
                             `lg:hidden ${mobileMenuOpen ? 'block' : 'hidden'}`,
@@ -387,7 +400,7 @@ export default function MainNavbar() {
                                                 Dashboard
                                             </Link>
                                         )}
-                                        
+
                                         {/* Regular users see all options except Dashboard */}
                                         {user.role === 'user' && (
                                             <>
