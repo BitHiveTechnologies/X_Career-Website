@@ -344,6 +344,13 @@ export default function NotifyPage() {
                                 Experience the ultimate in career notifications. Get exclusive access to priority alerts and personalized insights.
                             </p>
 
+                            <div className="max-w-2xl mx-auto mb-8 bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-xl text-left">
+                                <p className="text-xs font-semibold text-blue-200 mb-1">Company Information</p>
+                                <p className="text-xs text-white">
+                                    X Careers is a product of <strong>X Careers Connect Private Limited</strong>. All services on this platform are provided by X Careers Connect Private Limited.
+                                </p>
+                            </div>
+
                             {/* Current Subscription Status */}
                             {!isLoadingSubscription && (
                                 <div className="max-w-md mx-auto mb-8">
@@ -728,6 +735,10 @@ export default function NotifyPage() {
                     </div>
                     <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
                         <p className="mb-2">© {new Date().getFullYear()} X Careers. All rights reserved.</p>
+                        <p className="mb-2 text-xs text-gray-500">
+                            X Careers is a product of <strong>X Careers Connect Private Limited</strong>.
+                            All services on this platform are provided by X Careers Connect Private Limited.
+                        </p>
                         <p>Built with ❤️ for tech freshers</p>
                     </div>
                 </div>

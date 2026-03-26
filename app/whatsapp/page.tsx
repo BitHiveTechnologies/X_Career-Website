@@ -483,6 +483,10 @@ export default function WhatsAppPage() {
                     </div>
                     <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
                         <p className="mb-2">© {new Date().getFullYear()} X Careers. All rights reserved.</p>
+                        <p className="mb-2 text-xs text-gray-500">
+                            X Careers is a product of <strong>X Careers Connect Private Limited</strong>.
+                            All services on this platform are provided by X Careers Connect Private Limited.
+                        </p>
                         <p>Built with ❤️ for tech freshers</p>
                     </div>
                 </div>

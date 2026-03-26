@@ -2880,6 +2880,10 @@ export default function Page() {
                             {' '}
                             © {new Date().getFullYear()} X Careers. All rights reserved.{' '}
                         </p>{' '}
+                        <p className="mb-2 text-xs text-gray-500" data-oid="legal-entity">
+                            X Careers is a product of <strong>X Careers Connect Private Limited</strong>.{' '}
+                            All services on this platform are provided by X Careers Connect Private Limited.
+                        </p>{' '}
                         <p data-oid="uuado7s">Built with ❤️ for tech freshers</p>{' '}
                     </div>{' '}
                 </div>{' '}
