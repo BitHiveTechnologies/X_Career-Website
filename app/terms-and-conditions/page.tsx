@@ -23,6 +23,12 @@ export default function TermsAndConditionsPage() {
                         className="prose prose-lg max-w-none text-gray-700 space-y-6"
                         data-oid="4r8_vg5"
                     >
+                        <div className="mb-6 bg-blue-50/50 p-4 rounded-lg border border-blue-100">
+                            <p className="text-sm font-semibold text-blue-900 mb-1">Company Information</p>
+                            <p className="text-sm text-blue-800">
+                                X Careers is a product of <strong>X Careers Connect Private Limited</strong>. All services on this platform are provided by X Careers Connect Private Limited.
+                            </p>
+                        </div>
                         <div className="mb-6">
                             <p className="text-sm text-gray-600 mb-4">
                                 <strong>Effective Date:</strong> [Yet to be declared]
@@ -186,8 +192,11 @@ export default function TermsAndConditionsPage() {
                         </section>
 
                         <div className="border-t border-gray-200 pt-6 mt-8" data-oid="gvpq2l5">
-                            <p className="text-sm text-gray-500" data-oid="ysk6nzn">
+                            <p className="text-sm text-gray-500 mb-2" data-oid="ysk6nzn">
                                 Last updated: [Yet to be declared]
+                            </p>
+                            <p className="text-sm text-gray-500">
+                                X Careers is a product of <strong>X Careers Connect Private Limited</strong>. All services on this platform are provided by X Careers Connect Private Limited.
                             </p>
                         </div>
                     </div>
