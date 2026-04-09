@@ -34,9 +34,9 @@ export default function DebugEnvPage() {
               </p>
             </div>
             <div>
-              <p className="font-medium">Razorpay Key ID:</p>
+              <p className="font-medium">Cashfree Environment:</p>
               <p className="text-sm bg-gray-100 p-2 rounded">
-                {ENV.RAZORPAY_KEY_ID}
+                {ENV.CASHFREE_ENV}
               </p>
             </div>
             <div>
@@ -69,9 +69,9 @@ export default function DebugEnvPage() {
               </p>
             </div>
             <div>
-              <p className="font-medium">NEXT_PUBLIC_RAZORPAY_KEY_ID:</p>
+              <p className="font-medium">NEXT_PUBLIC_CASHFREE_ENV:</p>
               <p className="text-sm bg-gray-100 p-2 rounded">
-                {process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || 'Not set'}
+                {process.env.NEXT_PUBLIC_CASHFREE_ENV || 'Not set'}
               </p>
             </div>
           </div>

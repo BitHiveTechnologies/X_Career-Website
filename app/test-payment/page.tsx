@@ -61,7 +61,7 @@ export default function TestPaymentPage() {
       if (basicPlan) {
         const orderResponse = await paymentService.createOrder({
           plan: basicPlan.id,
-          amount: basicPlan.price * 100, // Convert to paise
+          amount: basicPlan.price,
           currency: 'INR'
         });
         
@@ -86,7 +86,7 @@ export default function TestPaymentPage() {
       setLoading(true);
       const orderResponse = await paymentService.createOrder({
         plan: plan.id,
-        amount: plan.price * 100,
+        amount: plan.price,
         currency: 'INR'
       });
 
@@ -122,7 +122,7 @@ export default function TestPaymentPage() {
     <div className="container mx-auto p-6 space-y-6">
       <div className="text-center">
         <h1 className="text-3xl font-bold mb-2">Payment Integration Test</h1>
-        <p className="text-gray-600">Testing Razorpay integration with backend API</p>
+        <p className="text-gray-600">Testing Cashfree integration with backend API</p>
       </div>
 
       {/* Test Results */}
@@ -275,7 +275,7 @@ export default function TestPaymentPage() {
         <CardContent>
           <div className="space-y-2 text-sm">
             <p><strong>Backend URL:</strong> https://unstaffed-semipictorially-sunshine.ngrok-free.dev</p>
-            <p><strong>Razorpay Key ID:</strong> rzp_test_RMAwhTLgqSmTyQ</p>
+            <p><strong>Cashfree mode:</strong> Uses the backend configured sandbox or production environment</p>
             <p><strong>Status:</strong> {testResults.plans && testResults.subscription && testResults.order ? 'Ready' : 'Not Ready'}</p>
           </div>
         </CardContent>

@@ -42,11 +42,15 @@ export default function SubscriptionStatus({ onUpgrade, className = '' }: Subscr
             priority: 'low' as const
           },
           status: subscription.status as 'pending' | 'completed' | 'cancelled' | 'expired' | 'failed',
-          startDate: new Date().toISOString(),
-          endDate: subscription.expiresAt,
-          amount: 0,
-          daysRemaining: 0,
-          isActive: subscription.status === 'active'
+          startDate: subscription.startDate,
+          endDate: subscription.expiresAt || subscription.endDate,
+          amount: subscription.amount,
+          paymentId: subscription.paymentId,
+          orderId: subscription.orderId,
+          paymentSessionId: subscription.paymentSessionId,
+          paymentStatus: subscription.paymentStatus,
+          daysRemaining: subscription.daysRemaining || 0,
+          isActive: subscription.isActive === true || subscription.status === 'completed'
         });
       } else {
         setSubscription(null);
@@ -62,6 +66,7 @@ export default function SubscriptionStatus({ onUpgrade, className = '' }: Subscr
   const getStatusIcon = (status: string) => {
     switch (status) {
       case 'completed':
+      case 'active':
         return <CheckCircle className="w-5 h-5 text-green-500" />;
       case 'pending':
         return <Clock className="w-5 h-5 text-yellow-500" />;
@@ -77,6 +82,7 @@ export default function SubscriptionStatus({ onUpgrade, className = '' }: Subscr
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'completed':
+      case 'active':
         return 'text-green-600 bg-green-50 border-green-200';
       case 'pending':
         return 'text-yellow-600 bg-yellow-50 border-yellow-200';

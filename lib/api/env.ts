@@ -18,9 +18,8 @@ export const ENV = {
   IS_PRODUCTION: process.env.NODE_ENV === 'production',
   IS_TEST: process.env.NODE_ENV === 'test',
   
-  // Razorpay Configuration
-  RAZORPAY_KEY_ID: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || '',
-  RAZORPAY_KEY_SECRET: process.env.NEXT_PUBLIC_RAZORPAY_KEY_SECRET || '',
+  // Cashfree Configuration
+  CASHFREE_ENV: process.env.NEXT_PUBLIC_CASHFREE_ENV === 'production' ? 'production' : 'sandbox',
   
   // Email Configuration
   EMAIL_FROM: process.env.NEXT_PUBLIC_EMAIL_FROM || 'noreply@notifyx.com',
@@ -43,9 +42,9 @@ export const validateEnvironment = (): { isValid: boolean; errors: string[] } =>
     errors.push('NEXT_PUBLIC_API_BASE_URL is required');
   }
   
-  // Check Razorpay configuration if payments are enabled
-  if (ENV.ENABLE_PAYMENTS && !ENV.RAZORPAY_KEY_ID) {
-    errors.push('NEXT_PUBLIC_RAZORPAY_KEY_ID is required when payments are enabled');
+  // Check Cashfree configuration if payments are enabled
+  if (ENV.ENABLE_PAYMENTS && !['sandbox', 'production'].includes(ENV.CASHFREE_ENV)) {
+    errors.push('NEXT_PUBLIC_CASHFREE_ENV must be sandbox or production when payments are enabled');
   }
   
   return {

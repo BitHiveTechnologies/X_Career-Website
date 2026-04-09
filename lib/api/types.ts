@@ -232,32 +232,58 @@ export interface CreateOrderRequest {
 }
 
 export interface CreateOrderResponse {
-  order: {
-    id: string;
-    amount: number;
-    currency: string;
-    receipt: string;
-    status: string;
+  success: boolean;
+  data?: {
+    order: {
+      id: string;
+      cfOrderId?: string;
+      paymentSessionId: string;
+      amount: number;
+      currency: string;
+      status: string;
+      orderMeta?: Record<string, any>;
+      customerDetails?: Record<string, any>;
+      createdAt?: string;
+    };
+    cashfree?: {
+      mode: 'sandbox' | 'production';
+      apiVersion?: string;
+    };
+    subscription?: {
+      id: string;
+      plan: string;
+      status: string;
+      startDate: string;
+      endDate: string;
+      expiresAt: string;
+      amount: number;
+      paymentId?: string;
+      orderId?: string;
+      paymentSessionId?: string;
+      paymentStatus?: string;
+      isActive?: boolean;
+      isExpired?: boolean;
+      daysRemaining?: number;
+      daysSinceStart?: number;
+      features?: string[];
+    };
   };
-  razorpay: {
-    orderId: string;
-    keyId: string;
+  error?: {
+    message: string;
+    details?: any;
   };
 }
 
 export interface VerifyPaymentRequest {
-  razorpay_order_id: string;
-  razorpay_payment_id: string;
-  razorpay_signature: string;
-  plan: string;
-  amount: number;
+  orderId: string;
+  paymentId?: string;
 }
 
 export interface PaymentHistory {
   id: string;
   amount: number;
   currency: string;
-  status: 'completed' | 'failed' | 'pending';
+  status: 'completed' | 'failed' | 'pending' | 'cancelled' | 'refunded';
   plan: string;
   createdAt: string; // ISO date
 }

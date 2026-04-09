@@ -1,11 +1,10 @@
 /**
- * Payment Service Integration
- * Handles all payment-related API calls with the backend
+ * Cashfree payment integration client.
+ * Handles checkout order creation, confirmation, history, and subscription fetches.
  */
 
 import { ENV } from './env';
 
-// Types for payment operations
 export interface CreateOrderRequest {
   plan: string;
   amount: number;
@@ -17,13 +16,36 @@ export interface CreateOrderResponse {
   data?: {
     order: {
       id: string;
+      cfOrderId?: string;
+      paymentSessionId: string;
       amount: number;
       currency: string;
       status: string;
+      orderMeta?: Record<string, any>;
+      customerDetails?: Record<string, any>;
+      createdAt?: string;
     };
-    razorpay: {
-      keyId: string;
-      orderId: string;
+    cashfree?: {
+      mode: 'sandbox' | 'production';
+      apiVersion?: string;
+    };
+    subscription?: {
+      id: string;
+      plan: string;
+      status: string;
+      startDate: string;
+      endDate: string;
+      expiresAt: string;
+      amount: number;
+      paymentId?: string;
+      orderId?: string;
+      paymentSessionId?: string;
+      paymentStatus?: string;
+      isActive?: boolean;
+      isExpired?: boolean;
+      daysRemaining?: number;
+      daysSinceStart?: number;
+      features?: string[];
     };
   };
   error?: {
@@ -33,26 +55,41 @@ export interface CreateOrderResponse {
 }
 
 export interface VerifyPaymentRequest {
-  razorpay_order_id: string;
-  razorpay_payment_id: string;
-  razorpay_signature: string;
+  orderId: string;
+  paymentId?: string;
 }
 
 export interface VerifyPaymentResponse {
   success: boolean;
   data?: {
-    payment: {
-      id: string;
-      amount: number;
-      currency: string;
-      status: string;
-    };
+    status: 'completed' | 'processing' | 'failed';
     subscription?: {
       id: string;
       plan: string;
       status: string;
+      startDate: string;
+      endDate: string;
       expiresAt: string;
+      amount: number;
+      paymentId?: string;
+      orderId?: string;
+      paymentSessionId?: string;
+      paymentStatus?: string;
+      isActive?: boolean;
+      isExpired?: boolean;
+      daysRemaining?: number;
+      daysSinceStart?: number;
+      features?: string[];
+      payment?: any;
     };
+    payment?: {
+      id: string;
+      status: string;
+      amount?: number;
+      currency?: string;
+      message?: string;
+      createdAt?: string;
+    } | null;
   };
   error?: {
     message: string;
@@ -63,14 +100,40 @@ export interface VerifyPaymentResponse {
 export interface PaymentHistoryResponse {
   success: boolean;
   data?: {
-    payments: Array<{
+    subscriptions: Array<{
       id: string;
+      plan: string;
+      status: string;
       amount: number;
       currency: string;
-      status: string;
+      paymentStatus?: string;
+      paymentId?: string;
+      orderId?: string;
+      paymentSessionId?: string;
+      startDate: string;
+      endDate: string;
       createdAt: string;
-      plan?: string;
     }>;
+    payments?: Array<{
+      id: string;
+      plan: string;
+      status: string;
+      amount: number;
+      currency: string;
+      paymentStatus?: string;
+      paymentId?: string;
+      orderId?: string;
+      paymentSessionId?: string;
+      startDate: string;
+      endDate: string;
+      createdAt: string;
+    }>;
+    pagination?: {
+      page: number;
+      limit: number;
+      total: number;
+      pages: number;
+    };
   };
   error?: {
     message: string;
@@ -106,8 +169,18 @@ export interface CurrentSubscriptionResponse {
       id: string;
       plan: string;
       status: string;
-      expiresAt: string;
-      features: string[];
+      startDate: string;
+      endDate: string;
+      expiresAt?: string;
+      amount: number;
+      paymentId?: string;
+      orderId?: string;
+      paymentSessionId?: string;
+      paymentStatus?: string;
+      isActive?: boolean;
+      isExpired?: boolean;
+      daysRemaining?: number;
+      features?: string[];
     };
   };
   error?: {
@@ -119,51 +192,39 @@ export interface CurrentSubscriptionResponse {
 class PaymentService {
   private baseUrl: string;
   private apiVersion: string;
+  private cashfreeMode: 'sandbox' | 'production';
 
   constructor() {
     this.baseUrl = ENV.API_BASE_URL;
     this.apiVersion = ENV.API_VERSION;
+    this.cashfreeMode = ENV.CASHFREE_ENV === 'production' ? 'production' : 'sandbox';
   }
 
   private getAuthHeaders(): HeadersInit {
     const token = typeof window !== 'undefined' ? localStorage.getItem('careerx_token') : null;
     return {
       'Content-Type': 'application/json',
-      ...(token && { 'Authorization': `Bearer ${token}` }),
+      ...(token ? { Authorization: `Bearer ${token}` } : {})
     };
   }
 
   private async handleResponse<T>(response: Response): Promise<T> {
     const data = await response.json();
-    
     if (!response.ok) {
-      throw new Error(data.error?.message || `HTTP ${response.status}: ${response.statusText}`);
+      throw new Error(data?.error?.message || data?.message || `HTTP ${response.status}: ${response.statusText}`);
     }
-    
     return data;
   }
 
-  /**
-   * Get available subscription plans
-   */
   async getSubscriptionPlans(): Promise<SubscriptionPlansResponse> {
     try {
       const response = await fetch(`${this.baseUrl}/api/${this.apiVersion}/subscriptions/plans`);
       return await this.handleResponse<SubscriptionPlansResponse>(response);
     } catch (error) {
-      console.error('Error fetching subscription plans:', error);
-      return {
-        success: false,
-        error: {
-          message: error instanceof Error ? error.message : 'Failed to fetch subscription plans'
-        }
-      };
+      return { success: false, error: { message: error instanceof Error ? error.message : 'Failed to fetch subscription plans' } };
     }
   }
 
-  /**
-   * Get current user's subscription
-   */
   async getCurrentSubscription(): Promise<CurrentSubscriptionResponse> {
     try {
       const response = await fetch(`${this.baseUrl}/api/${this.apiVersion}/subscriptions/current`, {
@@ -171,19 +232,10 @@ class PaymentService {
       });
       return await this.handleResponse<CurrentSubscriptionResponse>(response);
     } catch (error) {
-      console.error('Error fetching current subscription:', error);
-      return {
-        success: false,
-        error: {
-          message: error instanceof Error ? error.message : 'Failed to fetch current subscription'
-        }
-      };
+      return { success: false, error: { message: error instanceof Error ? error.message : 'Failed to fetch current subscription' } };
     }
   }
 
-  /**
-   * Create a Razorpay payment order
-   */
   async createOrder(request: CreateOrderRequest): Promise<CreateOrderResponse> {
     try {
       const response = await fetch(`${this.baseUrl}/api/${this.apiVersion}/payments/create-order`, {
@@ -193,19 +245,10 @@ class PaymentService {
       });
       return await this.handleResponse<CreateOrderResponse>(response);
     } catch (error) {
-      console.error('Error creating payment order:', error);
-      return {
-        success: false,
-        error: {
-          message: error instanceof Error ? error.message : 'Failed to create payment order'
-        }
-      };
+      return { success: false, error: { message: error instanceof Error ? error.message : 'Failed to create payment order' } };
     }
   }
 
-  /**
-   * Verify payment after Razorpay callback
-   */
   async verifyPayment(request: VerifyPaymentRequest): Promise<VerifyPaymentResponse> {
     try {
       const response = await fetch(`${this.baseUrl}/api/${this.apiVersion}/payments/verify`, {
@@ -215,19 +258,10 @@ class PaymentService {
       });
       return await this.handleResponse<VerifyPaymentResponse>(response);
     } catch (error) {
-      console.error('Error verifying payment:', error);
-      return {
-        success: false,
-        error: {
-          message: error instanceof Error ? error.message : 'Failed to verify payment'
-        }
-      };
+      return { success: false, error: { message: error instanceof Error ? error.message : 'Failed to verify payment' } };
     }
   }
 
-  /**
-   * Get payment history
-   */
   async getPaymentHistory(): Promise<PaymentHistoryResponse> {
     try {
       const response = await fetch(`${this.baseUrl}/api/${this.apiVersion}/payments/history`, {
@@ -235,59 +269,25 @@ class PaymentService {
       });
       return await this.handleResponse<PaymentHistoryResponse>(response);
     } catch (error) {
-      console.error('Error fetching payment history:', error);
-      return {
-        success: false,
-        error: {
-          message: error instanceof Error ? error.message : 'Failed to fetch payment history'
-        }
-      };
+      return { success: false, error: { message: error instanceof Error ? error.message : 'Failed to fetch payment history' } };
     }
   }
 
-  /**
-   * Cancel subscription
-   */
-  async cancelSubscription(subscriptionId: string): Promise<{ success: boolean; error?: { message: string } }> {
+  async getPaymentStatus(referenceId: string): Promise<VerifyPaymentResponse> {
     try {
-      const response = await fetch(`${this.baseUrl}/api/${this.apiVersion}/subscriptions/${subscriptionId}`, {
-        method: 'DELETE',
+      const response = await fetch(`${this.baseUrl}/api/${this.apiVersion}/payments/status/${encodeURIComponent(referenceId)}`, {
         headers: this.getAuthHeaders()
       });
-      return await this.handleResponse<{ success: boolean; error?: { message: string } }>(response);
+      return await this.handleResponse<VerifyPaymentResponse>(response);
     } catch (error) {
-      console.error('Error canceling subscription:', error);
-      return {
-        success: false,
-        error: {
-          message: error instanceof Error ? error.message : 'Failed to cancel subscription'
-        }
-      };
+      return { success: false, error: { message: error instanceof Error ? error.message : 'Failed to fetch payment status' } };
     }
   }
 
-  /**
-   * Renew subscription
-   */
-  async renewSubscription(): Promise<{ success: boolean; error?: { message: string } }> {
-    try {
-      const response = await fetch(`${this.baseUrl}/api/${this.apiVersion}/subscriptions/renew`, {
-        method: 'POST',
-        headers: this.getAuthHeaders()
-      });
-      return await this.handleResponse<{ success: boolean; error?: { message: string } }>(response);
-    } catch (error) {
-      console.error('Error renewing subscription:', error);
-      return {
-        success: false,
-        error: {
-          message: error instanceof Error ? error.message : 'Failed to renew subscription'
-        }
-      };
-    }
+  getCashfreeMode() {
+    return this.cashfreeMode;
   }
 }
 
-// Export singleton instance
 export const paymentService = new PaymentService();
-
+export default paymentService;

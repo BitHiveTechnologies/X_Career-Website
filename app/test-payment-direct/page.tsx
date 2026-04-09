@@ -59,7 +59,7 @@ export default function TestPaymentDirectPage() {
 
       const response = await paymentService.createOrder({
         plan: 'basic',
-        amount: 4900,
+        amount: 49,
         currency: 'INR'
       });
       

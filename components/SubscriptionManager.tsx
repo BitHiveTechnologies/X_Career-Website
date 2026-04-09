@@ -50,6 +50,7 @@ function SubscriptionManager({ onUpgrade }: SubscriptionManagerProps) {
 
   const getStatusBadge = (status: string) => {
     switch (status) {
+      case 'completed':
       case 'active':
         return <Badge className="bg-green-500"><CheckCircle className="h-3 w-3 mr-1" />Active</Badge>;
       case 'expired':

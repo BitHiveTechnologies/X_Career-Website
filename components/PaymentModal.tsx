@@ -1,9 +1,8 @@
 'use client';
 
-import { CreateOrderRequest, paymentService, VerifyPaymentRequest } from '@/lib/api/payment';
+import { paymentService } from '@/lib/api/payment';
 import { useAuth } from '@/lib/auth/AuthContext';
-import { Clock, CreditCard, Shield, X } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import { AlertCircle, CheckCircle2, Clock, CreditCard, Loader2, Shield, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 interface PaymentModalProps {
@@ -21,269 +20,280 @@ interface PaymentModalProps {
 
 declare global {
   interface Window {
-    Razorpay: any;
+    Cashfree?: (options: { mode: 'sandbox' | 'production' }) => {
+      checkout: (options: {
+        paymentSessionId: string;
+        redirectTarget?: '_modal' | '_blank' | '_self';
+      }) => Promise<any>;
+    };
   }
 }
 
+const loadCashfreeScript = async () => {
+  if (typeof window === 'undefined') return false;
+  if (window.Cashfree) return true;
+
+  return new Promise<boolean>((resolve) => {
+    const existing = document.querySelector('script[data-cashfree-sdk="true"]');
+    if (existing) {
+      resolve(true);
+      return;
+    }
+
+    const script = document.createElement('script');
+    script.src = 'https://sdk.cashfree.com/js/v3/cashfree.js';
+    script.async = true;
+    script.dataset.cashfreeSdk = 'true';
+    script.onload = () => resolve(true);
+    script.onerror = () => resolve(false);
+    document.body.appendChild(script);
+  });
+};
+
+const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
 export default function PaymentModal({ isOpen, onClose, plan, onSuccess, onError }: PaymentModalProps) {
-  const router = useRouter();
   const { refreshUser } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const [step, setStep] = useState<'order' | 'payment' | 'verification'>('order');
   const [orderId, setOrderId] = useState<string | null>(null);
+  const [statusMessage, setStatusMessage] = useState('Preparing your subscription');
 
-  // Load Razorpay script
   useEffect(() => {
-    if (!isOpen) return;
-
-    const loadRazorpay = () => {
-      return new Promise((resolve) => {
-        const script = document.createElement('script');
-        script.src = 'https://checkout.razorpay.com/v1/checkout.js';
-        script.onload = () => resolve(true);
-        script.onerror = () => resolve(false);
-        document.body.appendChild(script);
-      });
-    };
-
-    loadRazorpay();
+    if (isOpen === false) return;
+    void loadCashfreeScript();
   }, [isOpen]);
 
-  const handlePayment = async () => {
-    if (!plan) return;
+  const pollForFinalStatus = async (referenceOrderId: string) => {
+    for (let attempt = 0; attempt < 5; attempt += 1) {
+      const response = await paymentService.getPaymentStatus(referenceOrderId);
+      if (response.success && response.data?.subscription) {
+        const subscription = response.data.subscription;
+        if (subscription.status === 'completed' || subscription.isActive === true) {
+          return { done: true, response };
+        }
+        if (subscription.status === 'failed' || subscription.status === 'cancelled' || subscription.status === 'refunded') {
+          return { done: true, response };
+        }
+      }
 
-    // Check if user is authenticated
+      await sleep(2000);
+    }
+
+    return { done: false, response: null as any };
+  };
+
+  const finalizePayment = async (referenceOrderId: string) => {
+    setStep('verification');
+    setStatusMessage('Verifying payment status');
+
+    const verifyResponse = await paymentService.verifyPayment({
+      orderId: referenceOrderId
+    });
+
+    if (verifyResponse.success && verifyResponse.data?.subscription) {
+      const subscription = verifyResponse.data.subscription;
+      if (subscription.status === 'completed' || subscription.isActive === true) {
+        onSuccess(subscription);
+        await refreshUser();
+        onClose();
+        return;
+      }
+    }
+
+    const pollResult = await pollForFinalStatus(referenceOrderId);
+    if (pollResult.done && pollResult.response?.success && pollResult.response.data?.subscription) {
+      const subscription = pollResult.response.data.subscription;
+      if (subscription.status === 'completed' || subscription.isActive === true) {
+        onSuccess(subscription);
+        await refreshUser();
+        onClose();
+        return;
+      }
+      throw new Error(subscription.status === 'failed' ? 'Payment failed' : 'Payment could not be confirmed yet');
+    }
+
+    const fallbackSubscription = verifyResponse.data?.subscription;
+    if (fallbackSubscription) {
+      onSuccess(fallbackSubscription);
+      await refreshUser();
+      onClose();
+      return;
+    }
+
+    throw new Error('Payment confirmation timed out. Please refresh your profile in a moment.');
+  };
+
+  const handlePayment = async () => {
+    if (plan == null) return;
+
     const token = typeof window !== 'undefined' ? localStorage.getItem('careerx_token') : null;
-    if (!token) {
-      alert('Please login first to make a payment');
+    if (token == null) {
+      onError('Please login first to make a payment');
       return;
     }
 
     setIsLoading(true);
     setStep('order');
+    setStatusMessage('Creating payment order');
 
     try {
-      // Create order
-      const orderRequest: CreateOrderRequest = {
-        plan: plan.id,
-        amount: plan.price, // Send amount in rupees, backend will convert to paise
-        currency: 'INR'
-      };
+      const scriptLoaded = await loadCashfreeScript();
+      if (scriptLoaded === false || window.Cashfree == null) {
+        throw new Error('Unable to load Cashfree checkout');
+      }
 
-      console.log('Creating order with request:', orderRequest);
-      const orderResponse = await paymentService.createOrder(orderRequest);
-      console.log('Order response:', orderResponse);
-      
-      if (!orderResponse.success || !orderResponse.data) {
+      const orderResponse = await paymentService.createOrder({
+        plan: plan.id,
+        amount: plan.price,
+        currency: 'INR'
+      });
+
+      if (orderResponse.success === false || orderResponse.data?.order == null) {
         throw new Error(orderResponse.error?.message || 'Failed to create order');
       }
 
-      const { order, razorpay } = orderResponse.data;
+      const { order, cashfree } = orderResponse.data;
       setOrderId(order.id);
       setStep('payment');
+      setStatusMessage('Opening secure Cashfree checkout');
 
-      // Configure Razorpay options
-      const options = {
-        key: razorpay.keyId,
-        amount: order.amount,
-        currency: order.currency,
-        name: 'X Careers',
-        description: `${plan.name} Subscription`,
-        order_id: order.id,
-        handler: async (response: any) => {
-          setStep('verification');
-          await handlePaymentVerification(response, order.id);
-        },
-        prefill: {
-          name: 'User',
-          email: 'user@example.com',
-          contact: '+91XXXXXXXXXX'
-        },
-        theme: {
-          color: '#FFC94D'
-        },
-        modal: {
-          ondismiss: () => {
-            setIsLoading(false);
-            setStep('order');
-          }
-        }
-      };
+      const cashfreeCheckout = window.Cashfree({
+        mode: cashfree?.mode || paymentService.getCashfreeMode()
+      });
 
-      // Open Razorpay checkout
-      const rzp = new window.Razorpay(options);
-      rzp.open();
+      const result = await cashfreeCheckout.checkout({
+        paymentSessionId: order.paymentSessionId,
+        redirectTarget: '_modal'
+      });
 
-    } catch (error) {
-      console.error('Payment error:', error);
-      const errorMessage = error instanceof Error ? error.message : 'Payment failed';
-      onError(errorMessage);
-      alert(`Payment Error: ${errorMessage}`);
-      setIsLoading(false);
-      setStep('order');
-    }
-  };
-
-  const handlePaymentVerification = async (response: any, orderId: string) => {
-    try {
-      const verifyRequest: VerifyPaymentRequest = {
-        razorpay_order_id: response.razorpay_order_id,
-        razorpay_payment_id: response.razorpay_payment_id,
-        razorpay_signature: response.razorpay_signature
-      };
-
-      const verifyResponse = await paymentService.verifyPayment(verifyRequest);
-      
-      if (verifyResponse.success) {
-        // Call onSuccess callback
-        onSuccess(verifyResponse.data);
-        
-        // Refresh user data to get updated subscription info from /me API
-        await refreshUser();
-        
-        // Close modal
-        onClose();
-        
-        // Show success message
-        alert('🎉 Payment successful! Your subscription has been activated.');
-        
-        // Navigate to profile page
-        router.push('/profile');
-      } else {
-        throw new Error(verifyResponse.error?.message || 'Payment verification failed');
+      if (result && result.error) {
+        throw new Error(result.error.message || 'Checkout was closed');
       }
+
+      await finalizePayment(order.id);
     } catch (error) {
-      console.error('Verification error:', error);
-      onError(error instanceof Error ? error.message : 'Payment verification failed');
-    } finally {
+      const message = error instanceof Error ? error.message : 'Payment failed';
+      onError(message);
+      setStatusMessage(message);
       setIsLoading(false);
       setStep('order');
     }
   };
 
-  if (!isOpen) return null;
+  const handleClose = () => {
+    if (isLoading) return;
+    onClose();
+  };
+
+  if (isOpen === false) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-2xl max-w-md w-full max-h-[90vh] overflow-y-auto">
-        {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-gray-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm">
+      <div className="max-h-[90vh] w-full max-w-md overflow-y-auto rounded-2xl bg-white shadow-2xl">
+        <div className="flex items-center justify-between border-b border-gray-200 p-6">
           <h2 className="text-xl font-bold text-gray-900">Complete Payment</h2>
           <button
-            onClick={onClose}
-            className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+            onClick={handleClose}
+            className="rounded-full p-2 transition-colors hover:bg-gray-100"
             disabled={isLoading}
           >
             <X className="h-5 w-5" />
           </button>
         </div>
 
-        {/* Content */}
         <div className="p-6">
-          {/* Plan Details */}
-          <div className="bg-gradient-to-r from-yellow-50 to-orange-50 rounded-xl p-4 mb-6">
-            <h3 className="font-semibold text-gray-900 mb-2">{plan.name}</h3>
-            <div className="text-2xl font-bold text-yellow-600 mb-2">
-              ₹{plan.price}/month
-            </div>
+          <div className="mb-6 rounded-xl bg-gradient-to-r from-yellow-50 to-orange-50 p-4">
+            <h3 className="mb-2 font-semibold text-gray-900">{plan.name}</h3>
+            <div className="mb-2 text-2xl font-bold text-yellow-600">₹{plan.price}/month</div>
             <ul className="space-y-1 text-sm text-gray-600">
               {plan.features.slice(0, 3).map((feature, index) => (
                 <li key={index} className="flex items-center">
-                  <div className="w-1.5 h-1.5 bg-yellow-500 rounded-full mr-2" />
+                  <div className="mr-2 h-1.5 w-1.5 rounded-full bg-yellow-500" />
                   {feature}
                 </li>
               ))}
               {plan.features.length > 3 && (
-                <li className="text-xs text-gray-500">
-                  +{plan.features.length - 3} more features
-                </li>
+                <li className="text-xs text-gray-500">+{plan.features.length - 3} more features</li>
               )}
             </ul>
           </div>
 
-          {/* Payment Steps */}
           <div className="space-y-4">
-            {/* Step 1: Order Creation */}
-            <div className={`flex items-center p-3 rounded-lg ${
-              step === 'order' ? 'bg-yellow-50 border border-yellow-200' : 'bg-gray-50'
-            }`}>
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center mr-3 ${
-                step === 'order' ? 'bg-yellow-500 text-white' : 'bg-gray-300 text-gray-600'
-              }`}>
-                {step === 'order' && isLoading ? (
-                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                ) : (
-                  <Clock className="w-4 h-4" />
-                )}
+            <div className={`flex items-center rounded-lg p-3 ${step === 'order' ? 'border border-yellow-200 bg-yellow-50' : 'bg-gray-50'}`}>
+              <div className={`mr-3 flex h-8 w-8 items-center justify-center rounded-full ${step === 'order' ? 'bg-yellow-500 text-white' : 'bg-gray-300 text-gray-600'}`}>
+                {step === 'order' && isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Clock className="h-4 w-4" />}
               </div>
               <div>
                 <div className="font-medium text-gray-900">Creating Order</div>
-                <div className="text-sm text-gray-600">Preparing your subscription</div>
+                <div className="text-sm text-gray-600">{statusMessage}</div>
               </div>
             </div>
 
-            {/* Step 2: Payment */}
-            <div className={`flex items-center p-3 rounded-lg ${
-              step === 'payment' ? 'bg-yellow-50 border border-yellow-200' : 'bg-gray-50'
-            }`}>
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center mr-3 ${
-                step === 'payment' ? 'bg-yellow-500 text-white' : 'bg-gray-300 text-gray-600'
-              }`}>
-                <CreditCard className="w-4 h-4" />
+            <div className={`flex items-center rounded-lg p-3 ${step === 'payment' ? 'border border-yellow-200 bg-yellow-50' : 'bg-gray-50'}`}>
+              <div className={`mr-3 flex h-8 w-8 items-center justify-center rounded-full ${step === 'payment' ? 'bg-yellow-500 text-white' : 'bg-gray-300 text-gray-600'}`}>
+                {step === 'payment' && isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <CreditCard className="h-4 w-4" />}
               </div>
               <div>
-                <div className="font-medium text-gray-900">Payment Gateway</div>
-                <div className="text-sm text-gray-600">Secure payment with Razorpay</div>
+                <div className="font-medium text-gray-900">Cashfree Checkout</div>
+                <div className="text-sm text-gray-600">Secure hosted payment page</div>
               </div>
             </div>
 
-            {/* Step 3: Verification */}
-            <div className={`flex items-center p-3 rounded-lg ${
-              step === 'verification' ? 'bg-yellow-50 border border-yellow-200' : 'bg-gray-50'
-            }`}>
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center mr-3 ${
-                step === 'verification' ? 'bg-yellow-500 text-white' : 'bg-gray-300 text-gray-600'
-              }`}>
-                {step === 'verification' && isLoading ? (
-                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                ) : (
-                  <Shield className="w-4 h-4" />
-                )}
+            <div className={`flex items-center rounded-lg p-3 ${step === 'verification' ? 'border border-yellow-200 bg-yellow-50' : 'bg-gray-50'}`}>
+              <div className={`mr-3 flex h-8 w-8 items-center justify-center rounded-full ${step === 'verification' ? 'bg-yellow-500 text-white' : 'bg-gray-300 text-gray-600'}`}>
+                {step === 'verification' && isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Shield className="h-4 w-4" />}
               </div>
               <div>
                 <div className="font-medium text-gray-900">Verification</div>
-                <div className="text-sm text-gray-600">Activating your subscription</div>
+                <div className="text-sm text-gray-600">Confirming payment and subscription</div>
               </div>
             </div>
           </div>
 
-          {/* Security Notice */}
-          <div className="mt-6 p-4 bg-green-50 rounded-lg border border-green-200">
+          {orderId && (
+            <div className="mt-4 rounded-lg border border-blue-200 bg-blue-50 p-3 text-xs text-blue-800">
+              Order reference: {orderId}
+            </div>
+          )}
+
+          <div className="mt-6 rounded-lg border border-green-200 bg-green-50 p-4">
             <div className="flex items-start">
-              <Shield className="w-5 h-5 text-green-600 mr-2 mt-0.5" />
+              <CheckCircle2 className="mr-3 mt-0.5 h-5 w-5 text-green-600" />
               <div className="text-sm text-green-800">
-                <div className="font-medium mb-1">Secure Payment</div>
-                <div>Your payment is processed securely by Razorpay. We never store your payment details.</div>
+                <div className="font-medium">Secure payment</div>
+                <div>Cashfree processes the transaction and we only store payment references.</div>
               </div>
             </div>
           </div>
 
-          {/* Action Buttons */}
-          <div className="flex gap-3 mt-6">
-            <button
-              onClick={onClose}
-              className="flex-1 px-4 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
-              disabled={isLoading}
-            >
-              Cancel
-            </button>
+          <div className="mt-6 flex gap-3">
             <button
               onClick={handlePayment}
               disabled={isLoading}
-              className="flex-1 px-4 py-3 bg-gradient-to-r from-yellow-500 to-orange-500 text-white rounded-lg hover:from-yellow-600 hover:to-orange-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex-1 rounded-lg bg-gradient-to-r from-yellow-500 to-orange-500 px-4 py-3 font-medium text-white transition-all hover:from-yellow-600 hover:to-orange-600 disabled:cursor-not-allowed disabled:opacity-50"
             >
-              {isLoading ? 'Processing...' : `Pay ₹${plan.price}`}
+              {isLoading ? (
+                <span className="flex items-center justify-center gap-2">
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                  {step === 'verification' ? 'Verifying' : 'Processing'}
+                </span>
+              ) : (
+                'Pay Now'
+              )}
             </button>
+            <button
+              onClick={handleClose}
+              disabled={isLoading}
+              className="flex-1 rounded-lg border border-gray-300 px-4 py-3 font-medium text-gray-700 transition-colors hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              Cancel
+            </button>
+          </div>
+
+          <div className="mt-4 flex items-center justify-center gap-2 text-xs text-gray-500">
+            <AlertCircle className="h-4 w-4" />
+            If the webhook arrives a few seconds late, the modal will poll the backend until the status is confirmed.
           </div>
         </div>
       </div>

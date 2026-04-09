@@ -175,7 +175,14 @@ export default function NotifyPage() {
         id: string;
         plan: string;
         status: string;
+        startDate?: string;
+        endDate?: string;
         expiresAt: string;
+        amount?: number;
+        paymentId?: string;
+        orderId?: string;
+        paymentSessionId?: string;
+        paymentStatus?: string;
         features: string[];
     } | null>(null);
     const [isLoadingPlans, setIsLoadingPlans] = useState(true);
@@ -214,6 +221,7 @@ export default function NotifyPage() {
             }
         } catch (error) {
             console.error('Failed to load subscription data:', error);
+            setCurrentSubscription(null);
         } finally {
             setIsLoadingPlans(false);
             setIsLoadingSubscription(false);
@@ -295,11 +303,11 @@ export default function NotifyPage() {
         }
     };
 
-    const handlePaymentSuccess = (subscription: any) => {
+    const handlePaymentSuccess = async (subscription: any) => {
         console.log('Payment successful:', subscription);
-        setCurrentSubscription(subscription);
         setPaymentModal({ isOpen: false, plan: null });
         setSubscriptionStatus('success');
+        await loadSubscriptionData();
         setTimeout(() => setSubscriptionStatus('idle'), 5000);
     };
 
