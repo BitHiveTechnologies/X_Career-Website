@@ -1,7 +1,7 @@
 'use client';
 
 import { useAuth } from '@/lib/auth/AuthContext';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 export default function TestProfileApiPage() {
   const { user, isAuthenticated, getProfileCompletion } = useAuth();
@@ -9,7 +9,7 @@ export default function TestProfileApiPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const testProfileCompletion = async () => {
+  const testProfileCompletion = useCallback(async () => {
     if (!isAuthenticated) {
       setError('Please login first');
       return;
@@ -27,13 +27,13 @@ export default function TestProfileApiPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [isAuthenticated, getProfileCompletion]);
 
   useEffect(() => {
     if (isAuthenticated) {
       testProfileCompletion();
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated, testProfileCompletion]);
 
   return (
     <div className="min-h-screen bg-gray-50 py-8">

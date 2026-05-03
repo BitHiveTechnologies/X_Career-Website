@@ -47,7 +47,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
             priority: 0.5,
         },
         {
-            url: `${baseUrl}/register`,
+            url: `${baseUrl}/notify`,
             lastModified: new Date(),
             changeFrequency: 'monthly',
             priority: 0.5,

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback, ReactNode } from 'react';
 import { useRouter } from 'next/navigation';
 import { User } from '@/lib/api/types';
 import { AuthService } from '@/lib/api/auth';
@@ -65,7 +65,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   // AUTHENTICATION METHODS
   // ============================================================================
 
-    const checkAuthStatus = async () => {
+    const checkAuthStatus = useCallback(async () => {
         try {
       setIsLoading(true);
       
@@ -109,7 +109,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         } finally {
             setIsLoading(false);
         }
-    };
+    }, [authService]);
 
     const login = async (
         email: string,
@@ -331,7 +331,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   useEffect(() => {
     checkAuthStatus();
-  }, []);
+  }, [checkAuthStatus]);
 
   // ============================================================================
   // CONTEXT VALUE

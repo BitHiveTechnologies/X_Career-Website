@@ -169,7 +169,7 @@ export default function ProfilePage() {
         } finally {
             setLoading(false);
         }
-    }, [getUserProfile, getProfileCompletion, user]);
+    }, [getProfileCompletion, user]);
 
     useEffect(() => {
         if (!isAuthenticated) {

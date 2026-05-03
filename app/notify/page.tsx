@@ -310,11 +310,7 @@ export default function NotifyPage() {
         setTimeout(() => setSubscriptionStatus('idle'), 5000);
     };
 
-    const Logo = () => (
-        <Link href="/" className="inline-block">
-                                    <img src="/images/x_careelogo.png" alt="X Careers" className="h-10 w-auto object-contain" />
-                                </Link>
-    );
+
 
     return (
         <div className="min-h-screen bg-white">

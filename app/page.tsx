@@ -201,45 +201,6 @@ interface Feature {
 }
 
 // SVG Logo component
-const Logo = () => (
-    <svg
-        className="h-8 w-auto"
-        viewBox="0 0 140 30"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        data-oid="6g8ar7h"
-    >
-        <path
-            d="M10 5L20 15L10 25"
-            stroke="#1E3A8A"
-            strokeWidth="3"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            data-oid="3vs-shf"
-        />
-
-        <path
-            d="M30 5H40L50 25H40"
-            stroke="#1E3A8A"
-            strokeWidth="3"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            data-oid="2bjyc3:"
-        />
-
-        <text
-            x="60"
-            y="22"
-            fontFamily="Arial"
-            fontSize="16"
-            fontWeight="bold"
-            fill="#1E3A8A"
-            data-oid="8own87j"
-        >
-            X Careers
-        </text>
-    </svg>
-);
 
 export default function Page() {
     const [searchQuery, setSearchQuery] = useState('');
