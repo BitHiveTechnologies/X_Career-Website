@@ -49,7 +49,7 @@ function AuthGuard({
       }
     }
 
-    // If user is authenticated but trying to access login/register pages
+    // If user is authenticated but trying to access login pages
     if (!requireAuth && isAuthenticated && user) {
       // Redirect based on user role
       if (user.role === 'admin' || user.role === 'super_admin') {

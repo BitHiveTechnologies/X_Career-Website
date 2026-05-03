@@ -5,9 +5,10 @@ import { ResumeData } from '@/app/resume-builder/page';
 interface ResumePreviewProps {
     resumeData: ResumeData;
     template: string;
+    fontStyle?: string;
 }
 
-export default function ResumePreview({ resumeData, template }: ResumePreviewProps) {
+export default function ResumePreview({ resumeData, template, fontStyle = 'font-sans' }: ResumePreviewProps) {
     const formatDate = (dateString: string) => {
         if (!dateString) return '';
         const date = new Date(dateString);
@@ -18,7 +19,7 @@ export default function ResumePreview({ resumeData, template }: ResumePreviewPro
 
     const ModernTemplate = () => (
         <div
-            className="max-w-4xl mx-auto bg-white p-8 shadow-lg"
+            className={`max-w-4xl mx-auto bg-white p-8 shadow-lg ${fontStyle}`}
             style={{ minHeight: '11in', width: '8.5in' }}
             data-oid="hhy:wxb"
         >
@@ -468,17 +469,17 @@ export default function ResumePreview({ resumeData, template }: ResumePreviewPro
 
     const MinimalTemplate = () => (
         <div
-            className="max-w-4xl mx-auto bg-white p-8 shadow-lg"
+            className={`max-w-4xl mx-auto bg-white p-8 shadow-lg ${fontStyle}`}
             style={{ minHeight: '11in', width: '8.5in' }}
             data-oid="c-.2qmw"
         >
             {/* Header */}
-            <header className="text-center mb-8" data-oid="ab_2fa-">
+            <header className="mb-8" data-oid="ab_2fa-">
                 <h1 className="text-4xl font-light text-gray-800 mb-4" data-oid="zv.55dc">
                     {resumeData.personalInfo.fullName || 'Your Name'}
                 </h1>
                 <div
-                    className="flex justify-center flex-wrap gap-6 text-sm text-gray-600"
+                    className="flex flex-wrap gap-6 text-sm text-gray-600"
                     data-oid="l1wna1z"
                 >
                     {resumeData.personalInfo.email && (
@@ -536,7 +537,7 @@ export default function ResumePreview({ resumeData, template }: ResumePreviewPro
             {resumeData.personalInfo.summary && (
                 <section className="mb-8" data-oid="srhf0ol">
                     <p
-                        className="text-gray-700 leading-relaxed text-center italic"
+                        className="text-gray-700 leading-relaxed italic"
                         data-oid="bpm_zz7"
                     >
                         {resumeData.personalInfo.summary}
@@ -548,7 +549,7 @@ export default function ResumePreview({ resumeData, template }: ResumePreviewPro
             {resumeData.experience.length > 0 && (
                 <section className="mb-8" data-oid="dy7297:">
                     <h2
-                        className="text-2xl font-light text-gray-800 mb-4 text-center"
+                        className="text-2xl font-light text-gray-800 mb-4"
                         data-oid="7.mtz4y"
                     >
                         EXPERIENCE
@@ -601,14 +602,14 @@ export default function ResumePreview({ resumeData, template }: ResumePreviewPro
             {resumeData.education.length > 0 && (
                 <section className="mb-8" data-oid="0g1p5p_">
                     <h2
-                        className="text-2xl font-light text-gray-800 mb-4 text-center"
+                        className="text-2xl font-light text-gray-800 mb-4"
                         data-oid="eirwm-r"
                     >
                         EDUCATION
                     </h2>
                     <div className="space-y-4" data-oid="n17cvr8">
                         {resumeData.education.map((edu) => (
-                            <div key={edu.id} className="text-center" data-oid="-c4llci">
+                            <div key={edu.id} className="text-left" data-oid="-c4llci">
                                 <h3 className="font-semibold text-gray-800" data-oid="1tpjd87">
                                     {edu.degree} {edu.field && `in ${edu.field}`}
                                 </h3>
@@ -629,12 +630,12 @@ export default function ResumePreview({ resumeData, template }: ResumePreviewPro
             {resumeData.skills.length > 0 && (
                 <section className="mb-8" data-oid="32vyx.r">
                     <h2
-                        className="text-2xl font-light text-gray-800 mb-4 text-center"
+                        className="text-2xl font-light text-gray-800 mb-4"
                         data-oid="0r1h-2s"
                     >
                         SKILLS
                     </h2>
-                    <div className="text-center space-y-2" data-oid="skaorld">
+                    <div className="space-y-2" data-oid="skaorld">
                         {resumeData.skills.map((skillCategory, index) => (
                             <div key={index} data-oid="s41pxsj">
                                 <span className="font-medium text-gray-800" data-oid="mix9_29">
@@ -653,14 +654,14 @@ export default function ResumePreview({ resumeData, template }: ResumePreviewPro
             {resumeData.projects.length > 0 && (
                 <section className="mb-8" data-oid="-d0lcmt">
                     <h2
-                        className="text-2xl font-light text-gray-800 mb-4 text-center"
+                        className="text-2xl font-light text-gray-800 mb-4"
                         data-oid="jxv:ioh"
                     >
                         PROJECTS
                     </h2>
                     <div className="space-y-4" data-oid="5vj4_j5">
                         {resumeData.projects.map((project) => (
-                            <div key={project.id} className="text-center" data-oid="_lr4zjq">
+                            <div key={project.id} className="text-left" data-oid="_lr4zjq">
                                 <h3 className="font-semibold text-gray-800" data-oid="pah0hk-">
                                     {project.name}
                                 </h3>
@@ -675,7 +676,7 @@ export default function ResumePreview({ resumeData, template }: ResumePreviewPro
                                     </p>
                                 )}
                                 {/* Minimal Template Project Links - Add clickable links */}
-                                <div className="mt-2 flex justify-center space-x-4 text-sm">
+                                <div className="mt-2 flex justify-start space-x-4 text-sm">
                                     {project.link && (
                                         <a 
                                             href={project.link} 

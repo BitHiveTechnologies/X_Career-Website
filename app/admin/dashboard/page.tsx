@@ -503,6 +503,9 @@ export default function AdminDashboard() {
           )}
         </div>
               <div className="flex gap-2">
+          <Button onClick={() => window.location.href = '/admin/settings'} variant="default" size="sm" className="bg-blue-600 hover:bg-blue-700">
+            Content Settings
+          </Button>
           <Button onClick={exportToCSV} variant="outline" size="sm">
             <Download className="h-4 w-4 mr-2" />
             Export CSV

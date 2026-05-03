@@ -223,6 +223,7 @@ export default function FiltersSidebar({
                     </div>
                 )}
 
+
                 {/* Salary/Stipend Range Filter */}
                 <div data-oid="upu9cdc">
                     <label

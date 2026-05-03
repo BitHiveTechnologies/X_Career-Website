@@ -116,6 +116,7 @@ export default function ResumeBuilderPage() {
     const [resumeData, setResumeData] = useState<ResumeData>(initialResumeData);
     // FIX: Changed default to 'minimal'
     const [selectedTemplate, setSelectedTemplate] = useState('minimal'); 
+    const [selectedFont, setSelectedFont] = useState('font-sans');
     const [activeSection, setActiveSection] = useState('personal');
     const [isPreviewMode, setIsPreviewMode] = useState(false);
     const [zoomLevel, setZoomLevel] = useState(0.8);
@@ -149,6 +150,17 @@ export default function ResumeBuilderPage() {
     };
 
     const handleDownloadPDF = async () => {
+        // Validation checks
+        const { fullName, email } = resumeData.personalInfo;
+        if (!fullName || !email) {
+            alert('Please fill in your Full Name and Email before downloading.');
+            return;
+        }
+        if (!/@gmail\.com$/.test(email.toLowerCase())) {
+            alert('Please use a valid @gmail.com address.');
+            return;
+        }
+
         if (typeof window !== 'undefined') {
             try {
                 // Ensure html2pdf.js is imported dynamically
@@ -273,6 +285,34 @@ export default function ResumeBuilderPage() {
                         onTemplateChange={setSelectedTemplate}
                         data-oid="hfdniw1"
                     />
+                </div>
+
+                {/* Font Selection */}
+                <div className="mb-8" data-oid="font-selection-container">
+                    <div className="bg-white rounded-lg shadow-sm border p-6">
+                        <h2 className="text-xl font-semibold text-gray-800 mb-4">
+                            Choose Your Font
+                        </h2>
+                        <div className="flex flex-wrap gap-4">
+                            {[
+                                { id: 'font-sans', label: 'Modern (Sans)', className: 'font-sans' },
+                                { id: 'font-serif', label: 'Classic (Serif)', className: 'font-serif' },
+                                { id: 'font-mono', label: 'Technical (Mono)', className: 'font-mono' }
+                            ].map((font) => (
+                                <button
+                                    key={font.id}
+                                    onClick={() => setSelectedFont(font.id)}
+                                    className={`px-4 py-2 rounded-lg border-2 transition-all duration-200 ${font.className} ${
+                                        selectedFont === font.id
+                                            ? 'border-[hsl(196,80%,45%)] bg-blue-50 text-blue-800'
+                                            : 'border-gray-200 text-gray-600 hover:border-gray-300'
+                                    }`}
+                                >
+                                    {font.label}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
                 </div>
 
                 {/* Progress Bar */}
@@ -468,6 +508,7 @@ export default function ResumeBuilderPage() {
                                     <ResumePreview
                                         resumeData={resumeData}
                                         template={selectedTemplate}
+                                        fontStyle={selectedFont}
                                         data-oid="fm0oj46"
                                     />
                                 </div>

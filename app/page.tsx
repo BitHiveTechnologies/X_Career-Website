@@ -96,11 +96,11 @@ const dummyData: {
         {
             id: 2,
             title: 'Job Matches',
-            description: 'Personalized job recommendations',
+            description: 'Get job recommendations tailored to your skills and profile',
             icon: 'search',
         },
-        { id: 3, title: 'Community', description: 'Connect with peers and mentors', icon: 'users' },
-        { id: 4, title: 'Resume Builder', description: 'Get ATS friendly Resume', icon: 'file' },
+        { id: 3, title: 'Community', description: 'Learn, grow, and connect with a strong tech community', icon: 'users' },
+        { id: 4, title: 'Resume Builder', description: 'Build a professional, ATS-friendly resume that gets noticed', icon: 'file' },
     ],
 
     features: [
@@ -114,19 +114,19 @@ const dummyData: {
         {
             id: 1,
             title: 'Built for Freshers',
-            description: 'Resources for 0-2 years of experience',
+            description: 'Designed for 0–2 Years Experience — No Guesswork, Just Opportunities',
             icon: 'graduation',
         },
         {
             id: 2,
             title: 'Curated Opportunities',
-            description: 'Handpicked roles from companies offering training',
+            description: 'Handpicked Jobs from Companies That Hire & Train Freshers',
             icon: 'check',
         },
         {
             id: 3,
             title: 'Supportive Network',
-            description: 'Connect with peers, mentors, and hiring managers',
+            description: 'Connect with Peers, Mentors & Recruiters Who Actually Hire',
             icon: 'handshake',
         },
     ],
@@ -293,16 +293,30 @@ export default function Page() {
         // Simulate API calls
         const loadData = async () => {
             try {
-                const [statsData, testimonialsData, resourcesData, featuresData, benefitsData] =
+                // F10: Check sessionStorage for cached metrics
+                const cachedStats = sessionStorage.getItem('x_careers_stats');
+                let statsData;
+                
+                if (cachedStats) {
+                    statsData = JSON.parse(cachedStats);
+                    setStats(statsData);
+                }
+
+                const [fetchedStats, testimonialsData, resourcesData, featuresData, benefitsData] =
                     await Promise.all([
-                        fetchStats(),
+                        // Only fetch if not cached, otherwise just return existing
+                        cachedStats ? Promise.resolve(statsData) : fetchStats(),
                         fetchTestimonials(),
                         fetchResources(),
                         fetchFeatures(),
                         fetchBenefits(),
                     ]);
 
-                setStats(statsData);
+                if (!cachedStats) {
+                    setStats(fetchedStats);
+                    sessionStorage.setItem('x_careers_stats', JSON.stringify(fetchedStats));
+                }
+                
                 setTestimonials(testimonialsData);
                 setResources(resourcesData);
                 setFeatures(featuresData);
@@ -449,7 +463,7 @@ export default function Page() {
                                 >
                                     {' '}
                                     <a
-                                        href="https://t.me/xcareerconnect"
+                                        href="https://t.me/x_careers"
                                         className="inline-flex items-center px-3 py-1 bg-teal-500 hover:bg-teal-600 text-white text-xs font-medium rounded-md transition-all duration-300"
                                         data-oid="jog_-.-"
                                         target="_blank"
@@ -546,25 +560,22 @@ export default function Page() {
                                         clipRule="evenodd"
                                     />
                                 </svg>
-                                India's most trusted Platform For Tech Freshers
+                                India's Most Trusted Career Platform for Tech Freshers
                             </div>
 
                             {/* Main Heading */}
                             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 text-white leading-tight">
                                 <span className="block bg-gradient-to-r from-white to-blue-100 bg-clip-text text-transparent">
-                                    JOIN THOUSANDS
+                                    Launch Your Tech Career
                                 </span>
                                 <span className="block bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent">
-                                    GETTING JOBS
-                                </span>
-                                <span className="block bg-gradient-to-r from-white to-blue-100 bg-clip-text text-transparent">
-                                    IN TOP TECH COMPANIES
+                                    with Top Companies
                                 </span>
                             </h1>
 
                             {/* Subtitle */}
                             <p className="text-lg sm:text-xl lg:text-2xl mb-4 text-white/95 max-w-3xl mx-auto leading-relaxed">
-                                Discover Jobs, Internships, and Resources tailored for
+                                Explore Jobs, Internships & Career Resources Designed for
                                 <span className="font-semibold text-yellow-300"> Freshers</span>
                             </p>
 
@@ -596,7 +607,7 @@ export default function Page() {
                                         >
                                             <input
                                                 type="text"
-                                                placeholder="Search Entry Level Jobs..."
+                                                placeholder="Search Jobs, Internships, or Companies..."
                                                 className="w-full px-5 py-3 rounded-lg sm:rounded-l-lg sm:rounded-r-none text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-inner text-sm sm:text-base font-medium"
                                                 /* Reduced padding (py-4->py-3) and text size */
                                                 value={searchQuery}
@@ -615,13 +626,13 @@ export default function Page() {
                                     {/* Compact Stats Badges */}
                                     <div className="flex flex-wrap gap-2 sm:gap-3 justify-center">
                                         <div className="bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-full text-xs sm:text-sm border border-white/30 shadow-sm hover:shadow-md transition-all duration-300 hover:bg-white/30 text-white font-medium">
-                                            {stats?.freshers.toLocaleString()} Freshers
+                                            35K+ Active Freshers
                                         </div>
                                         <div className="bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-full text-xs sm:text-sm border border-white/30 shadow-sm hover:shadow-md transition-all duration-300 hover:bg-white/30 text-white font-medium">
-                                            {stats?.verifiedJobs} Verified Jobs
+                                            10,000+ Verified Opportunities
                                         </div>
                                         <div className="bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-full text-xs sm:text-sm border border-white/30 shadow-sm hover:shadow-md transition-all duration-300 hover:bg-white/30 text-white font-medium">
-                                            Entry-Level Focused
+                                            Built for Entry-Level Talent
                                         </div>
                                     </div>
 
@@ -650,7 +661,7 @@ export default function Page() {
                                             d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
                                         />
                                     </svg>
-                                    Join Community
+                                    Join Our Network 
                                     <svg
                                         className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform"
                                         fill="none"
@@ -700,7 +711,7 @@ export default function Page() {
                                                 d="M12 6v6m0 0v6m0-6h6m-6 0H6"
                                             />
                                         </svg>
-                                        Browse Jobs
+                                        Explore Opportunities
                                         <svg
                                             className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform"
                                             fill="none"
@@ -718,10 +729,10 @@ export default function Page() {
                                     <a
                                         href="/jobs"
                                         className="absolute inset-0 opacity-0 pointer-events-none"
-                                        aria-label="Browse Jobs"
+                                        aria-label="Explore Opportunities"
                                         tabIndex={-1}
                                     >
-                                        Browse Jobs
+                                        Explore Opportunities
                                     </a>
                                 </div>
                             </div>
@@ -730,7 +741,7 @@ export default function Page() {
                             <div className="mt-8 flex justify-center">
                                 <div className="flex flex-col items-center text-white/70 animate-bounce">
                                     <span className="text-sm font-medium mb-2">
-                                        Scroll to explore
+                                        Discover More Opportunities Below
                                     </span>
                                     <svg
                                         className="h-6 w-6"
@@ -763,7 +774,7 @@ export default function Page() {
                             data-oid="oao5.vl"
                         >
                             {' '}
-                            Platform Metrics{' '}
+                            Our Impact in Numbers{' '}
                         </h2>{' '}
                         <div
                             className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
@@ -1047,11 +1058,11 @@ export default function Page() {
                             </h2>{' '}
                             <p className="text-xl text-blue-800" data-oid=".ih::ar">
                                 {' '}
-                                Designed Exclusively For Tech Freshers{' '}
+                                Built Specifically for Tech Freshers{' '}
                             </p>{' '}
                             <p className="mt-4 text-gray-600 max-w-2xl mx-auto" data-oid="8m.hnq5">
                                 {' '}
-                                Our platform focuses on the unique needs of entry-level tech talent.{' '}
+                                We understand what entry-level talent needs — and deliver exactly that.{' '}
                             </p>{' '}
                         </div>{' '}
                         {/* Full-Width Banner */}{' '}
@@ -1083,7 +1094,7 @@ export default function Page() {
                                     </h3>{' '}
                                     <p className="text-blue-100" data-oid="o-woi:y">
                                         {' '}
-                                        Get real-time alerts for freshers jobs matching your profile{' '}
+                                        Get Instant Job Alerts Tailored to Your Profile{' '}
                                     </p>{' '}
                                 </div>{' '}
                                 <a
@@ -1092,7 +1103,7 @@ export default function Page() {
                                     data-oid="x8japti"
                                 >
                                     {' '}
-                                    Learn More{' '}
+                                    Explore NotifyX →{' '}
                                 </a>{' '}
                             </div>{' '}
                         </div>{' '}
@@ -1234,16 +1245,14 @@ export default function Page() {
                                 data-oid="58c336n"
                             >
                                 {' '}
-                                Get Real-time Tech Job Alerts for just ₹49/month.{' '}
+                                Unlock Real-Time Job Alerts for Just ₹79/Month.{' '}
                             </p>{' '}
                             <p
                                 className="text-xl text-gray-600 max-w-4xl mx-auto"
                                 data-oid="rj415ry"
                             >
                                 {' '}
-                                Unlock Curated Opportunities, Insider Updates, and a driven
-                                Community — All for less than a Cup of Coffee. Supercharge your
-                                Career, starting Today.{' '}
+                                Access curated jobs, insider updates, and a powerful tech community — all for less than your daily coffee. Start growing your career today.{' '}
                             </p>{' '}
                         </div>{' '}
                         <div className="grid md:grid-cols-3 gap-8" data-oid="vu3xse2">
@@ -1287,8 +1296,7 @@ export default function Page() {
                                 </h3>{' '}
                                 <p className="text-gray-600" data-oid="w356.u0">
                                     {' '}
-                                    Get immediate access to the latest tech job opportunities as
-                                    soon as they're posted.{' '}
+                                    Be the First to See New Job Openings — No Delays.{' '}
                                 </p>{' '}
                             </div>{' '}
                             {/* Tile 2 */}{' '}
@@ -1334,8 +1342,7 @@ export default function Page() {
                                 </h3>{' '}
                                 <p className="text-gray-600" data-oid="9xteoi4">
                                     {' '}
-                                    Stay ahead with personalized notifications that match your
-                                    skills and preferences.{' '}
+                                    Receive Personalized Alerts Based on Your Skills & Interests.{' '}
                                 </p>{' '}
                             </div>{' '}
                             {/* Tile 3 */}{' '}
@@ -1377,8 +1384,7 @@ export default function Page() {
                                 </h3>{' '}
                                 <p className="text-gray-600" data-oid=":__owg-">
                                     {' '}
-                                    Be among the first applicants and significantly increase your
-                                    chances of getting hired.{' '}
+                                    Apply Early, Stand Out, and Get Hired Faster.{' '}
                                 </p>{' '}
                             </div>{' '}
                         </div>{' '}
@@ -1411,11 +1417,11 @@ export default function Page() {
                                 data-oid="cv1:8hq"
                             >
                                 {' '}
-                                Join 35,000+ Tech Freshers{' '}
+                                Join 35,000+ Ambitious Tech Freshers{' '}
                             </h2>{' '}
                             <p className="text-gray-600 max-w-2xl mx-auto" data-oid="oraf9m9">
                                 {' '}
-                                Networking is crucial. Connect with peers and mentors.{' '}
+                                Grow faster by connecting with a community that shares opportunities, guidance, and support.{' '}
                             </p>{' '}
                         </div>{' '}
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-6" data-oid="z0:k4di">
@@ -1454,7 +1460,7 @@ export default function Page() {
                                 </h3>{' '}
                                 <p className="text-gray-600" data-oid=".l_n92d">
                                     {' '}
-                                    {stats?.whatsappMembers.toLocaleString()} members{' '}
+                                    Daily Job Updates & Instant Alerts{' '}
                                 </p>{' '}
                             </a>{' '}
                             <a
@@ -1491,7 +1497,7 @@ export default function Page() {
                                 </h3>{' '}
                                 <p className="text-gray-600" data-oid="d:a2i82">
                                     {' '}
-                                    {stats?.linkedinMembers.toLocaleString()} followers{' '}
+                                    Professional Insights & Career Opportunities{' '}
                                 </p>{' '}
                             </a>{' '}
                             <a
@@ -1528,7 +1534,7 @@ export default function Page() {
                                 </h3>{' '}
                                 <p className="text-gray-600" data-oid="bz44q.e">
                                     {' '}
-                                    {stats?.telegramMembers.toLocaleString()} members{' '}
+                                    Fast Updates & Exclusive Openings{' '}
                                 </p>{' '}
                             </a>{' '}
                             <a
@@ -1565,7 +1571,7 @@ export default function Page() {
                                 </h3>{' '}
                                 <p className="text-gray-600" data-oid="ta8vme1">
                                     {' '}
-                                    Follow us{' '}
+                                    Tips, Updates & Career Content{' '}
                                 </p>{' '}
                             </a>{' '}
                         </div>{' '}
@@ -1601,11 +1607,11 @@ export default function Page() {
                                 data-oid="jcfg.sm"
                             >
                                 {' '}
-                                Featured Jobs{' '}
+                                Top Opportunities for Freshers{' '}
                             </h2>{' '}
                             <p className="text-gray-600 max-w-2xl mx-auto" data-oid=":k5sth0">
                                 {' '}
-                                Handpicked opportunities for freshers in top tech companies{' '}
+                                Carefully curated roles to help you land your first tech job faster{' '}
                             </p>{' '}
                         </div>{' '}
                         <div
@@ -1722,7 +1728,7 @@ export default function Page() {
                                                 data-oid="wmedjr6"
                                             >
                                                 {' '}
-                                                View Details{' '}
+                                                View Role {' '}
                                                 <svg
                                                     className="ml-1 h-3 w-3"
                                                     fill="none"
@@ -1769,7 +1775,7 @@ export default function Page() {
                                                         data-oid=":jnrrx:"
                                                     />{' '}
                                                 </svg>{' '}
-                                                Apply Now{' '}
+                                                Apply Instantly →{' '}
                                             </a>{' '}
                                         </div>{' '}
                                     </div>{' '}
@@ -1875,7 +1881,7 @@ export default function Page() {
                                                 data-oid="og1dl9f"
                                             >
                                                 {' '}
-                                                View Details{' '}
+                                                View Role {' '}
                                                 <svg
                                                     className="ml-1 h-3 w-3"
                                                     fill="none"
@@ -1922,7 +1928,7 @@ export default function Page() {
                                                         data-oid=".-i5hgz"
                                                     />{' '}
                                                 </svg>{' '}
-                                                Apply Now{' '}
+                                                Apply Instantly →{' '}
                                             </a>{' '}
                                         </div>{' '}
                                     </div>{' '}
@@ -2032,7 +2038,7 @@ export default function Page() {
                                                 data-oid="gr2qejm"
                                             >
                                                 {' '}
-                                                View Details{' '}
+                                                View Role {' '}
                                                 <svg
                                                     className="ml-1 h-3 w-3"
                                                     fill="none"
@@ -2079,7 +2085,7 @@ export default function Page() {
                                                         data-oid="ha3lb1k"
                                                     />{' '}
                                                 </svg>{' '}
-                                                Apply Now{' '}
+                                                Apply Instantly →{' '}
                                             </a>{' '}
                                         </div>{' '}
                                     </div>{' '}
@@ -2093,7 +2099,7 @@ export default function Page() {
                                 className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white rounded-md font-medium hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300 hover:translate-y-[-2px] hover:shadow-lg"
                                 data-oid="kbeeo1y"
                             >
-                                View All Jobs
+                                Explore All Opportunities →
                                 <svg
                                     className="ml-2 h-5 w-5"
                                     fill="none"
@@ -2129,11 +2135,11 @@ export default function Page() {
                                 data-oid="b8wp.9i"
                             >
                                 {' '}
-                                Fresher Resources{' '}
+                                Everything You Need to Get Hired{' '}
                             </h2>{' '}
                             <p className="text-gray-600 max-w-2xl mx-auto" data-oid="7ru_s8d">
                                 {' '}
-                                Everything You Need to Succeed{' '}
+                                Tools, guidance, and resources to accelerate your career{' '}
                             </p>{' '}
                         </div>{' '}
                         <div
@@ -2355,7 +2361,7 @@ export default function Page() {
                                             data-oid=":hff6i1"
                                         >
                                             {' '}
-                                            Learn more{' '}
+                                            Explore →{' '}
                                             <svg
                                                 className="ml-1 h-4 w-4"
                                                 fill="none"
@@ -2410,10 +2416,10 @@ export default function Page() {
                         {' '}
                         <div className="text-center mb-12">
                             <h2 className="text-3xl font-bold mb-4 text-white">
-                                Hear From Our Members
+                                Success Stories from Our Community
                             </h2>
                             <p className="text-blue-100 max-w-2xl mx-auto text-base">
-                                Success stories from freshers who found their dream tech jobs
+                                See how freshers like you landed jobs at top tech companies
                             </p>
                         </div>
                         {/* Single Row Placard Design */}
@@ -2575,18 +2581,18 @@ export default function Page() {
                         {' '}
                         <p className="text-[hsl(196,80%,65%)] mb-2" data-oid="xw2ftyv">
                             {' '}
-                            Start Your Tech Journey Today{' '}
+                            Your Tech Career Starts Here{' '}
                         </p>{' '}
                         <h2
                             className="text-3xl md:text-4xl font-bold mb-6 text-gray-800"
                             data-oid="45ztg1i"
                         >
                             {' '}
-                            Ready to Land Your First Tech Job?{' '}
+                            Ready to Get Hired in Tech?{' '}
                         </h2>{' '}
                         <p className="text-xl text-gray-600 mb-8" data-oid="kb0z5oc">
                             {' '}
-                            Join 35,000+ freshers who've launched their careers with us{' '}
+                            Join 35,000+ freshers already building their careers with X Careers{' '}
                         </p>{' '}
                         <div
                             className="flex flex-col sm:flex-row justify-center gap-4"
@@ -2600,7 +2606,7 @@ export default function Page() {
                                     data-oid="ph:f5ek"
                                 >
                                     {' '}
-                                    Create Free Account →{' '}
+                                    Get Started for Free →{' '}
                                 </button>
                             )}{' '}
                             <Link
@@ -2608,7 +2614,7 @@ export default function Page() {
                                 className="inline-flex items-center justify-center px-8 py-4 border-2 border-[hsl(196,80%,45%)] text-[hsl(196,80%,45%)] rounded-md font-bold text-lg hover:bg-[hsl(196,80%,45%)]/10 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-lg transform hover:scale-105 relative z-10"
                                 data-oid="1.mxb:f"
                             >
-                                Browse Fresher Jobs
+                                Explore Jobs →
                             </Link>{' '}
                         </div>{' '}
                     </div>{' '}
@@ -2623,14 +2629,15 @@ export default function Page() {
                         {' '}
                         <div data-oid="l57_6.f">
                             {' '}
-                            <div className="mb-6" data-oid="7-o49y9">
-                                {' '}
-                                <Logo data-oid="0ivw6dx" />{' '}
-                            </div>{' '}
+                            <div className="mb-6">
+                                <Link href="/" className="inline-block">
+                                    <img src="/images/x_careelogo.png" alt="X Careers" className="h-10 w-auto object-contain" />
+                                </Link>
+                            </div>
                             <p className="text-gray-400 mb-4" data-oid="q96j6h7">
                                 {' '}
-                                Helping tech freshers launch their careers with curated
-                                opportunities and resources.{' '}
+                                Empowering tech freshers with the right opportunities, tools, and guidance to get hired
+                                faster.{' '}
                             </p>{' '}
                             <div className="flex space-x-4" data-oid="a4mkqe5">
                                 {' '}
@@ -2719,7 +2726,7 @@ export default function Page() {
                                     </svg>{' '}
                                 </a>{' '}
                                 <a
-                                    href="https://t.me/xcareerconnect"
+                                    href="https://t.me/x_careers"
                                     className="text-gray-400 hover:text-white transition-all duration-300"
                                     data-oid="telegram-link"
                                     target="_blank"
