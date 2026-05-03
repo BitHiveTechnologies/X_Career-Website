@@ -30,8 +30,8 @@ export const useAuthAction = () => {
         } else {
             // If user is not authenticated
             if (path === '/community') {
-                // For community access, redirect to register page
-                router.push('/register');
+                // For community access, redirect to notify page
+                router.push('/notify');
             } else {
                 // For other protected routes, store redirect and go to login
                 if (typeof window !== 'undefined') {

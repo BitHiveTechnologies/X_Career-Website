@@ -19,11 +19,6 @@ import {
 import Link from 'next/link';
 import { useState } from 'react';
 
-const Logo = () => (
-    <Link href="/" className="inline-block">
-                                    <img src="/images/x_careelogo.png" alt="X Careers" className="h-10 w-auto object-contain" />
-                                </Link>
-);
 
 const communityHighlights = [
     {

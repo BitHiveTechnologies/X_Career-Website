@@ -1,6 +1,6 @@
 'use client';
 
-import Logo from '@/components/ui/Logo';
+
 import Link from 'next/link';
 import { useState } from 'react';
 
@@ -50,7 +50,9 @@ export default function ForgotPasswordPage() {
 
             <div className="sm:mx-auto sm:w-full sm:max-w-md px-4 py-8 z-10" data-oid="c3l57ox">
                 <div className="text-center mb-6" data-oid="2hxpkk2">
-                    <Logo data-oid="gq6l-vm" />
+                    <Link href="/" className="inline-block" data-oid="gq6l-vm">
+                        <img src="/images/x_careelogo.png" alt="X Careers" className="h-10 w-auto object-contain mx-auto" />
+                    </Link>
                     <h2 className="mt-6 text-3xl font-extrabold text-gray-800" data-oid="f-:ra-i">
                         Reset your password
                     </h2>
