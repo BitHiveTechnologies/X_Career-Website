@@ -1,7 +1,9 @@
 'use client';
 
 import { ReactNode } from 'react';
+import Link from 'next/link';
 import MainNavbar from './mainNavbar';
+import Logo from './ui/Logo';
 
 interface LayoutWrapperProps {
     children: ReactNode;
@@ -22,14 +24,12 @@ export default function LayoutWrapper({ children, showFooter = true }: LayoutWra
                             {/* Company Info */}
                             <div className="col-span-1 md:col-span-2">
                                 <div className="flex items-center mb-4">
-                                    <svg className="h-8 w-auto" viewBox="0 0 140 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M10 5L20 15L10 25" stroke="#ffffff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-                                        <path d="M30 5H40L50 25H40" stroke="#ffffff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-                                        <text x="60" y="22" fontFamily="Arial" fontSize="16" fontWeight="bold" fill="#ffffff">X Careers</text>
-                                    </svg>
+                                    <Link href="/" className="inline-block">
+                                        <img src="/images/x_careelogo.png" alt="X Careers" className="h-10 w-auto object-contain" />
+                                    </Link>
                                 </div>
                                 <p className="text-gray-300 mb-4">
-                                    Your trusted partner for tech career growth. Join thousands of professionals who found their dream jobs with X Careers.
+                                    Empowering tech freshers with the right opportunities, tools, and guidance to get hired faster.
                                 </p>
                                 <div className="flex space-x-4">
                                     <a href="https://whatsapp.com/channel/0029Vak7B1WLo4hdCrawMw3i" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition-colors">
@@ -47,7 +47,7 @@ export default function LayoutWrapper({ children, showFooter = true }: LayoutWra
                                             <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.62 5.367 11.987 11.988 11.987 6.62 0 11.987-5.367 11.987-11.987C24.014 5.367 18.637.001 12.017.001zM8.449 16.988c-1.297 0-2.448-.49-3.323-1.297C4.198 14.895 3.708 13.744 3.708 12.447s.49-2.448 1.418-3.323c.875-.807 2.026-1.297 3.323-1.297s2.448.49 3.323 1.297c.928.875 1.418 2.026 1.418 3.323s-.49 2.448-1.418 3.323c-.875.807-2.026 1.297-3.323 1.297zm7.718-1.297c-.875.807-2.026 1.297-3.323 1.297s-2.448-.49-3.323-1.297c-.928-.875-1.418-2.026-1.418-3.323s.49-2.448 1.418-3.323c.875-.807 2.026-1.297 3.323-1.297s2.448.49 3.323 1.297c.928.875 1.418 2.026 1.418 3.323s-.49 2.448-1.418 3.323z"/>
                                         </svg>
                                     </a>
-                                    <a href="https://t.me/xcareerconnect" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition-colors">
+                                    <a href="https://t.me/x_careers" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition-colors">
                                         <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
                                             <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
                                         </svg>
@@ -79,8 +79,11 @@ export default function LayoutWrapper({ children, showFooter = true }: LayoutWra
                             </div>
                         </div>
 
-                        <div className="border-t border-gray-800 mt-8 pt-8 text-center">
-                            <p className="text-gray-400">
+                        <div className="border-t border-gray-800 mt-8 pt-8 text-center space-y-4">
+                            <p className="text-gray-400 text-sm max-w-3xl mx-auto leading-relaxed">
+                                X Careers is a product of X Careers Connect Private Limited. All services on this platform are provided by X Careers Connect Private Limited.
+                            </p>
+                            <p className="text-gray-500 text-sm">
                                 Built with ❤️ for tech freshers
                             </p>
                         </div>

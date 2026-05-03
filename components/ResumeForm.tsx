@@ -19,10 +19,21 @@ interface ResumeFormProps {
 
 export default function ResumeForm({ resumeData, activeSection, onDataChange, selectedTemplate }: ResumeFormProps) {
     const [newSkillCategory, setNewSkillCategory] = useState('');
+    const [emailError, setEmailError] = useState('');
 
     const handlePersonalInfoChange = (field: keyof PersonalInfo, value: string) => {
         // NOTE: The URL sanitization logic is now handled in the parent component (ResumeBuilderPage.tsx)
         // before calling onDataChange('personalInfo', ...), ensuring full URLs are stored.
+
+        // Gmail-only validation for email field
+        if (field === 'email') {
+            if (value && !value.endsWith('@gmail.com') && value.includes('@')) {
+                setEmailError('Only @gmail.com email addresses are accepted');
+            } else {
+                setEmailError('');
+            }
+        }
+
         onDataChange('personalInfo', {
             ...resumeData.personalInfo,
             [field]: value,
@@ -173,10 +184,13 @@ export default function ResumeForm({ resumeData, activeSection, onDataChange, se
                         type="email"
                         value={resumeData.personalInfo.email}
                         onChange={(e) => handlePersonalInfoChange('email', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
-                        placeholder="john@example.com"
+                        className={`w-full px-3 py-2 border ${emailError ? 'border-red-500' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent`}
+                        placeholder="john@gmail.com"
                         data-oid="n9_-j5h"
                     />
+                    {emailError && (
+                        <p className="mt-1 text-sm text-red-600">{emailError}</p>
+                    )}
                 </div>
 
                 <div data-oid="vlltrlj">

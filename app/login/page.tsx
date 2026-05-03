@@ -45,16 +45,6 @@ function LoginForm() {
                         >
                             Sign In
                         </button>
-                        
-                        <p className="mt-6 text-sm text-gray-600">
-                            Don't have an account?{' '}
-                            <Link
-                                href="/register"
-                                className="font-medium text-[hsl(196,80%,45%)] hover:text-[hsl(196,80%,40%)] transition-colors"
-                            >
-                                Create one here
-                            </Link>
-                        </p>
                     </div>
                 </div>
             </div>

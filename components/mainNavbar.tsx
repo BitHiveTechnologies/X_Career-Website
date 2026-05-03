@@ -263,11 +263,10 @@ export default function MainNavbar() {
                                         Login
                                     </Link>
                                     <Link
-                                        href="/register"
-                                        className="hidden lg:inline-flex items-center px-3 xl:px-4 py-2 border border-transparent text-xs xl:text-sm font-medium rounded-md text-white bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300"
-                                        data-oid="j0tu:qj"
+                                        href="/notify"
+                                        className="hidden lg:inline-flex items-center px-3 xl:px-4 py-2 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-xs xl:text-sm font-bold rounded-md text-white hover:translate-y-[-1px] hover:shadow-md transition-all duration-300"
                                     >
-                                        Register
+                                        Subscribe
                                     </Link>
                                 </>
                             )}
@@ -453,12 +452,11 @@ export default function MainNavbar() {
                                             Login
                                         </Link>
                                         <Link
-                                            href="/register"
-                                            className="block w-full text-center px-4 py-3 border border-transparent text-sm font-medium rounded-md text-white bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300"
+                                            href="/notify"
+                                            className="block w-full text-center px-4 py-3 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-sm font-bold rounded-md text-white shadow-sm transition-all duration-300"
                                             onClick={() => setMobileMenuOpen(false)}
-                                            data-oid="0m_bzz."
                                         >
-                                            Register
+                                            Subscribe
                                         </Link>
                                     </div>
                                 )}

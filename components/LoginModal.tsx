@@ -150,21 +150,6 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
               )}
             </button>
 
-            <div className="text-center">
-              <span className="text-sm text-gray-600">
-                Don't have an account?{' '}
-                <button
-                  type="button"
-                  onClick={() => {
-                    onClose();
-                    // You can add navigation to register page here
-                  }}
-                  className="text-[hsl(196,80%,45%)] hover:text-[hsl(196,80%,40%)] font-medium"
-                >
-                  Create one
-                </button>
-              </span>
-            </div>
           </div>
         </form>
       </div>

@@ -4,6 +4,7 @@ import CategoryMenu from '@/components/CategoryMenu';
 import FiltersSidebar from '@/components/FiltersSidebar';
 import JobCard from '@/components/JobCard';
 import MainNavbar from '@/components/mainNavbar';
+import Link from 'next/link';
 import { FrontendJob } from '@/lib/api';
 import { useCallback, useEffect, useState } from 'react';
 
@@ -875,12 +876,13 @@ export default function InternshipsPage() {
                                             </p>
                                         </div>
                                     </div>
-                                    <button
+                                    <Link
+                                        href="/notify"
                                         className="px-6 py-3 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white rounded-lg font-medium hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300 transform hover:scale-105 whitespace-nowrap"
                                         data-oid="feobp9o"
                                     >
                                         Create Alert
-                                    </button>
+                                    </Link>
                                 </div>
                             </div>
 
