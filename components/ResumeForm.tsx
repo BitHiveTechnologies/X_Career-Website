@@ -15,9 +15,18 @@ interface ResumeFormProps {
     activeSection: string;
     onDataChange: (section: keyof ResumeData, data: any) => void;
     selectedTemplate?: string;
+    fontFamily: string;
+    onFontChange: (font: string) => void;
 }
 
-export default function ResumeForm({ resumeData, activeSection, onDataChange, selectedTemplate }: ResumeFormProps) {
+export default function ResumeForm({ 
+    resumeData, 
+    activeSection, 
+    onDataChange, 
+    selectedTemplate,
+    fontFamily,
+    onFontChange 
+}: ResumeFormProps) {
     const [newSkillCategory, setNewSkillCategory] = useState('');
     const [emailError, setEmailError] = useState('');
 
@@ -150,142 +159,141 @@ export default function ResumeForm({ resumeData, activeSection, onDataChange, se
     };
 
     const renderPersonalInfo = () => (
-        <div className="p-6 space-y-6" data-oid="-..0rpg">
-            <h3 className="text-xl font-semibold text-gray-800 mb-4" data-oid="rbfho6l">
-                Personal Information
-            </h3>
+        <div className="space-y-8 p-6" data-oid="-..0rpg">
+            <div className="flex items-center justify-between pb-4 border-b border-slate-100">
+                <div>
+                    <h3 className="text-xl font-bold text-slate-800" data-oid="rbfho6l">
+                        Personal Details
+                    </h3>
+                    <p className="text-xs text-slate-400 mt-1">Basic information for your resume header</p>
+                </div>
+                <div className="text-[10px] text-slate-400 font-bold uppercase tracking-widest bg-slate-50 px-2 py-1 rounded border border-slate-100">Step 1 of 6</div>
+            </div>
 
-            <div className="grid md:grid-cols-2 gap-4" data-oid="4wa0qke">
-                <div data-oid="qg4k::_">
+            <div className="grid md:grid-cols-2 gap-6" data-oid="4wa0qke">
+                <div className="space-y-2" data-oid="qg4k::_">
                     <label
-                        className="block text-sm font-medium text-gray-700 mb-2"
+                        className="text-[11px] font-bold text-slate-500 uppercase tracking-wider ml-1"
                         data-oid="nd-0d5s"
                     >
-                        Full Name *
+                        Full Name <span className="text-rose-500">*</span>
                     </label>
                     <input
                         type="text"
                         value={resumeData.personalInfo.fullName}
                         onChange={(e) => handlePersonalInfoChange('fullName', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
+                        className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-sm font-medium"
                         placeholder="John Doe"
                         data-oid="o6h5:2b"
                     />
                 </div>
 
-                <div data-oid="23.7492">
+                <div className="space-y-2" data-oid="23.7492">
                     <label
-                        className="block text-sm font-medium text-gray-700 mb-2"
+                        className="text-[11px] font-bold text-slate-500 uppercase tracking-wider ml-1"
                         data-oid="w.49mn3"
                     >
-                        Email *
+                        Email Address <span className="text-rose-500">*</span>
                     </label>
                     <input
                         type="email"
                         value={resumeData.personalInfo.email}
                         onChange={(e) => handlePersonalInfoChange('email', e.target.value)}
-                        className={`w-full px-3 py-2 border ${emailError ? 'border-red-500' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent`}
+                        className={`w-full px-4 py-3 bg-slate-50 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-sm font-medium ${
+                            (resumeData.personalInfo.email && !resumeData.personalInfo.email.endsWith('@gmail.com')) || emailError
+                            ? 'border-rose-200 bg-rose-50' 
+                            : 'border-slate-200'
+                        }`}
                         placeholder="john@gmail.com"
                         data-oid="n9_-j5h"
                     />
-                    {emailError && (
-                        <p className="mt-1 text-sm text-red-600">{emailError}</p>
+                    {(resumeData.personalInfo.email && !resumeData.personalInfo.email.endsWith('@gmail.com')) && (
+                        <p className="text-[10px] text-rose-500 font-bold ml-1">Only @gmail.com email addresses are accepted</p>
+                    )}
+                    {emailError && !resumeData.personalInfo.email.endsWith('@gmail.com') && (
+                        <p className="text-[10px] text-rose-500 font-bold ml-1">{emailError}</p>
                     )}
                 </div>
 
-                <div data-oid="vlltrlj">
+                <div className="space-y-2" data-oid="vlltrlj">
                     <label
-                        className="block text-sm font-medium text-gray-700 mb-2"
+                        className="text-[11px] font-bold text-slate-500 uppercase tracking-wider ml-1"
                         data-oid="_n220x4"
                     >
-                        Phone *
+                        Phone Number <span className="text-rose-500">*</span>
                     </label>
                     <input
                         type="tel"
                         value={resumeData.personalInfo.phone}
                         onChange={(e) => handlePersonalInfoChange('phone', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
-                        placeholder="+1 (555) 123-4567"
+                        className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-sm font-medium"
+                        placeholder="+91 9876543210"
                         data-oid="wmp.t6c"
                     />
                 </div>
 
-                <div data-oid="pc67__0">
+                <div className="space-y-2" data-oid="pc67__0">
                     <label
-                        className="block text-sm font-medium text-gray-700 mb-2"
+                        className="text-[11px] font-bold text-slate-500 uppercase tracking-wider ml-1"
                         data-oid="98u.mk-"
                     >
-                        Location
+                        Current Location
                     </label>
                     <input
                         type="text"
                         value={resumeData.personalInfo.location}
                         onChange={(e) => handlePersonalInfoChange('location', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
-                        placeholder="City, State"
+                        className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-sm font-medium"
+                        placeholder="Bengaluru, India"
                         data-oid="xx:fd3_"
                     />
                 </div>
 
-                <div data-oid="7:5._ih">
+                <div className="space-y-2" data-oid="7:5._ih">
                     <label
-                        className="block text-sm font-medium text-gray-700 mb-2"
+                        className="text-[11px] font-bold text-slate-500 uppercase tracking-wider ml-1"
                         data-oid="3daetmi"
                     >
-                        LinkedIn **(Full URL)**
+                        LinkedIn URL
                     </label>
                     <input
                         type="url"
                         value={resumeData.personalInfo.linkedin}
                         onChange={(e) => handlePersonalInfoChange('linkedin', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
+                        className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-sm font-medium"
                         placeholder="https://linkedin.com/in/johndoe"
                         data-oid="5z6l-w1"
                     />
                 </div>
 
-                <div data-oid="abtgn0:">
+                <div className="space-y-2" data-oid="abtgn0:">
                     <label
-                        className="block text-sm font-medium text-gray-700 mb-2"
+                        className="text-[11px] font-bold text-slate-500 uppercase tracking-wider ml-1"
                         data-oid="4wrpgh4"
                     >
-                        GitHub **(Full URL)**
+                        GitHub Profile
                     </label>
                     <input
                         type="url"
                         value={resumeData.personalInfo.github}
                         onChange={(e) => handlePersonalInfoChange('github', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
+                        className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-sm font-medium"
                         placeholder="https://github.com/johndoe"
                         data-oid="kdhd0yp"
                     />
                 </div>
             </div>
 
-            <div data-oid="9w6uldg">
-                <label className="block text-sm font-medium text-gray-700 mb-2" data-oid="c-z.ozg">
-                    Portfolio Website **(Full URL)**
-                </label>
-                <input
-                    type="url"
-                    value={resumeData.personalInfo.portfolio}
-                    onChange={(e) => handlePersonalInfoChange('portfolio', e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
-                    placeholder="https://johndoe.com"
-                    data-oid="izw3gdd"
-                />
-            </div>
-
-            <div data-oid="uors82v">
-                <label className="block text-sm font-medium text-gray-700 mb-2" data-oid="tbq5-yu">
+            <div className="space-y-2" data-oid="uors82v">
+                <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider ml-1" data-oid="tbq5-yu">
                     Professional Summary
                 </label>
                 <textarea
                     value={resumeData.personalInfo.summary}
                     onChange={(e) => handlePersonalInfoChange('summary', e.target.value)}
-                    rows={4}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
-                    placeholder="Write a brief summary of your professional background and career objectives..."
+                    rows={5}
+                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-sm font-medium resize-none"
+                    placeholder="Briefly describe your career goals and highlights..."
                     data-oid="gwi5tcg"
                 />
             </div>
@@ -296,33 +304,37 @@ export default function ResumeForm({ resumeData, activeSection, onDataChange, se
         const isMinimalTemplate = selectedTemplate === 'minimal';
         
         return (
-            <div className="p-6 space-y-6" data-oid="c1v:7-v">
-                <div className="flex items-center justify-between" data-oid="f2o7big">
-                    <h3 className="text-xl font-semibold text-gray-800" data-oid="8i-iq51">
-                        Work Experience
-                    </h3>
+            <div className="space-y-6 p-6" data-oid="c1v:7-v">
+                <div className="flex items-center justify-between pb-4 border-b border-slate-100" data-oid="f2o7big">
+                    <div>
+                        <h3 className="text-xl font-bold text-slate-800" data-oid="8i-iq51">
+                            Professional Experience
+                        </h3>
+                        <p className="text-xs text-slate-400 mt-1">Relevant work history and internships</p>
+                    </div>
                     {!isMinimalTemplate && (
                         <button
                             onClick={addExperience}
-                            className="px-4 py-2 bg-[hsl(196,80%,45%)] text-white rounded-md hover:bg-[hsl(196,80%,40%)] transition-colors duration-200"
+                            className="px-4 py-2 bg-blue-600 text-white rounded-xl text-xs font-bold hover:bg-blue-700 transition-all shadow-lg shadow-blue-100"
                             data-oid="_65--s:"
                         >
-                            Add Experience
+                            + Add Item
                         </button>
                     )}
                 </div>
                 
                 {isMinimalTemplate && (
-                    <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-                        <div className="flex items-center gap-2 text-yellow-800">
-                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                            <span className="font-medium">Experience section is disabled for Minimal Clean template</span>
+                    <div className="bg-amber-50 border border-amber-200 rounded-2xl p-5">
+                        <div className="flex items-center gap-3 text-amber-800">
+                            <div className="p-2 bg-white rounded-lg shadow-sm">
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                            <span className="font-bold text-sm tracking-tight">Experience Hidden for This Template</span>
                         </div>
-                        <p className="text-yellow-700 text-sm mt-2">
-                            This template is designed for freshers and focuses on education, projects, and skills. 
-                            Switch to another template if you need to include work experience.
+                        <p className="text-amber-700/80 text-xs mt-3 leading-relaxed">
+                            The "Minimal Clean" template is optimized for fresh graduates. To display experience, please select a "Professional" or "Executive" template.
                         </p>
                     </div>
                 )}
@@ -330,150 +342,112 @@ export default function ResumeForm({ resumeData, activeSection, onDataChange, se
             {!isMinimalTemplate && resumeData.experience.map((exp, index) => (
                 <div
                     key={exp.id}
-                    className="border border-gray-200 rounded-lg p-4 space-y-4"
+                    className="relative bg-slate-50/50 border border-slate-200 rounded-2xl p-6 space-y-6 group transition-all hover:bg-white hover:shadow-xl hover:shadow-slate-200/50"
                     data-oid="i7jab-y"
                 >
                     <div className="flex items-center justify-between" data-oid="zx8jiaq">
-                        <h4 className="font-medium text-gray-800" data-oid="kjq_g8n">
-                            Experience {index + 1}
-                        </h4>
+                        <div className="flex items-center space-x-3">
+                            <span className="w-8 h-8 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-xs font-bold ring-4 ring-blue-50">
+                                {index + 1}
+                            </span>
+                            <h4 className="font-bold text-slate-800 text-sm" data-oid="kjq_g8n">
+                                Experience Details
+                            </h4>
+                        </div>
                         <button
                             onClick={() => removeExperience(exp.id)}
-                            className="text-red-500 hover:text-red-700"
+                            className="p-2 text-slate-400 hover:text-rose-500 hover:bg-rose-50 rounded-lg transition-all opacity-0 group-hover:opacity-100"
                             data-oid="6akarly"
                         >
-                            Remove
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
                         </button>
                     </div>
 
-                    <div className="grid md:grid-cols-2 gap-4" data-oid="wcnqcd.">
-                        <div data-oid="8f9bo94">
-                            <label
-                                className="block text-sm font-medium text-gray-700 mb-1"
-                                data-oid="riyndar"
-                            >
-                                Company *
-                            </label>
+                    <div className="grid md:grid-cols-2 gap-6" data-oid="wcnqcd.">
+                        <div className="space-y-2" data-oid="8f9bo94">
+                            <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest ml-1">Company</label>
                             <input
                                 type="text"
                                 value={exp.company}
-                                onChange={(e) =>
-                                    updateExperience(exp.id, 'company', e.target.value)
-                                }
-                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
-                                placeholder="Company Name"
+                                onChange={(e) => updateExperience(exp.id, 'company', e.target.value)}
+                                className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-sm"
+                                placeholder="e.g. Google"
                                 data-oid="1hmv5nd"
                             />
                         </div>
 
-                        <div data-oid="ezcmu-5">
-                            <label
-                                className="block text-sm font-medium text-gray-700 mb-1"
-                                data-oid="1.o2m7_"
-                            >
-                                Position *
-                            </label>
+                        <div className="space-y-2" data-oid="ezcmu-5">
+                            <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest ml-1">Position</label>
                             <input
                                 type="text"
                                 value={exp.position}
-                                onChange={(e) =>
-                                    updateExperience(exp.id, 'position', e.target.value)
-                                }
-                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
-                                placeholder="Job Title"
+                                onChange={(e) => updateExperience(exp.id, 'position', e.target.value)}
+                                className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-sm"
+                                placeholder="e.g. Software Engineer"
                                 data-oid="4rrh.vl"
                             />
                         </div>
 
-                        <div data-oid="vd_gc87">
-                            <label
-                                className="block text-sm font-medium text-gray-700 mb-1"
-                                data-oid="hwroyxc"
-                            >
-                                Location
-                            </label>
+                        <div className="space-y-2" data-oid="vd_gc87">
+                            <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest ml-1">Location</label>
                             <input
                                 type="text"
                                 value={exp.location}
-                                onChange={(e) =>
-                                    updateExperience(exp.id, 'location', e.target.value)
-                                }
-                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
-                                placeholder="City, State"
+                                onChange={(e) => updateExperience(exp.id, 'location', e.target.value)}
+                                className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-sm"
+                                placeholder="City, Country"
                                 data-oid="t4s.zdp"
                             />
                         </div>
 
-                        <div className="flex items-center space-x-2" data-oid="hb426rn">
-                            <input
-                                type="checkbox"
-                                checked={exp.current}
-                                onChange={(e) =>
-                                    updateExperience(exp.id, 'current', e.target.checked)
-                                }
-                                className="rounded text-[hsl(196,80%,45%)] focus:ring-[hsl(196,80%,45%)]"
-                                data-oid="hai-8:h"
-                            />
-
-                            <label className="text-sm text-gray-700" data-oid="ip801h:">
-                                Currently working here
-                            </label>
+                        <div className="flex items-center space-x-3 pt-6" data-oid="hb426rn">
+                            <div className="relative inline-flex items-center cursor-pointer">
+                                <input
+                                    type="checkbox"
+                                    checked={exp.current}
+                                    onChange={(e) => updateExperience(exp.id, 'current', e.target.checked)}
+                                    className="w-5 h-5 rounded-md border-slate-300 text-blue-600 focus:ring-blue-500/20 transition-all"
+                                    data-oid="hai-8:h"
+                                />
+                                <label className="text-xs font-bold text-slate-600 ml-2" data-oid="ip801h:">
+                                    Active Role
+                                </label>
+                            </div>
                         </div>
 
-                        <div data-oid="ekk3rs.">
-                            <label
-                                className="block text-sm font-medium text-gray-700 mb-1"
-                                data-oid="-_c5qry"
-                            >
-                                Start Date
-                            </label>
+                        <div className="space-y-2" data-oid="ekk3rs.">
+                            <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest ml-1">From</label>
                             <input
                                 type="month"
                                 value={exp.startDate}
-                                onChange={(e) =>
-                                    updateExperience(exp.id, 'startDate', e.target.value)
-                                }
-                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
+                                onChange={(e) => updateExperience(exp.id, 'startDate', e.target.value)}
+                                className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-sm"
                                 data-oid="d11_:r0"
                             />
                         </div>
 
                         {!exp.current && (
-                            <div data-oid="r_s5ted">
-                                <label
-                                    className="block text-sm font-medium text-gray-700 mb-1"
-                                    data-oid="50cf:8_"
-                                >
-                                    End Date
-                                </label>
+                            <div className="space-y-2" data-oid="r_s5ted">
+                                <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest ml-1">To</label>
                                 <input
                                     type="month"
                                     value={exp.endDate}
-                                    onChange={(e) =>
-                                        updateExperience(exp.id, 'endDate', e.target.value)
-                                    }
-                                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
+                                    onChange={(e) => updateExperience(exp.id, 'endDate', e.target.value)}
+                                    className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-sm"
                                     data-oid="he79bfv"
                                 />
                             </div>
                         )}
                     </div>
 
-                    <div data-oid="0:ke3mq">
-                        <label
-                            className="block text-sm font-medium text-gray-700 mb-1"
-                            data-oid="_fwyuk."
-                        >
-                            Job Description
-                        </label>
+                    <div className="space-y-2" data-oid="0:ke3mq">
+                        <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest ml-1">Key Responsibilities</label>
                         <textarea
                             value={exp.description.join('\n')}
-                            onChange={(e) =>
-                                updateExperience(exp.id, 'description', e.target.value.split('\n'))
-                            }
+                            onChange={(e) => updateExperience(exp.id, 'description', e.target.value.split('\n'))}
                             rows={4}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
-                            placeholder="• Describe your responsibilities and achievements&#10;• Use bullet points for better readability&#10;• Include quantifiable results when possible"
+                            className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-sm resize-none"
+                            placeholder="• Bullet points for clarity...&#10;• Achievements and metrics..."
                             data-oid="b13m66_"
                         />
                     </div>
@@ -481,11 +455,12 @@ export default function ResumeForm({ resumeData, activeSection, onDataChange, se
             ))}
 
             {resumeData.experience.length === 0 && !isMinimalTemplate && (
-                <div className="text-center py-8 text-gray-500" data-oid="8cj925:">
-                    <p data-oid="2h24tch">No work experience added yet.</p>
-                    <p className="text-sm" data-oid=":snv5df">
-                        Click "Add Experience" to get started.
-                    </p>
+                <div className="text-center py-12 bg-slate-50 rounded-2xl border-2 border-dashed border-slate-200" data-oid="8cj925:">
+                    <div className="p-3 bg-white rounded-2xl shadow-sm inline-block mb-3">
+                        <svg className="w-6 h-6 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                    </div>
+                    <p className="text-slate-500 font-bold text-sm tracking-tight" data-oid="2h24tch">History is Empty</p>
+                    <p className="text-slate-400 text-xs mt-1" data-oid=":snv5df">Add your first professional experience</p>
                 </div>
             )}
         </div>
@@ -493,480 +468,452 @@ export default function ResumeForm({ resumeData, activeSection, onDataChange, se
     };
 
     const renderEducation = () => (
-        <div className="p-6 space-y-6" data-oid="bc4_vg9">
-            <div className="flex items-center justify-between" data-oid="8u44v:q">
-                <h3 className="text-xl font-semibold text-gray-800" data-oid="7:re9rg">
-                    Education
-                </h3>
+        <div className="space-y-6 p-6" data-oid="bc4_vg9">
+            <div className="flex items-center justify-between pb-4 border-b border-slate-100" data-oid="8u44v:q">
+                <div>
+                    <h3 className="text-xl font-bold text-slate-800" data-oid="7:re9rg">
+                        Education History
+                    </h3>
+                    <p className="text-xs text-slate-400 mt-1">Academic credentials and certifications</p>
+                </div>
                 <button
                     onClick={addEducation}
-                    className="px-4 py-2 bg-[hsl(196,80%,45%)] text-white rounded-md hover:bg-[hsl(196,80%,40%)] transition-colors duration-200"
+                    className="px-4 py-2 bg-blue-600 text-white rounded-xl text-xs font-bold hover:bg-blue-700 transition-all shadow-lg shadow-blue-100"
                     data-oid="y9jshgd"
                 >
-                    Add Education
+                    + Add Item
                 </button>
             </div>
 
             {resumeData.education.map((edu, index) => (
                 <div
                     key={edu.id}
-                    className="border border-gray-200 rounded-lg p-4 space-y-4"
+                    className="relative bg-slate-50/50 border border-slate-200 rounded-2xl p-6 space-y-6 group transition-all hover:bg-white hover:shadow-xl hover:shadow-slate-200/50"
                     data-oid="7ike4y0"
                 >
                     <div className="flex items-center justify-between" data-oid="3co7-oe">
-                        <h4 className="font-medium text-gray-800" data-oid=":skakyy">
-                            Education {index + 1}
-                        </h4>
+                        <div className="flex items-center space-x-3">
+                            <span className="w-8 h-8 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-xs font-bold ring-4 ring-blue-50">
+                                {index + 1}
+                            </span>
+                            <h4 className="font-bold text-slate-800 text-sm" data-oid=":skakyy">
+                                Qualification Details
+                            </h4>
+                        </div>
                         <button
                             onClick={() => removeEducation(edu.id)}
-                            className="text-red-500 hover:text-red-700"
+                            className="p-2 text-slate-400 hover:text-rose-500 hover:bg-rose-50 rounded-lg transition-all opacity-0 group-hover:opacity-100"
                             data-oid="h7g-xcc"
                         >
-                            Remove
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
                         </button>
                     </div>
 
-                    <div className="grid md:grid-cols-2 gap-4" data-oid="m1ep59-">
-                        <div data-oid="ega.muq">
-                            <label
-                                className="block text-sm font-medium text-gray-700 mb-1"
-                                data-oid="ib.eljc"
-                            >
-                                Institution *
-                            </label>
+                    <div className="grid md:grid-cols-2 gap-6" data-oid="m1ep59-">
+                        <div className="space-y-2" data-oid="ega.muq">
+                            <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest ml-1">Institution</label>
                             <input
                                 type="text"
                                 value={edu.institution}
-                                onChange={(e) =>
-                                    updateEducation(edu.id, 'institution', e.target.value)
-                                }
-                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
+                                onChange={(e) => updateEducation(edu.id, 'institution', e.target.value)}
+                                className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-sm"
                                 placeholder="University Name"
                                 data-oid="dab0p8_"
                             />
                         </div>
 
-                        <div data-oid="0i:8l0l">
-                            <label
-                                className="block text-sm font-medium text-gray-700 mb-1"
-                                data-oid="dl0f14y"
-                            >
-                                Degree *
-                            </label>
+                        <div className="space-y-2" data-oid="0i:8l0l">
+                            <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest ml-1">Degree</label>
                             <input
                                 type="text"
                                 value={edu.degree}
                                 onChange={(e) => updateEducation(edu.id, 'degree', e.target.value)}
-                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
-                                placeholder="Bachelor's, Master's, etc."
+                                className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-sm"
+                                placeholder="e.g. B.Tech"
                                 data-oid="lmq1z0k"
                             />
                         </div>
 
-                        <div data-oid=":5nfj0u">
-                            <label
-                                className="block text-sm font-medium text-gray-700 mb-1"
-                                data-oid="unixt2u"
-                            >
-                                Field of Study
-                            </label>
+                        <div className="space-y-2" data-oid=":5nfj0u">
+                            <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest ml-1">Specialization</label>
                             <input
                                 type="text"
                                 value={edu.field}
                                 onChange={(e) => updateEducation(edu.id, 'field', e.target.value)}
-                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
-                                placeholder="Computer Science, Engineering, etc."
+                                className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-sm"
+                                placeholder="e.g. CS"
                                 data-oid="qiwr57k"
                             />
                         </div>
 
-                        <div data-oid="x88a4f.">
-                            <label
-                                className="block text-sm font-medium text-gray-700 mb-1"
-                                data-oid="ef8sekq"
-                            >
-                                GPA (Optional)
-                            </label>
+                        <div className="space-y-2" data-oid="x88a4f.">
+                            <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest ml-1">GPA / Percent</label>
                             <input
                                 type="text"
                                 value={edu.gpa || ''}
                                 onChange={(e) => updateEducation(edu.id, 'gpa', e.target.value)}
-                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
-                                placeholder="3.8/4.0"
+                                className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-sm"
+                                placeholder="8.5/10"
                                 data-oid="ndxrfk4"
                             />
                         </div>
 
-                        <div data-oid="awg435x">
-                            <label
-                                className="block text-sm font-medium text-gray-700 mb-1"
-                                data-oid="klkruq7"
-                            >
-                                Start Date
-                            </label>
+                        <div className="space-y-2" data-oid="awg435x">
+                            <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest ml-1">From</label>
                             <input
                                 type="month"
                                 value={edu.startDate}
-                                onChange={(e) =>
-                                    updateEducation(edu.id, 'startDate', e.target.value)
-                                }
-                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
+                                onChange={(e) => updateEducation(edu.id, 'startDate', e.target.value)}
+                                className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-sm"
                                 data-oid="anfxu3j"
                             />
                         </div>
 
-                        <div data-oid="q1p3bd.">
-                            <label
-                                className="block text-sm font-medium text-gray-700 mb-1"
-                                data-oid="w.6hpp7"
-                            >
-                                End Date
-                            </label>
+                        <div className="space-y-2" data-oid="q1p3bd.">
+                            <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest ml-1">To</label>
                             <input
                                 type="month"
                                 value={edu.endDate}
                                 onChange={(e) => updateEducation(edu.id, 'endDate', e.target.value)}
-                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
+                                className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-sm"
                                 data-oid="dygcz-r"
                             />
                         </div>
-                    </div>
-
-                    <div data-oid="yhq19f9">
-                        <label
-                            className="block text-sm font-medium text-gray-700 mb-1"
-                            data-oid="hqxb93e"
-                        >
-                            Achievements & Activities
-                        </label>
-                        <textarea
-                            value={edu.achievements.join('\n')}
-                            onChange={(e) =>
-                                updateEducation(edu.id, 'achievements', e.target.value.split('\n'))
-                            }
-                            rows={3}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
-                            placeholder="• Dean's List&#10;• Relevant coursework&#10;• Academic achievements"
-                            data-oid="6oa3ery"
-                        />
                     </div>
                 </div>
             ))}
 
             {resumeData.education.length === 0 && (
-                <div className="text-center py-8 text-gray-500" data-oid="u819:.f">
-                    <p data-oid="x5gvqr6">No education added yet.</p>
-                    <p className="text-sm" data-oid="ll6rv8k">
-                        Click "Add Education" to get started.
-                    </p>
+                <div className="text-center py-12 bg-slate-50 rounded-2xl border-2 border-dashed border-slate-200" data-oid="u819:.f">
+                    <div className="p-3 bg-white rounded-2xl shadow-sm inline-block mb-3">
+                        <svg className="w-6 h-6 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 14l9-5-9-5-9 5 9 5z" /><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" /></svg>
+                    </div>
+                    <p className="text-slate-500 font-bold text-sm tracking-tight" data-oid="x5gvqr6">Academic List Empty</p>
+                    <p className="text-slate-400 text-xs mt-1" data-oid="ll6rv8k">Add your qualifications to stand out</p>
                 </div>
             )}
         </div>
     );
 
     const renderProjects = () => (
-        <div className="p-6 space-y-6" data-oid=":d-iyqd">
-            <div className="flex items-center justify-between" data-oid="3esxtnd">
-                <h3 className="text-xl font-semibold text-gray-800" data-oid="_agqk2.">
-                    Projects
-                </h3>
+        <div className="space-y-6 p-6" data-oid=":d-iyqd">
+            <div className="flex items-center justify-between pb-4 border-b border-slate-100" data-oid="3esxtnd">
+                <div>
+                    <h3 className="text-xl font-bold text-slate-800" data-oid="_agqk2.">
+                        Personal Projects
+                    </h3>
+                    <p className="text-xs text-slate-400 mt-1">Showcase your practical skills</p>
+                </div>
                 <button
                     onClick={addProject}
-                    className="px-4 py-2 bg-[hsl(196,80%,45%)] text-white rounded-md hover:bg-[hsl(196,80%,40%)] transition-colors duration-200"
+                    className="px-4 py-2 bg-blue-600 text-white rounded-xl text-xs font-bold hover:bg-blue-700 transition-all shadow-lg shadow-blue-100"
                     data-oid="go:loiv"
                 >
-                    Add Project
+                    + Add Item
                 </button>
             </div>
 
             {resumeData.projects.map((project, index) => (
                 <div
                     key={project.id}
-                    className="border border-gray-200 rounded-lg p-4 space-y-4"
+                    className="relative bg-slate-50/50 border border-slate-200 rounded-2xl p-6 space-y-6 group transition-all hover:bg-white hover:shadow-xl hover:shadow-slate-200/50"
                     data-oid="wuyqxxe"
                 >
                     <div className="flex items-center justify-between" data-oid="wy8l2mj">
-                        <h4 className="font-medium text-gray-800" data-oid="3.mbebs">
-                            Project {index + 1}
-                        </h4>
+                        <div className="flex items-center space-x-3">
+                            <span className="w-8 h-8 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-xs font-bold ring-4 ring-blue-50">
+                                {index + 1}
+                            </span>
+                            <h4 className="font-bold text-slate-800 text-sm" data-oid="3.mbebs">
+                                Project Overview
+                            </h4>
+                        </div>
                         <button
                             onClick={() => removeProject(project.id)}
-                            className="text-red-500 hover:text-red-700"
+                            className="p-2 text-slate-400 hover:text-rose-500 hover:bg-rose-50 rounded-lg transition-all opacity-0 group-hover:opacity-100"
                             data-oid=".q37nvl"
                         >
-                            Remove
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
                         </button>
                     </div>
 
-                    <div className="grid md:grid-cols-2 gap-4" data-oid="aw8se1p">
-                        <div data-oid="n3ts_wz">
-                            <label
-                                className="block text-sm font-medium text-gray-700 mb-1"
-                                data-oid="be:mtyt"
-                            >
-                                Project Name *
-                            </label>
+                    <div className="grid md:grid-cols-2 gap-6" data-oid="aw8se1p">
+                        <div className="space-y-2" data-oid="n3ts_wz">
+                            <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest ml-1">Title</label>
                             <input
                                 type="text"
                                 value={project.name}
                                 onChange={(e) => updateProject(project.id, 'name', e.target.value)}
-                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
-                                placeholder="Project Name"
+                                className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-sm"
+                                placeholder="e.g. Portfolio"
                                 data-oid="by9qqdd"
                             />
                         </div>
 
-                        <div data-oid="38qxhmb">
-                            <label
-                                className="block text-sm font-medium text-gray-700 mb-1"
-                                data-oid="k3no8ts"
-                            >
-                                Technologies Used
-                            </label>
+                        <div className="space-y-2" data-oid="38qxhmb">
+                            <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest ml-1">Stack</label>
                             <input
                                 type="text"
                                 value={project.technologies.join(', ')}
-                                onChange={(e) =>
-                                    updateProject(
-                                        project.id,
-                                        'technologies',
-                                        e.target.value.split(', ').filter((t) => t.trim()),
-                                    )
-                                }
-                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
-                                placeholder="React, Node.js, MongoDB"
+                                onChange={(e) => updateProject(project.id, 'technologies', e.target.value.split(', ').filter((t) => t.trim()))}
+                                className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-sm"
+                                placeholder="e.g. React, Node"
                                 data-oid="8skl:u3"
                             />
                         </div>
 
-                        <div data-oid="1_33kp7">
-                            <label
-                                className="block text-sm font-medium text-gray-700 mb-1"
-                                data-oid="1o20bu5"
-                            >
-                                Live Demo Link **(Full URL)**
-                            </label>
+                        <div className="space-y-2" data-oid="1_33kp7">
+                            <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest ml-1">Live URL</label>
                             <input
                                 type="url"
                                 value={project.link || ''}
                                 onChange={(e) => updateProject(project.id, 'link', e.target.value)}
-                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
-                                placeholder="https://project-demo.com"
+                                className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-sm"
+                                placeholder="https://"
                                 data-oid="yxck6hz"
                             />
                         </div>
 
-                        <div data-oid="fp4cxxz">
-                            <label
-                                className="block text-sm font-medium text-gray-700 mb-1"
-                                data-oid="sryeuma"
-                            >
-                                GitHub Repository **(Full URL)**
-                            </label>
+                        <div className="space-y-2" data-oid="fp4cxxz">
+                            <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest ml-1">Source Code</label>
                             <input
                                 type="url"
                                 value={project.github || ''}
-                                onChange={(e) =>
-                                    updateProject(project.id, 'github', e.target.value)
-                                }
-                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
-                                placeholder="https://github.com/username/project"
+                                onChange={(e) => updateProject(project.id, 'github', e.target.value)}
+                                className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-sm"
+                                placeholder="GitHub URL"
                                 data-oid="g4.5el7"
                             />
                         </div>
                     </div>
 
-                    <div data-oid="yln_q2-">
-                        <label
-                            className="block text-sm font-medium text-gray-700 mb-1"
-                            data-oid="o3-1cr_"
-                        >
-                            Project Description
-                        </label>
+                    <div className="space-y-2" data-oid="yln_q2-">
+                        <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest ml-1">Implementation Highlights</label>
                         <textarea
                             value={project.description}
-                            onChange={(e) =>
-                                updateProject(project.id, 'description', e.target.value)
-                            }
+                            onChange={(e) => updateProject(project.id, 'description', e.target.value)}
                             rows={3}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
-                            placeholder="Brief description of the project and its purpose..."
-                            data-oid="agnd:az"
-                        />
-                    </div>
-
-                    <div data-oid="_wsk1_u">
-                        <label
-                            className="block text-sm font-medium text-gray-700 mb-1"
-                            data-oid="fm6dpe8"
-                        >
-                            Key Highlights
-                        </label>
-                        <textarea
-                            value={project.highlights.join('\n')}
-                            onChange={(e) =>
-                                updateProject(project.id, 'highlights', e.target.value.split('\n'))
-                            }
-                            rows={3}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
-                            placeholder="• Key features implemented&#10;• Technical challenges solved&#10;• Impact or results achieved"
-                            data-oid="x3ok79j"
+                            className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-sm resize-none"
+                            placeholder="What did you build and how?"
+                            data-oid="o3-1cr_"
                         />
                     </div>
                 </div>
             ))}
 
             {resumeData.projects.length === 0 && (
-                <div className="text-center py-8 text-gray-500" data-oid="dgn3je1">
-                    <p data-oid="n2:jr1-">No projects added yet.</p>
-                    <p className="text-sm" data-oid="yl3du9m">
-                        Click "Add Project" to get started.
-                    </p>
+                <div className="text-center py-12 bg-slate-50 rounded-2xl border-2 border-dashed border-slate-200" data-oid="dgn3je1">
+                    <div className="p-3 bg-white rounded-2xl shadow-sm inline-block mb-3">
+                        <svg className="w-6 h-6 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.168.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5S19.832 5.477 21 6.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
+                    </div>
+                    <p className="text-slate-500 font-bold text-sm tracking-tight" data-oid="n2:jr1-">Projects are Missing</p>
+                    <p className="text-slate-400 text-xs mt-1" data-oid="yl3du9m">Add projects to showcase your expertise</p>
                 </div>
             )}
         </div>
     );
 
     const renderSkills = () => (
-        <div className="p-6 space-y-6" data-oid="yo00ycf">
-            <div className="flex items-center justify-between" data-oid="veojlr5">
-                <h3 className="text-xl font-semibold text-gray-800" data-oid="dmkwdo3">
-                    Skills
-                </h3>
+        <div className="space-y-8 p-6" data-oid="yo00ycf">
+            <div className="flex items-center justify-between pb-4 border-b border-slate-100" data-oid="veojlr5">
+                <div>
+                    <h3 className="text-xl font-bold text-slate-800" data-oid="dmkwdo3">
+                        Skills & Expertise
+                    </h3>
+                    <p className="text-xs text-slate-400 mt-1">Categorized skills for ATS optimization</p>
+                </div>
                 <div className="flex items-center space-x-2" data-oid="0yyenlj">
                     <input
                         type="text"
                         value={newSkillCategory}
                         onChange={(e) => setNewSkillCategory(e.target.value)}
-                        placeholder="Category name"
-                        className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
+                        placeholder="Category (e.g. Tools)"
+                        className="px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-xs font-bold"
                         data-oid="-ypz4mt"
                     />
-
                     <button
                         onClick={addSkillCategory}
-                        className="px-4 py-2 bg-[hsl(196,80%,45%)] text-white rounded-md hover:bg-[hsl(196,80%,40%)] transition-colors duration-200"
+                        className="px-4 py-2 bg-slate-900 text-white rounded-xl text-xs font-bold hover:bg-black transition-all shadow-lg"
                         data-oid="6a-0rtz"
                     >
-                        Add Category
+                        Add
                     </button>
                 </div>
             </div>
 
-            {resumeData.skills.map((skill, index) => (
-                <div
-                    key={index}
-                    className="border border-gray-200 rounded-lg p-4 space-y-4"
-                    data-oid="7ktl56b"
-                >
-                    <div className="flex items-center justify-between" data-oid="fb6x3-r">
-                        <input
-                            type="text"
-                            value={skill.category}
-                            onChange={(e) => updateSkillCategory(index, 'category', e.target.value)}
-                            className="font-medium text-gray-800 bg-transparent border-none focus:outline-none focus:ring-0 text-lg"
-                            placeholder="Skill Category"
-                            data-oid="7d.x0f."
-                        />
+            <div className="grid gap-4" data-oid="skill-grid">
+                {resumeData.skills.map((skill, index) => (
+                    <div
+                        key={index}
+                        className="relative bg-slate-50/50 border border-slate-200 rounded-2xl p-6 transition-all hover:bg-white hover:shadow-xl hover:shadow-slate-200/50 group"
+                        data-oid="7ktl56b"
+                    >
+                        <div className="flex items-center justify-between mb-4" data-oid="fb6x3-r">
+                            <input
+                                type="text"
+                                value={skill.category}
+                                onChange={(e) => updateSkillCategory(index, 'category', e.target.value)}
+                                className="font-bold text-slate-800 bg-transparent border-none focus:outline-none focus:ring-0 text-sm uppercase tracking-wider"
+                                placeholder="Skill Category"
+                                data-oid="7d.x0f."
+                            />
+                            <button
+                                onClick={() => removeSkillCategory(index)}
+                                className="p-2 text-slate-400 hover:text-rose-500 hover:bg-rose-50 rounded-lg transition-all opacity-0 group-hover:opacity-100"
+                                data-oid="udmvsqa"
+                            >
+                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                            </button>
+                        </div>
 
-                        <button
-                            onClick={() => removeSkillCategory(index)}
-                            className="text-red-500 hover:text-red-700"
-                            data-oid="udmvsqa"
-                        >
-                            Remove
-                        </button>
+                        <div className="space-y-2" data-oid="xw2y.eo">
+                            <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1" data-oid="nw0_zc4">
+                                Items (Comma Separated)
+                            </label>
+                            <input
+                                type="text"
+                                value={skill.items.join(', ')}
+                                onChange={(e) =>
+                                    updateSkillCategory(
+                                        index,
+                                        'items',
+                                        e.target.value.split(', ').filter((item) => item.trim()),
+                                    )
+                                }
+                                className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-sm font-medium"
+                                placeholder="React, Node.js, TypeScript..."
+                                data-oid="4vutea9"
+                            />
+                        </div>
                     </div>
-
-                    <div data-oid="xw2y.eo">
-                        <label
-                            className="block text-sm font-medium text-gray-700 mb-1"
-                            data-oid="nw0_zc4"
-                        >
-                            Skills (comma-separated)
-                        </label>
-                        <input
-                            type="text"
-                            value={skill.items.join(', ')}
-                            onChange={(e) =>
-                                updateSkillCategory(
-                                    index,
-                                    'items',
-                                    e.target.value.split(', ').filter((item) => item.trim()),
-                                )
-                            }
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
-                            placeholder="JavaScript, React, Node.js"
-                            data-oid="4vutea9"
-                        />
-                    </div>
-                </div>
-            ))}
+                ))}
+            </div>
 
             {resumeData.skills.length === 0 && (
-                <div className="text-center py-8 text-gray-500" data-oid="w_qk4m-">
-                    <p data-oid="8:._30d">No skill categories added yet.</p>
-                    <p className="text-sm" data-oid="ynz21dq">
-                        Add a category to get started.
-                    </p>
+                <div className="text-center py-12 bg-slate-50 rounded-2xl border-2 border-dashed border-slate-200" data-oid="w_qk4m-">
+                    <div className="p-3 bg-white rounded-2xl shadow-sm inline-block mb-3">
+                        <svg className="w-6 h-6 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                    </div>
+                    <p className="text-slate-500 font-bold text-sm tracking-tight" data-oid="8:._30d">No Skills Defined</p>
+                    <p className="text-slate-400 text-xs mt-1" data-oid="ynz21dq">Add categories like Languages, Frameworks, etc.</p>
                 </div>
             )}
         </div>
     );
 
     const renderAdditional = () => (
-        <div className="p-6 space-y-6" data-oid="ow.r:kp">
-            <h3 className="text-xl font-semibold text-gray-800 mb-4" data-oid="6dn.ntb">
-                Additional Information
-            </h3>
-
-            <div data-oid="ug52n8u">
-                <label className="block text-sm font-medium text-gray-700 mb-2" data-oid="5yqzsb5">
-                    Certifications
-                </label>
-                <textarea
-                    value={resumeData.certifications.join('\n')}
-                    onChange={(e) =>
-                        onDataChange(
-                            'certifications',
-                            e.target.value.split('\n').filter((cert) => cert.trim()),
-                        )
-                    }
-                    rows={4}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
-                    placeholder="AWS Certified Solutions Architect&#10;Google Cloud Professional&#10;Microsoft Azure Fundamentals"
-                    data-oid="2mf7mrw"
-                />
-
-                <p className="text-xs text-gray-500 mt-1" data-oid="i02ak.a">
-                    Enter each certification on a new line
-                </p>
+        <div className="space-y-8 p-6" data-oid="ow.r:kp">
+            <div className="pb-4 border-b border-slate-100">
+                <h3 className="text-xl font-bold text-slate-800" data-oid="6dn.ntb">
+                    Additional Info
+                </h3>
+                <p className="text-xs text-slate-400 mt-1">Certifications, languages, and more</p>
             </div>
 
-            <div data-oid="qz2yiz-">
-                <label className="block text-sm font-medium text-gray-700 mb-2" data-oid="bk:k9:8">
-                    Languages
-                </label>
-                <textarea
-                    value={resumeData.languages.join('\n')}
-                    onChange={(e) =>
-                        onDataChange(
-                            'languages',
-                            e.target.value.split('\n').filter((lang) => lang.trim()),
-                        )
-                    }
-                    rows={3}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[hsl(196,80%,45%)] focus:border-transparent"
-                    placeholder="English (Native)&#10;Spanish (Conversational)&#10;French (Basic)"
-                    data-oid="-ig0ti1"
-                />
+            <div className="space-y-6">
+                <div className="space-y-2" data-oid="ug52n8u">
+                    <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider ml-1" data-oid="5yqzsb5">
+                        Certifications & Awards
+                    </label>
+                    <textarea
+                        value={resumeData.certifications.join('\n')}
+                        onChange={(e) =>
+                            onDataChange(
+                                'certifications',
+                                e.target.value.split('\n').filter((cert) => cert.trim()),
+                            )
+                        }
+                        rows={4}
+                        className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-sm font-medium resize-none"
+                        placeholder="• AWS Certified...&#10;• Best Performer Award..."
+                        data-oid="2mf7mrw"
+                    />
+                </div>
 
-                <p className="text-xs text-gray-500 mt-1" data-oid="5y1i4fl">
-                    Enter each language on a new line
-                </p>
+                <div className="space-y-2" data-oid="qz2yiz-">
+                    <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider ml-1" data-oid="bk:k9:8">
+                        Languages Spoken
+                    </label>
+                    <textarea
+                        value={resumeData.languages.join('\n')}
+                        onChange={(e) =>
+                            onDataChange(
+                                'languages',
+                                e.target.value.split('\n').filter((lang) => lang.trim()),
+                            )
+                        }
+                        rows={3}
+                        className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-sm font-medium resize-none"
+                        placeholder="• English (Native)&#10;• Hindi (Fluent)..."
+                        data-oid="-ig0ti1"
+                    />
+                </div>
             </div>
         </div>
     );
+
+    const renderDesignSettings = () => {
+        const fonts = [
+            { name: 'Inter', value: 'Inter' },
+            { name: 'Roboto', value: 'Roboto' },
+            { name: 'Montserrat', value: 'Montserrat' },
+            { name: 'Open Sans', value: 'Open Sans' },
+            { name: 'Playfair Display', value: 'Playfair Display' },
+            { name: 'Lora', value: 'Lora' },
+        ];
+
+        return (
+            <div className="space-y-8 p-6">
+                <div className="pb-4 border-b border-slate-100">
+                    <h3 className="text-xl font-bold text-slate-800">
+                        Design Canvas
+                    </h3>
+                    <p className="text-xs text-slate-400 mt-1">Customize typography and visual styles</p>
+                </div>
+                
+                <div className="space-y-6">
+                    <div className="space-y-3">
+                        <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider ml-1">
+                            Premium Typography
+                        </label>
+                        <div className="grid grid-cols-2 gap-3">
+                            {fonts.map((font) => (
+                                <button
+                                    key={font.value}
+                                    onClick={() => onFontChange(font.value)}
+                                    className={`relative px-4 py-4 text-sm rounded-2xl border-2 transition-all duration-300 flex flex-col items-center justify-center ${
+                                        fontFamily === font.value
+                                            ? 'bg-blue-50 border-blue-600 text-blue-700 shadow-lg shadow-blue-100 scale-[1.02]'
+                                            : 'bg-white border-slate-100 text-slate-500 hover:border-slate-200'
+                                    }`}
+                                    style={{ fontFamily: font.value }}
+                                >
+                                    <span className="text-lg mb-1">Aa</span>
+                                    <span className="font-bold text-xs uppercase tracking-tighter">{font.name}</span>
+                                    {fontFamily === font.value && (
+                                        <div className="absolute top-2 right-2 w-2 h-2 bg-blue-600 rounded-full"></div>
+                                    )}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className="p-5 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-2xl text-white shadow-xl shadow-blue-200">
+                        <div className="flex items-center gap-3 mb-2">
+                            <div className="p-1.5 bg-white/20 rounded-lg backdrop-blur-sm">
+                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                            </div>
+                            <span className="font-bold text-sm tracking-tight">AI Style Guide</span>
+                        </div>
+                        <p className="text-white/80 text-[11px] leading-relaxed">
+                            For maximum readability in ATS systems, we recommend <b>Inter</b> or <b>Roboto</b>. 
+                            These fonts are highly recognizable by scanning algorithms.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        );
+    };
 
     const sections = {
         personal: renderPersonalInfo,
@@ -975,6 +922,7 @@ export default function ResumeForm({ resumeData, activeSection, onDataChange, se
         projects: renderProjects,
         skills: renderSkills,
         additional: renderAdditional,
+        design: renderDesignSettings,
     };
 
     return (

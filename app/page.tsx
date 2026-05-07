@@ -1,6 +1,9 @@
 'use client';
 import MainNavbar from '@/components/mainNavbar';
+import Footer from '@/components/Footer';
+import TestimonialModal from '@/components/TestimonialModal';
 import { usePremiumTheme } from '@/hooks/usePremiumTheme';
+
 import { useAuth } from '@/lib/auth/AuthContext';
 import { useAuthAction } from '@/lib/auth/useAuthAction';
 import Link from 'next/link';
@@ -25,6 +28,7 @@ const dummyData: {
         whatsappMembers: 35213,
         linkedinMembers: 40320,
         telegramMembers: 2711,
+        premiumUsers: 1250,
     },
     testimonials: [
         {
@@ -134,14 +138,49 @@ const dummyData: {
 
 // API call functions (to be implemented with actual backend)
 const fetchStats = async (): Promise<Stats> => {
-    // Replace with actual API call
-    return new Promise((resolve) => setTimeout(() => resolve(dummyData.stats), 500));
+    try {
+        const response = await fetch('/api/v1/admin/settings/metrics');
+        const data = await response.json();
+        if (data.success) {
+            // Transform settings to Stats
+            return {
+                freshers: data.data.freshers_count || dummyData.stats.freshers,
+                verifiedJobs: data.data.verified_jobs_count || dummyData.stats.verifiedJobs,
+                activeMembers: data.data.active_members || dummyData.stats.activeMembers,
+                postedJobs: data.data.posted_jobs_count || dummyData.stats.postedJobs,
+                linkedInFollowers: data.data.linkedin_followers || dummyData.stats.linkedInFollowers,
+                users: data.data.freshers_count || dummyData.stats.users,
+                whatsappMembers: data.data.whatsapp_members || dummyData.stats.whatsappMembers,
+                linkedinMembers: data.data.linkedin_members || dummyData.stats.linkedinMembers,
+                telegramMembers: data.data.telegram_members || dummyData.stats.telegramMembers,
+                premiumUsers: data.data.premium_users_count || 1250, // Added default for premium users
+            };
+        }
+    } catch (error) {
+        console.error('Failed to fetch stats', error);
+    }
+    return dummyData.stats;
 };
 
 const fetchTestimonials = async (): Promise<Testimonial[]> => {
-    // Replace with actual API call
-    return new Promise((resolve) => setTimeout(() => resolve(dummyData.testimonials), 500));
+    try {
+        const response = await fetch('/api/v1/testimonials');
+        const data = await response.json();
+        if (data.success) {
+            return data.data.map((t: any) => ({
+                id: t._id,
+                name: t.name,
+                company: t.role,
+                quote: t.content,
+                image: t.avatar || 'https://randomuser.me/api/portraits/lego/1.jpg'
+            }));
+        }
+    } catch (error) {
+        console.error('Failed to fetch testimonials', error);
+    }
+    return dummyData.testimonials;
 };
+
 
 const fetchResources = async (): Promise<Resource[]> => {
     // Replace with actual API call
@@ -169,6 +208,7 @@ interface Stats {
     whatsappMembers: number;
     linkedinMembers: number;
     telegramMembers: number;
+    premiumUsers: number;
 }
 
 interface Testimonial {
@@ -212,6 +252,9 @@ export default function Page() {
     const { navigateWithAuth } = useAuthAction();
     const { isAuthenticated } = useAuth();
     const { isPremium, premiumColors } = usePremiumTheme();
+    const [showTestimonialModal, setShowTestimonialModal] = useState(false);
+    const [newTestimonial, setNewTestimonial] = useState({ rating: 5, content: '', role: '' });
+
     const router = useRouter();
 
     // Add custom CSS for animations
@@ -546,13 +589,25 @@ export default function Page() {
                             </div> 
                             */}
 
-                            {/* START: Placeholder for New 4-Card Grid */}
-                            <div className="mb-8">
-                                {/* TODO: Insert new 4-card grid design here as per instructions.
-                                  The code for this component was not provided in the list of changes.
-                                */}
+                            {/* Platform Metrics 4-Card Grid */}
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+                                <div className="bg-white/15 backdrop-blur-md p-4 rounded-2xl border border-white/20 shadow-xl">
+                                    <div className="text-3xl font-bold text-yellow-300">{(stats?.freshers || 35000).toLocaleString()}</div>
+                                    <div className="text-xs text-blue-100 uppercase tracking-wider font-semibold">Freshers Joined</div>
+                                </div>
+                                <div className="bg-white/15 backdrop-blur-md p-4 rounded-2xl border border-white/20 shadow-xl">
+                                    <div className="text-3xl font-bold text-white">{stats?.verifiedJobs || '10k+'}</div>
+                                    <div className="text-xs text-blue-100 uppercase tracking-wider font-semibold">Verified Jobs</div>
+                                </div>
+                                <div className="bg-white/15 backdrop-blur-md p-4 rounded-2xl border border-white/20 shadow-xl">
+                                    <div className="text-3xl font-bold text-green-300">{(stats?.users || 42000).toLocaleString()}</div>
+                                    <div className="text-xs text-blue-100 uppercase tracking-wider font-semibold">Active Members</div>
+                                </div>
+                                <div className="bg-white/15 backdrop-blur-md p-4 rounded-2xl border border-white/20 shadow-xl">
+                                    <div className="text-3xl font-bold text-orange-300">{(stats?.premiumUsers || 1250).toLocaleString()}</div>
+                                    <div className="text-xs text-blue-100 uppercase tracking-wider font-semibold">Premium Users</div>
+                                </div>
                             </div>
-                            {/* END: Placeholder for New 4-Card Grid */}
 
                             {/* Search Section (MOVED UP) */}
                             <div className="mb-8 max-w-3xl mx-auto">
@@ -1351,6 +1406,48 @@ export default function Page() {
                         </div>{' '}
                     </div>{' '}
                 </section>{' '}
+                {/* Hear From Our Members */}
+                <section className="py-20 bg-gradient-to-b from-white to-blue-50 overflow-hidden">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div className="text-center mb-16">
+                            <h2 className="text-4xl font-bold text-gray-900 mb-4">Hear From Our Members</h2>
+                            <p className="text-xl text-gray-600">Real stories from freshers who launched their tech careers</p>
+                        </div>
+
+                        <div className="relative">
+                            <div className="flex animate-scroll hover:pause-scroll space-x-8 pb-8">
+                                {[...testimonials, ...testimonials].map((testimonial, index) => (
+                                    <div
+                                        key={`${testimonial.id}-${index}`}
+                                        className="flex-shrink-0 w-80 bg-white p-8 rounded-2xl shadow-lg border border-gray-100 transform transition-all duration-300 hover:scale-105"
+                                    >
+                                        <div className="flex items-center mb-6">
+                                            <img
+                                                src={testimonial.image}
+                                                alt={testimonial.name}
+                                                className="w-14 h-14 rounded-full object-cover border-2 border-blue-500 p-0.5"
+                                            />
+                                            <div className="ml-4">
+                                                <h4 className="font-bold text-gray-900">{testimonial.name}</h4>
+                                                <p className="text-sm text-blue-600 font-medium">{testimonial.company}</p>
+                                            </div>
+                                        </div>
+                                        <div className="mb-4">
+                                            <div className="flex text-yellow-400 mb-2">
+                                                {[...Array(5)].map((_, i) => (
+                                                    <svg key={i} className="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.835 1.688-1.71 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.874.57-2.01-.197-1.71-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                                    </svg>
+                                                ))}
+                                            </div>
+                                        </div>
+                                        <p className="text-gray-700 italic leading-relaxed">"{testimonial.quote}"</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </section>
                 {/* Community Integration */}{' '}
                 <section
                     className="py-10 sm:py-12 bg-gradient-to-b from-[hsl(210,50%,98%)] to-[hsl(196,60%,95%)] relative overflow-hidden"
@@ -2379,9 +2476,17 @@ export default function Page() {
                             <h2 className="text-3xl font-bold mb-4 text-white">
                                 Success Stories from Our Community
                             </h2>
-                            <p className="text-blue-100 max-w-2xl mx-auto text-base">
-                                See how freshers like you landed jobs at top tech companies
+                            <p className="text-blue-100 max-w-2xl mx-auto text-base mb-6">
+                                Success stories from freshers who found their dream tech jobs
                             </p>
+                            {isAuthenticated && (
+                                <button 
+                                    onClick={() => setShowTestimonialModal(true)}
+                                    className="bg-yellow-400 hover:bg-yellow-500 text-blue-900 px-6 py-2 rounded-full font-bold transition-all transform hover:scale-105 shadow-lg"
+                                >
+                                    Rate Us & Share Success
+                                </button>
+                            )}
                         </div>
                         {/* Single Row Placard Design */}
                         <div className="space-y-6">
@@ -2580,282 +2685,9 @@ export default function Page() {
                         </div>{' '}
                     </div>{' '}
                 </section>{' '}
+                <Footer />
             </main>{' '}
-            {/* Footer */}{' '}
-            <footer className="bg-gray-950 text-white" data-oid="82tp7r7">
-                {' '}
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12" data-oid="h8df:uj">
-                    {' '}
-                    <div className="grid md:grid-cols-4 gap-8" data-oid="91gs75:">
-                        {' '}
-                        <div data-oid="l57_6.f">
-                            {' '}
-                            <div className="mb-6">
-                                <Link href="/" className="inline-block">
-                                    <img src="/images/x_careelogo.png" alt="X Careers" className="h-10 w-auto object-contain" />
-                                </Link>
-                            </div>
-                            <p className="text-gray-400 mb-4" data-oid="q96j6h7">
-                                {' '}
-                                Empowering tech freshers with the right opportunities, tools, and guidance to get hired
-                                faster.{' '}
-                            </p>{' '}
-                            <div className="flex space-x-4" data-oid="a4mkqe5">
-                                {' '}
-                                <a
-                                    href="https://www.linkedin.com/company/x-careers/"
-                                    className="text-gray-400 hover:text-white transition-all duration-300"
-                                    data-oid="s50bayb"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    {' '}
-                                    <svg
-                                        className="h-6 w-6"
-                                        fill="currentColor"
-                                        viewBox="0 0 24 24"
-                                        data-oid="ixrtog1"
-                                    >
-                                        {' '}
-                                        <path
-                                            d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
-                                            data-oid=".ll1czg"
-                                        />{' '}
-                                    </svg>{' '}
-                                </a>{' '}
-                                <a
-                                    href="https://www.instagram.com/x_careers_official?igsh=Z3M3cTJyNndtdDdq"
-                                    className="text-gray-400 hover:text-white transition-all duration-300"
-                                    data-oid="5rx5p5u"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    {' '}
-                                    <svg
-                                        className="h-6 w-6"
-                                        fill="currentColor"
-                                        viewBox="0 0 24 24"
-                                        data-oid="qbvgjhi"
-                                    >
-                                        {' '}
-                                        <path
-                                            d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"
-                                            data-oid="tifm572"
-                                        />{' '}
-                                    </svg>{' '}
-                                </a>{' '}
-                                <a
-                                    href="https://www.instagram.com/x_careers_official?igsh=Z3M3cTJyNndtdDdq"
-                                    className="text-gray-400 hover:text-white transition-all duration-300"
-                                    data-oid="bixx5ue"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    {' '}
-                                    <svg
-                                        className="h-6 w-6"
-                                        fill="currentColor"
-                                        viewBox="0 0 24 24"
-                                        data-oid="bindseu"
-                                    >
-                                        {' '}
-                                        <path
-                                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"
-                                            data-oid="y3y..:8"
-                                        />{' '}
-                                    </svg>{' '}
-                                </a>{' '}
-                                <a
-                                    href="https://whatsapp.com/channel/0029Vak7B1WLo4hdCrawMw3i"
-                                    className="text-gray-400 hover:text-white transition-all duration-300"
-                                    data-oid="whatsapp-link"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    {' '}
-                                    <svg
-                                        className="h-6 w-6"
-                                        fill="currentColor"
-                                        viewBox="0 0 24 24"
-                                        data-oid="whatsapp-icon"
-                                    >
-                                        {' '}
-                                        <path
-                                            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"
-                                            data-oid="whatsapp-path"
-                                        />{' '}
-                                    </svg>{' '}
-                                </a>{' '}
-                                <a
-                                    href="https://t.me/x_careers"
-                                    className="text-gray-400 hover:text-white transition-all duration-300"
-                                    data-oid="telegram-link"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    {' '}
-                                    <svg
-                                        className="h-6 w-6"
-                                        fill="currentColor"
-                                        viewBox="0 0 24 24"
-                                        data-oid="telegram-icon"
-                                    >
-                                        {' '}
-                                        <path
-                                            d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"
-                                            data-oid="telegram-path"
-                                        />{' '}
-                                    </svg>{' '}
-                                </a>{' '}
-                            </div>{' '}
-                        </div>{' '}
-                        <div data-oid="ogqm4hd">
-                            {' '}
-                            <h3 className="text-lg font-bold mb-4" data-oid=".zd2wgp">
-                                {' '}
-                                Company{' '}
-                            </h3>{' '}
-                            <ul className="space-y-3" data-oid="zdh8588">
-                                {' '}
-                                <li data-oid="v:.a:b8">
-                                    {' '}
-                                    <a
-                                        href="/about"
-                                        className="text-gray-400 hover:text-white transition-all duration-300"
-                                        data-oid="7rqc:nu"
-                                    >
-                                        {' '}
-                                        About Us{' '}
-                                    </a>{' '}
-                                </li>{' '}
-                                <li data-oid="dyoar89">
-                                    {' '}
-                                    <a
-                                        href="/careers"
-                                        className="text-gray-400 hover:text-white transition-all duration-300"
-                                        data-oid="k5l0my5"
-                                    >
-                                        {' '}
-                                        Careers{' '}
-                                    </a>{' '}
-                                </li>{' '}
-                            </ul>{' '}
-                        </div>{' '}
-                        <div data-oid="49atlo3">
-                            {' '}
-                            <h3 className="text-lg font-bold mb-4" data-oid="fy55lqf">
-                                {' '}
-                                Resources{' '}
-                            </h3>{' '}
-                            <ul className="space-y-3" data-oid="ug1pucs">
-                                {' '}
-                                <li data-oid="eugd72:">
-                                    {' '}
-                                    <a
-                                        href="/resume-review"
-                                        className="text-gray-400 hover:text-white transition-all duration-300"
-                                        data-oid="ic:w-at"
-                                    >
-                                        {' '}
-                                        Resume Review{' '}
-                                    </a>{' '}
-                                </li>{' '}
-                                <li data-oid="wsicpzb">
-                                    {' '}
-                                    <a
-                                        href="/blog"
-                                        className="text-gray-400 hover:text-white transition-all duration-300"
-                                        data-oid="uizz_6n"
-                                    >
-                                        {' '}
-                                        Blog{' '}
-                                    </a>{' '}
-                                </li>{' '}
-                            </ul>{' '}
-                        </div>{' '}
-                        <div data-oid="b_jp.ej">
-                            {' '}
-                            <h3 className="text-lg font-bold mb-4" data-oid="o0ywgvv">
-                                {' '}
-                                Legal{' '}
-                            </h3>{' '}
-                            <ul className="space-y-3" data-oid="56dsy7d">
-                                {' '}
-                                <li data-oid="0nkvgy2">
-                                    {' '}
-                                    <a
-                                        href="/privacy-policy"
-                                        className="text-gray-400 hover:text-white transition-all duration-300"
-                                        data-oid="v3q8mtz"
-                                    >
-                                        {' '}
-                                        Privacy Policy{' '}
-                                    </a>{' '}
-                                </li>{' '}
-                                <li data-oid="mjt0aqp">
-                                    {' '}
-                                    <a
-                                        href="/terms-of-service"
-                                        className="text-gray-400 hover:text-white transition-all duration-300"
-                                        data-oid="2h:c87y"
-                                    >
-                                        {' '}
-                                        Terms of Service{' '}
-                                    </a>{' '}
-                                </li>{' '}
-                                <li data-oid="moimpf4">
-                                    {' '}
-                                    <a
-                                        href="/refund-policy"
-                                        className="text-gray-400 hover:text-white transition-all duration-300"
-                                        data-oid="8yxq:x-"
-                                    >
-                                        {' '}
-                                        Refund Policy{' '}
-                                    </a>{' '}
-                                </li>{' '}
-                                <li data-oid="yel703b">
-                                    {' '}
-                                    <a
-                                        href="/shipping-policy"
-                                        className="text-gray-400 hover:text-white transition-all duration-300"
-                                        data-oid=":-go-qy"
-                                    >
-                                        {' '}
-                                        Shipping Policy{' '}
-                                    </a>{' '}
-                                </li>{' '}
-                                <li data-oid="terms-conditions">
-                                    {' '}
-                                    <a
-                                        href="/terms-and-conditions"
-                                        className="text-gray-400 hover:text-white transition-all duration-300"
-                                        data-oid="terms-conditions-link"
-                                    >
-                                        {' '}
-                                        Terms and Conditions{' '}
-                                    </a>{' '}
-                                </li>{' '}
-                            </ul>{' '}
-                        </div>{' '}
-                    </div>{' '}
-                    <div
-                        className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400"
-                        data-oid=":au5n3r"
-                    >
-                        {' '}
-                        <p className="mb-2" data-oid="2_7b0p9">
-                            {' '}
-                            © {new Date().getFullYear()} X Careers. All rights reserved.{' '}
-                        </p>{' '}
-                        <p className="mb-2 text-xs text-gray-500" data-oid="legal-entity">
-                            X Careers is a product of <strong>X Careers Connect Private Limited</strong>.{' '}
-                            All services on this platform are provided by X Careers Connect Private Limited.
-                        </p>{' '}
-                        <p data-oid="uuado7s">Built with ❤️ for tech freshers</p>{' '}
-                    </div>{' '}
-                </div>{' '}
-            </footer>{' '}
+
         </div>
     );
 }

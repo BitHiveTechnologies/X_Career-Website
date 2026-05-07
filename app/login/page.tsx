@@ -45,6 +45,16 @@ function LoginForm() {
                         >
                             Sign In
                         </button>
+                        <p className="mt-2 text-center text-sm text-gray-600" data-oid="3:v:c2j">
+                            {'Don\'t have an account? '}
+                            <Link
+                                href="/notify"
+                                className="font-medium text-blue-600 hover:text-blue-500 transition-colors"
+                                data-oid="x-h9r4-"
+                            >
+                                Get Started with NotifyX
+                            </Link>
+                        </p>
                     </div>
                 </div>
             </div>

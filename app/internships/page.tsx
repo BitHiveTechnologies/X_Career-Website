@@ -1,12 +1,14 @@
 'use client';
 
+import MainNavbar from '@/components/mainNavbar';
+import Footer from '@/components/Footer';
 import CategoryMenu from '@/components/CategoryMenu';
 import FiltersSidebar from '@/components/FiltersSidebar';
 import JobCard from '@/components/JobCard';
-import MainNavbar from '@/components/mainNavbar';
-import Link from 'next/link';
+
 import { FrontendJob } from '@/lib/api';
 import { useCallback, useEffect, useState } from 'react';
+import Link from 'next/link';
 
 // TypeScript Interfaces for Internships
 export interface InternshipFilterOptions {
@@ -18,6 +20,7 @@ export interface InternshipFilterOptions {
     stipendRange: string;
     companyType: string;
     isPaid: string;
+    yearOfPassout?: string;
 }
 
 export interface Category {
@@ -57,6 +60,7 @@ export default function InternshipsPage() {
         stipendRange: '',
         companyType: '',
         isPaid: '',
+        yearOfPassout: '',
     });
     const [isLoading, setIsLoading] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
@@ -324,6 +328,16 @@ export default function InternshipsPage() {
             );
         }
 
+        if (filters.yearOfPassout) {
+            filtered = filtered.filter((internship) => {
+                const passoutYears = internship.eligibility?.passoutYears || [];
+                return (
+                    passoutYears.length === 0 ||
+                    passoutYears.some((year) => year.toString() === filters.yearOfPassout)
+                );
+            });
+        }
+
         // Sort filtered results
         switch (sortBy) {
             case 'date':
@@ -379,6 +393,7 @@ export default function InternshipsPage() {
             stipendRange: '',
             companyType: '',
             isPaid: '',
+            yearOfPassout: '',
         });
         setSelectedCategory('all');
         setSearchQuery('');
@@ -984,6 +999,7 @@ export default function InternshipsPage() {
                     </div>
                 </div>
             </section>
+            <Footer />
         </div>
     );
 }

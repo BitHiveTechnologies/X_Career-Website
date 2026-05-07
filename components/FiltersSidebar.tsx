@@ -410,6 +410,31 @@ export default function FiltersSidebar({
                     </select>
                 </div>
 
+                {/* Year of Passout Filter */}
+                <div data-oid="passout-year-filter">
+                    <label
+                        htmlFor="yearOfPassout"
+                        className="block text-sm font-medium text-gray-700 mb-2"
+                        data-oid="py-label"
+                    >
+                        Year of Passout
+                    </label>
+                    <select
+                        id="yearOfPassout"
+                        value={filters.yearOfPassout || ''}
+                        onChange={(e) => handleInputChange('yearOfPassout', e.target.value)}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[hsl(196,80%,45%)] focus:border-[hsl(196,80%,45%)] transition-colors duration-200 bg-white"
+                        data-oid="py-select"
+                    >
+                        <option value="" data-oid="py-all">All Years</option>
+                        {[2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030].map((year) => (
+                            <option key={year} value={year.toString()} data-oid={`py-${year}`}>
+                                {year}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+
                 {/* Action Buttons */}
                 <div className="space-y-3 pt-6 border-t border-gray-200" data-oid="ah4f646">
                     <button

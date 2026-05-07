@@ -9,6 +9,8 @@ export interface CreateOrderRequest {
   plan: string;
   amount: number;
   currency: string;
+  email?: string;
+  name?: string;
 }
 
 export interface CreateOrderResponse {

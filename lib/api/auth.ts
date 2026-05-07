@@ -74,6 +74,7 @@ export class AuthService {
           role: response.data.user.role as 'user' | 'admin' | 'super_admin',
           subscriptionStatus: 'inactive',
           isProfileComplete: false,
+          mustChangePassword: response.data.user.mustChangePassword
         };
         
         console.log('Created user from JWT login:', basicUser);
@@ -178,7 +179,8 @@ export class AuthService {
           subscriptionPlan: userData.subscriptionPlan,
           subscriptionInfo: userData.subscriptionInfo,
           isProfileComplete: userData.isProfileComplete || false,
-          avatar: userData.avatar
+          avatar: userData.avatar,
+          mustChangePassword: userData.mustChangePassword
         };
         
         return { success: true, user };

@@ -9,6 +9,18 @@ import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Textarea } from "@/components/ui/textarea"
+
+const PRELOADED_LOGOS = [
+  { name: 'Google', url: '/company-logos/google.png' },
+  { name: 'Amazon', url: '/company-logos/amazon.png' },
+  { name: 'Microsoft', url: '/company-logos/microsoft.png' },
+  { name: 'Deloitte', url: '/company-logos/deloitte.png' },
+  { name: 'Capgemini', url: '/company-logos/capgemini.png' },
+  { name: 'Swiggy', url: '/company-logos/swiggy.png' },
+  { name: 'Zomato', url: '/company-logos/zomato.png' },
+  { name: 'TCS', url: '/company-logos/tcs.png' },
+  { name: 'Infosys', url: '/company-logos/infosys.png' },
+];
 import { Briefcase, GraduationCap, Plus, X } from "lucide-react"
 import { useState } from "react"
 
@@ -364,11 +376,19 @@ export function QuickCreateModal({ isOpen, onClose, onSubmit, isLoading = false 
     try {
       let logoUrl: string | null = null;
 
-      // Upload logo if provided
-      if (activeTab === "job" && jobLogoFile) {
-        logoUrl = await handleLogoUpload(jobLogoFile, "job");
-      } else if (activeTab === "internship" && internshipLogoFile) {
-        logoUrl = await handleLogoUpload(internshipLogoFile, "internship");
+      // Upload logo if provided, otherwise use preview if it's a preloaded URL
+      if (activeTab === "job") {
+        if (jobLogoFile) {
+          logoUrl = await handleLogoUpload(jobLogoFile, "job");
+        } else if (jobLogoPreview && jobLogoPreview.startsWith('/company-logos/')) {
+          logoUrl = jobLogoPreview;
+        }
+      } else if (activeTab === "internship") {
+        if (internshipLogoFile) {
+          logoUrl = await handleLogoUpload(internshipLogoFile, "internship");
+        } else if (internshipLogoPreview && internshipLogoPreview.startsWith('/company-logos/')) {
+          logoUrl = internshipLogoPreview;
+        }
       }
 
       if (activeTab === "job") {
@@ -530,6 +550,29 @@ export function QuickCreateModal({ isOpen, onClose, onSubmit, isLoading = false 
                         )}
                       </div>
                       <p className="text-xs text-gray-500">PNG, JPEG, JPG, or WebP (max 2MB)</p>
+                      
+                      {/* Preloaded Logos */}
+                      <div className="pt-2">
+                        <Label className="text-xs text-gray-500 mb-2 block">Quick Select Logo</Label>
+                        <div className="flex flex-wrap gap-2">
+                          {PRELOADED_LOGOS.map((logo) => (
+                            <button
+                              key={logo.name}
+                              type="button"
+                              onClick={() => {
+                                setJobLogoPreview(logo.url);
+                                setJobLogoFile(null); 
+                              }}
+                              className="w-10 h-10 border border-gray-200 rounded p-1 hover:border-blue-500 transition-colors flex items-center justify-center bg-gray-50"
+                              title={logo.name}
+                            >
+                              <img src={logo.url} alt={logo.name} className="w-full h-full object-contain" onError={(e) => {
+                                (e.target as HTMLImageElement).src = `https://ui-avatars.com/api/?name=${logo.name}&background=random`;
+                              }} />
+                            </button>
+                          ))}
+                        </div>
+                      </div>
                     </div>
 
                     <div className="space-y-2">
@@ -841,6 +884,29 @@ export function QuickCreateModal({ isOpen, onClose, onSubmit, isLoading = false 
                         )}
                       </div>
                       <p className="text-xs text-gray-500">PNG, JPEG, JPG, or WebP (max 2MB)</p>
+                      
+                      {/* Preloaded Logos */}
+                      <div className="pt-2">
+                        <Label className="text-xs text-gray-500 mb-2 block">Quick Select Logo</Label>
+                        <div className="flex flex-wrap gap-2">
+                          {PRELOADED_LOGOS.map((logo) => (
+                            <button
+                              key={logo.name}
+                              type="button"
+                              onClick={() => {
+                                setInternshipLogoPreview(logo.url);
+                                setInternshipLogoFile(null);
+                              }}
+                              className="w-10 h-10 border border-gray-200 rounded p-1 hover:border-blue-500 transition-colors flex items-center justify-center bg-gray-50"
+                              title={logo.name}
+                            >
+                              <img src={logo.url} alt={logo.name} className="w-full h-full object-contain" onError={(e) => {
+                                (e.target as HTMLImageElement).src = `https://ui-avatars.com/api/?name=${logo.name}&background=random`;
+                              }} />
+                            </button>
+                          ))}
+                        </div>
+                      </div>
                     </div>
 
                     <div className="space-y-2">

@@ -150,6 +150,13 @@ export const API_ENDPOINTS = {
     CHECK: '/health',
     API_DOCS: '/api/v1/',
   },
+  
+  // Resumes
+  RESUMES: {
+    MY_RESUME: '/api/v1/resumes/my-resume',
+    SAVE: '/api/v1/resumes/my-resume',
+    PUBLIC: (resumeId: string) => `/api/v1/resumes/public/${resumeId}`,
+  },
 } as const;
 
 // HTTP Methods

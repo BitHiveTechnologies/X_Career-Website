@@ -83,6 +83,7 @@ export interface LoginResponse {
     lastName: string;
     role: string;
     mobile?: string;
+    mustChangePassword?: boolean;
   };
   admin?: {
     id: string;
@@ -136,6 +137,7 @@ export interface User {
   isProfileComplete: boolean;
   type?: string;
   avatar?: string;
+  mustChangePassword?: boolean;
 }
 
 // ============================================================================
@@ -607,6 +609,28 @@ export interface JobSearchFormData {
   experienceLevel: string;
   salaryRange: string;
   companyType: string;
+}
+
+// ============================================================================
+// RESUME TYPES
+// ============================================================================
+
+export interface Resume {
+  _id: string;
+  userId: string;
+  data: any;
+  templateId: string;
+  previewUrl?: string;
+  pdfUrl?: string;
+  isPublic: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface SaveResumeRequest {
+  data: any;
+  templateId?: string;
+  isPublic?: boolean;
 }
 
 // ============================================================================

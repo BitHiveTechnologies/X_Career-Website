@@ -45,7 +45,9 @@ import {
     SubscriptionPlan,
     SystemHealth,
     UserAnalytics,
-    VerifyPaymentRequest
+    VerifyPaymentRequest,
+    Resume,
+    SaveResumeRequest
 } from './types';
 
 // ============================================================================
@@ -683,6 +685,33 @@ export class HealthService {
 }
 
 // ============================================================================
+// RESUME SERVICES
+// ============================================================================
+
+export class ResumeService {
+  /**
+   * Get current user's resume
+   */
+  static async getMyResume(): Promise<ApiResponse<{ resume: Resume }>> {
+    return apiClient.get(API_ENDPOINTS.RESUMES.MY_RESUME);
+  }
+
+  /**
+   * Save or update user's resume
+   */
+  static async saveResume(resumeData: SaveResumeRequest): Promise<ApiResponse<{ resume: Resume }>> {
+    return apiClient.post(API_ENDPOINTS.RESUMES.SAVE, resumeData);
+  }
+
+  /**
+   * Get a public resume by ID
+   */
+  static async getPublicResume(resumeId: string): Promise<ApiResponse<{ resume: Resume }>> {
+    return apiClient.get(API_ENDPOINTS.RESUMES.PUBLIC(resumeId));
+  }
+}
+
+// ============================================================================
 // CONVENIENCE FUNCTIONS
 // ============================================================================
 
@@ -697,6 +726,7 @@ export const adminService = AdminService;
 export const notificationService = NotificationService;
 export const jobAlertService = JobAlertService;
 export const healthService = HealthService;
+export const resumeService = ResumeService;
 
 // Export individual service methods for convenience
 export const {
@@ -781,4 +811,10 @@ export const {
   checkHealth,
   getApiDocs,
 } = HealthService;
+
+export const {
+  getMyResume,
+  saveResume,
+  getPublicResume,
+} = ResumeService;
 

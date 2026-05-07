@@ -74,6 +74,15 @@ export default function ProfilePage() {
     const [completion, setCompletion] = useState<ProfileCompletionStatus | null>(null);
     const [formData, setFormData] = useState<UpdateProfileRequest>({});
     const [newSkill, setNewSkill] = useState('');
+    
+    // Password change state
+    const [passwordData, setPasswordData] = useState({
+        currentPassword: '',
+        newPassword: '',
+        confirmPassword: ''
+    });
+    const [passwordError, setPasswordError] = useState<string | null>(null);
+    const [passwordSaving, setPasswordSaving] = useState(false);
 
     // Debug function to check token status
     const checkTokenStatus = useCallback(() => {
@@ -279,7 +288,69 @@ export default function ProfilePage() {
             setFormData(prev => ({
             ...prev,
                 skills: skills.join(', ')
-        }));
+            }));
+        }
+    };
+
+    const handlePasswordChange = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setPasswordError(null);
+        setSuccess(null);
+
+        if (!passwordData.currentPassword || !passwordData.newPassword) {
+            setPasswordError('Both current and new passwords are required');
+            return;
+        }
+
+        if (passwordData.newPassword !== passwordData.confirmPassword) {
+            setPasswordError('New passwords do not match');
+            return;
+        }
+
+        if (passwordData.newPassword.length < 8) {
+            setPasswordError('New password must be at least 8 characters long');
+            return;
+        }
+
+        try {
+            setPasswordSaving(true);
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/change-password`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('careerx_token')}`
+                },
+                body: JSON.stringify({
+                    currentPassword: passwordData.currentPassword,
+                    newPassword: passwordData.newPassword
+                })
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                setSuccess('Password changed successfully!');
+                setPasswordData({
+                    currentPassword: '',
+                    newPassword: '',
+                    confirmPassword: ''
+                });
+                
+                // If the user had a mustChangePassword flag, we should update local state
+                if (user?.mustChangePassword) {
+                    const updatedUser = { ...user, mustChangePassword: false };
+                    localStorage.setItem('careerx_user', JSON.stringify(updatedUser));
+                    // We might need to refresh the page or update context, 
+                    // but since success is shown, it's fine for now.
+                }
+            } else {
+                setPasswordError(result.error?.message || 'Failed to change password');
+            }
+        } catch (err) {
+            console.error('Password change error:', err);
+            setPasswordError('An unexpected error occurred');
+        } finally {
+            setPasswordSaving(false);
         }
     };
 
@@ -331,6 +402,27 @@ export default function ProfilePage() {
                     <div className="mb-6 bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg flex items-center gap-2">
                         <CheckCircle className="w-5 h-5" />
                         {success}
+                    </div>
+                )}
+
+                {user?.mustChangePassword && (
+                    <div className="mb-6 bg-amber-50 border border-amber-200 text-amber-700 px-4 py-4 rounded-xl flex flex-col md:flex-row items-center justify-between gap-4 shadow-sm animate-pulse">
+                        <div className="flex items-center gap-3">
+                            <div className="bg-amber-100 p-2 rounded-full">
+                                <AlertCircle className="w-6 h-6 text-amber-600" />
+                            </div>
+                            <div>
+                                <p className="font-bold">Password Change Required</p>
+                                <p className="text-sm opacity-90">Please set a new password for your account to ensure security.</p>
+                            </div>
+                        </div>
+                        <Button 
+                            onClick={() => setActiveTab('security')}
+                            variant="outline" 
+                            className="bg-white border-amber-300 text-amber-700 hover:bg-amber-100"
+                        >
+                            Change Password Now
+                        </Button>
                     </div>
                 )}
 
@@ -440,6 +532,7 @@ export default function ProfilePage() {
                                 <TabsTrigger value="education">Education</TabsTrigger>
                                 <TabsTrigger value="contact">Contact</TabsTrigger>
                                 <TabsTrigger value="links">Links</TabsTrigger>
+                                <TabsTrigger value="security">Security</TabsTrigger>
                             </TabsList>
 
                             {/* Personal Information Tab */}
@@ -777,6 +870,92 @@ export default function ProfilePage() {
                                                 placeholder="https://github.com/yourusername"
                                             />
                                 </div>
+                                    </CardContent>
+                                </Card>
+                            </TabsContent>
+                            {/* Security Tab */}
+                            <TabsContent value="security">
+                                <Card className="bg-white/80 backdrop-blur-sm border-white/20 shadow-xl">
+                                    <CardHeader>
+                                        <CardTitle className="flex items-center gap-2">
+                                            <AlertCircle className="w-5 h-5" />
+                                            Security & Password
+                                        </CardTitle>
+                                        <CardDescription>
+                                            Manage your account security and update your password
+                                        </CardDescription>
+                                    </CardHeader>
+                                    <CardContent className="space-y-6">
+                                        {passwordError && (
+                                            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg flex items-center gap-2 text-sm">
+                                                <AlertCircle className="w-4 h-4" />
+                                                {passwordError}
+                                            </div>
+                                        )}
+                                        
+                                        <form onSubmit={handlePasswordChange} className="space-y-4">
+                                            <div className="space-y-2">
+                                                <Label htmlFor="currentPassword">Current Password</Label>
+                                                <Input
+                                                    id="currentPassword"
+                                                    type="password"
+                                                    value={passwordData.currentPassword}
+                                                    onChange={(e) => setPasswordData(prev => ({ ...prev, currentPassword: e.target.value }))}
+                                                    placeholder="Enter current password"
+                                                />
+                                            </div>
+                                            
+                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                <div className="space-y-2">
+                                                    <Label htmlFor="newPassword">New Password</Label>
+                                                    <Input
+                                                        id="newPassword"
+                                                        type="password"
+                                                        value={passwordData.newPassword}
+                                                        onChange={(e) => setPasswordData(prev => ({ ...prev, newPassword: e.target.value }))}
+                                                        placeholder="Enter new password"
+                                                    />
+                                                </div>
+                                                <div className="space-y-2">
+                                                    <Label htmlFor="confirmPassword">Confirm New Password</Label>
+                                                    <Input
+                                                        id="confirmPassword"
+                                                        type="password"
+                                                        value={passwordData.confirmPassword}
+                                                        onChange={(e) => setPasswordData(prev => ({ ...prev, confirmPassword: e.target.value }))}
+                                                        placeholder="Confirm new password"
+                                                    />
+                                                </div>
+                                            </div>
+                                            
+                                            <div className="pt-4">
+                                                <Button 
+                                                    type="submit" 
+                                                    disabled={passwordSaving}
+                                                    className="bg-blue-600 hover:bg-blue-700"
+                                                >
+                                                    {passwordSaving ? (
+                                                        <>
+                                                            <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                                                            Updating Password...
+                                                        </>
+                                                    ) : (
+                                                        'Update Password'
+                                                    )}
+                                                </Button>
+                                            </div>
+                                        </form>
+                                        
+                                        <div className="mt-8 pt-6 border-t border-gray-100">
+                                            <h4 className="font-semibold text-gray-900 mb-2">Password Requirements:</h4>
+                                            <ul className="text-sm text-gray-600 space-y-1 list-disc pl-4">
+                                                <li>Minimum 8 characters long</li>
+                                                <li>At least one uppercase letter</li>
+                                                <li>At least one lowercase letter</li>
+                                                <li>At least one number</li>
+                                                <li>At least one special character</li>
+                                            </ul>
+                                        </div>
                                     </CardContent>
                                 </Card>
                             </TabsContent>

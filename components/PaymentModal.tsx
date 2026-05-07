@@ -2,7 +2,7 @@
 
 import { paymentService } from '@/lib/api/payment';
 import { useAuth } from '@/lib/auth/AuthContext';
-import { AlertCircle, CheckCircle2, Clock, CreditCard, Loader2, Shield, X } from 'lucide-react';
+import { AlertCircle, CheckCircle2, Clock, CreditCard, Loader2, Mail, Shield, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 interface PaymentModalProps {
@@ -16,6 +16,8 @@ interface PaymentModalProps {
   };
   onSuccess: (subscription: any) => void;
   onError: (error: string) => void;
+  email?: string;
+  name?: string;
 }
 
 declare global {
@@ -52,12 +54,15 @@ const loadCashfreeScript = async () => {
 
 const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
-export default function PaymentModal({ isOpen, onClose, plan, onSuccess, onError }: PaymentModalProps) {
-  const { refreshUser } = useAuth();
+export default function PaymentModal({ isOpen, onClose, plan, onSuccess, onError, email, name }: PaymentModalProps) {
+  const { refreshUser, isAuthenticated, user } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const [step, setStep] = useState<'order' | 'payment' | 'verification'>('order');
   const [orderId, setOrderId] = useState<string | null>(null);
   const [statusMessage, setStatusMessage] = useState('Preparing your subscription');
+  const [guestEmail, setGuestEmail] = useState(email || '');
+  const [guestName, setGuestName] = useState(name || '');
+  const [emailError, setEmailError] = useState<string | null>(null);
 
   useEffect(() => {
     if (isOpen === false) return;
@@ -128,12 +133,20 @@ export default function PaymentModal({ isOpen, onClose, plan, onSuccess, onError
     if (plan == null) return;
 
     const token = typeof window !== 'undefined' ? localStorage.getItem('careerx_token') : null;
-    if (token == null) {
-      onError('Please login first to make a payment');
-      return;
+    
+    if (!isAuthenticated && !token) {
+      if (!guestEmail) {
+        setEmailError('Email is required for guest checkout');
+        return;
+      }
+      if (!/^\S+@\S+\.\S+$/.test(guestEmail)) {
+        setEmailError('Please enter a valid email address');
+        return;
+      }
     }
 
     setIsLoading(true);
+    setEmailError(null);
     setStep('order');
     setStatusMessage('Creating payment order');
 
@@ -146,7 +159,9 @@ export default function PaymentModal({ isOpen, onClose, plan, onSuccess, onError
       const orderResponse = await paymentService.createOrder({
         plan: plan.id,
         amount: plan.price,
-        currency: 'INR'
+        currency: 'INR',
+        email: isAuthenticated ? user?.email : guestEmail,
+        name: isAuthenticated ? `${user?.firstName || ''} ${user?.lastName || ''}`.trim() : guestName
       });
 
       if (orderResponse.success === false || orderResponse.data?.order == null) {
@@ -218,6 +233,45 @@ export default function PaymentModal({ isOpen, onClose, plan, onSuccess, onError
               )}
             </ul>
           </div>
+
+          {!isAuthenticated && (
+            <div className="mb-6 space-y-4 rounded-xl border border-blue-100 bg-blue-50/50 p-4">
+              <h4 className="text-sm font-semibold text-blue-900 flex items-center gap-2">
+                <Mail className="h-4 w-4" /> Guest Checkout
+              </h4>
+              <p className="text-xs text-blue-700">
+                Enter your email to receive your account credentials after payment.
+              </p>
+              <div className="space-y-3">
+                <div>
+                  <label className="block text-xs font-medium text-gray-700 mb-1">Email Address *</label>
+                  <input
+                    type="email"
+                    value={guestEmail}
+                    onChange={(e) => {
+                      setGuestEmail(e.target.value);
+                      setEmailError(null);
+                    }}
+                    placeholder="your@email.com"
+                    className={`w-full rounded-lg border ${emailError ? 'border-red-300' : 'border-gray-300'} px-3 py-2 text-sm focus:border-blue-500 focus:outline-none`}
+                    disabled={isLoading}
+                  />
+                  {emailError && <p className="mt-1 text-xs text-red-500">{emailError}</p>}
+                </div>
+                <div>
+                  <label className="block text-xs font-medium text-gray-700 mb-1">Full Name (Optional)</label>
+                  <input
+                    type="text"
+                    value={guestName}
+                    onChange={(e) => setGuestName(e.target.value)}
+                    placeholder="Your Name"
+                    className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
+                    disabled={isLoading}
+                  />
+                </div>
+              </div>
+            </div>
+          )}
 
           <div className="space-y-4">
             <div className={`flex items-center rounded-lg p-3 ${step === 'order' ? 'border border-yellow-200 bg-yellow-50' : 'bg-gray-50'}`}>

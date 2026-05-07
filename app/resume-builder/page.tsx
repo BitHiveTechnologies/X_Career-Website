@@ -7,7 +7,9 @@ import ResumeForm from '@/components/ResumeForm';
 import ResumePreview from '@/components/ResumePreview';
 import SubscriptionStatus from '@/components/SubscriptionStatus';
 import TemplateSelector from '@/components/TemplateSelector';
-import { useRef, useState } from 'react';
+import { getMyResume, saveResume } from '@/lib/api/services';
+import { Save, RefreshCw, CheckCircle, AlertCircle, Clock } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
 
 // --- INTERFACE DEFINITIONS ---
 
@@ -114,20 +116,66 @@ const sanitizeUrl = (url: string): string => {
 
 export default function ResumeBuilderPage() {
     const [resumeData, setResumeData] = useState<ResumeData>(initialResumeData);
-    // FIX: Changed default to 'minimal'
-    const [selectedTemplate, setSelectedTemplate] = useState('minimal'); 
-    const [selectedFont, setSelectedFont] = useState('font-sans');
+    const [savedResumeData, setSavedResumeData] = useState<ResumeData>(initialResumeData);
+    const [selectedTemplate, setSelectedTemplate] = useState('vinod'); 
+    const [fontFamily, setFontFamily] = useState('Inter');
     const [activeSection, setActiveSection] = useState('personal');
-    const [isPreviewMode, setIsPreviewMode] = useState(false);
-    const [zoomLevel, setZoomLevel] = useState(0.8);
+    const [zoomLevel, setZoomLevel] = useState(0.7);
+    const [isSaving, setIsSaving] = useState(false);
+    const [lastSaved, setLastSaved] = useState<Date | null>(null);
+    const [isLoading, setIsLoading] = useState(true);
     const resumeRef = useRef<HTMLDivElement>(null);
 
+    const hasUnsavedChanges = JSON.stringify(resumeData) !== JSON.stringify(savedResumeData);
+
+    // Fetch initial data
+    useEffect(() => {
+        const fetchResume = async () => {
+            try {
+                setIsLoading(true);
+                const response = await getMyResume();
+                if (response.success && response.data?.resume) {
+                    const data = response.data.resume.data;
+                    setResumeData(data);
+                    setSavedResumeData(data);
+                    if (response.data.resume.templateId) {
+                        setSelectedTemplate(response.data.resume.templateId);
+                    }
+                    if (response.data.resume.updatedAt) {
+                        setLastSaved(new Date(response.data.resume.updatedAt));
+                    }
+                }
+            } catch (error) {
+                console.error('Failed to fetch resume:', error);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+        fetchResume();
+    }, []);
+
+    const handleSave = async () => {
+        try {
+            setIsSaving(true);
+            const response = await saveResume({
+                data: resumeData,
+                templateId: selectedTemplate
+            });
+            if (response.success) {
+                setSavedResumeData(JSON.parse(JSON.stringify(resumeData)));
+                setLastSaved(new Date());
+            }
+        } catch (error) {
+            console.error('Failed to save resume:', error);
+            alert('Failed to save resume. Please try again.');
+        } finally {
+            setIsSaving(false);
+        }
+    };
+
     const handleDataChange = (section: keyof ResumeData, data: any) => {
-        
-        // FIX: Implement URL Sanitization for Personal Info section
         if (section === 'personalInfo') {
             const personalInfoData = data as PersonalInfo;
-            
             const sanitizedData: PersonalInfo = {
                 ...personalInfoData,
                 linkedin: sanitizeUrl(personalInfoData.linkedin),
@@ -142,7 +190,6 @@ export default function ResumeBuilderPage() {
             return;
         }
 
-        // Standard data change for other sections
         setResumeData((prev) => ({
             ...prev,
             [section]: data,
@@ -163,16 +210,19 @@ export default function ResumeBuilderPage() {
 
         if (typeof window !== 'undefined') {
             try {
-                // Ensure html2pdf.js is imported dynamically
                 const html2pdf = (await import('html2pdf.js')).default;
                 const element = resumeRef.current;
 
                 if (element) {
                     const opt = {
-                        margin: 0.5,
+                        margin: 0,
                         filename: `${resumeData.personalInfo.fullName || 'resume'}.pdf`,
                         image: { type: 'jpeg', quality: 0.98 },
-                        html2canvas: { scale: 2 },
+                        html2canvas: { 
+                            scale: 2,
+                            useCORS: true,
+                            letterRendering: true
+                        },
                         jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
                     };
 
@@ -185,385 +235,237 @@ export default function ResumeBuilderPage() {
         }
     };
 
-    const handleZoomIn = () => {
-        setZoomLevel((prev) => Math.min(prev + 0.1, 1.5));
+    const handleDownloadDoc = () => {
+        if (resumeRef.current) {
+            const content = resumeRef.current.innerHTML;
+            const header = "<html xmlns:o='urn:schemas-microsoft-com:office:office' "+
+                "xmlns:w='urn:schemas-microsoft-com:office:word' "+
+                "xmlns='http://www.w3.org/TR/REC-html40'>"+
+                "<head><meta charset='utf-8'><title>Resume</title></head><body>";
+            const footer = "</body></html>";
+            const sourceHTML = header+content+footer;
+            
+            const source = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(sourceHTML);
+            const fileDownload = document.createElement("a");
+            document.body.appendChild(fileDownload);
+            fileDownload.href = source;
+            fileDownload.download = `${resumeData.personalInfo.fullName || 'resume'}.doc`;
+            fileDownload.click();
+            document.body.removeChild(fileDownload);
+        }
     };
 
-    const handleZoomOut = () => {
-        setZoomLevel((prev) => Math.max(prev - 0.1, 0.3));
-    };
+    const handleZoomIn = () => setZoomLevel((prev) => Math.min(prev + 0.1, 1.5));
+    const handleZoomOut = () => setZoomLevel((prev) => Math.max(prev - 0.1, 0.3));
 
     const sections = [
-        { id: 'personal', label: 'Personal Info', icon: '👤' },
+        { id: 'personal', label: 'Personal', icon: '👤' },
         { id: 'experience', label: 'Experience', icon: '💼' },
         { id: 'education', label: 'Education', icon: '🎓' },
         { id: 'projects', label: 'Projects', icon: '🚀' },
         { id: 'skills', label: 'Skills', icon: '⚡' },
-        { id: 'additional', label: 'Additional', icon: '📋' },
+        { id: 'additional', label: 'Extra', icon: '📋' },
+        { id: 'design', label: 'Design', icon: '🎨' },
     ];
 
-    return (
-        <div
-            className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50"
-            data-oid="1cmjb2l"
-        >
-            <MainNavbar data-oid="8ifzx91" />
+    if (isLoading) {
+        return (
+            <div className="min-h-screen bg-slate-50 flex items-center justify-center">
+                <div className="text-center p-8 bg-white rounded-2xl shadow-xl border border-blue-100">
+                    <div className="relative w-16 h-16 mx-auto mb-4">
+                        <div className="absolute inset-0 border-4 border-blue-100 rounded-full"></div>
+                        <div className="absolute inset-0 border-4 border-t-blue-600 rounded-full animate-spin"></div>
+                    </div>
+                    <p className="text-slate-600 font-semibold text-lg">Preparing Workspace...</p>
+                    <p className="text-slate-400 text-sm mt-1">Loading your resume data</p>
+                </div>
+            </div>
+        );
+    }
 
-            {/* Desktop-Only Banner */}
-            <div className="bg-yellow-50 border-b border-yellow-200 py-3 px-4 text-center">
-                <p className="text-yellow-800 text-sm font-medium">
-                    💻 For best experience, please use a desktop to build your resume.
-                </p>
+    return (
+        <div className="min-h-screen bg-[#f1f5f9]">
+            <MainNavbar />
+
+            {/* Premium Header Bar */}
+            <div className="sticky top-[64px] z-40 bg-white/80 backdrop-blur-md border-b border-slate-200/60 shadow-sm">
+                <div className="max-w-[1600px] mx-auto px-4 h-16 flex items-center justify-between">
+                    <div className="flex items-center space-x-6">
+                        <div className="flex flex-col">
+                            <h1 className="text-lg font-bold text-slate-800 tracking-tight leading-none">
+                                AI Resume Builder
+                            </h1>
+                            <span className="text-[10px] text-slate-400 font-medium uppercase tracking-widest mt-1">
+                                Premium Workspace
+                            </span>
+                        </div>
+                        <div className="h-8 w-px bg-slate-200"></div>
+                        <div className="flex items-center space-x-4">
+                            <div className="flex items-center px-3 py-1.5 rounded-full bg-slate-50 border border-slate-200">
+                                {hasUnsavedChanges ? (
+                                    <div className="flex items-center">
+                                        <div className="w-2 h-2 bg-amber-500 rounded-full animate-pulse mr-2"></div>
+                                        <span className="text-xs font-bold text-amber-700">Unsaved Changes</span>
+                                    </div>
+                                ) : (
+                                    <div className="flex items-center">
+                                        <div className="w-2 h-2 bg-emerald-500 rounded-full mr-2"></div>
+                                        <span className="text-xs font-bold text-emerald-700">Everything Saved</span>
+                                    </div>
+                                )}
+                            </div>
+                            {lastSaved && (
+                                <span className="text-[11px] text-slate-400 font-medium italic hidden md:block">
+                                    Last sync: {lastSaved.toLocaleTimeString()}
+                                </span>
+                            )}
+                        </div>
+                    </div>
+                    
+                    <div className="flex items-center space-x-3">
+                        <button
+                            onClick={handleSave}
+                            disabled={!hasUnsavedChanges || isSaving}
+                            className={`relative group px-6 py-2.5 rounded-xl text-sm font-bold transition-all duration-300 overflow-hidden ${
+                                hasUnsavedChanges 
+                                    ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-lg shadow-blue-200 active:scale-95' 
+                                    : 'bg-slate-100 text-slate-400 cursor-not-allowed'
+                            }`}
+                        >
+                            <span className="relative z-10 flex items-center">
+                                {isSaving ? <RefreshCw className="w-4 h-4 mr-2 animate-spin" /> : <Save className="w-4 h-4 mr-2" />}
+                                {isSaving ? 'Syncing...' : 'Save Progress'}
+                            </span>
+                        </button>
+                    </div>
+                </div>
             </div>
 
-            {/* Hero Section */}
-            <section
-                className="bg-gradient-to-r from-[hsl(196,80%,45%)] via-[hsl(210,70%,45%)] to-[hsl(175,70%,41%)] text-white py-16"
-                data-oid="vtkalms"
-            >
-                <div
-                    className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
-                    data-oid="lo390gj"
-                >
-                    <h1 className="text-4xl md:text-5xl font-bold mb-4" data-oid="w:p7:tk">
-                        Professional Resume Builder
-                    </h1>
-                    <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto" data-oid="srpcnxq">
-                        Create a stunning resume in minutes with our AI-powered builder. Choose from
-                        professional templates and land your dream job.
-                    </p>
-                    <div className="flex flex-wrap justify-center gap-4 text-sm mb-6" data-oid="_wcaukn">
-                        <div
-                            className="flex items-center bg-white/20 px-4 py-2 rounded-full"
-                            data-oid="p7tv0jk"
-                        >
-                            <span className="mr-2" data-oid="t-6jvr_">
-                                ✨
-                            </span>
-                            ATS-Friendly Templates
-                        </div>
-                        <div
-                            className="flex items-center bg-white/20 px-4 py-2 rounded-full"
-                            data-oid="2e7dua4"
-                        >
-                            <span className="mr-2" data-oid="4k0soel">
-                                📱
-                            </span>
-                            Mobile Responsive
-                        </div>
-                        <div
-                            className="flex items-center bg-white/20 px-4 py-2 rounded-full"
-                            data-oid="n8mp:jg"
-                        >
-                            <span className="mr-2" data-oid="0wxmf.q">
-                                ⚡
-                            </span>
-                            Instant PDF Download
-                        </div>
-                    </div>
-                    <div className="flex justify-center">
-                        <a
-                            href="/resume-builder/subscription"
-                            className="inline-flex items-center px-6 py-3 bg-white text-blue-600 rounded-lg font-medium hover:bg-gray-100 transition-colors duration-200"
-                        >
-                            <span className="mr-2">👑</span>
-                            View Subscription Plans
-                        </a>
-                    </div>
-                </div>
-            </section>
-
-            {/* Main Content */}
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8" data-oid="yypwmjp">
-                {/* Subscription Status */}
-                <SubscriptionStatus />
-                
-                {/* Template Selection */}
-                <div className="mb-8" data-oid="i1bhab6">
-                    <TemplateSelector
-                        selectedTemplate={selectedTemplate}
-                        onTemplateChange={setSelectedTemplate}
-                        data-oid="hfdniw1"
-                    />
-                </div>
-
-                {/* Font Selection */}
-                <div className="mb-8" data-oid="font-selection-container">
-                    <div className="bg-white rounded-lg shadow-sm border p-6">
-                        <h2 className="text-xl font-semibold text-gray-800 mb-4">
-                            Choose Your Font
-                        </h2>
-                        <div className="flex flex-wrap gap-4">
-                            {[
-                                { id: 'font-sans', label: 'Modern (Sans)', className: 'font-sans' },
-                                { id: 'font-serif', label: 'Classic (Serif)', className: 'font-serif' },
-                                { id: 'font-mono', label: 'Technical (Mono)', className: 'font-mono' }
-                            ].map((font) => (
-                                <button
-                                    key={font.id}
-                                    onClick={() => setSelectedFont(font.id)}
-                                    className={`px-4 py-2 rounded-lg border-2 transition-all duration-200 ${font.className} ${
-                                        selectedFont === font.id
-                                            ? 'border-[hsl(196,80%,45%)] bg-blue-50 text-blue-800'
-                                            : 'border-gray-200 text-gray-600 hover:border-gray-300'
-                                    }`}
-                                >
-                                    {font.label}
-                                </button>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-
-                {/* Progress Bar */}
-                <div className="mb-8" data-oid="b30df.r">
-                    <div className="bg-white rounded-lg shadow-sm border p-4" data-oid="168:855">
-                        <div className="flex items-center justify-between mb-2" data-oid="bjftgg1">
-                            <h3 className="text-lg font-semibold text-gray-800" data-oid="__l-y21">
-                                Resume Progress
-                            </h3>
-                            <span className="text-sm text-gray-600" data-oid="yz4o-my">
-                                {Math.round(
-                                    (Object.values(resumeData).filter((section) =>
-                                        Array.isArray(section)
-                                            ? section.length > 0
-                                            : typeof section === 'object'
-                                              ? Object.values(section).some((val) => val !== '')
-                                              : false,
-                                    ).length /
-                                        6) *
-                                        100,
-                                )}
-                                % Complete
-                            </span>
-                        </div>
-                        <div className="w-full bg-gray-200 rounded-full h-2" data-oid="ks:7bf0">
-                            <div
-                                className="bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] h-2 rounded-full transition-all duration-300"
-                                style={{
-                                    width: `${Math.round(
-                                        (Object.values(resumeData).filter((section) =>
-                                            Array.isArray(section)
-                                                ? section.length > 0
-                                                : typeof section === 'object'
-                                                  ? Object.values(section).some((val) => val !== '')
-                                                  : false,
-                                        ).length /
-                                            6) *
-                                            100,
-                                    )}%`,
-                                }}
-                                data-oid="bdlodgc"
-                            ></div>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Toggle Button - Always Visible */}
-                <div className="mb-6 flex justify-center">
-                    <button
-                        onClick={() => setIsPreviewMode(!isPreviewMode)}
-                        className={`px-8 py-3 rounded-lg font-medium transition-colors duration-200 ${
-                            isPreviewMode 
-                                ? 'bg-blue-100 text-blue-700 hover:bg-blue-200' 
-                                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                        }`}
-                        data-oid="toggle-button"
-                    >
-                        {isPreviewMode ? '📝 Edit Mode' : '👁️ Preview Mode'}
-                    </button>
-                </div>
-
-                {/* Main Builder Interface */}
-                {/* Default to a single column grid, switch to 2 columns only on large screens */}
-                <div className={`grid gap-8 ${isPreviewMode ? 'grid-cols-1' : 'grid-cols-1 lg:grid-cols-2'}`} data-oid="sce-_t2">
+            <div className="max-w-[1600px] mx-auto px-4 py-8">
+                <div className="grid grid-cols-1 lg:grid-cols-[450px,1fr] gap-8 items-start">
                     
-                    {/* Form Section */}
-                    <div className={`space-y-6 ${isPreviewMode ? 'hidden' : 'block'}`} data-oid="2jd15jx">
-                        {/* Section Navigation */}
-                        <div
-                            className="bg-white rounded-lg shadow-sm border p-4"
-                            data-oid="7m61ad-"
-                        >
-                            <div
-                                className="grid grid-cols-2 md:grid-cols-3 gap-2"
-                                data-oid="jxjuitd"
-                            >
+                    {/* Left Panel: Editor (Vibrant Glassmorphism) */}
+                    <div className="space-y-6 lg:sticky lg:top-[144px]">
+                        <SubscriptionStatus />
+                        
+                        {/* Section Navigation Tabs */}
+                        <div className="bg-white rounded-2xl shadow-xl shadow-slate-200/50 border border-slate-100 p-2 overflow-x-auto no-scrollbar">
+                            <div className="flex items-center space-x-1">
                                 {sections.map((section) => (
                                     <button
                                         key={section.id}
                                         onClick={() => setActiveSection(section.id)}
-                                        className={`p-3 rounded-lg text-sm font-medium transition-all duration-200 ${
+                                        className={`flex-shrink-0 px-4 py-3 rounded-xl transition-all duration-200 flex flex-col items-center min-w-[70px] ${
                                             activeSection === section.id
-                                                ? 'bg-[hsl(196,80%,45%)] text-white shadow-md'
-                                                : 'bg-gray-50 text-gray-700 hover:bg-gray-100'
+                                                ? 'bg-blue-600 text-white shadow-lg shadow-blue-200'
+                                                : 'text-slate-500 hover:bg-slate-50 hover:text-slate-700'
                                         }`}
-                                        data-oid="h_hhx9p"
                                     >
-                                        <div
-                                            className="flex flex-col items-center"
-                                            data-oid="pc93q30"
-                                        >
-                                            <span className="text-lg mb-1" data-oid="tqf4og1">
-                                                {section.icon}
-                                            </span>
-                                            <span data-oid="qt6luyu">{section.label}</span>
-                                        </div>
+                                        <span className="text-xl mb-1">{section.icon}</span>
+                                        <span className="text-[10px] font-bold uppercase tracking-wider">{section.label}</span>
                                     </button>
                                 ))}
                             </div>
                         </div>
 
-                        {/* Form Content */}
-                        <div className="bg-white rounded-lg shadow-sm border" data-oid="0_bqpa1">
+                        {/* Template Selection Quick Tool */}
+                        <div className="bg-white rounded-2xl shadow-xl shadow-slate-200/50 border border-slate-100 overflow-hidden">
+                            <div className="bg-slate-50 px-4 py-3 border-b border-slate-100 flex items-center justify-between">
+                                <span className="text-xs font-bold text-slate-500 uppercase tracking-widest">Active Template</span>
+                                <span className="text-[10px] bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full font-bold">PRO</span>
+                            </div>
+                            <div className="p-4">
+                                <TemplateSelector
+                                    selectedTemplate={selectedTemplate}
+                                    onTemplateChange={setSelectedTemplate}
+                                />
+                            </div>
+                        </div>
+
+                        {/* Main Editor Component */}
+                        <div className="bg-white rounded-2xl shadow-2xl shadow-slate-200/80 border border-slate-100 overflow-hidden ring-1 ring-black/5">
                             <ResumeForm
                                 resumeData={resumeData}
                                 activeSection={activeSection}
                                 onDataChange={handleDataChange}
                                 selectedTemplate={selectedTemplate}
-                                data-oid="-f0o4xe"
+                                fontFamily={fontFamily}
+                                onFontChange={setFontFamily}
                             />
                         </div>
 
                         {/* Action Buttons */}
-                        <div className="flex flex-wrap gap-4" data-oid="dqygmwm">
+                        <div className="grid grid-cols-2 gap-4">
                             <button
                                 onClick={handleDownloadPDF}
-                                className="flex-1 md:flex-none px-6 py-3 bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white rounded-lg font-medium hover:from-[hsl(196,80%,40%)] hover:to-[hsl(175,70%,36%)] transition-all duration-300 transform hover:scale-105"
-                                data-oid="-c--ubr"
+                                className="group flex items-center justify-center px-6 py-4 bg-slate-900 text-white rounded-2xl font-bold hover:bg-black transition-all duration-300 shadow-xl active:scale-[0.98]"
                             >
-                                Download PDF
+                                <svg className="w-5 h-5 mr-3 group-hover:translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                </svg>
+                                Export PDF
                             </button>
                             <button
-                                onClick={() => window.open('/resume-writing-tips.pdf', '_blank')}
-                                className="flex-1 md:flex-none px-6 py-3 bg-blue-100 text-blue-700 rounded-lg font-medium hover:bg-blue-200 transition-colors duration-200"
-                                data-oid="tips-button"
+                                onClick={handleDownloadDoc}
+                                className="flex items-center justify-center px-6 py-4 bg-white text-blue-600 border-2 border-blue-100 rounded-2xl font-bold hover:bg-blue-50 hover:border-blue-200 transition-all duration-300 shadow-md active:scale-[0.98]"
                             >
-                                📖 Resume Writing Tips
+                                Download DOCX
                             </button>
                         </div>
                     </div>
 
-                    {/* Preview Section - Corrected visibility and zoom styles */}
-                    <div className={`${isPreviewMode ? 'block lg:col-span-1' : 'hidden lg:block lg:sticky lg:top-24 lg:h-fit'}`} data-oid="cwics50">
-                        <div
-                            className="bg-white rounded-lg shadow-lg border p-6 overflow-x-auto" 
-                            data-oid="7e3qyqo"
-                        >
-                            <div
-                                className="flex items-center justify-between mb-4"
-                                data-oid="1n67:gk"
-                            >
-                                <h3
-                                    className="text-lg font-semibold text-gray-800"
-                                    data-oid="o-vc3v7"
+                    {/* Right Panel: Live Preview (Document Simulator) */}
+                    <div className="lg:sticky lg:top-[144px] h-[calc(100vh-176px)]">
+                        <div className="bg-slate-200/50 rounded-3xl p-6 h-full flex flex-col border border-slate-300/30 shadow-inner">
+                            {/* Toolbar */}
+                            <div className="flex items-center justify-between mb-6">
+                                <div className="flex items-center space-x-3 bg-white/60 backdrop-blur-sm px-4 py-2 rounded-2xl border border-white shadow-sm">
+                                    <div className="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-pulse"></div>
+                                    <h3 className="text-sm font-bold text-slate-800">Live Render</h3>
+                                </div>
+                                
+                                <div className="flex items-center space-x-2 bg-white/60 backdrop-blur-sm p-1.5 rounded-2xl border border-white shadow-sm">
+                                    <button onClick={handleZoomOut} className="p-2 hover:bg-white rounded-xl transition-all shadow-sm text-slate-600 active:scale-90">
+                                        <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M20 12H4" /></svg>
+                                    </button>
+                                    <div className="px-3 border-x border-slate-200">
+                                        <span className="text-xs font-bold text-slate-700 tabular-nums">{Math.round(zoomLevel * 100)}%</span>
+                                    </div>
+                                    <button onClick={handleZoomIn} className="p-2 hover:bg-white rounded-xl transition-all shadow-sm text-slate-600 active:scale-90">
+                                        <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M12 4v16m8-8H4" /></svg>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            {/* Preview Area (Simulating a desk/surface) */}
+                            <div className="flex-1 overflow-auto rounded-2xl bg-slate-400/10 shadow-inner border border-black/5 flex justify-center custom-scrollbar">
+                                <div 
+                                    className="origin-top p-8 lg:p-12"
+                                    style={{
+                                        transform: `scale(${zoomLevel})`,
+                                        width: '8.5in', // Standard Letter width
+                                        transition: 'transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)'
+                                    }}
                                 >
-                                    Live Preview
-                                </h3>
-                                <div className="flex items-center space-x-2" data-oid="73yyf6b">
-                                    {/* Zoom Controls */}
-                                    <div className="flex items-center space-x-1">
-                                        <button
-                                            onClick={handleZoomOut}
-                                            className="p-1.5 text-gray-500 hover:text-gray-700 rounded hover:bg-gray-100"
-                                            title="Zoom Out"
-                                            data-oid="zoom-out"
-                                        >
-                                            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20 12H4" />
-                                            </svg>
-                                        </button>
-                                        <span className="text-sm text-gray-500 px-2">
-                                            {Math.round(zoomLevel * 100)}%
-                                        </span>
-                                        <button
-                                            onClick={handleZoomIn}
-                                            className="p-1.5 text-gray-500 hover:text-gray-700 rounded hover:bg-gray-100"
-                                            title="Zoom In"
-                                            data-oid="zoom-in"
-                                        >
-                                            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
-                                            </svg>
-                                        </button>
+                                    <div 
+                                        ref={resumeRef}
+                                        className="shadow-2xl shadow-black/20 bg-white ring-1 ring-black/5"
+                                    >
+                                        <ResumePreview
+                                            resumeData={resumeData}
+                                            template={selectedTemplate}
+                                            fontFamily={fontFamily}
+                                        />
                                     </div>
                                 </div>
                             </div>
-                            <div
-                                className="border rounded-lg bg-white"
-                                data-oid="hcxcv8r"
-                            >
-                                <div 
-                                    ref={resumeRef} 
-                                    data-oid="oh.mxr8"
-                                    style={{
-                                        // Apply scaling to the inner content
-                                        transform: `scale(${zoomLevel})`,
-                                        transformOrigin: 'top left',
-                                        // Use calculated width/height to ensure the full scaled size is respected in the container
-                                        width: `calc(100% / ${zoomLevel})`,
-                                        height: `calc(100% / ${zoomLevel})`,
-                                    }}
-                                >
-                                    <ResumePreview
-                                        resumeData={resumeData}
-                                        template={selectedTemplate}
-                                        fontStyle={selectedFont}
-                                        data-oid="fm0oj46"
-                                    />
-                                </div>
+                            
+                            {/* Tips Overlay */}
+                            <div className="mt-4 flex items-center justify-center space-x-6 text-[11px] text-slate-500 font-medium">
+                                <span className="flex items-center"><CheckCircle className="w-3 h-3 mr-1 text-emerald-500" /> ATS Optimized</span>
+                                <span className="flex items-center"><CheckCircle className="w-3 h-3 mr-1 text-emerald-500" /> High-Resolution Export</span>
+                                <span className="flex items-center"><CheckCircle className="w-3 h-3 mr-1 text-emerald-500" /> Multi-Template Ready</span>
                             </div>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Tips Section */}
-                <div
-                    className="mt-12 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-8"
-                    data-oid="j3mwpu6"
-                >
-                    <h3
-                        className="text-2xl font-bold text-gray-800 mb-6 text-center"
-                        data-oid="mgzwc-h"
-                    >
-                        Resume Writing Tips
-                    </h3>
-                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6" data-oid="hrx3iif">
-                        <div className="bg-white p-6 rounded-lg shadow-sm" data-oid="axrutw-">
-                            <div className="text-2xl mb-3" data-oid="3t734im">
-                                🎯
-                            </div>
-                            <h4 className="font-semibold text-gray-800 mb-2" data-oid="-cxud6r">
-                                Tailor Your Resume
-                            </h4>
-                            <p className="text-gray-600 text-sm" data-oid="x8np094">
-                                Customize your resume for each job application by highlighting
-                                relevant skills and experiences.
-                            </p>
-                        </div>
-                        <div className="bg-white p-6 rounded-lg shadow-sm" data-oid="tbfrqc5">
-                            <div className="text-2xl mb-3" data-oid="18ngly3">
-                                📊
-                            </div>
-                            <h4 className="font-semibold text-gray-800 mb-2" data-oid="-_:93aj">
-                                Use Numbers
-                            </h4>
-                            <p className="text-gray-600 text-sm" data-oid="7-tohmy">
-                                Quantify your achievements with specific numbers, percentages, and
-                                metrics whenever possible.
-                            </p>
-                        </div>
-                        <div className="bg-white p-6 rounded-lg shadow-sm" data-oid="edo6rzb">
-                            <div className="text-2xl mb-3" data-oid="gse.6j9">
-                                🔍
-                            </div>
-                            <h4 className="font-semibold text-gray-800 mb-2" data-oid="krj41on">
-                                Keywords Matter
-                            </h4>
-                            <p className="text-gray-600 text-sm" data-oid="833-lwf">
-                                Include relevant keywords from the job description to pass through
-                                ATS systems.
-                            </p>
                         </div>
                     </div>
                 </div>

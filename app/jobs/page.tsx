@@ -1,15 +1,18 @@
 'use client';
 
 import CategoryMenu from '@/components/CategoryMenu';
+import { useProgressiveEnhancement } from '@/hooks/useProgressiveEnhancement';
+import MainNavbar from '@/components/mainNavbar';
+import Footer from '@/components/Footer';
 import FiltersSidebar from '@/components/FiltersSidebar';
 import JobCard from '@/components/JobCard';
-import MainNavbar from '@/components/mainNavbar';
-import Link from 'next/link';
+
 import {
     FrontendJob,
     jobService
 } from '@/lib/api';
 import { useRouter, useSearchParams } from 'next/navigation';
+import Link from 'next/link';
 import { Suspense, useCallback, useEffect, useState } from 'react';
 
 // TypeScript Interfaces
@@ -22,7 +25,7 @@ export interface FilterOptions {
     experienceLevel: string;
     salaryRange: string;
     companyType: string;
-    passoutYear?: string;
+    yearOfPassout?: string;
 }
 
 export interface Category {
@@ -74,6 +77,7 @@ function JobsPageContent() {
         experienceLevel: '',
         salaryRange: '',
         companyType: '',
+        yearOfPassout: '',
     });
     const [isLoading, setIsLoading] = useState(true);
     const [searchQuery, setSearchQuery] = useState('');
@@ -876,6 +880,20 @@ function JobsPageContent() {
             console.log('🏢 After company type filter:', filtered.length, 'jobs');
         }
 
+        // Filter by year of passout
+        if (filters.yearOfPassout) {
+            filtered = filtered.filter((job) => {
+                if (!job.eligibility?.passoutYears || job.eligibility.passoutYears.length === 0) {
+                    // If no passout years specified, assume it's open to all
+                    return true;
+                }
+                return job.eligibility.passoutYears.some(
+                    (year) => year.toString() === filters.yearOfPassout
+                );
+            });
+            console.log('🎓 After year of passout filter:', filtered.length, 'jobs');
+        }
+
         // Sort filtered results
         const sortedFiltered = [...filtered]; // Create copy for sorting
         switch (sortBy) {
@@ -924,6 +942,7 @@ function JobsPageContent() {
                 experienceLevel: newFilters.experienceLevel || '',
                 salaryRange: newFilters.salaryRange || '',
                 companyType: newFilters.companyType || '',
+                yearOfPassout: newFilters.yearOfPassout || '',
             };
             
             // Additional validation
@@ -956,6 +975,7 @@ function JobsPageContent() {
             experienceLevel: '',
             salaryRange: '',
             companyType: '',
+            yearOfPassout: '',
         });
         setSelectedCategory('all');
         setSearchQuery('');
@@ -1681,6 +1701,7 @@ function JobsPageContent() {
                     </div>
                 </div>
             </section>
+            <Footer />
         </div>
     );
 }

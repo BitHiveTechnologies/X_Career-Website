@@ -38,8 +38,8 @@ export default function TemplateSelector({
 
     const templates = [
         {
-            id: 'minimal',
-            name: 'Minimal Clean',
+            id: 'vinod',
+            name: 'Vinod Resume',
             description: 'Simple and elegant design for freshers',
             preview: '/template-previews/minimal.png',
             features: ['Minimalist', 'Typography Focus', 'Clean Lines'],
@@ -48,19 +48,19 @@ export default function TemplateSelector({
             candidateType: 'freshers',
         },
         {
-            id: 'modern',
-            name: 'Modern Professional',
-            description: 'Clean design with blue accents for fresher interns',
-            preview: '/template-previews/modern.png',
-            features: ['ATS-Friendly', 'Color Accents', 'Professional Layout'],
-            subscription: 'starter',
-            targetAudience: 'Fresher Interns',
-            candidateType: 'fresher-interns',
+            id: 'professional',
+            name: 'Standard Professional',
+            description: 'Classic left-aligned structure preferred by recruiters',
+            preview: '/template-previews/professional.png',
+            features: ['Recruiter Favorite', 'Left-Aligned', 'High Readability'],
+            subscription: 'premium',
+            targetAudience: 'Professionals',
+            candidateType: 'professionals',
         },
         {
             id: 'creative',
-            name: 'Creative Design & Executive',
-            description: 'Sophisticated design for experienced candidates',
+            name: 'Creative Executive',
+            description: 'Sophisticated sidebar layout for experienced candidates',
             preview: '/template-previews/creative.png',
             features: ['Creative Layout', 'Executive Style', 'Leadership Focus'],
             subscription: 'premium',
@@ -255,13 +255,10 @@ export default function TemplateSelector({
                             </h4>
                             <ul className="text-sm text-blue-700 space-y-1" data-oid="35qikfv">
                                 <li data-oid="op30erm">
-                                    • <strong>Free:</strong> Minimal Clean (for freshers)
+                                    • <strong>Free:</strong> Vinod Resume (for freshers)
                                 </li>
                                 <li data-oid="8h8672:">
-                                    • <strong>Starter (₹49/month):</strong> Modern Professional (for fresher interns)
-                                </li>
-                                <li data-oid="kjl0-j3">
-                                    • <strong>Premium (₹99/month):</strong> Creative Design & Executive (for experienced candidates)
+                                    • <strong>Premium:</strong> Standard Professional & Creative Executive
                                 </li>
                             </ul>
                         </div>
