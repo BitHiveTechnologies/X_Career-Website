@@ -188,6 +188,32 @@ The form data is currently logged to the console and can be easily integrated wi
 - Mobile app development
 - AI-powered job matching
 
+## 🧪 Testing (End-to-End)
+
+The project uses Playwright for comprehensive End-to-End (E2E) testing.
+
+### Prerequisites for E2E Tests
+Make sure the frontend and backend servers are running:
+```bash
+# Terminal 1: Backend
+cd XCareer-Backend/backend && npm run dev
+
+# Terminal 2: Frontend
+cd X_Career-Website && npm run dev
+```
+
+### Running Tests
+```bash
+# Run all E2E tests in headless mode
+npm run test:e2e
+
+# Run tests with browser UI (headed mode)
+npm run test:e2e:headed
+
+# View the HTML test report
+npm run test:e2e:report
+```
+
 ## Contributing
 
 1. Fork the repository
