@@ -29,6 +29,7 @@ interface AuthContextType {
   refreshUser: () => Promise<void>;
   updateProfile: (profileData: any) => Promise<{ success: boolean; error?: string }>;
   getProfileCompletion: () => Promise<any>;
+  changePassword: (currentPassword: string, newPassword: string) => Promise<{ success: boolean; error?: string }>;
 }
 
 interface AuthProviderProps {
@@ -134,15 +135,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       
       if (result.success && result.user) {
         // Set user data from login response
-        const userData = {
-          id: result.user.id,
-          email: result.user.email,
-          firstName: result.user.firstName,
-          lastName: result.user.lastName,
-          role: result.user.role as 'user' | 'admin' | 'super_admin',
-          subscriptionStatus: 'inactive' as const,
-          isProfileComplete: true,
-        };
+        const userData = result.user;
         
         setUser(userData);
         
@@ -157,19 +150,31 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
                 }
 
         // Handle redirect after login based on role
-                if (typeof window !== 'undefined') {
-                    const redirectTo = localStorage.getItem('careerx_redirect_after_auth');
-                    if (redirectTo) {
-                        localStorage.removeItem('careerx_redirect_after_auth');
-                        router.push(redirectTo);
+        if (typeof window !== 'undefined') {
+          console.log('🚀 Login successful! Determining redirect path...', {
+            mustChangePassword: userData.mustChangePassword,
+            role: userData.role
+          });
+          
+          if (userData.mustChangePassword) {
+            console.log('➡️ Redirecting to /change-password due to mustChangePassword flag');
+            // Force full page reload to ensure redirect works reliably
+            window.location.href = '/change-password';
+          } else {
+            const redirectTo = localStorage.getItem('careerx_redirect_after_auth');
+            if (redirectTo) {
+                console.log(`➡️ Redirecting to saved path: ${redirectTo}`);
+                localStorage.removeItem('careerx_redirect_after_auth');
+                router.push(redirectTo);
                     } else {
-            // Role-based routing
-            if (userData.role === 'admin' || userData.role === 'super_admin') {
-                        router.push('/dashboard');
-            } else {
-              router.push('/');
-            }
+              // Role-based routing
+              if (userData.role === 'admin' || userData.role === 'super_admin') {
+                          router.push('/dashboard');
+              } else {
+                router.push('/');
+              }
                     }
+          }
                 }
 
                 return { success: true };
@@ -210,15 +215,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       
       if (result.success && result.user) {
         // Set user data from registration response
-        const userData = {
-          id: result.user.id,
-          email: result.user.email,
-          firstName: result.user.firstName,
-          lastName: result.user.lastName,
-          role: (result.user.role as 'user' | 'admin' | 'super_admin') || 'user',
-          subscriptionStatus: 'inactive' as const,
-          isProfileComplete: true,
-        };
+        const userData = result.user;
         
         setUser(userData);
         
@@ -308,6 +305,19 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
+  const changePassword = async (currentPassword: string, newPassword: string): Promise<{ success: boolean; error?: string }> => {
+    try {
+      setIsLoading(true);
+      const result = await authService.changePassword(currentPassword, newPassword);
+      return result;
+    } catch (error: any) {
+      console.error('Change password error:', error);
+      return { success: false, error: error.message || 'Failed to change password' };
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const refreshUser = async (): Promise<void> => {
     try {
       const result = await authService.getCurrentUser();
@@ -348,6 +358,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     refreshUser,
     updateProfile,
     getProfileCompletion,
+    changePassword,
     };
 
     return (

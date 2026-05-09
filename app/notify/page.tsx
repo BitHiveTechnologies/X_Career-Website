@@ -18,7 +18,9 @@ import {
     TrendingUp,
     Zap
 } from 'lucide-react';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState, Suspense } from 'react';
+import { useAuth } from '@/lib/auth/AuthContext';
+import { useSearchParams, useRouter } from 'next/navigation';
 
 const notificationTypes = [
     {
@@ -161,7 +163,10 @@ const notifyTestimonials = [
     }
 ];
 
-export default function NotifyPage() {
+function NotifyContent() {
+    const { isAuthenticated, refreshUser } = useAuth();
+    const searchParams = useSearchParams();
+    const router = useRouter();
     const [email, setEmail] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [subscriptionStatus, setSubscriptionStatus] = useState<'idle' | 'success' | 'error'>('idle');
@@ -172,31 +177,68 @@ export default function NotifyPage() {
         careerUpdates: true,
     });
 
-    const [pricingPlans, setPricingPlans] = useState(defaultPricingPlans);
-    const [currentSubscription, setCurrentSubscription] = useState<{
-        id: string;
-        plan: string;
-        status: string;
-        startDate?: string;
-        endDate?: string;
-        expiresAt?: string;
-        amount?: number;
-        paymentId?: string;
-        orderId?: string;
-        paymentSessionId?: string;
-        paymentStatus?: string;
-        features?: string[];
-    } | null>(null);
+    const [pricingPlans, setPricingPlans] = useState<any[]>(defaultPricingPlans);
+    const [currentSubscription, setCurrentSubscription] = useState<any>(null);
     const [isLoadingPlans, setIsLoadingPlans] = useState(true);
     const [isLoadingSubscription, setIsLoadingSubscription] = useState(true);
+    const [hasMounted, setHasMounted] = useState(false);
     const [paymentModal, setPaymentModal] = useState<{
         isOpen: boolean;
         plan: any;
     }>({ isOpen: false, plan: null });
 
     useEffect(() => {
+        setHasMounted(true);
         loadSubscriptionData();
-    }, []);
+        
+        // Handle payment redirect verification
+        const orderId = searchParams.get('order_id');
+        const status = searchParams.get('status');
+        
+        if (orderId && status === 'success') {
+            handleFinalizePayment(orderId);
+        }
+    }, [isAuthenticated, searchParams]);
+
+    const handleFinalizePayment = async (orderId: string) => {
+        try {
+            setIsLoadingSubscription(true);
+            const response = await paymentService.verifyPayment({ orderId });
+            
+            if (response.success && response.data) {
+                const { accessToken, refreshToken, subscription } = response.data as any;
+                
+                if (accessToken) {
+                    localStorage.setItem('careerx_token', accessToken);
+                    if (refreshToken) localStorage.setItem('careerx_refresh_token', refreshToken);
+                    
+                    // Also set initial user data if available to prevent flicker
+                    if ((response.data as any).user) {
+                        const userData = (response.data as any).user;
+                        localStorage.setItem('careerx_user', JSON.stringify({
+                            id: userData.id,
+                            email: userData.email,
+                            firstName: userData.name ? userData.name.split(' ')[0] : 'User',
+                            lastName: userData.name ? userData.name.split(' ').slice(1).join(' ') : '',
+                            role: userData.role || 'user',
+                            subscriptionStatus: 'active',
+                            isProfileComplete: true
+                        }));
+                    }
+                    
+                    await refreshUser();
+                    setCurrentSubscription(subscription);
+                }
+                
+                // Clear URL parameters
+                router.replace('/notify');
+            }
+        } catch (error) {
+            console.error('Finalize payment failed:', error);
+        } finally {
+            setIsLoadingSubscription(false);
+        }
+    };
 
     const loadSubscriptionData = async () => {
         try {
@@ -216,10 +258,15 @@ export default function NotifyPage() {
                 setPricingPlans(apiPlans);
             }
 
-            setIsLoadingSubscription(true);
-            const subscriptionResponse = await paymentService.getCurrentSubscription();
-            if (subscriptionResponse.success && subscriptionResponse.data?.subscription) {
-                setCurrentSubscription(subscriptionResponse.data.subscription);
+            if (isAuthenticated) {
+                setIsLoadingSubscription(true);
+                const subscriptionResponse = await paymentService.getCurrentSubscription();
+                if (subscriptionResponse.success && subscriptionResponse.data?.subscription) {
+                    setCurrentSubscription(subscriptionResponse.data.subscription);
+                }
+            } else {
+                setCurrentSubscription(null);
+                setIsLoadingSubscription(false);
             }
         } catch (error) {
             console.error('Failed to load subscription data:', error);
@@ -229,6 +276,7 @@ export default function NotifyPage() {
             setIsLoadingSubscription(false);
         }
     };
+
 
     useEffect(() => {
         if (typeof window === 'undefined') return;
@@ -305,6 +353,18 @@ export default function NotifyPage() {
         }
     };
 
+    const getPlanButtonText = (plan: any) => {
+        if (!currentSubscription || !currentSubscription.isActive) return plan.buttonText;
+        if (currentSubscription.plan === plan.id) return 'Current Plan';
+        
+        const planOrder = ['basic', 'premium', 'enterprise'];
+        const currentIdx = planOrder.indexOf(currentSubscription.plan);
+        const targetIdx = planOrder.indexOf(plan.id);
+        
+        if (targetIdx > currentIdx) return 'Upgrade Now';
+        return 'Switch Plan';
+    };
+
     const handlePaymentSuccess = async (subscription: any) => {
         console.log('Payment successful:', subscription);
         setPaymentModal({ isOpen: false, plan: null });
@@ -320,6 +380,15 @@ export default function NotifyPage() {
     };
 
 
+
+    // Prevent hydration mismatch — render spinner until client is mounted
+    if (!hasMounted) {
+        return (
+            <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+            </div>
+        );
+    }
 
     return (
         <div className="min-h-screen bg-white">
@@ -495,7 +564,7 @@ export default function NotifyPage() {
                                             </div>
                                         </div>
                                         <div className="space-y-4 mb-8">
-                                            {plan.features.map((feature, featureIndex) => (
+                                            {plan.features.map((feature: string, featureIndex: number) => (
                                                 <div key={featureIndex} className="flex items-center gap-3">
                                                     <CheckCircle className="h-5 w-5 text-[hsl(175,70%,41%)] flex-shrink-0" />
                                                     <span className="text-gray-600 text-sm">{feature}</span>
@@ -503,14 +572,17 @@ export default function NotifyPage() {
                                             ))}
                                         </div>
                                         <button
+                                            disabled={currentSubscription?.plan === plan.id && currentSubscription?.isActive}
                                             onClick={() => handleSubscribe(plan.id)}
                                             className={`w-full px-6 py-4 rounded-2xl font-semibold transition-all transform hover:scale-105 ${
-                                                plan.popular
-                                                    ? 'bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white hover:shadow-xl'
-                                                    : 'border-2 border-[hsl(196,80%,45%)] text-[hsl(196,80%,45%)] hover:bg-[hsl(196,80%,45%)]/10'
+                                                plan.id === currentSubscription?.plan && currentSubscription?.isActive
+                                                    ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                                                    : plan.popular
+                                                        ? 'bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white hover:shadow-xl'
+                                                        : 'border-2 border-[hsl(196,80%,45%)] text-[hsl(196,80%,45%)] hover:bg-[hsl(196,80%,45%)]/10'
                                             }`}
                                         >
-                                            {plan.buttonText}
+                                            {getPlanButtonText(plan)}
                                         </button>
                                     </div>
                                 ))}
@@ -701,5 +773,17 @@ export default function NotifyPage() {
                 email={email}
             />
         </div>
+    );
+}
+
+export default function NotifyPage() {
+    return (
+        <Suspense fallback={
+            <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+            </div>
+        }>
+            <NotifyContent />
+        </Suspense>
     );
 }

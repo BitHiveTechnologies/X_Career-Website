@@ -11,7 +11,7 @@ export default function Footer() {
                     <div data-oid="footer-brand-section">
                         <div className="mb-6" data-oid="footer-logo">
                             <Link href="/" className="inline-block hover:opacity-80 transition-opacity">
-                                <Logo data-oid="footer-logo-comp" />
+                                <Logo showLink={false} data-oid="footer-logo-comp" />
                             </Link>
                         </div>
                         <p className="text-gray-400 mb-4" data-oid="footer-description">

@@ -57,7 +57,8 @@ export default function ProfilePage() {
         user, 
         isAuthenticated, 
         updateProfile, 
-        getProfileCompletion 
+        getProfileCompletion,
+        changePassword 
     } = useAuth();
     const router = useRouter();
     
@@ -207,20 +208,48 @@ export default function ProfilePage() {
                 setError('Mobile number is required');
                 return;
             }
+            if (!/^[6-9]\d{9}$/.test(formData.mobile)) {
+                setError('Please enter a valid 10-digit Indian mobile number');
+                return;
+            }
             if (!formData.qualification || !formData.stream) {
                 setError('Qualification and stream are required');
                 return;
             }
 
+            // Build the payload the backend expects
+            // Backend Joi schema accepts: name, mobile, qualification, stream,
+            // yearOfPassout, cgpaOrPercentage, collegeName, dateOfBirth,
+            // address, city, state, pincode, skills, resumeUrl, linkedinUrl, githubUrl
+            // Build the payload the backend expects
+            const payload: Record<string, any> = {
+                name: `${formData.firstName} ${formData.lastName}`.trim(),
+                mobile: formData.mobile,
+                qualification: formData.qualification,
+                stream: formData.stream,
+                firstName: formData.firstName,
+                lastName: formData.lastName,
+                yearOfPassout: formData.yearOfPassout || 0,
+                cgpaOrPercentage: formData.cgpaOrPercentage || 0,
+                collegeName: formData.collegeName || '',
+                dateOfBirth: formData.dateOfBirth || '',
+                address: formData.address || '',
+                city: formData.city || '',
+                state: formData.state || '',
+                pincode: formData.pincode || '',
+                skills: formData.skills || '',
+                resumeUrl: formData.resumeUrl || '',
+                linkedinUrl: formData.linkedinUrl || '',
+                githubUrl: formData.githubUrl || '',
+            };
+
             // Update profile
-            const result = await updateProfile(formData);
+            const result = await updateProfile(payload as UpdateProfileRequest);
             if (result.success) {
                 // Reload profile data after successful update
                 await loadUserProfile();
                 setIsEditing(false);
                 setSuccess('Profile updated successfully!');
-                // Reload profile data to get updated information
-                await loadUserProfile();
                 
                 // Clear success message after 3 seconds
                 setTimeout(() => setSuccess(null), 3000);
@@ -272,24 +301,31 @@ export default function ProfilePage() {
     };
 
     const handleSkillAdd = () => {
-        if (newSkill.trim() && formData.skills && !formData.skills.includes(newSkill.trim())) {
-            const currentSkills = formData.skills.split(',').filter(s => s.trim());
-            setFormData(prev => ({
-                ...prev,
-                skills: [...currentSkills, newSkill.trim()].join(', ')
-            }));
+        const trimmed = newSkill.trim();
+        if (!trimmed) return;
+        
+        const currentSkills = (formData.skills || '').split(',').map(s => s.trim()).filter(Boolean);
+        
+        // Don't add duplicates
+        if (currentSkills.includes(trimmed)) {
             setNewSkill('');
+            return;
         }
+        
+        setFormData(prev => ({
+            ...prev,
+            skills: [...currentSkills, trimmed].join(', ')
+        }));
+        setNewSkill('');
     };
 
     const handleSkillRemove = (skillToRemove: string) => {
-        if (formData.skills) {
-            const skills = formData.skills.split(',').filter(skill => skill.trim() !== skillToRemove);
-            setFormData(prev => ({
+        const currentSkills = (formData.skills || '').split(',').map(s => s.trim()).filter(Boolean);
+        const updatedSkills = currentSkills.filter(skill => skill !== skillToRemove);
+        setFormData(prev => ({
             ...prev,
-                skills: skills.join(', ')
-            }));
-        }
+            skills: updatedSkills.join(', ')
+        }));
     };
 
     const handlePasswordChange = async (e: React.FormEvent) => {
@@ -314,19 +350,7 @@ export default function ProfilePage() {
 
         try {
             setPasswordSaving(true);
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/change-password`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${localStorage.getItem('careerx_token')}`
-                },
-                body: JSON.stringify({
-                    currentPassword: passwordData.currentPassword,
-                    newPassword: passwordData.newPassword
-                })
-            });
-
-            const result = await response.json();
+            const result = await changePassword(passwordData.currentPassword, passwordData.newPassword);
 
             if (result.success) {
                 setSuccess('Password changed successfully!');
@@ -340,11 +364,9 @@ export default function ProfilePage() {
                 if (user?.mustChangePassword) {
                     const updatedUser = { ...user, mustChangePassword: false };
                     localStorage.setItem('careerx_user', JSON.stringify(updatedUser));
-                    // We might need to refresh the page or update context, 
-                    // but since success is shown, it's fine for now.
                 }
             } else {
-                setPasswordError(result.error?.message || 'Failed to change password');
+                setPasswordError(result.error || 'Failed to change password');
             }
         } catch (err) {
             console.error('Password change error:', err);
@@ -364,6 +386,14 @@ export default function ProfilePage() {
         if (percentage >= 80) return 'bg-green-500';
         if (percentage >= 60) return 'bg-yellow-500';
         return 'bg-red-500';
+    };
+
+    const formatFieldName = (field: string) => {
+        return field
+            .replace(/([A-Z])/g, ' $1') // insert a space before all caps
+            .replace(/^./, (str) => str.toUpperCase()) // capitalize the first letter
+            .replace('Cgpa Or Percentage', 'CGPA/Percentage')
+            .replace('Dob', 'Date of Birth');
     };
 
     if (!isAuthenticated) {
@@ -527,7 +557,7 @@ export default function ProfilePage() {
                     {/* Main Content */}
                     <div className="lg:col-span-2">
                         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-                            <TabsList className="grid w-full grid-cols-4 mb-6">
+                            <TabsList className="grid w-full grid-cols-5 mb-6">
                                 <TabsTrigger value="personal">Personal</TabsTrigger>
                                 <TabsTrigger value="education">Education</TabsTrigger>
                                 <TabsTrigger value="contact">Contact</TabsTrigger>
@@ -989,8 +1019,8 @@ export default function ProfilePage() {
                                             <ul className="text-sm text-gray-500 space-y-1">
                                                 {completion.missingFields.map((field, index) => (
                                                     <li key={index} className="flex items-center gap-2">
-                                                        <AlertCircle className="w-3 h-3" />
-                                                        {field}
+                                                        <AlertCircle className="w-3 h-3 text-red-400" />
+                                                        {formatFieldName(field)}
                                                     </li>
                                                 ))}
                                             </ul>

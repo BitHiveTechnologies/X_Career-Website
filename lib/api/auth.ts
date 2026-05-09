@@ -65,16 +65,19 @@ export class AuthService {
         
         // Note: Role is determined from the response, not from the request
         
-        // Use the user data directly from login response to preserve the correct role
+        // Use the user data directly from login response to preserve the correct role and subscription
+        const userData = response.data.user as any;
         const basicUser: User = {
-          id: response.data.user.id,
-          email: response.data.user.email,
-          firstName: response.data.user.firstName,
-          lastName: response.data.user.lastName,
-          role: response.data.user.role as 'user' | 'admin' | 'super_admin',
-          subscriptionStatus: 'inactive',
-          isProfileComplete: false,
-          mustChangePassword: response.data.user.mustChangePassword
+          id: userData.id || userData._id,
+          email: userData.email,
+          firstName: userData.firstName || userData.name?.split(' ')[0] || '',
+          lastName: userData.lastName || userData.name?.split(' ').slice(1).join(' ') || '',
+          role: (userData.role as any) || 'user',
+          subscriptionStatus: userData.subscriptionStatus || 'inactive',
+          subscriptionPlan: userData.subscriptionPlan,
+          subscriptionInfo: userData.subscriptionInfo,
+          isProfileComplete: userData.isProfileComplete || false,
+          mustChangePassword: userData.mustChangePassword
         };
         
         console.log('Created user from JWT login:', basicUser);
@@ -121,13 +124,15 @@ export class AuthService {
         }
         
         const basicUser: User = {
-          id: userData.id || `admin_${Date.now()}`,
+          id: userData.id || userData._id || `admin_${Date.now()}`,
           email: userData.email || loginData.email,
           firstName: userData.name ? userData.name.split(' ')[0] : userData.firstName || 'Admin',
           lastName: userData.name ? userData.name.split(' ').slice(1).join(' ') : userData.lastName || 'User',
           role: userRole,
-          subscriptionStatus: 'inactive',
-          isProfileComplete: false,
+          subscriptionStatus: (userData as any).subscriptionStatus || 'inactive',
+          subscriptionPlan: (userData as any).subscriptionPlan,
+          subscriptionInfo: (userData as any).subscriptionInfo,
+          isProfileComplete: (userData as any).isProfileComplete || false,
         };
         
         console.log('Created user object:', basicUser);
@@ -154,6 +159,43 @@ export class AuthService {
       email,
       password,
     });
+  }
+
+  /**
+   * Change user password
+   */
+  async changePassword(currentPassword: string, newPassword: string): Promise<{ success: boolean; error?: string }> {
+    try {
+      if (!currentPassword || !newPassword) {
+        return { success: false, error: 'Both current and new passwords are required' };
+      }
+      
+      if (newPassword.length < 6) {
+        return { success: false, error: 'New password must be at least 6 characters long' };
+      }
+
+      const response = await apiClient.post<any>(API_ENDPOINTS.AUTH.CHANGE_PASSWORD, {
+        currentPassword,
+        newPassword
+      });
+
+      if (response.success) {
+        return { success: true };
+      }
+      
+      // Handle validation errors with details
+      if (response.error?.details && Array.isArray(response.error.details)) {
+        return { success: false, error: response.error.details.join(', ') };
+      }
+      
+      return { success: false, error: response.error?.message || 'Failed to change password' };
+    } catch (error: any) {
+      console.error('Change password error:', error);
+      return { 
+        success: false, 
+        error: error.message || 'Failed to change password. Please try again.' 
+      };
+    }
   }
 
   /**
@@ -238,16 +280,49 @@ export class AuthService {
    */
   async getUserProfile(): Promise<{ success: boolean; profile?: User; error?: string }> {
     try {
-      const response = await apiClient.get<User>(API_ENDPOINTS.USERS.ME);
+      const response = await apiClient.get<any>(API_ENDPOINTS.USERS.ME);
       
       if (response.success && response.data) {
-        const validation = safeValidate(response.data, validateUser);
-        if (validation.isValid) {
-          this.setCurrentUser(validation.data!);
-          return { success: true, profile: validation.data! };
-        } else {
-          return { success: false, error: 'Invalid user data received' };
-        }
+        // Backend returns { user: { id, name, email, ... }, profile: { ... } }
+        const userData = response.data.user || response.data;
+        const profileData = response.data.profile || userData.profile || null;
+        const nameParts = (userData.name || '').split(' ');
+        
+        const user: User = {
+          id: userData.id || userData._id,
+          email: userData.email,
+          firstName: profileData?.firstName || nameParts[0] || '',
+          lastName: profileData?.lastName || nameParts.slice(1).join(' ') || '',
+          mobile: userData.mobile || profileData?.contactNumber || '',
+          role: userData.role || 'user',
+          subscriptionStatus: userData.subscriptionStatus || 'inactive',
+          subscriptionPlan: userData.subscriptionPlan,
+          subscriptionInfo: userData.subscriptionInfo,
+          isProfileComplete: userData.isProfileComplete || false,
+          mustChangePassword: userData.mustChangePassword,
+          profile: profileData ? {
+            firstName: profileData.firstName || nameParts[0] || '',
+            lastName: profileData.lastName || nameParts.slice(1).join(' ') || '',
+            contactNumber: profileData.contactNumber || userData.mobile || '',
+            dateOfBirth: profileData.dateOfBirth || '',
+            qualification: profileData.qualification || '',
+            stream: profileData.stream || '',
+            yearOfPassout: profileData.yearOfPassout || 0,
+            cgpaOrPercentage: profileData.cgpaOrPercentage || 0,
+            collegeName: profileData.collegeName || '',
+            address: profileData.address || '',
+            city: profileData.city || '',
+            state: profileData.state || '',
+            pincode: profileData.pincode || '',
+            skills: profileData.skills || '',
+            resumeUrl: profileData.resumeUrl || '',
+            linkedinUrl: profileData.linkedinUrl || '',
+            githubUrl: profileData.githubUrl || '',
+          } : undefined,
+        };
+        
+        this.setCurrentUser(user);
+        return { success: true, profile: user };
       }
       
       return { success: false, error: 'Failed to get user profile' };
@@ -265,16 +340,49 @@ export class AuthService {
    */
   async updateProfile(profileData: UpdateProfileRequest): Promise<{ success: boolean; error?: string; user?: User }> {
     try {
-      const response = await apiClient.put<User>(API_ENDPOINTS.USERS.ME, profileData);
+      const response = await apiClient.put<any>(API_ENDPOINTS.USERS.ME, profileData);
       
       if (response.success && response.data) {
-        const validation = safeValidate(response.data, validateUser);
-        if (validation.isValid) {
-          this.setCurrentUser(validation.data!);
-          return { success: true, user: validation.data! };
-        } else {
-          return { success: false, error: 'Invalid user data received' };
-        }
+        // Backend returns { user: { id, name, email, ... }, profile: { ... } }
+        const userData = response.data.user || response.data;
+        const profileResp = response.data.profile || userData.profile || null;
+        const nameParts = (userData.name || '').split(' ');
+        
+        const user: User = {
+          id: userData.id || userData._id,
+          email: userData.email,
+          firstName: profileResp?.firstName || profileData.firstName || nameParts[0] || '',
+          lastName: profileResp?.lastName || profileData.lastName || nameParts.slice(1).join(' ') || '',
+          mobile: userData.mobile || profileResp?.contactNumber || '',
+          role: userData.role || 'user',
+          subscriptionStatus: userData.subscriptionStatus || 'inactive',
+          subscriptionPlan: userData.subscriptionPlan,
+          subscriptionInfo: userData.subscriptionInfo,
+          isProfileComplete: userData.isProfileComplete || false,
+          mustChangePassword: userData.mustChangePassword,
+          profile: profileResp ? {
+            firstName: profileResp.firstName || '',
+            lastName: profileResp.lastName || '',
+            contactNumber: profileResp.contactNumber || '',
+            dateOfBirth: profileResp.dateOfBirth || '',
+            qualification: profileResp.qualification || '',
+            stream: profileResp.stream || '',
+            yearOfPassout: profileResp.yearOfPassout || 0,
+            cgpaOrPercentage: profileResp.cgpaOrPercentage || 0,
+            collegeName: profileResp.collegeName || '',
+            address: profileResp.address || '',
+            city: profileResp.city || '',
+            state: profileResp.state || '',
+            pincode: profileResp.pincode || '',
+            skills: profileResp.skills || '',
+            resumeUrl: profileResp.resumeUrl || '',
+            linkedinUrl: profileResp.linkedinUrl || '',
+            githubUrl: profileResp.githubUrl || '',
+          } : undefined,
+        };
+        
+        this.setCurrentUser(user);
+        return { success: true, user };
       }
       
       return { success: false, error: 'Failed to update profile' };
@@ -322,13 +430,15 @@ export class AuthService {
         
         // Create user object from registration response
         const basicUser: User = {
-          id: response.data.user.id,
+          id: response.data.user.id || response.data.user._id,
           email: response.data.user.email,
-          firstName: response.data.user.firstName,
-          lastName: response.data.user.lastName,
-          role: response.data.user.role as 'user' | 'admin' | 'super_admin',
-          subscriptionStatus: 'inactive',
-          isProfileComplete: false,
+          firstName: response.data.user.firstName || response.data.user.name?.split(' ')[0] || '',
+          lastName: response.data.user.lastName || response.data.user.name?.split(' ').slice(1).join(' ') || '',
+          role: (response.data.user.role as 'user' | 'admin' | 'super_admin') || 'user',
+          subscriptionStatus: response.data.user.subscriptionStatus || 'inactive',
+          subscriptionPlan: response.data.user.subscriptionPlan,
+          subscriptionInfo: response.data.user.subscriptionInfo,
+          isProfileComplete: response.data.user.isProfileComplete || false,
         };
         
         this.setCurrentUser(basicUser);

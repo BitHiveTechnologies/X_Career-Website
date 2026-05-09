@@ -96,9 +96,27 @@ export default function PaymentModal({ isOpen, onClose, plan, onSuccess, onError
       orderId: referenceOrderId
     });
 
-    if (verifyResponse.success && verifyResponse.data?.subscription) {
-      const subscription = verifyResponse.data.subscription;
-      if (subscription.status === 'completed' || subscription.isActive === true) {
+    if (verifyResponse.success && verifyResponse.data) {
+      const { subscription, accessToken, user: userData } = verifyResponse.data as any;
+      
+      if (subscription && (subscription.status === 'completed' || subscription.isActive === true)) {
+        // If tokens were returned (guest checkout), save them to log the user in
+        if (accessToken && userData) {
+          if (typeof window !== 'undefined') {
+            localStorage.setItem('careerx_token', accessToken);
+            localStorage.setItem('careerx_user', JSON.stringify({
+              id: userData.id,
+              email: userData.email,
+              firstName: userData.name ? userData.name.split(' ')[0] : 'User',
+              lastName: userData.name ? userData.name.split(' ').slice(1).join(' ') : '',
+              role: userData.role || 'user',
+              subscriptionStatus: 'active',
+              subscriptionPlan: subscription.plan,
+              isProfileComplete: true
+            }));
+          }
+        }
+
         onSuccess(subscription);
         await refreshUser();
         onClose();
