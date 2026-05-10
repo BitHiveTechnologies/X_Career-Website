@@ -139,7 +139,8 @@ const dummyData: {
 // API call functions (to be implemented with actual backend)
 const fetchStats = async (): Promise<Stats> => {
     try {
-        const response = await fetch('/api/v1/admin/settings/metrics');
+        const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3001';
+        const response = await fetch(`${baseUrl}/api/v1/admin/settings/metrics`);
         const data = await response.json();
         if (data.success) {
             // Transform settings to Stats
@@ -164,7 +165,8 @@ const fetchStats = async (): Promise<Stats> => {
 
 const fetchTestimonials = async (): Promise<Testimonial[]> => {
     try {
-        const response = await fetch('/api/v1/testimonials');
+        const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3001';
+        const response = await fetch(`${baseUrl}/api/v1/testimonials`);
         const data = await response.json();
         if (data.success) {
             return data.data.map((t: any) => ({

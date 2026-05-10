@@ -14,7 +14,6 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [isAdminLogin, setIsAdminLogin] = useState(false);
   const { login } = useAuth();
 
   const handleInputChange = (field: string, value: string) => {
@@ -46,7 +45,6 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
       // Reset form
       setEmail('');
       setPassword('');
-      setIsAdminLogin(false);
     } else {
       setError(result.error || 'Login failed');
     }
@@ -67,7 +65,7 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
             </div>
             <div>
               <h2 className="text-xl font-bold text-gray-900">
-                {isAdminLogin ? 'Admin Login' : 'User Login'}
+                Sign In
               </h2>
               <p className="text-sm text-gray-600">
                 Sign in to your account
@@ -119,18 +117,6 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
               />
             </div>
 
-            <div className="flex items-center">
-              <input
-                id="admin-login"
-                type="checkbox"
-                checked={isAdminLogin}
-                onChange={(e) => setIsAdminLogin(e.target.checked)}
-                className="h-4 w-4 text-[hsl(196,80%,45%)] focus:ring-[hsl(196,80%,45%)] border-gray-300 rounded"
-              />
-              <label htmlFor="admin-login" className="ml-2 block text-sm text-gray-900">
-                Admin Login
-              </label>
-            </div>
           </div>
 
           {/* Footer */}

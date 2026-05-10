@@ -2,6 +2,7 @@
 
 import { paymentService } from '@/lib/api/payment';
 import { UserSubscription } from '@/lib/api/subscriptionService';
+import { useAuth } from '@/lib/auth/AuthContext';
 import { AlertCircle, CheckCircle, Clock, Crown, XCircle } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
@@ -11,13 +12,20 @@ interface SubscriptionStatusProps {
 }
 
 export default function SubscriptionStatus({ onUpgrade, className = '' }: SubscriptionStatusProps) {
+  const { isAuthenticated } = useAuth();
   const [subscription, setSubscription] = useState<UserSubscription | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [hasMounted, setHasMounted] = useState(false);
 
   useEffect(() => {
-    loadSubscription();
-  }, []);
+    setHasMounted(true);
+    if (isAuthenticated) {
+      loadSubscription();
+    } else {
+      setIsLoading(false);
+    }
+  }, [isAuthenticated]);
 
   const loadSubscription = async () => {
     try {
@@ -57,11 +65,21 @@ export default function SubscriptionStatus({ onUpgrade, className = '' }: Subscr
       }
     } catch (err) {
       console.error('Failed to load subscription:', err);
-      setError('Failed to load subscription status');
+      // Don't show error for 401s, just treat as no subscription
+      setSubscription(null);
     } finally {
       setIsLoading(false);
     }
   };
+
+  // Prevent hydration mismatch by returning null or a skeleton until mounted
+  if (!hasMounted) {
+    return (
+      <div className={`bg-white rounded-xl p-4 border border-gray-200 ${className}`}>
+        <div className="animate-pulse h-12 bg-gray-100 rounded"></div>
+      </div>
+    );
+  }
 
   const getStatusIcon = (status: string) => {
     switch (status) {
@@ -210,13 +228,13 @@ export default function SubscriptionStatus({ onUpgrade, className = '' }: Subscr
                     )}
                 </div>
                 
-      {!subscription.isActive && onUpgrade && (
+      {onUpgrade && (subscription.isActive ? subscription.plan !== 'enterprise' : true) && (
         <div className="mt-3 pt-3 border-t border-gray-200">
           <button
             onClick={onUpgrade}
             className="w-full px-4 py-2 bg-gradient-to-r from-yellow-500 to-orange-500 text-white rounded-lg text-sm font-medium hover:from-yellow-600 hover:to-orange-600 transition-all"
           >
-            Renew Subscription
+            {subscription.isActive ? 'Upgrade Plan' : 'Renew Subscription'}
           </button>
                     </div>
                 )}

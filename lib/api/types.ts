@@ -436,14 +436,28 @@ export interface SendJobAlertRequest {
 // ============================================================================
 
 export interface AdminDashboardStats {
-  totalUsers: number;
-  activeUsers: number;
-  totalJobs: number;
-  activeJobs: number;
-  totalApplications: number;
-  pendingApplications: number;
-  totalRevenue: number;
-  monthlyRevenue: number;
+  overview: {
+    totalUsers: number;
+    activeUsers: number;
+    totalJobs: number;
+    activeJobs: number;
+    totalSubscriptions: number;
+    activeSubscriptions: number;
+    totalApplications: number;
+    pendingApplications: number;
+    totalRevenue: number;
+  };
+  growth: {
+    users: { count: number; percentage: number };
+    subscriptions: { count: number; percentage: number };
+    revenue: { amount: number; percentage: number };
+  };
+  distributions: {
+    subscriptionPlans: Array<{ _id: string; count: number }>;
+    userRoles: Array<{ _id: string; count: number }>;
+    jobTypes: Array<{ _id: string; count: number }>;
+  };
+  lastUpdated: string;
 }
 
 export interface UserAnalytics {
