@@ -23,7 +23,12 @@ import {
   Search,
   User,
   Users,
-  XCircle
+  XCircle,
+  TrendingUp,
+  TrendingDown,
+  DollarSign,
+  CreditCard,
+  IndianRupee
 } from 'lucide-react';
 import { useCallback, useEffect, useState } from 'react';
 
@@ -118,6 +123,7 @@ export default function AdminDashboard() {
       basic: 0,
     },
   });
+  const [dashboardStats, setDashboardStats] = useState<any>(null);
   const [analytics, setAnalytics] = useState<CustomerAnalytics | null>(null);
   const [pagination, setPagination] = useState<PaginationInfo>({
     currentPage: 1,
@@ -263,13 +269,19 @@ export default function AdminDashboard() {
   // Fetch comprehensive customer analytics
   const fetchCustomerAnalytics = useCallback(async () => {
     try {
-      console.log('🔍 Fetching customer analytics...');
+      console.log('🔍 Fetching dashboard statistics and analytics...');
       const userToken = getUserToken();
       if (!userToken) {
         throw new Error('No authentication token available');
       }
       apiClient.setToken(userToken);
       
+      // Fetch Dashboard Stats (New)
+      const dashResponse = await adminService.getDashboardStats();
+      if (dashResponse.success && dashResponse.data) {
+        setDashboardStats(dashResponse.data);
+      }
+
       const response = await adminService.getUserAnalytics();
       console.log('✅ Customer analytics response:', response);
 
@@ -288,7 +300,7 @@ export default function AdminDashboard() {
           subscriptionBreakdown: {
             active: analyticsData.activeUsers || 0,
             inactive: analyticsData.totalUsers - analyticsData.activeUsers || 0,
-            halted: 0, // This would need to come from the actual analytics response
+            halted: 0, 
             premium: analyticsData.subscriptionBreakdown?.premium || 0,
             basic: analyticsData.subscriptionBreakdown?.starter || 0,
           },
@@ -296,7 +308,6 @@ export default function AdminDashboard() {
       }
     } catch (err) {
       console.error('❌ Error fetching customer analytics:', err);
-      // Don't set error state for analytics, just log it
     }
   }, []);
 
@@ -544,9 +555,9 @@ export default function AdminDashboard() {
 
       {/* Comprehensive Statistics Dashboard */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <Card>
+        <Card className="border-l-4 border-l-blue-500">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Customers</CardTitle>
+            <CardTitle className="text-sm font-medium">Total Users</CardTitle>
             <Users className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
@@ -554,56 +565,92 @@ export default function AdminDashboard() {
               {loading ? (
                 <RefreshCw className="h-6 w-6 animate-spin" />
               ) : (
-                customerStats.totalUsers.toLocaleString()
+                (dashboardStats?.overview?.totalUsers || customerStats.totalUsers).toLocaleString()
               )}
             </div>
-            <p className="text-xs text-muted-foreground">
-              All registered customers
-            </p>
+            <div className="flex items-center mt-1">
+              {dashboardStats?.growth?.users?.percentage >= 0 ? (
+                <span className="flex items-center text-xs font-medium text-green-600">
+                  <TrendingUp className="h-3 w-3 mr-1" />
+                  {dashboardStats.growth.users.percentage}%
+                  <span className="text-muted-foreground font-normal ml-1">since last month</span>
+                </span>
+              ) : (
+                <span className="flex items-center text-xs font-medium text-red-600">
+                  <TrendingDown className="h-3 w-3 mr-1" />
+                  {Math.abs(dashboardStats?.growth?.users?.percentage)}%
+                  <span className="text-muted-foreground font-normal ml-1">since last month</span>
+                </span>
+              )}
+            </div>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="border-l-4 border-l-purple-500">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Active Customers</CardTitle>
-            <Activity className="h-4 w-4 text-muted-foreground" />
+            <CardTitle className="text-sm font-medium">Active Subscriptions</CardTitle>
+            <CreditCard className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
               {loading ? (
                 <RefreshCw className="h-6 w-6 animate-spin" />
               ) : (
-                customerStats.subscriptionBreakdown.active.toLocaleString()
+                (dashboardStats?.overview?.activeSubscriptions || customerStats.subscriptionBreakdown.active).toLocaleString()
               )}
             </div>
-            <p className="text-xs text-muted-foreground">
-              Active subscriptions
-            </p>
+            <div className="flex items-center mt-1">
+              {dashboardStats?.growth?.subscriptions?.percentage >= 0 ? (
+                <span className="flex items-center text-xs font-medium text-green-600">
+                  <TrendingUp className="h-3 w-3 mr-1" />
+                  {dashboardStats.growth.subscriptions.percentage}%
+                  <span className="text-muted-foreground font-normal ml-1">conversion up</span>
+                </span>
+              ) : (
+                <span className="flex items-center text-xs font-medium text-red-600">
+                  <TrendingDown className="h-3 w-3 mr-1" />
+                  {Math.abs(dashboardStats?.growth?.subscriptions?.percentage)}%
+                  <span className="text-muted-foreground font-normal ml-1">conversion down</span>
+                </span>
+              )}
+            </div>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="border-l-4 border-l-green-500">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Premium Customers</CardTitle>
-            <Crown className="h-4 w-4 text-muted-foreground" />
+            <CardTitle className="text-sm font-medium">Total Revenue</CardTitle>
+            <IndianRupee className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
               {loading ? (
                 <RefreshCw className="h-6 w-6 animate-spin" />
               ) : (
-                customerStats.subscriptionBreakdown.premium.toLocaleString()
+                `₹${(dashboardStats?.overview?.totalRevenue || 0).toLocaleString()}`
               )}
             </div>
-            <p className="text-xs text-muted-foreground">
-              Premium subscriptions
-            </p>
+            <div className="flex items-center mt-1">
+              {dashboardStats?.growth?.revenue?.percentage >= 0 ? (
+                <span className="flex items-center text-xs font-medium text-green-600">
+                  <TrendingUp className="h-3 w-3 mr-1" />
+                  {dashboardStats.growth.revenue.percentage}%
+                  <span className="text-muted-foreground font-normal ml-1">increase</span>
+                </span>
+              ) : (
+                <span className="flex items-center text-xs font-medium text-red-600">
+                  <TrendingDown className="h-3 w-3 mr-1" />
+                  {Math.abs(dashboardStats?.growth?.revenue?.percentage)}%
+                  <span className="text-muted-foreground font-normal ml-1">decrease</span>
+                </span>
+              )}
+            </div>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="border-l-4 border-l-amber-500">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Completed Profiles</CardTitle>
+            <CardTitle className="text-sm font-medium">Match Rate</CardTitle>
             <CheckCircle className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
@@ -611,14 +658,11 @@ export default function AdminDashboard() {
               {loading ? (
                 <RefreshCw className="h-6 w-6 animate-spin" />
               ) : (
-                customerStats.completedProfiles.toLocaleString()
+                `${Math.round(((dashboardStats?.overview?.totalApplications || 0) / (dashboardStats?.overview?.totalJobs || 1)) * 10)}%`
               )}
             </div>
-            <p className="text-xs text-muted-foreground">
-              {customerStats.totalUsers > 0 
-                ? `${Math.round((customerStats.completedProfiles / customerStats.totalUsers) * 100)}% completion rate`
-                : '0% completion rate'
-              }
+            <p className="text-xs text-muted-foreground mt-1">
+              Avg applications per job
             </p>
           </CardContent>
         </Card>
