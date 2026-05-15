@@ -6,9 +6,10 @@ import MainNavbar from '@/components/mainNavbar';
 import ResumeForm from '@/components/ResumeForm';
 import ResumePreview from '@/components/ResumePreview';
 import SubscriptionStatus from '@/components/SubscriptionStatus';
+import ResumeEmptyState from '@/components/ResumeEmptyState';
 import TemplateSelector from '@/components/TemplateSelector';
 import { getMyResume, saveResume } from '@/lib/api/services';
-import { Save, RefreshCw, CheckCircle, AlertCircle, Clock } from 'lucide-react';
+import { Save, RefreshCw, CheckCircle, AlertCircle, Clock, Plus } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 
 // --- INTERFACE DEFINITIONS ---
@@ -124,9 +125,11 @@ export default function ResumeBuilderPage() {
     const [isSaving, setIsSaving] = useState(false);
     const [lastSaved, setLastSaved] = useState<Date | null>(null);
     const [isLoading, setIsLoading] = useState(true);
+    const [showEmptyState, setShowEmptyState] = useState(false);
     const resumeRef = useRef<HTMLDivElement>(null);
 
     const hasUnsavedChanges = JSON.stringify(resumeData) !== JSON.stringify(savedResumeData);
+    const isDataEmpty = !resumeData.personalInfo.fullName && resumeData.experience.length === 0 && resumeData.education.length === 0;
 
     // Fetch initial data
     useEffect(() => {
@@ -144,9 +147,13 @@ export default function ResumeBuilderPage() {
                     if (response.data.resume.updatedAt) {
                         setLastSaved(new Date(response.data.resume.updatedAt));
                     }
+                    setShowEmptyState(false);
+                } else {
+                    setShowEmptyState(true);
                 }
             } catch (error) {
                 console.error('Failed to fetch resume:', error);
+                setShowEmptyState(true);
             } finally {
                 setIsLoading(false);
             }
@@ -344,10 +351,14 @@ export default function ResumeBuilderPage() {
             <div className="max-w-[1600px] mx-auto px-4 py-8">
                 <div className="grid grid-cols-1 lg:grid-cols-[450px,1fr] gap-8 items-start">
                     
-                    {/* Left Panel: Editor (Vibrant Glassmorphism) */}
+                    {/* Left Panel: Editor */}
                     <div className="space-y-6 lg:sticky lg:top-[144px]">
                         <SubscriptionStatus />
                         
+                        {showEmptyState && isDataEmpty ? (
+                            <ResumeEmptyState onStart={() => setShowEmptyState(false)} />
+                        ) : (
+                            <>
                         {/* Section Navigation Tabs */}
                         <div className="bg-white rounded-2xl shadow-xl shadow-slate-200/50 border border-slate-100 p-2 overflow-x-auto no-scrollbar">
                             <div className="flex items-center space-x-1">
@@ -412,6 +423,8 @@ export default function ResumeBuilderPage() {
                                 Download DOCX
                             </button>
                         </div>
+                            </>
+                        )}
                     </div>
 
                     {/* Right Panel: Live Preview (Document Simulator) */}

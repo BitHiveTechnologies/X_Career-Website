@@ -176,6 +176,7 @@ function NotifyContent() {
         learningResources: true,
         careerUpdates: true,
     });
+    const [isGuestCheckout, setIsGuestCheckout] = useState(false);
 
     const [pricingPlans, setPricingPlans] = useState<any[]>(defaultPricingPlans);
     const [currentSubscription, setCurrentSubscription] = useState<any>(null);
@@ -224,6 +225,11 @@ function NotifyContent() {
                             subscriptionStatus: 'active',
                             isProfileComplete: true
                         }));
+                    }
+                    
+                    // Set guest checkout flag if backend says so
+                    if ((response.data as any).isNewUser) {
+                        setIsGuestCheckout(true);
                     }
                     
                     await refreshUser();
@@ -427,6 +433,19 @@ function NotifyContent() {
                             {/* Current Subscription Status */}
                             {!isLoadingSubscription && (
                                 <div className="max-w-md mx-auto mb-8">
+                                    {isGuestCheckout && (
+                                        <div className="mb-6 p-6 bg-white/20 backdrop-blur-md border border-yellow-300/50 rounded-3xl text-white shadow-2xl animate-pulse">
+                                            <div className="flex items-start gap-4">
+                                                <div className="bg-yellow-400 p-3 rounded-2xl shadow-lg">
+                                                    <Mail className="w-6 h-6 text-blue-900" />
+                                                </div>
+                                                <div className="text-left">
+                                                    <h4 className="text-xl font-bold mb-1">Check Your Email!</h4>
+                                                    <p className="text-blue-50">We've sent your login credentials to your email address. Please use them to log in and access your premium benefits.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )}
                                     <SubscriptionStatus 
                                         onUpgrade={() => {
                                             const premiumPlan = pricingPlans.find(p => p.id === 'premium');

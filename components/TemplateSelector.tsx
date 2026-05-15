@@ -43,9 +43,9 @@ export default function TemplateSelector({
             description: 'Simple and elegant design for freshers',
             preview: '/template-previews/minimal.png',
             features: ['Minimalist', 'Typography Focus', 'Clean Lines'],
-            subscription: 'free',
+            // All plans (basic+) can access this template
+            subscriptionTier: 'basic' as const,
             targetAudience: 'Freshers',
-            candidateType: 'freshers',
         },
         {
             id: 'professional',
@@ -53,9 +53,9 @@ export default function TemplateSelector({
             description: 'Classic left-aligned structure preferred by recruiters',
             preview: '/template-previews/professional.png',
             features: ['Recruiter Favorite', 'Left-Aligned', 'High Readability'],
-            subscription: 'premium',
+            // Premium and Enterprise (Pro) plans
+            subscriptionTier: 'premium' as const,
             targetAudience: 'Professionals',
-            candidateType: 'professionals',
         },
         {
             id: 'creative',
@@ -63,20 +63,29 @@ export default function TemplateSelector({
             description: 'Sophisticated sidebar layout for experienced candidates',
             preview: '/template-previews/creative.png',
             features: ['Creative Layout', 'Executive Style', 'Leadership Focus'],
-            subscription: 'premium',
+            // Premium and Enterprise (Pro) plans
+            subscriptionTier: 'premium' as const,
             targetAudience: 'Experienced Candidates',
-            candidateType: 'experienced-professionals',
         },
     ];
 
-    const handleTemplateClick = (template: any) => {
-        if (!userSubscription) return;
-        
-        const isAccessible = template.subscription === 'free' || 
-            (template.subscription === 'starter' && ['starter', 'premium'].includes(userSubscription)) ||
-            (template.subscription === 'premium' && userSubscription === 'premium');
-        
-        if (isAccessible) {
+    /**
+     * Returns true if the user plan can access the given template tier.
+     * Hierarchy: basic=1, premium=2, enterprise(pro)=3
+     * Template tiers: 'basic' requires level>=1, 'premium' requires level>=2
+     */
+    const canAccessTemplate = (templateTier: 'basic' | 'premium', plan: string | null): boolean => {
+        if (!plan) return templateTier === 'basic';
+        const normalized = plan.toLowerCase();
+        const tierLevel: Record<string, number> = { basic: 1, premium: 2, enterprise: 3 };
+        const userLevel = tierLevel[normalized] || 1;
+        const requiredLevel = templateTier === 'premium' ? 2 : 1;
+        return userLevel >= requiredLevel;
+    };
+
+    const handleTemplateClick = (template: typeof templates[0]) => {
+        const accessible = canAccessTemplate(template.subscriptionTier, userSubscription);
+        if (accessible) {
             onTemplateChange(template.id);
         } else {
             setLockedTemplate(template.name);
@@ -84,10 +93,23 @@ export default function TemplateSelector({
         }
     };
 
-    const getSubscriptionRequired = (templateSubscription: string) => {
-        if (templateSubscription === 'starter') return 'Starter Plan (₹49/month)';
-        if (templateSubscription === 'premium') return 'Premium Plan (₹99/month)';
+    const getSubscriptionRequired = (templateTier: 'basic' | 'premium') => {
+        if (templateTier === 'premium') return 'Premium or Pro Plan';
         return '';
+    };
+
+    /**
+     * Returns a user-friendly display label for the plan.
+     * 'enterprise' is stored in DB but displayed as 'Pro'.
+     */
+    const getPlanDisplayLabel = (plan: string | null): string => {
+        if (!plan) return 'Loading...';
+        const labels: Record<string, string> = {
+            basic: 'Basic',
+            premium: 'Premium',
+            enterprise: '⚡ Pro'
+        };
+        return labels[plan.toLowerCase()] || plan;
     };
 
     return (
@@ -100,24 +122,18 @@ export default function TemplateSelector({
                     <div className="flex items-center space-x-2">
                         <span className="text-sm text-gray-600">Current Plan:</span>
                         <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                            userSubscription === 'free' ? 'bg-gray-100 text-gray-700' :
-                            userSubscription === 'starter' ? 'bg-blue-100 text-blue-700' :
-                            isPremium ? 'bg-premium-gold text-premium-navy border border-premium-gold/30' : 'bg-purple-100 text-purple-700'
+                            userSubscription === 'enterprise' ? 'bg-purple-100 text-purple-700' :
+                            userSubscription === 'premium' ? 'bg-blue-100 text-blue-700' :
+                            'bg-gray-100 text-gray-700'
                         }`}>
-                            {!userSubscription ? 'Loading...' :
-                             userSubscription === 'free' ? 'Free' :
-                             userSubscription === 'starter' ? 'Starter' : 
-                             isPremium ? '👑 Royal Premium' : 'Premium'}
+                            {getPlanDisplayLabel(userSubscription)}
                         </span>
                     </div>
                 </div>
                 
                 <div className="grid md:grid-cols-3 gap-4" data-oid="v62dji9">
                     {templates.map((template) => {
-                        const isAccessible = template.subscription === 'free' || 
-                            (userSubscription && template.subscription === 'starter' && ['starter', 'premium'].includes(userSubscription)) ||
-                            (userSubscription && template.subscription === 'premium' && userSubscription === 'premium');
-                        
+                        const isAccessible = canAccessTemplate(template.subscriptionTier, userSubscription);
                         const isLocked = !isAccessible;
                         
                         return (
@@ -137,7 +153,7 @@ export default function TemplateSelector({
                                         data-oid="uo4_47m"
                                     >
                                         <Lock className="w-3 h-3" />
-                                        {getSubscriptionRequired(template.subscription)}
+                                        <span>{getSubscriptionRequired(template.subscriptionTier)}</span>
                                     </div>
                                 )}
 
@@ -255,10 +271,10 @@ export default function TemplateSelector({
                             </h4>
                             <ul className="text-sm text-blue-700 space-y-1" data-oid="35qikfv">
                                 <li data-oid="op30erm">
-                                    • <strong>Free:</strong> Vinod Resume (for freshers)
+                                    • <strong>Basic:</strong> Vinod Resume (for freshers)
                                 </li>
                                 <li data-oid="8h8672:">
-                                    • <strong>Premium:</strong> Standard Professional & Creative Executive
+                                    • <strong>Premium &amp; Pro:</strong> Standard Professional &amp; Creative Executive
                                 </li>
                             </ul>
                         </div>
@@ -269,10 +285,13 @@ export default function TemplateSelector({
             <SubscriptionUpgradeModal
                 isOpen={showUpgradeModal}
                 onClose={() => setShowUpgradeModal(false)}
-                currentPlan={userSubscription as "free" | "premium" | "starter" || "free"}
+                currentPlan={(userSubscription === 'enterprise' ? 'premium' : userSubscription) as "free" | "premium" | "starter" || "free"}
                 onUpgrade={(planId) => {
                     console.log('Upgrading to plan:', planId);
-                    // Implement upgrade logic here
+                    // Redirect to pricing page
+                    if (typeof window !== 'undefined') {
+                        window.location.href = '/subscriptions';
+                    }
                     setShowUpgradeModal(false);
                 }}
             />

@@ -221,14 +221,13 @@ class SubscriptionService {
   }
 
   /**
-   * Cancel current subscription
+   * Cancel current subscription by subscription ID
    * Requires authentication
    */
-  async cancelSubscription(request: CancelSubscriptionRequest): Promise<ApiResponse<any>> {
+  async cancelSubscription(subscriptionId: string): Promise<ApiResponse<any>> {
     try {
-      const response = await apiClient.post(
-        API_ENDPOINTS.SUBSCRIPTIONS.RENEW, // Using renew endpoint for cancel
-        request
+      const response = await apiClient.delete(
+        API_ENDPOINTS.SUBSCRIPTIONS.DELETE(subscriptionId)
       );
       return response;
     } catch (error) {
@@ -264,6 +263,41 @@ class SubscriptionService {
     } catch (error) {
       console.error('Failed to check subscription status:', error);
       return false;
+    }
+  }
+
+  /**
+   * Get the current user's plan access and feature flags.
+   * Returns what templates, notifications etc. the user can access.
+   */
+  async getUserPlanAccess(): Promise<ApiResponse<{
+    plan: string;
+    displayName: string;
+    isActive: boolean;
+    tierLevel: number;
+    features: {
+      jobNotifications: boolean;
+      priorityNotifications: boolean;
+      basicResumeTemplate: boolean;
+      premiumResumeTemplates: boolean;
+      maxJobs: number;
+      prioritySupport: boolean;
+    };
+  }>> {
+    try {
+      const response = await apiClient.get(API_ENDPOINTS.SUBSCRIPTIONS.ACCESS);
+      return response;
+    } catch (error) {
+      console.error('Failed to get user plan access:', error);
+      // Return safe default: basic plan access
+      return {
+        success: false,
+        error: { 
+          message: error instanceof Error ? error.message : 'Failed to get plan access',
+          code: 'ACCESS_ERROR'
+        },
+        timestamp: new Date().toISOString()
+      };
     }
   }
 

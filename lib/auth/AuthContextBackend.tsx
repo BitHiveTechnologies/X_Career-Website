@@ -551,8 +551,21 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   const getUserSubscription = async (): Promise<any> => {
-    // Placeholder implementation
-    return null;
+    try {
+      const token = typeof window !== 'undefined' ? localStorage.getItem('careerx_token') : null;
+      if (!token) {
+        return 'basic'; // Unauthenticated → basic access
+      }
+
+      const result = await apiClient.get(API_ENDPOINTS.SUBSCRIPTIONS.ACCESS);
+      if (result.success && result.data?.plan) {
+        return result.data.plan; // Returns 'basic', 'premium', or 'enterprise'
+      }
+      return 'basic'; // Fallback
+    } catch (error) {
+      console.error('Error getting user subscription:', error);
+      return 'basic'; // Safe fallback
+    }
   };
 
   // ============================================================================

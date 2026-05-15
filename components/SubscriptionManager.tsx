@@ -199,9 +199,12 @@ function SubscriptionManager({ onUpgrade }: SubscriptionManagerProps) {
                   onClick={() => onUpgrade?.(plan)}
                   className="w-full"
                   disabled={currentSubscription?.plan === plan.id}
+                  variant={currentSubscription?.plan === plan.id ? "outline" : "default"}
                 >
                   <CreditCard className="h-4 w-4 mr-2" />
-                  {currentSubscription?.plan === plan.id ? 'Current Plan' : 'Upgrade'}
+                  {currentSubscription?.plan === plan.id 
+                    ? 'Current Plan' 
+                    : (currentSubscription ? 'Switch Plan' : 'Get Started')}
                 </Button>
               </CardContent>
             </Card>

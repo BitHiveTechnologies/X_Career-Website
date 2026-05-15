@@ -519,7 +519,7 @@ export class AdminService {
   /**
    * Get dashboard statistics
    */
-  static async getDashboardStats(): Promise<ApiResponse<{ stats: AdminDashboardStats }>> {
+  static async getDashboardStats(): Promise<ApiResponse<AdminDashboardStats>> {
     return apiClient.get(API_ENDPOINTS.ADMIN.DASHBOARD);
   }
 
@@ -556,6 +556,32 @@ export class AdminService {
   }): Promise<ApiResponse<any>> {
     console.log('🔍 AdminService.getUsers called with params:', params);
     return apiClient.get(API_ENDPOINTS.ADMIN.USERS, params);
+  }
+
+  /**
+   * Get all payments (admin only)
+   */
+  static async getAllPayments(params?: {
+    page?: number;
+    limit?: number;
+    status?: string;
+    plan?: string;
+  }): Promise<ApiResponse<any>> {
+    console.log('🔍 AdminService.getAllPayments called with params:', params);
+    return apiClient.get(API_ENDPOINTS.ADMIN.PAYMENTS, params);
+  }
+
+  /**
+   * Get all customers (admin only)
+   */
+  static async getAllCustomers(params?: {
+    page?: number;
+    limit?: number;
+    search?: string;
+    status?: string;
+  }): Promise<ApiResponse<any>> {
+    console.log('🔍 AdminService.getAllCustomers called with params:', params);
+    return apiClient.get(API_ENDPOINTS.ADMIN.CUSTOMERS, params);
   }
 }
 
