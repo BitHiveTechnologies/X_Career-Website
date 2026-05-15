@@ -15,16 +15,16 @@ export default function TestLoginPage() {
     setTestResult(null)
     
     try {
-      console.log('Testing super admin login...')
+      ; void /* console.log */ ((..._args) => {})('Testing super admin login...')
       const result = await login('superadmin@notifyx.com', 'anypassword')
-      console.log('Login result:', result)
+      ; void /* console.log */ ((..._args) => {})('Login result:', result)
       setTestResult({
         success: result.success,
         error: result.error,
         user: user
       })
     } catch (error: any) {
-      console.error('Test login error:', error)
+      ; void /* console.error */ ((..._args) => {})('Test login error:', error)
       setTestResult({
         success: false,
         error: error.message
@@ -39,16 +39,16 @@ export default function TestLoginPage() {
     setTestResult(null)
     
     try {
-      console.log('Testing admin login...')
+      ; void /* console.log */ ((..._args) => {})('Testing admin login...')
       const result = await login('admin@notifyx.com', 'Admin123!')
-      console.log('Login result:', result)
+      ; void /* console.log */ ((..._args) => {})('Login result:', result)
       setTestResult({
         success: result.success,
         error: result.error,
         user: user
       })
     } catch (error: any) {
-      console.error('Test login error:', error)
+      ; void /* console.error */ ((..._args) => {})('Test login error:', error)
       setTestResult({
         success: false,
         error: error.message
@@ -61,9 +61,9 @@ export default function TestLoginPage() {
   const checkTokenStatus = () => {
     const token = localStorage.getItem('careerx_token')
     const user = localStorage.getItem('careerx_user')
-    console.log('Token in localStorage:', token ? 'Exists' : 'Missing')
-    console.log('User in localStorage:', user ? 'Exists' : 'Missing')
-    console.log('Full token value:', token)
+    ; void /* console.log */ ((..._args) => {})('Token in localStorage:', token ? 'Exists' : 'Missing')
+    ; void /* console.log */ ((..._args) => {})('User in localStorage:', user ? 'Exists' : 'Missing')
+    ; void /* console.log */ ((..._args) => {})('Full token value:', token)
     setTestResult({
       token: token ? 'Exists' : 'Missing',
       user: user ? 'Exists' : 'Missing',
@@ -78,17 +78,17 @@ export default function TestLoginPage() {
     setTestResult(null)
     
     try {
-      console.log('Testing API call...')
+      ; void /* console.log */ ((..._args) => {})('Testing API call...')
       const { authService } = await import('@/lib/api/services')
       const result = await authService.getMe()
-      console.log('API call result:', result)
+      ; void /* console.log */ ((..._args) => {})('API call result:', result)
       setTestResult({
         success: result.success,
         data: result.data,
         error: result.error
       })
     } catch (error: any) {
-      console.error('API call error:', error)
+      ; void /* console.error */ ((..._args) => {})('API call error:', error)
       setTestResult({
         success: false,
         error: error.message

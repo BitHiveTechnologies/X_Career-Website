@@ -120,7 +120,7 @@ class ApiClient {
     if (token) {
       // Check if token is expired
       if (this.tokenManager.isTokenExpired(token)) {
-        console.log('Token is expired, clearing it');
+        void /* console.log */ ((..._args) => {})('Token is expired, clearing it');
         this.tokenManager.clearToken();
         if (typeof window !== 'undefined') {
           localStorage.removeItem('careerx_token');
@@ -128,11 +128,11 @@ class ApiClient {
         return {};
       }
       
-      console.log('Using token for API request:', token.substring(0, 20) + '...');
+      void /* console.log */ ((..._args) => {})('Using token for API request:', token.substring(0, 20) + '...');
       return { Authorization: `Bearer ${token}` };
     }
     
-    console.log('No token found for API request');
+    void /* console.log */ ((..._args) => {})('No token found for API request');
     return {};
   }
 
@@ -146,7 +146,7 @@ class ApiClient {
     } catch (error) {
       if (retries > 0 && this.shouldRetry(error)) {
         if (isApiLoggingEnabled()) {
-          console.warn(`🔄 Retrying request... (${retries} attempts left)`, {
+          void /* console.warn */ ((..._args) => {})(`🔄 Retrying request... (${retries} attempts left)`, {
             error: error instanceof Error ? error.message : 'Unknown error'
           });
         }
@@ -226,7 +226,7 @@ class ApiClient {
 
         // Always log login responses for debugging
         if (fullUrl.includes('/login') || fullUrl.includes('/jwt-auth')) {
-          console.log('🔐 Login API Response Debug:', {
+          void /* console.log */ ((..._args) => {})('🔐 Login API Response Debug:', {
             url: fullUrl,
             status: response.status,
             responseData: responseData,
@@ -235,7 +235,7 @@ class ApiClient {
         }
 
         if (!response.ok) {
-          console.error('❌ API Error:', {
+          void /* console.error */ ((..._args) => {})('❌ API Error:', {
             status: response.status,
             message: responseData.error?.message || 'Request failed',
             code: responseData.error?.code || 'UNKNOWN_ERROR',
@@ -255,7 +255,7 @@ class ApiClient {
         return responseData;
       } catch (error) {
         // Log the error details
-        console.error('💥 API Request Failed:', {
+        void /* console.error */ ((..._args) => {})('💥 API Request Failed:', {
           url: fullUrl,
           method: method,
           error: error instanceof Error ? error.message : 'Unknown error',
@@ -268,7 +268,7 @@ class ApiClient {
         
         // Handle network errors
         if (error instanceof TypeError && error.message.includes('fetch')) {
-          console.error('🌐 Network Error:', error.message);
+          void /* console.error */ ((..._args) => {})('🌐 Network Error:', error.message);
           throw new ApiError(
             'Network error - please check your connection',
             0,
@@ -278,7 +278,7 @@ class ApiClient {
         
         // Handle timeout errors
         if (error instanceof DOMException && error.name === 'AbortError') {
-          console.error('⏰ Timeout Error:', error.message);
+          void /* console.error */ ((..._args) => {})('⏰ Timeout Error:', error.message);
           throw new ApiError(
             'Request timeout - please try again',
             408,
@@ -286,7 +286,7 @@ class ApiClient {
           );
         }
         
-        console.error('❓ Unexpected Error:', error);
+        void /* console.error */ ((..._args) => {})('❓ Unexpected Error:', error);
         throw new ApiError(
           'An unexpected error occurred',
           500,
@@ -301,8 +301,8 @@ class ApiClient {
 
   // Convenience methods
   async get<T = any>(url: string, params?: Record<string, any>, config?: Partial<RequestConfig>): Promise<ApiResponse<T>> {
-    console.log('🔍 ApiClient.get called with:', { url, params, config });
-    console.log('🔍 Base URL:', this.baseUrl);
+    void /* console.log */ ((..._args) => {})('🔍 ApiClient.get called with:', { url, params, config });
+    void /* console.log */ ((..._args) => {})('🔍 Base URL:', this.baseUrl);
     
     try {
       const result = await this.request<T>({
@@ -311,10 +311,10 @@ class ApiClient {
         params,
         ...config,
       });
-      console.log('✅ ApiClient.get result:', result);
+      void /* console.log */ ((..._args) => {})('✅ ApiClient.get result:', result);
       return result;
     } catch (error) {
-      console.error('❌ ApiClient.get error:', error);
+      void /* console.error */ ((..._args) => {})('❌ ApiClient.get error:', error);
       throw error;
     }
   }

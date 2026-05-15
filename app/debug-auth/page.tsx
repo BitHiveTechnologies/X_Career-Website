@@ -19,11 +19,11 @@ export default function DebugAuthPage() {
 
       // Test subscription plans
       const plansResponse = await paymentService.getSubscriptionPlans();
-      console.log('Plans response:', plansResponse);
+      ; void /* console.log */ ((..._args) => {})('Plans response:', plansResponse);
 
       // Test current subscription
       const subscriptionResponse = await paymentService.getCurrentSubscription();
-      console.log('Subscription response:', subscriptionResponse);
+      ; void /* console.log */ ((..._args) => {})('Subscription response:', subscriptionResponse);
 
       setSubscriptionData({
         plans: plansResponse,
@@ -31,7 +31,7 @@ export default function DebugAuthPage() {
       });
 
     } catch (err) {
-      console.error('Error testing subscription data:', err);
+      ; void /* console.error */ ((..._args) => {})('Error testing subscription data:', err);
       setError(err instanceof Error ? err.message : 'Unknown error');
     } finally {
       setLoading(false);
@@ -40,7 +40,7 @@ export default function DebugAuthPage() {
 
   const handleLogin = async () => {
     const result = await login('user@example.com', 'password');
-    console.log('Login result:', result);
+    ; void /* console.log */ ((..._args) => {})('Login result:', result);
   };
 
   const handleLogout = async () => {

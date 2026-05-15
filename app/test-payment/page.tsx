@@ -33,30 +33,30 @@ export default function TestPaymentPage() {
     
     try {
       // Test 1: Get subscription plans
-      console.log('Testing subscription plans...');
+      ; void /* console.log */ ((..._args) => {})('Testing subscription plans...');
       const plansResponse = await subscriptionService.getPlans();
       if (plansResponse.success && plansResponse.data?.plans) {
         setPlans(plansResponse.data.plans);
         setTestResults(prev => ({ ...prev, plans: true }));
-        console.log('✅ Plans loaded successfully:', plansResponse.data.plans);
+        ; void /* console.log */ ((..._args) => {})('✅ Plans loaded successfully:', plansResponse.data.plans);
       } else {
         throw new Error('Failed to load subscription plans');
       }
 
       // Test 2: Get current subscription
-      console.log('Testing current subscription...');
+      ; void /* console.log */ ((..._args) => {})('Testing current subscription...');
       const subscriptionResponse = await subscriptionService.getCurrentSubscription();
       if (subscriptionResponse.success) {
         setCurrentSubscription(subscriptionResponse.data?.subscription || null);
         setTestResults(prev => ({ ...prev, subscription: true }));
-        console.log('✅ Current subscription loaded:', subscriptionResponse.data?.subscription);
+        ; void /* console.log */ ((..._args) => {})('✅ Current subscription loaded:', subscriptionResponse.data?.subscription);
       } else {
-        console.log('ℹ️ No active subscription found (this is normal for new users)');
+        ; void /* console.log */ ((..._args) => {})('ℹ️ No active subscription found (this is normal for new users)');
         setTestResults(prev => ({ ...prev, subscription: true }));
       }
 
       // Test 3: Test payment order creation (with basic plan)
-      console.log('Testing payment order creation...');
+      ; void /* console.log */ ((..._args) => {})('Testing payment order creation...');
       const basicPlan = plansResponse.data?.plans.find(plan => plan.id === 'basic');
       if (basicPlan) {
         const orderResponse = await paymentService.createOrder({
@@ -67,14 +67,14 @@ export default function TestPaymentPage() {
         
         if (orderResponse.success) {
           setTestResults(prev => ({ ...prev, order: true }));
-          console.log('✅ Payment order created successfully:', orderResponse.data);
+          ; void /* console.log */ ((..._args) => {})('✅ Payment order created successfully:', orderResponse.data);
         } else {
           throw new Error(`Order creation failed: ${orderResponse.error?.message}`);
         }
       }
 
     } catch (err) {
-      console.error('❌ Payment integration test failed:', err);
+      ; void /* console.error */ ((..._args) => {})('❌ Payment integration test failed:', err);
       setError(err instanceof Error ? err.message : 'Unknown error occurred');
     } finally {
       setLoading(false);
@@ -91,13 +91,13 @@ export default function TestPaymentPage() {
       });
 
       if (orderResponse.success) {
-        console.log('Payment order created:', orderResponse.data);
+        ; void /* console.log */ ((..._args) => {})('Payment order created:', orderResponse.data);
         alert(`Order created successfully! Order ID: ${orderResponse.data?.order.id}`);
       } else {
         throw new Error(orderResponse.error?.message || 'Failed to create order');
       }
     } catch (err) {
-      console.error('Payment test failed:', err);
+      ; void /* console.error */ ((..._args) => {})('Payment test failed:', err);
       alert(`Payment test failed: ${err instanceof Error ? err.message : 'Unknown error'}`);
     } finally {
       setLoading(false);

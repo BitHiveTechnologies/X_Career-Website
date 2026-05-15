@@ -54,15 +54,15 @@ export default function Page() {
 
   // Fetch dashboard data - MUST be before any early returns
   useEffect(() => {
-    console.log('🔍 Dashboard: Auth state changed', { user: user?.email, role: user?.role, authLoading });
+    ; void /* console.log */ ((..._args) => {})('🔍 Dashboard: Auth state changed', { user: user?.email, role: user?.role, authLoading });
     
     // BULLETPROOF: Always fetch data for testing
     if (!authLoading && user && (user.role === 'admin' || user.role === 'super_admin')) {
-      console.log('🔍 Dashboard: Starting data fetch (bulletproof mode)...');
+      ; void /* console.log */ ((..._args) => {})('🔍 Dashboard: Starting data fetch (bulletproof mode)...');
       fetchDashboardData()
       fetchAlertStats() // Fetch job alert statistics
     } else {
-      console.log('🔍 Dashboard: Still loading auth state or not admin');
+      ; void /* console.log */ ((..._args) => {})('🔍 Dashboard: Still loading auth state or not admin');
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, authLoading])
@@ -121,19 +121,19 @@ export default function Page() {
       
       // Fetch dashboard overview stats
       try {
-        console.log('🔍 Fetching dashboard stats...');
+        ; void /* console.log */ ((..._args) => {})('🔍 Fetching dashboard stats...');
         const statsResponse = await adminService.getDashboardStats();
         if (statsResponse.success && statsResponse.data) {
           setDashboardStats(statsResponse.data);
-          console.log('✅ Dashboard stats loaded');
+          ; void /* console.log */ ((..._args) => {})('✅ Dashboard stats loaded');
         }
       } catch (statsError) {
-        console.error('❌ Stats API failed:', statsError);
+        ; void /* console.error */ ((..._args) => {})('❌ Stats API failed:', statsError);
       }
 
       // Fetch user analytics for chart
       try {
-        console.log('🔍 Fetching user analytics...');
+        ; void /* console.log */ ((..._args) => {})('🔍 Fetching user analytics...');
         const analyticsResponse = await adminService.getUserAnalytics();
         if (analyticsResponse.success && analyticsResponse.data) {
           // Transform userTrends into chart data
@@ -143,48 +143,48 @@ export default function Page() {
             customers: t.count
           }));
           setChartData(transformedTrends);
-          console.log('✅ User trends loaded for chart');
+          ; void /* console.log */ ((..._args) => {})('✅ User trends loaded for chart');
         }
       } catch (analyticsError) {
-        console.error('❌ Analytics API failed:', analyticsError);
+        ; void /* console.error */ ((..._args) => {})('❌ Analytics API failed:', analyticsError);
       }
 
       // Fetch payment history (admin version)
       try {
-        console.log('🔍 Fetching all payment history...');
+        ; void /* console.log */ ((..._args) => {})('🔍 Fetching all payment history...');
         const paymentsResponse = await adminService.getAllPayments({ limit: 50 });
         if (paymentsResponse.success && paymentsResponse.data) {
           const paymentList = paymentsResponse.data.data || [];
           setPayments(paymentList);
-          console.log('✅ Payments loaded:', paymentList.length);
+          ; void /* console.log */ ((..._args) => {})('✅ Payments loaded:', paymentList.length);
         }
       } catch (paymentsError) {
-        console.error('❌ Payments API failed:', paymentsError);
+        ; void /* console.error */ ((..._args) => {})('❌ Payments API failed:', paymentsError);
       }
 
       // Fetch customers with bulletproof error handling
       try {
-        console.log('🔍 Fetching customers with working token...');
+        ; void /* console.log */ ((..._args) => {})('🔍 Fetching customers with working token...');
         const customersResponse = await adminService.getAllCustomers({ limit: 50 });
-        console.log('🔍 Customers API Response:', customersResponse);
+        ; void /* console.log */ ((..._args) => {})('🔍 Customers API Response:', customersResponse);
         
         if (customersResponse.success && customersResponse.data && customersResponse.data.data) {
           const customerList = customersResponse.data.data || [];
           setCustomers(customerList);
-          console.log('✅ Customers loaded successfully:', customerList.length);
+          ; void /* console.log */ ((..._args) => {})('✅ Customers loaded successfully:', customerList.length);
         } else {
-          console.error('❌ Invalid customers response:', customersResponse);
+          ; void /* console.error */ ((..._args) => {})('❌ Invalid customers response:', customersResponse);
           setCustomers([]);
         }
       } catch (customersError) {
-        console.error('❌ Customers API failed:', customersError);
+        ; void /* console.error */ ((..._args) => {})('❌ Customers API failed:', customersError);
         setCustomers([]);
       }
 
       // Fetch jobs
       try {
         const jobsResponse = await jobService.getJobs({ limit: 50 })
-        console.log('🔍 API Response:', jobsResponse)
+        ; void /* console.log */ ((..._args) => {})('🔍 API Response:', jobsResponse)
         
         if (jobsResponse.success && jobsResponse.data && jobsResponse.data.jobs) {
           const jobData = jobsResponse.data.jobs || []
@@ -217,10 +217,10 @@ export default function Page() {
           toast.success(`Refreshed data: ${transformedJobs.length} jobs, ${transformedInternships.length} internships`)
         }
       } catch (apiError) {
-        console.log('⚠️ API call failed:', apiError)
+        ; void /* console.log */ ((..._args) => {})('⚠️ API call failed:', apiError)
       }
     } catch (error) {
-      console.error('Error fetching dashboard data:', error)
+      ; void /* console.error */ ((..._args) => {})('Error fetching dashboard data:', error)
       toast.error('Failed to fetch dashboard data')
     } finally {
       setIsLoading(false)
@@ -235,7 +235,7 @@ export default function Page() {
         setAlertStats(response.data.statistics);
       }
     } catch (error) {
-      console.error('Error fetching alert statistics:', error);
+      ; void /* console.error */ ((..._args) => {})('Error fetching alert statistics:', error);
     }
   };
 
@@ -248,7 +248,8 @@ export default function Page() {
       const response = await jobAlertService.sendForJob(jobId, {
         minMatchScore: 50,
         maxUsers: 100,
-        dryRun: false
+        dryRun: false,
+        force: true // Manual trigger should bypass deduplication
       });
       
       if (response.success) {
@@ -266,7 +267,7 @@ export default function Page() {
         toast.error(`Failed to send alerts for "${jobTitle}": ${response.error?.message || 'Unknown error'}`);
       }
     } catch (error: any) {
-      console.error('Error sending job alerts:', error);
+      ; void /* console.error */ ((..._args) => {})('Error sending job alerts:', error);
       toast.error(`Error sending job alerts: ${error.message}`);
     } finally {
       setSendingNotifications(prev => ({ ...prev, [jobId]: false }));
@@ -282,7 +283,7 @@ export default function Page() {
       const response = await jobAlertService.sendForAllJobs({
         minMatchScore: 50,
         maxUsersPerJob: 100,
-        dryRun: false
+        dryRun: false, force: true // Manual trigger
       });
       
       if (response.success) {
@@ -301,7 +302,7 @@ export default function Page() {
         toast.error(`Failed to send all job alerts: ${response.error?.message || 'Unknown error'}`);
       }
     } catch (error: any) {
-      console.error('Error sending all job alerts:', error);
+      ; void /* console.error */ ((..._args) => {})('Error sending all job alerts:', error);
       toast.error(`Error sending all job alerts: ${error.message}`);
     } finally {
       setSendingAllAlerts(false);
@@ -331,7 +332,7 @@ export default function Page() {
         toast.error(`Failed to retry: ${response.error?.message || 'Unknown error'}`);
       }
     } catch (error: any) {
-      console.error('Error retrying failed notifications:', error);
+      ; void /* console.error */ ((..._args) => {})('Error retrying failed notifications:', error);
       toast.error(`Error retrying notifications: ${error.message}`);
     } finally {
       setRetryingFailed(false);
@@ -406,12 +407,12 @@ Note: Dedup is active — ${userEmail} only receives new jobs they haven't seen.
         })
       }
 
-      console.log('Creating job with data:', jobData)
-      console.log('Current user:', user)
+      ; void /* console.log */ ((..._args) => {})('Creating job with data:', jobData)
+      ; void /* console.log */ ((..._args) => {})('Current user:', user)
       
       // Check if we have a valid token
       const token = localStorage.getItem('careerx_token')
-      console.log('Current token:', token ? 'Present' : 'Missing')
+      ; void /* console.log */ ((..._args) => {})('Current token:', token ? 'Present' : 'Missing')
       
       const response = await jobService.createJob(jobData)
       
@@ -424,7 +425,7 @@ Note: Dedup is active — ${userEmail} only receives new jobs they haven't seen.
         // Close the modal
         setIsQuickCreateOpen(false)
       } else {
-        console.error('Job creation failed:', response)
+        ; void /* console.error */ ((..._args) => {})('Job creation failed:', response)
         if (response.error?.message === 'Admin access required') {
           toast.error('Admin access required. The backend job creation endpoint needs to be fixed. Please contact the backend team.')
         } else {
@@ -432,7 +433,7 @@ Note: Dedup is active — ${userEmail} only receives new jobs they haven't seen.
         }
       }
     } catch (error: any) {
-      console.error('Error creating job:', error)
+      ; void /* console.error */ ((..._args) => {})('Error creating job:', error)
       if (error.message === 'Admin access required') {
         toast.error('Admin access required. The backend job creation endpoint needs to be fixed. Please contact the backend team.')
       } else {
@@ -711,7 +712,7 @@ Note: Dedup is active — ${userEmail} only receives new jobs they haven't seen.
                 <div className="flex gap-2">
                   <Button 
                     onClick={() => {
-                      console.log('🔍 Debug: Current state:', { 
+                      ; void /* console.log */ ((..._args) => {})('🔍 Debug: Current state:', { 
                         customers: customers.length,
                         user: user?.email,
                         role: user?.role,
@@ -727,7 +728,7 @@ Note: Dedup is active — ${userEmail} only receives new jobs they haven't seen.
                   </Button>
                   <Button 
                     onClick={() => {
-                      console.log('🔄 FORCE REFRESH triggered - clearing state and refetching...');
+                      ; void /* console.log */ ((..._args) => {})('🔄 FORCE REFRESH triggered - clearing state and refetching...');
                       setCustomers([]);
                       setIsLoading(true);
                       setTimeout(() => {

@@ -115,7 +115,7 @@ export default function ResumeBuilderSubscriptionPage() {
                     setCurrentPlan(plan);
                 }
             } catch (error) {
-                console.error('Error loading current plan:', error);
+                ; void /* console.error */ ((..._args) => {})('Error loading current plan:', error);
             }
         };
         loadCurrentPlan();

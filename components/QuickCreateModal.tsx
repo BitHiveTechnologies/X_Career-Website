@@ -343,7 +343,7 @@ export function QuickCreateModal({ isOpen, onClose, onSubmit, isLoading = false 
         throw new Error(result.error?.message || 'Failed to upload logo');
       }
     } catch (error) {
-      console.error('Error uploading logo:', error);
+      ; void /* console.error */ ((..._args) => {})('Error uploading logo:', error);
       alert('Failed to upload logo. Please try again.');
       return null;
     } finally {
@@ -398,7 +398,7 @@ export function QuickCreateModal({ isOpen, onClose, onSubmit, isLoading = false 
       }
       onClose()
     } catch (error) {
-      console.error('Error submitting form:', error);
+      ; void /* console.error */ ((..._args) => {})('Error submitting form:', error);
       alert('Failed to submit. Please try again.');
     }
   }

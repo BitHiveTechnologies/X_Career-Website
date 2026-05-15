@@ -86,14 +86,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
               return;
                         } else {
               // Token is invalid or expired, clear stored data
-              console.log('Token validation failed');
+              ; void /* console.log */ ((..._args) => {})('Token validation failed');
               setUser(null);
                             localStorage.removeItem('careerx_user');
                             localStorage.removeItem('careerx_token');
                         }
           } catch (error) {
             // Token is invalid or expired, clear stored data
-            console.log('Token validation failed with error:', error);
+            ; void /* console.log */ ((..._args) => {})('Token validation failed with error:', error);
             setUser(null);
                         localStorage.removeItem('careerx_user');
                         localStorage.removeItem('careerx_token');
@@ -105,7 +105,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       // No stored user/token, user is not authenticated
       setUser(null);
         } catch (error) {
-      console.error('Auth initialization error:', error);
+      ; void /* console.error */ ((..._args) => {})('Auth initialization error:', error);
       setUser(null);
         } finally {
             setIsLoading(false);
@@ -123,14 +123,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       let result;
       if (email === 'superadmin@notifyx.com' || email === 'admin@notifyx.com') {
         // Use admin login for admin users
-        console.log('Using admin login for admin user');
+        ; void /* console.log */ ((..._args) => {})('Using admin login for admin user');
         result = await authService.adminLogin({ email, password });
-        console.log('Admin login result:', result);
+        ; void /* console.log */ ((..._args) => {})('Admin login result:', result);
       } else {
         // Use regular user login
-        console.log('Using regular user login');
+        ; void /* console.log */ ((..._args) => {})('Using regular user login');
         result = await authService.login({ email, password });
-        console.log('User login result:', result);
+        ; void /* console.log */ ((..._args) => {})('User login result:', result);
       }
       
       if (result.success && result.user) {
@@ -151,19 +151,19 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
         // Handle redirect after login based on role
         if (typeof window !== 'undefined') {
-          console.log('🚀 Login successful! Determining redirect path...', {
+          ; void /* console.log */ ((..._args) => {})('🚀 Login successful! Determining redirect path...', {
             mustChangePassword: userData.mustChangePassword,
             role: userData.role
           });
           
           if (userData.mustChangePassword) {
-            console.log('➡️ Redirecting to /change-password due to mustChangePassword flag');
+            ; void /* console.log */ ((..._args) => {})('➡️ Redirecting to /change-password due to mustChangePassword flag');
             // Force full page reload to ensure redirect works reliably
             window.location.href = '/change-password';
           } else {
             const redirectTo = localStorage.getItem('careerx_redirect_after_auth');
             if (redirectTo) {
-                console.log(`➡️ Redirecting to saved path: ${redirectTo}`);
+                ; void /* console.log */ ((..._args) => {})(`➡️ Redirecting to saved path: ${redirectTo}`);
                 localStorage.removeItem('careerx_redirect_after_auth');
                 router.push(redirectTo);
                     } else {
@@ -182,7 +182,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         return { success: false, error: result.error || 'Login failed. Please try again.' };
             }
     } catch (error: any) {
-            console.error('Login error:', error);
+            ; void /* console.error */ ((..._args) => {})('Login error:', error);
       return { success: false, error: error.message || 'Login failed. Please try again.' };
         } finally {
             setIsLoading(false);
@@ -250,7 +250,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         return { success: false, error: result.error || 'Registration failed' };
             }
     } catch (error: any) {
-            console.error('Registration error:', error);
+            ; void /* console.error */ ((..._args) => {})('Registration error:', error);
       return { success: false, error: error.message || 'Registration failed. Please try again.' };
         } finally {
             setIsLoading(false);
@@ -285,7 +285,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         return { success: false, error: result.error || 'Failed to update profile' };
       }
     } catch (error: any) {
-      console.error('Update profile error:', error);
+      ; void /* console.error */ ((..._args) => {})('Update profile error:', error);
       return { success: false, error: error.message || 'Failed to update profile' };
     }
   };
@@ -300,7 +300,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         return null;
       }
     } catch (error: any) {
-      console.error('Get profile completion error:', error);
+      ; void /* console.error */ ((..._args) => {})('Get profile completion error:', error);
       return null;
     }
   };
@@ -311,7 +311,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       const result = await authService.changePassword(currentPassword, newPassword);
       return result;
     } catch (error: any) {
-      console.error('Change password error:', error);
+      ; void /* console.error */ ((..._args) => {})('Change password error:', error);
       return { success: false, error: error.message || 'Failed to change password' };
     } finally {
       setIsLoading(false);
@@ -331,7 +331,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         }
       }
     } catch (error: any) {
-      console.error('Refresh user error:', error);
+      ; void /* console.error */ ((..._args) => {})('Refresh user error:', error);
     }
   };
 

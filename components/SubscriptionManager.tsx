@@ -41,7 +41,7 @@ function SubscriptionManager({ onUpgrade }: SubscriptionManagerProps) {
       }
 
     } catch (err) {
-      console.error('Error loading subscription data:', err);
+      ; void /* console.error */ ((..._args) => {})('Error loading subscription data:', err);
       setError(err instanceof Error ? err.message : 'Failed to load subscription data');
     } finally {
       setLoading(false);

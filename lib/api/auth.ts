@@ -61,7 +61,7 @@ export class AuthService {
           apiClient.setToken(token);
         }
         
-        console.log('JWT Login response data:', response.data);
+        ; void /* console.log */ ((..._args) => {})('JWT Login response data:', response.data);
         
         // Note: Role is determined from the response, not from the request
         
@@ -80,7 +80,7 @@ export class AuthService {
           mustChangePassword: userData.mustChangePassword
         };
         
-        console.log('Created user from JWT login:', basicUser);
+        ; void /* console.log */ ((..._args) => {})('Created user from JWT login:', basicUser);
         
         this.setCurrentUser(basicUser);
         return { success: true, user: basicUser };
@@ -88,7 +88,7 @@ export class AuthService {
       
       return { success: false, error: 'Login failed' };
     } catch (error: any) {
-      console.error('Login error:', error);
+      ; void /* console.error */ ((..._args) => {})('Login error:', error);
       return { 
         success: false, 
         error: error.message || 'Login failed. Please try again.' 
@@ -112,8 +112,8 @@ export class AuthService {
         // Handle both admin and user response structures
         const userData = response.data.admin || response.data.user || response.data;
         
-        console.log('Admin login response data:', response.data);
-        console.log('Extracted user data:', userData);
+        ; void /* console.log */ ((..._args) => {})('Admin login response data:', response.data);
+        ; void /* console.log */ ((..._args) => {})('Extracted user data:', userData);
         
         // Ensure admin role is set correctly from the actual response
         let userRole: 'user' | 'admin' | 'super_admin' = userData.role || 'admin';
@@ -135,7 +135,7 @@ export class AuthService {
           isProfileComplete: (userData as any).isProfileComplete || false,
         };
         
-        console.log('Created user object:', basicUser);
+        ; void /* console.log */ ((..._args) => {})('Created user object:', basicUser);
         
         this.setCurrentUser(basicUser);
         return { success: true, user: basicUser };
@@ -143,7 +143,7 @@ export class AuthService {
       
       return { success: false, error: 'Admin login failed' };
     } catch (error: any) {
-      console.error('Admin login error:', error);
+      ; void /* console.error */ ((..._args) => {})('Admin login error:', error);
       return { 
         success: false, 
         error: error.message || 'Admin login failed. Please try again.' 
@@ -190,7 +190,7 @@ export class AuthService {
       
       return { success: false, error: response.error?.message || 'Failed to change password' };
     } catch (error: any) {
-      console.error('Change password error:', error);
+      ; void /* console.error */ ((..._args) => {})('Change password error:', error);
       return { 
         success: false, 
         error: error.message || 'Failed to change password. Please try again.' 
@@ -230,7 +230,7 @@ export class AuthService {
       
       return { success: false, error: 'Failed to get user data' };
     } catch (error: any) {
-      console.error('Get current user error:', error);
+      ; void /* console.error */ ((..._args) => {})('Get current user error:', error);
       return { 
         success: false, 
         error: error.message || 'Failed to get user data' 
@@ -267,7 +267,7 @@ export class AuthService {
         localStorage.removeItem('careerx_token');
       }
     } catch (error) {
-      console.error('Logout error:', error);
+      ; void /* console.error */ ((..._args) => {})('Logout error:', error);
     }
   }
 
@@ -327,7 +327,7 @@ export class AuthService {
       
       return { success: false, error: 'Failed to get user profile' };
     } catch (error: any) {
-      console.error('Get user profile error:', error);
+      ; void /* console.error */ ((..._args) => {})('Get user profile error:', error);
       return { 
         success: false, 
         error: error.message || 'Failed to get user profile' 
@@ -387,7 +387,7 @@ export class AuthService {
       
       return { success: false, error: 'Failed to update profile' };
     } catch (error: any) {
-      console.error('Update profile error:', error);
+      ; void /* console.error */ ((..._args) => {})('Update profile error:', error);
       return { 
         success: false, 
         error: error.message || 'Failed to update profile' 
@@ -408,7 +408,7 @@ export class AuthService {
       
       return { success: false, error: 'Failed to get profile completion status' };
     } catch (error: any) {
-      console.error('Get profile completion error:', error);
+      ; void /* console.error */ ((..._args) => {})('Get profile completion error:', error);
       return { 
         success: false, 
         error: error.message || 'Failed to get profile completion status' 
@@ -447,7 +447,7 @@ export class AuthService {
       
       return { success: false, error: 'Registration failed' };
     } catch (error: any) {
-      console.error('Registration error:', error);
+      ; void /* console.error */ ((..._args) => {})('Registration error:', error);
       return { 
         success: false, 
         error: error.message || 'Registration failed. Please try again.' 
@@ -479,10 +479,10 @@ export class AuthService {
 
       // If we can't get user data, don't logout immediately
       // The token might be valid but the /me endpoint might not work
-      console.warn('Token verification failed, but keeping token:', userResult.error);
+      ; void /* console.warn */ ((..._args) => {})('Token verification failed, but keeping token:', userResult.error);
       return { success: false, error: userResult.error || 'Token verification failed' };
     } catch (error: any) {
-      console.error('Initialize auth error:', error);
+      ; void /* console.error */ ((..._args) => {})('Initialize auth error:', error);
       // Don't logout on error, just return failure
       return { 
         success: false, 
@@ -597,7 +597,7 @@ export class AuthService {
       
       return response.success;
     } catch (error) {
-      console.error('Token validation error:', error);
+      ; void /* console.error */ ((..._args) => {})('Token validation error:', error);
       return false;
     }
   }
@@ -642,7 +642,7 @@ export class AuthService {
       
       return { success: false, error: 'No user logged in' };
     } catch (error: any) {
-      console.error('Update subscription error:', error);
+      ; void /* console.error */ ((..._args) => {})('Update subscription error:', error);
       return { 
         success: false, 
         error: error.message || 'Failed to update subscription' 

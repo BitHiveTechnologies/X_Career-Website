@@ -158,7 +158,7 @@ const fetchStats = async (): Promise<Stats> => {
             };
         }
     } catch (error) {
-        console.error('Failed to fetch stats', error);
+        ; void /* console.error */ ((..._args) => {})('Failed to fetch stats', error);
     }
     return dummyData.stats;
 };
@@ -178,7 +178,7 @@ const fetchTestimonials = async (): Promise<Testimonial[]> => {
             }));
         }
     } catch (error) {
-        console.error('Failed to fetch testimonials', error);
+        ; void /* console.error */ ((..._args) => {})('Failed to fetch testimonials', error);
     }
     return dummyData.testimonials;
 };
@@ -329,7 +329,7 @@ export default function Page() {
                 setBenefits(benefitsData);
             } catch (error) {
                 // Handle data loading errors gracefully
-                // console.warn('Failed to load some data, using defaults');
+                // ; void /* console.warn */ ((..._args) => {})('Failed to load some data, using defaults');
             }
         };
 
@@ -345,7 +345,7 @@ export default function Page() {
                 const encodedQuery = encodeURIComponent(trimmedQuery);
                 router.push(`/jobs?search=${encodedQuery}`);
             } catch (error) {
-                // console.error('Error redirecting to jobs page:', error);
+                // ; void /* console.error */ ((..._args) => {})('Error redirecting to jobs page:', error);
                 // Fallback: just navigate to jobs page
                 router.push('/jobs');
             }

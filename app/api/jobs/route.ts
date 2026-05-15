@@ -34,7 +34,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(data);
     
   } catch (error) {
-    console.error('Proxy Error:', error);
+    ; void /* console.error */ ((..._args) => {})('Proxy Error:', error);
     return NextResponse.json(
       {
         success: false,

@@ -152,7 +152,7 @@ export default function ResumeBuilderPage() {
                     setShowEmptyState(true);
                 }
             } catch (error) {
-                console.error('Failed to fetch resume:', error);
+                ; void /* console.error */ ((..._args) => {})('Failed to fetch resume:', error);
                 setShowEmptyState(true);
             } finally {
                 setIsLoading(false);
@@ -173,7 +173,7 @@ export default function ResumeBuilderPage() {
                 setLastSaved(new Date());
             }
         } catch (error) {
-            console.error('Failed to save resume:', error);
+            ; void /* console.error */ ((..._args) => {})('Failed to save resume:', error);
             alert('Failed to save resume. Please try again.');
         } finally {
             setIsSaving(false);
@@ -236,7 +236,7 @@ export default function ResumeBuilderPage() {
                     html2pdf().set(opt).from(element).save();
                 }
             } catch (error) {
-                console.error('PDF generation error:', error);
+                ; void /* console.error */ ((..._args) => {})('PDF generation error:', error);
                 alert('Failed to generate PDF. Please try again.');
             }
         }

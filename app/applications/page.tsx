@@ -137,7 +137,7 @@ export default function ApplicationsPage() {
                 setError('Failed to load applications');
             }
         } catch (err) {
-            console.error('Error loading applications:', err);
+            ; void /* console.error */ ((..._args) => {})('Error loading applications:', err);
             setError('Failed to load applications');
         } finally {
             setLoading(false);

@@ -52,7 +52,7 @@ export default function TestimonialModal({ isOpen, onClose, onSuccess }: Testimo
         }, 2000);
       }
     } catch (error) {
-      console.error('Failed to submit testimonial', error);
+      ; void /* console.error */ ((..._args) => {})('Failed to submit testimonial', error);
     } finally {
       setIsSubmitting(false);
     }

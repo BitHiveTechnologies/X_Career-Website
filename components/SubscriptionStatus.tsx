@@ -64,7 +64,7 @@ export default function SubscriptionStatus({ onUpgrade, className = '' }: Subscr
         setSubscription(null);
       }
     } catch (err) {
-      console.error('Failed to load subscription:', err);
+      ; void /* console.error */ ((..._args) => {})('Failed to load subscription:', err);
       // Don't show error for 401s, just treat as no subscription
       setSubscription(null);
     } finally {

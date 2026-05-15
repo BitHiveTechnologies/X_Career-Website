@@ -58,7 +58,7 @@ function JobsPageContent() {
     
     // Debug filteredJobs changes
     useEffect(() => {
-        console.log('🔍 FilteredJobs State Change:', {
+        ; void /* console.log */ ((..._args) => {})('🔍 FilteredJobs State Change:', {
             filteredJobs,
             length: filteredJobs?.length,
             type: typeof filteredJobs,
@@ -98,7 +98,7 @@ function JobsPageContent() {
 
     // Function to calculate category counts based on actual job data
     const calculateCategoryCounts = useCallback((jobData: FrontendJob[]) => {
-        console.log('📊 Calculating category counts for', jobData.length, 'jobs');
+        ; void /* console.log */ ((..._args) => {})('📊 Calculating category counts for', jobData.length, 'jobs');
         
         const categoryMap: { [key: string]: string[] } = {
             'software-development': [
@@ -147,7 +147,7 @@ function JobsPageContent() {
             count: counts[category.slug] || 0
         }));
 
-        console.log('📊 Category counts calculated:', counts);
+        ; void /* console.log */ ((..._args) => {})('📊 Category counts calculated:', counts);
         return categoriesWithCounts;
     }, []);
 
@@ -172,7 +172,7 @@ function JobsPageContent() {
             setIsLoading(true);
             setError(null);
             
-            console.log('🔄 Loading jobs from backend...', {
+            ; void /* console.log */ ((..._args) => {})('🔄 Loading jobs from backend...', {
                 page,
                 limit: pagination.limit,
                 type: 'job'
@@ -184,23 +184,23 @@ function JobsPageContent() {
                 type: 'job' // Only load jobs, not internships
             });
 
-            console.log('📥 Backend response:', response);
-            console.log('📥 Response type:', typeof response);
-            console.log('📥 Response success:', response?.success);
-            console.log('📥 Response data:', response?.data);
+            ; void /* console.log */ ((..._args) => {})('📥 Backend response:', response);
+            ; void /* console.log */ ((..._args) => {})('📥 Response type:', typeof response);
+            ; void /* console.log */ ((..._args) => {})('📥 Response success:', response?.success);
+            ; void /* console.log */ ((..._args) => {})('📥 Response data:', response?.data);
 
             if (response.success && response.data) {
                 // Backend returns: { success: true, data: { jobs: [...], pagination: {...} } }
                 const jobsArray = response.data.jobs;
                 
                 if (Array.isArray(jobsArray)) {
-                    console.log('✅ Processing', jobsArray.length, 'jobs from backend');
+                    ; void /* console.log */ ((..._args) => {})('✅ Processing', jobsArray.length, 'jobs from backend');
                     
                     const frontendJobs = jobsArray.map((job: any) => {
                         try {
                         return jobService.transformToFrontendJob(job);
                         } catch (transformError) {
-                            console.error('❌ Error transforming job:', job, transformError);
+                            ; void /* console.error */ ((..._args) => {})('❌ Error transforming job:', job, transformError);
                             // Return a fallback job object
                             return {
                                 ...job,
@@ -218,7 +218,7 @@ function JobsPageContent() {
                         }
                     });
                     
-                    console.log('✅ Transformed jobs:', frontendJobs);
+                    ; void /* console.log */ ((..._args) => {})('✅ Transformed jobs:', frontendJobs);
                     setJobs(frontendJobs);
                     setFilteredJobs(frontendJobs);
                     setPagination(response.data.pagination || { page: 1, limit: 10, total: 0, pages: 0 });
@@ -227,23 +227,23 @@ function JobsPageContent() {
                     const categoriesWithCounts = calculateCategoryCounts(frontendJobs);
                     setCategories(categoriesWithCounts);
                 } else {
-                    console.warn('❌ Jobs data is not an array:', jobsArray);
+                    ; void /* console.warn */ ((..._args) => {})('❌ Jobs data is not an array:', jobsArray);
                     setJobs([]);
                     setFilteredJobs([]);
                     setError('Invalid jobs data format received');
                 }
             } else {
-                console.error('❌ API response failed:', response);
+                ; void /* console.error */ ((..._args) => {})('❌ API response failed:', response);
                 setError(response.error?.message || 'No jobs data received');
                 setJobs([]);
                 setFilteredJobs([]);
             }
         } catch (err) {
-            console.error('💥 Error loading jobs:', err);
+            ; void /* console.error */ ((..._args) => {})('💥 Error loading jobs:', err);
             
             // Try to load mock data as fallback
             try {
-                console.log('🔄 Attempting to load mock data as fallback...');
+                ; void /* console.log */ ((..._args) => {})('🔄 Attempting to load mock data as fallback...');
                 const { mockJobs } = await import('@/lib/mockData');
                 const frontendJobs = mockJobs.map((job: any) => ({
                     ...job,
@@ -266,9 +266,9 @@ function JobsPageContent() {
                 // Calculate and set category counts for mock data too
                 const categoriesWithCounts = calculateCategoryCounts(frontendJobs);
                 setCategories(categoriesWithCounts);
-                console.log('✅ Fallback to mock data successful');
+                ; void /* console.log */ ((..._args) => {})('✅ Fallback to mock data successful');
             } catch (fallbackError) {
-                console.error('❌ Fallback to mock data also failed:', fallbackError);
+                ; void /* console.error */ ((..._args) => {})('❌ Fallback to mock data also failed:', fallbackError);
                 setError(`Failed to load jobs: ${err instanceof Error ? err.message : 'Unknown error'}`);
             setJobs([]);
             setFilteredJobs([]);
@@ -283,7 +283,7 @@ function JobsPageContent() {
             setIsLoading(true);
             setError(null);
             
-            console.log('🔍 Searching jobs...', {
+            ; void /* console.log */ ((..._args) => {})('🔍 Searching jobs...', {
                 query: searchQuery,
                 location: searchLocation,
                 page,
@@ -297,19 +297,19 @@ function JobsPageContent() {
                 location: (searchLocation as 'remote' | 'onsite' | 'hybrid') || undefined
             });
 
-            console.log('📥 Search response:', response);
+            ; void /* console.log */ ((..._args) => {})('📥 Search response:', response);
 
             if (response.success && response.data) {
                 // Backend returns: { success: true, data: { jobs: [...], pagination: {...} } }
                 const jobsArray = response.data.jobs;
                 if (Array.isArray(jobsArray)) {
-                    console.log('✅ Processing', jobsArray.length, 'search results');
+                    ; void /* console.log */ ((..._args) => {})('✅ Processing', jobsArray.length, 'search results');
                     
                     const frontendJobs = jobsArray.map((job: any) => {
                         try {
                             return jobService.transformToFrontendJob(job);
                         } catch (transformError) {
-                            console.error('❌ Error transforming search result:', job, transformError);
+                            ; void /* console.error */ ((..._args) => {})('❌ Error transforming search result:', job, transformError);
                             return {
                                 ...job,
                                 isFeatured: false,
@@ -334,19 +334,19 @@ function JobsPageContent() {
                     const categoriesWithCounts = calculateCategoryCounts(frontendJobs);
                     setCategories(categoriesWithCounts);
                 } else {
-                    console.warn('❌ Search jobs data is not an array:', jobsArray);
+                    ; void /* console.warn */ ((..._args) => {})('❌ Search jobs data is not an array:', jobsArray);
                     setJobs([]);
                     setFilteredJobs([]);
                     setError('Invalid search results format received');
                 }
             } else {
-                console.error('❌ Search API response failed:', response);
+                ; void /* console.error */ ((..._args) => {})('❌ Search API response failed:', response);
                 setError(response.error?.message || 'No search results received');
                 setJobs([]);
                 setFilteredJobs([]);
             }
         } catch (err) {
-            console.error('💥 Error searching jobs:', err);
+            ; void /* console.error */ ((..._args) => {})('💥 Error searching jobs:', err);
             setError(`Failed to search jobs: ${err instanceof Error ? err.message : 'Unknown error'}`);
             setJobs([]);
             setFilteredJobs([]);
@@ -359,12 +359,12 @@ function JobsPageContent() {
     useEffect(() => {
         const testApiConnection = async () => {
             try {
-                console.log('🔌 Testing API connection...');
+                ; void /* console.log */ ((..._args) => {})('🔌 Testing API connection...');
                 const response = await fetch('http://localhost:3001/health');
                 const healthData = await response.json();
-                console.log('✅ API Health Check:', healthData);
+                ; void /* console.log */ ((..._args) => {})('✅ API Health Check:', healthData);
             } catch (error) {
-                console.error('❌ API Health Check Failed:', error);
+                ; void /* console.error */ ((..._args) => {})('❌ API Health Check Failed:', error);
             }
         };
         
@@ -373,14 +373,14 @@ function JobsPageContent() {
 
     // Load jobs from backend on component mount
     useEffect(() => {
-        console.log('🚀 Component mounted, loading jobs...');
+        ; void /* console.log */ ((..._args) => {})('🚀 Component mounted, loading jobs...');
         loadJobs();
     }, [loadJobs]);
 
     // Recalculate category counts when jobs data changes
     useEffect(() => {
         if (jobs.length > 0) {
-            console.log('🔄 Recalculating category counts due to jobs change');
+            ; void /* console.log */ ((..._args) => {})('🔄 Recalculating category counts due to jobs change');
             const categoriesWithCounts = calculateCategoryCounts(jobs);
             setCategories(categoriesWithCounts);
         }
@@ -413,7 +413,7 @@ function JobsPageContent() {
 
             return () => clearTimeout(timeoutId);
         } catch (error) {
-            // console.error('Error updating search URL:', error);
+            // ; void /* console.error */ ((..._args) => {})('Error updating search URL:', error);
         }
     };
 
@@ -425,7 +425,7 @@ function JobsPageContent() {
             params.delete('search');
             router.replace(`/jobs?${params.toString()}`);
         } catch (error) {
-            // console.error('Error clearing search URL:', error);
+            // ; void /* console.error */ ((..._args) => {})('Error clearing search URL:', error);
         }
     };
 
@@ -433,7 +433,7 @@ function JobsPageContent() {
     useEffect(() => {
         // Debounce filter operations for better performance
         const filterTimeout = setTimeout(() => {
-            console.log('🔍 Filter Effect Triggered:', {
+            ; void /* console.log */ ((..._args) => {})('🔍 Filter Effect Triggered:', {
                 jobsLength: jobs?.length,
                 selectedCategory,
                 filters,
@@ -446,7 +446,7 @@ function JobsPageContent() {
         
         // Ensure jobs is an array before filtering
         if (!Array.isArray(jobs)) {
-                console.warn('❌ Jobs is not an array:', jobs);
+                ; void /* console.warn */ ((..._args) => {})('❌ Jobs is not an array:', jobs);
             setFilteredJobs([]);
                 setFilterLoading(false);
             return;
@@ -454,14 +454,14 @@ function JobsPageContent() {
 
         // If jobs array is empty, don't run filtering logic
         if (jobs.length === 0) {
-                console.log('📭 No jobs to filter');
+                ; void /* console.log */ ((..._args) => {})('📭 No jobs to filter');
                 setFilteredJobs([]);
                 setFilterLoading(false);
             return;
         }
 
         let filtered = [...jobs]; // Create a copy to avoid mutating original array
-        console.log('🚀 Starting with', filtered.length, 'jobs');
+        ; void /* console.log */ ((..._args) => {})('🚀 Starting with', filtered.length, 'jobs');
 
         // Filter by search query
         if (searchQuery && searchQuery.trim()) {
@@ -476,7 +476,7 @@ function JobsPageContent() {
                 
                 return titleMatch || companyMatch || skillsMatch || descriptionMatch;
             });
-            console.log('🔍 After search query filter:', filtered.length, 'jobs');
+            ; void /* console.log */ ((..._args) => {})('🔍 After search query filter:', filtered.length, 'jobs');
         }
 
         // Filter by search location
@@ -487,7 +487,7 @@ function JobsPageContent() {
                 const locationMatch = job.location?.toLowerCase().includes(location) || false;
                 return locationMatch;
             });
-            console.log('📍 After location filter:', filtered.length, 'jobs');
+            ; void /* console.log */ ((..._args) => {})('📍 After location filter:', filtered.length, 'jobs');
         }
 
         // Filter by category
@@ -521,7 +521,7 @@ function JobsPageContent() {
                     skillsLower.includes(keyword)
                 );
             });
-            console.log('🏷️ After category filter:', filtered.length, 'jobs');
+            ; void /* console.log */ ((..._args) => {})('🏷️ After category filter:', filtered.length, 'jobs');
         }
 
         // Filter by job type (Full-time, Part-time, etc.)
@@ -561,7 +561,7 @@ function JobsPageContent() {
                         return true;
                 }
             });
-            console.log('💼 After job type filter:', filtered.length, 'jobs');
+            ; void /* console.log */ ((..._args) => {})('💼 After job type filter:', filtered.length, 'jobs');
         }
 
         // Filter by employment type (Permanent, Contract, etc.)
@@ -598,7 +598,7 @@ function JobsPageContent() {
                         return true;
                 }
             });
-            console.log('📋 After employment type filter:', filtered.length, 'jobs');
+            ; void /* console.log */ ((..._args) => {})('📋 After employment type filter:', filtered.length, 'jobs');
         }
 
         // Filter by experience level
@@ -683,7 +683,7 @@ function JobsPageContent() {
                 
                 // Debug logging for experience filtering
                 if (filters.experienceLevel === '0-1 years' && matches) {
-                    console.log(`👔 Experience Match [${filters.experienceLevel}]:`, {
+                    ; void /* console.log */ ((..._args) => {})(`👔 Experience Match [${filters.experienceLevel}]:`, {
                         jobTitle: job.title,
                         experienceRequired: job.experienceRequired,
                         jobDescription: job.description?.substring(0, 100) + '...',
@@ -693,7 +693,7 @@ function JobsPageContent() {
                 
                 return matches;
             });
-            console.log('👔 After experience filter:', filtered.length, 'jobs');
+            ; void /* console.log */ ((..._args) => {})('👔 After experience filter:', filtered.length, 'jobs');
         }
 
         // Filter by skills
@@ -736,7 +736,7 @@ function JobsPageContent() {
                     return hasSkill || hasInTitle || hasInDescription;
                 });
             });
-            console.log('🛠️ After skills filter:', filtered.length, 'jobs');
+            ; void /* console.log */ ((..._args) => {})('🛠️ After skills filter:', filtered.length, 'jobs');
         }
 
         // Filter by location
@@ -746,7 +746,7 @@ function JobsPageContent() {
                 const jobLocation = job.location?.toLowerCase() || '';
                 return jobLocation === locationValue || jobLocation.includes(locationValue);
             });
-            console.log('📍 After location filter:', filtered.length, 'jobs');
+            ; void /* console.log */ ((..._args) => {})('📍 After location filter:', filtered.length, 'jobs');
         }
 
         // Filter by salary range
@@ -758,7 +758,7 @@ function JobsPageContent() {
                 // Extract salary range from strings like "₹6-10 LPA" or "₹15-25 LPA"
                 const salaryMatch = salary.match(/₹?(\d+)(?:-(\d+))?/);
                 if (!salaryMatch) {
-                    console.log('❌ Salary regex failed for:', salary);
+                    ; void /* console.log */ ((..._args) => {})('❌ Salary regex failed for:', salary);
                     return false;
                 }
 
@@ -792,7 +792,7 @@ function JobsPageContent() {
 
                 // Debug logging for salary filtering
                 if (filters.salaryRange === '10-20') {
-                    console.log(`💰 Salary Filter Debug [${filters.salaryRange}]:`, {
+                    ; void /* console.log */ ((..._args) => {})(`💰 Salary Filter Debug [${filters.salaryRange}]:`, {
                     jobTitle: job.title,
                         salary: salary,
                         jobMinSalary,
@@ -804,7 +804,7 @@ function JobsPageContent() {
 
                 return matches;
             });
-            console.log('💰 After salary filter:', filtered.length, 'jobs');
+            ; void /* console.log */ ((..._args) => {})('💰 After salary filter:', filtered.length, 'jobs');
         }
 
         // Filter by company type
@@ -877,7 +877,7 @@ function JobsPageContent() {
                         return true;
                 }
             });
-            console.log('🏢 After company type filter:', filtered.length, 'jobs');
+            ; void /* console.log */ ((..._args) => {})('🏢 After company type filter:', filtered.length, 'jobs');
         }
 
         // Filter by year of passout
@@ -891,7 +891,7 @@ function JobsPageContent() {
                     (year) => year.toString() === filters.yearOfPassout
                 );
             });
-            console.log('🎓 After year of passout filter:', filtered.length, 'jobs');
+            ; void /* console.log */ ((..._args) => {})('🎓 After year of passout filter:', filtered.length, 'jobs');
         }
 
         // Sort filtered results
@@ -922,7 +922,7 @@ function JobsPageContent() {
                 });
         }
 
-            console.log('✅ Final filtered results:', sortedFiltered.length, 'jobs');
+            ; void /* console.log */ ((..._args) => {})('✅ Final filtered results:', sortedFiltered.length, 'jobs');
             setFilteredJobs(sortedFiltered);
             setFilterLoading(false);
         }, 150); // 150ms debounce
@@ -956,9 +956,9 @@ function JobsPageContent() {
             }
             
             setFilters(validatedFilters);
-            console.log('✅ Filters updated:', validatedFilters);
+            ; void /* console.log */ ((..._args) => {})('✅ Filters updated:', validatedFilters);
         } catch (error) {
-            console.error('❌ Error updating filters:', error);
+            ; void /* console.error */ ((..._args) => {})('❌ Error updating filters:', error);
         }
     };
 
@@ -1186,7 +1186,7 @@ function JobsPageContent() {
                                                 params.set('search', tag);
                                                 router.replace(`/jobs?${params.toString()}`);
                                             } catch (error) {
-                                                // console.error('Error updating quick search URL:', error);
+                                                // ; void /* console.error */ ((..._args) => {})('Error updating quick search URL:', error);
                                             }
                                         }}
                                         className="px-3 py-1 bg-white/20 backdrop-blur-sm text-white text-sm rounded-full hover:bg-white/30 transition-all duration-300"
@@ -1211,7 +1211,7 @@ function JobsPageContent() {
                                         <button
                                             key={quickFilter.label}
                                             onClick={() => {
-                                                console.log('🚀 Applying quick filter:', quickFilter);
+                                                ; void /* console.log */ ((..._args) => {})('🚀 Applying quick filter:', quickFilter);
                                                 setFilters(prevFilters => ({
                                                     ...prevFilters,
                                                     ...quickFilter.filters
@@ -1223,7 +1223,7 @@ function JobsPageContent() {
                                                 try {
                                                     router.replace('/jobs');
                                                 } catch (error) {
-                                                    console.error('Error clearing search URL:', error);
+                                                    ; void /* console.error */ ((..._args) => {})('Error clearing search URL:', error);
                                                 }
                                             }}
                                             className="px-4 py-2 bg-white/10 backdrop-blur-sm text-white text-sm rounded-full hover:bg-white/20 transition-all duration-300 border border-white/20"

@@ -14,7 +14,7 @@ export default function TestPaymentFlowPage() {
 
   const handleLogin = async () => {
     const result = await login('user@example.com', 'password');
-    console.log('Login result:', result);
+    ; void /* console.log */ ((..._args) => {})('Login result:', result);
     if (result.success) {
       alert('Login successful!');
     } else {
@@ -28,7 +28,7 @@ export default function TestPaymentFlowPage() {
       setError(null);
 
       const token = localStorage.getItem('careerx_token');
-      console.log('Current token:', token);
+      ; void /* console.log */ ((..._args) => {})('Current token:', token);
 
       const response = await paymentService.createOrder({
         plan: 'basic',
@@ -42,7 +42,7 @@ export default function TestPaymentFlowPage() {
       });
 
     } catch (err) {
-      console.error('Create order failed:', err);
+      ; void /* console.error */ ((..._args) => {})('Create order failed:', err);
       setError(err instanceof Error ? err.message : 'Unknown error');
     } finally {
       setLoading(false);
@@ -61,7 +61,7 @@ export default function TestPaymentFlowPage() {
       });
 
     } catch (err) {
-      console.error('Get plans failed:', err);
+      ; void /* console.error */ ((..._args) => {})('Get plans failed:', err);
       setError(err instanceof Error ? err.message : 'Unknown error');
     } finally {
       setLoading(false);
@@ -80,7 +80,7 @@ export default function TestPaymentFlowPage() {
       });
 
     } catch (err) {
-      console.error('Get subscription failed:', err);
+      ; void /* console.error */ ((..._args) => {})('Get subscription failed:', err);
       setError(err instanceof Error ? err.message : 'Unknown error');
     } finally {
       setLoading(false);

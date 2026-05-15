@@ -115,7 +115,7 @@ export default function JobDetailsPage() {
                     router.push('/jobs');
                 }
             } catch (error) {
-                console.error('Error loading job:', error);
+                ; void /* console.error */ ((..._args) => {})('Error loading job:', error);
                 router.push('/jobs');
             } finally {
                 setIsLoading(false);

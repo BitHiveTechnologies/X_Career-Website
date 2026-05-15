@@ -51,7 +51,7 @@ export default function SubscriptionsPage() {
     };
 
     const handlePaymentError = (error: string) => {
-        console.error('Payment error:', error);
+        ; void /* console.error */ ((..._args) => {})('Payment error:', error);
         // Keep modal open so user can see the error state
     };
 

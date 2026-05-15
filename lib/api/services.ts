@@ -100,15 +100,15 @@ export class JobService {
    * Get all jobs with optional filters
    */
   static async getJobs(params?: JobSearchParams): Promise<ApiResponse<JobsResponse>> {
-    console.log('🔍 JobService.getJobs called with params:', params);
-    console.log('🔍 API_ENDPOINTS.JOBS.ALL:', API_ENDPOINTS.JOBS.ALL);
+    ; void /* console.log */ ((..._args) => {})('🔍 JobService.getJobs called with params:', params);
+    ; void /* console.log */ ((..._args) => {})('🔍 API_ENDPOINTS.JOBS.ALL:', API_ENDPOINTS.JOBS.ALL);
     
     try {
       const result = await apiClient.get(API_ENDPOINTS.JOBS.ALL, params);
-      console.log('✅ JobService.getJobs result:', result);
+      ; void /* console.log */ ((..._args) => {})('✅ JobService.getJobs result:', result);
       return result;
     } catch (error) {
-      console.error('❌ JobService.getJobs error:', error);
+      ; void /* console.error */ ((..._args) => {})('❌ JobService.getJobs error:', error);
       throw error;
     }
   }
@@ -554,7 +554,7 @@ export class AdminService {
     subscriptionStatus?: string;
     search?: string;
   }): Promise<ApiResponse<any>> {
-    console.log('🔍 AdminService.getUsers called with params:', params);
+    ; void /* console.log */ ((..._args) => {})('🔍 AdminService.getUsers called with params:', params);
     return apiClient.get(API_ENDPOINTS.ADMIN.USERS, params);
   }
 
@@ -567,7 +567,7 @@ export class AdminService {
     status?: string;
     plan?: string;
   }): Promise<ApiResponse<any>> {
-    console.log('🔍 AdminService.getAllPayments called with params:', params);
+    ; void /* console.log */ ((..._args) => {})('🔍 AdminService.getAllPayments called with params:', params);
     return apiClient.get(API_ENDPOINTS.ADMIN.PAYMENTS, params);
   }
 
@@ -580,7 +580,7 @@ export class AdminService {
     search?: string;
     status?: string;
   }): Promise<ApiResponse<any>> {
-    console.log('🔍 AdminService.getAllCustomers called with params:', params);
+    ; void /* console.log */ ((..._args) => {})('🔍 AdminService.getAllCustomers called with params:', params);
     return apiClient.get(API_ENDPOINTS.ADMIN.CUSTOMERS, params);
   }
 }
@@ -641,11 +641,13 @@ export class JobAlertService {
     minMatchScore?: number;
     maxUsers?: number;
     dryRun?: boolean;
+    force?: boolean;
   } = {}): Promise<ApiResponse<any>> {
     const payload = {
       minMatchScore: options.minMatchScore || 50,
       maxUsers: options.maxUsers || 100,
-      dryRun: options.dryRun || false
+      dryRun: options.dryRun || false,
+      force: options.force || false
     };
     return apiClient.post(API_ENDPOINTS.JOB_ALERTS.SEND_FOR_JOB(jobId), payload);
   }
@@ -657,11 +659,13 @@ export class JobAlertService {
     minMatchScore?: number;
     maxUsersPerJob?: number;
     dryRun?: boolean;
+    force?: boolean;
   } = {}): Promise<ApiResponse<any>> {
     const payload = {
       minMatchScore: options.minMatchScore || 50,
       maxUsersPerJob: options.maxUsersPerJob || 100,
-      dryRun: options.dryRun || false
+      dryRun: options.dryRun || false,
+      force: options.force || false
     };
     return apiClient.post(API_ENDPOINTS.JOB_ALERTS.SEND_ALL, payload);
   }

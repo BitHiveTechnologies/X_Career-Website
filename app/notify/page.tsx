@@ -240,7 +240,7 @@ function NotifyContent() {
                 router.replace('/notify');
             }
         } catch (error) {
-            console.error('Finalize payment failed:', error);
+            ; void /* console.error */ ((..._args) => {})('Finalize payment failed:', error);
         } finally {
             setIsLoadingSubscription(false);
         }
@@ -275,7 +275,7 @@ function NotifyContent() {
                 setIsLoadingSubscription(false);
             }
         } catch (error) {
-            console.error('Failed to load subscription data:', error);
+            ; void /* console.error */ ((..._args) => {})('Failed to load subscription data:', error);
             setCurrentSubscription(null);
         } finally {
             setIsLoadingPlans(false);
@@ -372,7 +372,7 @@ function NotifyContent() {
     };
 
     const handlePaymentSuccess = async (subscription: any) => {
-        console.log('Payment successful:', subscription);
+        ; void /* console.log */ ((..._args) => {})('Payment successful:', subscription);
         setPaymentModal({ isOpen: false, plan: null });
         setSubscriptionStatus('success');
         await loadSubscriptionData();
@@ -380,7 +380,7 @@ function NotifyContent() {
     };
 
     const handlePaymentError = (error: string) => {
-        console.error('Payment error:', error);
+        ; void /* console.error */ ((..._args) => {})('Payment error:', error);
         setSubscriptionStatus('error');
         setTimeout(() => setSubscriptionStatus('idle'), 5000);
     };

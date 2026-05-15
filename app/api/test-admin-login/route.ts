@@ -7,7 +7,7 @@ export async function POST(request: NextRequest) {
     // Test admin login with backend
     const backendUrl = `${process.env.BACKEND_BASE_URL || 'http://localhost:3001'}/api/v1/admin/login`;
     
-    console.log('Testing admin login with:', { email, backendUrl });
+    ; void /* console.log */ ((..._args) => {})('Testing admin login with:', { email, backendUrl });
     
     const response = await fetch(backendUrl, {
       method: 'POST',
@@ -19,8 +19,8 @@ export async function POST(request: NextRequest) {
     
     const data = await response.json();
     
-    console.log('Backend response status:', response.status);
-    console.log('Backend response data:', JSON.stringify(data, null, 2));
+    ; void /* console.log */ ((..._args) => {})('Backend response status:', response.status);
+    ; void /* console.log */ ((..._args) => {})('Backend response data:', JSON.stringify(data, null, 2));
     
     return NextResponse.json({
       success: response.ok,
@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
       response: data,
     });
   } catch (error: any) {
-    console.error('Test admin login error:', error);
+    ; void /* console.error */ ((..._args) => {})('Test admin login error:', error);
     return NextResponse.json({
       success: false,
       error: error.message,

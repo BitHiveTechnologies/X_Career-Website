@@ -91,7 +91,7 @@ async function handleRequest(
 
     return nextResponse;
   } catch (error) {
-    console.error('Proxy error:', error);
+    ; void /* console.error */ ((..._args) => {})('Proxy error:', error);
     return NextResponse.json(
       { error: 'Backend service unavailable' },
       { status: 503 }

@@ -211,10 +211,10 @@ export default function AdminDashboard() {
         params.search = debouncedSearchQuery.trim();
       }
 
-      console.log('🔍 Fetching customers with params:', params);
+      ; void /* console.log */ ((..._args) => {})('🔍 Fetching customers with params:', params);
 
       const response = await adminService.getUsers(params);
-      console.log('✅ Customers response:', response);
+      ; void /* console.log */ ((..._args) => {})('✅ Customers response:', response);
 
       if (response.success && response.data) {
         const customersData = response.data.users || response.data;
@@ -257,7 +257,7 @@ export default function AdminDashboard() {
       }
 
     } catch (err) {
-      console.error('❌ Error fetching customers:', err);
+      ; void /* console.error */ ((..._args) => {})('❌ Error fetching customers:', err);
       setError(err instanceof Error ? err.message : 'Failed to fetch customers');
       setCustomers([]);
     } finally {
@@ -269,7 +269,7 @@ export default function AdminDashboard() {
   // Fetch comprehensive customer analytics
   const fetchCustomerAnalytics = useCallback(async () => {
     try {
-      console.log('🔍 Fetching dashboard statistics and analytics...');
+      ; void /* console.log */ ((..._args) => {})('🔍 Fetching dashboard statistics and analytics...');
       const userToken = getUserToken();
       if (!userToken) {
         throw new Error('No authentication token available');
@@ -283,7 +283,7 @@ export default function AdminDashboard() {
       }
 
       const response = await adminService.getUserAnalytics();
-      console.log('✅ Customer analytics response:', response);
+      ; void /* console.log */ ((..._args) => {})('✅ Customer analytics response:', response);
 
       if (response.success && response.data) {
         const analyticsData = response.data;
@@ -307,7 +307,7 @@ export default function AdminDashboard() {
         }));
       }
     } catch (err) {
-      console.error('❌ Error fetching customer analytics:', err);
+      ; void /* console.error */ ((..._args) => {})('❌ Error fetching customer analytics:', err);
     }
   }, []);
 
@@ -392,14 +392,14 @@ export default function AdminDashboard() {
 
   // Initial data fetch - wait for authentication to be ready
   useEffect(() => {
-    console.log('🔍 Admin Dashboard: Auth state changed', { isAuthenticated, isAdmin });
+    ; void /* console.log */ ((..._args) => {})('🔍 Admin Dashboard: Auth state changed', { isAuthenticated, isAdmin });
     
     if (isAuthenticated && isAdmin) {
-      console.log('🔍 Admin Dashboard: Starting data fetch...');
+      ; void /* console.log */ ((..._args) => {})('🔍 Admin Dashboard: Starting data fetch...');
       fetchCustomers();
       fetchCustomerAnalytics();
     } else {
-      console.log('🔍 Admin Dashboard: Not authenticated or not admin, skipping data fetch');
+      ; void /* console.log */ ((..._args) => {})('🔍 Admin Dashboard: Not authenticated or not admin, skipping data fetch');
     }
   }, [isAuthenticated, isAdmin, fetchCustomers, fetchCustomerAnalytics]);
 
@@ -538,7 +538,7 @@ export default function AdminDashboard() {
                 </Button>
                 <Button
             onClick={() => {
-              console.log('🔍 Debug: Current auth state:', { 
+              ; void /* console.log */ ((..._args) => {})('🔍 Debug: Current auth state:', { 
                 isAuthenticated, 
                 isAdmin: isAdmin, 
                 user: user?.email,
@@ -935,7 +935,7 @@ export default function AdminDashboard() {
                               size="sm"
                               onClick={() => {
                                 // TODO: Implement edit functionality
-                                console.log('Edit customer:', customer.id);
+                                ; void /* console.log */ ((..._args) => {})('Edit customer:', customer.id);
                               }}
                             >
                               <Edit className="h-3 w-3" />
@@ -1127,7 +1127,7 @@ export default function AdminDashboard() {
               <div className="flex gap-2 pt-4 border-t">
                 <Button onClick={() => {
                   // TODO: Implement edit functionality
-                  console.log('Edit customer:', selectedCustomer.id);
+                  ; void /* console.log */ ((..._args) => {})('Edit customer:', selectedCustomer.id);
                 }}>
                   <Edit className="h-4 w-4 mr-2" />
                   Edit Customer

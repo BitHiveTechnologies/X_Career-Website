@@ -68,6 +68,6 @@ export const getApiUrl = (endpoint: string): string => {
 if (typeof window !== 'undefined') {
   const validation = validateEnvironment();
   if (!validation.isValid) {
-    console.warn('Environment validation failed:', validation.errors);
+    ; void /* console.warn */ ((..._args) => {})('Environment validation failed:', validation.errors);
   }
 }

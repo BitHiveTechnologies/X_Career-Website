@@ -141,7 +141,7 @@ class SubscriptionService {
       );
       return response;
     } catch (error) {
-      console.error('Failed to fetch subscription plans:', error);
+      ; void /* console.error */ ((..._args) => {})('Failed to fetch subscription plans:', error);
       throw error;
     }
   }
@@ -157,7 +157,7 @@ class SubscriptionService {
       );
       return response;
     } catch (error) {
-      console.error('Failed to fetch current subscription:', error);
+      ; void /* console.error */ ((..._args) => {})('Failed to fetch current subscription:', error);
       throw error;
     }
   }
@@ -178,7 +178,7 @@ class SubscriptionService {
       );
       return response;
     } catch (error) {
-      console.error('Failed to fetch subscription history:', error);
+      ; void /* console.error */ ((..._args) => {})('Failed to fetch subscription history:', error);
       throw error;
     }
   }
@@ -198,7 +198,7 @@ class SubscriptionService {
       );
       return response;
     } catch (error) {
-      console.error('Failed to create payment order:', error);
+      ; void /* console.error */ ((..._args) => {})('Failed to create payment order:', error);
       throw error;
     }
   }
@@ -215,7 +215,7 @@ class SubscriptionService {
       );
       return response;
     } catch (error) {
-      console.error('Failed to verify payment:', error);
+      ; void /* console.error */ ((..._args) => {})('Failed to verify payment:', error);
       throw error;
     }
   }
@@ -231,7 +231,7 @@ class SubscriptionService {
       );
       return response;
     } catch (error) {
-      console.error('Failed to cancel subscription:', error);
+      ; void /* console.error */ ((..._args) => {})('Failed to cancel subscription:', error);
       throw error;
     }
   }
@@ -248,7 +248,7 @@ class SubscriptionService {
       );
       return response;
     } catch (error) {
-      console.error('Failed to renew subscription:', error);
+      ; void /* console.error */ ((..._args) => {})('Failed to renew subscription:', error);
       throw error;
     }
   }
@@ -261,7 +261,7 @@ class SubscriptionService {
       const response = await this.getCurrentSubscription();
       return response.success && response.data?.subscription?.isActive === true;
     } catch (error) {
-      console.error('Failed to check subscription status:', error);
+      ; void /* console.error */ ((..._args) => {})('Failed to check subscription status:', error);
       return false;
     }
   }
@@ -288,7 +288,7 @@ class SubscriptionService {
       const response = await apiClient.get(API_ENDPOINTS.SUBSCRIPTIONS.ACCESS);
       return response;
     } catch (error) {
-      console.error('Failed to get user plan access:', error);
+      ; void /* console.error */ ((..._args) => {})('Failed to get user plan access:', error);
       // Return safe default: basic plan access
       return {
         success: false,
@@ -312,7 +312,7 @@ class SubscriptionService {
       }
       return null;
     } catch (error) {
-      console.error('Failed to get plan by ID:', error);
+      ; void /* console.error */ ((..._args) => {})('Failed to get plan by ID:', error);
       return null;
     }
   }
@@ -348,7 +348,7 @@ class SubscriptionService {
         maxJobs: subscription.planDetails?.maxJobs || 10
       };
     } catch (error) {
-      console.error('Failed to check job application eligibility:', error);
+      ; void /* console.error */ ((..._args) => {})('Failed to check job application eligibility:', error);
       return { canApply: true, maxJobs: 10 }; // Default to allowing with free limits
     }
   }

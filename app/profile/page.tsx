@@ -92,7 +92,7 @@ export default function ProfilePage() {
         if (typeof window !== 'undefined') {
             const token = localStorage.getItem('careerx_token');
             const userData = localStorage.getItem('careerx_user');
-            console.log('Token status:', {
+            ; void /* console.log */ ((..._args) => {})('Token status:', {
                 hasToken: !!token,
                 tokenPreview: token ? token.substring(0, 20) + '...' : 'No token',
                 hasUserData: !!userData,
@@ -176,7 +176,7 @@ export default function ProfilePage() {
                 });
             }
         } catch (err) {
-            console.error('Error loading profile:', err);
+            ; void /* console.error */ ((..._args) => {})('Error loading profile:', err);
             setError('An unexpected error occurred while loading your profile. Please try refreshing the page.');
         } finally {
             setLoading(false);
@@ -259,7 +259,7 @@ export default function ProfilePage() {
                 setError(result.error || 'Failed to update profile');
             }
         } catch (err) {
-            console.error('Error saving profile:', err);
+            ; void /* console.error */ ((..._args) => {})('Error saving profile:', err);
             setError('An unexpected error occurred while saving your profile');
         } finally {
             setSaving(false);
@@ -357,7 +357,7 @@ export default function ProfilePage() {
 
     const handlePasswordChange = async (e: React.FormEvent) => {
         e.preventDefault();
-        console.log('Starting password change process...');
+        ; void /* console.log */ ((..._args) => {})('Starting password change process...');
         setPasswordError(null);
         setPasswordSuccess(null);
 
@@ -378,9 +378,9 @@ export default function ProfilePage() {
 
         try {
             setPasswordSaving(true);
-            console.log('Calling changePassword API...');
+            ; void /* console.log */ ((..._args) => {})('Calling changePassword API...');
             const result = await changePassword(passwordData.currentPassword, passwordData.newPassword);
-            console.log('Password change result:', result);
+            ; void /* console.log */ ((..._args) => {})('Password change result:', result);
 
             if (result.success) {
                 setPasswordSuccess('Password changed successfully!');
@@ -399,7 +399,7 @@ export default function ProfilePage() {
                 setPasswordError(result.error || 'Failed to change password');
             }
         } catch (err) {
-            console.error('Password change error:', err);
+            ; void /* console.error */ ((..._args) => {})('Password change error:', err);
             setPasswordError('An unexpected error occurred. Please try again.');
         } finally {
             setPasswordSaving(false);

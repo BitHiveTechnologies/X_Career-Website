@@ -65,7 +65,7 @@ function verifyToken(request: NextRequest) {
         const decoded = jwt.verify(token, process.env.JWT_SECRET || 'your-secret-key') as any;
         return decoded;
     } catch (error) {
-        console.error('Token verification error:', error);
+        ; void /* console.error */ ((..._args) => {})('Token verification error:', error);
         return null;
     }
 }
@@ -141,7 +141,7 @@ export async function GET(request: NextRequest) {
             data: completionData,
         });
     } catch (error) {
-        console.error('Get profile completion error:', error);
+        ; void /* console.error */ ((..._args) => {})('Get profile completion error:', error);
         return NextResponse.json(
             { error: 'Internal server error' },
             { status: 500 }

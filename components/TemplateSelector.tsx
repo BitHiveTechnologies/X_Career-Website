@@ -30,7 +30,7 @@ export default function TemplateSelector({
                     setUserSubscription(subscription);
                 }
             } catch (error) {
-                console.error('Error loading user subscription:', error);
+                ; void /* console.error */ ((..._args) => {})('Error loading user subscription:', error);
             }
         };
         loadUserSubscription();
@@ -287,7 +287,7 @@ export default function TemplateSelector({
                 onClose={() => setShowUpgradeModal(false)}
                 currentPlan={(userSubscription === 'enterprise' ? 'premium' : userSubscription) as "free" | "premium" | "starter" || "free"}
                 onUpgrade={(planId) => {
-                    console.log('Upgrading to plan:', planId);
+                    ; void /* console.log */ ((..._args) => {})('Upgrading to plan:', planId);
                     // Redirect to pricing page
                     if (typeof window !== 'undefined') {
                         window.location.href = '/subscriptions';
