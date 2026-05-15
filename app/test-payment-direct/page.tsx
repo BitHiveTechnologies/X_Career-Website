@@ -26,7 +26,7 @@ export default function TestPaymentDirectPage() {
       });
 
     } catch (err) {
-      console.error('Direct API test failed:', err);
+      ; void /* console.error */ ((..._args) => {})('Direct API test failed:', err);
       setError(err instanceof Error ? err.message : 'Unknown error');
     } finally {
       setLoading(false);
@@ -45,7 +45,7 @@ export default function TestPaymentDirectPage() {
       });
 
     } catch (err) {
-      console.error('Payment service test failed:', err);
+      ; void /* console.error */ ((..._args) => {})('Payment service test failed:', err);
       setError(err instanceof Error ? err.message : 'Unknown error');
     } finally {
       setLoading(false);
@@ -69,7 +69,7 @@ export default function TestPaymentDirectPage() {
       });
 
     } catch (err) {
-      console.error('Payment order test failed:', err);
+      ; void /* console.error */ ((..._args) => {})('Payment order test failed:', err);
       setError(err instanceof Error ? err.message : 'Unknown error');
     } finally {
       setLoading(false);

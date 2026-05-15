@@ -90,7 +90,7 @@ export async function POST(request: NextRequest) {
     });
 
   } catch (error) {
-    console.error('Error uploading company logo:', error);
+    ; void /* console.error */ ((..._args) => {})('Error uploading company logo:', error);
     return NextResponse.json(
       {
         success: false,

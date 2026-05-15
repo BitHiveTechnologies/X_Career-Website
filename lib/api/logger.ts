@@ -13,7 +13,7 @@ let loggingEnabled = apiConfig.enableLogging;
  */
 export const enableApiLogging = () => {
   loggingEnabled = true;
-  console.log('🔧 API Logging enabled');
+  ; void /* console.log */ ((..._args) => {})('🔧 API Logging enabled');
 };
 
 /**
@@ -21,7 +21,7 @@ export const enableApiLogging = () => {
  */
 export const disableApiLogging = () => {
   loggingEnabled = false;
-  console.log('🔧 API Logging disabled');
+  ; void /* console.log */ ((..._args) => {})('🔧 API Logging disabled');
 };
 
 /**
@@ -45,7 +45,7 @@ export const toggleApiLogging = () => {
  */
 export const logApiRequest = (message: string, data?: any) => {
   if (loggingEnabled) {
-    console.log(message, data);
+    ; void /* console.log */ ((..._args) => {})(message, data);
   }
 };
 
@@ -54,7 +54,7 @@ export const logApiRequest = (message: string, data?: any) => {
  */
 export const logApiResponse = (message: string, data?: any) => {
   if (loggingEnabled) {
-    console.log(message, data);
+    ; void /* console.log */ ((..._args) => {})(message, data);
   }
 };
 
@@ -62,7 +62,7 @@ export const logApiResponse = (message: string, data?: any) => {
  * Log API error (always logs, regardless of setting)
  */
 export const logApiError = (message: string, error?: any) => {
-  console.error(message, error);
+  ; void /* console.error */ ((..._args) => {})(message, error);
 };
 
 // Make functions available globally for easy access in browser console

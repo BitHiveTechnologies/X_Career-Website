@@ -158,7 +158,7 @@ export default function SavedJobsPage() {
                 setError('Failed to load saved jobs');
             }
         } catch (err) {
-            console.error('Error loading saved jobs:', err);
+            ; void /* console.error */ ((..._args) => {})('Error loading saved jobs:', err);
             setError('Failed to load saved jobs');
         } finally {
             setLoading(false);

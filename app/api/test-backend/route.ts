@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
       timestamp: new Date().toISOString()
     });
   } catch (error: any) {
-    console.error('Backend connection test failed:', error);
+    ; void /* console.error */ ((..._args) => {})('Backend connection test failed:', error);
     
     return NextResponse.json({
       success: false,

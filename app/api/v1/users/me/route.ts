@@ -61,7 +61,7 @@ function verifyToken(request: NextRequest) {
         const decoded = jwt.verify(token, process.env.JWT_SECRET || 'your-secret-key') as any;
         return decoded;
     } catch (error) {
-        console.error('Token verification error:', error);
+        ; void /* console.error */ ((..._args) => {})('Token verification error:', error);
         return null;
     }
 }
@@ -105,7 +105,7 @@ export async function GET(request: NextRequest) {
             data: profileData,
         });
     } catch (error) {
-        console.error('Get user profile error:', error);
+        ; void /* console.error */ ((..._args) => {})('Get user profile error:', error);
         return NextResponse.json(
             { error: 'Internal server error' },
             { status: 500 }
@@ -148,7 +148,7 @@ export async function PUT(request: NextRequest) {
             data: users[userIndex],
         });
     } catch (error) {
-        console.error('Update user profile error:', error);
+        ; void /* console.error */ ((..._args) => {})('Update user profile error:', error);
         return NextResponse.json(
             { error: 'Internal server error' },
             { status: 500 }

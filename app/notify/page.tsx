@@ -176,6 +176,7 @@ function NotifyContent() {
         learningResources: true,
         careerUpdates: true,
     });
+    const [isGuestCheckout, setIsGuestCheckout] = useState(false);
 
     const [pricingPlans, setPricingPlans] = useState<any[]>(defaultPricingPlans);
     const [currentSubscription, setCurrentSubscription] = useState<any>(null);
@@ -226,6 +227,11 @@ function NotifyContent() {
                         }));
                     }
                     
+                    // Set guest checkout flag if backend says so
+                    if ((response.data as any).isNewUser) {
+                        setIsGuestCheckout(true);
+                    }
+                    
                     await refreshUser();
                     setCurrentSubscription(subscription);
                 }
@@ -234,7 +240,7 @@ function NotifyContent() {
                 router.replace('/notify');
             }
         } catch (error) {
-            console.error('Finalize payment failed:', error);
+            ; void /* console.error */ ((..._args) => {})('Finalize payment failed:', error);
         } finally {
             setIsLoadingSubscription(false);
         }
@@ -269,7 +275,7 @@ function NotifyContent() {
                 setIsLoadingSubscription(false);
             }
         } catch (error) {
-            console.error('Failed to load subscription data:', error);
+            ; void /* console.error */ ((..._args) => {})('Failed to load subscription data:', error);
             setCurrentSubscription(null);
         } finally {
             setIsLoadingPlans(false);
@@ -366,7 +372,7 @@ function NotifyContent() {
     };
 
     const handlePaymentSuccess = async (subscription: any) => {
-        console.log('Payment successful:', subscription);
+        ; void /* console.log */ ((..._args) => {})('Payment successful:', subscription);
         setPaymentModal({ isOpen: false, plan: null });
         setSubscriptionStatus('success');
         await loadSubscriptionData();
@@ -374,7 +380,7 @@ function NotifyContent() {
     };
 
     const handlePaymentError = (error: string) => {
-        console.error('Payment error:', error);
+        ; void /* console.error */ ((..._args) => {})('Payment error:', error);
         setSubscriptionStatus('error');
         setTimeout(() => setSubscriptionStatus('idle'), 5000);
     };
@@ -427,6 +433,19 @@ function NotifyContent() {
                             {/* Current Subscription Status */}
                             {!isLoadingSubscription && (
                                 <div className="max-w-md mx-auto mb-8">
+                                    {isGuestCheckout && (
+                                        <div className="mb-6 p-6 bg-white/20 backdrop-blur-md border border-yellow-300/50 rounded-3xl text-white shadow-2xl animate-pulse">
+                                            <div className="flex items-start gap-4">
+                                                <div className="bg-yellow-400 p-3 rounded-2xl shadow-lg">
+                                                    <Mail className="w-6 h-6 text-blue-900" />
+                                                </div>
+                                                <div className="text-left">
+                                                    <h4 className="text-xl font-bold mb-1">Check Your Email!</h4>
+                                                    <p className="text-blue-50">We've sent your login credentials to your email address. Please use them to log in and access your premium benefits.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )}
                                     <SubscriptionStatus 
                                         onUpgrade={() => {
                                             const premiumPlan = pricingPlans.find(p => p.id === 'premium');

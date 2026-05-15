@@ -71,7 +71,7 @@ export default function InternshipsPage() {
 
     // Function to calculate category counts based on actual internship data
     const calculateCategoryCounts = useCallback((internshipData: FrontendJob[]) => {
-        console.log('📊 Calculating category counts for', internshipData.length, 'internships');
+        ; void /* console.log */ ((..._args) => {})('📊 Calculating category counts for', internshipData.length, 'internships');
         
         const categoryMap: { [key: string]: string[] } = {
             'software-development': [
@@ -118,7 +118,7 @@ export default function InternshipsPage() {
             };
         });
 
-        console.log('📊 Category counts calculated:', categoriesWithCounts);
+        ; void /* console.log */ ((..._args) => {})('📊 Category counts calculated:', categoriesWithCounts);
         return categoriesWithCounts;
     }, []);
 
@@ -127,12 +127,12 @@ export default function InternshipsPage() {
         const loadInternships = async () => {
             try {
                 setIsLoading(true);
-                console.log('🔄 Loading internships...');
+                ; void /* console.log */ ((..._args) => {})('🔄 Loading internships...');
                 
                 // For now, let's use mock data directly to test the UI
-                console.log('🔄 Loading mock internships...');
+                ; void /* console.log */ ((..._args) => {})('🔄 Loading mock internships...');
                 const { mockInternships } = await import('@/lib/mockData');
-                console.log('📥 Mock internships loaded:', mockInternships.length);
+                ; void /* console.log */ ((..._args) => {})('📥 Mock internships loaded:', mockInternships.length);
                 
                 const frontendInternships: FrontendJob[] = mockInternships.map((internship) => ({
                     // Core Job interface properties
@@ -170,7 +170,7 @@ export default function InternshipsPage() {
                     isRemote: internship.isRemote,
                 }));
                 
-                console.log('✅ Processed internships:', frontendInternships.length);
+                ; void /* console.log */ ((..._args) => {})('✅ Processed internships:', frontendInternships.length);
                 setInternships(frontendInternships);
                 setFilteredInternships(frontendInternships);
                 
@@ -179,7 +179,7 @@ export default function InternshipsPage() {
                 setCategories(categoriesWithCounts);
                 
             } catch (e) {
-                console.error('💥 Error loading internships:', e);
+                ; void /* console.error */ ((..._args) => {})('💥 Error loading internships:', e);
             } finally {
                 setIsLoading(false);
             }
@@ -190,7 +190,7 @@ export default function InternshipsPage() {
     // Recalculate category counts when internships data changes
     useEffect(() => {
         if (internships.length > 0) {
-            console.log('🔄 Recalculating category counts due to internships change');
+            ; void /* console.log */ ((..._args) => {})('🔄 Recalculating category counts due to internships change');
             const categoriesWithCounts = calculateCategoryCounts(internships);
             setCategories(categoriesWithCounts);
         }
@@ -635,7 +635,7 @@ export default function InternshipsPage() {
                                         <button
                                             key={quickFilter.label}
                                             onClick={() => {
-                                                console.log('🚀 Applying quick filter:', quickFilter);
+                                                ; void /* console.log */ ((..._args) => {})('🚀 Applying quick filter:', quickFilter);
                                                 setFilters(prevFilters => ({
                                                     ...prevFilters,
                                                     ...quickFilter.filters

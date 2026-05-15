@@ -215,7 +215,6 @@ export default function PaymentModal({ isOpen, onClose, plan, onSuccess, onError
   };
 
   const handleClose = () => {
-    if (isLoading) return;
     onClose();
   };
 
@@ -229,7 +228,6 @@ export default function PaymentModal({ isOpen, onClose, plan, onSuccess, onError
           <button
             onClick={handleClose}
             className="rounded-full p-2 transition-colors hover:bg-gray-100"
-            disabled={isLoading}
           >
             <X className="h-5 w-5" />
           </button>
@@ -356,8 +354,7 @@ export default function PaymentModal({ isOpen, onClose, plan, onSuccess, onError
             </button>
             <button
               onClick={handleClose}
-              disabled={isLoading}
-              className="flex-1 rounded-lg border border-gray-300 px-4 py-3 font-medium text-gray-700 transition-colors hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
+              className="flex-1 rounded-lg border border-gray-300 px-4 py-3 font-medium text-gray-700 transition-colors hover:bg-gray-50"
             >
               Cancel
             </button>

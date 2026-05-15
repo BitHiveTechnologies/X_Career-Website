@@ -80,6 +80,7 @@ export const API_ENDPOINTS = {
     CURRENT: '/api/v1/subscriptions/current',
     PLANS: '/api/v1/subscriptions/plans',
     HISTORY: '/api/v1/subscriptions/history',
+    ACCESS: '/api/v1/subscriptions/access',
     DELETE: (id: string) => `/api/v1/subscriptions/${id}`,
     RENEW: '/api/v1/subscriptions/renew',
     ANALYTICS: '/api/v1/subscriptions/analytics',
@@ -144,6 +145,8 @@ export const API_ENDPOINTS = {
     USER_ANALYTICS: '/api/v1/admin/analytics/users',
     JOB_ANALYTICS: '/api/v1/admin/analytics/jobs',
     HEALTH: '/api/v1/admin/health',
+    PAYMENTS: '/api/v1/admin/payments',
+    CUSTOMERS: '/api/v1/admin/customers',
   },
   
   // Health Check

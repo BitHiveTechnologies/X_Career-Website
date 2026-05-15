@@ -23,7 +23,7 @@ export default function TestProfileApiPage() {
       setCompletionData(completion);
     } catch (err) {
       setError('Failed to fetch profile completion data');
-      console.error('Profile completion error:', err);
+      ; void /* console.error */ ((..._args) => {})('Profile completion error:', err);
     } finally {
       setLoading(false);
     }

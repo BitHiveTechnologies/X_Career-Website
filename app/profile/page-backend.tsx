@@ -77,7 +77,7 @@ export default function ProfilePageBackend() {
                 setCompletion(completionResult);
             }
         } catch (err) {
-            console.error('Error loading profile:', err);
+            ; void /* console.error */ ((..._args) => {})('Error loading profile:', err);
             setError('An unexpected error occurred while loading your profile');
         } finally {
             setLoading(false);
@@ -127,7 +127,7 @@ export default function ProfilePageBackend() {
                 setError(result.error || 'Failed to update profile');
             }
         } catch (err) {
-            console.error('Error saving profile:', err);
+            ; void /* console.error */ ((..._args) => {})('Error saving profile:', err);
             setError('An unexpected error occurred while saving your profile');
         } finally {
             setSaving(false);

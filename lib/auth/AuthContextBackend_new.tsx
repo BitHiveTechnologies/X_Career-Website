@@ -101,7 +101,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         setUser(null);
       }
     } catch (error) {
-      console.error('Auth initialization error:', error);
+      ; void /* console.error */ ((..._args) => {})('Auth initialization error:', error);
       setUser(null);
     } finally {
       setIsLoading(false);
@@ -119,14 +119,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       let result;
       if (email === 'superadmin@notifyx.com' || email === 'admin@notifyx.com') {
         // Use admin login for admin users
-        console.log('Using admin login for admin user');
+        ; void /* console.log */ ((..._args) => {})('Using admin login for admin user');
         result = await authService.adminLogin({ email, password });
-        console.log('Admin login result:', result);
+        ; void /* console.log */ ((..._args) => {})('Admin login result:', result);
       } else {
         // Use regular user login
-        console.log('Using regular user login');
+        ; void /* console.log */ ((..._args) => {})('Using regular user login');
         result = await authService.login({ email, password });
-        console.log('User login result:', result);
+        ; void /* console.log */ ((..._args) => {})('User login result:', result);
       }
       
       if (result.success && result.data && result.data.user) {
@@ -164,7 +164,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         return { success: false, error: result.error?.message || 'Login failed' };
       }
     } catch (error: any) {
-      console.error('Login error:', error);
+      ; void /* console.error */ ((..._args) => {})('Login error:', error);
       return { success: false, error: error.message || 'Login failed. Please try again.' };
     } finally {
       setIsLoading(false);
@@ -215,7 +215,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         return { success: false, error: result.error?.message || 'Admin login failed' };
       }
     } catch (error: any) {
-      console.error('Admin login error:', error);
+      ; void /* console.error */ ((..._args) => {})('Admin login error:', error);
       return { success: false, error: error.message || 'Admin login failed. Please try again.' };
     } finally {
       setIsLoading(false);
@@ -281,7 +281,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         return { success: false, error: result.error?.message || 'Registration failed' };
       }
     } catch (error: any) {
-      console.error('Registration error:', error);
+      ; void /* console.error */ ((..._args) => {})('Registration error:', error);
       return { success: false, error: error.message || 'Registration failed. Please try again.' };
     } finally {
       setIsLoading(false);
@@ -300,7 +300,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       
       router.push('/');
     } catch (error) {
-      console.error('Logout error:', error);
+      ; void /* console.error */ ((..._args) => {})('Logout error:', error);
     } finally {
       setIsLoading(false);
     }

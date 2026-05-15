@@ -12,7 +12,7 @@ export default function ClearAuthPage() {
       localStorage.removeItem('careerx_user')
       localStorage.removeItem('careerx_token')
       localStorage.removeItem('careerx_redirect_after_auth')
-      console.log('Cleared all auth data from localStorage')
+      ; void /* console.log */ ((..._args) => {})('Cleared all auth data from localStorage')
     }
     
     // Redirect to login after clearing

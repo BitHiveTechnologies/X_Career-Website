@@ -28,6 +28,7 @@ import {
     Linkedin,
     Link as LinkIcon,
     Loader2,
+    Lock,
     Mail,
     MapPin,
     Plus,
@@ -38,7 +39,7 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState, useMemo } from 'react';
 
 // Qualification and Stream options from API documentation
 const QUALIFICATION_OPTIONS = [
@@ -83,6 +84,7 @@ export default function ProfilePage() {
         confirmPassword: ''
     });
     const [passwordError, setPasswordError] = useState<string | null>(null);
+    const [passwordSuccess, setPasswordSuccess] = useState<string | null>(null);
     const [passwordSaving, setPasswordSaving] = useState(false);
 
     // Debug function to check token status
@@ -90,7 +92,7 @@ export default function ProfilePage() {
         if (typeof window !== 'undefined') {
             const token = localStorage.getItem('careerx_token');
             const userData = localStorage.getItem('careerx_user');
-            console.log('Token status:', {
+            ; void /* console.log */ ((..._args) => {})('Token status:', {
                 hasToken: !!token,
                 tokenPreview: token ? token.substring(0, 20) + '...' : 'No token',
                 hasUserData: !!userData,
@@ -174,7 +176,7 @@ export default function ProfilePage() {
                 });
             }
         } catch (err) {
-            console.error('Error loading profile:', err);
+            ; void /* console.error */ ((..._args) => {})('Error loading profile:', err);
             setError('An unexpected error occurred while loading your profile. Please try refreshing the page.');
         } finally {
             setLoading(false);
@@ -257,7 +259,7 @@ export default function ProfilePage() {
                 setError(result.error || 'Failed to update profile');
             }
         } catch (err) {
-            console.error('Error saving profile:', err);
+            ; void /* console.error */ ((..._args) => {})('Error saving profile:', err);
             setError('An unexpected error occurred while saving your profile');
         } finally {
             setSaving(false);
@@ -328,10 +330,36 @@ export default function ProfilePage() {
         }));
     };
 
+    const handleAutofill = () => {
+        setIsEditing(true);
+        setFormData(prev => ({
+            ...prev,
+            firstName: user?.firstName || 'Test',
+            lastName: user?.lastName || 'User',
+            mobile: '9876543210',
+            qualification: 'B.Tech',
+            stream: 'CSE',
+            yearOfPassout: 2024,
+            cgpaOrPercentage: 8.5,
+            collegeName: 'IIT Delhi',
+            dateOfBirth: '1995-03-15',
+            skills: 'React, Node.js, TypeScript, Python, AWS, Frontend Development, Software Engineering',
+            address: '123 Test Street',
+            city: 'New Delhi',
+            state: 'Delhi',
+            pincode: '110001',
+            linkedinUrl: 'https://linkedin.com/in/testuser',
+            githubUrl: 'https://github.com/testuser'
+        }));
+        setSuccess('Test data autofilled! Click "Save Changes" to apply.');
+        setTimeout(() => setSuccess(null), 3000);
+    };
+
     const handlePasswordChange = async (e: React.FormEvent) => {
         e.preventDefault();
+        ; void /* console.log */ ((..._args) => {})('Starting password change process...');
         setPasswordError(null);
-        setSuccess(null);
+        setPasswordSuccess(null);
 
         if (!passwordData.currentPassword || !passwordData.newPassword) {
             setPasswordError('Both current and new passwords are required');
@@ -350,10 +378,12 @@ export default function ProfilePage() {
 
         try {
             setPasswordSaving(true);
+            ; void /* console.log */ ((..._args) => {})('Calling changePassword API...');
             const result = await changePassword(passwordData.currentPassword, passwordData.newPassword);
+            ; void /* console.log */ ((..._args) => {})('Password change result:', result);
 
             if (result.success) {
-                setSuccess('Password changed successfully!');
+                setPasswordSuccess('Password changed successfully!');
                 setPasswordData({
                     currentPassword: '',
                     newPassword: '',
@@ -369,8 +399,8 @@ export default function ProfilePage() {
                 setPasswordError(result.error || 'Failed to change password');
             }
         } catch (err) {
-            console.error('Password change error:', err);
-            setPasswordError('An unexpected error occurred');
+            ; void /* console.error */ ((..._args) => {})('Password change error:', err);
+            setPasswordError('An unexpected error occurred. Please try again.');
         } finally {
             setPasswordSaving(false);
         }
@@ -509,7 +539,17 @@ export default function ProfilePage() {
                                 </div>
                             </div>
                         </div>
-                        <div className="mt-4 md:mt-0">
+                        <div className="mt-4 md:mt-0 flex flex-wrap gap-3">
+                            {/* Testing Autofill Button */}
+                            <Button
+                                onClick={handleAutofill}
+                                variant="outline"
+                                className="border-blue-200 text-blue-600 hover:bg-blue-50"
+                            >
+                                <Sparkles className="w-4 h-4 mr-2" />
+                                Autofill for Testing
+                            </Button>
+
                             {isEditing ? (
                                 <div className="flex space-x-3">
                                         <Button
@@ -794,50 +834,10 @@ export default function ProfilePage() {
                                         </CardDescription>
                                     </CardHeader>
                                     <CardContent className="space-y-6">
-                                        <div className="space-y-2">
-                                            <Label htmlFor="address">Address</Label>
-                                            <Textarea
-                                                id="address"
-                                                value={formData.address || ''}
-                                                onChange={(e) => handleInputChange('address', e.target.value)}
-                                                disabled={!isEditing}
-                                                placeholder="Enter your full address"
-                                                rows={3}
-                                            />
-                                        </div>
-
-                                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                            <div className="space-y-2">
-                                                <Label htmlFor="city">City</Label>
-                                                <Input
-                                                    id="city"
-                                                    value={formData.city || ''}
-                                                    onChange={(e) => handleInputChange('city', e.target.value)}
-                                                    disabled={!isEditing}
-                                                    placeholder="Enter city"
-                                                />
-                                            </div>
-                                            <div className="space-y-2">
-                                                <Label htmlFor="state">State</Label>
-                                                <Input
-                                                    id="state"
-                                                    value={formData.state || ''}
-                                                    onChange={(e) => handleInputChange('state', e.target.value)}
-                                                    disabled={!isEditing}
-                                                    placeholder="Enter state"
-                                                />
-                                            </div>
-                                            <div className="space-y-2">
-                                                <Label htmlFor="pincode">Pincode</Label>
-                                                <Input
-                                                    id="pincode"
-                                                    value={formData.pincode || ''}
-                                                    onChange={(e) => handleInputChange('pincode', e.target.value)}
-                                                    disabled={!isEditing}
-                                                    placeholder="123456"
-                                                    maxLength={6}
-                                                />
-                                            </div>
+                                        <div className="rounded-lg bg-blue-50 p-4 border border-blue-100">
+                                            <p className="text-sm text-blue-800">
+                                                Only your mobile number is required for contact. Other address details are optional or removed to keep your profile simple.
+                                            </p>
                                         </div>
                                     </CardContent>
                                 </Card>
@@ -903,27 +903,35 @@ export default function ProfilePage() {
                                     </CardContent>
                                 </Card>
                             </TabsContent>
+
                             {/* Security Tab */}
                             <TabsContent value="security">
                                 <Card className="bg-white/80 backdrop-blur-sm border-white/20 shadow-xl">
                                     <CardHeader>
                                         <CardTitle className="flex items-center gap-2">
-                                            <AlertCircle className="w-5 h-5" />
-                                            Security & Password
+                                            <Lock className="w-5 h-5" />
+                                            Security Settings
                                         </CardTitle>
                                         <CardDescription>
-                                            Manage your account security and update your password
+                                            Update your password to keep your account secure
                                         </CardDescription>
                                     </CardHeader>
-                                    <CardContent className="space-y-6">
-                                        {passwordError && (
-                                            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg flex items-center gap-2 text-sm">
-                                                <AlertCircle className="w-4 h-4" />
-                                                {passwordError}
-                                            </div>
-                                        )}
-                                        
-                                        <form onSubmit={handlePasswordChange} className="space-y-4">
+                                    <CardContent>
+                                        <form onSubmit={handlePasswordChange} className="space-y-6">
+                                            {passwordError && (
+                                                <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm flex items-center gap-2">
+                                                    <AlertCircle className="w-4 h-4" />
+                                                    {passwordError}
+                                                </div>
+                                            )}
+
+                                            {passwordSuccess && (
+                                                <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg text-sm flex items-center gap-2">
+                                                    <CheckCircle className="w-4 h-4" />
+                                                    {passwordSuccess}
+                                                </div>
+                                            )}
+                                            
                                             <div className="space-y-2">
                                                 <Label htmlFor="currentPassword">Current Password</Label>
                                                 <Input
@@ -934,58 +942,44 @@ export default function ProfilePage() {
                                                     placeholder="Enter current password"
                                                 />
                                             </div>
-                                            
-                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                                <div className="space-y-2">
-                                                    <Label htmlFor="newPassword">New Password</Label>
-                                                    <Input
-                                                        id="newPassword"
-                                                        type="password"
-                                                        value={passwordData.newPassword}
-                                                        onChange={(e) => setPasswordData(prev => ({ ...prev, newPassword: e.target.value }))}
-                                                        placeholder="Enter new password"
-                                                    />
-                                                </div>
-                                                <div className="space-y-2">
-                                                    <Label htmlFor="confirmPassword">Confirm New Password</Label>
-                                                    <Input
-                                                        id="confirmPassword"
-                                                        type="password"
-                                                        value={passwordData.confirmPassword}
-                                                        onChange={(e) => setPasswordData(prev => ({ ...prev, confirmPassword: e.target.value }))}
-                                                        placeholder="Confirm new password"
-                                                    />
-                                                </div>
+
+                                            <div className="space-y-2">
+                                                <Label htmlFor="newPassword">New Password</Label>
+                                                <Input
+                                                    id="newPassword"
+                                                    type="password"
+                                                    value={passwordData.newPassword}
+                                                    onChange={(e) => setPasswordData(prev => ({ ...prev, newPassword: e.target.value }))}
+                                                    placeholder="Enter new password"
+                                                />
                                             </div>
-                                            
-                                            <div className="pt-4">
-                                                <Button 
-                                                    type="submit" 
-                                                    disabled={passwordSaving}
-                                                    className="bg-blue-600 hover:bg-blue-700"
-                                                >
-                                                    {passwordSaving ? (
-                                                        <>
-                                                            <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                                                            Updating Password...
-                                                        </>
-                                                    ) : (
-                                                        'Update Password'
-                                                    )}
-                                                </Button>
+
+                                            <div className="space-y-2">
+                                                <Label htmlFor="confirmPassword">Confirm New Password</Label>
+                                                <Input
+                                                    id="confirmPassword"
+                                                    type="password"
+                                                    value={passwordData.confirmPassword}
+                                                    onChange={(e) => setPasswordData(prev => ({ ...prev, confirmPassword: e.target.value }))}
+                                                    placeholder="Confirm new password"
+                                                />
                                             </div>
+
+                                            <Button 
+                                                type="submit" 
+                                                disabled={passwordSaving}
+                                                className="w-full bg-blue-600 hover:bg-blue-700"
+                                            >
+                                                {passwordSaving ? (
+                                                    <>
+                                                        <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                                                        Updating Password...
+                                                    </>
+                                                ) : (
+                                                    'Update Password'
+                                                )}
+                                            </Button>
                                         </form>
-                                        
-                                        <div className="mt-8 pt-6 border-t border-gray-100">
-                                            <h4 className="font-semibold text-gray-900 mb-2">Password Requirements:</h4>
-                                            <ul className="text-sm text-gray-600 space-y-1 list-disc pl-4">
-                                                <li>Minimum 8 characters long</li>
-                                                <li>At least one uppercase letter</li>
-                                                <li>At least one lowercase letter</li>
-                                                <li>At least one number</li>
-                                                <li>At least one special character</li>
-                                            </ul>
-                                        </div>
                                     </CardContent>
                                 </Card>
                             </TabsContent>
@@ -1030,34 +1024,6 @@ export default function ProfilePage() {
                             </Card>
                         )}
 
-                        {/* Quick Actions */}
-                        <Card className="bg-white/80 backdrop-blur-sm border-white/20 shadow-xl">
-                            <CardHeader>
-                                <CardTitle className="text-lg">Quick Actions</CardTitle>
-                            </CardHeader>
-                            <CardContent className="space-y-3">
-                                <Link href="/jobs" className="block">
-                                    <Button className="w-full bg-blue-600 hover:bg-blue-700">
-                                    Browse Jobs
-                                    </Button>
-                                </Link>
-                                <Link href="/applications" className="block">
-                                    <Button variant="outline" className="w-full">
-                                    My Applications
-                                    </Button>
-                                </Link>
-                                <Link href="/saved-jobs" className="block">
-                                    <Button variant="outline" className="w-full">
-                                    Saved Jobs
-                                    </Button>
-                                </Link>
-                                <Link href="/resume-builder" className="block">
-                                    <Button variant="outline" className="w-full">
-                                        Resume Builder
-                                    </Button>
-                                </Link>
-                            </CardContent>
-                        </Card>
 
                         {/* Subscription Status Card */}
                         {user?.subscriptionInfo && (

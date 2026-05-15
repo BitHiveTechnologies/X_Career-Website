@@ -19,7 +19,7 @@ export const testApiSetup = async (): Promise<{
     details: any;
   };
 }> => {
-  console.log('🧪 Testing NotifyX API Setup...');
+  ; void /* console.log */ ((..._args) => {})('🧪 Testing NotifyX API Setup...');
   
   const results = {
     environment: false,
@@ -29,7 +29,7 @@ export const testApiSetup = async (): Promise<{
   };
 
   // Test 1: Environment validation
-  console.log('1️⃣ Testing environment configuration...');
+  ; void /* console.log */ ((..._args) => {})('1️⃣ Testing environment configuration...');
   const envValidation = validateEnvironment();
   results.environment = envValidation.isValid;
   results.details.environment = {
@@ -43,13 +43,13 @@ export const testApiSetup = async (): Promise<{
   };
 
   if (envValidation.isValid) {
-    console.log('✅ Environment configuration is valid');
+    ; void /* console.log */ ((..._args) => {})('✅ Environment configuration is valid');
   } else {
-    console.error('❌ Environment configuration errors:', envValidation.errors);
+    ; void /* console.error */ ((..._args) => {})('❌ Environment configuration errors:', envValidation.errors);
   }
 
   // Test 2: API configuration
-  console.log('2️⃣ Testing API configuration...');
+  ; void /* console.log */ ((..._args) => {})('2️⃣ Testing API configuration...');
   results.config = !!apiConfig.baseUrl && apiConfig.timeout > 0;
   results.details.config = {
     baseUrl: apiConfig.baseUrl,
@@ -59,13 +59,13 @@ export const testApiSetup = async (): Promise<{
   };
 
   if (results.config) {
-    console.log('✅ API configuration is valid');
+    ; void /* console.log */ ((..._args) => {})('✅ API configuration is valid');
   } else {
-    console.error('❌ API configuration is invalid');
+    ; void /* console.error */ ((..._args) => {})('❌ API configuration is invalid');
   }
 
   // Test 3: Backend connectivity
-  console.log('3️⃣ Testing backend connectivity...');
+  ; void /* console.log */ ((..._args) => {})('3️⃣ Testing backend connectivity...');
   try {
     const healthCheck = await performFullHealthCheck();
     results.connectivity = healthCheck.overall.isHealthy;
@@ -75,24 +75,24 @@ export const testApiSetup = async (): Promise<{
     };
 
     if (healthCheck.overall.isHealthy) {
-      console.log('✅ Backend is healthy and reachable');
+      ; void /* console.log */ ((..._args) => {})('✅ Backend is healthy and reachable');
     } else {
-      console.warn('⚠️ Backend health check failed:', healthCheck.overall.message);
+      ; void /* console.warn */ ((..._args) => {})('⚠️ Backend health check failed:', healthCheck.overall.message);
     }
   } catch (error) {
     results.connectivity = false;
     results.details.connectivity = {
       error: error instanceof Error ? error.message : 'Unknown error',
     };
-    console.error('❌ Backend connectivity test failed:', error);
+    ; void /* console.error */ ((..._args) => {})('❌ Backend connectivity test failed:', error);
   }
 
   const success = results.environment && results.config && results.connectivity;
   
   if (success) {
-    console.log('🎉 All API setup tests passed!');
+    ; void /* console.log */ ((..._args) => {})('🎉 All API setup tests passed!');
   } else {
-    console.log('⚠️ Some API setup tests failed. Check the details above.');
+    ; void /* console.log */ ((..._args) => {})('⚠️ Some API setup tests failed. Check the details above.');
   }
 
   return {
@@ -117,12 +117,12 @@ export const quickConnectivityTest = async (): Promise<boolean> => {
 if (typeof window !== 'undefined' && ENV.IS_DEVELOPMENT) {
   // Only run in browser and development mode
   setTimeout(() => {
-    console.log('🚀 Running automatic API setup test...');
+    ; void /* console.log */ ((..._args) => {})('🚀 Running automatic API setup test...');
     testApiSetup().then(result => {
       if (result.success) {
-        console.log('✅ API setup is ready for integration!');
+        ; void /* console.log */ ((..._args) => {})('✅ API setup is ready for integration!');
       } else {
-        console.log('⚠️ API setup needs attention before integration.');
+        ; void /* console.log */ ((..._args) => {})('⚠️ API setup needs attention before integration.');
       }
     });
   }, 1000);

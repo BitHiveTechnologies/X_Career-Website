@@ -80,7 +80,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       if (typeof window !== 'undefined') {
         const storedUser = localStorage.getItem('careerx_user');
         const storedToken = localStorage.getItem('careerx_token');
-        console.log('Auth initialization - checking stored data:', {
+        ; void /* console.log */ ((..._args) => {})('Auth initialization - checking stored data:', {
           hasUser: !!storedUser,
           hasToken: !!storedToken,
           tokenPreview: storedToken ? storedToken.substring(0, 20) + '...' : 'No token',
@@ -92,9 +92,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           // Ensure user data has required properties
           if (user && user.id) {
             setUser(user);
-            console.log('User and token loaded from localStorage');
+            ; void /* console.log */ ((..._args) => {})('User and token loaded from localStorage');
           } else {
-            console.log('Invalid user data in localStorage, clearing...');
+            ; void /* console.log */ ((..._args) => {})('Invalid user data in localStorage, clearing...');
             localStorage.removeItem('careerx_user');
             localStorage.removeItem('careerx_token');
             setUser(null);
@@ -103,7 +103,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           // Verify the token is still valid by calling the backend
           try {
             const result = await authService.getMe();
-            console.log('Token validation response:', result);
+            ; void /* console.log */ ((..._args) => {})('Token validation response:', result);
             if (result.success && result.data) {
               // Token is valid, update user data if needed
               // Handle different response structures
@@ -114,12 +114,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
                   localStorage.setItem('careerx_user', JSON.stringify(userData));
                 }
               } else {
-                console.log('Invalid user data structure:', result.data);
+                ; void /* console.log */ ((..._args) => {})('Invalid user data structure:', result.data);
                 // Keep the stored user data if API response is malformed
               }
             } else {
               // Token is invalid, clear stored data
-              console.log('Token validation failed - clearing stored data');
+              ; void /* console.log */ ((..._args) => {})('Token validation failed - clearing stored data');
               setUser(null);
               if (typeof window !== 'undefined') {
                 localStorage.removeItem('careerx_user');
@@ -128,7 +128,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
             }
           } catch (error) {
             // Token is invalid or expired, clear stored data
-            console.log('Token validation failed with error:', error);
+            ; void /* console.log */ ((..._args) => {})('Token validation failed with error:', error);
             setUser(null);
             if (typeof window !== 'undefined') {
               localStorage.removeItem('careerx_user');
@@ -142,7 +142,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       // No stored user/token, user is not authenticated
       setUser(null);
     } catch (error) {
-      console.error('Auth initialization error:', error);
+      ; void /* console.error */ ((..._args) => {})('Auth initialization error:', error);
       setUser(null);
     } finally {
       setIsLoading(false);
@@ -160,31 +160,31 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       let result;
       if (email === 'superadmin@notifyx.com' || email === 'admin@notifyx.com') {
         // Use admin login for admin users
-        console.log('Using admin login for admin user');
+        ; void /* console.log */ ((..._args) => {})('Using admin login for admin user');
         result = await authService.adminLogin({ email, password });
-        console.log('Admin login result:', result);
+        ; void /* console.log */ ((..._args) => {})('Admin login result:', result);
       } else {
         // Use regular user login
-        console.log('Using regular user login');
+        ; void /* console.log */ ((..._args) => {})('Using regular user login');
         result = await authService.login({ email, password });
-        console.log('User login result:', result);
+        ; void /* console.log */ ((..._args) => {})('User login result:', result);
       }
       
       if (result.success && result.data) {
         // Store the JWT token in localStorage
         if (typeof window !== 'undefined') {
           const token = result.data.token || (result.data as any).accessToken;
-          console.log('Login successful, storing token:', {
+          ; void /* console.log */ ((..._args) => {})('Login successful, storing token:', {
             hasToken: !!token,
             tokenPreview: token ? token.substring(0, 20) + '...' : 'No token',
             fullResponse: result
           });
           localStorage.setItem('careerx_token', token);
-          console.log('Token stored in localStorage:', token);
+          ; void /* console.log */ ((..._args) => {})('Token stored in localStorage:', token);
           
           // Verify token was stored
           const storedToken = localStorage.getItem('careerx_token');
-          console.log('Token verification - stored token:', storedToken ? storedToken.substring(0, 20) + '...' : 'No token found');
+          ; void /* console.log */ ((..._args) => {})('Token verification - stored token:', storedToken ? storedToken.substring(0, 20) + '...' : 'No token found');
         }
         
         // Set user data from login response (handle both user and admin responses)
@@ -227,13 +227,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           };
         }
         
-        console.log('Constructed user data:', userData);
+        ; void /* console.log */ ((..._args) => {})('Constructed user data:', userData);
         
         // Validate user data before setting
         if (userData && userData.id && userData.email) {
           setUser(userData);
         } else {
-          console.error('Invalid user data structure:', userData);
+          ; void /* console.error */ ((..._args) => {})('Invalid user data structure:', userData);
           return { success: false, error: 'Invalid user data received from server' };
         }
         
@@ -263,7 +263,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         return { success: false, error: result.error?.message || 'Login failed' };
       }
     } catch (error: any) {
-      console.error('Login error:', error);
+      ; void /* console.error */ ((..._args) => {})('Login error:', error);
       return { success: false, error: error.message || 'Login failed. Please try again.' };
     } finally {
       setIsLoading(false);
@@ -283,17 +283,17 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         // Store the JWT token in localStorage
         if (typeof window !== 'undefined') {
           const token = result.data.token || (result.data as any).accessToken;
-          console.log('Admin login successful, storing token:', {
+          ; void /* console.log */ ((..._args) => {})('Admin login successful, storing token:', {
             hasToken: !!token,
             tokenPreview: token ? token.substring(0, 20) + '...' : 'No token',
             fullResponse: result
           });
           localStorage.setItem('careerx_token', token);
-          console.log('Token stored in localStorage:', token);
+          ; void /* console.log */ ((..._args) => {})('Token stored in localStorage:', token);
           
           // Verify token was stored
           const storedToken = localStorage.getItem('careerx_token');
-          console.log('Token verification - stored token:', storedToken ? storedToken.substring(0, 20) + '...' : 'No token found');
+          ; void /* console.log */ ((..._args) => {})('Token verification - stored token:', storedToken ? storedToken.substring(0, 20) + '...' : 'No token found');
         }
         
         // Set user data from login response
@@ -308,13 +308,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           isProfileComplete: true,
         };
         
-        console.log('Constructed admin user data:', userData);
+        ; void /* console.log */ ((..._args) => {})('Constructed admin user data:', userData);
         
         // Validate user data before setting
         if (userData && userData.id && userData.email) {
           setUser(userData);
         } else {
-          console.error('Invalid admin user data structure:', userData);
+          ; void /* console.error */ ((..._args) => {})('Invalid admin user data structure:', userData);
           return { success: false, error: 'Invalid user data received from server' };
         }
         
@@ -344,7 +344,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         return { success: false, error: result.error?.message || 'Admin login failed' };
       }
     } catch (error: any) {
-      console.error('Admin login error:', error);
+      ; void /* console.error */ ((..._args) => {})('Admin login error:', error);
       return { success: false, error: error.message || 'Admin login failed. Please try again.' };
     } finally {
       setIsLoading(false);
@@ -388,13 +388,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           isProfileComplete: true,
         };
         
-        console.log('Constructed registration user data:', userData);
+        ; void /* console.log */ ((..._args) => {})('Constructed registration user data:', userData);
         
         // Validate user data before setting
         if (userData && userData.id && userData.email) {
           setUser(userData);
         } else {
-          console.error('Invalid registration user data structure:', userData);
+          ; void /* console.error */ ((..._args) => {})('Invalid registration user data structure:', userData);
           return { success: false, error: 'Invalid user data received from server' };
         }
         
@@ -424,7 +424,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         return { success: false, error: result.error?.message || 'Registration failed' };
       }
     } catch (error: any) {
-      console.error('Registration error:', error);
+      ; void /* console.error */ ((..._args) => {})('Registration error:', error);
       return { success: false, error: error.message || 'Registration failed. Please try again.' };
     } finally {
       setIsLoading(false);
@@ -440,12 +440,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       if (typeof window !== 'undefined') {
         localStorage.removeItem('careerx_user');
         localStorage.removeItem('careerx_token');
-        console.log('User data and token cleared from localStorage');
+        ; void /* console.log */ ((..._args) => {})('User data and token cleared from localStorage');
       }
       
       router.push('/');
     } catch (error) {
-      console.error('Logout error:', error);
+      ; void /* console.error */ ((..._args) => {})('Logout error:', error);
     } finally {
       setIsLoading(false);
     }
@@ -472,12 +472,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       // Ensure we have a valid token before making the request
       const token = apiClient.getToken();
       if (!token) {
-        console.error('No token available for profile request');
+        ; void /* console.error */ ((..._args) => {})('No token available for profile request');
         return null;
       }
 
       const result = await apiClient.get(API_ENDPOINTS.USERS.ME);
-      console.log('getUserProfile response:', result);
+      ; void /* console.log */ ((..._args) => {})('getUserProfile response:', result);
       
       if (result.success && result.data) {
         // Handle different response structures
@@ -486,12 +486,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           return userData.profile;
         }
         // If no profile exists, return null
-        console.log('No profile data found in response');
+        ; void /* console.log */ ((..._args) => {})('No profile data found in response');
         return null;
       }
       return null;
     } catch (error: any) {
-      console.error('Error getting user profile:', error);
+      ; void /* console.error */ ((..._args) => {})('Error getting user profile:', error);
       return null;
     }
   };
@@ -501,7 +501,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       // Ensure we have a valid token before making the request
       const token = apiClient.getToken();
       if (!token) {
-        console.error('No token available for profile update request');
+        ; void /* console.error */ ((..._args) => {})('No token available for profile update request');
         return { success: false, error: 'No authentication token available' };
       }
 
@@ -516,7 +516,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         return { success: false, error: result.error?.message || 'Failed to update profile' };
       }
     } catch (error: any) {
-      console.error('Error updating profile:', error);
+      ; void /* console.error */ ((..._args) => {})('Error updating profile:', error);
       return { success: false, error: error.message || 'Failed to update profile' };
     }
   };
@@ -526,7 +526,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       // Ensure we have a valid token before making the request
       const token = apiClient.getToken();
       if (!token) {
-        console.error('No token available for profile completion request');
+        ; void /* console.error */ ((..._args) => {})('No token available for profile completion request');
         return null;
       }
 
@@ -536,7 +536,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       }
       return null;
     } catch (error: any) {
-      console.error('Error getting profile completion:', error);
+      ; void /* console.error */ ((..._args) => {})('Error getting profile completion:', error);
       return null;
     }
   };
@@ -551,8 +551,21 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   const getUserSubscription = async (): Promise<any> => {
-    // Placeholder implementation
-    return null;
+    try {
+      const token = typeof window !== 'undefined' ? localStorage.getItem('careerx_token') : null;
+      if (!token) {
+        return 'basic'; // Unauthenticated → basic access
+      }
+
+      const result = await apiClient.get(API_ENDPOINTS.SUBSCRIPTIONS.ACCESS);
+      if (result.success && result.data?.plan) {
+        return result.data.plan; // Returns 'basic', 'premium', or 'enterprise'
+      }
+      return 'basic'; // Fallback
+    } catch (error) {
+      ; void /* console.error */ ((..._args) => {})('Error getting user subscription:', error);
+      return 'basic'; // Safe fallback
+    }
   };
 
   // ============================================================================
@@ -626,7 +639,7 @@ export const useAuth = (): AuthContextType | null => {
   if (context === undefined) {
     // Only log warning on client-side, not during SSR
     if (typeof window !== 'undefined') {
-      console.warn('useAuth: Auth context not available');
+      ; void /* console.warn */ ((..._args) => {})('useAuth: Auth context not available');
     }
     return null as any;
   }

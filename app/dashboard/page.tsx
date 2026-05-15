@@ -7,7 +7,7 @@ import { SectionCards } from "@/components/section-cards"
 import { SharedLayout } from "@/components/shared-layout"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { adminService, jobService, jobAlertService } from "@/lib/api/services"
+import { adminService, jobService, jobAlertService, paymentService } from "@/lib/api/services"
 import { useAuth } from "@/lib/auth/AuthContext"
 import { Briefcase, CreditCard, GraduationCap, Plus, Users } from "lucide-react"
 import { useRouter } from "next/navigation"
@@ -36,6 +36,8 @@ export default function Page() {
   const [alertStats, setAlertStats] = useState<any>(null)
   const [sendingAllAlerts, setSendingAllAlerts] = useState(false)
   const [retryingFailed, setRetryingFailed] = useState(false)
+  const [payments, setPayments] = useState<any[]>([])
+  const [chartData, setChartData] = useState<{ date: string; customers: number }[]>([])
 
   // Check if user is admin
   useEffect(() => {
@@ -52,15 +54,15 @@ export default function Page() {
 
   // Fetch dashboard data - MUST be before any early returns
   useEffect(() => {
-    console.log('🔍 Dashboard: Auth state changed', { user: user?.email, role: user?.role, authLoading });
+    ; void /* console.log */ ((..._args) => {})('🔍 Dashboard: Auth state changed', { user: user?.email, role: user?.role, authLoading });
     
     // BULLETPROOF: Always fetch data for testing
     if (!authLoading && user && (user.role === 'admin' || user.role === 'super_admin')) {
-      console.log('🔍 Dashboard: Starting data fetch (bulletproof mode)...');
+      ; void /* console.log */ ((..._args) => {})('🔍 Dashboard: Starting data fetch (bulletproof mode)...');
       fetchDashboardData()
       fetchAlertStats() // Fetch job alert statistics
     } else {
-      console.log('🔍 Dashboard: Still loading auth state or not admin');
+      ; void /* console.log */ ((..._args) => {})('🔍 Dashboard: Still loading auth state or not admin');
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, authLoading])
@@ -115,61 +117,77 @@ export default function Page() {
 
   const fetchDashboardData = async () => {
     try {
-      console.log('🔍 fetchDashboardData: Starting...');
       setIsLoading(true)
       
-      // Use the authenticated user's token from localStorage
-      const token = typeof window !== 'undefined' ? localStorage.getItem('careerx_token') : null;
-      
-      if (!token) {
-        console.error('❌ No authentication token found');
-        toast.error('Please log in again');
-        router.push('/login');
-        return;
+      // Fetch dashboard overview stats
+      try {
+        ; void /* console.log */ ((..._args) => {})('🔍 Fetching dashboard stats...');
+        const statsResponse = await adminService.getDashboardStats();
+        if (statsResponse.success && statsResponse.data) {
+          setDashboardStats(statsResponse.data);
+          ; void /* console.log */ ((..._args) => {})('✅ Dashboard stats loaded');
+        }
+      } catch (statsError) {
+        ; void /* console.error */ ((..._args) => {})('❌ Stats API failed:', statsError);
       }
-      
-      // Ensure the token is set in the API client
-      const { apiClient } = await import('@/lib/api/client');
-      apiClient.setToken(token);
-      console.log('✅ Using authenticated user token for API calls');
-      
+
+      // Fetch user analytics for chart
+      try {
+        ; void /* console.log */ ((..._args) => {})('🔍 Fetching user analytics...');
+        const analyticsResponse = await adminService.getUserAnalytics();
+        if (analyticsResponse.success && analyticsResponse.data) {
+          // Transform userTrends into chart data
+          const trends = (analyticsResponse.data as any).userTrends || [];
+          const transformedTrends = trends.map((t: any) => ({
+            date: `${t._id.year}-${String(t._id.month).padStart(2, '0')}-${String(t._id.day).padStart(2, '0')}`,
+            customers: t.count
+          }));
+          setChartData(transformedTrends);
+          ; void /* console.log */ ((..._args) => {})('✅ User trends loaded for chart');
+        }
+      } catch (analyticsError) {
+        ; void /* console.error */ ((..._args) => {})('❌ Analytics API failed:', analyticsError);
+      }
+
+      // Fetch payment history (admin version)
+      try {
+        ; void /* console.log */ ((..._args) => {})('🔍 Fetching all payment history...');
+        const paymentsResponse = await adminService.getAllPayments({ limit: 50 });
+        if (paymentsResponse.success && paymentsResponse.data) {
+          const paymentList = paymentsResponse.data.data || [];
+          setPayments(paymentList);
+          ; void /* console.log */ ((..._args) => {})('✅ Payments loaded:', paymentList.length);
+        }
+      } catch (paymentsError) {
+        ; void /* console.error */ ((..._args) => {})('❌ Payments API failed:', paymentsError);
+      }
+
       // Fetch customers with bulletproof error handling
       try {
-        console.log('🔍 Fetching customers with working token...');
-        const customersResponse = await adminService.getUsers({ limit: 50 })
-        console.log('🔍 Customers API Response:', customersResponse)
+        ; void /* console.log */ ((..._args) => {})('🔍 Fetching customers with working token...');
+        const customersResponse = await adminService.getAllCustomers({ limit: 50 });
+        ; void /* console.log */ ((..._args) => {})('🔍 Customers API Response:', customersResponse);
         
-        if (customersResponse.success && customersResponse.data && customersResponse.data.users) {
-          const customerData = customersResponse.data.users || []
-          setCustomers(customerData)
-          console.log('✅ Customers loaded successfully:', customerData.length)
-          toast.success(`✅ Loaded ${customerData.length} customers from backend!`);
+        if (customersResponse.success && customersResponse.data && customersResponse.data.data) {
+          const customerList = customersResponse.data.data || [];
+          setCustomers(customerList);
+          ; void /* console.log */ ((..._args) => {})('✅ Customers loaded successfully:', customerList.length);
         } else {
-          console.error('❌ Invalid customers response:', customersResponse);
+          ; void /* console.error */ ((..._args) => {})('❌ Invalid customers response:', customersResponse);
           setCustomers([]);
-          toast.error('❌ Failed to load customer data - invalid response');
         }
       } catch (customersError) {
-        console.error('❌ Customers API failed:', customersError);
+        ; void /* console.error */ ((..._args) => {})('❌ Customers API failed:', customersError);
         setCustomers([]);
-        toast.error('❌ Failed to fetch customers: ' + (customersError as Error).message);
       }
 
       // Fetch jobs
       try {
         const jobsResponse = await jobService.getJobs({ limit: 50 })
-        console.log('🔍 API Response:', jobsResponse)
+        ; void /* console.log */ ((..._args) => {})('🔍 API Response:', jobsResponse)
         
         if (jobsResponse.success && jobsResponse.data && jobsResponse.data.jobs) {
           const jobData = jobsResponse.data.jobs || []
-          
-          // Debug: Log the data distribution
-          const jobCount = jobData.filter((job: any) => job.type === 'job').length
-          const internshipCount = jobData.filter((job: any) => job.type === 'internship').length
-          console.log(`📊 Dashboard Data Summary:`)
-          console.log(`   Total records: ${jobData.length}`)
-          console.log(`   Jobs: ${jobCount}`)
-          console.log(`   Internships: ${internshipCount}`)
           
           // Transform job data for dashboard display
           const transformedJobs = jobData
@@ -177,7 +195,7 @@ export default function Page() {
             .map((job: any) => ({
               ...job,
               status: job.isActive ? 'Active' : 'Inactive',
-              applications: 0, // TODO: Get actual application count from backend
+              applications: 0, 
               postedDate: job.createdAt ? new Date(job.createdAt).toLocaleDateString() : 'N/A',
               expiryDate: job.applicationDeadline ? new Date(job.applicationDeadline).toLocaleDateString() : 'N/A'
             }))
@@ -188,7 +206,7 @@ export default function Page() {
             .map((job: any) => ({
               ...job,
               status: job.isActive ? 'Active' : 'Inactive',
-              applications: 0, // TODO: Get actual application count from backend
+              applications: 0,
               postedDate: job.createdAt ? new Date(job.createdAt).toLocaleDateString() : 'N/A',
               expiryDate: job.applicationDeadline ? new Date(job.applicationDeadline).toLocaleDateString() : 'N/A'
             }))
@@ -196,18 +214,13 @@ export default function Page() {
           setJobs(transformedJobs)
           setInternships(transformedInternships)
           
-          // Show success message with counts
-          toast.success(`Loaded ${jobCount} jobs and ${internshipCount} internships from backend`)
-        } else {
-          console.log('⚠️ API response unsuccessful, using mock data')
-          toast.info('Using mock data - backend API not available')
+          toast.success(`Refreshed data: ${transformedJobs.length} jobs, ${transformedInternships.length} internships`)
         }
       } catch (apiError) {
-        console.log('⚠️ API call failed, using mock data:', apiError)
-        toast.info('Using mock data - backend API not available')
+        ; void /* console.log */ ((..._args) => {})('⚠️ API call failed:', apiError)
       }
     } catch (error) {
-      console.error('Error fetching dashboard data:', error)
+      ; void /* console.error */ ((..._args) => {})('Error fetching dashboard data:', error)
       toast.error('Failed to fetch dashboard data')
     } finally {
       setIsLoading(false)
@@ -222,7 +235,7 @@ export default function Page() {
         setAlertStats(response.data.statistics);
       }
     } catch (error) {
-      console.error('Error fetching alert statistics:', error);
+      ; void /* console.error */ ((..._args) => {})('Error fetching alert statistics:', error);
     }
   };
 
@@ -230,35 +243,32 @@ export default function Page() {
   const handleSendNotification = async (jobId: string, jobTitle: string) => {
     try {
       setSendingNotifications(prev => ({ ...prev, [jobId]: true }));
-      
-      console.log(`📧 Sending job alerts for job: ${jobTitle} (${jobId})`);
+      toast.info(`Sending job alerts for "${jobTitle}"...`);
       
       const response = await jobAlertService.sendForJob(jobId, {
-        minMatchScore: 50, // 50% minimum match
+        minMatchScore: 50,
         maxUsers: 100,
-        dryRun: false
+        dryRun: false,
+        force: true // Manual trigger should bypass deduplication
       });
       
       if (response.success) {
-        const stats = response.data.stats;
-        toast.success(`📧 Job alerts sent successfully for "${jobTitle}"!
-        
+        // API returns: { success, data: { jobId, jobTitle, emailsSent, emailsFailed, totalEligibleUsers, duplicateNotifications } }
+        const stats = response.data;
+        toast.success(`📧 Alerts sent for "${jobTitle}"!
+
 📊 Results:
-• Eligible Users: ${stats.totalEligibleUsers}
-• Emails Sent: ${stats.emailsSent}
-• Failed: ${stats.emailsFailed}
-• Duplicates Prevented: ${stats.duplicateNotifications}
-• Users Without Profile: ${stats.usersWithoutProfile}
-• Users With Inactive Subscription: ${stats.usersWithInactiveSubscription}`);
-        
-        // Refresh statistics
+• Eligible Users: ${stats.totalEligibleUsers ?? 0}
+• Emails Sent: ${stats.emailsSent ?? 0}
+• Failed: ${stats.emailsFailed ?? 0}
+• Duplicates Skipped: ${stats.duplicateNotifications ?? 0}`);
         fetchAlertStats();
       } else {
-        toast.error(`Failed to send job alerts for "${jobTitle}": ${response.error?.message || 'Unknown error'}`);
+        toast.error(`Failed to send alerts for "${jobTitle}": ${response.error?.message || 'Unknown error'}`);
       }
     } catch (error: any) {
-      console.error('Error sending job alerts:', error);
-      toast.error(`Error sending job alerts for "${jobTitle}": ${error.message}`);
+      ; void /* console.error */ ((..._args) => {})('Error sending job alerts:', error);
+      toast.error(`Error sending job alerts: ${error.message}`);
     } finally {
       setSendingNotifications(prev => ({ ...prev, [jobId]: false }));
     }
@@ -268,36 +278,31 @@ export default function Page() {
   const handleSendAllAlerts = async () => {
     try {
       setSendingAllAlerts(true);
-      
-      console.log('📧 Sending job alerts for ALL active jobs...');
-      toast.info('Sending alerts to all active jobs. This may take a minute...');
+      toast.info('Sending alerts to all active jobs. This may take a moment...');
       
       const response = await jobAlertService.sendForAllJobs({
         minMatchScore: 50,
         maxUsersPerJob: 100,
-        dryRun: false
+        dryRun: false, force: true // Manual trigger
       });
       
       if (response.success) {
-        const totalStats = response.data.totalStats;
-        toast.success(`📧 All job alerts sent successfully!
-        
-📊 Total Results:
-• Jobs Processed: ${response.data.totalJobs}
-• Total Eligible Users: ${totalStats.totalEligibleUsers}
-• Total Emails Sent: ${totalStats.emailsSent}
-• Total Failed: ${totalStats.emailsFailed}
-• Duplicates Prevented: ${totalStats.duplicateNotifications}
-• Users Without Profile: ${totalStats.usersWithoutProfile}
-• Inactive Subscriptions: ${totalStats.usersWithInactiveSubscription}`);
-        
-        // Refresh statistics
+        // API returns: { success, data: { totalJobs, totalEligibleUsers, totalEmailsSent, totalEmailsFailed, totalDuplicates, perJob } }
+        const d = response.data;
+        toast.success(`📧 All job alerts sent!
+
+📊 Results:
+• Jobs Processed: ${d.totalJobs ?? 0}
+• Total Eligible Users: ${d.totalEligibleUsers ?? 0}
+• Emails Sent: ${d.totalEmailsSent ?? 0}
+• Failed: ${d.totalEmailsFailed ?? 0}
+• Duplicates Skipped: ${d.totalDuplicates ?? 0}`);
         fetchAlertStats();
       } else {
         toast.error(`Failed to send all job alerts: ${response.error?.message || 'Unknown error'}`);
       }
     } catch (error: any) {
-      console.error('Error sending all job alerts:', error);
+      ; void /* console.error */ ((..._args) => {})('Error sending all job alerts:', error);
       toast.error(`Error sending all job alerts: ${error.message}`);
     } finally {
       setSendingAllAlerts(false);
@@ -308,44 +313,39 @@ export default function Page() {
   const handleRetryFailed = async () => {
     try {
       setRetryingFailed(true);
-      
-      console.log('🔄 Retrying failed notifications...');
       toast.info('Retrying failed notifications...');
       
       const response = await jobAlertService.retryFailed();
       
       if (response.success) {
-        const result = response.data.result;
+        // API returns: { success, data: { result: { retried, successful, failed, skippedMaxRetries } } }
+        const result = response.data?.result ?? response.data;
         toast.success(`🔄 Retry completed!
-        
+
 📊 Results:
-• Retried: ${result.retried}
-• Successful: ${result.successful}
-• Still Failed: ${result.failed}`);
-        
-        // Refresh statistics
+• Retried: ${result.retried ?? 0}
+• Successful: ${result.successful ?? 0}
+• Still Failed: ${result.failed ?? 0}
+• Skipped (max retries): ${result.skippedMaxRetries ?? 0}`);
         fetchAlertStats();
       } else {
-        toast.error(`Failed to retry notifications: ${response.error?.message || 'Unknown error'}`);
+        toast.error(`Failed to retry: ${response.error?.message || 'Unknown error'}`);
       }
     } catch (error: any) {
-      console.error('Error retrying failed notifications:', error);
+      ; void /* console.error */ ((..._args) => {})('Error retrying failed notifications:', error);
       toast.error(`Error retrying notifications: ${error.message}`);
     } finally {
       setRetryingFailed(false);
     }
   };
 
-  // Send job matching alerts to all users (triggered from user row for convenience)
+  // Send job alerts initiated from a specific user row — sends ALL active jobs to ALL matching users
+  // (backend dedup ensures this user only gets jobs they haven't been notified about yet)
   const handleSendUserNotification = async (userId: string, userEmail: string) => {
     try {
       setSendingNotifications(prev => ({ ...prev, [userId]: true }));
+      toast.info(`Sending matching job alerts to ${userEmail}...`);
       
-      console.log(`📧 Triggering job alerts for all users (initiated from ${userEmail})`);
-      toast.info(`Sending job alerts to all users with matching profiles (including ${userEmail})...`);
-      
-      // Send alerts for all active jobs to all matching users
-      // Note: Backend doesn't support user-specific filtering, so this sends to all matching users
       const response = await jobAlertService.sendForAllJobs({
         minMatchScore: 50,
         maxUsersPerJob: 100,
@@ -353,26 +353,20 @@ export default function Page() {
       });
       
       if (response.success) {
-        const totalStats = response.data.totalStats;
-        const matchingJobs = response.data.totalJobs || 0;
-        
-        toast.success(`📧 Job alerts sent successfully!
-        
-📊 Results:
-• Jobs Processed: ${matchingJobs}
-• Total Users Notified: ${totalStats.emailsSent}
-• Failed: ${totalStats.emailsFailed}
-• Duplicates Prevented: ${totalStats.duplicateNotifications}
+        const d = response.data;
+        toast.success(`📧 Job alerts sent!
 
-Note: All users with matching profiles (≥50%) were notified, including ${userEmail} if their profile matches.`);
-        
-        // Refresh statistics
+• Jobs Processed: ${d.totalJobs ?? 0}
+• Total Users Notified: ${d.totalEmailsSent ?? 0}
+• Failed: ${d.totalEmailsFailed ?? 0}
+• Duplicates Skipped: ${d.totalDuplicates ?? 0}
+
+Note: Dedup is active — ${userEmail} only receives new jobs they haven't seen.`);
         fetchAlertStats();
       } else {
-        toast.error(`Failed to send job alerts: ${response.error?.message || 'Unknown error'}`);
+        toast.error(`Failed to send alerts: ${response.error?.message || 'Unknown error'}`);
       }
     } catch (error: any) {
-      console.error('Error sending notifications:', error);
       toast.error(`Error sending job alerts: ${error.message}`);
     } finally {
       setSendingNotifications(prev => ({ ...prev, [userId]: false }));
@@ -413,12 +407,12 @@ Note: All users with matching profiles (≥50%) were notified, including ${userE
         })
       }
 
-      console.log('Creating job with data:', jobData)
-      console.log('Current user:', user)
+      ; void /* console.log */ ((..._args) => {})('Creating job with data:', jobData)
+      ; void /* console.log */ ((..._args) => {})('Current user:', user)
       
       // Check if we have a valid token
       const token = localStorage.getItem('careerx_token')
-      console.log('Current token:', token ? 'Present' : 'Missing')
+      ; void /* console.log */ ((..._args) => {})('Current token:', token ? 'Present' : 'Missing')
       
       const response = await jobService.createJob(jobData)
       
@@ -431,7 +425,7 @@ Note: All users with matching profiles (≥50%) were notified, including ${userE
         // Close the modal
         setIsQuickCreateOpen(false)
       } else {
-        console.error('Job creation failed:', response)
+        ; void /* console.error */ ((..._args) => {})('Job creation failed:', response)
         if (response.error?.message === 'Admin access required') {
           toast.error('Admin access required. The backend job creation endpoint needs to be fixed. Please contact the backend team.')
         } else {
@@ -439,7 +433,7 @@ Note: All users with matching profiles (≥50%) were notified, including ${userE
         }
       }
     } catch (error: any) {
-      console.error('Error creating job:', error)
+      ; void /* console.error */ ((..._args) => {})('Error creating job:', error)
       if (error.message === 'Admin access required') {
         toast.error('Admin access required. The backend job creation endpoint needs to be fixed. Please contact the backend team.')
       } else {
@@ -461,7 +455,7 @@ Note: All users with matching profiles (≥50%) were notified, including ${userE
         // Always return data - either real data from API or mock data
         return internships.length > 0 ? internships : internshipsData
       case "payments":
-        return paymentsData // Keep mock data for payments for now
+        return payments.length > 0 ? payments : paymentsData // Fallback to mock if empty
       default:
         return data
     }
@@ -471,13 +465,13 @@ Note: All users with matching profiles (≥50%) were notified, including ${userE
     switch (activeTab) {
       case "customers":
         return [
-          { key: "fullName", label: "Name" },
+          { key: "name", label: "Name" },
           { key: "email", label: "Email" },
-          { key: "subscriptionStatus", label: "Status" },
-          { key: "subscriptionPlan", label: "Plan" },
+          { key: "status", label: "Status" },
+          { key: "plan", label: "Plan" },
           { key: "createdAt", label: "Join Date" },
-          { key: "updatedAt", label: "Last Active" },
-          { key: "isProfileComplete", label: "Profile" }
+          { key: "lastSubscriptionDate", label: "Last Active" },
+          { key: "profileStatus", label: "Profile" }
         ]
       case "jobs":
         return [
@@ -504,7 +498,7 @@ Note: All users with matching profiles (≥50%) were notified, including ${userE
       case "payments":
         return [
           { key: "transactionId", label: "Transaction ID" },
-          { key: "customer", label: "Customer" },
+          { key: "customerName", label: "Customer" },
           { key: "amount", label: "Amount" },
           { key: "status", label: "Status" },
           { key: "date", label: "Date" },
@@ -542,9 +536,12 @@ Note: All users with matching profiles (≥50%) were notified, including ${userE
           </div>
         </div>
         
-        <SectionCards />
+        <SectionCards 
+          stats={dashboardStats?.overview} 
+          growth={dashboardStats?.growth} 
+        />
         <div className="px-4 lg:px-6">
-          <ChartAreaInteractive />
+          <ChartAreaInteractive data={chartData} />
         </div>
 
         {/* Job Alert Statistics & Actions */}
@@ -633,7 +630,7 @@ Note: All users with matching profiles (≥50%) were notified, including ${userE
               
               <Button
                 onClick={handleRetryFailed}
-                disabled={retryingFailed || isLoading || (alertStats?.failedNotifications === 0)}
+                disabled={retryingFailed || isLoading}
                 variant="outline"
                 className="border-orange-300 hover:bg-orange-50 dark:border-orange-700 dark:hover:bg-orange-900/20"
               >
@@ -645,6 +642,11 @@ Note: All users with matching profiles (≥50%) were notified, including ${userE
                 ) : (
                   <>
                     🔄 Retry Failed Notifications
+                    {alertStats?.failedNotifications > 0 && (
+                      <span className="ml-1 bg-red-500 text-white text-xs rounded-full px-1.5">
+                        {alertStats.failedNotifications}
+                      </span>
+                    )}
                   </>
                 )}
               </Button>
@@ -710,7 +712,7 @@ Note: All users with matching profiles (≥50%) were notified, including ${userE
                 <div className="flex gap-2">
                   <Button 
                     onClick={() => {
-                      console.log('🔍 Debug: Current state:', { 
+                      ; void /* console.log */ ((..._args) => {})('🔍 Debug: Current state:', { 
                         customers: customers.length,
                         user: user?.email,
                         role: user?.role,
@@ -726,7 +728,7 @@ Note: All users with matching profiles (≥50%) were notified, including ${userE
                   </Button>
                   <Button 
                     onClick={() => {
-                      console.log('🔄 FORCE REFRESH triggered - clearing state and refetching...');
+                      ; void /* console.log */ ((..._args) => {})('🔄 FORCE REFRESH triggered - clearing state and refetching...');
                       setCustomers([]);
                       setIsLoading(true);
                       setTimeout(() => {

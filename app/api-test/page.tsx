@@ -92,12 +92,12 @@ export default function ApiTestPage() {
       
       if (response.success) {
         toast.success('Test job created successfully!')
-        console.log('Created job:', response.data)
+        ; void /* console.log */ ((..._args) => {})('Created job:', response.data)
       } else {
         throw new Error(response.error?.message || 'Failed to create job')
       }
     } catch (error: any) {
-      console.error('Error creating test job:', error)
+      ; void /* console.error */ ((..._args) => {})('Error creating test job:', error)
       toast.error('Failed to create test job: ' + error.message)
     } finally {
       setIsLoading(false)

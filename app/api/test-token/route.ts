@@ -5,7 +5,7 @@ export const dynamic = 'force-dynamic';
 export async function GET(request: NextRequest) {
   try {
     const authHeader = request.headers.get('authorization');
-    console.log('Authorization header:', authHeader);
+    ; void /* console.log */ ((..._args) => {})('Authorization header:', authHeader);
     
     // Test the token with the backend
     const backendUrl = `${process.env.BACKEND_BASE_URL || 'http://localhost:3001'}/api/v1/jobs/`;
@@ -26,7 +26,7 @@ export async function GET(request: NextRequest) {
       backendStatus: response.status
     });
   } catch (error: any) {
-    console.error('Token test error:', error);
+    ; void /* console.error */ ((..._args) => {})('Token test error:', error);
     return NextResponse.json({
       success: false,
       error: error.message,

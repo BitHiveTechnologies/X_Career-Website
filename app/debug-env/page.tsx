@@ -94,10 +94,10 @@ export default function DebugEnvPage() {
                 try {
                   const response = await fetch(`${ENV.API_BASE_URL}/api/${ENV.API_VERSION}/subscriptions/plans`);
                   const data = await response.json();
-                  console.log('API Response:', data);
+                  ; void /* console.log */ ((..._args) => {})('API Response:', data);
                   alert('Check console for API response');
                 } catch (error) {
-                  console.error('API Error:', error);
+                  ; void /* console.error */ ((..._args) => {})('API Error:', error);
                   alert('API Error - check console');
                 }
               }}
