@@ -9,6 +9,7 @@ import {
     Project,
     Skill,
 } from '@/app/resume-builder/page';
+import { BASIC_TEMPLATE_ID } from '@/lib/resumeTemplates/basic';
 
 interface ResumeFormProps {
     resumeData: ResumeData;
@@ -29,19 +30,11 @@ export default function ResumeForm({
 }: ResumeFormProps) {
     const [newSkillCategory, setNewSkillCategory] = useState('');
     const [emailError, setEmailError] = useState('');
+    const isBasicLatexTemplate = selectedTemplate === BASIC_TEMPLATE_ID;
 
     const handlePersonalInfoChange = (field: keyof PersonalInfo, value: string) => {
         // NOTE: The URL sanitization logic is now handled in the parent component (ResumeBuilderPage.tsx)
-        // before calling onDataChange('personalInfo', ...), ensuring full URLs are stored.
-
-        // Gmail-only validation for email field
-        if (field === 'email') {
-            if (value && !value.endsWith('@gmail.com') && value.includes('@')) {
-                setEmailError('Only @gmail.com email addresses are accepted');
-            } else {
-                setEmailError('');
-            }
-        }
+        // before calling onDataChange('personalInfo', ...), ensuring full URLs are stored
 
         onDataChange('personalInfo', {
             ...resumeData.personalInfo,
@@ -112,6 +105,9 @@ export default function ResumeForm({
             name: '',
             description: '',
             technologies: [],
+            startDate: '',
+            endDate: '',
+            current: false,
             link: '',
             github: '',
             highlights: [''],
@@ -199,17 +195,11 @@ export default function ResumeForm({
                         type="email"
                         value={resumeData.personalInfo.email}
                         onChange={(e) => handlePersonalInfoChange('email', e.target.value)}
-                        className={`w-full px-4 py-3 bg-slate-50 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-sm font-medium ${
-                            (resumeData.personalInfo.email && !resumeData.personalInfo.email.endsWith('@gmail.com')) || emailError
-                            ? 'border-rose-200 bg-rose-50' 
-                            : 'border-slate-200'
+                        className={`w-full px-4 py-3 bg-slate-50 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-sm font-medium border-slate-200
                         }`}
                         placeholder="john@gmail.com"
                         data-oid="n9_-j5h"
                     />
-                    {(resumeData.personalInfo.email && !resumeData.personalInfo.email.endsWith('@gmail.com')) && (
-                        <p className="text-[10px] text-rose-500 font-bold ml-1">Only @gmail.com email addresses are accepted</p>
-                    )}
                     {emailError && !resumeData.personalInfo.email.endsWith('@gmail.com') && (
                         <p className="text-[10px] text-rose-500 font-bold ml-1">{emailError}</p>
                     )}
@@ -232,22 +222,24 @@ export default function ResumeForm({
                     />
                 </div>
 
-                <div className="space-y-2" data-oid="pc67__0">
-                    <label
-                        className="text-[11px] font-bold text-slate-500 uppercase tracking-wider ml-1"
-                        data-oid="98u.mk-"
-                    >
-                        Current Location
-                    </label>
-                    <input
-                        type="text"
-                        value={resumeData.personalInfo.location}
-                        onChange={(e) => handlePersonalInfoChange('location', e.target.value)}
-                        className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-sm font-medium"
-                        placeholder="Bengaluru, India"
-                        data-oid="xx:fd3_"
-                    />
-                </div>
+                {!isBasicLatexTemplate && (
+                    <div className="space-y-2" data-oid="pc67__0">
+                        <label
+                            className="text-[11px] font-bold text-slate-500 uppercase tracking-wider ml-1"
+                            data-oid="98u.mk-"
+                        >
+                            Current Location
+                        </label>
+                        <input
+                            type="text"
+                            value={resumeData.personalInfo.location}
+                            onChange={(e) => handlePersonalInfoChange('location', e.target.value)}
+                            className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-sm font-medium"
+                            placeholder="Bengaluru, India"
+                            data-oid="xx:fd3_"
+                        />
+                    </div>
+                )}
 
                 <div className="space-y-2" data-oid="7:5._ih">
                     <label
@@ -284,19 +276,21 @@ export default function ResumeForm({
                 </div>
             </div>
 
-            <div className="space-y-2" data-oid="uors82v">
-                <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider ml-1" data-oid="tbq5-yu">
-                    Professional Summary
-                </label>
-                <textarea
-                    value={resumeData.personalInfo.summary}
-                    onChange={(e) => handlePersonalInfoChange('summary', e.target.value)}
-                    rows={5}
-                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-sm font-medium resize-none"
-                    placeholder="Briefly describe your career goals and highlights..."
-                    data-oid="gwi5tcg"
-                />
-            </div>
+            {!isBasicLatexTemplate && (
+                <div className="space-y-2" data-oid="uors82v">
+                    <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider ml-1" data-oid="tbq5-yu">
+                        Professional Summary
+                    </label>
+                    <textarea
+                        value={resumeData.personalInfo.summary}
+                        onChange={(e) => handlePersonalInfoChange('summary', e.target.value)}
+                        rows={5}
+                        className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-sm font-medium resize-none"
+                        placeholder="Briefly describe your career goals and highlights..."
+                        data-oid="gwi5tcg"
+                    />
+                </div>
+            )}
         </div>
     );
 
@@ -655,11 +649,47 @@ export default function ResumeForm({
                             <input
                                 type="text"
                                 value={project.technologies.join(', ')}
-                                onChange={(e) => updateProject(project.id, 'technologies', e.target.value.split(', ').filter((t) => t.trim()))}
+                                onChange={(e) => updateProject(project.id, 'technologies', e.target.value.split(',').map((t) => t.trim()).filter((t) => t))}
                                 className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-sm"
                                 placeholder="e.g. React, Node"
                                 data-oid="8skl:u3"
                             />
+                        </div>
+
+                        <div className="space-y-2" data-oid="project-start-date">
+                            <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest ml-1">From</label>
+                            <input
+                                type="month"
+                                value={project.startDate}
+                                onChange={(e) => updateProject(project.id, 'startDate', e.target.value)}
+                                className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-sm"
+                            />
+                        </div>
+
+                        {!project.current && (
+                            <div className="space-y-2" data-oid="project-end-date">
+                                <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest ml-1">To</label>
+                                <input
+                                    type="month"
+                                    value={project.endDate}
+                                    onChange={(e) => updateProject(project.id, 'endDate', e.target.value)}
+                                    className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-sm"
+                                />
+                            </div>
+                        )}
+
+                        <div className="flex items-center space-x-3 pt-6" data-oid="project-current">
+                            <div className="relative inline-flex items-center cursor-pointer">
+                                <input
+                                    type="checkbox"
+                                    checked={project.current}
+                                    onChange={(e) => updateProject(project.id, 'current', e.target.checked)}
+                                    className="w-5 h-5 rounded-md border-slate-300 text-blue-600 focus:ring-blue-500/20 transition-all"
+                                />
+                                <label className="text-xs font-bold text-slate-600 ml-2">
+                                    Ongoing Project
+                                </label>
+                            </div>
                         </div>
 
                         <div className="space-y-2" data-oid="1_33kp7">
@@ -698,6 +728,18 @@ export default function ResumeForm({
                             data-oid="o3-1cr_"
                         />
                     </div>
+
+                    <div className="space-y-2" data-oid="project-highlights">
+                        <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest ml-1">Bullet Highlights</label>
+                        <textarea
+                            value={project.highlights.join('\n')}
+                            onChange={(e) => updateProject(project.id, 'highlights', e.target.value.split('\n'))}
+                            rows={4}
+                            className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-sm resize-none"
+                            placeholder="One bullet per line"
+                        />
+                    </div>
+
                 </div>
             ))}
 
@@ -777,7 +819,7 @@ export default function ResumeForm({
                                     updateSkillCategory(
                                         index,
                                         'items',
-                                        e.target.value.split(', ').filter((item) => item.trim()),
+                                        e.target.value.split(',').map((item) => item.trim()).filter((item) => item),
                                     )
                                 }
                                 className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-sm font-medium"

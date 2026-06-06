@@ -9,6 +9,8 @@ import SubscriptionStatus from '@/components/SubscriptionStatus';
 import ResumeEmptyState from '@/components/ResumeEmptyState';
 import TemplateSelector from '@/components/TemplateSelector';
 import { getMyResume, saveResume } from '@/lib/api/services';
+import { getResumePrintStorageKey } from '@/lib/resumeExport/printPayload';
+import { BASIC_TEMPLATE_ID, basicTemplateVisibleSections, cloneBasicTemplateDefaults } from '@/lib/resumeTemplates/basic';
 import { Save, RefreshCw, CheckCircle, AlertCircle, Clock, Plus } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 
@@ -53,6 +55,9 @@ export interface Project {
     name: string;
     description: string;
     technologies: string[];
+    startDate: string;
+    endDate: string;
+    current: boolean;
     link?: string;
     github?: string;
     highlights: string[];
@@ -118,7 +123,7 @@ const sanitizeUrl = (url: string): string => {
 export default function ResumeBuilderPage() {
     const [resumeData, setResumeData] = useState<ResumeData>(initialResumeData);
     const [savedResumeData, setSavedResumeData] = useState<ResumeData>(initialResumeData);
-    const [selectedTemplate, setSelectedTemplate] = useState('vinod'); 
+    const [selectedTemplate, setSelectedTemplate] = useState(BASIC_TEMPLATE_ID);
     const [fontFamily, setFontFamily] = useState('Inter');
     const [activeSection, setActiveSection] = useState('personal');
     const [zoomLevel, setZoomLevel] = useState(0.7);
@@ -127,9 +132,13 @@ export default function ResumeBuilderPage() {
     const [isLoading, setIsLoading] = useState(true);
     const [showEmptyState, setShowEmptyState] = useState(false);
     const resumeRef = useRef<HTMLDivElement>(null);
+    const exportResumeRef = useRef<HTMLDivElement>(null);
 
     const hasUnsavedChanges = JSON.stringify(resumeData) !== JSON.stringify(savedResumeData);
     const isDataEmpty = !resumeData.personalInfo.fullName && resumeData.experience.length === 0 && resumeData.education.length === 0;
+    const visibleSectionIds = selectedTemplate === BASIC_TEMPLATE_ID
+        ? [...basicTemplateVisibleSections]
+        : ['personal', 'experience', 'education', 'projects', 'skills', 'additional', 'design'];
 
     // Fetch initial data
     useEffect(() => {
@@ -210,31 +219,27 @@ export default function ResumeBuilderPage() {
             alert('Please fill in your Full Name and Email before downloading.');
             return;
         }
-        if (!/@gmail\.com$/.test(email.toLowerCase())) {
-            alert('Please use a valid @gmail.com address.');
-            return;
-        }
 
         if (typeof window !== 'undefined') {
             try {
-                const html2pdf = (await import('html2pdf.js')).default;
-                const element = resumeRef.current;
+                const token = `${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
+                const storageKey = getResumePrintStorageKey(token);
+                const printWindow = window.open('', '_blank');
 
-                if (element) {
-                    const opt = {
-                        margin: 0,
-                        filename: `${resumeData.personalInfo.fullName || 'resume'}.pdf`,
-                        image: { type: 'jpeg', quality: 0.98 },
-                        html2canvas: { 
-                            scale: 2,
-                            useCORS: true,
-                            letterRendering: true
-                        },
-                        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
-                    };
-
-                    html2pdf().set(opt).from(element).save();
+                if (!printWindow) {
+                    throw new Error('Unable to open print window');
                 }
+
+                window.localStorage.setItem(
+                    storageKey,
+                    JSON.stringify({
+                        resumeData,
+                        template: selectedTemplate,
+                        fontFamily,
+                    }),
+                );
+
+                printWindow.location.href = `/resume-builder/print?token=${encodeURIComponent(token)}`;
             } catch (error) {
                 ; void /* console.error */ ((..._args) => {})('PDF generation error:', error);
                 alert('Failed to generate PDF. Please try again.');
@@ -243,12 +248,12 @@ export default function ResumeBuilderPage() {
     };
 
     const handleDownloadDoc = () => {
-        if (resumeRef.current) {
-            const content = resumeRef.current.innerHTML;
+        if (exportResumeRef.current) {
+            const content = exportResumeRef.current.innerHTML;
             const header = "<html xmlns:o='urn:schemas-microsoft-com:office:office' "+
                 "xmlns:w='urn:schemas-microsoft-com:office:word' "+
                 "xmlns='http://www.w3.org/TR/REC-html40'>"+
-                "<head><meta charset='utf-8'><title>Resume</title></head><body>";
+                "<head><meta charset='utf-8'><title>Resume</title><style>.resume-export-root{background:#fff}.resume-export-page{page-break-after:always;break-after:page;box-shadow:none !important;margin:0 auto;} .resume-export-page:last-child{page-break-after:auto;break-after:auto;} .break-inside-avoid{page-break-inside:avoid;break-inside:avoid;}</style></head><body>";
             const footer = "</body></html>";
             const sourceHTML = header+content+footer;
             
@@ -265,6 +270,15 @@ export default function ResumeBuilderPage() {
     const handleZoomIn = () => setZoomLevel((prev) => Math.min(prev + 0.1, 1.5));
     const handleZoomOut = () => setZoomLevel((prev) => Math.max(prev - 0.1, 0.3));
 
+    const handleStartWithTemplate = () => {
+        const seededData = cloneBasicTemplateDefaults();
+        setSelectedTemplate(BASIC_TEMPLATE_ID);
+        setResumeData(seededData);
+        setSavedResumeData(seededData);
+        setActiveSection('personal');
+        setShowEmptyState(false);
+    };
+
     const sections = [
         { id: 'personal', label: 'Personal', icon: '👤' },
         { id: 'experience', label: 'Experience', icon: '💼' },
@@ -273,7 +287,7 @@ export default function ResumeBuilderPage() {
         { id: 'skills', label: 'Skills', icon: '⚡' },
         { id: 'additional', label: 'Extra', icon: '📋' },
         { id: 'design', label: 'Design', icon: '🎨' },
-    ];
+    ].filter((section) => visibleSectionIds.includes(section.id));
 
     if (isLoading) {
         return (
@@ -356,7 +370,7 @@ export default function ResumeBuilderPage() {
                         <SubscriptionStatus />
                         
                         {showEmptyState && isDataEmpty ? (
-                            <ResumeEmptyState onStart={() => setShowEmptyState(false)} />
+                            <ResumeEmptyState onStart={handleStartWithTemplate} />
                         ) : (
                             <>
                         {/* Section Navigation Tabs */}
@@ -481,6 +495,17 @@ export default function ResumeBuilderPage() {
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <div className="fixed left-[-99999px] top-0 pointer-events-none opacity-0">
+                <div ref={exportResumeRef} className="resume-export-root bg-white">
+                    <ResumePreview
+                        resumeData={resumeData}
+                        template={selectedTemplate}
+                        fontFamily={fontFamily}
+                        isExport={true}
+                    />
                 </div>
             </div>
         </div>

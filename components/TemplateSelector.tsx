@@ -39,10 +39,10 @@ export default function TemplateSelector({
     const templates = [
         {
             id: 'vinod',
-            name: 'Vinod Resume',
-            description: 'Simple and elegant design for freshers',
+            name: 'Basic',
+            description: 'LaTeX-backed ATS-friendly resume for the free plan',
             preview: '/template-previews/minimal.png',
-            features: ['Minimalist', 'Typography Focus', 'Clean Lines'],
+            features: ['LaTeX Structure', 'ATS Friendly', 'Live Mapped Fields'],
             // All plans (basic+) can access this template
             subscriptionTier: 'basic' as const,
             targetAudience: 'Freshers',
@@ -271,7 +271,7 @@ export default function TemplateSelector({
                             </h4>
                             <ul className="text-sm text-blue-700 space-y-1" data-oid="35qikfv">
                                 <li data-oid="op30erm">
-                                    • <strong>Basic:</strong> Vinod Resume (for freshers)
+                                    • <strong>Basic:</strong> Basic Resume (for freshers)
                                 </li>
                                 <li data-oid="8h8672:">
                                     • <strong>Premium &amp; Pro:</strong> Standard Professional &amp; Creative Executive
