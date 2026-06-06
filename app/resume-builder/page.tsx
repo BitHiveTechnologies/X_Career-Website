@@ -24,7 +24,6 @@ import {
     Plus,
     RefreshCw,
     Save,
-    Settings2,
     UserRound,
     Wrench,
     FolderKanban,
@@ -129,7 +128,6 @@ export default function ResumeBuilderPage() {
     const [resumeData, setResumeData] = useState<ResumeData>(initialResumeData);
     const [savedResumeData, setSavedResumeData] = useState<ResumeData>(initialResumeData);
     const [selectedTemplate, setSelectedTemplate] = useState(BASIC_TEMPLATE_ID);
-    const [fontFamily, setFontFamily] = useState('Inter');
     const [activeSection, setActiveSection] = useState('personal');
     const [zoomLevel, setZoomLevel] = useState(0.7);
     const [isSaving, setIsSaving] = useState(false);
@@ -137,12 +135,13 @@ export default function ResumeBuilderPage() {
     const [isLoading, setIsLoading] = useState(true);
     const resumeRef = useRef<HTMLDivElement>(null);
     const exportResumeRef = useRef<HTMLDivElement>(null);
+    const fontFamily = 'Inter';
 
     const hasUnsavedChanges = JSON.stringify(resumeData) !== JSON.stringify(savedResumeData);
     const visibleSectionIds =
         selectedTemplate === BASIC_TEMPLATE_ID
             ? [...basicTemplateVisibleSections]
-            : ['personal', 'experience', 'education', 'projects', 'skills', 'additional', 'design'];
+            : ['personal', 'experience', 'education', 'projects', 'skills', 'additional'];
 
     useEffect(() => {
         const fetchResume = async () => {
@@ -165,14 +164,14 @@ export default function ResumeBuilderPage() {
                 } else {
                     const seededData = cloneBasicTemplateDefaults();
                     setResumeData(seededData);
-                    setSavedResumeData(initialResumeData);
+                    setSavedResumeData(seededData);
                     setSelectedTemplate(BASIC_TEMPLATE_ID);
                 }
             } catch (error) {
                 ; void /* console.error */ ((..._args) => {})('Failed to fetch resume:', error);
                 const seededData = cloneBasicTemplateDefaults();
                 setResumeData(seededData);
-                setSavedResumeData(initialResumeData);
+                setSavedResumeData(seededData);
                 setSelectedTemplate(BASIC_TEMPLATE_ID);
             } finally {
                 setIsLoading(false);
@@ -290,7 +289,6 @@ export default function ResumeBuilderPage() {
         { id: 'projects', label: 'Projects', icon: FolderKanban },
         { id: 'skills', label: 'Skills', icon: Wrench },
         { id: 'additional', label: 'Extra', icon: FileText },
-        { id: 'design', label: 'Design', icon: Settings2 },
     ].filter((section) => visibleSectionIds.includes(section.id));
 
     const activeSectionMeta = sections.find((section) => section.id === activeSection) ?? sections[0];
@@ -431,14 +429,12 @@ export default function ResumeBuilderPage() {
 
                     <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white h-[70vh] xl:h-[calc(100vh-341px)]">
                         <div className="h-full overflow-y-auto">
-                            <ResumeForm
-                                resumeData={resumeData}
-                                activeSection={activeSection}
-                                onDataChange={handleDataChange}
-                                selectedTemplate={selectedTemplate}
-                                fontFamily={fontFamily}
-                                onFontChange={setFontFamily}
-                            />
+                        <ResumeForm
+                            resumeData={resumeData}
+                            activeSection={activeSection}
+                            onDataChange={handleDataChange}
+                            selectedTemplate={selectedTemplate}
+                        />
                         </div>
                     </div>
                 </div>
@@ -475,13 +471,13 @@ export default function ResumeBuilderPage() {
                         </div>
 
                         <div className="flex-1 overflow-auto bg-slate-100 p-4 sm:p-6">
-                            <div className="flex justify-center">
+                            <div className="flex justify-center items-start">
                                 <div
                                     className="origin-top"
                                     style={{
-                                        transform: `scale(${zoomLevel})`,
+                                        zoom: zoomLevel,
                                         width: '8.5in',
-                                        transition: 'transform 0.2s ease',
+                                        transition: 'zoom 0.2s ease',
                                     }}
                                 >
                                     <div
@@ -497,11 +493,11 @@ export default function ResumeBuilderPage() {
                                 </div>
                             </div>
                         </div>
-
+{/* 
                         <div className="flex items-center gap-2 border-t border-slate-200 px-5 py-4 text-sm text-slate-500">
                             <CheckCircle className="h-4 w-4 text-emerald-500" />
                             Live preview updates as you edit.
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>
