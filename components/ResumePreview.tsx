@@ -97,7 +97,11 @@ export default function ResumePreview({ resumeData, template, fontFamily = 'Inte
                 </h1>
                 <div className="flex flex-wrap gap-4 text-sm text-gray-600" data-oid="zmucxvj">
                     {resumeData.personalInfo.email && (
-                        <span className="flex items-center" data-oid="nidfn2r">
+                        <a
+                            href={`mailto:${resumeData.personalInfo.email}`}
+                            className="flex items-center hover:underline text-[hsl(196,80%,45%)]"
+                            data-oid="nidfn2r"
+                        >
                             <svg
                                 className="w-4 h-4 mr-1"
                                 fill="currentColor"
@@ -115,7 +119,7 @@ export default function ResumePreview({ resumeData, template, fontFamily = 'Inte
                                 />
                             </svg>
                             {resumeData.personalInfo.email}
-                        </span>
+                        </a>
                     )}
                     {resumeData.personalInfo.phone && (
                         <span className="flex items-center" data-oid="rb2rumq">
@@ -386,52 +390,27 @@ export default function ResumePreview({ resumeData, template, fontFamily = 'Inte
                         {resumeData.projects.map((project) => (
                             <div key={project.id} data-oid="zifl683">
                                 <div className="mb-2" data-oid="n5ljv7c">
-                                    <h3 className="font-semibold text-gray-800" data-oid="t.ga.0x">
-                                        {project.name}
-                                    </h3>
-                                    {project.technologies.length > 0 && (
-                                        <p
-                                            className="text-sm text-[hsl(196,80%,45%)] font-medium"
-                                            data-oid="ial8d0n"
-                                        >
-                                            Technologies: {project.technologies.join(', ')}
-                                        </p>
-                                    )}
-                                    <div
-                                        className="flex space-x-4 text-sm text-gray-600"
-                                        data-oid="eu._201"
-                                    >
-                                        {/* Live Demo Link */}
-                                        {project.link && (
-                                            <a 
-                                                href={project.link} 
-                                                target="_blank" 
-                                                rel="noopener noreferrer"
-                                                className="text-[hsl(196,80%,45%)] hover:underline"
-                                                data-oid="0pei95n"
-                                            >
-                                                Live Demo
-                                            </a>
-                                        )}
-                                        {/* GitHub Link */}
-                                        {project.github && (
-                                            <a 
-                                                href={project.github} 
-                                                target="_blank" 
-                                                rel="noopener noreferrer"
-                                                className="text-[hsl(196,80%,45%)] hover:underline"
-                                                data-oid="5z_pf2t"
-                                            >
-                                                GitHub Repo
-                                            </a>
-                                        )}
+                                    <div className="flex justify-between items-start gap-4">
+                                        <div>
+                                            <h3 className="font-semibold text-gray-800" data-oid="t.ga.0x">
+                                                {project.name}
+                                            </h3>
+                                            {project.technologies.length > 0 && (
+                                                <p
+                                                    className="text-sm text-[hsl(196,80%,45%)] font-medium"
+                                                    data-oid="ial8d0n"
+                                                >
+                                                    Technologies: {project.technologies.join(', ')}
+                                                </p>
+                                            )}
+                                        </div>
+                                        <div className="text-sm text-gray-600 text-right">
+                                            <div>
+                                                {formatDate(project.startDate)} - {project.current ? 'Present' : formatDate(project.endDate)}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                {project.description && (
-                                    <p className="text-gray-700 text-sm mb-2" data-oid="ov7ecd5">
-                                        {project.description}
-                                    </p>
-                                )}
                                 {project.highlights.length > 0 && project.highlights[0] && (
                                     <ul
                                         className="list-disc list-inside text-gray-700 space-y-1 ml-4"
@@ -582,7 +561,10 @@ export default function ResumePreview({ resumeData, template, fontFamily = 'Inte
                                 <p className="text-right text-black" style={{ fontSize: bodyFont90, margin: 0 }}>{edu.location}</p>
                             </div>
                             <div className="flex items-start justify-between gap-4 italic text-black" style={{ fontSize: bodyFont88 }}>
-                                <p style={{ margin: 0 }}>{[edu.degree, edu.field].filter(Boolean).join(' in ')}</p>
+                                <p style={{ margin: 0 }}>
+                                    {[edu.degree, edu.field].filter(Boolean).join(' in ')}
+                                    {edu.gpa ? ` | GPA: ${edu.gpa}` : ''}
+                                </p>
                                 <p className="text-right" style={{ margin: 0 }}>{formatDateRange(edu.startDate, edu.endDate)}</p>
                             </div>
                         </div>
@@ -631,17 +613,36 @@ export default function ResumePreview({ resumeData, template, fontFamily = 'Inte
                     height: (index === 0 ? 1.4 : 0) + 3 + Math.max(1.8, bulletCount * 1.15),
                     content: (
                         <div key={project.id}>
-                            <div className="flex items-start justify-between gap-4" style={{ fontSize: bodyFont90 }}>
+                            <div className="relative" style={{ fontSize: bodyFont90, paddingRight: '10.5rem' }}>
                                 <p className="text-black" style={{ margin: 0 }}>
                                     <span className="font-semibold">{project.name}</span>
                                     {project.technologies.length > 0 && (
                                         <span className="italic">{` | ${project.technologies.join(', ')}`}</span>
                                     )}
                                 </p>
-                                    <p className="text-right text-black" style={{ fontSize: '0.85em', margin: 0 }}>
+                                <div
+                                    className="text-right text-black"
+                                    style={{ fontSize: '0.85em', margin: 0, position: 'absolute', top: 0, right: 0 }}
+                                >
+                                    <p style={{ margin: 0 }}>
                                         {formatDateRange(project.startDate, project.endDate, project.current)}
                                     </p>
+                                    {(project.link || project.github) && (
+                                        <div style={{ display: 'grid', rowGap: '0', justifyItems: 'end', lineHeight: 1.1 }}>
+                                            {project.link && (
+                                                <a href={project.link} target="_blank" rel="noopener noreferrer" className="underline">
+                                                    Live URL
+                                                </a>
+                                            )}
+                                            {project.github && (
+                                            <a href={project.github} target="_blank" rel="noopener noreferrer" className="underline">
+                                                Source Code
+                                            </a>
+                                            )}
+                                        </div>
+                                    )}
                                 </div>
+                            </div>
                             {bulletCount > 0 && (
                                 <ul
                                     className="list-disc text-black"
@@ -709,7 +710,9 @@ export default function ResumePreview({ resumeData, template, fontFamily = 'Inte
                                         {resumeData.personalInfo.email && (
                                             <>
                                                 {resumeData.personalInfo.phone && <span style={{ lineHeight: 1 }}>|</span>}
-                                                <span style={{ lineHeight: 1 }}>{resumeData.personalInfo.email}</span>
+                                                <a href={`mailto:${resumeData.personalInfo.email}`} className="underline">
+                                                    {resumeData.personalInfo.email}
+                                                </a>
                                             </>
                                         )}
                                         {resumeData.personalInfo.linkedin && (

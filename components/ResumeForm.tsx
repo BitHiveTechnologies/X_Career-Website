@@ -16,21 +16,22 @@ interface ResumeFormProps {
     activeSection: string;
     onDataChange: (section: keyof ResumeData, data: any) => void;
     selectedTemplate?: string;
-    fontFamily: string;
-    onFontChange: (font: string) => void;
 }
 
 export default function ResumeForm({ 
     resumeData, 
     activeSection, 
     onDataChange, 
-    selectedTemplate,
-    fontFamily,
-    onFontChange 
+    selectedTemplate
 }: ResumeFormProps) {
     const [newSkillCategory, setNewSkillCategory] = useState('');
+    const [skillItemDrafts, setSkillItemDrafts] = useState<Record<number, string>>({});
+    const [projectTechnologyDrafts, setProjectTechnologyDrafts] = useState<Record<string, string>>({});
     const [emailError, setEmailError] = useState('');
     const isBasicLatexTemplate = selectedTemplate === BASIC_TEMPLATE_ID;
+
+    const parseCommaSeparated = (value: string) =>
+        value.split(',').map((item) => item.trim()).filter((item) => item);
 
     const handlePersonalInfoChange = (field: keyof PersonalInfo, value: string) => {
         // NOTE: The URL sanitization logic is now handled in the parent component (ResumeBuilderPage.tsx)
@@ -155,15 +156,14 @@ export default function ResumeForm({
     };
 
     const renderPersonalInfo = () => (
-        <div className="space-y-8 p-6" data-oid="-..0rpg">
-            <div className="flex items-center justify-between pb-4 border-b border-slate-100">
+        <div className="space-y-8 pt-0 p-6" data-oid="-..0rpg">
+            <div className="sticky top-0 z-10 -mx-6 flex items-center justify-between border-b border-slate-100 bg-white px-6 py-4">
                 <div>
                     <h3 className="text-xl font-bold text-slate-800" data-oid="rbfho6l">
                         Personal Details
                     </h3>
-                    <p className="text-xs text-slate-400 mt-1">Basic information for your resume header</p>
+                    <p className="mt-1 text-sm text-slate-500">Basic information for your resume header</p>
                 </div>
-                <div className="text-[10px] text-slate-400 font-bold uppercase tracking-widest bg-slate-50 px-2 py-1 rounded border border-slate-100">Step 1 of 6</div>
             </div>
 
             <div className="grid md:grid-cols-2 gap-6" data-oid="4wa0qke">
@@ -298,8 +298,8 @@ export default function ResumeForm({
         const isMinimalTemplate = selectedTemplate === 'minimal';
         
         return (
-            <div className="space-y-6 p-6" data-oid="c1v:7-v">
-                <div className="flex items-center justify-between pb-4 border-b border-slate-100" data-oid="f2o7big">
+            <div className="space-y-6 pt-0 p-6" data-oid="c1v:7-v">
+                <div className="sticky top-0 z-10 -mx-6 flex items-center justify-between border-b border-slate-100 bg-white px-6 py-4" data-oid="f2o7big">
                     <div>
                         <h3 className="text-xl font-bold text-slate-800" data-oid="8i-iq51">
                             Professional Experience
@@ -309,7 +309,7 @@ export default function ResumeForm({
                     {!isMinimalTemplate && (
                         <button
                             onClick={addExperience}
-                            className="px-4 py-2 bg-blue-600 text-white rounded-xl text-xs font-bold hover:bg-blue-700 transition-all shadow-lg shadow-blue-100"
+                            className="px-4 py-2 bg-slate-900 text-white rounded-xl text-xs font-bold hover:bg-black transition-all shadow-lg"
                             data-oid="_65--s:"
                         >
                             + Add Item
@@ -462,8 +462,8 @@ export default function ResumeForm({
     };
 
     const renderEducation = () => (
-        <div className="space-y-6 p-6" data-oid="bc4_vg9">
-            <div className="flex items-center justify-between pb-4 border-b border-slate-100" data-oid="8u44v:q">
+        <div className="space-y-6 pt-0 p-6" data-oid="bc4_vg9">
+            <div className="sticky top-0 z-10 -mx-6 flex items-center justify-between border-b border-slate-100 bg-white px-6 py-4" data-oid="8u44v:q">
                 <div>
                     <h3 className="text-xl font-bold text-slate-800" data-oid="7:re9rg">
                         Education History
@@ -472,7 +472,7 @@ export default function ResumeForm({
                 </div>
                 <button
                     onClick={addEducation}
-                    className="px-4 py-2 bg-blue-600 text-white rounded-xl text-xs font-bold hover:bg-blue-700 transition-all shadow-lg shadow-blue-100"
+                    className="px-4 py-2 bg-slate-900 text-white rounded-xl text-xs font-bold hover:bg-black transition-all shadow-lg"
                     data-oid="y9jshgd"
                 >
                     + Add Item
@@ -590,8 +590,8 @@ export default function ResumeForm({
     );
 
     const renderProjects = () => (
-        <div className="space-y-6 p-6" data-oid=":d-iyqd">
-            <div className="flex items-center justify-between pb-4 border-b border-slate-100" data-oid="3esxtnd">
+        <div className="space-y-6 pt-0 p-6" data-oid=":d-iyqd">
+            <div className="sticky top-0 z-10 -mx-6 flex items-center justify-between border-b border-slate-100 bg-white px-6 py-4" data-oid="3esxtnd">
                 <div>
                     <h3 className="text-xl font-bold text-slate-800" data-oid="_agqk2.">
                         Personal Projects
@@ -600,7 +600,7 @@ export default function ResumeForm({
                 </div>
                 <button
                     onClick={addProject}
-                    className="px-4 py-2 bg-blue-600 text-white rounded-xl text-xs font-bold hover:bg-blue-700 transition-all shadow-lg shadow-blue-100"
+                    className="px-4 py-2 bg-slate-900 text-white rounded-xl text-xs font-bold hover:bg-black transition-all shadow-lg"
                     data-oid="go:loiv"
                 >
                     + Add Item
@@ -644,16 +644,24 @@ export default function ResumeForm({
                             />
                         </div>
 
-                        <div className="space-y-2" data-oid="38qxhmb">
-                            <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest ml-1">Stack</label>
-                            <input
-                                type="text"
-                                value={project.technologies.join(', ')}
-                                onChange={(e) => updateProject(project.id, 'technologies', e.target.value.split(',').map((t) => t.trim()).filter((t) => t))}
-                                className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-sm"
-                                placeholder="e.g. React, Node"
-                                data-oid="8skl:u3"
-                            />
+                    <div className="space-y-2" data-oid="38qxhmb">
+                        <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest ml-1">Stack</label>
+                        <input
+                            type="text"
+                            value={projectTechnologyDrafts[project.id] ?? project.technologies.join(', ')}
+                            onChange={(e) =>
+                                setProjectTechnologyDrafts((prev) => ({
+                                    ...prev,
+                                    [project.id]: e.target.value,
+                                }))
+                            }
+                            onBlur={(e) =>
+                                updateProject(project.id, 'technologies', parseCommaSeparated(e.target.value))
+                            }
+                            className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-sm"
+                            placeholder="e.g. React, Node"
+                            data-oid="8skl:u3"
+                        />
                         </div>
 
                         <div className="space-y-2" data-oid="project-start-date">
@@ -717,20 +725,8 @@ export default function ResumeForm({
                         </div>
                     </div>
 
-                    <div className="space-y-2" data-oid="yln_q2-">
-                        <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest ml-1">Implementation Highlights</label>
-                        <textarea
-                            value={project.description}
-                            onChange={(e) => updateProject(project.id, 'description', e.target.value)}
-                            rows={3}
-                            className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-sm resize-none"
-                            placeholder="What did you build and how?"
-                            data-oid="o3-1cr_"
-                        />
-                    </div>
-
                     <div className="space-y-2" data-oid="project-highlights">
-                        <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest ml-1">Bullet Highlights</label>
+                        <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest ml-1">Project Highlights</label>
                         <textarea
                             value={project.highlights.join('\n')}
                             onChange={(e) => updateProject(project.id, 'highlights', e.target.value.split('\n'))}
@@ -756,8 +752,8 @@ export default function ResumeForm({
     );
 
     const renderSkills = () => (
-        <div className="space-y-8 p-6" data-oid="yo00ycf">
-            <div className="flex items-center justify-between pb-4 border-b border-slate-100" data-oid="veojlr5">
+        <div className="space-y-8 pt-0 p-6" data-oid="yo00ycf">
+            <div className="sticky top-0 z-10 -mx-6 flex items-center justify-between border-b border-slate-100 bg-white px-6 py-4" data-oid="veojlr5">
                 <div>
                     <h3 className="text-xl font-bold text-slate-800" data-oid="dmkwdo3">
                         Skills & Expertise
@@ -814,13 +810,17 @@ export default function ResumeForm({
                             </label>
                             <input
                                 type="text"
-                                value={skill.items.join(', ')}
-                                onChange={(e) =>
-                                    updateSkillCategory(
-                                        index,
-                                        'items',
-                                        e.target.value.split(',').map((item) => item.trim()).filter((item) => item),
-                                    )
+                                value={skillItemDrafts[index] ?? skill.items.join(', ')}
+                                onChange={(e) => {
+                                    const nextValue = e.target.value;
+                                    setSkillItemDrafts((prev) => ({
+                                        ...prev,
+                                        [index]: nextValue,
+                                    }))
+                                    updateSkillCategory(index, 'items', parseCommaSeparated(nextValue))
+                                }}
+                                onBlur={(e) =>
+                                    updateSkillCategory(index, 'items', parseCommaSeparated(e.target.value))
                                 }
                                 className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-sm font-medium"
                                 placeholder="React, Node.js, TypeScript..."
@@ -844,12 +844,14 @@ export default function ResumeForm({
     );
 
     const renderAdditional = () => (
-        <div className="space-y-8 p-6" data-oid="ow.r:kp">
-            <div className="pb-4 border-b border-slate-100">
+        <div className="space-y-8 pt-0 p-6" data-oid="ow.r:kp">
+            <div className="sticky top-0 z-10 -mx-6 border-b border-slate-100 bg-white px-6 py-4">
+                <div>
                 <h3 className="text-xl font-bold text-slate-800" data-oid="6dn.ntb">
                     Additional Info
                 </h3>
                 <p className="text-xs text-slate-400 mt-1">Certifications, languages, and more</p>
+                </div>
             </div>
 
             <div className="space-y-6">
@@ -894,69 +896,6 @@ export default function ResumeForm({
         </div>
     );
 
-    const renderDesignSettings = () => {
-        const fonts = [
-            { name: 'Inter', value: 'Inter' },
-            { name: 'Roboto', value: 'Roboto' },
-            { name: 'Montserrat', value: 'Montserrat' },
-            { name: 'Open Sans', value: 'Open Sans' },
-            { name: 'Playfair Display', value: 'Playfair Display' },
-            { name: 'Lora', value: 'Lora' },
-        ];
-
-        return (
-            <div className="space-y-8 p-6">
-                <div className="pb-4 border-b border-slate-100">
-                    <h3 className="text-xl font-bold text-slate-800">
-                        Design Canvas
-                    </h3>
-                    <p className="text-xs text-slate-400 mt-1">Customize typography and visual styles</p>
-                </div>
-                
-                <div className="space-y-6">
-                    <div className="space-y-3">
-                        <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider ml-1">
-                            Premium Typography
-                        </label>
-                        <div className="grid grid-cols-2 gap-3">
-                            {fonts.map((font) => (
-                                <button
-                                    key={font.value}
-                                    onClick={() => onFontChange(font.value)}
-                                    className={`relative px-4 py-4 text-sm rounded-2xl border-2 transition-all duration-300 flex flex-col items-center justify-center ${
-                                        fontFamily === font.value
-                                            ? 'bg-blue-50 border-blue-600 text-blue-700 shadow-lg shadow-blue-100 scale-[1.02]'
-                                            : 'bg-white border-slate-100 text-slate-500 hover:border-slate-200'
-                                    }`}
-                                    style={{ fontFamily: font.value }}
-                                >
-                                    <span className="text-lg mb-1">Aa</span>
-                                    <span className="font-bold text-xs uppercase tracking-tighter">{font.name}</span>
-                                    {fontFamily === font.value && (
-                                        <div className="absolute top-2 right-2 w-2 h-2 bg-blue-600 rounded-full"></div>
-                                    )}
-                                </button>
-                            ))}
-                        </div>
-                    </div>
-
-                    <div className="p-5 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-2xl text-white shadow-xl shadow-blue-200">
-                        <div className="flex items-center gap-3 mb-2">
-                            <div className="p-1.5 bg-white/20 rounded-lg backdrop-blur-sm">
-                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                            </div>
-                            <span className="font-bold text-sm tracking-tight">AI Style Guide</span>
-                        </div>
-                        <p className="text-white/80 text-[11px] leading-relaxed">
-                            For maximum readability in ATS systems, we recommend <b>Inter</b> or <b>Roboto</b>. 
-                            These fonts are highly recognizable by scanning algorithms.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        );
-    };
-
     const sections = {
         personal: renderPersonalInfo,
         experience: renderExperience,
@@ -964,7 +903,6 @@ export default function ResumeForm({
         projects: renderProjects,
         skills: renderSkills,
         additional: renderAdditional,
-        design: renderDesignSettings,
     };
 
     return (

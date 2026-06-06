@@ -1,8 +1,7 @@
 'use client';
 
-import { usePremiumTheme } from '@/hooks/usePremiumTheme';
 import { useAuth } from '@/lib/auth/AuthContextBackend';
-import { Crown, Lock } from 'lucide-react';
+import { Check, Crown, FileText, Lock } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import SubscriptionUpgradeModal from './SubscriptionUpgradeModal';
 
@@ -16,12 +15,10 @@ export default function TemplateSelector({
     onTemplateChange,
 }: TemplateSelectorProps) {
     const auth = useAuth();
-    const { isPremium, premiumColors } = usePremiumTheme();
     const [showUpgradeModal, setShowUpgradeModal] = useState(false);
     const [lockedTemplate, setLockedTemplate] = useState<string>('');
     const [userSubscription, setUserSubscription] = useState<string | null>(null);
 
-    // Load user subscription on component mount
     useEffect(() => {
         const loadUserSubscription = async () => {
             try {
@@ -40,40 +37,26 @@ export default function TemplateSelector({
         {
             id: 'vinod',
             name: 'Basic',
-            description: 'LaTeX-backed ATS-friendly resume for the free plan',
-            preview: '/template-previews/minimal.png',
-            features: ['LaTeX Structure', 'ATS Friendly', 'Live Mapped Fields'],
-            // All plans (basic+) can access this template
-            subscriptionTier: 'basic' as const,
-            targetAudience: 'Freshers',
+            description: 'Clean and simple template for freshers and students',
+            features: ['ATS Friendly', 'Best for Freshers', 'Clean Layout'],
+            subscriptionTier: 'basic' as const
         },
         {
             id: 'professional',
             name: 'Standard Professional',
-            description: 'Classic left-aligned structure preferred by recruiters',
-            preview: '/template-previews/professional.png',
-            features: ['Recruiter Favorite', 'Left-Aligned', 'High Readability'],
-            // Premium and Enterprise (Pro) plans
-            subscriptionTier: 'premium' as const,
-            targetAudience: 'Professionals',
+            description: 'Recruter-friendly layout for professionals with some experience',
+            features: ['ATS Friendly', 'Recruiter Favorite', 'High Readability'],
+            subscriptionTier: 'premium' as const
         },
         {
             id: 'creative',
             name: 'Creative Executive',
-            description: 'Sophisticated sidebar layout for experienced candidates',
-            preview: '/template-previews/creative.png',
-            features: ['Creative Layout', 'Executive Style', 'Leadership Focus'],
-            // Premium and Enterprise (Pro) plans
-            subscriptionTier: 'premium' as const,
-            targetAudience: 'Experienced Candidates',
+            description: 'Stylish and modern template for executives and leadership roles',
+            features: ['ATS Friendly', 'Executive Style', 'Leadership Focus'],
+            subscriptionTier: 'premium' as const
         },
     ];
 
-    /**
-     * Returns true if the user plan can access the given template tier.
-     * Hierarchy: basic=1, premium=2, enterprise(pro)=3
-     * Template tiers: 'basic' requires level>=1, 'premium' requires level>=2
-     */
     const canAccessTemplate = (templateTier: 'basic' | 'premium', plan: string | null): boolean => {
         if (!plan) return templateTier === 'basic';
         const normalized = plan.toLowerCase();
@@ -98,188 +81,94 @@ export default function TemplateSelector({
         return '';
     };
 
-    /**
-     * Returns a user-friendly display label for the plan.
-     * 'enterprise' is stored in DB but displayed as 'Pro'.
-     */
-    const getPlanDisplayLabel = (plan: string | null): string => {
-        if (!plan) return 'Loading...';
-        const labels: Record<string, string> = {
-            basic: 'Basic',
-            premium: 'Premium',
-            enterprise: '⚡ Pro'
-        };
-        return labels[plan.toLowerCase()] || plan;
+    
+
+    const getAudienceClass = (audience: string) => {
+        if (audience === 'Freshers') return 'bg-emerald-50 text-emerald-700 border-emerald-200';
+        if (audience === 'Professionals') return 'bg-blue-50 text-blue-700 border-blue-200';
+        return 'bg-amber-50 text-amber-700 border-amber-200';
+    };
+
+    const getPreviewAccent = (accent: string) => {
+        if (accent === 'emerald') return 'from-emerald-100 via-white to-emerald-50';
+        if (accent === 'amber') return 'from-amber-100 via-white to-amber-50';
+        return 'from-blue-100 via-white to-blue-50';
     };
 
     return (
         <>
-            <div className="bg-white rounded-lg shadow-sm border p-6" data-oid="gn7_.ww">
-                <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-xl font-semibold text-gray-800">
-                        Choose Your Template
-                    </h2>
-                    <div className="flex items-center space-x-2">
-                        <span className="text-sm text-gray-600">Current Plan:</span>
-                        <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                            userSubscription === 'enterprise' ? 'bg-purple-100 text-purple-700' :
-                            userSubscription === 'premium' ? 'bg-blue-100 text-blue-700' :
-                            'bg-gray-100 text-gray-700'
-                        }`}>
-                            {getPlanDisplayLabel(userSubscription)}
-                        </span>
-                    </div>
-                </div>
+            <div data-oid="gn7_.ww">
                 
-                <div className="grid md:grid-cols-3 gap-4" data-oid="v62dji9">
+
+                <div className="grid gap-4 lg:grid-cols-3" data-oid="v62dji9">
                     {templates.map((template) => {
                         const isAccessible = canAccessTemplate(template.subscriptionTier, userSubscription);
                         const isLocked = !isAccessible;
+                        const isSelected = selectedTemplate === template.id;
                         
                         return (
-                            <div
+                            <button
                                 key={template.id}
-                                className={`relative border-2 rounded-lg p-4 transition-all duration-200 ${
-                                    selectedTemplate === template.id
-                                        ? 'border-[hsl(196,80%,45%)] bg-blue-50'
-                                        : 'border-gray-200 hover:border-gray-300'
-                                } ${isLocked ? 'opacity-60 cursor-pointer' : 'cursor-pointer'}`}
+                                type="button"
+                                className={`relative overflow-hidden rounded-2xl border p-4 text-left transition-all duration-200 ${
+                                    isSelected
+                                        ? 'border-[hsl(196,80%,45%)]/30 bg-[linear-gradient(180deg,rgba(236,254,255,0.95)_0%,rgba(240,249,255,1)_100%)] text-slate-900 shadow-sm ring-1 ring-[hsl(196,80%,45%)]/10'
+                                        : 'border-slate-200 bg-white hover:border-slate-300 hover:shadow-sm'
+                                }`}
                                 onClick={() => handleTemplateClick(template)}
                                 data-oid="yr0_1od"
                             >
-                                {isLocked && (
-                                    <div
-                                        className="absolute top-2 right-2 bg-red-100 text-red-800 text-xs px-2 py-1 rounded-full flex items-center space-x-1"
-                                        data-oid="uo4_47m"
-                                    >
-                                        <Lock className="w-3 h-3" />
-                                        <span>{getSubscriptionRequired(template.subscriptionTier)}</span>
-                                    </div>
-                                )}
 
-                                {/* Template Preview */}
-                                <div
-                                    className="bg-gray-100 rounded-md h-32 mb-3 flex items-center justify-center"
-                                    data-oid="vio-g27"
-                                >
-                                    <div className="text-gray-400 text-center" data-oid="p:916ig">
-                                        <svg
-                                            className="w-8 h-8 mx-auto mb-2"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            viewBox="0 0 24 24"
-                                            data-oid="o92kmwh"
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth="2"
-                                                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                                                data-oid="ky0ym7c"
-                                            />
-                                        </svg>
-                                        <span className="text-xs" data-oid="f4cdzuh">
-                                            Preview
-                                        </span>
+                                <div className="flex items-start justify-between gap-3">
+                                    <div>
+                                        <h3 className={`font-semibold ${isSelected ? 'text-slate-900' : 'text-slate-900'}`} data-oid="wkodqmo">
+                                            {template.name}
+                                        </h3>
+                                        <p className={`mt-1 text-sm ${isSelected ? 'text-slate-700' : 'text-slate-600'}`} data-oid="m2d:dx9">
+                                            {template.description}
+                                        </p>
                                     </div>
+                                    {isSelected ? (
+                                        <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[hsl(196,80%,45%)] text-white shadow-sm">
+                                            <Check className="h-4 w-4" />
+                                        </div>
+                                    ) : isLocked ? (
+                                        <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-500">
+                                            <Lock className="h-4 w-4" />
+                                        </div>
+                                    ) : null}
                                 </div>
 
-                                <h3 className="font-semibold text-gray-800 mb-1" data-oid="wkodqmo">
-                                    {template.name}
-                                </h3>
-                                <p className="text-sm text-gray-600 mb-2" data-oid="m2d:dx9">
-                                    {template.description}
-                                </p>
-                                
-                                {/* Target Audience Badge */}
-                                <div className="mb-3">
-                                    <span className={`inline-block px-2 py-1 rounded-full text-xs font-medium ${
-                                        template.targetAudience === 'Freshers' ? 'bg-green-100 text-green-700' :
-                                        template.targetAudience === 'Fresher Interns' ? 'bg-blue-100 text-blue-700' :
-                                        'bg-purple-100 text-purple-700'
+                                <div className="mt-3 flex flex-wrap gap-2">
+                                    <span className={`rounded-full border px-2.5 py-1 text-xs font-medium ${
+                                        isSelected
+                                            ? 'border-[hsl(196,80%,45%)]/20 bg-white text-[hsl(196,80%,32%)]'
+                                            : isLocked
+                                                ? 'border-amber-200 bg-amber-50 text-amber-700'
+                                                : 'border-slate-200 bg-slate-50 text-slate-600'
                                     }`}>
-                                        {template.targetAudience}
+                                        {isLocked ? getSubscriptionRequired(template.subscriptionTier) : 'Free'}
                                     </span>
                                 </div>
 
-                                {/* Features */}
-                                <div className="space-y-1" data-oid="r6mqnto">
+                                <div className="mt-4 space-y-2" data-oid="r6mqnto">
                                     {template.features.map((feature, index) => (
                                         <div
                                             key={index}
-                                            className="flex items-center text-xs text-gray-500"
+                                            className={`flex items-center text-xs ${isSelected ? 'text-slate-600' : 'text-slate-500'}`}
                                             data-oid="2w-wez1"
                                         >
-                                            <svg
-                                                className="w-3 h-3 mr-1 text-green-500"
-                                                fill="currentColor"
-                                                viewBox="0 0 20 20"
-                                                data-oid=".j:dpee"
-                                            >
-                                                <path
-                                                    fillRule="evenodd"
-                                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                                    clipRule="evenodd"
-                                                    data-oid="5clpxpu"
-                                                />
-                                            </svg>
+                                            <Check className={`mr-2 h-3.5 w-3.5 ${isSelected ? 'text-[hsl(196,80%,45%)]' : 'text-emerald-500'}`} />
                                             {feature}
                                         </div>
                                     ))}
                                 </div>
-
-                                {selectedTemplate === template.id && !isLocked && (
-                                    <div
-                                        className="absolute top-2 left-2 bg-[hsl(196,80%,45%)] text-white text-xs px-2 py-1 rounded-full"
-                                        data-oid="3bwnqof"
-                                    >
-                                        Selected
-                                    </div>
-                                )}
-                                
-                                {isLocked && (
-                                    <div className="absolute inset-0 bg-gray-900/20 rounded-lg flex items-center justify-center">
-                                        <div className="bg-white rounded-lg p-3 text-center">
-                                            <Crown className="w-6 h-6 text-gray-400 mx-auto mb-2" />
-                                            <p className="text-xs text-gray-600 font-medium">Upgrade Required</p>
-                                        </div>
-                                    </div>
-                                )}
-                            </div>
+                            </button>
                         );
                     })}
                 </div>
 
-                <div className="mt-4 p-4 bg-blue-50 rounded-lg" data-oid="d208uo6">
-                    <div className="flex items-start space-x-3" data-oid="ny2u22e">
-                        <svg
-                            className="w-5 h-5 text-blue-500 mt-0.5"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                            data-oid="6-20fwx"
-                        >
-                            <path
-                                fillRule="evenodd"
-                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                                clipRule="evenodd"
-                                data-oid="gev-bu7"
-                            />
-                        </svg>
-                        <div data-oid="wqvk9n:">
-                            <h4 className="font-medium text-blue-800 mb-1" data-oid="j1r.ksm">
-                                Template Access by Plan
-                            </h4>
-                            <ul className="text-sm text-blue-700 space-y-1" data-oid="35qikfv">
-                                <li data-oid="op30erm">
-                                    • <strong>Basic:</strong> Basic Resume (for freshers)
-                                </li>
-                                <li data-oid="8h8672:">
-                                    • <strong>Premium &amp; Pro:</strong> Standard Professional &amp; Creative Executive
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
 
             <SubscriptionUpgradeModal
@@ -288,7 +177,6 @@ export default function TemplateSelector({
                 currentPlan={(userSubscription === 'enterprise' ? 'premium' : userSubscription) as "free" | "premium" | "starter" || "free"}
                 onUpgrade={(planId) => {
                     ; void /* console.log */ ((..._args) => {})('Upgrading to plan:', planId);
-                    // Redirect to pricing page
                     if (typeof window !== 'undefined') {
                         window.location.href = '/subscriptions';
                     }
