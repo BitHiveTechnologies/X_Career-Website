@@ -47,6 +47,8 @@ export default function ResumePrintPage() {
                 return;
             }
 
+            const fullName = parsed.resumeData?.personalInfo?.fullName?.trim();
+            document.title = `${fullName}'s Resume` || 'Resume';
             setPayload(parsed);
             setStatus('ready');
         } catch (_error) {
