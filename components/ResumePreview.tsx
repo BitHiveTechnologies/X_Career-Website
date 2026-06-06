@@ -1,18 +1,35 @@
 'use client';
 
 import { ResumeData } from '@/app/resume-builder/page';
+import { BASIC_TEMPLATE_ID, basicTemplateLatexSource } from '@/lib/resumeTemplates/basic';
 
 interface ResumePreviewProps {
     resumeData: ResumeData;
     template: string;
     fontFamily?: string;
+    isExport?: boolean;
 }
 
-export default function ResumePreview({ resumeData, template, fontFamily = 'Inter' }: ResumePreviewProps) {
+export default function ResumePreview({ resumeData, template, fontFamily = 'Inter', isExport = false }: ResumePreviewProps) {
+    const BASIC_TEMPLATE_FONT_STACK = '"Computer Modern Serif", "Latin Modern Roman", "CMU Serif", "STIX Two Text", "Charter", "Times New Roman", serif';
+    const BASIC_TEMPLATE_FIRST_PAGE_CAPACITY = 62;
+    const BASIC_TEMPLATE_OTHER_PAGE_CAPACITY = 58;
+
     const formatDate = (dateString: string) => {
         if (!dateString) return '';
         const date = new Date(dateString);
         return date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+    };
+
+    const formatDateRange = (startDate: string, endDate: string, current?: boolean) => {
+        const start = formatDate(startDate);
+        const end = current ? 'Present' : formatDate(endDate);
+
+        if (!start && !end) return '';
+        if (!start) return end;
+        if (!end) return start;
+
+        return `${start} -- ${end}`;
     };
 
     // NOTE: The getDisplayUrl function has been removed as the text is now a static label.
@@ -21,9 +38,55 @@ export default function ResumePreview({ resumeData, template, fontFamily = 'Inte
         fontFamily: fontFamily,
     };
 
+    type BasicPageBlock = {
+        key: string;
+        sectionTitle?: string;
+        height: number;
+        content: JSX.Element;
+    };
+
+    type BasicTemplatePage = {
+        key: string;
+        showHeader: boolean;
+        blocks: BasicPageBlock[];
+    };
+
+    const createBasicPages = (blocks: BasicPageBlock[]): BasicTemplatePage[] => {
+        const pages: BasicTemplatePage[] = [];
+        let currentPage: BasicTemplatePage = {
+            key: 'basic-page-1',
+            showHeader: true,
+            blocks: [],
+        };
+        let remainingHeight = BASIC_TEMPLATE_FIRST_PAGE_CAPACITY;
+
+        blocks.forEach((block, index) => {
+            const needsNewPage = currentPage.blocks.length > 0 && block.height > remainingHeight;
+
+            if (needsNewPage) {
+                pages.push(currentPage);
+                currentPage = {
+                    key: `basic-page-${pages.length + 1}`,
+                    showHeader: false,
+                    blocks: [],
+                };
+                remainingHeight = BASIC_TEMPLATE_OTHER_PAGE_CAPACITY;
+            }
+
+            currentPage.blocks.push(block);
+            remainingHeight -= block.height;
+
+            if (index === blocks.length - 1) {
+                pages.push(currentPage);
+            }
+        });
+
+        return pages.length > 0 ? pages : [currentPage];
+    };
+
     const ModernTemplate = () => (
         <div
-            className="max-w-4xl mx-auto bg-white p-8 shadow-lg"
+            className={`resume-export-page max-w-4xl mx-auto bg-white p-8 ${isExport ? '' : 'shadow-lg'}`}
             style={{ ...templateStyle, minHeight: '11in', width: '8.5in' }}
             data-oid="hhy:wxb"
         >
@@ -472,247 +535,235 @@ export default function ResumePreview({ resumeData, template, fontFamily = 'Inte
     );
 
     const VinodTemplate = () => (
-        <div
-            className="max-w-4xl mx-auto bg-white p-8 shadow-lg"
-            style={{ ...templateStyle, minHeight: '11in', width: '8.5in' }}
-            data-oid="c-.2qmw"
-        >
-            {/* Header */}
-            <header className="mb-8" data-oid="ab_2fa-">
-                <h1 className="text-4xl font-light text-gray-800 mb-4" data-oid="zv.55dc">
-                    {resumeData.personalInfo.fullName || 'Your Name'}
-                </h1>
-                <div
-                    className="flex flex-wrap gap-6 text-sm text-gray-600"
-                    data-oid="l1wna1z"
-                >
-                    {resumeData.personalInfo.email && (
-                        <span data-oid="9g5mmhj">{resumeData.personalInfo.email}</span>
-                    )}
-                    {resumeData.personalInfo.phone && (
-                        <span data-oid="uwb938p">{resumeData.personalInfo.phone}</span>
-                    )}
-                    {resumeData.personalInfo.location && (
-                        <span data-oid="-s_xfbh">{resumeData.personalInfo.location}</span>
-                    )}
-                    
-                    {/* FIX APPLIED: LINKEDIN - Display text is hardcoded to 'LinkedIn' */}
-                    {resumeData.personalInfo.linkedin && (
-                        <a 
-                            href={resumeData.personalInfo.linkedin}
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            className="hover:underline text-gray-700"
-                            data-oid="kcrjpy:"
-                        >
-                            {"LinkedIn"}
-                        </a>
-                    )}
-                    
-                    {/* FIX APPLIED: GITHUB - Display text is hardcoded to 'GitHub' */}
-                    {resumeData.personalInfo.github && (
-                        <a 
-                            href={resumeData.personalInfo.github}
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            className="hover:underline text-gray-700"
-                            data-oid="43.jj::"
-                        >
-                            {"GitHub"}
-                        </a>
-                    )}
+        (() => {
+            const exportLineHeight = isExport ? 1.02 : 1.3;
+            const sectionGap = isExport ? '0.22rem' : '0.7rem';
+            const blockGap = isExport ? '0.08rem' : '0.45rem';
+            const listItemGap = isExport ? '0.02em' : '0.2em';
+            const headerBottomSpace = isExport ? '0.16in' : '0.32in';
+            const sectionTitleBottomSpace = isExport ? '0.1rem' : '0.35rem';
+            const sectionTitlePadding = isExport ? '0.04rem' : '0.12rem';
+            const topPadding = isExport ? '0.26in' : '0.35in';
+            const bottomPadding = isExport ? '0.22in' : '0.42in';
+            const listTopMargin = isExport ? '0.1em' : '0.2em';
+            const basicTemplateStyle = {
+                fontFamily: BASIC_TEMPLATE_FONT_STACK,
+                height: '11in',
+                minHeight: '11in',
+                maxHeight: '11in',
+                width: '8.5in',
+                fontSize: '11pt',
+                lineHeight: exportLineHeight,
+                fontWeight: 400,
+                boxSizing: 'border-box' as const,
+                overflow: 'hidden' as const,
+                WebkitFontSmoothing: 'antialiased' as const,
+                MozOsxFontSmoothing: 'grayscale' as const,
+                fontKerning: 'normal' as const,
+            };
+            const bodyFont95 = '0.95em';
+            const bodyFont90 = '0.9em';
+            const bodyFont88 = '0.88em';
+            const bodyFont86 = '0.86em';
+            const listPaddingLeft = '1.35em';
+            const listMarginTop = '0.2em';
 
-                    {/* FIX APPLIED: PORTFOLIO - Display text is hardcoded to 'Portfolio' */}
-                    {resumeData.personalInfo.portfolio && (
-                        <a 
-                            href={resumeData.personalInfo.portfolio}
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            className="hover:underline text-gray-700"
-                            data-oid="portfolio_link_min"
+            const blocks: BasicPageBlock[] = [];
+
+            resumeData.education.forEach((edu, index) => {
+                blocks.push({
+                    key: `education-${edu.id}`,
+                    sectionTitle: index === 0 ? 'Education' : undefined,
+                    height: 4,
+                    content: (
+                        <div key={edu.id}>
+                            <div className="flex items-start justify-between gap-4" style={{ fontSize: bodyFont95 }}>
+                                <p className="font-semibold text-black" style={{ margin: 0 }}>{edu.institution}</p>
+                                <p className="text-right text-black" style={{ fontSize: bodyFont90, margin: 0 }}>{edu.location}</p>
+                            </div>
+                            <div className="flex items-start justify-between gap-4 italic text-black" style={{ fontSize: bodyFont88 }}>
+                                <p style={{ margin: 0 }}>{[edu.degree, edu.field].filter(Boolean).join(' in ')}</p>
+                                <p className="text-right" style={{ margin: 0 }}>{formatDateRange(edu.startDate, edu.endDate)}</p>
+                            </div>
+                        </div>
+                    ),
+                });
+            });
+
+            resumeData.experience.forEach((exp, index) => {
+                const bulletCount = exp.description.filter((item) => item.trim()).length;
+                blocks.push({
+                    key: `experience-${exp.id}`,
+                    sectionTitle: index === 0 ? 'Experience' : undefined,
+                    height: (index === 0 ? 1.4 : 0) + 4 + Math.max(1.8, bulletCount * 1.2),
+                    content: (
+                        <div key={exp.id}>
+                            <div className="flex items-start justify-between gap-4" style={{ fontSize: bodyFont95 }}>
+                                <p className="font-semibold text-black" style={{ margin: 0 }}>{exp.position}</p>
+                                <p className="text-right text-black" style={{ fontSize: bodyFont88, margin: 0 }}>
+                                    {formatDateRange(exp.startDate, exp.endDate, exp.current)}
+                                </p>
+                            </div>
+                            <div className="flex items-start justify-between gap-4 italic text-black" style={{ fontSize: bodyFont88 }}>
+                                <p style={{ margin: 0 }}>{exp.company}</p>
+                                <p className="text-right" style={{ margin: 0 }}>{exp.location}</p>
+                            </div>
+                            {bulletCount > 0 && (
+                                <ul
+                                    className="list-disc text-black"
+                                    style={{ marginTop: listTopMargin, paddingLeft: listPaddingLeft, fontSize: bodyFont86 }}
+                                >
+                                    {exp.description.filter((item) => item.trim()).map((item, itemIndex) => (
+                                        <li key={itemIndex} style={{ marginBottom: listItemGap }}>{item}</li>
+                                    ))}
+                                </ul>
+                            )}
+                        </div>
+                    ),
+                });
+            });
+
+            resumeData.projects.forEach((project, index) => {
+                const bulletCount = project.highlights.filter((item) => item.trim()).length;
+                blocks.push({
+                    key: `project-${project.id}`,
+                    sectionTitle: index === 0 ? 'Projects' : undefined,
+                    height: (index === 0 ? 1.4 : 0) + 3 + Math.max(1.8, bulletCount * 1.15),
+                    content: (
+                        <div key={project.id}>
+                            <div className="flex items-start justify-between gap-4" style={{ fontSize: bodyFont90 }}>
+                                <p className="text-black" style={{ margin: 0 }}>
+                                    <span className="font-semibold">{project.name}</span>
+                                    {project.technologies.length > 0 && (
+                                        <span className="italic">{` | ${project.technologies.join(', ')}`}</span>
+                                    )}
+                                </p>
+                                    <p className="text-right text-black" style={{ fontSize: '0.85em', margin: 0 }}>
+                                        {formatDateRange(project.startDate, project.endDate, project.current)}
+                                    </p>
+                                </div>
+                            {bulletCount > 0 && (
+                                <ul
+                                    className="list-disc text-black"
+                                    style={{ marginTop: listTopMargin, paddingLeft: listPaddingLeft, fontSize: bodyFont86 }}
+                                >
+                                    {project.highlights.filter((item) => item.trim()).map((item, itemIndex) => (
+                                        <li key={itemIndex} style={{ marginBottom: listItemGap }}>{item}</li>
+                                    ))}
+                                </ul>
+                            )}
+                        </div>
+                    ),
+                });
+            });
+
+            if (resumeData.skills.length > 0) {
+                blocks.push({
+                    key: 'skills',
+                    sectionTitle: 'Technical Skills',
+                    height: 4.5 + resumeData.skills.length * 1.15,
+                    content: (
+                        <div className="text-black" style={{ fontSize: bodyFont86, display: 'grid', rowGap: '0.2em' }}>
+                            {resumeData.skills.map((skillCategory, index) => (
+                                <p key={index} style={{ margin: 0 }}>
+                                    <span className="font-semibold">{skillCategory.category}</span>
+                                    {`: ${skillCategory.items.join(', ')}`}
+                                </p>
+                            ))}
+                        </div>
+                    ),
+                });
+            }
+
+            const pages = createBasicPages(blocks);
+
+            return (
+                <div className="space-y-6">
+                    {pages.map((page) => (
+                        <div
+                            key={page.key}
+                            className={`resume-export-page max-w-4xl mx-auto bg-white text-left ${isExport ? '' : 'shadow-lg'}`}
+                            style={{
+                                ...basicTemplateStyle,
+                                paddingLeft: '0.62in',
+                                paddingRight: '0.62in',
+                                paddingTop: topPadding,
+                                paddingBottom: bottomPadding,
+                                pageBreakAfter: page.key !== pages[pages.length - 1]?.key ? 'always' : 'auto',
+                                breakAfter: page.key !== pages[pages.length - 1]?.key ? 'page' : 'auto',
+                            }}
                         >
-                            {"Portfolio"}
-                        </a>
-                    )}
-                </div>
-            </header>
-
-            {/* Summary */}
-            {resumeData.personalInfo.summary && (
-                <section className="mb-8" data-oid="srhf0ol">
-                    <p
-                        className="text-gray-700 leading-relaxed italic"
-                        data-oid="bpm_zz7"
-                    >
-                        {resumeData.personalInfo.summary}
-                    </p>
-                </section>
-            )}
-
-            {/* Experience */}
-            {resumeData.experience.length > 0 && (
-                <section className="mb-8" data-oid="dy7297:">
-                    <h2
-                        className="text-2xl font-light text-gray-800 mb-4"
-                        data-oid="7.mtz4y"
-                    >
-                        EXPERIENCE
-                    </h2>
-                    <div className="space-y-6" data-oid="auv4421">
-                        {resumeData.experience.map((exp) => (
-                            <div
-                                key={exp.id}
-                                className="border-l-2 border-gray-300 pl-4"
-                                data-oid="r4-p_dd"
-                            >
-                                <div className="mb-2" data-oid="luhyk-6">
-                                    <h3
-                                        className="font-semibold text-gray-800 text-lg"
-                                        data-oid="6_9jn93"
+                            {page.showHeader && (
+                                <header className="text-center" style={{ marginBottom: headerBottomSpace }}>
+                                    <h1
+                                        className="font-semibold uppercase text-black"
+                                        style={{ fontSize: '2rem', letterSpacing: '0.1em' }}
                                     >
-                                        {exp.position}
-                                    </h3>
-                                    <p className="text-gray-600 font-medium" data-oid="783qhij">
-                                        {exp.company}
-                                    </p>
-                                    <p className="text-sm text-gray-500" data-oid="-e8zg9.">
-                                        {formatDate(exp.startDate)} -{' '}
-                                        {exp.current ? 'Present' : formatDate(exp.endDate)}
-                                        {exp.location && ` • ${exp.location}`}
-                                    </p>
-                                </div>
-                                {exp.description.length > 0 && (
-                                    <ul className="space-y-1" data-oid=".d9w8zu">
-                                        {exp.description
-                                            .filter((desc) => desc.trim())
-                                            .map((desc, index) => (
-                                                <li
-                                                    key={index}
-                                                    className="text-gray-700 text-sm"
-                                                    data-oid="r.9lr2u"
-                                                >
-                                                    • {desc}
-                                                </li>
-                                            ))}
-                                    </ul>
-                                )}
-                            </div>
-                        ))}
-                    </div>
-                </section>
-            )}
+                                        {resumeData.personalInfo.fullName || 'Your Name'}
+                                    </h1>
+                                    <div
+                                        className="mt-1 flex flex-wrap items-center justify-center gap-x-2 text-black"
+                                        style={{ fontSize: '0.88rem' }}
+                                    >
+                                        {resumeData.personalInfo.phone && <span style={{ lineHeight: 1 }}>{resumeData.personalInfo.phone}</span>}
+                                        {resumeData.personalInfo.email && (
+                                            <>
+                                                {resumeData.personalInfo.phone && <span style={{ lineHeight: 1 }}>|</span>}
+                                                <span style={{ lineHeight: 1 }}>{resumeData.personalInfo.email}</span>
+                                            </>
+                                        )}
+                                        {resumeData.personalInfo.linkedin && (
+                                            <>
+                                                {(resumeData.personalInfo.phone || resumeData.personalInfo.email) && <span style={{ lineHeight: 1 }}>|</span>}
+                                                <a href={resumeData.personalInfo.linkedin} target="_blank" rel="noopener noreferrer" className="underline">
+                                                    {resumeData.personalInfo.linkedin.replace(/^https?:\/\//, '')}
+                                                </a>
+                                            </>
+                                        )}
+                                        {resumeData.personalInfo.github && (
+                                            <>
+                                                {(resumeData.personalInfo.phone || resumeData.personalInfo.email || resumeData.personalInfo.linkedin) && <span style={{ lineHeight: 1 }}>|</span>}
+                                                <a href={resumeData.personalInfo.github} target="_blank" rel="noopener noreferrer" className="underline">
+                                                    {resumeData.personalInfo.github.replace(/^https?:\/\//, '')}
+                                                </a>
+                                            </>
+                                        )}
+                                    </div>
+                                </header>
+                            )}
 
-            {/* Education */}
-            {resumeData.education.length > 0 && (
-                <section className="mb-8" data-oid="0g1p5p_">
-                    <h2
-                        className="text-2xl font-light text-gray-800 mb-4"
-                        data-oid="eirwm-r"
-                    >
-                        EDUCATION
-                    </h2>
-                    <div className="space-y-4" data-oid="n17cvr8">
-                        {resumeData.education.map((edu) => (
-                            <div key={edu.id} className="text-left" data-oid="-c4llci">
-                                <h3 className="font-semibold text-gray-800" data-oid="1tpjd87">
-                                    {edu.degree} {edu.field && `in ${edu.field}`}
-                                </h3>
-                                <p className="text-gray-600" data-oid="iw7j:2i">
-                                    {edu.institution}
-                                </p>
-                                <p className="text-sm text-gray-500" data-oid="6enp:g9">
-                                    {formatDate(edu.startDate)} - {formatDate(edu.endDate)}
-                                    {edu.gpa && ` • GPA: ${edu.gpa}`}
-                                </p>
+                            <div style={{ display: 'grid', rowGap: sectionGap }}>
+                                {page.blocks.map((block) => (
+                                    <div key={block.key} className="break-inside-avoid" style={{ display: 'grid', rowGap: blockGap }}>
+                                        {block.sectionTitle && (
+                                            <h2
+                                                className="border-b border-black font-semibold uppercase text-black"
+                                                style={{
+                                                    marginBottom: sectionTitleBottomSpace,
+                                                    paddingBottom: sectionTitlePadding,
+                                                    fontSize: '1.02rem',
+                                                    letterSpacing: '0.16em',
+                                                }}
+                                            >
+                                                {block.sectionTitle}
+                                            </h2>
+                                        )}
+                                        {block.content}
+                                    </div>
+                                ))}
                             </div>
-                        ))}
-                    </div>
-                </section>
-            )}
 
-            {/* Skills */}
-            {resumeData.skills.length > 0 && (
-                <section className="mb-8" data-oid="32vyx.r">
-                    <h2
-                        className="text-2xl font-light text-gray-800 mb-4"
-                        data-oid="0r1h-2s"
-                    >
-                        SKILLS
-                    </h2>
-                    <div className="space-y-2" data-oid="skaorld">
-                        {resumeData.skills.map((skillCategory, index) => (
-                            <div key={index} data-oid="s41pxsj">
-                                <span className="font-medium text-gray-800" data-oid="mix9_29">
-                                    {skillCategory.category}:
-                                </span>
-                                <span className="text-gray-700 ml-2" data-oid="qgwe0yz">
-                                    {skillCategory.items.join(' • ')}
-                                </span>
-                            </div>
-                        ))}
-                    </div>
-                </section>
-            )}
-
-            {/* Projects */}
-            {resumeData.projects.length > 0 && (
-                <section className="mb-8" data-oid="-d0lcmt">
-                    <h2
-                        className="text-2xl font-light text-gray-800 mb-4"
-                        data-oid="jxv:ioh"
-                    >
-                        PROJECTS
-                    </h2>
-                    <div className="space-y-4" data-oid="5vj4_j5">
-                        {resumeData.projects.map((project) => (
-                            <div key={project.id} className="text-left" data-oid="_lr4zjq">
-                                <h3 className="font-semibold text-gray-800" data-oid="pah0hk-">
-                                    {project.name}
-                                </h3>
-                                {project.technologies.length > 0 && (
-                                    <p className="text-sm text-gray-600" data-oid="3weyi:e">
-                                        {project.technologies.join(' • ')}
-                                    </p>
-                                )}
-                                {project.description && (
-                                    <p className="text-gray-700 text-sm mt-1" data-oid="y_qdhfk">
-                                        {project.description}
-                                    </p>
-                                )}
-                                {/* Minimal Template Project Links - Add clickable links */}
-                                <div className="mt-2 flex justify-start space-x-4 text-sm">
-                                    {project.link && (
-                                        <a 
-                                            href={project.link} 
-                                            target="_blank" 
-                                            rel="noopener noreferrer"
-                                            className="text-blue-600 hover:underline"
-                                        >
-                                            Live Demo
-                                        </a>
-                                    )}
-                                    {project.github && (
-                                        <a 
-                                            href={project.github} 
-                                            target="_blank" 
-                                            rel="noopener noreferrer"
-                                            className="text-blue-600 hover:underline"
-                                        >
-                                            GitHub Repo
-                                        </a>
-                                    )}
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </section>
-            )}
-        </div>
+                            <pre className="hidden">{basicTemplateLatexSource}</pre>
+                        </div>
+                    ))}
+                </div>
+            );
+        })()
     );
 
     const ProfessionalTemplate = () => (
         <div
-            className="max-w-4xl mx-auto bg-white p-8 shadow-lg text-left"
+            className={`resume-export-page max-w-4xl mx-auto bg-white p-8 text-left ${isExport ? '' : 'shadow-lg'}`}
             style={{ ...templateStyle, minHeight: '11in', width: '8.5in' }}
         >
             {/* Professional Template Implementation - Left Aligned */}
@@ -794,7 +845,7 @@ export default function ResumePreview({ resumeData, template, fontFamily = 'Inte
 
     const CreativeTemplate = () => (
         <div
-            className="max-w-4xl mx-auto bg-white shadow-lg flex overflow-hidden text-left"
+            className={`resume-export-page max-w-4xl mx-auto bg-white flex overflow-hidden text-left ${isExport ? '' : 'shadow-lg'}`}
             style={{ ...templateStyle, minHeight: '11in', width: '8.5in' }}
         >
             {/* Sidebar */}
@@ -892,7 +943,7 @@ export default function ResumePreview({ resumeData, template, fontFamily = 'Inte
 
     const templates = {
         modern: ModernTemplate,
-        vinod: VinodTemplate,
+        [BASIC_TEMPLATE_ID]: VinodTemplate,
         professional: ProfessionalTemplate,
         creative: CreativeTemplate,
     };
