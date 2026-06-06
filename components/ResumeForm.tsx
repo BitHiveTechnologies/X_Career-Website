@@ -155,15 +155,14 @@ export default function ResumeForm({
     };
 
     const renderPersonalInfo = () => (
-        <div className="space-y-8 p-6" data-oid="-..0rpg">
-            <div className="flex items-center justify-between pb-4 border-b border-slate-100">
+        <div className="space-y-8 pt-0 p-6" data-oid="-..0rpg">
+            <div className="sticky top-0 z-10 -mx-6 flex items-center justify-between border-b border-slate-100 bg-white px-6 py-4">
                 <div>
                     <h3 className="text-xl font-bold text-slate-800" data-oid="rbfho6l">
                         Personal Details
                     </h3>
-                    <p className="text-xs text-slate-400 mt-1">Basic information for your resume header</p>
+                    <p className="mt-1 text-sm text-slate-500">Basic information for your resume header</p>
                 </div>
-                <div className="text-[10px] text-slate-400 font-bold uppercase tracking-widest bg-slate-50 px-2 py-1 rounded border border-slate-100">Step 1 of 6</div>
             </div>
 
             <div className="grid md:grid-cols-2 gap-6" data-oid="4wa0qke">
@@ -298,8 +297,8 @@ export default function ResumeForm({
         const isMinimalTemplate = selectedTemplate === 'minimal';
         
         return (
-            <div className="space-y-6 p-6" data-oid="c1v:7-v">
-                <div className="flex items-center justify-between pb-4 border-b border-slate-100" data-oid="f2o7big">
+            <div className="space-y-6 pt-0 p-6" data-oid="c1v:7-v">
+                <div className="sticky top-0 z-10 -mx-6 flex items-center justify-between border-b border-slate-100 bg-white px-6 py-4" data-oid="f2o7big">
                     <div>
                         <h3 className="text-xl font-bold text-slate-800" data-oid="8i-iq51">
                             Professional Experience
@@ -309,7 +308,7 @@ export default function ResumeForm({
                     {!isMinimalTemplate && (
                         <button
                             onClick={addExperience}
-                            className="px-4 py-2 bg-blue-600 text-white rounded-xl text-xs font-bold hover:bg-blue-700 transition-all shadow-lg shadow-blue-100"
+                            className="px-4 py-2 bg-slate-900 text-white rounded-xl text-xs font-bold hover:bg-black transition-all shadow-lg"
                             data-oid="_65--s:"
                         >
                             + Add Item
@@ -462,8 +461,8 @@ export default function ResumeForm({
     };
 
     const renderEducation = () => (
-        <div className="space-y-6 p-6" data-oid="bc4_vg9">
-            <div className="flex items-center justify-between pb-4 border-b border-slate-100" data-oid="8u44v:q">
+        <div className="space-y-6 pt-0 p-6" data-oid="bc4_vg9">
+            <div className="sticky top-0 z-10 -mx-6 flex items-center justify-between border-b border-slate-100 bg-white px-6 py-4" data-oid="8u44v:q">
                 <div>
                     <h3 className="text-xl font-bold text-slate-800" data-oid="7:re9rg">
                         Education History
@@ -472,7 +471,7 @@ export default function ResumeForm({
                 </div>
                 <button
                     onClick={addEducation}
-                    className="px-4 py-2 bg-blue-600 text-white rounded-xl text-xs font-bold hover:bg-blue-700 transition-all shadow-lg shadow-blue-100"
+                    className="px-4 py-2 bg-slate-900 text-white rounded-xl text-xs font-bold hover:bg-black transition-all shadow-lg"
                     data-oid="y9jshgd"
                 >
                     + Add Item
@@ -590,8 +589,8 @@ export default function ResumeForm({
     );
 
     const renderProjects = () => (
-        <div className="space-y-6 p-6" data-oid=":d-iyqd">
-            <div className="flex items-center justify-between pb-4 border-b border-slate-100" data-oid="3esxtnd">
+        <div className="space-y-6 pt-0 p-6" data-oid=":d-iyqd">
+            <div className="sticky top-0 z-10 -mx-6 flex items-center justify-between border-b border-slate-100 bg-white px-6 py-4" data-oid="3esxtnd">
                 <div>
                     <h3 className="text-xl font-bold text-slate-800" data-oid="_agqk2.">
                         Personal Projects
@@ -600,7 +599,7 @@ export default function ResumeForm({
                 </div>
                 <button
                     onClick={addProject}
-                    className="px-4 py-2 bg-blue-600 text-white rounded-xl text-xs font-bold hover:bg-blue-700 transition-all shadow-lg shadow-blue-100"
+                    className="px-4 py-2 bg-slate-900 text-white rounded-xl text-xs font-bold hover:bg-black transition-all shadow-lg"
                     data-oid="go:loiv"
                 >
                     + Add Item
@@ -756,8 +755,8 @@ export default function ResumeForm({
     );
 
     const renderSkills = () => (
-        <div className="space-y-8 p-6" data-oid="yo00ycf">
-            <div className="flex items-center justify-between pb-4 border-b border-slate-100" data-oid="veojlr5">
+        <div className="space-y-8 pt-0 p-6" data-oid="yo00ycf">
+            <div className="sticky top-0 z-10 -mx-6 flex items-center justify-between border-b border-slate-100 bg-white px-6 py-4" data-oid="veojlr5">
                 <div>
                     <h3 className="text-xl font-bold text-slate-800" data-oid="dmkwdo3">
                         Skills & Expertise
@@ -844,12 +843,14 @@ export default function ResumeForm({
     );
 
     const renderAdditional = () => (
-        <div className="space-y-8 p-6" data-oid="ow.r:kp">
-            <div className="pb-4 border-b border-slate-100">
+        <div className="space-y-8 pt-0 p-6" data-oid="ow.r:kp">
+            <div className="sticky top-0 z-10 -mx-6 border-b border-slate-100 bg-white px-6 py-4">
+                <div>
                 <h3 className="text-xl font-bold text-slate-800" data-oid="6dn.ntb">
                     Additional Info
                 </h3>
                 <p className="text-xs text-slate-400 mt-1">Certifications, languages, and more</p>
+                </div>
             </div>
 
             <div className="space-y-6">
@@ -906,11 +907,13 @@ export default function ResumeForm({
 
         return (
             <div className="space-y-8 p-6">
-                <div className="pb-4 border-b border-slate-100">
+                <div className="sticky top-0 z-10 -mx-6 border-b border-slate-100 bg-white px-6 py-4">
+                    <div>
                     <h3 className="text-xl font-bold text-slate-800">
                         Design Canvas
                     </h3>
                     <p className="text-xs text-slate-400 mt-1">Customize typography and visual styles</p>
+                    </div>
                 </div>
                 
                 <div className="space-y-6">
