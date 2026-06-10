@@ -174,7 +174,8 @@ const fetchTestimonials = async (): Promise<Testimonial[]> => {
                 name: t.name,
                 company: t.role,
                 quote: t.content,
-                image: t.avatar || 'https://randomuser.me/api/portraits/lego/1.jpg'
+                image: t.avatar || 'https://randomuser.me/api/portraits/lego/1.jpg',
+                linkedinUrl: t.linkedinUrl || 'https://www.linkedin.com/'
             }));
         }
     } catch (error) {
@@ -214,11 +215,12 @@ interface Stats {
 }
 
 interface Testimonial {
-    id: number;
+    id: number | string;
     name: string;
     company: string;
     quote: string;
     image: string;
+    linkedinUrl?: string;
 }
 
 interface Resource {
@@ -240,6 +242,100 @@ interface Feature {
     title: string;
     description: string;
     icon: 'rocket' | 'book' | 'people' | 'map';
+}
+
+function TestimonialCard({ testimonial, index }: { testimonial: Testimonial; index: number }) {
+    const placementMonths = ['8 Months', '6 Months', '4 Months', '3 Months', '5 Months', '7 Months', '6 Months', '4 Months', '8 Months'][index % 9];
+
+    return (
+        <article className="w-[390px] max-w-[84vw] flex-shrink-0 rounded-[30px] border border-slate-100 bg-white shadow-[0_18px_60px_rgba(15,23,42,0.12)] overflow-hidden">
+            <div className="flex h-full flex-col px-4 py-4 md:px-5 md:py-5">
+                <div className="flex items-center gap-3 md:gap-4">
+                    <div className="relative shrink-0">
+                        <img
+                            src={testimonial.image}
+                            alt={testimonial.name}
+                            className="h-16 w-16 rounded-full object-cover ring-4 ring-[#4ea4f3] shadow-[0_10px_30px_rgba(59,130,246,0.18)] md:h-18 md:w-18"
+                        />
+                        <div className="absolute -right-1 bottom-0 flex h-6 w-6 items-center justify-center rounded-full bg-[#357ae8] text-white shadow-lg ring-4 ring-white">
+                            <svg className="h-3.5 w-3.5" fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    fillRule="evenodd"
+                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                    clipRule="evenodd"
+                                />
+                            </svg>
+                        </div>
+                    </div>
+                    <div className="min-w-0">
+                        <h3 className="text-[1.2rem] md:text-[1.35rem] font-extrabold tracking-tight text-slate-900">
+                            {testimonial.name}
+                        </h3>
+                        <p className="mt-1 flex flex-wrap items-center gap-1.5 text-[0.75rem] md:text-[0.85rem] text-slate-500">
+                            <span>Placed at</span>
+                            <span className="font-bold text-[#357ae8]">{testimonial.company}</span>
+                            <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#357ae8] text-white shadow-sm">
+                                <svg className="h-3 w-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M10 0l2.39 4.84L18 5.64l-4 3.89.94 5.52L10 12.97 5.06 15.05 6 9.53 2 5.64l5.61-.8L10 0z" />
+                                </svg>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+
+                <div className="my-3 h-px bg-slate-200/90" />
+
+                <div className="rounded-[22px] bg-[#f6f9ff] px-3 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.8)]">
+                    <div className="flex items-center justify-center gap-3">
+                        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#e6efff] text-[#357ae8] md:h-16 md:w-16">
+                            <svg className="h-6 w-6 md:h-7 md:w-7" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
+                                <rect x="3" y="5" width="18" height="16" rx="4" />
+                                <path d="M8 3v4M16 3v4M3 10h18M8 14h.01M12 14h.01M16 14h.01" />
+                            </svg>
+                        </div>
+                        <div className="text-center">
+                            <p className="text-[0.8rem] md:text-[0.9rem] font-semibold text-slate-500">Got placed in</p>
+                            <p className="mt-0.5 text-[1.35rem] md:text-[1.6rem] font-extrabold tracking-tight text-[#357ae8]">
+                                {placementMonths}
+                            </p>
+                            <p className="mt-0.5 text-[0.8rem] md:text-[0.9rem] font-semibold text-slate-600">after joining X Careers</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="mt-3 flex items-start gap-3 md:gap-3.5">
+                    <div className="mt-1 text-[#357ae8]">
+                        <svg className="h-6 w-6 md:h-7 md:w-7" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M7.2 17.8c-.7 0-1.2-.5-1.2-1.2v-2.2c0-2.1 1.6-3.8 3.7-3.8h.7v-.6c0-1.1-.9-2-2-2H6.4c-.7 0-1.2-.5-1.2-1.2S5.7 5.6 6.4 5.6h2c2.5 0 4.6 2 4.6 4.6v6.4c0 .7-.5 1.2-1.2 1.2H7.2zm9.6 0c-.7 0-1.2-.5-1.2-1.2v-2.2c0-2.1 1.6-3.8 3.7-3.8h.7v-.6c0-1.1-.9-2-2-2h-1.2c-.7 0-1.2-.5-1.2-1.2s.5-1.2 1.2-1.2h2c2.5 0 4.6 2 4.6 4.6v6.4c0 .7-.5 1.2-1.2 1.2h-4.4z" />
+                        </svg>
+                    </div>
+                    <p className="text-[0.82rem] leading-[1.35rem] md:text-[0.9rem] md:leading-[1.45rem] italic text-slate-700">
+                        {testimonial.quote}
+                    </p>
+                </div>
+
+                <div className="mt-3 border-t border-slate-200 pt-3">
+                    <a
+                        href={testimonial.linkedinUrl || 'https://www.linkedin.com/'}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex w-full items-center justify-center gap-3 rounded-[18px] border-2 border-[#357ae8] bg-white px-4 py-2 text-[0.75rem] md:px-5 md:py-2.5 md:text-[0.85rem] font-bold text-[#357ae8] shadow-[0_8px_24px_rgba(53,122,232,0.08)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#f7fbff]"
+                    >
+                        <span className="flex h-5 w-5 md:h-6 md:w-6 items-center justify-center rounded-md bg-[#357ae8] text-[0.8rem] md:text-[0.9rem] font-black leading-none text-white">
+                            in
+                        </span>
+                        <span>View LinkedIn Profile</span>
+                        <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                            <path d="M14 3h7v7" />
+                            <path d="M10 14L21 3" />
+                            <path d="M21 14v7h-7" />
+                            <path d="M21 3l-8 8" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </article>
+    );
 }
 
 // SVG Logo component
@@ -2494,130 +2590,13 @@ export default function Page() {
                         <div className="space-y-6">
                             {/* Row 1: Left to Right */}
                             <div className="relative overflow-hidden py-3">
-                                <div
-                                    className="flex animate-scroll gap-4"
-                                    style={{ width: `${testimonials.length * 320}px` }}
-                                >
-                                    {testimonials.map((testimonial) => (
-                                        <div
-                                            key={testimonial.id}
-                                            className="bg-gradient-to-br from-white/95 to-white/85 backdrop-blur-md text-gray-800 p-6 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 relative z-10 border border-white/30 w-[300px] h-[220px] flex-shrink-0 flex flex-col"
-                                        >
-                                            <div className="flex items-center mb-4">
-                                                <div className="relative">
-                                                    <img
-                                                        src={testimonial.image}
-                                                        alt={testimonial.name}
-                                                        className="w-12 h-12 rounded-full mr-3 object-cover border-3 border-blue-100 shadow-md"
-                                                    />
-                                                    <div className="absolute -top-1 -right-1 w-5 h-5 bg-green-500 rounded-full border-2 border-white flex items-center justify-center">
-                                                        <svg
-                                                            className="w-2.5 h-2.5 text-white"
-                                                            fill="currentColor"
-                                                            viewBox="0 0 20 20"
-                                                        >
-                                                            <path
-                                                                fillRule="evenodd"
-                                                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                                                clipRule="evenodd"
-                                                            />
-                                                        </svg>
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <h3 className="font-bold text-gray-800 text-base">
-                                                        {testimonial.name}
-                                                    </h3>
-                                                    <p className="text-blue-600 text-xs font-semibold">
-                                                        {testimonial.company}
-                                                    </p>
-                                                    <div className="flex items-center mt-1">
-                                                        <div className="flex text-yellow-400">
-                                                            {[...Array(5)].map((_, i) => (
-                                                                <svg
-                                                                    key={i}
-                                                                    className="w-3 h-3"
-                                                                    fill="currentColor"
-                                                                    viewBox="0 0 20 20"
-                                                                >
-                                                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.835 1.688-1.71 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.874.57-2.01-.197-1.71-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                                                </svg>
-                                                            ))}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <p className="text-gray-700 italic flex-grow text-sm leading-relaxed">
-                                                "{testimonial.quote}"
-                                            </p>
-                                            <div className="mt-3 pt-3 border-t border-gray-200">
-                                                <div className="flex items-center justify-between text-xs text-gray-500">
-                                                    <span>✅ Verified Success</span>
-                                                    <span>🎯 Entry Level</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    ))}
-                                    {/* Duplicate for seamless loop */}
-                                    {testimonials.slice(0, 3).map((testimonial) => (
-                                        <div
-                                            key={`duplicate-1-${testimonial.id}`}
-                                            className="bg-gradient-to-br from-white/95 to-white/85 backdrop-blur-md text-gray-800 p-6 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 relative z-10 border border-white/30 w-[300px] h-[220px] flex-shrink-0 flex flex-col"
-                                        >
-                                            <div className="flex items-center mb-4">
-                                                <div className="relative">
-                                                    <img
-                                                        src={testimonial.image}
-                                                        alt={testimonial.name}
-                                                        className="w-12 h-12 rounded-full mr-3 object-cover border-3 border-blue-100 shadow-md"
-                                                    />
-                                                    <div className="absolute -top-1 -right-1 w-5 h-5 bg-green-500 rounded-full border-2 border-white flex items-center justify-center">
-                                                        <svg
-                                                            className="w-2.5 h-2.5 text-white"
-                                                            fill="currentColor"
-                                                            viewBox="0 0 20 20"
-                                                        >
-                                                            <path
-                                                                fillRule="evenodd"
-                                                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                                                clipRule="evenodd"
-                                                            />
-                                                        </svg>
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <h3 className="font-bold text-gray-800 text-base">
-                                                        {testimonial.name}
-                                                    </h3>
-                                                    <p className="text-blue-600 text-xs font-semibold">
-                                                        {testimonial.company}
-                                                    </p>
-                                                    <div className="flex items-center mt-1">
-                                                        <div className="flex text-yellow-400">
-                                                            {[...Array(5)].map((_, i) => (
-                                                                <svg
-                                                                    key={i}
-                                                                    className="w-3 h-3"
-                                                                    fill="currentColor"
-                                                                    viewBox="0 0 20 20"
-                                                                >
-                                                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.835 1.688-1.71 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.874.57-2.01-.197-1.71-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                                                </svg>
-                                                            ))}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <p className="text-gray-700 italic flex-grow text-sm leading-relaxed">
-                                                "{testimonial.quote}"
-                                            </p>
-                                            <div className="mt-3 pt-3 border-t border-gray-200">
-                                                <div className="flex items-center justify-between text-xs text-gray-500">
-                                                    <span>✅ Verified Success</span>
-                                                    <span>🎯 Entry Level</span>
-                                                </div>
-                                            </div>
-                                        </div>
+                                <div className="flex w-max animate-scroll gap-6">
+                                    {[...testimonials, ...testimonials].map((testimonial, index) => (
+                                        <TestimonialCard
+                                            key={`${testimonial.id}-${index}`}
+                                            testimonial={testimonial}
+                                            index={index}
+                                        />
                                     ))}
                                 </div>
                             </div>
