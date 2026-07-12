@@ -2,6 +2,17 @@
 
 import { ResumeData } from '@/app/resume-builder/page';
 import { BASIC_TEMPLATE_ID, basicTemplateLatexSource } from '@/lib/resumeTemplates/basic';
+import {
+    CREATIVE_EXECUTIVE_TEMPLATE_ID,
+    creativeExecutiveOneLatexSource,
+    creativeExecutiveThreeLatexSource,
+    creativeExecutiveTwoLatexSource,
+} from '@/lib/resumeTemplates/creative';
+import {
+    STANDARD_PROFESSIONAL_TEMPLATE_ID,
+    standardProfessionalOneLatexSource,
+    standardProfessionalTwoLatexSource,
+} from '@/lib/resumeTemplates/professional';
 
 interface ResumePreviewProps {
     resumeData: ResumeData;
@@ -24,6 +35,23 @@ export default function ResumePreview({ resumeData, template, fontFamily = 'Inte
     const formatDateRange = (startDate: string, endDate: string, current?: boolean) => {
         const start = formatDate(startDate);
         const end = current ? 'Present' : formatDate(endDate);
+
+        if (!start && !end) return '';
+        if (!start) return end;
+        if (!end) return start;
+
+        return `${start} -- ${end}`;
+    };
+
+    const formatYearDate = (dateString: string) => {
+        if (!dateString) return '';
+        if (/^\d{4}$/.test(dateString)) return dateString;
+        return formatDate(dateString);
+    };
+
+    const formatYearDateRange = (startDate: string, endDate: string, current?: boolean) => {
+        const start = formatYearDate(startDate);
+        const end = current ? 'Present' : formatYearDate(endDate);
 
         if (!start && !end) return '';
         if (!start) return end;
@@ -764,6 +792,392 @@ export default function ResumePreview({ resumeData, template, fontFamily = 'Inte
         })()
     );
 
+    const StandardProfessionalOneTemplate = () => {
+        const sectionGap = isExport ? '0.18cm' : '0.28cm';
+        const blockGap = isExport ? '0.08cm' : '0.16cm';
+        const listGap = isExport ? '0.02cm' : '0.06cm';
+        const pageStyle = {
+            fontFamily: BASIC_TEMPLATE_FONT_STACK,
+            minHeight: '11.69in',
+            width: '8.27in',
+            padding: isExport ? '0.5in 0.68in' : '0.6in 0.7in',
+            fontSize: '10pt',
+            lineHeight: isExport ? 1.16 : 1.25,
+            boxSizing: 'border-box' as const,
+            color: '#000000',
+        };
+
+        const sectionTitleStyle = {
+            borderBottom: '1px solid #000',
+            fontVariant: 'small-caps',
+            fontSize: '1.15rem',
+            margin: 0,
+            paddingBottom: '0.05cm',
+            lineHeight: 1.1,
+        };
+
+        const filledCertifications = resumeData.certifications.filter((cert) => cert.trim());
+
+        return (
+            <div
+                className={`resume-export-page mx-auto bg-white text-left ${isExport ? '' : 'shadow-lg'}`}
+                style={pageStyle}
+            >
+                <header className="text-center" style={{ marginBottom: sectionGap }}>
+                    <h1 style={{ fontSize: '1.55rem', lineHeight: 1.1, margin: 0 }}>
+                        {resumeData.personalInfo.fullName || 'Your Name'}
+                    </h1>
+                    <div
+                        className="mt-1 flex flex-wrap items-center justify-center gap-x-3 gap-y-1"
+                        style={{ fontSize: '0.88rem' }}
+                    >
+                        {resumeData.personalInfo.github && (
+                            <span>
+                                Github :{' '}
+                                <a href={resumeData.personalInfo.github} target="_blank" rel="noopener noreferrer" className="underline">
+                                    Github Link
+                                </a>
+                            </span>
+                        )}
+                        {resumeData.personalInfo.linkedin && (
+                            <span>
+                                LinkedIn :{' '}
+                                <a href={resumeData.personalInfo.linkedin} target="_blank" rel="noopener noreferrer" className="underline">
+                                    LinkedIn Link
+                                </a>
+                            </span>
+                        )}
+                        {resumeData.personalInfo.email && (
+                            <span>
+                                Gmail :{' '}
+                                <a href={`mailto:${resumeData.personalInfo.email}`} className="underline">
+                                    {resumeData.personalInfo.email}
+                                </a>
+                            </span>
+                        )}
+                    </div>
+                    {resumeData.personalInfo.phone && (
+                        <p style={{ margin: '0.06cm 0 0', fontSize: '0.88rem' }}>
+                            Mobile: {resumeData.personalInfo.phone}
+                        </p>
+                    )}
+                </header>
+
+                <div style={{ display: 'grid', rowGap: sectionGap }}>
+                    {resumeData.personalInfo.summary && (
+                        <section style={{ display: 'grid', rowGap: blockGap }}>
+                            <h2 style={sectionTitleStyle}>Career Objective</h2>
+                            <p style={{ margin: 0 }}>{resumeData.personalInfo.summary}</p>
+                        </section>
+                    )}
+
+                    {resumeData.experience.length > 0 && (
+                        <section style={{ display: 'grid', rowGap: blockGap }}>
+                            <h2 style={sectionTitleStyle}>Experience</h2>
+                            <div style={{ display: 'grid', rowGap: blockGap }}>
+                                {resumeData.experience.map((exp) => (
+                                    <div key={exp.id}>
+                                        {exp.company && (
+                                            <p style={{ margin: 0 }}>
+                                                <strong>Company:</strong> {exp.company}.
+                                            </p>
+                                        )}
+                                        {exp.position && (
+                                            <p style={{ margin: 0 }}>
+                                                <strong>Role:</strong> {exp.position}.
+                                            </p>
+                                        )}
+                                        {formatYearDateRange(exp.startDate, exp.endDate, exp.current) && (
+                                            <p style={{ margin: 0 }}>
+                                                <strong>Experience:</strong> {formatYearDateRange(exp.startDate, exp.endDate, exp.current)}.
+                                            </p>
+                                        )}
+                                        {exp.description.filter((item) => item.trim()).map((item, index) => (
+                                            <p key={index} style={{ margin: index === 0 ? '0.04cm 0 0' : 0 }}>
+                                                {item}
+                                            </p>
+                                        ))}
+                                    </div>
+                                ))}
+                            </div>
+                        </section>
+                    )}
+
+                    {resumeData.skills.length > 0 && (
+                        <section style={{ display: 'grid', rowGap: blockGap }}>
+                            <h2 style={sectionTitleStyle}>Technical Skills</h2>
+                            <div style={{ display: 'grid', rowGap: listGap }}>
+                                {resumeData.skills.map((skillCategory, index) => (
+                                    <p key={index} style={{ margin: 0 }}>
+                                        <strong>{skillCategory.category}:</strong> {skillCategory.items.join(', ')}
+                                    </p>
+                                ))}
+                            </div>
+                        </section>
+                    )}
+
+                    {resumeData.projects.length > 0 && (
+                        <section style={{ display: 'grid', rowGap: blockGap }}>
+                            <h2 style={sectionTitleStyle}>Projects</h2>
+                            <div style={{ display: 'grid', rowGap: '0.22cm' }}>
+                                {resumeData.projects.map((project) => (
+                                    <div key={project.id}>
+                                        <p style={{ margin: 0 }}>
+                                            <strong>{project.name || 'Project Name'}</strong>
+                                        </p>
+                                        {project.github && (
+                                            <p style={{ margin: 0 }}>
+                                                <strong>Github Repo:</strong> {project.github}
+                                            </p>
+                                        )}
+                                        {project.description && (
+                                            <p style={{ margin: 0 }}>
+                                                <strong>Description:</strong> {project.description}
+                                            </p>
+                                        )}
+                                        {project.highlights.filter((item) => item.trim()).map((item, index) => (
+                                            <p key={index} style={{ margin: index === 0 ? '0.04cm 0 0' : 0 }}>
+                                                {item}
+                                            </p>
+                                        ))}
+                                    </div>
+                                ))}
+                            </div>
+                        </section>
+                    )}
+
+                    {resumeData.education.length > 0 && (
+                        <section style={{ display: 'grid', rowGap: blockGap }}>
+                            <h2 style={sectionTitleStyle}>Education</h2>
+                            <div style={{ display: 'grid', rowGap: '0.1cm' }}>
+                                {resumeData.education.map((edu) => (
+                                    <div
+                                        key={edu.id}
+                                        style={{
+                                            display: 'grid',
+                                            gridTemplateColumns: '1.15in minmax(0, 1fr) 1.25in',
+                                            columnGap: '0.15in',
+                                            alignItems: 'start',
+                                        }}
+                                    >
+                                        <span>{formatYearDateRange(edu.startDate, edu.endDate)}</span>
+                                        <span>
+                                            {[edu.degree, edu.field].filter(Boolean).join(' in ')}
+                                            {edu.institution && (
+                                                <>
+                                                    {' at '}
+                                                    <strong>{edu.institution}</strong>
+                                                </>
+                                            )}
+                                        </span>
+                                        <span className="text-right">{edu.gpa ? `(GPA: ${edu.gpa})` : ''}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </section>
+                    )}
+
+                    {filledCertifications.length > 0 && (
+                        <section style={{ display: 'grid', rowGap: blockGap }}>
+                            <h2 style={sectionTitleStyle}>Certifications</h2>
+                            <div style={{ display: 'grid', rowGap: listGap }}>
+                                {filledCertifications.map((cert, index) => {
+                                    const [name, issuer] = cert.split(/\s--\s|\s-\s/);
+
+                                    return (
+                                        <p key={index} style={{ margin: 0 }}>
+                                            <strong>{name}</strong>
+                                            {issuer ? ` -- ${issuer}` : ''}
+                                        </p>
+                                    );
+                                })}
+                            </div>
+                        </section>
+                    )}
+                </div>
+
+                <pre className="hidden">{standardProfessionalOneLatexSource}</pre>
+            </div>
+        );
+    };
+
+    const StandardProfessionalTwoTemplate = () => {
+        const filledAchievements = resumeData.certifications.filter((item) => item.trim());
+        const pageStyle = {
+            fontFamily: BASIC_TEMPLATE_FONT_STACK,
+            minHeight: '11.69in',
+            width: '8.27in',
+            padding: isExport ? '0.48in 0.6in' : '0.6in',
+            fontSize: '10pt',
+            lineHeight: isExport ? 1.14 : 1.24,
+            boxSizing: 'border-box' as const,
+            color: '#000000',
+        };
+        const sectionTitleStyle = {
+            borderBottom: '1px solid #000',
+            fontSize: '1.32rem',
+            fontWeight: 700,
+            lineHeight: 1.12,
+            margin: 0,
+            paddingBottom: '0.04cm',
+        };
+        const sectionStyle = {
+            display: 'grid',
+            rowGap: isExport ? '0.07cm' : '0.12cm',
+        };
+        const bulletListStyle = {
+            margin: '0.03cm 0 0',
+            paddingLeft: '1.2em',
+            display: 'grid',
+            rowGap: isExport ? '0.01cm' : '0.04cm',
+        };
+
+        return (
+            <div
+                className={`resume-export-page mx-auto bg-white text-left ${isExport ? '' : 'shadow-lg'}`}
+                style={pageStyle}
+            >
+                <header className="text-center" style={{ marginBottom: isExport ? '0.18cm' : '0.28cm' }}>
+                    <h1 style={{ fontSize: '2rem', fontWeight: 700, lineHeight: 1.1, margin: 0 }}>
+                        {resumeData.personalInfo.fullName || 'Your Name'}
+                    </h1>
+                    <div
+                        className="mt-2 flex flex-wrap items-center justify-center gap-x-4 gap-y-1"
+                        style={{ fontSize: '0.88rem' }}
+                    >
+                        {resumeData.personalInfo.location && <span>Location {resumeData.personalInfo.location}</span>}
+                        {resumeData.personalInfo.email && (
+                            <a href={`mailto:${resumeData.personalInfo.email}`} className="underline">
+                                Email {resumeData.personalInfo.email}
+                            </a>
+                        )}
+                        {resumeData.personalInfo.phone && <span>Phone {resumeData.personalInfo.phone}</span>}
+                        {resumeData.personalInfo.linkedin && (
+                            <a href={resumeData.personalInfo.linkedin} target="_blank" rel="noopener noreferrer" className="underline">
+                                LinkedIn
+                            </a>
+                        )}
+                    </div>
+                </header>
+
+                <div style={{ display: 'grid', rowGap: isExport ? '0.16cm' : '0.24cm' }}>
+                    {resumeData.skills.length > 0 && (
+                        <section style={sectionStyle}>
+                            <h2 style={sectionTitleStyle}>Technical Skills</h2>
+                            <div style={{ display: 'grid', rowGap: '0.02cm' }}>
+                                {resumeData.skills.map((skillCategory, index) => (
+                                    <p key={index} style={{ margin: 0 }}>
+                                        <strong>{skillCategory.category}:</strong> {skillCategory.items.join(', ')}
+                                    </p>
+                                ))}
+                            </div>
+                        </section>
+                    )}
+
+                    {filledAchievements.length > 0 && (
+                        <section style={sectionStyle}>
+                            <h2 style={sectionTitleStyle}>Achievements</h2>
+                            <ul style={bulletListStyle}>
+                                {filledAchievements.map((achievement, index) => (
+                                    <li key={index}>{achievement}</li>
+                                ))}
+                            </ul>
+                        </section>
+                    )}
+
+                    {resumeData.experience.length > 0 && (
+                        <section style={sectionStyle}>
+                            <h2 style={sectionTitleStyle}>Experience</h2>
+                            <div style={{ display: 'grid', rowGap: isExport ? '0.08cm' : '0.14cm' }}>
+                                {resumeData.experience.map((exp) => (
+                                    <div key={exp.id}>
+                                        <div className="flex items-start justify-between gap-4">
+                                            <p style={{ margin: 0, fontWeight: 700 }}>
+                                                {[exp.position, exp.company].filter(Boolean).join(' -- ')}
+                                            </p>
+                                            <p className="text-right" style={{ margin: 0, fontWeight: 700 }}>
+                                                {formatYearDateRange(exp.startDate, exp.endDate, exp.current)}
+                                            </p>
+                                        </div>
+                                        {exp.description.filter((item) => item.trim()).length > 0 && (
+                                            <ul style={bulletListStyle}>
+                                                {exp.description.filter((item) => item.trim()).map((item, index) => (
+                                                    <li key={index}>{item}</li>
+                                                ))}
+                                            </ul>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
+                        </section>
+                    )}
+
+                    {resumeData.projects.length > 0 && (
+                        <section style={sectionStyle}>
+                            <h2 style={sectionTitleStyle}>Projects</h2>
+                            <div style={{ display: 'grid', rowGap: isExport ? '0.08cm' : '0.14cm' }}>
+                                {resumeData.projects.map((project) => (
+                                    <div key={project.id}>
+                                        <div className="flex items-start justify-between gap-4">
+                                            <p style={{ margin: 0, fontWeight: 700 }}>
+                                                {project.name}
+                                                {project.technologies.length > 0 ? ` -- ${project.technologies.join(', ')}` : ''}
+                                            </p>
+                                            {(project.github || project.link) && (
+                                                <a
+                                                    href={project.github?.startsWith('http') ? project.github : project.link || '#'}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="underline"
+                                                    style={{ fontWeight: 700 }}
+                                                >
+                                                    GitHub Link
+                                                </a>
+                                            )}
+                                        </div>
+                                        {project.highlights.filter((item) => item.trim()).length > 0 && (
+                                            <ul style={bulletListStyle}>
+                                                {project.highlights.filter((item) => item.trim()).map((item, index) => (
+                                                    <li key={index}>{item}</li>
+                                                ))}
+                                            </ul>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
+                        </section>
+                    )}
+
+                    {resumeData.education.length > 0 && (
+                        <section style={sectionStyle}>
+                            <h2 style={sectionTitleStyle}>Education</h2>
+                            <div style={{ display: 'grid', rowGap: '0.04cm' }}>
+                                {resumeData.education.map((edu) => (
+                                    <div key={edu.id}>
+                                        <div className="flex items-start justify-between gap-4">
+                                            <p style={{ margin: 0, fontWeight: 700 }}>{edu.institution}</p>
+                                            <p className="text-right" style={{ margin: 0, fontWeight: 700 }}>
+                                                {formatYearDateRange(edu.startDate, edu.endDate)}
+                                            </p>
+                                        </div>
+                                        <div className="flex items-start justify-between gap-4">
+                                            <p style={{ margin: 0 }}>
+                                                {[edu.degree, edu.field].filter(Boolean).join(' in ')}
+                                            </p>
+                                            {edu.gpa && <p className="text-right" style={{ margin: 0 }}>GPA: {edu.gpa}</p>}
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </section>
+                    )}
+                </div>
+
+                <pre className="hidden">{standardProfessionalTwoLatexSource}</pre>
+            </div>
+        );
+    };
+
     const ProfessionalTemplate = () => (
         <div
             className={`resume-export-page max-w-4xl mx-auto bg-white p-8 text-left ${isExport ? '' : 'shadow-lg'}`}
@@ -845,6 +1259,532 @@ export default function ResumePreview({ resumeData, template, fontFamily = 'Inte
             )}
         </div>
     );
+
+    const CreativeExecutiveOneTemplate = () => {
+        const summaryItems = resumeData.personalInfo.summary
+            .split(/\n+/)
+            .map((item) => item.trim())
+            .filter(Boolean);
+        const certifications = resumeData.certifications.filter((cert) => cert.trim());
+        const pageStyle = {
+            fontFamily: BASIC_TEMPLATE_FONT_STACK,
+            minHeight: '11.69in',
+            width: '8.27in',
+            padding: isExport ? '0.52in 0.68in' : '0.6in 0.7in',
+            fontSize: '10pt',
+            lineHeight: isExport ? 1.16 : 1.25,
+            boxSizing: 'border-box' as const,
+            color: '#000000',
+        };
+        const sectionTitleStyle = {
+            borderBottom: '1px solid #000',
+            fontSize: '1.1rem',
+            fontWeight: 700,
+            lineHeight: 1.1,
+            margin: 0,
+            paddingBottom: '0.05cm',
+        };
+        const sectionStyle = {
+            display: 'grid',
+            rowGap: isExport ? '0.09cm' : '0.14cm',
+        };
+        const bulletListStyle = {
+            margin: 0,
+            paddingLeft: '1.2em',
+            display: 'grid',
+            rowGap: isExport ? '0.03cm' : '0.07cm',
+        };
+
+        return (
+            <div
+                className={`resume-export-page mx-auto bg-white text-left ${isExport ? '' : 'shadow-lg'}`}
+                style={pageStyle}
+            >
+                <header style={{ marginBottom: isExport ? '0.26cm' : '0.34cm' }}>
+                    <h1 style={{ fontSize: '1.55rem', fontWeight: 700, lineHeight: 1.1, margin: 0 }}>
+                        {resumeData.personalInfo.fullName || 'Your Name'}
+                    </h1>
+                    <p style={{ margin: '0.07cm 0 0', fontWeight: 700 }}>
+                        {(resumeData.experience[0]?.position || 'Software Engineer').toUpperCase()}
+                    </p>
+                    <div
+                        className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1"
+                        style={{ fontSize: '0.9rem' }}
+                    >
+                        {resumeData.personalInfo.location && <span>{resumeData.personalInfo.location}</span>}
+                        {resumeData.personalInfo.phone && <span>{resumeData.personalInfo.phone}</span>}
+                        {resumeData.personalInfo.linkedin && (
+                            <a href={resumeData.personalInfo.linkedin} target="_blank" rel="noopener noreferrer" className="underline">
+                                {resumeData.personalInfo.linkedin.replace(/^https?:\/\/(www\.)?/, '')}
+                            </a>
+                        )}
+                        {resumeData.personalInfo.email && (
+                            <a href={`mailto:${resumeData.personalInfo.email}`} className="underline">
+                                {resumeData.personalInfo.email}
+                            </a>
+                        )}
+                    </div>
+                </header>
+
+                <div style={{ display: 'grid', rowGap: isExport ? '0.18cm' : '0.26cm' }}>
+                    {summaryItems.length > 0 && (
+                        <section style={sectionStyle}>
+                            <h2 style={sectionTitleStyle}>Professional Summary</h2>
+                            <ul style={bulletListStyle}>
+                                {summaryItems.map((item, index) => (
+                                    <li key={index}>{item}</li>
+                                ))}
+                            </ul>
+                        </section>
+                    )}
+
+                    {resumeData.skills.length > 0 && (
+                        <section style={sectionStyle}>
+                            <h2 style={sectionTitleStyle}>Technical Skills</h2>
+                            <ul style={bulletListStyle}>
+                                {resumeData.skills.map((skillCategory, index) => (
+                                    <li key={index}>
+                                        <strong>{skillCategory.category}</strong>
+                                        {skillCategory.items.length > 0 && (
+                                            <ul style={{ margin: '0.04cm 0 0', paddingLeft: '1.5em' }}>
+                                                {skillCategory.items.map((item, itemIndex) => (
+                                                    <li key={itemIndex}>{item}</li>
+                                                ))}
+                                            </ul>
+                                        )}
+                                    </li>
+                                ))}
+                            </ul>
+                        </section>
+                    )}
+
+                    {resumeData.experience.length > 0 && (
+                        <section style={sectionStyle}>
+                            <h2 style={sectionTitleStyle}>Professional Experience</h2>
+                            <div style={{ display: 'grid', rowGap: isExport ? '0.16cm' : '0.24cm' }}>
+                                {resumeData.experience.map((exp) => (
+                                    <div key={exp.id}>
+                                        <div className="flex items-start justify-between gap-4">
+                                            <p style={{ margin: 0, fontWeight: 700 }}>{exp.position}</p>
+                                            <p className="text-right" style={{ margin: 0 }}>
+                                                {formatYearDateRange(exp.startDate, exp.endDate, exp.current)}
+                                            </p>
+                                        </div>
+                                        {exp.company && (
+                                            <p style={{ margin: '0.05cm 0 0', fontStyle: 'italic' }}>{exp.company}</p>
+                                        )}
+                                        {exp.description.filter((item) => item.trim()).length > 0 && (
+                                            <>
+                                                <p style={{ margin: '0.08cm 0 0', fontWeight: 700 }}>Roles &amp; Responsibilities</p>
+                                                <ul style={{ ...bulletListStyle, paddingLeft: '1.5em', marginTop: '0.05cm' }}>
+                                                    {exp.description.filter((item) => item.trim()).map((item, index) => (
+                                                        <li key={index}>{item}</li>
+                                                    ))}
+                                                </ul>
+                                            </>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
+                        </section>
+                    )}
+
+                    {resumeData.education.length > 0 && (
+                        <section style={sectionStyle}>
+                            <h2 style={sectionTitleStyle}>Education</h2>
+                            <div style={{ display: 'grid', rowGap: '0.1cm' }}>
+                                {resumeData.education.map((edu) => (
+                                    <div key={edu.id}>
+                                        <div className="flex items-start justify-between gap-4">
+                                            <p style={{ margin: 0, fontWeight: 700 }}>{edu.institution}</p>
+                                            <p className="text-right" style={{ margin: 0 }}>
+                                                {formatYearDateRange(edu.startDate, edu.endDate)}
+                                            </p>
+                                        </div>
+                                        <p style={{ margin: '0.05cm 0 0' }}>
+                                            {[edu.degree, edu.field].filter(Boolean).join(' | ')}
+                                        </p>
+                                        {edu.gpa && <p style={{ margin: '0.04cm 0 0' }}>CGPA: {edu.gpa}</p>}
+                                    </div>
+                                ))}
+                            </div>
+                        </section>
+                    )}
+
+                    {certifications.length > 0 && (
+                        <section style={sectionStyle}>
+                            <h2 style={sectionTitleStyle}>Certifications</h2>
+                            <ul style={{ ...bulletListStyle, paddingLeft: '1.5em' }}>
+                                {certifications.map((cert, index) => (
+                                    <li key={index}>{cert}</li>
+                                ))}
+                            </ul>
+                        </section>
+                    )}
+                </div>
+
+                <pre className="hidden">{creativeExecutiveOneLatexSource}</pre>
+            </div>
+        );
+    };
+
+    const CreativeExecutiveTwoTemplate = () => {
+        const summaryParagraphs = resumeData.personalInfo.summary
+            .split(/\n+/)
+            .map((item) => item.trim())
+            .filter(Boolean);
+        const certifications = resumeData.certifications.filter((cert) => cert.trim());
+        const headingColor = '#285263';
+        const pageStyle = {
+            fontFamily: BASIC_TEMPLATE_FONT_STACK,
+            minHeight: '11.69in',
+            width: '8.27in',
+            padding: isExport ? '0.52in 0.68in' : '0.6in 0.7in',
+            fontSize: '10pt',
+            lineHeight: isExport ? 1.15 : 1.24,
+            boxSizing: 'border-box' as const,
+            color: '#000000',
+        };
+        const sectionTitleStyle = {
+            borderBottom: '1px solid #000',
+            color: headingColor,
+            fontSize: '1.08rem',
+            fontWeight: 700,
+            lineHeight: 1.1,
+            margin: 0,
+            paddingBottom: '0.04cm',
+            textTransform: 'uppercase' as const,
+        };
+        const sectionStyle = {
+            display: 'grid',
+            rowGap: isExport ? '0.08cm' : '0.13cm',
+        };
+        const bulletListStyle = {
+            margin: 0,
+            paddingLeft: '1.2em',
+            display: 'grid',
+            rowGap: isExport ? '0.03cm' : '0.07cm',
+        };
+
+        return (
+            <div
+                className={`resume-export-page mx-auto bg-white text-left ${isExport ? '' : 'shadow-lg'}`}
+                style={pageStyle}
+            >
+                <header style={{ marginBottom: isExport ? '0.16cm' : '0.24cm' }}>
+                    <h1
+                        style={{
+                            color: headingColor,
+                            fontSize: '1.55rem',
+                            fontWeight: 700,
+                            lineHeight: 1.1,
+                            margin: 0,
+                            textTransform: 'uppercase',
+                        }}
+                    >
+                        {resumeData.personalInfo.fullName || 'Your Name'}
+                    </h1>
+                    <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1">
+                        {resumeData.personalInfo.phone && (
+                            <span><strong>Phone:</strong> {resumeData.personalInfo.phone}</span>
+                        )}
+                        {resumeData.personalInfo.email && (
+                            <a href={`mailto:${resumeData.personalInfo.email}`} className="underline">
+                                <strong>Email:</strong> {resumeData.personalInfo.email}
+                            </a>
+                        )}
+                        {resumeData.personalInfo.location && <span>{resumeData.personalInfo.location}</span>}
+                    </div>
+                    {resumeData.personalInfo.linkedin && (
+                        <p style={{ margin: '0.04cm 0 0' }}>
+                            LinkedIn:{' '}
+                            <a href={resumeData.personalInfo.linkedin} target="_blank" rel="noopener noreferrer" className="underline">
+                                {resumeData.personalInfo.linkedin.replace(/^https?:\/\/(www\.)?/, '')}
+                            </a>
+                        </p>
+                    )}
+                </header>
+
+                <div style={{ display: 'grid', rowGap: isExport ? '0.15cm' : '0.22cm' }}>
+                    {summaryParagraphs.length > 0 && (
+                        <section style={sectionStyle}>
+                            <h2 style={sectionTitleStyle}>Professional Summary</h2>
+                            <div style={{ display: 'grid', rowGap: '0.07cm' }}>
+                                {summaryParagraphs.map((paragraph, index) => (
+                                    <p key={index} style={{ margin: 0 }}>{paragraph}</p>
+                                ))}
+                            </div>
+                        </section>
+                    )}
+
+                    {resumeData.skills.length > 0 && (
+                        <section style={sectionStyle}>
+                            <h2 style={sectionTitleStyle}>Technical Skills</h2>
+                            <ul style={bulletListStyle}>
+                                {resumeData.skills.map((skillCategory, index) => (
+                                    <li key={index}>
+                                        <strong>{skillCategory.category}:</strong> {skillCategory.items.join(', ')}
+                                    </li>
+                                ))}
+                            </ul>
+                        </section>
+                    )}
+
+                    {resumeData.experience.length > 0 && (
+                        <section style={sectionStyle}>
+                            <h2 style={sectionTitleStyle}>Professional Experience</h2>
+                            <div style={{ display: 'grid', rowGap: isExport ? '0.14cm' : '0.22cm' }}>
+                                {resumeData.experience.map((exp) => (
+                                    <div key={exp.id}>
+                                        <p style={{ margin: 0, fontWeight: 700 }}>
+                                            {[exp.position, exp.company, exp.location].filter(Boolean).join(' -- ')}
+                                        </p>
+                                        {formatYearDateRange(exp.startDate, exp.endDate, exp.current) && (
+                                            <p style={{ margin: '0.03cm 0 0', fontStyle: 'italic' }}>
+                                                {formatYearDateRange(exp.startDate, exp.endDate, exp.current)}
+                                            </p>
+                                        )}
+                                        {resumeData.projects.length > 0 && exp === resumeData.experience[0] && (
+                                            <div style={{ display: 'grid', rowGap: '0.1cm', marginTop: '0.1cm' }}>
+                                                {resumeData.projects.map((project) => (
+                                                    <div key={project.id}>
+                                                        <p style={{ margin: 0, fontWeight: 700 }}>
+                                                            Project: {project.name}
+                                                        </p>
+                                                        {project.highlights.filter((item) => item.trim()).length > 0 && (
+                                                            <ul style={{ ...bulletListStyle, marginTop: '0.04cm' }}>
+                                                                {project.highlights.filter((item) => item.trim()).map((item, index) => (
+                                                                    <li key={index}>{item}</li>
+                                                                ))}
+                                                            </ul>
+                                                        )}
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        )}
+                                        {exp.description.filter((item) => item.trim()).length > 0 && (
+                                            <ul style={{ ...bulletListStyle, marginTop: '0.08cm' }}>
+                                                {exp.description.filter((item) => item.trim()).map((item, index) => (
+                                                    <li key={index}>{item}</li>
+                                                ))}
+                                            </ul>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
+                        </section>
+                    )}
+
+                    {certifications.length > 0 && (
+                        <section style={sectionStyle}>
+                            <h2 style={sectionTitleStyle}>Certification</h2>
+                            <ul style={bulletListStyle}>
+                                {certifications.map((cert, index) => (
+                                    <li key={index}><strong>{cert}</strong></li>
+                                ))}
+                            </ul>
+                        </section>
+                    )}
+
+                    {resumeData.education.length > 0 && (
+                        <section style={sectionStyle}>
+                            <h2 style={sectionTitleStyle}>Education</h2>
+                            <div style={{ display: 'grid', rowGap: '0.14cm' }}>
+                                {resumeData.education.map((edu) => (
+                                    <div key={edu.id}>
+                                        <p style={{ margin: 0, fontWeight: 700 }}>
+                                            {[edu.degree, edu.field].filter(Boolean).join(' in ')}
+                                        </p>
+                                        <div className="flex items-start justify-between gap-4">
+                                            <p style={{ margin: 0 }}>{edu.institution}</p>
+                                            <p className="text-right" style={{ margin: 0 }}>
+                                                {formatYearDateRange(edu.startDate, edu.endDate)}
+                                            </p>
+                                        </div>
+                                        {edu.gpa && <p style={{ margin: 0 }}>CGPA: {edu.gpa}</p>}
+                                    </div>
+                                ))}
+                            </div>
+                        </section>
+                    )}
+                </div>
+
+                <pre className="hidden">{creativeExecutiveTwoLatexSource}</pre>
+            </div>
+        );
+    };
+
+    const CreativeExecutiveThreeTemplate = () => {
+        const courseItems = resumeData.languages.filter((item) => item.trim());
+        const certifications = resumeData.certifications.filter((cert) => cert.trim());
+        const pageStyle = {
+            fontFamily: BASIC_TEMPLATE_FONT_STACK,
+            minHeight: '11.69in',
+            width: '8.27in',
+            padding: isExport ? '0.58in 0.7in' : '0.7in',
+            fontSize: '11pt',
+            lineHeight: isExport ? 1.14 : 1.24,
+            boxSizing: 'border-box' as const,
+            color: '#000000',
+        };
+        const sectionTitleStyle = {
+            borderBottom: '1px solid #000',
+            fontSize: '1.12rem',
+            fontWeight: 700,
+            lineHeight: 1.12,
+            margin: 0,
+            paddingBottom: '0.04cm',
+            textTransform: 'uppercase' as const,
+        };
+        const sectionStyle = {
+            display: 'grid',
+            rowGap: isExport ? '0.08cm' : '0.13cm',
+        };
+        const bulletListStyle = {
+            margin: 0,
+            paddingLeft: '1.2em',
+            display: 'grid',
+            rowGap: isExport ? '0.02cm' : '0.05cm',
+        };
+
+        return (
+            <div
+                className={`resume-export-page mx-auto bg-white text-left ${isExport ? '' : 'shadow-lg'}`}
+                style={pageStyle}
+            >
+                <header className="text-center" style={{ marginBottom: isExport ? '0.18cm' : '0.28cm' }}>
+                    <h1 style={{ fontSize: '1.55rem', fontWeight: 700, lineHeight: 1.1, margin: 0 }}>
+                        {resumeData.personalInfo.fullName || 'Your Name'}
+                    </h1>
+                    <div
+                        className="mt-1 flex flex-wrap items-center justify-center gap-x-3 gap-y-1"
+                        style={{ fontSize: '0.9rem' }}
+                    >
+                        {resumeData.personalInfo.email && (
+                            <a href={`mailto:${resumeData.personalInfo.email}`} className="underline">
+                                {resumeData.personalInfo.email}
+                            </a>
+                        )}
+                        {resumeData.personalInfo.phone && <span>{resumeData.personalInfo.phone}</span>}
+                        {resumeData.personalInfo.location && <span>{resumeData.personalInfo.location}</span>}
+                        {resumeData.personalInfo.linkedin && (
+                            <a href={resumeData.personalInfo.linkedin} target="_blank" rel="noopener noreferrer" className="underline">
+                                LinkedIn: {resumeData.personalInfo.linkedin.replace(/^https?:\/\/(www\.)?/, '')}
+                            </a>
+                        )}
+                    </div>
+                </header>
+
+                <div style={{ display: 'grid', rowGap: isExport ? '0.17cm' : '0.24cm' }}>
+                    {resumeData.personalInfo.summary && (
+                        <section style={sectionStyle}>
+                            <h2 style={sectionTitleStyle}>Profile</h2>
+                            <p style={{ margin: 0 }}>{resumeData.personalInfo.summary}</p>
+                        </section>
+                    )}
+
+                    {resumeData.education.length > 0 && (
+                        <section style={sectionStyle}>
+                            <h2 style={sectionTitleStyle}>Education</h2>
+                            <div style={{ display: 'grid', rowGap: isExport ? '0.08cm' : '0.12cm' }}>
+                                {resumeData.education.map((edu) => (
+                                    <div key={edu.id}>
+                                        <div className="flex items-start justify-between gap-4">
+                                            <p style={{ margin: 0, fontWeight: 700 }}>{edu.institution}</p>
+                                            {edu.location && <p className="text-right" style={{ margin: 0 }}>{edu.location}</p>}
+                                        </div>
+                                        <div className="flex items-start justify-between gap-4">
+                                            <p style={{ margin: 0 }}>
+                                                {[edu.degree, edu.field].filter(Boolean).join(' ')}
+                                            </p>
+                                            <p className="text-right" style={{ margin: 0 }}>
+                                                {formatYearDateRange(edu.startDate, edu.endDate)}
+                                            </p>
+                                        </div>
+                                        {edu.gpa && <p style={{ margin: 0 }}>CGPA: {edu.gpa}</p>}
+                                    </div>
+                                ))}
+                            </div>
+                        </section>
+                    )}
+
+                    {resumeData.skills.length > 0 && (
+                        <section style={sectionStyle}>
+                            <h2 style={sectionTitleStyle}>Skills</h2>
+                            <div style={{ display: 'grid', rowGap: '0.08cm' }}>
+                                {resumeData.skills.map((skillCategory, index) => {
+                                    const shouldListItems = skillCategory.items.length > 4;
+
+                                    return (
+                                        <div key={index}>
+                                            <p style={{ margin: 0, fontWeight: 700 }}>
+                                                {skillCategory.category}:
+                                            </p>
+                                            {shouldListItems ? (
+                                                <ul style={{ ...bulletListStyle, marginTop: '0.03cm' }}>
+                                                    {skillCategory.items.map((item, itemIndex) => (
+                                                        <li key={itemIndex}>{item}</li>
+                                                    ))}
+                                                </ul>
+                                            ) : (
+                                                <p style={{ margin: '0.03cm 0 0' }}>{skillCategory.items.join(', ')}</p>
+                                            )}
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        </section>
+                    )}
+
+                    {resumeData.projects.length > 0 && (
+                        <section style={sectionStyle}>
+                            <h2 style={sectionTitleStyle}>Projects</h2>
+                            <div style={{ display: 'grid', rowGap: isExport ? '0.1cm' : '0.16cm' }}>
+                                {resumeData.projects.map((project) => (
+                                    <div key={project.id}>
+                                        <p style={{ margin: 0, fontWeight: 700 }}>{project.name}</p>
+                                        {project.highlights.filter((item) => item.trim()).length > 0 && (
+                                            <ul style={{ ...bulletListStyle, marginTop: '0.04cm' }}>
+                                                {project.highlights.filter((item) => item.trim()).map((item, index) => (
+                                                    <li key={index}>{item}</li>
+                                                ))}
+                                            </ul>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
+                        </section>
+                    )}
+
+                    {courseItems.length > 0 && (
+                        <section style={sectionStyle}>
+                            <h2 style={sectionTitleStyle}>Course</h2>
+                            <p style={{ margin: 0, fontWeight: 700 }}>Data Analytics &amp; Business Analytics</p>
+                            <p style={{ margin: 0 }}>Naresh i Technologies, Hyderabad</p>
+                            <ul style={bulletListStyle}>
+                                {courseItems.map((courseItem, index) => (
+                                    <li key={index}>{courseItem}</li>
+                                ))}
+                            </ul>
+                        </section>
+                    )}
+
+                    {certifications.length > 0 && (
+                        <section style={sectionStyle}>
+                            <h2 style={sectionTitleStyle}>Certifications</h2>
+                            <ul style={bulletListStyle}>
+                                {certifications.map((cert, index) => (
+                                    <li key={index}>{cert}</li>
+                                ))}
+                            </ul>
+                        </section>
+                    )}
+                </div>
+
+                <pre className="hidden">{creativeExecutiveThreeLatexSource}</pre>
+            </div>
+        );
+    };
 
     const CreativeTemplate = () => (
         <div
@@ -947,8 +1887,13 @@ export default function ResumePreview({ resumeData, template, fontFamily = 'Inte
     const templates = {
         modern: ModernTemplate,
         [BASIC_TEMPLATE_ID]: VinodTemplate,
-        professional: ProfessionalTemplate,
-        creative: CreativeTemplate,
+        [STANDARD_PROFESSIONAL_TEMPLATE_ID]: StandardProfessionalOneTemplate,
+        'standard-professional-2': StandardProfessionalTwoTemplate,
+        professional: StandardProfessionalOneTemplate,
+        [CREATIVE_EXECUTIVE_TEMPLATE_ID]: CreativeExecutiveOneTemplate,
+        'creative-executive-2': CreativeExecutiveTwoTemplate,
+        'creative-executive-3': CreativeExecutiveThreeTemplate,
+        creative: CreativeExecutiveOneTemplate,
     };
 
     const TemplateComponent = templates[template as keyof typeof templates] || ModernTemplate;
