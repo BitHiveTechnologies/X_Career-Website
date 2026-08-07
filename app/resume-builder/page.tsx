@@ -15,6 +15,14 @@ import {
     cloneBasicTemplateDefaults,
 } from '@/lib/resumeTemplates/basic';
 import {
+    isStandardProfessionalTemplate,
+    standardProfessionalVisibleSections,
+} from '@/lib/resumeTemplates/professional';
+import {
+    creativeExecutiveVisibleSections,
+    isCreativeExecutiveTemplate,
+} from '@/lib/resumeTemplates/creative';
+import {
     BriefcaseBusiness,
     CheckCircle,
     Download,
@@ -138,10 +146,13 @@ export default function ResumeBuilderPage() {
     const fontFamily = 'Inter';
 
     const hasUnsavedChanges = JSON.stringify(resumeData) !== JSON.stringify(savedResumeData);
-    const visibleSectionIds =
-        selectedTemplate === BASIC_TEMPLATE_ID
-            ? [...basicTemplateVisibleSections]
-            : ['personal', 'experience', 'education', 'projects', 'skills', 'additional'];
+    const visibleSectionIds = selectedTemplate === BASIC_TEMPLATE_ID
+        ? [...basicTemplateVisibleSections]
+        : isStandardProfessionalTemplate(selectedTemplate)
+            ? [...standardProfessionalVisibleSections]
+            : isCreativeExecutiveTemplate(selectedTemplate)
+                ? [...creativeExecutiveVisibleSections]
+                : ['personal', 'experience', 'education', 'projects', 'skills', 'additional'];
 
     useEffect(() => {
         const fetchResume = async () => {

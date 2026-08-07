@@ -1,7 +1,17 @@
 'use client';
 
 import { useAuth } from '@/lib/auth/AuthContextBackend';
-import { Check, Crown, FileText, Lock } from 'lucide-react';
+import {
+    CREATIVE_EXECUTIVE_TEMPLATE_ID,
+    CREATIVE_EXECUTIVE_TEMPLATE_IDS,
+    isCreativeExecutiveTemplate,
+} from '@/lib/resumeTemplates/creative';
+import {
+    STANDARD_PROFESSIONAL_TEMPLATE_ID,
+    STANDARD_PROFESSIONAL_TEMPLATE_IDS,
+    isStandardProfessionalTemplate,
+} from '@/lib/resumeTemplates/professional';
+import { Check, Lock } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import SubscriptionUpgradeModal from './SubscriptionUpgradeModal';
 
@@ -42,18 +52,49 @@ export default function TemplateSelector({
             subscriptionTier: 'basic' as const
         },
         {
-            id: 'professional',
+            id: STANDARD_PROFESSIONAL_TEMPLATE_ID,
             name: 'Standard Professional',
             description: 'Recruter-friendly layout for professionals with some experience',
             features: ['ATS Friendly', 'Recruiter Favorite', 'High Readability'],
             subscriptionTier: 'premium' as const
         },
         {
-            id: 'creative',
+            id: CREATIVE_EXECUTIVE_TEMPLATE_ID,
             name: 'Creative Executive',
             description: 'Stylish and modern template for executives and leadership roles',
             features: ['ATS Friendly', 'Executive Style', 'Leadership Focus'],
             subscriptionTier: 'premium' as const
+        },
+    ];
+
+    const creativeVariants = [
+        {
+            id: CREATIVE_EXECUTIVE_TEMPLATE_IDS[0],
+            label: 'Creative 1',
+            available: true,
+        },
+        {
+            id: CREATIVE_EXECUTIVE_TEMPLATE_IDS[1],
+            label: 'Creative 2',
+            available: true,
+        },
+        {
+            id: CREATIVE_EXECUTIVE_TEMPLATE_IDS[2],
+            label: 'Creative 3',
+            available: true,
+        },
+    ];
+
+    const professionalVariants = [
+        {
+            id: STANDARD_PROFESSIONAL_TEMPLATE_IDS[0],
+            label: 'Standard 1',
+            available: true,
+        },
+        {
+            id: STANDARD_PROFESSIONAL_TEMPLATE_IDS[1],
+            label: 'Standard 2',
+            available: true,
         },
     ];
 
@@ -72,6 +113,30 @@ export default function TemplateSelector({
             onTemplateChange(template.id);
         } else {
             setLockedTemplate(template.name);
+            setShowUpgradeModal(true);
+        }
+    };
+
+    const handleProfessionalVariantClick = (variant: typeof professionalVariants[0]) => {
+        if (!variant.available) return;
+
+        const accessible = canAccessTemplate('premium', userSubscription);
+        if (accessible) {
+            onTemplateChange(variant.id);
+        } else {
+            setLockedTemplate('Standard Professional');
+            setShowUpgradeModal(true);
+        }
+    };
+
+    const handleCreativeVariantClick = (variant: typeof creativeVariants[0]) => {
+        if (!variant.available) return;
+
+        const accessible = canAccessTemplate('premium', userSubscription);
+        if (accessible) {
+            onTemplateChange(variant.id);
+        } else {
+            setLockedTemplate('Creative Executive');
             setShowUpgradeModal(true);
         }
     };
@@ -104,7 +169,12 @@ export default function TemplateSelector({
                     {templates.map((template) => {
                         const isAccessible = canAccessTemplate(template.subscriptionTier, userSubscription);
                         const isLocked = !isAccessible;
-                        const isSelected = selectedTemplate === template.id;
+                        const isSelected =
+                            selectedTemplate === template.id ||
+                            (template.id === STANDARD_PROFESSIONAL_TEMPLATE_ID &&
+                                isStandardProfessionalTemplate(selectedTemplate)) ||
+                            (template.id === CREATIVE_EXECUTIVE_TEMPLATE_ID &&
+                                isCreativeExecutiveTemplate(selectedTemplate));
                         
                         return (
                             <button
@@ -167,6 +237,64 @@ export default function TemplateSelector({
                         );
                     })}
                 </div>
+
+                {isStandardProfessionalTemplate(selectedTemplate) && (
+                    <div className="mt-4 rounded-xl border border-slate-200 bg-slate-50 p-2">
+                        <div className="grid grid-cols-2 gap-2">
+                            {professionalVariants.map((variant) => {
+                                const isSelected = selectedTemplate === variant.id ||
+                                    (selectedTemplate === 'professional' && variant.id === STANDARD_PROFESSIONAL_TEMPLATE_ID);
+
+                                return (
+                                    <button
+                                        key={variant.id}
+                                        type="button"
+                                        disabled={!variant.available}
+                                        className={`rounded-lg border px-3 py-2 text-sm font-semibold transition ${
+                                            isSelected
+                                                ? 'border-[hsl(196,80%,45%)] bg-white text-[hsl(196,80%,32%)] shadow-sm'
+                                                : variant.available
+                                                    ? 'border-transparent bg-transparent text-slate-600 hover:bg-white'
+                                                    : 'cursor-not-allowed border-transparent bg-transparent text-slate-400'
+                                        }`}
+                                        onClick={() => handleProfessionalVariantClick(variant)}
+                                    >
+                                        {variant.label}
+                                    </button>
+                                );
+                            })}
+                        </div>
+                    </div>
+                )}
+
+                {isCreativeExecutiveTemplate(selectedTemplate) && (
+                    <div className="mt-4 rounded-xl border border-slate-200 bg-slate-50 p-2">
+                        <div className="grid grid-cols-3 gap-2">
+                            {creativeVariants.map((variant) => {
+                                const isSelected = selectedTemplate === variant.id ||
+                                    (selectedTemplate === 'creative' && variant.id === CREATIVE_EXECUTIVE_TEMPLATE_ID);
+
+                                return (
+                                    <button
+                                        key={variant.id}
+                                        type="button"
+                                        disabled={!variant.available}
+                                        className={`rounded-lg border px-3 py-2 text-sm font-semibold transition ${
+                                            isSelected
+                                                ? 'border-[hsl(196,80%,45%)] bg-white text-[hsl(196,80%,32%)] shadow-sm'
+                                                : variant.available
+                                                    ? 'border-transparent bg-transparent text-slate-600 hover:bg-white'
+                                                    : 'cursor-not-allowed border-transparent bg-transparent text-slate-400'
+                                        }`}
+                                        onClick={() => handleCreativeVariantClick(variant)}
+                                    >
+                                        {variant.label}
+                                    </button>
+                                );
+                            })}
+                        </div>
+                    </div>
+                )}
 
                 
             </div>
