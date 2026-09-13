@@ -197,7 +197,10 @@ class PaymentService {
   private cashfreeMode: 'sandbox' | 'production';
 
   constructor() {
-    this.baseUrl = ENV.API_BASE_URL;
+    // Strip any trailing slash so `${baseUrl}/api/...` never produces a double
+    // slash (`//api/...`), which the backend 404s. Guards against a
+    // NEXT_PUBLIC_API_BASE_URL env value that ends in "/".
+    this.baseUrl = ENV.API_BASE_URL.replace(/\/+$/, '');
     this.apiVersion = ENV.API_VERSION;
     this.cashfreeMode = ENV.CASHFREE_ENV === 'production' ? 'production' : 'sandbox';
   }
