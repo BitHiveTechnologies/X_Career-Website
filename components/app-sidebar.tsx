@@ -14,6 +14,7 @@ import {
 
 import { NavMain } from "@/components/nav-main"
 import { NavUser } from "@/components/nav-user"
+import { useAuth } from "@/lib/auth/AuthContext"
 import Logo from "@/components/ui/Logo"
 import {
   Sidebar,
@@ -26,11 +27,6 @@ import {
 } from "@/components/ui/sidebar"
 
 const data = {
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
-  },
   navMain: [
     {
       title: "Dashboard",
@@ -71,6 +67,16 @@ const data = {
 }
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const auth = useAuth()
+  const authUser = auth?.user
+  const sidebarUser = {
+    name:
+      [authUser?.firstName, authUser?.lastName].filter(Boolean).join(" ").trim() ||
+      authUser?.email?.split("@")[0] ||
+      "Administrator",
+    email: authUser?.email || "",
+    avatar: "",
+  }
   return (
     <Sidebar 
       collapsible="offcanvas" 
@@ -96,7 +102,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavMain items={data.navMain} />
       </SidebarContent>
       <SidebarFooter className="bg-gray-50 border-t border-gray-200 px-3 py-3">
-        <NavUser user={data.user} />
+        <NavUser user={sidebarUser} />
       </SidebarFooter>
     </Sidebar>
   )
