@@ -35,6 +35,8 @@ export default function Page() {
   const [sendingNotifications, setSendingNotifications] = useState<{[key: string]: boolean}>({})
   const [alertStats, setAlertStats] = useState<any>(null)
   const [sendingAllAlerts, setSendingAllAlerts] = useState(false)
+  const [batchProgress, setBatchProgress] = useState<any>(null)
+  const [stopping, setStopping] = useState(false)
   const [retryingFailed, setRetryingFailed] = useState(false)
   const [payments, setPayments] = useState<any[]>([])
   const [chartData, setChartData] = useState<{ date: string; customers: number }[]>([])
@@ -274,18 +276,46 @@ export default function Page() {
     }
   };
 
+  // Stop an in-progress alert batch
+  const handleStopAlerts = async () => {
+    try {
+      setStopping(true);
+      const res = await jobAlertService.stopSending();
+      if (res.success) {
+        toast.info(res.data?.stopRequested ? 'Stopping — the batch will halt after the current email.' : 'No batch is currently running.');
+      } else {
+        toast.error(res.error?.message || 'Failed to stop sending');
+      }
+    } catch (e: any) {
+      toast.error(`Failed to stop sending: ${e.message}`);
+    } finally {
+      setStopping(false);
+    }
+  };
+
   // Send alerts to ALL active jobs
   const handleSendAllAlerts = async () => {
+    let poll: ReturnType<typeof setInterval> | null = null;
     try {
       setSendingAllAlerts(true);
+      setBatchProgress(null);
+      setStopping(false);
       toast.info('Sending alerts to all active jobs. This may take a moment...');
-      
+
+      // Poll live progress while the batch runs so the admin can watch/stop it.
+      poll = setInterval(async () => {
+        try {
+          const p = await jobAlertService.getProgress();
+          if (p.success && p.data?.progress) setBatchProgress(p.data.progress);
+        } catch { /* ignore transient poll errors */ }
+      }, 1500);
+
       const response = await jobAlertService.sendForAllJobs({
         minMatchScore: 50,
         maxUsersPerJob: 100,
         dryRun: false, force: true // Manual trigger
       });
-      
+
       if (response.success) {
         // API returns: { success, data: { totalJobs, totalEligibleUsers, totalEmailsSent, totalEmailsFailed, totalDuplicates, perJob } }
         const d = response.data;
@@ -305,6 +335,12 @@ export default function Page() {
       ; void /* console.error */ ((..._args) => {})('Error sending all job alerts:', error);
       toast.error(`Error sending all job alerts: ${error.message}`);
     } finally {
+      if (poll) clearInterval(poll);
+      // One final progress read to show the settled totals.
+      try {
+        const p = await jobAlertService.getProgress();
+        if (p.success && p.data?.progress) setBatchProgress(p.data.progress);
+      } catch { /* ignore */ }
       setSendingAllAlerts(false);
     }
   };
@@ -651,7 +687,22 @@ Note: Dedup is active — ${userEmail} only receives new jobs they haven't seen.
                 )}
               </Button>
 
-              <div className="ml-auto flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+              {sendingAllAlerts && (
+                <Button
+                  onClick={handleStopAlerts}
+                  disabled={stopping}
+                  variant="destructive"
+                  className="bg-red-600 hover:bg-red-700 text-white"
+                >
+                  {stopping ? (
+                    <><span className="animate-spin mr-2">⏳</span>Stopping…</>
+                  ) : (
+                    <>⏹ Stop Sending</>
+                  )}
+                </Button>
+              )}
+
+              <div className="w-full sm:w-auto sm:ml-auto flex flex-wrap items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
                 <span className="px-3 py-1 bg-white dark:bg-gray-800 rounded-full border border-gray-300 dark:border-gray-600">
                   Min Match: 50%
                 </span>
@@ -660,13 +711,45 @@ Note: Dedup is active — ${userEmail} only receives new jobs they haven't seen.
                 </span>
               </div>
             </div>
+
+            {/* Live batch progress */}
+            {batchProgress && batchProgress.batchId && (
+              <div className="mt-4 bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
+                <div className="flex items-center justify-between mb-2 flex-wrap gap-2">
+                  <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                    {batchProgress.active
+                      ? 'Sending in progress…'
+                      : batchProgress.cancelled
+                        ? 'Batch stopped'
+                        : 'Last batch complete'}
+                  </span>
+                  <span className="text-xs font-mono text-gray-600 dark:text-gray-400 tabular-nums">
+                    {batchProgress.processed ?? 0} / {batchProgress.total ?? 0}
+                  </span>
+                </div>
+                <div className="h-2 w-full rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
+                  <div
+                    className={`h-full rounded-full transition-all duration-300 ${batchProgress.cancelled ? 'bg-red-500' : batchProgress.active ? 'bg-blue-600' : 'bg-green-600'}`}
+                    style={{ width: `${batchProgress.total ? Math.min(100, Math.round((batchProgress.processed / batchProgress.total) * 100)) : 0}%` }}
+                  />
+                </div>
+                <div className="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-xs">
+                  <span className="text-green-600 dark:text-green-400">✓ Sent: <b className="tabular-nums">{batchProgress.sent ?? 0}</b></span>
+                  <span className="text-red-600 dark:text-red-400">✕ Failed: <b className="tabular-nums">{batchProgress.failed ?? 0}</b></span>
+                  <span className="text-gray-500 dark:text-gray-400">⤼ Skipped: <b className="tabular-nums">{batchProgress.skipped ?? 0}</b></span>
+                  {batchProgress.lastError && (
+                    <span className="text-red-500 truncate max-w-full" title={batchProgress.lastError}>Last error: {batchProgress.lastError}</span>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
         </div>
         
         {/* Tabbed Data Tables */}
         <div className="px-4 lg:px-6">
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="grid w-full grid-cols-4">
+            <TabsList className="flex w-full overflow-x-auto justify-start sm:grid sm:grid-cols-4">
               <TabsTrigger value="customers" className="flex items-center gap-2">
                 <Users className="h-4 w-4" />
                 Customers

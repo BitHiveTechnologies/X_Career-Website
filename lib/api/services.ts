@@ -679,6 +679,20 @@ export class JobAlertService {
   }
 
   /**
+   * Stop the currently-running email/alert batch (admin only)
+   */
+  static async stopSending(): Promise<ApiResponse<any>> {
+    return apiClient.post(API_ENDPOINTS.JOB_ALERTS.STOP, {});
+  }
+
+  /**
+   * Get live progress of the current/last email batch (admin only)
+   */
+  static async getProgress(): Promise<ApiResponse<any>> {
+    return apiClient.get(API_ENDPOINTS.JOB_ALERTS.PROGRESS);
+  }
+
+  /**
    * Get scheduler status (admin only)
    */
   static async getSchedulerStatus(): Promise<ApiResponse<any>> {

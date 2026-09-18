@@ -136,6 +136,8 @@ export const API_ENDPOINTS = {
     RETRY_FAILED: '/api/v1/jobs/alerts/retry-failed',
     SCHEDULER_STATUS: '/api/v1/jobs/alerts/scheduler/status',
     SCHEDULER_TRIGGER: '/api/v1/jobs/alerts/scheduler/trigger',
+    STOP: '/api/v1/jobs/alerts/stop',
+    PROGRESS: '/api/v1/jobs/alerts/progress',
   },
   
   // Admin
