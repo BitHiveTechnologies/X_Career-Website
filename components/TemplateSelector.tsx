@@ -1,6 +1,6 @@
 'use client';
 
-import { useAuth } from '@/lib/auth/AuthContextBackend';
+import { subscriptionService } from '@/lib/api/services';
 import {
     CREATIVE_EXECUTIVE_TEMPLATE_ID,
     CREATIVE_EXECUTIVE_TEMPLATE_IDS,
@@ -24,33 +24,22 @@ export default function TemplateSelector({
     selectedTemplate,
     onTemplateChange,
 }: TemplateSelectorProps) {
-    const auth = useAuth();
     const [showUpgradeModal, setShowUpgradeModal] = useState(false);
     const [lockedTemplate, setLockedTemplate] = useState<string>('');
     const [userSubscription, setUserSubscription] = useState<string | null>(null);
 
     useEffect(() => {
-        // Wait for auth to finish hydrating. Running before the token is restored
-        // made getUserSubscription() fall back to 'basic', which locked the premium
-        // templates for paying users until a manual refresh.
-        if (auth?.isLoading) return;
-
+        // Read the plan straight from the API. This used to go through
+        // useAuth() from AuthContextBackend, which has no provider mounted
+        // anywhere in the app, so the plan was always undefined and every
+        // premium template stayed locked for paying subscribers.
         let cancelled = false;
 
         const loadUserSubscription = async () => {
-            // The authenticated user already carries the plan, so the templates
-            // unlock on first paint rather than after the round trip.
-            const planFromUser = (auth?.user as { subscriptionPlan?: string } | null)?.subscriptionPlan;
-            if (planFromUser && !cancelled) {
-                setUserSubscription(planFromUser);
-            }
-
             try {
-                if (auth?.getUserSubscription) {
-                    const subscription = await auth.getUserSubscription();
-                    if (subscription && !cancelled) {
-                        setUserSubscription(subscription);
-                    }
+                const response = await subscriptionService.getAccess();
+                if (!cancelled && response.success && response.data?.plan) {
+                    setUserSubscription(response.data.plan);
                 }
             } catch (error) {
                 ; void /* console.error */ ((..._args) => {})('Error loading user subscription:', error);
@@ -62,7 +51,7 @@ export default function TemplateSelector({
         return () => {
             cancelled = true;
         };
-    }, [auth?.isLoading, auth?.isAuthenticated, auth?.user?.id]);
+    }, []);
 
     const templates = [
         {
