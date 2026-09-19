@@ -21,7 +21,12 @@ interface SiteMetricFormModalProps {
 
 const empty: SiteMetricFormValues = { key: '', value: '', description: '' };
 
-export function SiteMetricFormModal({ isOpen, onClose, onSubmit, metric }: SiteMetricFormModalProps) {
+export function SiteMetricFormModal({
+    isOpen,
+    onClose,
+    onSubmit,
+    metric,
+}: SiteMetricFormModalProps) {
     const [values, setValues] = useState<SiteMetricFormValues>(empty);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [error, setError] = useState<string | null>(null);
@@ -50,7 +55,9 @@ export function SiteMetricFormModal({ isOpen, onClose, onSubmit, metric }: SiteM
         try {
             await onSubmit({ ...values, key: values.key.trim(), value: values.value.trim() });
         } catch (err) {
-            setError(err instanceof Error ? err.message : 'Something went wrong. Please try again.');
+            setError(
+                err instanceof Error ? err.message : 'Something went wrong. Please try again.',
+            );
         } finally {
             setIsSubmitting(false);
         }
@@ -78,7 +85,9 @@ export function SiteMetricFormModal({ isOpen, onClose, onSubmit, metric }: SiteM
 
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
-                        <label className="mb-1 block text-sm font-medium text-gray-700">Key *</label>
+                        <label className="mb-1 block text-sm font-medium text-gray-700">
+                            Key *
+                        </label>
                         <input
                             className={`${field} ${isEdit ? 'bg-gray-50 text-gray-500' : ''}`}
                             value={values.key}
@@ -94,7 +103,9 @@ export function SiteMetricFormModal({ isOpen, onClose, onSubmit, metric }: SiteM
                     </div>
 
                     <div>
-                        <label className="mb-1 block text-sm font-medium text-gray-700">Value *</label>
+                        <label className="mb-1 block text-sm font-medium text-gray-700">
+                            Value *
+                        </label>
                         <input
                             className={field}
                             value={values.value}
@@ -113,7 +124,9 @@ export function SiteMetricFormModal({ isOpen, onClose, onSubmit, metric }: SiteM
                         <input
                             className={field}
                             value={values.description}
-                            onChange={(e) => setValues((v) => ({ ...v, description: e.target.value }))}
+                            onChange={(e) =>
+                                setValues((v) => ({ ...v, description: e.target.value }))
+                            }
                             placeholder="Hero · Freshers Joined"
                         />
                     </div>

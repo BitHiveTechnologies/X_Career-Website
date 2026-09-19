@@ -136,11 +136,15 @@ const dummyData: {
     ],
 };
 
+// NEXT_PUBLIC_API_BASE_URL may end in '/'; concatenating it with '/api/...'
+// produced '//api/...' which 404s. URL() resolves the path correctly.
+const apiUrl = (path: string) =>
+    new URL(path, process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3001').toString();
+
 // API call functions (to be implemented with actual backend)
 const fetchStats = async (): Promise<Stats> => {
     try {
-        const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3001';
-        const response = await fetch(`${baseUrl}/api/v1/admin/settings/metrics`);
+        const response = await fetch(apiUrl('/api/v1/admin/settings/metrics'));
         const data = await response.json();
         if (data.success) {
             // Transform settings to Stats
@@ -167,8 +171,7 @@ const fetchStats = async (): Promise<Stats> => {
 
 const fetchTestimonials = async (): Promise<Testimonial[]> => {
     try {
-        const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3001';
-        const response = await fetch(`${baseUrl}/api/v1/testimonials`);
+        const response = await fetch(apiUrl('/api/v1/testimonials'));
         const data = await response.json();
         if (data.success) {
             return data.data.map((t: any) => ({
@@ -410,18 +413,18 @@ export default function Page() {
 
                 const [fetchedStats, testimonialsData, resourcesData, featuresData, benefitsData] =
                     await Promise.all([
-                        // Only fetch if not cached, otherwise just return existing
-                        cachedStats ? Promise.resolve(statsData) : fetchStats(),
+                        // Always refetch: the cache only paints something while this
+                        // loads, otherwise admin edits would not show until the
+                        // browser session ended.
+                        fetchStats(),
                         fetchTestimonials(),
                         fetchResources(),
                         fetchFeatures(),
                         fetchBenefits(),
                     ]);
 
-                if (!cachedStats) {
-                    setStats(fetchedStats);
-                    sessionStorage.setItem('x_careers_stats', JSON.stringify(fetchedStats));
-                }
+                setStats(fetchedStats);
+                sessionStorage.setItem('x_careers_stats', JSON.stringify(fetchedStats));
                 
                 setTestimonials(testimonialsData);
                 setResources(resourcesData);
