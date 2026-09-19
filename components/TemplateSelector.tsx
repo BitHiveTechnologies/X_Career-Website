@@ -1,6 +1,7 @@
 'use client';
 
 import { subscriptionService } from '@/lib/api/services';
+import { canUseTemplatePlan, planForTemplate, planLabel } from '@/lib/resumeTemplates/plans';
 import {
     CREATIVE_EXECUTIVE_TEMPLATE_ID,
     CREATIVE_EXECUTIVE_TEMPLATE_IDS,
@@ -59,21 +60,18 @@ export default function TemplateSelector({
             name: 'Basic',
             description: 'Clean and simple template for freshers and students',
             features: ['ATS Friendly', 'Best for Freshers', 'Clean Layout'],
-            subscriptionTier: 'basic' as const
         },
         {
             id: STANDARD_PROFESSIONAL_TEMPLATE_ID,
             name: 'Standard Professional',
             description: 'Recruter-friendly layout for professionals with some experience',
             features: ['ATS Friendly', 'Recruiter Favorite', 'High Readability'],
-            subscriptionTier: 'premium' as const
         },
         {
             id: CREATIVE_EXECUTIVE_TEMPLATE_ID,
             name: 'Creative Executive',
             description: 'Stylish and modern template for executives and leadership roles',
             features: ['ATS Friendly', 'Executive Style', 'Leadership Focus'],
-            subscriptionTier: 'premium' as const
         },
     ];
 
@@ -108,17 +106,12 @@ export default function TemplateSelector({
         },
     ];
 
-    const canAccessTemplate = (templateTier: 'basic' | 'premium', plan: string | null): boolean => {
-        if (!plan) return templateTier === 'basic';
-        const normalized = plan.toLowerCase();
-        const tierLevel: Record<string, number> = { basic: 1, premium: 2, enterprise: 3 };
-        const userLevel = tierLevel[normalized] || 1;
-        const requiredLevel = templateTier === 'premium' ? 2 : 1;
-        return userLevel >= requiredLevel;
-    };
+    /** Access is decided by lib/resumeTemplates/plans.ts, the one place tiers live. */
+    const canAccessTemplateId = (templateId: string) =>
+        canUseTemplatePlan(planForTemplate(templateId), userSubscription);
 
     const handleTemplateClick = (template: typeof templates[0]) => {
-        const accessible = canAccessTemplate(template.subscriptionTier, userSubscription);
+        const accessible = canAccessTemplateId(template.id);
         if (accessible) {
             onTemplateChange(template.id);
         } else {
@@ -130,7 +123,7 @@ export default function TemplateSelector({
     const handleProfessionalVariantClick = (variant: typeof professionalVariants[0]) => {
         if (!variant.available) return;
 
-        const accessible = canAccessTemplate('premium', userSubscription);
+        const accessible = canAccessTemplateId(variant.id);
         if (accessible) {
             onTemplateChange(variant.id);
         } else {
@@ -142,18 +135,13 @@ export default function TemplateSelector({
     const handleCreativeVariantClick = (variant: typeof creativeVariants[0]) => {
         if (!variant.available) return;
 
-        const accessible = canAccessTemplate('premium', userSubscription);
+        const accessible = canAccessTemplateId(variant.id);
         if (accessible) {
             onTemplateChange(variant.id);
         } else {
             setLockedTemplate('Creative Executive');
             setShowUpgradeModal(true);
         }
-    };
-
-    const getSubscriptionRequired = (templateTier: 'basic' | 'premium') => {
-        if (templateTier === 'premium') return 'Premium or Pro Plan';
-        return '';
     };
 
     
@@ -177,7 +165,7 @@ export default function TemplateSelector({
 
                 <div className="grid gap-4 lg:grid-cols-3" data-oid="v62dji9">
                     {templates.map((template) => {
-                        const isAccessible = canAccessTemplate(template.subscriptionTier, userSubscription);
+                        const isAccessible = canAccessTemplateId(template.id);
                         const isLocked = !isAccessible;
                         const isSelected =
                             selectedTemplate === template.id ||
@@ -227,7 +215,7 @@ export default function TemplateSelector({
                                                 ? 'border-amber-200 bg-amber-50 text-amber-700'
                                                 : 'border-slate-200 bg-slate-50 text-slate-600'
                                     }`}>
-                                        {isLocked ? getSubscriptionRequired(template.subscriptionTier) : 'Free'}
+                                        {planLabel(planForTemplate(template.id))}
                                     </span>
                                 </div>
 
