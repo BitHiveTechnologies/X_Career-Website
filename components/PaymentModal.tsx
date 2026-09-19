@@ -4,6 +4,7 @@ import { paymentService } from '@/lib/api/payment';
 import { useAuth } from '@/lib/auth/AuthContext';
 import { AlertCircle, CheckCircle2, Clock, CreditCard, Loader2, Mail, Shield, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { toast } from 'sonner';
 
 interface PaymentModalProps {
   isOpen: boolean;
@@ -70,7 +71,14 @@ export default function PaymentModal({ isOpen, onClose, plan, onSuccess, onError
   }, [isOpen]);
 
   const pollForFinalStatus = async (referenceOrderId: string) => {
-    for (let attempt = 0; attempt < 5; attempt += 1) {
+    for (let attempt = 0; attempt < 8; attempt += 1) {
+      if (attempt > 0) {
+        setStatusMessage(
+          attempt < 3
+            ? 'Still confirming with the payment gateway'
+            : 'Almost there — the gateway is taking a little longer than usual',
+        );
+      }
       const response = await paymentService.getPaymentStatus(referenceOrderId);
       if (response.success && response.data?.subscription) {
         const subscription = response.data.subscription;
@@ -86,6 +94,21 @@ export default function PaymentModal({ isOpen, onClose, plan, onSuccess, onError
     }
 
     return { done: false, response: null as any };
+  };
+
+
+  /**
+   * Confirmation the user can act on: the subscription is live and the
+   * credentials they need to log in were emailed to them.
+   */
+  const announceSuccess = (planName: string) => {
+    const address = guestEmail || email;
+    toast.success(`${planName} subscription activated`, {
+      description: address
+        ? `Your payment went through. We've emailed your subscription confirmation and login details to ${address} — please check your inbox, and your spam folder if it isn't there.`
+        : "Your payment went through. We've emailed your subscription confirmation and login details — please check your inbox, and your spam folder if it isn't there.",
+      duration: 12000,
+    });
   };
 
   const finalizePayment = async (referenceOrderId: string) => {
@@ -117,6 +140,7 @@ export default function PaymentModal({ isOpen, onClose, plan, onSuccess, onError
           }
         }
 
+        announceSuccess(plan?.name || 'Your');
         onSuccess(subscription);
         await refreshUser();
         onClose();
@@ -128,6 +152,7 @@ export default function PaymentModal({ isOpen, onClose, plan, onSuccess, onError
     if (pollResult.done && pollResult.response?.success && pollResult.response.data?.subscription) {
       const subscription = pollResult.response.data.subscription;
       if (subscription.status === 'completed' || subscription.isActive === true) {
+        announceSuccess(plan?.name || 'Your');
         onSuccess(subscription);
         await refreshUser();
         onClose();
@@ -138,6 +163,7 @@ export default function PaymentModal({ isOpen, onClose, plan, onSuccess, onError
 
     const fallbackSubscription = verifyResponse.data?.subscription;
     if (fallbackSubscription) {
+      announceSuccess(plan?.name || 'Your');
       onSuccess(fallbackSubscription);
       await refreshUser();
       onClose();
