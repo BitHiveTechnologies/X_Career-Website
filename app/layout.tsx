@@ -32,8 +32,6 @@ export const viewport: Viewport = {
     themeColor: '#1E3A8A',
 };
 
-import { Toaster } from 'sonner';
-
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
     return (
         <html lang="en" data-oid="m0hu0qs">
@@ -44,7 +42,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             </head>
             <body className="" data-oid="5ntnda_">
                 <Providers data-oid="tr..l98">{children}</Providers>
-                <Toaster position="top-center" richColors closeButton />
             </body>
         </html>
     );

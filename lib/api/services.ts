@@ -482,6 +482,15 @@ export class SubscriptionService {
     /**
      * Get current subscription
      */
+    /**
+     * The caller's plan and feature flags. Used for gating paid features.
+     */
+    static async getAccess(): Promise<
+        ApiResponse<{ plan: string; tierLevel: number; isActive: boolean; features: Record<string, unknown> }>
+    > {
+        return apiClient.get(API_ENDPOINTS.SUBSCRIPTIONS.ACCESS);
+    }
+
     static async getCurrentSubscription(): Promise<ApiResponse<{ subscription: Subscription }>> {
         return apiClient.get(API_ENDPOINTS.SUBSCRIPTIONS.CURRENT);
     }
