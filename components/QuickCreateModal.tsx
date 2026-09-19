@@ -27,7 +27,7 @@ import { useState } from "react"
 interface QuickCreateModalProps {
   isOpen: boolean
   onClose: () => void
-  onSubmit: (data: any) => void
+  onSubmit: (data: any) => void | Promise<void>
   isLoading?: boolean
 }
 
@@ -377,7 +377,8 @@ export function QuickCreateModal({ isOpen, onClose, onSubmit, isLoading = false 
     const form = activeTab === "job" ? jobForm : internshipForm;
     const validationErrors: string[] = [];
 
-    if (!form.title.trim()) validationErrors.push("Job title is required");
+    if (!form.title.trim() || form.title.trim().length < 2)
+      validationErrors.push("Job title must be at least 2 characters");
     if (!form.company.trim()) validationErrors.push("Company name is required");
     if (!form.description.trim() || form.description.trim().length < 20)
       validationErrors.push("Description must be at least 20 characters");
@@ -417,11 +418,10 @@ export function QuickCreateModal({ isOpen, onClose, onSubmit, isLoading = false 
       }
 
       if (activeTab === "job") {
-        onSubmit({ ...jobForm, companyLogoUrl: logoUrl || undefined })
+        await onSubmit({ ...jobForm, companyLogoUrl: logoUrl || undefined })
       } else {
-        onSubmit({ ...internshipForm, companyLogoUrl: logoUrl || undefined })
+        await onSubmit({ ...internshipForm, companyLogoUrl: logoUrl || undefined })
       }
-      onClose()
     } catch (error) {
       ; void /* console.error */ ((..._args) => {})('Error submitting form:', error);
       alert('Failed to submit. Please try again.');
@@ -441,7 +441,7 @@ export function QuickCreateModal({ isOpen, onClose, onSubmit, isLoading = false 
           passoutYears: [2022, 2023, 2024],
           minCGPA: 7.0
         },
-        applicationDeadline: "2025-12-31T23:59:59.000Z",
+        applicationDeadline: "2027-12-31",
         applicationLink: "https://techcorp.com/careers/frontend-developer",
         location: "remote",
         salary: "₹8-15 LPA",
@@ -462,12 +462,12 @@ export function QuickCreateModal({ isOpen, onClose, onSubmit, isLoading = false 
           passoutYears: [2024, 2025, 2026],
           minCGPA: 6.5
         },
-        applicationDeadline: "2025-11-30T23:59:59.000Z",
+        applicationDeadline: "2027-11-30",
         applicationLink: "https://startupxyz.com/internships/software-dev",
         location: "hybrid",
         stipend: "₹15,000/month",
         duration: "3 months",
-        startDate: "2025-12-01T00:00:00.000Z",
+        startDate: "2027-12-01",
         isPartTime: false,
         isPaid: true,
         certificateProvided: true,
