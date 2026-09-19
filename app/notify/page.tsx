@@ -324,7 +324,7 @@ function NotifyContent() {
     }, []);
 
     const handleSubscribe = async (planId: string) => {
-        if (planId === 'basic' || planId === 'free') {
+        if (planId === 'free') {
             if (!email || !email.includes('@')) {
                 setSubscriptionStatus('error');
                 setTimeout(() => setSubscriptionStatus('idle'), 3000);
@@ -368,7 +368,20 @@ function NotifyContent() {
         const targetIdx = planOrder.indexOf(plan.id);
         
         if (targetIdx > currentIdx) return 'Upgrade Now';
-        return 'Switch Plan';
+        // Downgrades aren't supported — the button is disabled alongside this label.
+        return 'Included in your plan';
+    };
+
+    /** True when the plan sits below the active one, so it can't be selected. */
+    const isDowngrade = (plan: any) => {
+        if (!currentSubscription || !currentSubscription.isActive) return false;
+        const planOrder = ['basic', 'premium', 'enterprise'];
+        return planOrder.indexOf(plan.id) < planOrder.indexOf(currentSubscription.plan);
+    };
+
+    /** Send the user to the plans grid to choose, rather than presuming a plan. */
+    const scrollToPlans = () => {
+        document.getElementById('pricing-plans')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     };
 
     const handlePaymentSuccess = async (subscription: any) => {
@@ -447,10 +460,7 @@ function NotifyContent() {
                                         </div>
                                     )}
                                     <SubscriptionStatus 
-                                        onUpgrade={() => {
-                                            const premiumPlan = pricingPlans.find(p => p.id === 'premium');
-                                            if (premiumPlan) setPaymentModal({ isOpen: true, plan: premiumPlan });
-                                        }}
+                                        onUpgrade={scrollToPlans}
                                     />
                                 </div>
                             )}
@@ -546,7 +556,7 @@ function NotifyContent() {
                 </section>
 
                 {/* Pricing Section */}
-                <section className="py-20 px-4 bg-gradient-to-b from-white to-[hsl(196,60%,95%)]">
+                <section id="pricing-plans" className="py-20 px-4 bg-gradient-to-b from-white to-[hsl(196,60%,95%)]">
                     <div className="max-w-6xl mx-auto">
                         <div className="text-center mb-16">
                             <h2 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight text-gray-800">Premium Plans</h2>
@@ -591,10 +601,10 @@ function NotifyContent() {
                                             ))}
                                         </div>
                                         <button
-                                            disabled={currentSubscription?.plan === plan.id && currentSubscription?.isActive}
+                                            disabled={(currentSubscription?.plan === plan.id && currentSubscription?.isActive) || isDowngrade(plan)}
                                             onClick={() => handleSubscribe(plan.id)}
                                             className={`w-full px-6 py-4 rounded-2xl font-semibold transition-all transform hover:scale-105 ${
-                                                plan.id === currentSubscription?.plan && currentSubscription?.isActive
+                                                (plan.id === currentSubscription?.plan && currentSubscription?.isActive) || isDowngrade(plan)
                                                     ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
                                                     : plan.popular
                                                         ? 'bg-gradient-to-r from-[hsl(196,80%,45%)] to-[hsl(175,70%,41%)] text-white hover:shadow-xl'
