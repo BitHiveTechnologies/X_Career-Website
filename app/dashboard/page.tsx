@@ -4,6 +4,7 @@ import { ChartAreaInteractive } from '@/components/chart-area-interactive';
 import { FlexibleDataTable } from '@/components/flexible-data-table';
 import { QuickCreateModal } from '@/components/QuickCreateModal';
 import { TestimonialFormModal, type TestimonialFormValues } from '@/components/TestimonialFormModal';
+import { SiteMetricFormModal, type SiteMetricFormValues } from '@/components/SiteMetricFormModal';
 import { SectionCards } from '@/components/section-cards';
 import { SharedLayout } from '@/components/shared-layout';
 import { Button } from '@/components/ui/button';
@@ -14,9 +15,10 @@ import {
     jobAlertService,
     paymentService,
     testimonialService,
+    siteMetricService,
 } from '@/lib/api/services';
 import { useAuth } from '@/lib/auth/AuthContext';
-import { Briefcase, CreditCard, GraduationCap, MessageSquareQuote, Plus, Users } from 'lucide-react';
+import { BarChart3, Briefcase, CreditCard, GraduationCap, MessageSquareQuote, Plus, Users } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
@@ -37,6 +39,9 @@ export default function Page() {
     const [dashboardStats, setDashboardStats] = useState<any>(null);
     const [jobs, setJobs] = useState<any[]>([]);
     const [testimonials, setTestimonials] = useState<any[]>([]);
+    const [siteMetrics, setSiteMetrics] = useState<any[]>([]);
+    const [isMetricModalOpen, setIsMetricModalOpen] = useState(false);
+    const [editingMetric, setEditingMetric] = useState<SiteMetricFormValues | null>(null);
     const [isTestimonialModalOpen, setIsTestimonialModalOpen] = useState(false);
     const [editingTestimonial, setEditingTestimonial] = useState<TestimonialFormValues | null>(
         null,
@@ -149,6 +154,7 @@ export default function Page() {
             setIsLoading(true);
             // Testimonials load alongside the rest so the tab is populated on arrival.
             void loadTestimonials();
+            void loadSiteMetrics();
 
             // Fetch dashboard overview stats
             try {
@@ -508,6 +514,54 @@ Note: Dedup is active — ${userEmail} only receives new jobs they haven't seen.
         }
     };
 
+    const loadSiteMetrics = async () => {
+        try {
+            setSiteMetrics(await siteMetricService.getAll());
+        } catch (error) {
+            toast.error('Failed to load site stats');
+        }
+    };
+
+    const handleMetricSubmit = async (values: SiteMetricFormValues) => {
+        const response = await siteMetricService.save({
+            key: values.key,
+            value: values.value,
+            description: values.description,
+        });
+        if (!response.success) {
+            throw new Error(response.error?.message || 'Failed to save stat');
+        }
+        toast.success(values._id ? 'Stat updated' : 'Stat added');
+        setIsMetricModalOpen(false);
+        setEditingMetric(null);
+        await loadSiteMetrics();
+    };
+
+    const handleMetricEdit = (id: string) => {
+        const found = siteMetrics.find((item) => item._id === id);
+        if (!found) return;
+        setEditingMetric({
+            _id: found._id,
+            key: found.key,
+            value: String(found.value ?? ''),
+            description: found.description || '',
+        });
+        setIsMetricModalOpen(true);
+    };
+
+    const handleMetricDelete = async (id: string) => {
+        const found = siteMetrics.find((item) => item._id === id);
+        if (!found) return;
+        try {
+            const response = await siteMetricService.remove(found.key);
+            if (!response.success) throw new Error(response.error?.message || 'Delete failed');
+            toast.success('Stat deleted');
+            await loadSiteMetrics();
+        } catch (error) {
+            toast.error(error instanceof Error ? error.message : 'Failed to delete stat');
+        }
+    };
+
     const loadTestimonials = async () => {
         try {
             const response = await testimonialService.getAll();
@@ -660,6 +714,14 @@ Note: Dedup is active — ${userEmail} only receives new jobs they haven't seen.
                 // Real records only — showing sample transactions here made the
                 // dashboard look like it had revenue it did not.
                 return payments;
+            case 'stats':
+                return siteMetrics.map((item: any) => ({
+                    ...item,
+                    value: String(item.value ?? ''),
+                    updatedDate: item.updatedAt
+                        ? new Date(item.updatedAt).toLocaleDateString()
+                        : 'N/A',
+                }));
             case 'testimonials':
                 return testimonials.map((item: any) => ({
                     ...item,
@@ -716,6 +778,13 @@ Note: Dedup is active — ${userEmail} only receives new jobs they haven't seen.
                     { key: 'date', label: 'Date' },
                     { key: 'type', label: 'Type' },
                     { key: 'paymentMethod', label: 'Payment Method' },
+                ];
+            case 'stats':
+                return [
+                    { key: 'description', label: 'Where it appears' },
+                    { key: 'value', label: 'Value' },
+                    { key: 'key', label: 'Key' },
+                    { key: 'updatedDate', label: 'Last updated' },
                 ];
             case 'testimonials':
                 return [
@@ -946,7 +1015,7 @@ Note: Dedup is active — ${userEmail} only receives new jobs they haven't seen.
                 {/* Tabbed Data Tables */}
                 <div className="px-4 lg:px-6">
                     <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-                        <TabsList className="flex w-full overflow-x-auto justify-start sm:grid sm:grid-cols-5">
+                        <TabsList className="flex w-full overflow-x-auto justify-start sm:grid sm:grid-cols-6">
                             <TabsTrigger value="customers" className="flex items-center gap-2">
                                 <Users className="h-4 w-4" />
                                 Customers
@@ -972,6 +1041,15 @@ Note: Dedup is active — ${userEmail} only receives new jobs they haven't seen.
                             <TabsTrigger value="payments" className="flex items-center gap-2">
                                 <CreditCard className="h-4 w-4" />
                                 Payments
+                            </TabsTrigger>
+                            <TabsTrigger value="stats" className="flex items-center gap-2">
+                                <BarChart3 className="h-4 w-4" />
+                                Site Stats
+                                {siteMetrics.length > 0 && (
+                                    <span className="ml-1 px-1.5 py-0.5 text-xs bg-emerald-100 text-emerald-800 rounded-full">
+                                        {siteMetrics.length}
+                                    </span>
+                                )}
                             </TabsTrigger>
                             <TabsTrigger value="testimonials" className="flex items-center gap-2">
                                 <MessageSquareQuote className="h-4 w-4" />
@@ -1116,6 +1194,33 @@ Note: Dedup is active — ${userEmail} only receives new jobs they haven't seen.
                             <FlexibleDataTable data={getTableData()} columns={getTableColumns()} />
                         </TabsContent>
 
+                        <TabsContent value="stats" className="mt-6">
+                            <div className="mb-4 flex items-center justify-between">
+                                <div className="text-sm text-gray-600">
+                                    Showing {siteMetrics.length} stats
+                                    <span className="ml-2 text-xs text-gray-500">
+                                        The numbers shown on the homepage
+                                    </span>
+                                </div>
+                                <Button
+                                    onClick={() => {
+                                        setEditingMetric(null);
+                                        setIsMetricModalOpen(true);
+                                    }}
+                                    className="flex items-center gap-2"
+                                >
+                                    <Plus className="h-4 w-4" />
+                                    Add stat
+                                </Button>
+                            </div>
+                            <FlexibleDataTable
+                                data={getTableData()}
+                                columns={getTableColumns()}
+                                onEdit={handleMetricEdit}
+                                onDelete={handleMetricDelete}
+                            />
+                        </TabsContent>
+
                         <TabsContent value="testimonials" className="mt-6">
                             <div className="mb-4 flex items-center justify-between">
                                 <div className="text-sm text-gray-600">
@@ -1151,6 +1256,16 @@ Note: Dedup is active — ${userEmail} only receives new jobs they haven't seen.
                 onClose={() => setIsQuickCreateOpen(false)}
                 onSubmit={handleQuickCreate}
                 isLoading={isLoading}
+            />
+
+            <SiteMetricFormModal
+                isOpen={isMetricModalOpen}
+                onClose={() => {
+                    setIsMetricModalOpen(false);
+                    setEditingMetric(null);
+                }}
+                onSubmit={handleMetricSubmit}
+                metric={editingMetric}
             />
 
             <TestimonialFormModal
