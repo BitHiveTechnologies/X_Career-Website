@@ -156,11 +156,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
             role: userData.role
           });
           
-          if (userData.mustChangePassword) {
-            ; void /* console.log */ ((..._args) => {})('➡️ Redirecting to /change-password due to mustChangePassword flag');
-            // Force full page reload to ensure redirect works reliably
-            window.location.href = '/change-password';
-          } else {
+          // No forced password change on first login: the profile page already
+          // offers it, so users land where they were going and update it there.
+          {
             const redirectTo = localStorage.getItem('careerx_redirect_after_auth');
             if (redirectTo) {
                 ; void /* console.log */ ((..._args) => {})(`➡️ Redirecting to saved path: ${redirectTo}`);
