@@ -1344,14 +1344,8 @@ export default function ResumePreview({ resumeData, template, fontFamily = 'Inte
                             <ul style={bulletListStyle}>
                                 {resumeData.skills.map((skillCategory, index) => (
                                     <li key={index}>
-                                        <strong>{skillCategory.category}</strong>
-                                        {skillCategory.items.length > 0 && (
-                                            <ul style={{ margin: '0.04cm 0 0', paddingLeft: '1.5em' }}>
-                                                {skillCategory.items.map((item, itemIndex) => (
-                                                    <li key={itemIndex}>{item}</li>
-                                                ))}
-                                            </ul>
-                                        )}
+                                        <strong>{skillCategory.category}:</strong>{' '}
+                                        {skillCategory.items.join(', ')}
                                     </li>
                                 ))}
                             </ul>
@@ -1713,22 +1707,14 @@ export default function ResumePreview({ resumeData, template, fontFamily = 'Inte
                             <h2 style={sectionTitleStyle}>Skills</h2>
                             <div style={{ display: 'grid', rowGap: '0.08cm' }}>
                                 {resumeData.skills.map((skillCategory, index) => {
-                                    const shouldListItems = skillCategory.items.length > 4;
-
                                     return (
                                         <div key={index}>
                                             <p style={{ margin: 0, fontWeight: 700 }}>
                                                 {skillCategory.category}:
                                             </p>
-                                            {shouldListItems ? (
-                                                <ul style={{ ...bulletListStyle, marginTop: '0.03cm' }}>
-                                                    {skillCategory.items.map((item, itemIndex) => (
-                                                        <li key={itemIndex}>{item}</li>
-                                                    ))}
-                                                </ul>
-                                            ) : (
-                                                <p style={{ margin: '0.03cm 0 0' }}>{skillCategory.items.join(', ')}</p>
-                                            )}
+                                            <p style={{ margin: '0.03cm 0 0' }}>
+                                                {skillCategory.items.join(', ')}
+                                            </p>
                                         </div>
                                     );
                                 })}
