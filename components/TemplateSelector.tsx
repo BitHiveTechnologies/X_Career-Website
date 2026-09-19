@@ -30,18 +30,39 @@ export default function TemplateSelector({
     const [userSubscription, setUserSubscription] = useState<string | null>(null);
 
     useEffect(() => {
+        // Wait for auth to finish hydrating. Running before the token is restored
+        // made getUserSubscription() fall back to 'basic', which locked the premium
+        // templates for paying users until a manual refresh.
+        if (auth?.isLoading) return;
+
+        let cancelled = false;
+
         const loadUserSubscription = async () => {
+            // The authenticated user already carries the plan, so the templates
+            // unlock on first paint rather than after the round trip.
+            const planFromUser = (auth?.user as { subscriptionPlan?: string } | null)?.subscriptionPlan;
+            if (planFromUser && !cancelled) {
+                setUserSubscription(planFromUser);
+            }
+
             try {
                 if (auth?.getUserSubscription) {
                     const subscription = await auth.getUserSubscription();
-                    setUserSubscription(subscription);
+                    if (subscription && !cancelled) {
+                        setUserSubscription(subscription);
+                    }
                 }
             } catch (error) {
                 ; void /* console.error */ ((..._args) => {})('Error loading user subscription:', error);
             }
         };
+
         loadUserSubscription();
-    }, [auth]);
+
+        return () => {
+            cancelled = true;
+        };
+    }, [auth?.isLoading, auth?.isAuthenticated, auth?.user?.id]);
 
     const templates = [
         {
