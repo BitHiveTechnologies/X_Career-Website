@@ -633,7 +633,14 @@ Note: Dedup is active — ${userEmail} only receives new jobs they haven't seen.
                     passoutYears: [],
                     minCGPA: 0,
                 },
-                applicationDeadline: formData.applicationDeadline,
+                // Convert "YYYY-MM-DD" date picker value to a full ISO 8601 timestamp
+                // (end-of-day UTC) so the backend Joi validator and Mongoose pre-save
+                // hook both accept it regardless of server timezone.
+                applicationDeadline: formData.applicationDeadline
+                    ? (/^\d{4}-\d{2}-\d{2}$/.test(formData.applicationDeadline)
+                        ? new Date(formData.applicationDeadline + 'T23:59:59.000Z').toISOString()
+                        : new Date(formData.applicationDeadline).toISOString())
+                    : formData.applicationDeadline,
                 applicationLink: formData.applicationLink,
                 location: formData.location,
                 ...(formData.companyLogoUrl ? { companyLogoUrl: formData.companyLogoUrl } : {}), // Include logo URL if provided

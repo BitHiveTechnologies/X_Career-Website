@@ -373,6 +373,31 @@ export function QuickCreateModal({ isOpen, onClose, onSubmit, isLoading = false 
   };
 
   const handleSubmit = async () => {
+    // --- Frontend validation ---
+    const form = activeTab === "job" ? jobForm : internshipForm;
+    const validationErrors: string[] = [];
+
+    if (!form.title.trim()) validationErrors.push("Job title is required");
+    if (!form.company.trim()) validationErrors.push("Company name is required");
+    if (!form.description.trim() || form.description.trim().length < 20)
+      validationErrors.push("Description must be at least 20 characters");
+    if (!form.applicationDeadline) validationErrors.push("Application deadline is required");
+    if (!form.applicationLink.trim()) validationErrors.push("Application link is required");
+    if (!/^https?:\/\/.+/.test(form.applicationLink.trim()))
+      validationErrors.push("Application link must be a valid URL (starting with http:// or https://)");
+    if (form.eligibility.qualifications.length === 0)
+      validationErrors.push("At least one qualification is required (e.g. B.Tech, MCA)");
+    if (form.eligibility.streams.length === 0)
+      validationErrors.push("At least one stream is required (e.g. CSE, IT)");
+    if (form.eligibility.passoutYears.length === 0)
+      validationErrors.push("At least one passout year is required (e.g. 2024)");
+
+    if (validationErrors.length > 0) {
+      alert("Please fix the following before submitting:\n\n• " + validationErrors.join("\n• "));
+      return;
+    }
+    // --- End validation ---
+
     try {
       let logoUrl: string | null = null;
 
