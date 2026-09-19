@@ -179,7 +179,7 @@ const fetchTestimonials = async (): Promise<Testimonial[]> => {
                 name: t.name,
                 company: t.role,
                 quote: t.content,
-                image: t.avatar || 'https://randomuser.me/api/portraits/lego/1.jpg',
+                image: t.avatar || '',
                 linkedinUrl: t.linkedinUrl || 'https://www.linkedin.com/'
             }));
         }
@@ -251,7 +251,33 @@ interface Feature {
     icon: 'rocket' | 'book' | 'people' | 'map';
 }
 
+/** Brand-toned gradients for initials avatars; picked by name so each person keeps theirs. */
+const AVATAR_GRADIENTS = [
+    'from-sky-500 to-blue-600',
+    'from-teal-500 to-emerald-600',
+    'from-indigo-500 to-violet-600',
+    'from-cyan-500 to-sky-600',
+    'from-blue-600 to-indigo-700',
+    'from-emerald-500 to-teal-600',
+];
+
+const initialsOf = (name: string) =>
+    name
+        .trim()
+        .split(/\s+/)
+        .filter(Boolean)
+        .slice(0, 2)
+        .map((part) => part[0]!.toUpperCase())
+        .join('') || '?';
+
+const gradientFor = (name: string) => {
+    let hash = 0;
+    for (const ch of name) hash = (hash * 31 + ch.charCodeAt(0)) >>> 0;
+    return AVATAR_GRADIENTS[hash % AVATAR_GRADIENTS.length];
+};
+
 function TestimonialCard({ testimonial, index }: { testimonial: Testimonial; index: number }) {
+    const [imageFailed, setImageFailed] = useState(false);
     const placementMonths = ['8 Months', '6 Months', '4 Months', '3 Months', '5 Months', '7 Months', '6 Months', '4 Months', '8 Months'][index % 9];
 
     return (
@@ -259,11 +285,22 @@ function TestimonialCard({ testimonial, index }: { testimonial: Testimonial; ind
             <div className="flex h-full flex-col px-4 py-4 md:px-5 md:py-5">
                 <div className="flex items-center gap-3 md:gap-4">
                     <div className="relative shrink-0">
-                        <img
-                            src={testimonial.image}
-                            alt={testimonial.name}
-                            className="h-16 w-16 rounded-full object-cover ring-4 ring-[#4ea4f3] shadow-[0_10px_30px_rgba(59,130,246,0.18)] md:h-18 md:w-18"
-                        />
+                        {testimonial.image && !imageFailed ? (
+                            <img
+                                src={testimonial.image}
+                                alt={testimonial.name}
+                                onError={() => setImageFailed(true)}
+                                className="h-16 w-16 rounded-full object-cover ring-4 ring-[#4ea4f3] shadow-[0_10px_30px_rgba(59,130,246,0.18)] md:h-18 md:w-18"
+                            />
+                        ) : (
+                            // No photo, or the URL is broken: initials rather than a placeholder image.
+                            <div
+                                aria-label={testimonial.name}
+                                className={`flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br ${gradientFor(testimonial.name)} text-xl font-semibold tracking-wide text-white ring-4 ring-[#4ea4f3] shadow-[0_10px_30px_rgba(59,130,246,0.18)] md:h-18 md:w-18`}
+                            >
+                                {initialsOf(testimonial.name)}
+                            </div>
+                        )}
                         <div className="absolute -right-1 bottom-0 flex h-6 w-6 items-center justify-center rounded-full bg-[#357ae8] text-white shadow-lg ring-4 ring-white">
                             <svg className="h-3.5 w-3.5" fill="currentColor" viewBox="0 0 20 20">
                                 <path
