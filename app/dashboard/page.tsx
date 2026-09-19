@@ -690,7 +690,14 @@ Note: Dedup is active — ${userEmail} only receives new jobs they haven't seen.
                         'Admin access required. The backend job creation endpoint needs to be fixed. Please contact the backend team.',
                     );
                 } else {
-                    throw new Error(response.error?.message || 'Failed to create job');
+                    const details = Array.isArray((response.error as any)?.details)
+                        ? (response.error as any).details.join('; ')
+                        : '';
+                    throw new Error(
+                        details
+                            ? `${response.error?.message || 'Failed to create job'}: ${details}`
+                            : response.error?.message || 'Failed to create job',
+                    );
                 }
             }
         } catch (error: any) {
@@ -700,7 +707,12 @@ Note: Dedup is active — ${userEmail} only receives new jobs they haven't seen.
                     'Admin access required. The backend job creation endpoint needs to be fixed. Please contact the backend team.',
                 );
             } else {
-                toast.error(error.message || 'Failed to create job/internship');
+                const details = Array.isArray(error.details) ? error.details.join('; ') : '';
+                toast.error(
+                    details
+                        ? `${error.message || 'Failed to create job/internship'}: ${details}`
+                        : error.message || 'Failed to create job/internship',
+                );
             }
         } finally {
             setIsLoading(false);
