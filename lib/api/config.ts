@@ -76,6 +76,12 @@ export const API_ENDPOINTS = {
     },
 
     // Subscription
+    SITE_METRICS: {
+        PUBLIC: '/api/v1/admin/settings/metrics',
+        ADMIN_LIST: '/api/v1/admin/settings',
+        UPSERT: '/api/v1/admin/settings',
+        DELETE: (key: string) => `/api/v1/admin/settings/${encodeURIComponent(key)}`,
+    },
     TESTIMONIALS: {
         PUBLIC: '/api/v1/testimonials',
         ADMIN_LIST: '/api/v1/testimonials/admin',

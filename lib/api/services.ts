@@ -933,6 +933,30 @@ export class TestimonialService {
 
 export const testimonialService = TestimonialService;
 
+
+/**
+ * Homepage numbers, stored as SystemSettings rows in the 'metrics' category.
+ * Values are display strings ("35,213", "10k+") rendered exactly as entered.
+ */
+export class SiteMetricService {
+    static async getAll(): Promise<any[]> {
+        const response = await apiClient.get<any[]>(API_ENDPOINTS.SITE_METRICS.ADMIN_LIST);
+        const rows = response.success && Array.isArray(response.data) ? response.data : [];
+        return rows.filter((row: any) => row.category === 'metrics');
+    }
+
+    /** Create or update by key — the backend upserts. */
+    static async save(data: { key: string; value: string; description?: string }): Promise<ApiResponse<any>> {
+        return apiClient.post(API_ENDPOINTS.SITE_METRICS.UPSERT, { ...data, category: 'metrics' });
+    }
+
+    static async remove(key: string): Promise<ApiResponse<any>> {
+        return apiClient.delete(API_ENDPOINTS.SITE_METRICS.DELETE(key));
+    }
+}
+
+export const siteMetricService = SiteMetricService;
+
 export const jobService = JobService;
 export const applicationService = ApplicationService;
 export const subscriptionService = SubscriptionService;

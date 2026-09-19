@@ -150,11 +150,13 @@ const fetchStats = async (): Promise<Stats> => {
                 activeMembers: data.data.active_members || dummyData.stats.activeMembers,
                 postedJobs: data.data.posted_jobs_count || dummyData.stats.postedJobs,
                 linkedInFollowers: data.data.linkedin_followers || dummyData.stats.linkedInFollowers,
-                users: data.data.freshers_count || dummyData.stats.users,
+                users: data.data.registered_users_count || dummyData.stats.users,
                 whatsappMembers: data.data.whatsapp_members || dummyData.stats.whatsappMembers,
                 linkedinMembers: data.data.linkedin_members || dummyData.stats.linkedinMembers,
                 telegramMembers: data.data.telegram_members || dummyData.stats.telegramMembers,
-                premiumUsers: data.data.premium_users_count || 1250, // Added default for premium users
+                premiumUsers: data.data.premium_users_count || dummyData.stats.premiumUsers,
+                heroChipFreshers: data.data.hero_chip_freshers,
+                heroChipOpportunities: data.data.hero_chip_opportunities,
             };
         }
     } catch (error) {
@@ -202,16 +204,18 @@ const fetchBenefits = async (): Promise<Benefit[]> => {
 
 // Type definitions
 interface Stats {
-    freshers: number;
+    freshers: number | string;
     verifiedJobs: string;
-    activeMembers: number;
+    activeMembers: number | string;
     postedJobs: string;
     linkedInFollowers: string;
-    users: number;
+    users: number | string;
     whatsappMembers: number;
     linkedinMembers: number;
     telegramMembers: number;
-    premiumUsers: number;
+    premiumUsers: number | string;
+    heroChipFreshers?: string;
+    heroChipOpportunities?: string;
 }
 
 interface Testimonial {
@@ -740,10 +744,10 @@ export default function Page() {
                                     {/* Compact Stats Badges */}
                                     <div className="flex flex-wrap gap-2 sm:gap-3 justify-center">
                                         <div className="bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-full text-xs sm:text-sm border border-white/30 shadow-sm hover:shadow-md transition-all duration-300 hover:bg-white/30 text-white font-medium">
-                                            35K+ Active Freshers
+                                            {stats?.heroChipFreshers || '35K+ Active Freshers'}
                                         </div>
                                         <div className="bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-full text-xs sm:text-sm border border-white/30 shadow-sm hover:shadow-md transition-all duration-300 hover:bg-white/30 text-white font-medium">
-                                            10,000+ Verified Opportunities
+                                            {stats?.heroChipOpportunities || '10,000+ Verified Opportunities'}
                                         </div>
                                         <div className="bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-full text-xs sm:text-sm border border-white/30 shadow-sm hover:shadow-md transition-all duration-300 hover:bg-white/30 text-white font-medium">
                                             Built for Entry-Level Talent
