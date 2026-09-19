@@ -210,7 +210,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
             lastName: result.data.user.lastName || '',
             mobile: result.data.user.mobile || '',
             role: (result.data.user.role || 'user') as 'user' | 'admin' | 'super_admin',
-            subscriptionStatus: 'inactive' as const,
+            // Carry the plan through: the backend returns it on login, and
+            // hardcoding 'inactive' made every paid user look unsubscribed.
+            subscriptionStatus: (result.data.user as any).subscriptionStatus || 'inactive',
+            subscriptionPlan: (result.data.user as any).subscriptionPlan,
             isProfileComplete: true,
           };
         } else {
@@ -222,7 +225,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
             lastName: (result.data as any).lastName || '',
             mobile: (result.data as any).mobile || '',
             role: ((result.data as any).role || 'user') as 'user' | 'admin' | 'super_admin',
-            subscriptionStatus: 'inactive' as const,
+            subscriptionStatus: (result.data as any).subscriptionStatus || 'inactive',
+            subscriptionPlan: (result.data as any).subscriptionPlan,
             isProfileComplete: true,
           };
         }
