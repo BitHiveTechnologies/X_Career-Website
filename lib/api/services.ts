@@ -896,6 +896,34 @@ export class ResumeService {
 
 // Export all services for easy access
 export const authService = AuthService;
+
+/**
+ * Testimonials shown on the homepage. Listing is public; everything else is admin.
+ */
+export class TestimonialService {
+    static async getApproved(): Promise<ApiResponse<any[]>> {
+        return apiClient.get(API_ENDPOINTS.TESTIMONIALS.PUBLIC);
+    }
+
+    static async getAll(): Promise<ApiResponse<any[]>> {
+        return apiClient.get(API_ENDPOINTS.TESTIMONIALS.ADMIN_LIST);
+    }
+
+    static async create(data: Record<string, unknown>): Promise<ApiResponse<any>> {
+        return apiClient.post(API_ENDPOINTS.TESTIMONIALS.CREATE, data);
+    }
+
+    static async update(id: string, data: Record<string, unknown>): Promise<ApiResponse<any>> {
+        return apiClient.put(API_ENDPOINTS.TESTIMONIALS.UPDATE(id), data);
+    }
+
+    static async remove(id: string): Promise<ApiResponse<any>> {
+        return apiClient.delete(API_ENDPOINTS.TESTIMONIALS.DELETE(id));
+    }
+}
+
+export const testimonialService = TestimonialService;
+
 export const jobService = JobService;
 export const applicationService = ApplicationService;
 export const subscriptionService = SubscriptionService;

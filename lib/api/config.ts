@@ -76,6 +76,14 @@ export const API_ENDPOINTS = {
     },
 
     // Subscription
+    TESTIMONIALS: {
+        PUBLIC: '/api/v1/testimonials',
+        ADMIN_LIST: '/api/v1/testimonials/admin',
+        CREATE: '/api/v1/testimonials/admin',
+        UPDATE: (id: string) => `/api/v1/testimonials/${id}`,
+        DELETE: (id: string) => `/api/v1/testimonials/${id}`,
+        MODERATE: (id: string) => `/api/v1/testimonials/${id}/moderate`,
+    },
     SUBSCRIPTIONS: {
         CURRENT: '/api/v1/subscriptions/current',
         PLANS: '/api/v1/subscriptions/plans',

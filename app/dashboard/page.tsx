@@ -3,13 +3,20 @@
 import { ChartAreaInteractive } from '@/components/chart-area-interactive';
 import { FlexibleDataTable } from '@/components/flexible-data-table';
 import { QuickCreateModal } from '@/components/QuickCreateModal';
+import { TestimonialFormModal, type TestimonialFormValues } from '@/components/TestimonialFormModal';
 import { SectionCards } from '@/components/section-cards';
 import { SharedLayout } from '@/components/shared-layout';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { adminService, jobService, jobAlertService, paymentService } from '@/lib/api/services';
+import {
+    adminService,
+    jobService,
+    jobAlertService,
+    paymentService,
+    testimonialService,
+} from '@/lib/api/services';
 import { useAuth } from '@/lib/auth/AuthContext';
-import { Briefcase, CreditCard, GraduationCap, Plus, Users } from 'lucide-react';
+import { Briefcase, CreditCard, GraduationCap, MessageSquareQuote, Plus, Users } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
@@ -30,6 +37,11 @@ export default function Page() {
     const [isLoading, setIsLoading] = useState(false);
     const [dashboardStats, setDashboardStats] = useState<any>(null);
     const [jobs, setJobs] = useState<any[]>([]);
+    const [testimonials, setTestimonials] = useState<any[]>([]);
+    const [isTestimonialModalOpen, setIsTestimonialModalOpen] = useState(false);
+    const [editingTestimonial, setEditingTestimonial] = useState<TestimonialFormValues | null>(
+        null,
+    );
     const [internships, setInternships] = useState<any[]>([]);
     const [customers, setCustomers] = useState<any[]>([]);
     const [sendingNotifications, setSendingNotifications] = useState<{ [key: string]: boolean }>(
@@ -136,6 +148,8 @@ export default function Page() {
     const fetchDashboardData = async () => {
         try {
             setIsLoading(true);
+            // Testimonials load alongside the rest so the tab is populated on arrival.
+            void loadTestimonials();
 
             // Fetch dashboard overview stats
             try {
@@ -495,6 +509,61 @@ Note: Dedup is active — ${userEmail} only receives new jobs they haven't seen.
         }
     };
 
+    const loadTestimonials = async () => {
+        try {
+            const response = await testimonialService.getAll();
+            if (response.success && response.data) {
+                setTestimonials(Array.isArray(response.data) ? response.data : []);
+            }
+        } catch (error) {
+            toast.error('Failed to load testimonials');
+        }
+    };
+
+    const handleTestimonialSubmit = async (values: TestimonialFormValues) => {
+        const payload = {
+            name: values.name,
+            role: values.role,
+            content: values.content,
+            rating: values.rating,
+            avatar: values.avatar,
+            linkedinUrl: values.linkedinUrl,
+            isApproved: values.isApproved,
+            isVerified: values.isVerified,
+        };
+
+        const response = values._id
+            ? await testimonialService.update(values._id, payload)
+            : await testimonialService.create(payload);
+
+        if (!response.success) {
+            throw new Error(response.error?.message || 'Failed to save testimonial');
+        }
+
+        toast.success(values._id ? 'Testimonial updated' : 'Testimonial added');
+        setIsTestimonialModalOpen(false);
+        setEditingTestimonial(null);
+        await loadTestimonials();
+    };
+
+    const handleTestimonialEdit = (id: string) => {
+        const found = testimonials.find((item) => item._id === id);
+        if (!found) return;
+        setEditingTestimonial(found as TestimonialFormValues);
+        setIsTestimonialModalOpen(true);
+    };
+
+    const handleTestimonialDelete = async (id: string) => {
+        try {
+            const response = await testimonialService.remove(id);
+            if (!response.success) throw new Error(response.error?.message || 'Delete failed');
+            toast.success('Testimonial deleted');
+            await loadTestimonials();
+        } catch (error) {
+            toast.error(error instanceof Error ? error.message : 'Failed to delete testimonial');
+        }
+    };
+
     const handleQuickCreate = async (formData: any) => {
         try {
             setIsLoading(true);
@@ -590,6 +659,14 @@ Note: Dedup is active — ${userEmail} only receives new jobs they haven't seen.
                 return internships.length > 0 ? internships : internshipsData;
             case 'payments':
                 return payments.length > 0 ? payments : paymentsData; // Fallback to mock if empty
+            case 'testimonials':
+                return testimonials.map((item: any) => ({
+                    ...item,
+                    approvedLabel: item.isApproved ? 'Approved' : 'Pending',
+                    createdDate: item.createdAt
+                        ? new Date(item.createdAt).toLocaleDateString()
+                        : 'N/A',
+                }));
             default:
                 return data;
         }
@@ -638,6 +715,15 @@ Note: Dedup is active — ${userEmail} only receives new jobs they haven't seen.
                     { key: 'date', label: 'Date' },
                     { key: 'type', label: 'Type' },
                     { key: 'paymentMethod', label: 'Payment Method' },
+                ];
+            case 'testimonials':
+                return [
+                    { key: 'name', label: 'Name' },
+                    { key: 'role', label: 'Role / Company' },
+                    { key: 'content', label: 'Testimonial' },
+                    { key: 'rating', label: 'Rating' },
+                    { key: 'approvedLabel', label: 'Approved' },
+                    { key: 'createdDate', label: 'Added' },
                 ];
             default:
                 return [
@@ -859,7 +945,7 @@ Note: Dedup is active — ${userEmail} only receives new jobs they haven't seen.
                 {/* Tabbed Data Tables */}
                 <div className="px-4 lg:px-6">
                     <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-                        <TabsList className="flex w-full overflow-x-auto justify-start sm:grid sm:grid-cols-4">
+                        <TabsList className="flex w-full overflow-x-auto justify-start sm:grid sm:grid-cols-5">
                             <TabsTrigger value="customers" className="flex items-center gap-2">
                                 <Users className="h-4 w-4" />
                                 Customers
@@ -885,6 +971,15 @@ Note: Dedup is active — ${userEmail} only receives new jobs they haven't seen.
                             <TabsTrigger value="payments" className="flex items-center gap-2">
                                 <CreditCard className="h-4 w-4" />
                                 Payments
+                            </TabsTrigger>
+                            <TabsTrigger value="testimonials" className="flex items-center gap-2">
+                                <MessageSquareQuote className="h-4 w-4" />
+                                Testimonials
+                                {testimonials.length > 0 && (
+                                    <span className="ml-1 px-1.5 py-0.5 text-xs bg-purple-100 text-purple-800 rounded-full">
+                                        {testimonials.length}
+                                    </span>
+                                )}
                             </TabsTrigger>
                         </TabsList>
 
@@ -1019,6 +1114,33 @@ Note: Dedup is active — ${userEmail} only receives new jobs they haven't seen.
                         <TabsContent value="payments" className="mt-6">
                             <FlexibleDataTable data={getTableData()} columns={getTableColumns()} />
                         </TabsContent>
+
+                        <TabsContent value="testimonials" className="mt-6">
+                            <div className="mb-4 flex items-center justify-between">
+                                <div className="text-sm text-gray-600">
+                                    Showing {testimonials.length} testimonials
+                                    <span className="ml-2 text-xs text-gray-500">
+                                        Approved ones appear on the homepage
+                                    </span>
+                                </div>
+                                <Button
+                                    onClick={() => {
+                                        setEditingTestimonial(null);
+                                        setIsTestimonialModalOpen(true);
+                                    }}
+                                    className="flex items-center gap-2"
+                                >
+                                    <Plus className="h-4 w-4" />
+                                    Add testimonial
+                                </Button>
+                            </div>
+                            <FlexibleDataTable
+                                data={getTableData()}
+                                columns={getTableColumns()}
+                                onEdit={handleTestimonialEdit}
+                                onDelete={handleTestimonialDelete}
+                            />
+                        </TabsContent>
                     </Tabs>
                 </div>
             </div>
@@ -1028,6 +1150,16 @@ Note: Dedup is active — ${userEmail} only receives new jobs they haven't seen.
                 onClose={() => setIsQuickCreateOpen(false)}
                 onSubmit={handleQuickCreate}
                 isLoading={isLoading}
+            />
+
+            <TestimonialFormModal
+                isOpen={isTestimonialModalOpen}
+                onClose={() => {
+                    setIsTestimonialModalOpen(false);
+                    setEditingTestimonial(null);
+                }}
+                onSubmit={handleTestimonialSubmit}
+                testimonial={editingTestimonial}
             />
         </SharedLayout>
     );
