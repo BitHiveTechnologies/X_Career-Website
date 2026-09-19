@@ -25,7 +25,6 @@ import { toast } from 'sonner';
 import data from './data.json';
 import internshipsData from './internships-data.json';
 import jobsData from './jobs-data.json';
-import paymentsData from './payments-data.json';
 
 export default function Page() {
     const { user, isLoading: authLoading } = useAuth();
@@ -658,7 +657,9 @@ Note: Dedup is active — ${userEmail} only receives new jobs they haven't seen.
                 // Always return data - either real data from API or mock data
                 return internships.length > 0 ? internships : internshipsData;
             case 'payments':
-                return payments.length > 0 ? payments : paymentsData; // Fallback to mock if empty
+                // Real records only — showing sample transactions here made the
+                // dashboard look like it had revenue it did not.
+                return payments;
             case 'testimonials':
                 return testimonials.map((item: any) => ({
                     ...item,

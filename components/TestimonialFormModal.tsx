@@ -52,10 +52,8 @@ export function TestimonialFormModal({
 
     if (!isOpen) return null;
 
-    const set = <K extends keyof TestimonialFormValues>(
-        key: K,
-        value: TestimonialFormValues[K],
-    ) => setValues((prev) => ({ ...prev, [key]: value }));
+    const set = <K extends keyof TestimonialFormValues>(key: K, value: TestimonialFormValues[K]) =>
+        setValues((prev) => ({ ...prev, [key]: value }));
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -68,7 +66,9 @@ export function TestimonialFormModal({
         try {
             await onSubmit(values);
         } catch (err) {
-            setError(err instanceof Error ? err.message : 'Something went wrong. Please try again.');
+            setError(
+                err instanceof Error ? err.message : 'Something went wrong. Please try again.',
+            );
         } finally {
             setIsSubmitting(false);
         }
